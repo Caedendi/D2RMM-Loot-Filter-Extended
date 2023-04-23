@@ -1,0 +1,229 @@
+{
+  "name": "Caedendi's Extended Loot Filter",
+  "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
+  "author": "Caedendi",
+  "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
+  "version": "0.0.4",
+  "config": [
+    {
+      "id": "Gold",
+      "type": "select",
+      "name": "Gold",
+      "description": "Apply the loot filter to the Gold affix. [CSTM-GLD]",
+      "defaultValue": "goldg",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Gold text", "value": "gold" },
+        { "label": "Gold G", "value": "goldg" },
+        { "label": "White G", "value": "whiteg" },
+        { "label": "Hide affix", "value": "hide" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    }, 
+    {
+      "id": "Runes",
+      "type": "select",
+      "name": "Runes",
+      "description": "Apply the loot filter to Runes.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Add rune numbers + highlights + remove affix", "value": "all" },
+        { "label": "Add rune numbers + remove affix", "value": "nrs-raf" },
+        { "label": "Add rune numbers + highlights", "value": "nrs-hls" },
+        { "label": "Add highlights + remove affix", "value": "hls-raf" },
+        { "label": "Add rune numbers", "value": "nrs" },
+        { "label": "Add highlights", "value": "hls" },
+        { "label": "Remove affix", "value": "raf" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "HealingPotions",
+      "type": "select",
+      "name": "Healing Potions",
+      "description": "Apply the loot filter to Healing, Mana and Rejuvenation Potions.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Enable (show all)", "value": "all" },
+        { "label": "Hide lvl 1-3 healing/mana", "value": "hide3" },
+        { "label": "hide lvl 1-4 healing/mana", "value": "hide4" },
+        { "label": "Hide lvl 1-3 healing/mana & small rejuvs", "value": "hide3sr" },
+        { "label": "Hide lvl 1-4 healing/mana & small rejuvs", "value": "hide4sr" },
+        { "label": "Show only rejuvs", "value": "sfr" },
+        { "label": "Show only full rejuvs", "value": "fr" },
+        { "label": "Hide all", "value": "hide" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "BuffPotions",
+      "type": "select",
+      "name": "Buff Potions",
+      "description": "Apply the loot filter to Antidote, Thawing and Stamina Potions.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Enable (show all)", "value": "all" },
+        { "label": "Hide", "value": "hide" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ThrowingPotions",
+      "type": "select",
+      "name": "Throwing Potions",
+      "description": "Apply the loot filter to Strangling/Choking/Rancid Gas and Fulminating/Exploding/Oil Potions.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Enable (show all)", "value": "all" },
+        { "label": "Hide", "value": "hide" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ScrollsTomes",
+      "type": "select",
+      "name": "Scrolls & Tomes",
+      "description": "Apply the loot filter to ID/TP Scrolls and Tomes.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Enable (show all)", "value": "all" },
+        { "label": "Hide Scrolls", "value": "hide" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ArrowsBolts",
+      "type": "select",
+      "name": "Arrows & Bolts",
+      "description": "Apply the loot filter to Arrows & Bolts.",
+      "defaultValue": "hide",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "highlight" },
+        { "label": "Hide", "value": "hide" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "RingsAmulets",
+      "type": "select",
+      "name": "Rings & Amulets (bugged)",
+      "description": "Apply the loot filter to Rings & Amulets. KNOWN BUG: turns rare/unique Rings/Amulets blue.",
+      "defaultValue": "highlight",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "highlight" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "Jewels",
+      "type": "select",
+      "name": "Jewels (bugged)",
+      "description": "Apply the loot filter to Jewels. KNOWN BUG: turns rare Jewels and Facets blue.",
+      "defaultValue": "highlight",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "highlight" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "Charms",
+      "type": "select",
+      "name": "Charms (bugged)",
+      "description": "Apply the loot filter to Small, Large and Grand Charms. KNOWN BUG: turns unique Charms blue.",
+      "defaultValue": "highlight",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "highlight" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "Gems",
+      "type": "select",
+      "name": "Gems",
+      "description": "Apply the loot filter to Gems.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "all" },
+        { "label": "Highlight, show only Flawless and Perfect Gems", "value": "flawless" },
+        { "label": "Highlight, show only Perfect Gems", "value": "perfect" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "Quest",
+      "type": "select",
+      "name": "Quest Items",
+      "description": "Highlight quest items.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "all" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "Endgame",
+      "type": "select",
+      "name": "Endgame Items",
+      "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "all" },
+        { "label": "Highlight, exclude Standard of Heroes)", "value": "xsh" },
+        { "label": "Highlight, hide Standard of Heroes)", "value": "hsh" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "HiddenItemTooltipSize",
+      "type": "number",
+      "name": "Tooltip width for hidden items",
+      "description": "Sets the width of the tooltip for hidden items by adding spaces if set to > 0. Max 100.",
+      "defaultValue": 0,
+      "minValue": 0,
+      "maxValue": 100
+    },
+    {
+      "id": "Tooltip",
+      "type": "select",
+      "name": "Tooltip mods",
+      "description": "Modifies the size and background opacity of the tooltip for items on the ground and in the inventory.",
+      "defaultValue": "none",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Opacity & Size", "value": "all" },
+        { "label": "Opacity", "value": "opacity" },
+        { "label": "Size", "value": "size" }
+      ]
+    },
+    {
+      "id": "TooltipOpacity",
+      "type": "number",
+      "minValue": 0.1,
+      "maxValue": 1,
+      "name": "Tooltip: opacity",
+      "description": "Set the tooltip background opacity (unmodded = 0.6).",
+      "defaultValue": 0.75
+    },
+    {
+      "id": "TooltipSize",
+      "type": "number",
+      "minValue": 20,
+      "maxValue": 50,
+      "name": "Tooltip: font size",
+      "description": "Set the tooltip font size (unmodded = 36).",
+      "defaultValue": 33
+    }
+  ]
+}
