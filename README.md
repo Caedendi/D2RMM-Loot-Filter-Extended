@@ -109,27 +109,43 @@ Cleans up item names to remove clutter and emphasizes important items. For the f
 
 ## Recommended Mods
 
-In addition to this mod, I recommend you also use the D2RMM mods below:
+In addition to this, I recommend you also use the following D2RMM mods:
 
-| Mod                                                                             | Creator     | Notes                                                                                      |
-|---------------------------------------------------------------------------------|-------------|--------------------------------------------------------------------------------------------|
-| [Disable Battle.net](https://github.com/olegbl/d2rmm.mods)                      | olegbl      | So you don't accidentally get yourself banned.                                             |
-| [Settings Font Fix](https://www.nexusmods.com/diablo2resurrected/mods/200)      | olegbl      | In case any mod touches __profilehd_ and screws up the font size in the settings menu.     |
-| [LightPillar](https://www.nexusmods.com/diablo2resurrected/mods/197)            | qhu91it     | Add an awesome effect when certain items drop.                                             |
-| [Skip Intro Videos](https://www.nexusmods.com/diablo2resurrected/mods/179)      | olegbl      | On startup, gets you straight to the title screen.                                         |
-| [Towns QoL Changes](https://www.nexusmods.com/diablo2resurrected/mods/310)      | night0wl117 | Move town starting points, TP locations and Cain's position in Act 5.                      |
-| [Town Cast](https://www.nexusmods.com/diablo2resurrected/mods/183)              | olegbl      | TP & buff in town. _(BREAKING: allows teleporting past Jerhyn during the Act 2 questline)_ |
-| [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174)        | olegbl      | Adds the ilvl to the tooltips of all items with an ilvl.                                   |
-| [Short Quality Prefixes](https://www.nexusmods.com/diablo2resurrected/mods/214) | Jobus       | Shortens the Superior/Inferior prefixes _(until I have added it to this mod)_.             |
+| Mod                                                                             |   Creator   | Notes                                                                                              |
+|---------------------------------------------------------------------------------|:-----------:|----------------------------------------------------------------------------------------------------|
+| [Disable Battle.net](https://github.com/olegbl/d2rmm.mods)                      |   olegbl    | So you don't accidentally get yourself banned.                                                     |
+| [Settings Font Fix](https://www.nexusmods.com/diablo2resurrected/mods/200)      |   olegbl    | In case any mod touches __profilehd_ and screws up the font size in the settings menu.             |
+| [LightPillar](https://www.nexusmods.com/diablo2resurrected/mods/197)            |   qhu91it   | Add an awesome effect when certain items drop.                                                     |
+| [Skip Intro Videos](https://www.nexusmods.com/diablo2resurrected/mods/179)      |   olegbl    | On startup, gets you straight to the title screen.                                                 |
+| [Towns QoL Changes](https://www.nexusmods.com/diablo2resurrected/mods/310)      | night0wl117 | Move town starting points, TP locations and Cain's position in Act 5.                              |
+| [Town Cast](https://www.nexusmods.com/diablo2resurrected/mods/183)              |   olegbl    | Teleport and buff in town. _(BREAKING: allows teleporting past Jerhyn during the Act 2 questline)_ |
+| [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174)        |   olegbl    | Adds the ilvl to the tooltips of all items with an ilvl.                                           |
+| [Short Quality Prefixes](https://www.nexusmods.com/diablo2resurrected/mods/214) |    Jobus    | Shortens the Superior/Inferior prefixes _(will be added to this mod in a future update)_.          |
 
 
 ## Roadmap
 
-- Fix known bugs:
-  - Enabling jewelry turns crafted/rare/set/unique jewelry blue.
-- Add features:
-  - different emphasis for unique charms, rare jewels and facets (rainbow color)
-  - Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214/?tab=files&category=archived) or [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351)
+- [ ] Semantic versioning
+- [ ] Finish mod
+  - [x] Rework to implement detailed toggles & presets
+  - [ ] Implement/fix rune highlighting
+- [ ] Document mod
+  - [ ] JSON descriptions
+  - [ ] Add all custom naming shortcut codes to code & preset descriptions
+  - [ ] Finish README
+- [ ] Test
+  - [ ] verify keys
+  - [ ] verify gas/oil potions
+- [ ] Publish mod
+  - [ ] Create pictures
+  - [ ] Link pictures in README
+  - [ ] Git tag + release
+  - [ ] Publish on Nexus Mods
+- [ ] Fix known bugs:
+  - [ ] Enabling jewelry turns crafted/rare/set/unique jewelry blue.
+- [ ] Add features:
+  - [ ] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214/?tab=files&category=archived) or [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351)
+  - [ ] different emphasis for unique charms, rare jewels and facets (rainbow color)
 
 
 ## Credits
