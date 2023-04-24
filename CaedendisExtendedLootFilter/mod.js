@@ -58,7 +58,7 @@ const LIGHTPINK = `${COLOR_PREFIX}G`;
 const PURPLE = `${COLOR_PREFIX};`;
 
 // Naming
-const HIDDEN = '' + ' '.repeat(config.HiddenItemTooltipSize); // item name when it is set to "hidden". Set to empty, single space, etc.
+const HIDDEN = '' + ' '.repeat(config.HiddenItemTooltipSize);
 
 
 //============================//
