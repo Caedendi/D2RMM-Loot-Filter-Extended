@@ -9,12 +9,13 @@ Cleans up item names to remove clutter and emphasizes important items. For the f
 ## Table of Contents
 
 - [Features](#features)
+- [Presets Overview](#presets-overview)
 - [Installation](#installation)
 - [Recommended Mods](#recommended-mods)
-- [ToDo](#todo)
+- [Roadmap](#roadmap)
 - [Credits](#credits)
   - [Code](#code)
-  - [Loot Filter Style](#loot-filter-style)
+  - [Filter Style](#filter-style)
 - [License/Permissions](#licensepermissions)
 
 
