@@ -5,6 +5,7 @@ _See also: [Caedendi's Simple Loot Filter for D2RMM](https://github.com/Caedendi
 Adds a customizable loot filter with lots of presets to Diablo 2: Resurrected using D2RMM. <br>
 Cleans up item names to remove clutter and emphasizes important items. For the full feature list, see below.
 
+
 ## Table of Contents
 
 - [Features](#features)
@@ -15,6 +16,7 @@ Cleans up item names to remove clutter and emphasizes important items. For the f
   - [Code](#code)
   - [Loot Filter Style](#loot-filter-style)
 - [License/Permissions](#licensepermissions)
+
 
 ## Features
 
@@ -33,67 +35,67 @@ Cleans up item names to remove clutter and emphasizes important items. For the f
 - Add your own custom naming for each item type. 
   - Search the code for the tag mentioned in the item type description in the D2RMM settings.
 
+
 ## Presets Overview
 
-| Item Type                                    | Presets (**Bold** = default)                     |
-|----------------------------------------------|--------------------------------------------------|
-| **Runes**                                    | No change                                        |
-|                                              | **Add rune numbers + highlights + remove affix** |
-|                                              | Add rune numbers + remove affix                  |
-|                                              | Add rune numbers + highlights                    |
-|                                              | Add highlights + remove affix                    |
-|                                              | Add rune numbers                                 |
-|                                              | Add highlights                                   |
-|                                              | Remove affix                                     |
-|                                              | Custom                                           |
-| **Healing Potions**                          | No change                                        |
-|                                              | **All**                                          |
-|                                              | Hide lvl 3                                       |
-|                                              | Hide lvl 4                                       |
-|                                              | Hide lvl 3 + small rejuvs                        |
-|                                              | Hide lvl 4 + small rejuvs                        |
-|                                              | Show only rejuvs                                 |
-|                                              | Show only full rejuvs                            |
-|                                              | Hide all                                         |
-|                                              | Custom                                           |
-| **Buff Potions**                             | No change                                        |
-|                                              | **All**                                          |
-|                                              | Hide                                             |
-|                                              | Custom                                           |
-| **Throwing Potions**                         | No change                                        |
-|                                              | **All**                                          |
-|                                              | Hide                                             |
-|                                              | Custom                                           |
-| **Scrolls & Tomes**                          | No change                                        |
-|                                              | **All**                                          |
-|                                              | Hide scrolls                                     |
-|                                              | Custom                                           |
-| **Arrows & Bolts**                           | No change                                        |
-|                                              | **Highlight**                                    |
-|                                              | Hide                                             |
-|                                              | Custom                                           |
-| **Rings, Amulets, Jewels & Charms [BUGGED]** | **No change**                                    |
-|                                              | Highlight                                        |
-|                                              | Custom                                           |
-| **Gems**                                     | No change                                        |
-|                                              | **Highlight all**                                |
-|                                              | Highlight, show only flawless & perfect          |
-|                                              | Highlight, show only perfect                     |
-|                                              | Custom                                           |
-| **Quest items**                              | No change                                        |
-|                                              | **Highlight**                                    |
-|                                              | Custom                                           |
-| **Endgame Items**                            | No change                                        |
-|                                              | **Highlight**                                    |
-|                                              | Highlight (exclude Standard of Heroes)           |
-|                                              | Highlight, hide Standard of Heroes               |
-|                                              | Custom                                           |
-| **Tooltip**                                  | Tooltip size for hidden items (0 or more spaces) |
-|                                              | **No change**                                    |
-|                                              | Opacity & Size                                   |
-|                                              | Opactiy                                          |
-|                                              | Size                                             |
-
+| Item Type                                    | Presets                                                    |
+|----------------------------------------------|------------------------------------------------------------|
+| **Runes**                                    | No change                                                  |
+|                                              | **Add rune numbers + highlights + remove affix (default)** |
+|                                              | Add rune numbers + remove affix                            |
+|                                              | Add rune numbers + highlights                              |
+|                                              | Add highlights + remove affix                              |
+|                                              | Add rune numbers                                           |
+|                                              | Add highlights                                             |
+|                                              | Remove affix                                               |
+|                                              | Custom                                                     |
+| **Healing Potions**                          | No change                                                  |
+|                                              | **All (default)**                                          |
+|                                              | Hide lvl 3                                                 |
+|                                              | Hide lvl 4                                                 |
+|                                              | Hide lvl 3 + small rejuvs                                  |
+|                                              | Hide lvl 4 + small rejuvs                                  |
+|                                              | Show only rejuvs                                           |
+|                                              | Show only full rejuvs                                      |
+|                                              | Hide all                                                   |
+|                                              | Custom                                                     |
+| **Buff Potions**                             | No change                                                  |
+|                                              | **All (default)**                                          |
+|                                              | Hide                                                       |
+|                                              | Custom                                                     |
+| **Throwing Potions**                         | No change                                                  |
+|                                              | **All (default)**                                          |
+|                                              | Hide                                                       |
+|                                              | Custom                                                     |
+| **Scrolls & Tomes**                          | No change                                                  |
+|                                              | **All (default)**                                          |
+|                                              | Hide scrolls                                               |
+|                                              | Custom                                                     |
+| **Arrows & Bolts**                           | No change                                                  |
+|                                              | **Highlight (default)**                                    |
+|                                              | Hide                                                       |
+|                                              | Custom                                                     |
+| **Rings, Amulets, Jewels & Charms [BUGGED]** | **No change (default)**                                    |
+|                                              | Highlight                                                  |
+|                                              | Custom                                                     |
+| **Gems**                                     | No change                                                  |
+|                                              | **Highlight all (default)**                                |
+|                                              | Highlight, show only flawless & perfect                    |
+|                                              | Highlight, show only perfect                               |
+|                                              | Custom                                                     |
+| **Quest items**                              | No change                                                  |
+|                                              | **Highlight (default)**                                    |
+|                                              | Custom                                                     |
+| **Endgame Items**                            | No change                                                  |
+|                                              | **Highlight (default)**                                    |
+|                                              | Highlight (exclude Standard of Heroes)                     |
+|                                              | Highlight, hide Standard of Heroes                         |
+|                                              | Custom                                                     |
+| **Tooltip size for hidden items**            | **0 (default)** - 100 spaces                               |
+| **Tooltip**                                  | **No change (default)**                                    |
+|                                              | Opacity & Size                                             |
+|                                              | Opactiy                                                    |
+|                                              | Size                                                       |
 
 
 ## Installation
@@ -102,6 +104,7 @@ Cleans up item names to remove clutter and emphasizes important items. For the f
 - Download and extract this mod folder to /D2RMM/mods/.
 - See D2RMM instructions on how to configure and enable.
 - Play the game!
+
 
 ## Recommended Mods
 
@@ -118,6 +121,7 @@ In addition to this mod, I recommend you also use the D2RMM mods below:
 | [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174)        | olegbl      | Adds the ilvl to the tooltips of all items with an ilvl.                                   |
 | [Short Quality Prefixes](https://www.nexusmods.com/diablo2resurrected/mods/214) | Jobus       | Shortens the Superior/Inferior prefixes _(until I have added it to this mod)_.             |
 
+
 ## Roadmap
 
 - Fix known bugs:
@@ -125,6 +129,7 @@ In addition to this mod, I recommend you also use the D2RMM mods below:
 - Add features:
   - different emphasis for unique charms, rare jewels and facets (rainbow color)
   - Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214/?tab=files&category=archived) or [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351)
+
 
 ## Credits
 
@@ -144,6 +149,7 @@ Many thanks to:
 - [Path of Diablo filters](https://pathofdiablo.com/wiki/index.php?title=List_of_Loot_Filters) for removing all that clutter on Path of Diablo and inspiring me to create this loot filter for D2R
   - Mainly [Darkgale](https://www.twitch.tv/darkgale)'s filter called [Filtergale](https://www.reddit.com/r/pathofdiablo/comments/i9hdw7/filtergale/) ([download](https://greendu.de/s/ZbDwHekAg3rmeRB/download?path=%2F&files=item.filter)) regarding styling
 - [Practical Item Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/317)
+
 
 ## License/Permissions
 
