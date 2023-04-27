@@ -488,6 +488,19 @@ const customItems = {
         break;
     }
   },
+
+  customizeKeys(setting) {
+    switch (setting) {
+      case "none":
+        return;
+      case "hide":
+        this.items.key = HIDDEN;
+        break;
+      case "custom": // [CSTM-KEY]
+        // ADD YOUR CUSTOM ITEM NAMES HERE
+        break;
+    }
+  },
   
   //=============//
   //   Jewelry   //   BUGGED: crafted/rare/set/unique jewelry and charms show up as blue
@@ -822,6 +835,7 @@ function applyCustomItemNames() {
   customItems.customizeThrowingPotions(config.ThrowingPotions);
   customItems.customizeScrollsAndTomes(config.ScrollsTomes);
   customItems.customizeArrowsAndBolts(config.ArrowsBolts);
+  customItems.customizeKeys(config.Keys);
   customItems.customizeRingsAndAmulets(config.RingsAmulets);
   customItems.customizeJewels(config.Jewels);
   customItems.customizeCharms(config.Charms);

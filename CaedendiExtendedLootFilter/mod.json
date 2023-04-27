@@ -110,6 +110,18 @@
       ]
     },
     {
+      "id": "Keys",
+      "type": "select",
+      "name": "Keys",
+      "description": "Customize regular keys for opening locked chests. For Uber keys, see Endgame. [CSTM-KEY]",
+      "defaultValue": "none",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Hide", "value": "hide" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
       "id": "RingsAmulets",
       "type": "select",
       "name": "Rings & Amulets (bugged)",
