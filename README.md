@@ -126,26 +126,29 @@ In addition to this, I recommend you also use the following D2RMM mods:
 ## Roadmap
 
 - [ ] Semantic versioning
-- [ ] Finish mod
-  - [x] Rework to implement detailed toggles & presets
-  - [ ] Implement/fix rune highlighting
+- [x] Finish mod
+  - [x] Rework to implement loads of toggles & presets
+  - [x] Implement/fix rune highlighting
 - [ ] Document mod
   - [ ] JSON descriptions
   - [ ] Add all custom naming shortcut codes to code & preset descriptions
   - [ ] Finish README
 - [ ] Test
-  - [ ] verify keys
-  - [ ] verify gas/oil potions
+  - [x] verify keys
+  - [x] verify gas/oil potions
+  - [x] verify essences
 - [ ] Publish mod
   - [ ] Create pictures
   - [ ] Link pictures in README
   - [ ] Git tag + release
   - [ ] Publish on Nexus Mods
+  - [ ] Reddit post
 - [ ] Fix known bugs:
-  - [ ] Enabling jewelry turns crafted/rare/set/unique jewelry blue.
+  - [x] Not working for regular Ruby, Sapphire, Emerald and Diamond
+  - [ ] Enabling jewelry turns crafted/rare/set/unique jewelry blue
 - [ ] Add features:
   - [ ] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214/?tab=files&category=archived) or [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351)
-  - [ ] different emphasis for unique charms, rare jewels and facets (rainbow color)
+  - [ ] Different emphasis for unique charms, rare jewels and facets (rainbow color)
 
 
 ## Credits
