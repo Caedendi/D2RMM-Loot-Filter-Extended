@@ -107,7 +107,7 @@ const customAffixes = {
       case "perfect": // hide lvl 1-4 potions, show small/full rejuvs
       this.hideGems();
         break;
-      case "custom": 
+      case "custom": // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -357,7 +357,7 @@ const customItems = {
       case "hide": // hide all healing potions
         this.hideHealingPotions();
         break;
-      case "custom": 
+      case "custom": // [CSTM-HPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -399,7 +399,7 @@ const customItems = {
         this.items.wms = HIDDEN;
         this.items.vps = HIDDEN;
         break;
-      case "custom":
+      case "custom": // [CSTM-BPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -434,7 +434,7 @@ const customItems = {
         this.items.opm = HIDDEN;
         this.items.ops = HIDDEN;
         break;
-      case "custom":
+      case "custom": // [CSTM-TPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -462,7 +462,7 @@ const customItems = {
         this.items.tsc = HIDDEN; // Scroll of Town Portal
         this.items.isc = HIDDEN; // Scroll of Identify
         break;
-      case "custom":
+      case "custom": // [CSTM-SCR]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -483,7 +483,7 @@ const customItems = {
         this.items.aqv = HIDDEN; // Arrow Quiver
         this.items.cqv = HIDDEN; // Crossbow Bolt Quiver
         break;
-      case "custom":
+      case "custom": // [CSTM-ARB]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -500,7 +500,7 @@ const customItems = {
         this.items.amu = `${RED}0 ${BLUE}Amulet ${RED}0${BLUE}`; // Amulet
         this.items.rin = `${RED}0 ${BLUE}Ring ${RED}0${BLUE}`;   // Ring
         break;
-      case "custom":
+      case "custom": // [CSTM-RAM]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -513,7 +513,7 @@ const customItems = {
       case "highlight":
         this.items.jew = `${RED}0 ${BLUE}Jewel ${RED}0${BLUE}`; // Jewel
         break;
-      case "custom":
+      case "custom": // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -528,7 +528,7 @@ const customItems = {
         this.items.cm2 = `${RED}0 ${BLUE}Large Charm ${RED}0${BLUE}`; // Large Charm
         this.items.cm3 = `${RED}0 ${BLUE}Grand Charm ${RED}0${BLUE}`; // Grand Charm
         break;
-      case "custom":
+      case "custom": // [CSTM-CHA]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -657,9 +657,9 @@ const customItems = {
         this.items.gpy = gpy;
         this.items.skz = skz;
         break;
-      case "custom": 
+      case "custom": // [CSTM-GEM1]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        // NOTE: Ruby, Sapphire, Emerald and Diamond have to be set in the "Affixes" section on line 94.
+        // NOTE: Ruby, Sapphire, Emerald and Diamond have to be set in the "Affixes" section on line 110. See [CSTM-GEM2].
         break;
     }
   },
@@ -744,7 +744,7 @@ const customItems = {
         this.items.ice = `${RED}***  ${GOLD}Malah's Potion  ${RED}***`;       // Malah's Potion
         this.items.tr2 = `${RED}***  ${GOLD}Scroll of Resistance  ${RED}***`; // Scroll of Resistance
         break;
-      case "custom":
+      case "custom": // [CSTM-QST]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -768,7 +768,7 @@ const customItems = {
         this.highlightEndgameItems();
         this.items.std = ``;
         break;
-      case "custom":
+      case "custom": // [CSTM-END]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }

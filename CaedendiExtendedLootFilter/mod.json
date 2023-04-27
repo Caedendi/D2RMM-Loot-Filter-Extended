@@ -9,7 +9,7 @@
       "id": "Gold",
       "type": "select",
       "name": "Gold",
-      "description": "Apply the loot filter to the Gold affix. [CSTM-GLD]",
+      "description": "Customize the \"Gold\" affix for gold drops. [CSTM-GLD]",
       "defaultValue": "goldg",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -24,15 +24,15 @@
       "id": "Runes",
       "type": "select",
       "name": "Runes",
-      "description": "Apply the loot filter to Runes.",
+      "description": "Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel, Ko and up). [CSTM-RUN]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Add rune numbers + highlights + remove affix", "value": "all" },
-        { "label": "Add rune numbers + remove affix", "value": "nrs-raf" },
-        { "label": "Add rune numbers + highlights", "value": "nrs-hls" },
+        { "label": "Add Rune numbers + highlights + remove affix", "value": "all" },
+        { "label": "Add Rune numbers + remove affix", "value": "nrs-raf" },
+        { "label": "Add Rune numbers + highlights", "value": "nrs-hls" },
         { "label": "Add highlights + remove affix", "value": "hls-raf" },
-        { "label": "Add rune numbers", "value": "nrs" },
+        { "label": "Add Rune numbers", "value": "nrs" },
         { "label": "Add highlights", "value": "hls" },
         { "label": "Remove affix", "value": "raf" },
         { "label": "Custom", "value": "custom" }
@@ -42,17 +42,17 @@
       "id": "HealingPotions",
       "type": "select",
       "name": "Healing Potions",
-      "description": "Apply the loot filter to Healing, Mana and Rejuvenation Potions.",
+      "description": "Customize Healing, Mana and Rejuvenation Potions. [CSTM-HPT]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Enable (show all)", "value": "all" },
-        { "label": "Hide lvl 1-3 healing/mana", "value": "hide3" },
-        { "label": "Hide lvl 1-4 healing/mana", "value": "hide4" },
-        { "label": "Hide lvl 1-3 healing/mana & small rejuvs", "value": "hide3sr" },
-        { "label": "Hide lvl 1-4 healing/mana & small rejuvs", "value": "hide4sr" },
-        { "label": "Show only rejuvs", "value": "sfr" },
-        { "label": "Show only full rejuvs", "value": "fr" },
+        { "label": "Hide lvl 1-3 Healing/Mana Potions", "value": "hide3" },
+        { "label": "Hide lvl 1-4 Healing/Mana Potions", "value": "hide4" },
+        { "label": "Hide lvl 1-3 Healing/Mana & Small Rejuvenation Potions", "value": "hide3sr" },
+        { "label": "Hide lvl 1-4 Healing/Mana & Small Rejuvenation Potions", "value": "hide4sr" },
+        { "label": "Show only Rejuvenation Potions", "value": "sfr" },
+        { "label": "Show only Full Rejuvenation Potions", "value": "fr" },
         { "label": "Hide all", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
@@ -61,7 +61,7 @@
       "id": "BuffPotions",
       "type": "select",
       "name": "Buff Potions",
-      "description": "Apply the loot filter to Antidote, Thawing and Stamina Potions.",
+      "description": "Customize Antidote, Thawing and Stamina Potions. [CSTM-BPT]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -74,7 +74,7 @@
       "id": "ThrowingPotions",
       "type": "select",
       "name": "Throwing Potions",
-      "description": "Apply the loot filter to Strangling/Choking/Rancid Gas and Fulminating/Exploding/Oil Potions.",
+      "description": "Customize Strangling/Choking/Rancid Gas and Fulminating/Exploding/Oil Potions. [CSTM-TPT]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -87,7 +87,7 @@
       "id": "ScrollsTomes",
       "type": "select",
       "name": "Scrolls & Tomes",
-      "description": "Apply the loot filter to ID/TP Scrolls and Tomes.",
+      "description": "Customize ID/TP Scrolls and Tomes. [CSTM-SCR]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -100,7 +100,7 @@
       "id": "ArrowsBolts",
       "type": "select",
       "name": "Arrows & Bolts",
-      "description": "Apply the loot filter to Arrows & Bolts.",
+      "description": "Customize Arrows & Bolts. [CSTM-ARB]",
       "defaultValue": "highlight",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -113,7 +113,7 @@
       "id": "RingsAmulets",
       "type": "select",
       "name": "Rings & Amulets (bugged)",
-      "description": "Apply the loot filter to Rings & Amulets. KNOWN BUG: turns rare/unique Rings/Amulets blue.",
+      "description": "Customize Rings & Amulets. KNOWN BUG: turns crafted/rare/set/unique Rings/Amulets blue. [CSTM-RAM]",
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -125,7 +125,7 @@
       "id": "Jewels",
       "type": "select",
       "name": "Jewels (bugged)",
-      "description": "Apply the loot filter to Jewels. KNOWN BUG: turns rare Jewels and Facets blue.",
+      "description": "Customize Jewels. KNOWN BUG: turns rare Jewels and Facets blue. [CSTM-JWL]",
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -137,7 +137,7 @@
       "id": "Charms",
       "type": "select",
       "name": "Charms (bugged)",
-      "description": "Apply the loot filter to Small, Large and Grand Charms. KNOWN BUG: turns unique Charms blue.",
+      "description": "Customize Small, Large and Grand Charms. KNOWN BUG: turns unique Charms blue. [CSTM-CHA]",
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -149,7 +149,7 @@
       "id": "Gems",
       "type": "select",
       "name": "Gems",
-      "description": "Apply the loot filter to Gems.",
+      "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -163,7 +163,7 @@
       "id": "Quest",
       "type": "select",
       "name": "Quest Items",
-      "description": "Highlight quest items.",
+      "description": "Highlight quest items. [CSTM-QST]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -175,7 +175,7 @@
       "id": "Endgame",
       "type": "select",
       "name": "Endgame Items",
-      "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes.",
+      "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. [CSTM-END]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -210,7 +210,7 @@
     {
       "id": "TooltipOpacity",
       "type": "number",
-      "minValue": 0.1,
+      "minValue": 0,
       "maxValue": 1,
       "name": "Tooltip: opacity",
       "description": "Set the tooltip background opacity (unmodded = 0.6).",

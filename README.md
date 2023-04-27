@@ -2,9 +2,11 @@
 
 _See also: [Caedendi's Simple Loot Filter for D2RMM](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)_
 
-Adds a customizable loot filter with lots of presets to Diablo 2: Resurrected using D2RMM. <br>
-Cleans up item names to remove clutter and emphasizes important items. For the full feature list, see below.
+Adds an expansive customizable loot filter with a shitload of presets to Diablo 2: Resurrected using D2RMM. <br>
+Hide junk, clean up tooltips to remove clutter and emphasize important items. For the full feature list, see below.
 
+Recommended for those who prefer toggling presets to reach their desired functionality. <br>
+If you'd rather have a compact list to act as a template for your own naming schemes, see the Simple version above.
 
 ## Table of Contents
 
@@ -21,26 +23,35 @@ Cleans up item names to remove clutter and emphasizes important items. For the f
 
 ## Features
 
-- This mod was written in a way that allows for easy item name customizations by end users.
-  - Just open the mod.js file in Notepad and change whatever item name into what you'd like it to be
+- **Customize to your liking:**
+  - Alter or hide each item type to your preference using the presets in the D2RMM settings.
+  - Shorten or hide junk.
+  - Emphasize the good/important stuff (runes, flawless gems, essences, uber keys/organs, quest items, etc).
+  - For a full list of features, see [Presets Overview](#presets-overview).
   - Don't forget to reload and apply in D2RMM!
-- All mods are optional and can be toggled in the D2RMM settings
-  - Untoggling everything means no modding will be applied
-- Shortens and colors gold tooltip
-- Show rune numbers and emphasize better runes
-- Shorten item names for junk and gems
-- Emphasized items for quests, Pandemonium event (ubers), essences and token
-- Item tooltip customization:
-  - Change the background opacity
-  - Change the font size
-- Add your own custom naming for each item type. 
-  - Search the code for the tag mentioned in the item type description in the D2RMM settings.
+- **Completely optional:** 
+  - Untoggling everything means no modding will be applied.
+- **Apply your own custom naming schemes for specific item types**:
+  - Set the item type to "Custom", open the mod.js file in Notepad and add your personalized naming schemes on the lines mentioned in the item type's setting description.
+  - To hide an item, change its name to HIDDEN (without quotes). The value of HIDDEN (amount of spaces) can be changed in the D2RMM settings.
+  - Don't forget to reload and apply in D2RMM!
+- **Item tooltip customization:**
+  - Modify the size and background opacity of the tooltip for items on the ground and in the inventory.
+- **Rings, Amulets, Jewels and Charms customization disabled by default:**
+  - Because of a bug, crafted/rare/set/unique variants of these items are also changed to the custom name/color.
+  - If you enable this, make sure to pick up _all of them_ or you'd might miss a unique!
 
 
 ## Presets Overview
 
 | Item Type                                    | Presets                                                    |
 |----------------------------------------------|------------------------------------------------------------|
+| **Gold**                                     | No change                                                  |
+|                                              | Gold text                                                  |
+|                                              | **Gold G (default)**                                       |
+|                                              | White G                                                    |
+|                                              | Hide affix                                                 |
+|                                              | Custom                                                     |
 | **Runes**                                    | No change                                                  |
 |                                              | **Add rune numbers + highlights + remove affix (default)** |
 |                                              | Add rune numbers + remove affix                            |
@@ -92,7 +103,7 @@ Cleans up item names to remove clutter and emphasizes important items. For the f
 |                                              | Highlight (exclude Standard of Heroes)                     |
 |                                              | Highlight, hide Standard of Heroes                         |
 |                                              | Custom                                                     |
-| **Tooltip size for hidden items**            | **0 (default)** - 100 spaces                               |
+| **Tooltip size for hidden items**            | **0 (default)** to 25 (max) spaces                         |
 | **Tooltip**                                  | **No change (default)**                                    |
 |                                              | Opacity & Size                                             |
 |                                              | Opactiy                                                    |
@@ -125,15 +136,14 @@ In addition to this, I recommend you also use the following D2RMM mods:
 
 ## Roadmap
 
-- [ ] Semantic versioning
-- [x] Finish mod
+- [x] Finish code
   - [x] Rework to implement loads of toggles & presets
   - [x] Implement/fix rune highlighting
-- [ ] Document mod
-  - [ ] JSON descriptions
-  - [ ] Add all custom naming shortcut codes to code & preset descriptions
-  - [ ] Finish README
-- [ ] Test
+- [x] Document mod
+  - [x] JSON descriptions
+  - [x] Add all custom naming shortcut codes to code & preset descriptions
+  - [x] Finish README
+- [x] Test
   - [x] verify keys
   - [x] verify gas/oil potions
   - [x] verify essences
@@ -159,15 +169,15 @@ Remnants of other people's codes remain, so I have tried to list the credits as 
 Many thanks to:
 
 ### Code
-- [Practical Item Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/317) for acting as a base for this mod and the tooltip customization features
-- olegbl for:
-  - creating [D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/169)
-  - his [example mods](https://github.com/olegbl/d2rmm.mods) in general
-  - his [Short Potion Names](https://www.nexusmods.com/diablo2resurrected/mods/177) mod for the list of colors
+- [Practical Item Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/317) for acting as a base to build upon and the tooltip customization features
+- [olegbl](https://github.com/olegbl) for:
+  - Creating [D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/169).
+  - His [example mods](https://github.com/olegbl/d2rmm.mods) in general.
+  - His [Short Potion Names](https://www.nexusmods.com/diablo2resurrected/mods/177) mod for the list of colors.
 
 ### Filter Style
-- [Path of Diablo filters](https://pathofdiablo.com/wiki/index.php?title=List_of_Loot_Filters) for removing all that clutter on Path of Diablo and inspiring me to create this loot filter for D2R
-  - Mainly [Darkgale](https://www.twitch.tv/darkgale)'s filter called [Filtergale](https://www.reddit.com/r/pathofdiablo/comments/i9hdw7/filtergale/) ([download](https://greendu.de/s/ZbDwHekAg3rmeRB/download?path=%2F&files=item.filter)) regarding styling
+- [Path of Diablo filters](https://pathofdiablo.com/wiki/index.php?title=List_of_Loot_Filters) for removing all that clutter on Path of Diablo and inspiring me to create this loot filter for D2R.
+  - Mainly [Darkgale](https://www.twitch.tv/darkgale)'s filter called [Filtergale](https://www.reddit.com/r/pathofdiablo/comments/i9hdw7/filtergale/) ([download](https://greendu.de/s/ZbDwHekAg3rmeRB/download?path=%2F&files=item.filter)) regarding styling.
 - [Practical Item Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/317)
 
 
