@@ -28,10 +28,10 @@
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Add Rune numbers + highlights + remove affix", "value": "all" },
-        { "label": "Add Rune numbers + remove affix", "value": "nrs-raf" },
-        { "label": "Add Rune numbers + highlights", "value": "nrs-hls" },
-        { "label": "Add highlights + remove affix", "value": "hls-raf" },
+        { "label": "Add Rune numbers, add highlights, remove affix", "value": "all" },
+        { "label": "Add Rune numbers, add highlights", "value": "nrs-hls" },
+        { "label": "Add Rune numbers, remove affix", "value": "nrs-raf" },
+        { "label": "Add highlights, remove affix", "value": "hls-raf" },
         { "label": "Add Rune numbers", "value": "nrs" },
         { "label": "Add highlights", "value": "hls" },
         { "label": "Remove affix", "value": "raf" },
@@ -192,8 +192,8 @@
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },
-        { "label": "Highlight, exclude Standard of Heroes)", "value": "xsh" },
-        { "label": "Highlight, hide Standard of Heroes)", "value": "hsh" },
+        { "label": "Highlight, exclude Standard of Heroes", "value": "xsh" },
+        { "label": "Highlight, hide Standard of Heroes", "value": "hsh" },
         { "label": "Custom", "value": "custom" }
       ]
     },
