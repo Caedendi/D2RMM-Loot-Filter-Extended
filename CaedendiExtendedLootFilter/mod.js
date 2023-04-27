@@ -470,14 +470,14 @@ const customItems = {
 
   customizeArrowsAndBolts(setting) {
     const aqv = `${GRAY}o ${WHITE}Arrows`;
-    const bqv = `${GRAY}o ${WHITE}Bolts`;
+    const cqv = `${GRAY}o ${WHITE}Bolts`;
 
     switch (setting) {
       case "none":
         return;
       case "highlight":
         this.items.aqv = aqv;
-        this.items.bqv = bqv;
+        this.items.cqv = cqv;
         break;
       case "hide":
         this.items.aqv = HIDDEN; // Arrow Quiver
