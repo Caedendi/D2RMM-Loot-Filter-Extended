@@ -87,6 +87,9 @@ If you'd rather have a compact list to act as a template for your own naming sch
 |                                              | **Highlight (default)**                                    |
 |                                              | Hide                                                       |
 |                                              | Custom                                                     |
+| **Keys**                                     | **No change (default)**                                    |
+|                                              | Hide                                                       |
+|                                              | Custom                                                     |
 | **Rings, Amulets, Jewels & Charms [BUGGED]** | **No change (default)**                                    |
 |                                              | Highlight                                                  |
 |                                              | Custom                                                     |
