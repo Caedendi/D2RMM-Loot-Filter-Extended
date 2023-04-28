@@ -157,6 +157,11 @@ const customRunes = {
     r32: "Cham",
     r33: "Zod",
   },
+  
+  lvl1Highlight: [8, 15, 18, 19, 20],                        // Ral, Hel, Ko, Fal, Lem
+  lvl2Highlight: [21, 22, 23, 24, 25],                       // Pul, Um, Mal, Ist, Gul
+  lvl3Highlight: [26, 27, 28, 29, 30, 31, 32, 33],           // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
+  highlightSettings: ["all", "nrs-hls", "hls-raf", "hls"],
 
   customizeRunes(setting) {
     switch (setting) {
@@ -164,76 +169,70 @@ const customRunes = {
       case "raf": // Remove affix
         return;
       case "all": // Add rune numbers + highlights + remove affix
-        this.setColor(ORANGE1);
-        this.addRuneNumbers();
+        this.setColor(ORANGE1, RED, setting);
+        this.addRuneNumbers(setting);
         this.addHighlighting()
         break;
       case "nrs-raf": // Add rune numbers + remove affix
-        this.setColor(ORANGE1);
-        this.addRuneNumbers();
+        this.setColor(ORANGE1, ORANGE1, setting);
+        this.addRuneNumbers(setting);
         break;
       case "nrs-hls": // Add rune numbers + highlights
-        this.setColor(ORANGE1);
         this.addRuneAffix();
-        this.addRuneNumbers();
+        this.setColor(ORANGE1, RED, setting);
+        this.addRuneNumbers(setting); 
         this.addHighlighting();
         break;
       case "hls-raf": // Add highlights + remove affix
-        this.setColor(ORANGE1);
+        this.setColor(ORANGE1, RED, setting);
         this.addHighlighting();
         break;
       case "nrs": // Add rune numbers
-        this.setColor(ORANGE1);
         this.addRuneAffix();
-        this.addRuneNumbers();
+        this.setColor(ORANGE1, ORANGE1, setting);
+        this.addRuneNumbers(setting);
         break;
       case "hls": // Add highlights
-        this.setColor(ORANGE1);
         this.addRuneAffix();
+        this.setColor(ORANGE1, RED, setting);
         this.addHighlighting();
         break;
       case "custom": // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.r01 = `${ORANGE1}El ${WHITE}[${RED}1${WHITE}]`;                                // El
-        this.r02 = `${ORANGE1}Eld ${WHITE}[${RED}2${WHITE}]`;                               // Eld
-        this.r03 = `${ORANGE1}Tir ${WHITE}[${RED}3${WHITE}]`;                               // Tir
-        this.r04 = `${ORANGE1}Nef ${WHITE}[${RED}4${WHITE}]`;                               // Nef
-        this.r05 = `${ORANGE1}Eth ${WHITE}[${RED}5${WHITE}]`;                               // Eth
-        this.r06 = `${ORANGE1}Ith ${WHITE}[${RED}6${WHITE}]`;                               // Ith
-        this.r07 = `${ORANGE1}Tal ${WHITE}[${RED}7${WHITE}]`;                               // Tal
-        this.r08 = `${RED}* ${ORANGE1}Ral ${WHITE}[${RED}8${WHITE}] ${RED}*`;               // Ral
-        this.r09 = `${ORANGE1}Ort ${WHITE}[${RED}9${WHITE}]`;                               // Ort
-        this.r10 = `${ORANGE1}Thul ${WHITE}[${RED}10${WHITE}]`;                             // Thul
-        this.r11 = `${ORANGE1}Amn ${WHITE}[${RED}11${WHITE}]`;                              // Amn
-        this.r12 = `${ORANGE1}Sol ${WHITE}[${RED}12${WHITE}]`;                              // Sol
-        this.r13 = `${ORANGE1}Shael ${WHITE}[${RED}13${WHITE}]`;                            // Shael
-        this.r14 = `${ORANGE1}Dol ${WHITE}[${RED}14${WHITE}]`;                              // Dol
-        this.r15 = `${RED}* ${ORANGE1}Hel ${WHITE}[${RED}15${WHITE}] ${RED}*`;              // Hel
-        this.r16 = `${ORANGE1}Io ${WHITE}[${RED}16${WHITE}]`;                               // Io
-        this.r17 = `${ORANGE1}Lum ${WHITE}[${RED}17${WHITE}]`;                              // Lum
-        this.r18 = `${RED}* ${ORANGE1}Ko ${WHITE}[${RED}18${WHITE}] ${RED}*`;               // Ko
-        this.r19 = `${RED}* ${ORANGE1}Fal ${WHITE}[${RED}19${WHITE}] ${RED}*`;              // Fal
-        this.r20 = `${RED}* ${ORANGE1}Lem ${WHITE}[${RED}20${WHITE}] ${RED}*`;              // Lem
-        this.r21 = `${RED}***  ${ORANGE1}Pul ${WHITE}[${RED}21${WHITE}]  ${RED}***`;        // Pul
-        this.r22 = `${RED}***  ${ORANGE1}Um ${WHITE}[${RED}22${WHITE}]  ${RED}***`;         // Um
-        this.r23 = `${RED}***  ${ORANGE1}Mal ${WHITE}[${RED}23${WHITE}]  ${RED}***`;        // Mal
-        this.r24 = `${RED}***  ${ORANGE1}Ist ${WHITE}[${RED}24${WHITE}]  ${RED}***`;        // Ist
-        this.r25 = `${RED}***  ${ORANGE1}Gul ${WHITE}[${RED}25${WHITE}]  ${RED}***`;        // Gul
-        this.r26 = `${RED}*****   ${ORANGE1}Vex ${WHITE}[${RED}26${WHITE}]   ${RED}*****`;  // Vex
-        this.r27 = `${RED}*****   ${ORANGE1}Ohm ${WHITE}[${RED}27${WHITE}]   ${RED}*****`;  // Ohm
-        this.r28 = `${RED}*****   ${ORANGE1}Lo ${WHITE}[${RED}28${WHITE}]   ${RED}*****`;   // Lo
-        this.r29 = `${RED}*****   ${ORANGE1}Sur ${WHITE}[${RED}29${WHITE}]   ${RED}*****`;  // Sur
-        this.r30 = `${RED}*****   ${ORANGE1}Ber ${WHITE}[${RED}30${WHITE}]   ${RED}*****`;  // Ber
-        this.r31 = `${RED}*****   ${ORANGE1}Jah ${WHITE}[${RED}31${WHITE}]   ${RED}*****`;  // Jah
-        this.r32 = `${RED}*****   ${ORANGE1}Cham ${WHITE}[${RED}32${WHITE}]   ${RED}*****`; // Cham
-        this.r33 = `${RED}*****   ${ORANGE1}Zod ${WHITE}[${RED}33${WHITE}]   ${RED}*****`;  // Zod
+        this.runes.r01 = `${ORANGE1}El (1)`;                                              // El
+        this.runes.r02 = `${ORANGE1}Eld (2)`;                                             // Eld
+        this.runes.r03 = `${ORANGE1}Tir (3)`;                                             // Tir
+        this.runes.r04 = `${ORANGE1}Nef (4)`;                                             // Nef
+        this.runes.r05 = `${ORANGE1}Eth (5)`;                                             // Eth
+        this.runes.r06 = `${ORANGE1}Ith (6)`;                                             // Ith
+        this.runes.r07 = `${ORANGE1}Tal (7)`;                                             // Tal
+        this.runes.r08 = `${RED}**  ${ORANGE1}Ral (8)  ${RED}**`;                         // Ral
+        this.runes.r09 = `${ORANGE1}Ort (9)`;                                             // Ort
+        this.runes.r10 = `${ORANGE1}Thul (10)`;                                           // Thul
+        this.runes.r11 = `${ORANGE1}Amn (11)`;                                            // Amn
+        this.runes.r12 = `${ORANGE1}Sol (12)`;                                            // Sol
+        this.runes.r13 = `${ORANGE1}Shael (13)`;                                          // Shael
+        this.runes.r14 = `${ORANGE1}Dol (14)`;                                            // Dol
+        this.runes.r15 = `${RED}**  ${ORANGE1}Hel (15) ${RED}*`;                          // Hel
+        this.runes.r16 = `${ORANGE1}Io (16)`;                                             // Io
+        this.runes.r17 = `${ORANGE1}Lum (17)`;                                            // Lum
+        this.runes.r18 = `${RED}**  ${ORANGE1}Ko (18)  ${RED}**`;                         // Ko
+        this.runes.r19 = `${RED}**  ${ORANGE1}Fal (19)  ${RED}**`;                        // Fal
+        this.runes.r20 = `${RED}**  ${ORANGE1}Lem (20)  ${RED}**`;                        // Lem
+        this.runes.r21 = `${RED}*****   ${ORANGE1}Pul (21)   ${RED}*****`;                // Pul
+        this.runes.r22 = `${RED}*****   ${ORANGE1}Um (22)   ${RED}*****`;                 // Um
+        this.runes.r23 = `${RED}*****   ${ORANGE1}Mal (23)   ${RED}*****`;                // Mal
+        this.runes.r24 = `${RED}*****   ${ORANGE1}Ist (24)   ${RED}*****`;                // Ist
+        this.runes.r25 = `${RED}*****   ${ORANGE1}Gul (25)   ${RED}*****`;                // Gul
+        this.runes.r26 = `${RED}**********     ${ORANGE1}Vex (26)     ${RED}**********`;  // Vex
+        this.runes.r27 = `${RED}**********     ${ORANGE1}Ohm (27)     ${RED}**********`;  // Ohm
+        this.runes.r28 = `${RED}**********     ${ORANGE1}Lo (28)     ${RED}**********`;   // Lo
+        this.runes.r29 = `${RED}**********     ${ORANGE1}Sur (29)     ${RED}**********`;  // Sur
+        this.runes.r30 = `${RED}**********     ${ORANGE1}Ber (30)     ${RED}**********`;  // Ber
+        this.runes.r31 = `${RED}**********     ${ORANGE1}Jah (31)     ${RED}**********`;  // Jah
+        this.runes.r32 = `${RED}**********     ${ORANGE1}Cham (32)     ${RED}**********`; // Cham
+        this.runes.r33 = `${RED}**********     ${ORANGE1}Zod (33)     ${RED}**********`;  // Zod
         break;
-    }
-  },
-
-  setColor(color) {
-    for (const rune in this.runes) {
-      this.runes[rune] = `${color}${this.runes[rune]}`;
     }
   },
 
@@ -242,33 +241,44 @@ const customRunes = {
       this.runes[rune] = `${this.runes[rune]} Rune`;
     }
   },
-  
-  addRuneNumbers() {
+
+  setColor(color, highlightColor, setting) {
     var i = 1;
     for (const rune in this.runes) {
-      this.runes[rune] = this.runes[rune] + ` ${WHITE}[${RED}${i}${WHITE}]`;
+      if (i > 25 && this.highlightSettings.includes(setting))
+        this.runes[rune] = `${highlightColor}${this.runes[rune]}`;
+      else 
+        this.runes[rune] = `${color}${this.runes[rune]}`;
+
+      i++;
+    }
+  },
+  
+  addRuneNumbers(setting) {
+    var i = 1;
+    for (const rune in this.runes) {
+      if (i > 20 && this.highlightSettings.includes(setting)) 
+        this.runes[rune] = this.runes[rune] + ` ${RED}(${i})`;
+      else
+        this.runes[rune] = this.runes[rune] + ` ${ORANGE}(${i})`;
+
       i++;
     }
   },
 
   addHighlighting() {
-    const lvl1Highlight = [8, 15, 18, 19, 20];                        // Ral, Hel, Ko, Fal, Lem
-    const lvl2Highlight = [21, 22, 23, 24, 25];                       // Pul, Um, Mal, Ist, Gul
-    const lvl3Highlight = [26, 27, 28, 29, 30, 31, 32, 33];           // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
-
     var i = 1;
     for (const rune in this.runes) {
-      if (lvl1Highlight.includes(i)) {
-        this.runes[rune] = this.generateHighlight(this.runes[rune], '*', RED, 1);
+      if (this.lvl1Highlight.includes(i)) {
+        this.runes[rune] = this.generateHighlight(this.runes[rune], '**', RED, 2);
       }
-    
-      else if (lvl2Highlight.includes(i)) {
-        this.runes[rune] = this.generateHighlight(this.runes[rune], '***', RED, 2);
-      }
-    
-      else if (lvl3Highlight.includes(i)) {
+      else if (this.lvl2Highlight.includes(i)) {
         this.runes[rune] = this.generateHighlight(this.runes[rune], '*****', RED, 3);
       }
+      else if (this.lvl3Highlight.includes(i)) {
+        this.runes[rune] = this.generateHighlight(this.runes[rune], '**********', RED, 5);
+      }
+
       i++;
     }
   },
@@ -282,20 +292,20 @@ const customItems = {
   items: {},
 
   customizeHealingPotions(setting) {
-    const hp1 = `${RED}+${WHITE}HP1`; // Minor Healing Potion
-    const hp2 = `${RED}+${WHITE}HP2`; // Light Healing Potion
-    const hp3 = `${RED}+${WHITE}HP3`; // Healing Potion
-    const hp4 = `${RED}+${WHITE}HP4`; // Greater Healing Potion
-    const hp5 = `${RED}+${WHITE}HP5`; // Super Healing Potion
+    const hp1 = `${RED}+${WHITE}HP1`;    // Minor Healing Potion
+    const hp2 = `${RED}+${WHITE}HP2`;    // Light Healing Potion
+    const hp3 = `${RED}+${WHITE}HP3`;    // Healing Potion
+    const hp4 = `${RED}+${WHITE}HP4`;    // Greater Healing Potion
+    const hp5 = `${RED}+${WHITE}HP5`;    // Super Healing Potion
     
-    const mp1 = `${BLUE}+${WHITE}MP1`; // Minor Mana Potion
-    const mp2 = `${BLUE}+${WHITE}MP2`; // Light Mana Potion
-    const mp3 = `${BLUE}+${WHITE}MP3`; // Mana Potion
-    const mp4 = `${BLUE}+${WHITE}MP4`; // Greater Mana Potion
-    const mp5 = `${BLUE}+${WHITE}MP5`; // Super Mana Potion
+    const mp1 = `${BLUE}+${WHITE}MP1`;   // Minor Mana Potion
+    const mp2 = `${BLUE}+${WHITE}MP2`;   // Light Mana Potion
+    const mp3 = `${BLUE}+${WHITE}MP3`;   // Mana Potion
+    const mp4 = `${BLUE}+${WHITE}MP4`;   // Greater Mana Potion
+    const mp5 = `${BLUE}+${WHITE}MP5`;   // Super Mana Potion
     
-    const rvs = `${PURPLE}+${WHITE}Small`; // Rejuvenation Potion
-    const rvl = `${PURPLE}+${WHITE}Full`;  // Full Rejuvenation Potion
+    const rvs = `${PURPLE}+${WHITE}SRP`; // Rejuvenation Potion
+    const rvl = `${PURPLE}+${WHITE}FRP`; // Full Rejuvenation Potion
 
     // apply above custom names, unless set to "none" or "custom"
     switch (setting) {
@@ -728,34 +738,34 @@ const customItems = {
         return;
       case "all": // highlight all
         // Act 1
-        this.items.leg = `${RED}***  ${GOLD}Wirt's Leg  ${RED}***`;           // Wirt's Leg
-        this.items.hdm = `${RED}***  ${GOLD}Horadric Malus  ${RED}***`;       // Horadric Malus
-        this.items.bks = `${RED}***  ${GOLD}Scroll of Inifuss  ${RED}***`;    // Scroll of Inifuss
-        this.items.bkd = `${RED}***  ${GOLD}Scroll of Inifuss  ${RED}***`;    // Scroll of Inifuss (deciphered)
+        this.items.leg = `${RED}**********     ${GOLD}Wirt's Leg     ${RED}**********`;           // Wirt's Leg
+        this.items.hdm = `${RED}**********     ${GOLD}Horadric Malus     ${RED}**********`;       // Horadric Malus
+        this.items.bks = `${RED}**********     ${GOLD}Scroll of Inifuss     ${RED}**********`;    // Scroll of Inifuss
+        this.items.bkd = `${RED}**********     ${GOLD}Scroll of Inifuss     ${RED}**********`;    // Scroll of Inifuss (deciphered)
         // Act 2
-        this.items.ass = `${RED}***  ${GOLD}Book of Skill  ${RED}***`;        // Book of Skill
-        this.items.box = `${RED}***  ${GOLD}Horadric Cube  ${RED}***`;        // Horadric Cube
-        this.items.tr1 = `${RED}***  ${GOLD}Horadric Scroll  ${RED}***`;      // Horadric Scroll
-        this.items.msf = `${RED}***  ${GOLD}Staff of Kings  ${RED}***`;       // Staff of Kings
-        this.items.vip = `${RED}***  ${GOLD}Amulet of the Viper  ${RED}***`;  // Amulet of the Viper
-        this.items.hst = `${RED}***  ${GOLD}Horadric Staff  ${RED}***`;       // Horadric Staff
+        this.items.ass = `${RED}**********     ${GOLD}Book of Skill     ${RED}**********`;        // Book of Skill
+        this.items.box = `${RED}**********     ${GOLD}Horadric Cube     ${RED}**********`;        // Horadric Cube
+        this.items.tr1 = `${RED}**********     ${GOLD}Horadric Scroll     ${RED}**********`;      // Horadric Scroll
+        this.items.msf = `${RED}**********     ${GOLD}Staff of Kings     ${RED}**********`;       // Staff of Kings
+        this.items.vip = `${RED}**********     ${GOLD}Amulet of the Viper     ${RED}**********`;  // Amulet of the Viper
+        this.items.hst = `${RED}**********     ${GOLD}Horadric Staff     ${RED}**********`;       // Horadric Staff
         // Act 3
-        this.items.xyz = `${RED}***  ${GOLD}Potion of Life  ${RED}***`;       // Potion of Life
-        this.items.j34 = `${RED}***  ${GOLD}A Jade Figurine  ${RED}***`;      // A Jade Figurine
-        this.items.g34 = `${RED}***  ${GOLD}The Golden Bird  ${RED}***`;      // The Golden Bird
-        this.items.bbb = `${RED}***  ${GOLD}Lam Esen's Tome  ${RED}***`;      // Lam Esen's Tome
-        this.items.g33 = `${RED}***  ${GOLD}The Gidbinn  ${RED}***`;          // The Gidbinn
-        this.items.qf1 = `${RED}***  ${GOLD}Khalim's Flail  ${RED}***`;       // Khalim's Flail
-        this.items.qf2 = `${RED}***  ${GOLD}Khalim's Will  ${RED}***`;        // Khalim's Will
-        this.items.qey = `${RED}***  ${GOLD}Khalim's Eye  ${RED}***`;         // Khalim's Eye
-        this.items.qhr = `${RED}***  ${GOLD}Khalim's Heart  ${RED}***`;       // Khalim's Heart
-        this.items.qbr = `${RED}***  ${GOLD}Khalim's Brain  ${RED}***`;       // Khalim's Brain
-        this.items.mss = `${RED}***  ${GOLD}Mephisto's Soulstone  ${RED}***`; // Mephisto's Soulstone
+        this.items.xyz = `${RED}**********     ${GOLD}Potion of Life     ${RED}**********`;       // Potion of Life
+        this.items.j34 = `${RED}**********     ${GOLD}A Jade Figurine     ${RED}**********`;      // A Jade Figurine
+        this.items.g34 = `${RED}**********     ${GOLD}The Golden Bird     ${RED}**********`;      // The Golden Bird
+        this.items.bbb = `${RED}**********     ${GOLD}Lam Esen's Tome     ${RED}**********`;      // Lam Esen's Tome
+        this.items.g33 = `${RED}**********     ${GOLD}The Gidbinn     ${RED}**********`;          // The Gidbinn
+        this.items.qf1 = `${RED}**********     ${GOLD}Khalim's Flail     ${RED}**********`;       // Khalim's Flail
+        this.items.qf2 = `${RED}**********     ${GOLD}Khalim's Will     ${RED}**********`;        // Khalim's Will
+        this.items.qey = `${RED}**********     ${GOLD}Khalim's Eye     ${RED}**********`;         // Khalim's Eye
+        this.items.qhr = `${RED}**********     ${GOLD}Khalim's Heart     ${RED}**********`;       // Khalim's Heart
+        this.items.qbr = `${RED}**********     ${GOLD}Khalim's Brain     ${RED}**********`;       // Khalim's Brain
+        this.items.mss = `${RED}**********     ${GOLD}Mephisto's Soulstone     ${RED}**********`; // Mephisto's Soulstone
         // Act 4
-        this.items.hfh = `${RED}***  ${GOLD}Hellforge Hammer  ${RED}***`;     // Hellforge Hammer
+        this.items.hfh = `${RED}**********     ${GOLD}Hellforge Hammer     ${RED}**********`;     // Hellforge Hammer
         // Act 5
-        this.items.ice = `${RED}***  ${GOLD}Malah's Potion  ${RED}***`;       // Malah's Potion
-        this.items.tr2 = `${RED}***  ${GOLD}Scroll of Resistance  ${RED}***`; // Scroll of Resistance
+        this.items.ice = `${RED}**********     ${GOLD}Malah's Potion     ${RED}**********`;       // Malah's Potion
+        this.items.tr2 = `${RED}**********     ${GOLD}Scroll of Resistance     ${RED}**********`; // Scroll of Resistance
         break;
       case "custom": // [CSTM-QST]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -766,13 +776,13 @@ const customItems = {
   //===================================================//
   //   Endgame: Pandemonium Event, Tokens & Essences   //
   //===================================================//
-  customizeEndgameItems(){
+  customizeEndgameItems(setting){
     switch(setting) {
       case "none": // no change
         return;
       case "all": // highlight all
         this.highlightEndgameItems();
-        this.items.std = `${RED}* ${GOLD}Standard of Heroes ${RED}*`; // Standard of Heroes
+        this.items.std = `${RED}**  ${GOLD}Standard of Heroes  ${RED}**`; // Standard of Heroes
         break;
       case "xsh": // exclude Standard of Heroes from highlighting
         this.highlightEndgameItems();
@@ -788,17 +798,17 @@ const customItems = {
   },
   
   highlightEndgameItems() {
-    this.items.tes = `${RED}* ${ORANGE}Twisted Essence of Suffering ${RED}*`;     // Twisted Essence of Suffering
-    this.items.ceh = `${RED}* ${ORANGE}Charged Essense of Hatred ${RED}*`;        // Charged Essense of Hatred
-    this.items.bet = `${RED}* ${ORANGE}Burning Essence of Terror ${RED}*`;        // Burning Essence of Terror
-    this.items.fed = `${RED}* ${ORANGE}Festering Essence of Destruction ${RED}*`; // Festering Essence of Destruction
-    this.items.toa = `${RED}***  ${ORANGE}Token of Absolution  ${RED}***`;        // Token of Absolution
-    this.items.pk1 = `${RED}***  ${ORANGE}Key of Terror  ${RED}***`;              // Pandemonium Key 1 Key of Terror
-    this.items.pk2 = `${RED}***  ${ORANGE}Key of Hate  ${RED}***`;                // Pandemonium Key 2 Key of Hate
-    this.items.pk3 = `${RED}***  ${ORANGE}Key of Destruction  ${RED}***`;         // Pandemonium Key 3 Key of Destruction
-    this.items.dhn = `${RED}***  ${ORANGE}Diablo's Horn  ${RED}***`;              // Diablo's Horn
-    this.items.bey = `${RED}***  ${ORANGE}Baal's Eye  ${RED}***`;                 // Baal's Eye
-    this.items.mbr = `${RED}***  ${ORANGE}Mephisto's Brain  ${RED}***`;           // Mephisto's Brain
+    this.items.tes = `${RED}**  ${ORANGE}Twisted Essence of Suffering  ${RED}**`;           // Twisted Essence of Suffering
+    this.items.ceh = `${RED}**  ${ORANGE}Charged Essense of Hatred  ${RED}**`;              // Charged Essense of Hatred
+    this.items.bet = `${RED}**  ${ORANGE}Burning Essence of Terror  ${RED}**`;              // Burning Essence of Terror
+    this.items.fed = `${RED}**  ${ORANGE}Festering Essence of Destruction  ${RED}**`;       // Festering Essence of Destruction
+    this.items.toa = `${RED}*****   ${ORANGE}Token of Absolution   ${RED}*****`;            // Token of Absolution
+    this.items.pk1 = `${RED}*****   ${ORANGE}Key of Terror   ${RED}*****`;                  // Pandemonium Key 1 Key of Terror
+    this.items.pk2 = `${RED}*****   ${ORANGE}Key of Hate   ${RED}*****`;                    // Pandemonium Key 2 Key of Hate
+    this.items.pk3 = `${RED}*****   ${ORANGE}Key of Destruction   ${RED}*****`;             // Pandemonium Key 3 Key of Destruction
+    this.items.dhn = `${RED}**********     ${ORANGE}Diablo's Horn     ${RED}**********`;    // Diablo's Horn
+    this.items.bey = `${RED}**********     ${ORANGE}Baal's Eye     ${RED}**********`;       // Baal's Eye
+    this.items.mbr = `${RED}**********     ${ORANGE}Mephisto's Brain     ${RED}**********`; // Mephisto's Brain
   },
 };
 
