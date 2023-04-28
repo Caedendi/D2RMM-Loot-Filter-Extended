@@ -10,6 +10,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ## Table of Contents
 
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Presets Overview](#presets-overview)
 - [Installation](#installation)
