@@ -23,15 +23,11 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ## Screenshots
 
-<img src="https://i.imgur.com/AGELRY4.png" alt="01_pots_scrolls_gold">
-<img src="https://i.imgur.com/ObIq8LL.png" alt="02_gems_quest_endgame">
-<img src="https://i.imgur.com/x91wdr9.png" alt="03_runes_numbers">
-<img src="https://i.imgur.com/f1DxeAI.png" alt="04_runes_numbers_highlights_no-affix">
-<img src="https://i.imgur.com/AM0wQz2.png" alt="05_D2RMM_Settings">
+<img src="https://i.imgur.com/AGELRY4.png" alt="01_pots_scrolls_gold" width="49%" align="left">
+<img src="https://i.imgur.com/ObIq8LL.png" alt="02_gems_quest_endgame" width="49%" align="right">
 
-
-
-
+<img src="https://i.imgur.com/x91wdr9.png" alt="03_runes_numbers" width="49%" align="left">
+<img src="https://i.imgur.com/f1DxeAI.png" alt="04_runes_numbers_highlights_no-affix" width="49%" align="right">
 
 
 ## Features
