@@ -13,9 +13,11 @@
 
 // File paths
 const profileHdPath = 'global\\ui\\layouts\\_profilehd.json';
-const itemRunesPath = 'local\\lng\\strings\\item-runes.json';
-const itemNamesPath = 'local\\lng\\strings\\item-names.json';
+
 const itemNameAffixesPath = 'local\\lng\\strings\\item-nameaffixes.json';
+const itemNamesPath = 'local\\lng\\strings\\item-names.json';
+const itemRunesPath = 'local\\lng\\strings\\item-runes.json';
+const uiPath = 'local\\lng\\strings\\ui.json';
 
 // Color
 const COLOR_PREFIX = 'ÿc';
@@ -304,8 +306,8 @@ const customItems = {
     const mp4 = `${BLUE}+${WHITE}MP4`;   // Greater Mana Potion
     const mp5 = `${BLUE}+${WHITE}MP5`;   // Super Mana Potion
     
-    const rvs = `${PURPLE}+${WHITE}SRP`; // Rejuvenation Potion
-    const rvl = `${PURPLE}+${WHITE}FRP`; // Full Rejuvenation Potion
+    const rvs = `${PURPLE}+${WHITE}RPS`; // Rejuvenation Potion
+    const rvl = `${PURPLE}+${WHITE}RPF`; // Full Rejuvenation Potion
 
     // apply above custom names, unless set to "none" or "custom"
     switch (setting) {
@@ -534,7 +536,8 @@ const customItems = {
       case "none":
         return;
       case "highlight":
-        this.items.jew = `${RED}0 ${BLUE}Jewel ${RED}0${BLUE}`; // Jewel
+        // this.items.jew = `${RED}0 ${BLUE}Jewel ${RED}0${BLUE}`; // Jewel
+        this.items["Rainbow Facet"] = `${RED}** ${YELLOW}** ${BLUE}** ${GREEN}**     ${GOLD}Rainbow Facet     ${GREEN}** ${BLUE}** ${YELLOW}** ${RED}**${GOLD}`; // Rainbow Facet
         break;
       case "custom": // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -762,12 +765,21 @@ const customItems = {
         this.items.qbr = `${RED}**********     ${GOLD}Khalim's Brain     ${RED}**********`;       // Khalim's Brain
         this.items.mss = `${RED}**********     ${GOLD}Mephisto's Soulstone     ${RED}**********`; // Mephisto's Soulstone
         // Act 4
-        this.items.hfh = `${RED}**********     ${GOLD}Hellforge Hammer     ${RED}**********`;     // Hellforge Hammer
+        this.items.hfh = `${RED}**********     ${GOLD}Hell Forge Hammer     ${RED}**********`;     // Hellforge Hammer
         // Act 5
         this.items.ice = `${RED}**********     ${GOLD}Malah's Potion     ${RED}**********`;       // Malah's Potion
         this.items.tr2 = `${RED}**********     ${GOLD}Scroll of Resistance     ${RED}**********`; // Scroll of Resistance
+
+        // Extra
+        this.items["Staff of Kings"]      = `${RED}**********     ${GOLD}Staff of Kings     ${RED}**********`;      // Staff of Kings
+        this.items["Amulet of the Viper"] = `${RED}**********     ${GOLD}Amulet of the Viper     ${RED}**********`; // Amulet of the Viper
+        this.items["Horadric Staff"]      = `${RED}**********     ${GOLD}Horadric Staff     ${RED}**********`;      // Horadric Staff
+        this.items.LamTome                = `${RED}**********     ${GOLD}Lam Esen's Tome     ${RED}**********`;     // Lam Esen's Tome
+        this.items.KhalimFlail            = `${RED}**********     ${GOLD}Khalim's Flail     ${RED}**********`;      // Khalim's Flail
+        this.items.SuperKhalimFlail       = `${RED}**********     ${GOLD}Khalim's Will     ${RED}**********`;       // Khalim's Will
+        this.items["Hell Forge Hammer"]   = `${RED}**********     ${GOLD}Hell Forge Hammer     ${RED}**********`;   // Hellforge Hammer
         break;
-      case "custom": // [CSTM-QST]
+      case "custom": // [CSTM-QST1]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         break;
     }
@@ -809,6 +821,27 @@ const customItems = {
     this.items.dhn = `${RED}**********     ${ORANGE}Diablo's Horn     ${RED}**********`;    // Diablo's Horn
     this.items.bey = `${RED}**********     ${ORANGE}Baal's Eye     ${RED}**********`;       // Baal's Eye
     this.items.mbr = `${RED}**********     ${ORANGE}Mephisto's Brain     ${RED}**********`; // Mephisto's Brain
+    
+    this.items["Annihilus"] = `${RED}**********     ${GOLD}Annihilus     ${RED}**********`;           // Annihilus
+    this.items["Hellfire Torch"] = `${RED}**********     ${GOLD}Hellfire Torch     ${RED}**********`; // Hellfire Torch
+  },
+};
+
+const customUi = {
+  items: {},
+
+  customizeQuestItems(setting) {
+    switch (setting) {
+      case "none": // no change
+        return;
+      case "all": // highlight all
+        this.items.ass = `${RED}**********     ${GOLD}Book of Skill     ${RED}**********`;  // Book of Skill
+        this.items.xyz = `${RED}**********     ${GOLD}Potion of Life     ${RED}**********`; // Potion of Life
+        break;
+      case "custom": // [CSTM-QST2]
+        // ADD YOUR CUSTOM ITEM NAMES HERE
+        break;
+    }
   },
 };
 
@@ -819,6 +852,7 @@ function applyLootFilter() {
   applyCustomAffixes();
   applyCustomRuneNames();
   applyCustomItemNames();
+  applyCustomUiNames();
   applyTooltipMods();
 }
 
@@ -854,6 +888,14 @@ function applyCustomItemNames() {
   customItems.customizeEndgameItems(config.Endgame);
 
   applyCustomNames(itemNamesPath, customItems.items);
+}
+
+function applyCustomUiNames() {
+  if (config.Quest == "none")
+    return;
+
+  customUi.customizeQuestItems(config.Quest);
+  applyCustomNames(uiPath, customUi.items);
 }
 
 function applyCustomNames(path, customNames) {

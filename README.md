@@ -35,6 +35,17 @@ If you'd rather have a compact list to act as a template for your own naming sch
 </p>
 
 
+## Changelog
+
+### 1.0.1
+
+- Fixed certain quest items not highlighting correctly
+- Added highlighting to Hellfire Torch and Annihilus (as part of the Endgame filter)
+- Added highlighting to Rainbow Facets (as part of the Jewels filter)
+- Changed Small/Full Rejuvenation Potion name from +SRP and +FRP to +RPS and +RPF
+- Corrected "Hellforge Hammer" to "Hell Forge Hammer" when highlighting is enabled
+
+
 ## Features
 
 - **Customize to your liking:**
@@ -155,7 +166,19 @@ In addition to this, I recommend you also use the following D2RMM mods:
 
 - [ ] Fix known bugs:
   - [x] Regular Ruby, Sapphire, Emerald and Diamond not working
+  - [ ] Certain quest items not working:
+    - [ ] Book of Skill
+    - [ ] Staff of Kings
+    - [ ] Amulet of the Viper
+    - [X] Horadric Staff
+    - [ ] Khalim's Flail
+    - [X] Khalim's Will
+    - [ ] Potion of Life (xyz)
+    - [ ] Hell Forge Hammer
+    - [ ] Malah's Potion
+    - [ ] Update toggle description regarding [CSTM-QST1] and [CSTM-QST2]
   - [ ] Enabling jewelry turns crafted/rare/set/unique jewelry blue
+  - [ ] Item name alignment out of place for items with ilvls when combining this mod with [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174)
 - [ ] Add features:
   - [ ] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by olegbl
   - [ ] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214/?tab=files&category=archived) or [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351)
