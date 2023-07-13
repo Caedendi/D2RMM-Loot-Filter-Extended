@@ -25,25 +25,28 @@ If you'd rather have a compact list to act as a template for your own naming sch
 ## Screenshots
 
 <p float="left">
-<img src="https://i.imgur.com/AGELRY4.png" alt="01_pots_scrolls_gold" width="49%">
-<img src="https://i.imgur.com/ObIq8LL.png" alt="02_gems_quest_endgame" width="49%">
+  <img src="https://i.imgur.com/AGELRY4.png" alt="01_pots_scrolls_gold" width="49%">
+  <img src="https://i.imgur.com/ObIq8LL.png" alt="02_gems_quest_endgame" width="49%">
 </p>
 
 <p float="left">
-<img src="https://i.imgur.com/x91wdr9.png" alt="03_runes_numbers" width="49%">
-<img src="https://i.imgur.com/f1DxeAI.png" alt="04_runes_numbers_highlights_no-affix" width="49%">
+  <img src="https://i.imgur.com/x91wdr9.png" alt="03_runes_numbers" width="49%">
+  <img src="https://i.imgur.com/f1DxeAI.png" alt="04_runes_numbers_highlights_no-affix" width="49%">
 </p>
 
 
 ## Changelog
 
-### 1.0.1
+### 1.0.2
 
 - Fixed certain quest items not highlighting correctly
 - Added highlighting to Hellfire Torch and Annihilus (as part of the Endgame filter)
 - Added highlighting to Rainbow Facets (as part of the Jewels filter)
-- Changed Small/Full Rejuvenation Potion name from +SRP and +FRP to +RPS and +RPF
+- Changed Small/Full Rejuvenation Potion name from +SRP/+FRP to +RPS/+RPF
 - Corrected "Hellforge Hammer" to "Hell Forge Hammer" when highlighting is enabled
+- Added custom highlight character support: you can now pick the character/symbol that is used for highlighting, or set a custom character by only changing a single character in the mod.js file
+- fixed red high rune numbers while highlighting is disabled
+- Expanded jewel settings
 
 
 ## Features
@@ -55,7 +58,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
   - For a full list of features, see [Presets Overview](#presets-overview).
   - Don't forget to reload and apply in D2RMM!
 - **Completely optional:** 
-  - Untoggling everything means no modding will be applied.
+  - Disabling everything means no modding will be applied.
 - **Apply your own custom naming schemes for specific item types**:
   - Set the item type to "Custom", open the mod.js file in Notepad and add your personalized naming schemes on the lines mentioned in the item type's setting description.
   - To hide an item, change its name to HIDDEN (without quotes). The value of HIDDEN (amount of spaces) can be changed in the D2RMM settings.
@@ -177,6 +180,7 @@ In addition to this, I recommend you also use the following D2RMM mods:
     - [ ] Hell Forge Hammer
     - [ ] Malah's Potion
     - [ ] Update toggle description regarding [CSTM-QST1] and [CSTM-QST2]
+  - [ ] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
   - [ ] Enabling jewelry turns crafted/rare/set/unique jewelry blue
   - [ ] Item name alignment out of place for items with ilvls when combining this mod with [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174)
 - [ ] Add features:

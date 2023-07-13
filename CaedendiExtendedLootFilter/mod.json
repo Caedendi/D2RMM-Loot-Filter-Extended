@@ -6,6 +6,20 @@
   "version": "1.0.0",
   "config": [
     {
+      "id": "ilvl",
+      "type": "checkbox",
+      "name": "Show Item Level",
+      "description": "Show the item level between brackets in the item's tooltip.",
+      "defaultValue": "true"
+    }, 
+    {
+      "id": "ilvlfix",
+      "type": "checkbox",
+      "name": "Fix Item Level indentation",
+      "description": "Fix the mismatched indentation when Show Item Level is enabled",
+      "defaultValue": "true"
+    }, 
+    {
       "id": "Gold",
       "type": "select",
       "name": "Gold",
@@ -141,7 +155,9 @@
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "highlight" },
+        { "label": "Highlight", "value": "all" },
+        { "label": "Exclude facets", "value": "jewel" },
+        { "label": "Only facets", "value": "facet" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -175,11 +191,12 @@
       "id": "Quest",
       "type": "select",
       "name": "Quest Items",
-      "description": "Highlight quest items. [CSTM-QST]",
+      "description": "Highlight quest items. Known issue: enabling the Horadric Cube screws up its display name when the cube is opened and in NPC dialogs. [CSTM-QST]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },
+        { "label": "Highlight, exclude Cube", "value": "xch" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -187,13 +204,48 @@
       "id": "Endgame",
       "type": "select",
       "name": "Endgame Items",
-      "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. [CSTM-END]",
+      "description": "Highlight Essences, Tokens, Keys, Organs and optionally Annihilus, Torch and the Standard of Heroes. [CSTM-END]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },
+        { "label": "Highlight, exclude Annihilus & Torch", "value": "xat" },
         { "label": "Highlight, exclude Standard of Heroes", "value": "xsh" },
         { "label": "Highlight, hide Standard of Heroes", "value": "hsh" },
+        { "label": "Highlight, exclude Annihilus, Torch & Standard of Heroes", "value": "xat-xsh" },
+        { "label": "Highlight, exclude Annihilus & Torch, hide Standard of Heroes", "value": "xat-hsh" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "HighlightCharacter",
+      "type": "select",
+      "name": "Highlight character",
+      "description": "Character used to highlight select items. [CSTM-HLC]",
+      "defaultValue": "*",
+      "options": [
+        { "label": "* (asterisk)", "value": "*" },
+        { "label": "• (bullet)", "value": "•" },
+        { "label": "· (middle dot)", "value": "·" },
+        { "label": "= (equals)", "value": "=" },
+        { "label": "+ (plus)", "value": "+" },
+        { "label": "- (hyphen/dash/minus)", "value": "-" },
+        { "label": "x (small letter x)", "value": "x" },
+        { "label": "X (capital letter x)", "value": "X" },
+        { "label": "o (small letter o)", "value": "o" },
+        { "label": "O (capital letter o)", "value": "O" },
+        { "label": "0 (zero)", "value": "0" },
+        { "label": "@ (at)", "value": "@" },
+        { "label": "$ (dollar)", "value": "$" },
+        { "label": "% (percent)", "value": "%" },
+        { "label": "& (ampersand)", "value": "&" },
+        { "label": "~ (tilde)", "value": "~" },
+        { "label": "¤ (currency sign)", "value": "¤" },
+        { "label": "※ (reference mark)", "value": "※" },
+        { "label": "★ (black star)", "value": "★" },
+        { "label": "° (degree sign)", "value": "°" },
+        { "label": "⁂ (asterism)", "value": "⁂" },
+        { "label": "‼ (double exclamation mark)", "value": "‼" },
         { "label": "Custom", "value": "custom" }
       ]
     },
