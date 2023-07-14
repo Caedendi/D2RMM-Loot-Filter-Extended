@@ -61,16 +61,30 @@ const PURPLE = `${COLOR_PREFIX};`;
 
 // Naming
 const HIDDEN = '' + ' '.repeat(config.HiddenItemTooltipSize);
-const HIGHLIGHT = config.HighlightCharacter !== 'custom' ? config.HighlightCharacter : '*'; // replace * with custom character [CSTM-HLC]
+const HIGHLIGHT = config.HighlightCharacter !== 'custom' ? config.HighlightCharacter : '*'; // [CSTM-HLC] replace * with custom character
 
-const PATTERN1 = HIGHLIGHT.repeat(2);
-const PATTERN2 = HIGHLIGHT.repeat(5);
-const PATTERN3 = HIGHLIGHT.repeat(10);
-const PATTERN4 = `${HIGHLIGHT.repeat(10)} ${HIGHLIGHT.repeat(10)} ${HIGHLIGHT.repeat(10)}`;
+const PATTERN_2 = HIGHLIGHT.repeat(2);
+const PATTERN_5 = HIGHLIGHT.repeat(5);
+const PATTERN_10 = HIGHLIGHT.repeat(10);
+const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)} ${HIGHLIGHT.repeat(10)} ${HIGHLIGHT.repeat(10)}`;
+const SMALL_O = 'o';
+const PLUS = '+';
+const ZERO = '0';
 
-const PADDING1 = ' '.repeat(2);
-const PADDING2 = ' '.repeat(3);
-const PADDING3 = ' '.repeat(5);
+const PADDING_0 = '';
+const PADDING_1 = ' ';
+const PADDING_2 = ' '.repeat(2);
+const PADDING_3 = ' '.repeat(3);
+const PADDING_4 = ' '.repeat(4);
+const PADDING_5 = ' '.repeat(5);
+
+function generateSingleHighlight(patternColor, pattern, padding, itemColor, itemName) {
+  return `${patternColor}${pattern}${itemColor}${padding}${itemName}${itemColor}`;
+}
+  
+function generateDoubleHighlight(patternColor, pattern, padding, itemColor, itemName) {
+  return `${patternColor}${pattern}${itemColor}${padding}${itemName}${padding}${patternColor}${pattern}${itemColor}`;
+}
 
 
 //============================//
@@ -98,6 +112,7 @@ const customAffixes = {
         break;
       case "custom": // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.gld = `Gold`;
         break;
     }
   },
@@ -108,28 +123,33 @@ const customAffixes = {
       case "none":
         return;
       case "all": // show all
-        this.items.gsw =  `${WHITE}o ${WHITE}Diamond`;  // Diamond
-        this.items.gsg =  `${GREEN}o ${WHITE}Emerald`;  // Emerald
-        this.items.gsr =    `${RED}o ${WHITE}Ruby`;     // Ruby
-        this.items.gsb =   `${BLUE}o ${WHITE}Sapphire`; // Sapphire
+        // `${GREEN}o${WHITE} Emerald`;
+        this.items.gsw = generateSingleHighlight(WHITE, SMALL_O, PADDING_1, WHITE, 'Diamond');  // Diamond
+        this.items.gsg = generateSingleHighlight(GREEN, SMALL_O, PADDING_1, WHITE, 'Emerald');  // Emerald
+        this.items.gsr = generateSingleHighlight(RED,   SMALL_O, PADDING_1, WHITE, 'Ruby');     // Ruby
+        this.items.gsb = generateSingleHighlight(BLUE,  SMALL_O, PADDING_1, WHITE, 'Sapphire'); // Sapphire
         break;
-      case "flawless": // hide lvl 1-3 potions, show small/full rejuvs
+      case "flawless": // hide chipped/flawed/regular gems
         this.hideGems();
         break;
-      case "perfect": // hide lvl 1-4 potions, show small/full rejuvs
+      case "perfect": // hide chipped/flawed/regular/flawless gems
       this.hideGems();
         break;
       case "custom": // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.gsw = `Diamond`; 
+        this.items.gsg = `Emerald`; 
+        this.items.gsr = `Ruby`;
+        this.items.gsb = `Sapphire`;
         break;
     }
   },
 
   hideGems() {
-    this.items.gsw = ``;
-    this.items.gsg = ``;
-    this.items.gsr = ``;
-    this.items.gsb = ``;
+    this.items.gsw = HIDDEN;
+    this.items.gsg = HIDDEN;
+    this.items.gsr = HIDDEN;
+    this.items.gsb = HIDDEN;
   },
 };
 
@@ -170,10 +190,19 @@ const customRunes = {
     r33: "Zod",
   },
   
-  highlightSettings: ["all", "nrs-hls", "hls-raf", "hls"], // all settings that enable highlighting
-  lvl1Highlight: [8, 15, 18, 19, 20],                      // Ral, Hel, Ko, Fal, Lem
-  lvl2Highlight: [21, 22, 23, 24, 25],                     // Pul, Um, Mal, Ist, Gul
-  lvl3Highlight: [26, 27, 28, 29, 30, 31, 32, 33],         // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
+  highlightSettings: ["all", "nrs-hls", "hls-raf", "hls"], // settings that enable highlighting
+  
+  // I consider the rune tiers to be:
+  // - low: 1-15 (El-Hel)
+  // - low-mid: 16-20 (Io-Lem)
+  // - mid: 21-15 (Pul-Gul)
+  // - high: 26-33 (Vex-Zod)
+  // I have however switched Ral (8), Hel (15) and Lem (20) around because of their usefulness.
+
+  lowRunes: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14],  // El, Eld, Tir, Nef, Eth, Ith, Tal, Ort, Thul, Amn, Sol, Shael, Dol
+  lowMidRunes: [8, 15, 16, 17, 18, 19],                    // Ral, Hel, Io, Lum, Ko, Fal
+  midRunes: [20, 21, 22, 23, 24, 25],                      // Lem, Pul, Um, Mal, Ist, Gul
+  highRunes: [26, 27, 28, 29, 30, 31, 32, 33],             // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
 
   customizeRunes(setting) {
     switch (setting) {
@@ -211,40 +240,41 @@ const customRunes = {
         break;
       case "custom": // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.runes.r01 = `${ORANGE1}El (1)`;                                              // El
-        this.runes.r02 = `${ORANGE1}Eld (2)`;                                             // Eld
-        this.runes.r03 = `${ORANGE1}Tir (3)`;                                             // Tir
-        this.runes.r04 = `${ORANGE1}Nef (4)`;                                             // Nef
-        this.runes.r05 = `${ORANGE1}Eth (5)`;                                             // Eth
-        this.runes.r06 = `${ORANGE1}Ith (6)`;                                             // Ith
-        this.runes.r07 = `${ORANGE1}Tal (7)`;                                             // Tal
-        this.runes.r08 = `${RED}**  ${ORANGE1}Ral (8)  ${RED}**`;                         // Ral
-        this.runes.r09 = `${ORANGE1}Ort (9)`;                                             // Ort
-        this.runes.r10 = `${ORANGE1}Thul (10)`;                                           // Thul
-        this.runes.r11 = `${ORANGE1}Amn (11)`;                                            // Amn
-        this.runes.r12 = `${ORANGE1}Sol (12)`;                                            // Sol
-        this.runes.r13 = `${ORANGE1}Shael (13)`;                                          // Shael
-        this.runes.r14 = `${ORANGE1}Dol (14)`;                                            // Dol
-        this.runes.r15 = `${RED}**  ${ORANGE1}Hel (15) ${RED}*`;                          // Hel
-        this.runes.r16 = `${ORANGE1}Io (16)`;                                             // Io
-        this.runes.r17 = `${ORANGE1}Lum (17)`;                                            // Lum
-        this.runes.r18 = `${RED}**  ${ORANGE1}Ko (18)  ${RED}**`;                         // Ko
-        this.runes.r19 = `${RED}**  ${ORANGE1}Fal (19)  ${RED}**`;                        // Fal
-        this.runes.r20 = `${RED}**  ${ORANGE1}Lem (20)  ${RED}**`;                        // Lem
-        this.runes.r21 = `${RED}*****   ${ORANGE1}Pul (21)   ${RED}*****`;                // Pul
-        this.runes.r22 = `${RED}*****   ${ORANGE1}Um (22)   ${RED}*****`;                 // Um
-        this.runes.r23 = `${RED}*****   ${ORANGE1}Mal (23)   ${RED}*****`;                // Mal
-        this.runes.r24 = `${RED}*****   ${ORANGE1}Ist (24)   ${RED}*****`;                // Ist
-        this.runes.r25 = `${RED}*****   ${ORANGE1}Gul (25)   ${RED}*****`;                // Gul
-        this.runes.r26 = `${RED}**********     ${ORANGE1}Vex (26)     ${RED}**********`;  // Vex
-        this.runes.r27 = `${RED}**********     ${ORANGE1}Ohm (27)     ${RED}**********`;  // Ohm
-        this.runes.r28 = `${RED}**********     ${ORANGE1}Lo (28)     ${RED}**********`;   // Lo
-        this.runes.r29 = `${RED}**********     ${ORANGE1}Sur (29)     ${RED}**********`;  // Sur
-        this.runes.r30 = `${RED}**********     ${ORANGE1}Ber (30)     ${RED}**********`;  // Ber
-        this.runes.r31 = `${RED}**********     ${ORANGE1}Jah (31)     ${RED}**********`;  // Jah
-        this.runes.r32 = `${RED}**********     ${ORANGE1}Cham (32)     ${RED}**********`; // Cham
-        // this.runes.r33 = `${RED}**********     ${ORANGE1}Zod (33)     ${RED}**********`;  // Zod
-        this.runes.r33 = `${RED}${HIGHLIGHT.repeat(10)}${PADDING3}${ORANGE1}Zod (33)${PADDING3}${RED}${HIGHLIGHT.repeat(10)}`;  // Zod
+        this.runes.r01 = `${ORANGE1}El (1)`;                                                        // El
+        this.runes.r02 = `${ORANGE1}Eld (2)`;                                                       // Eld
+        this.runes.r03 = `${ORANGE1}Tir (3)`;                                                       // Tir
+        this.runes.r04 = `${ORANGE1}Nef (4)`;                                                       // Nef
+        this.runes.r05 = `${ORANGE1}Eth (5)`;                                                       // Eth
+        this.runes.r06 = `${ORANGE1}Ith (6)`;                                                       // Ith
+        this.runes.r07 = `${ORANGE1}Tal (7)`;                                                       // Tal
+        this.runes.r08 = `${RED}**${ORANGE1}  Ral (8)  ${RED}**${ORANGE1}`;                         // Ral
+        this.runes.r09 = `${ORANGE1}Ort (9)`;                                                       // Ort
+        this.runes.r10 = `${ORANGE1}Thul (10)`;                                                     // Thul
+        this.runes.r11 = `${ORANGE1}Amn (11)`;                                                      // Amn
+        this.runes.r12 = `${ORANGE1}Sol (12)`;                                                      // Sol
+        this.runes.r13 = `${ORANGE1}Shael (13)`;                                                    // Shael
+        this.runes.r14 = `${ORANGE1}Dol (14)`;                                                      // Dol
+        this.runes.r15 = `${RED}**${ORANGE1}  Hel (15) ${RED}**${ORANGE1}`;                         // Hel
+        this.runes.r16 = `${ORANGE1}Io (16)`;                                                       // Io
+        this.runes.r17 = `${ORANGE1}Lum (17)`;                                                      // Lum
+        this.runes.r18 = `${RED}**${ORANGE1}  Ko (18)  ${RED}**${ORANGE1}`;                         // Ko
+        this.runes.r19 = `${RED}**${ORANGE1}  Fal (19)  ${RED}**${ORANGE1}`;                        // Fal
+        this.runes.r20 = `${RED}**${ORANGE1}  Lem (20)  ${RED}**${ORANGE1}`;                        // Lem
+        this.runes.r21 = `${RED}*****${ORANGE1}   Pul (21)   ${RED}*****${ORANGE1}`;                // Pul
+        this.runes.r22 = `${RED}*****${ORANGE1}   Um (22)   ${RED}*****${ORANGE1}`;                 // Um
+        this.runes.r23 = `${RED}*****${ORANGE1}   Mal (23)   ${RED}*****${ORANGE1}`;                // Mal
+        this.runes.r24 = `${RED}*****${ORANGE1}   Ist (24)   ${RED}*****${ORANGE1}`;                // Ist
+        this.runes.r25 = `${RED}*****${ORANGE1}   Gul (25)   ${RED}*****${ORANGE1}`;                // Gul
+        this.runes.r26 = `${RED}**********${ORANGE1}     Vex (26)     ${RED}**********${ORANGE1}`;  // Vex
+        this.runes.r27 = `${RED}**********${ORANGE1}     Ohm (27)     ${RED}**********${ORANGE1}`;  // Ohm
+        this.runes.r28 = `${RED}**********${ORANGE1}     Lo (28)     ${RED}**********${ORANGE1}`;   // Lo
+        this.runes.r29 = `${RED}**********${ORANGE1}     Sur (29)     ${RED}**********${ORANGE1}`;  // Sur
+        this.runes.r30 = `${RED}**********${ORANGE1}     Ber (30)     ${RED}**********${ORANGE1}`;  // Ber
+        this.runes.r31 = `${RED}**********${ORANGE1}     Jah (31)     ${RED}**********${ORANGE1}`;  // Jah
+        this.runes.r32 = `${RED}**********${ORANGE1}     Cham (32)     ${RED}**********${ORANGE1}`; // Cham
+        // this.runes.r33 = `${RED}**********${ORANGE1}     Zod (33)     ${RED}**********${ORANGE1}`;  // Zod
+        // this.runes.r33 = `${RED}${HIGHLIGHT.repeat(10)}${PADDING3}${ORANGE1}Zod (33)${PADDING3}${RED}${HIGHLIGHT.repeat(10)}`;  // Zod
+        this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE1, 'Zod Rune (33)'); // Zod
         break;
     }
   },
@@ -255,7 +285,12 @@ const customRunes = {
     }
   },
 
-  setColor(lowMidRuneColor, highRuneColor, setting) {
+  // lowRunes
+  // lowMidRunes
+  // midRunes
+  // highRunes
+
+  setNameColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, setting) {
     var i = 1;
     for (const rune in this.runes) {
       if (i > 25 && this.highlightSettings.includes(setting))
@@ -267,18 +302,24 @@ const customRunes = {
     }
   },
   
-  addRuneNumbers(lowMidRuneColor, highRuneColor, setting) {
+  addRuneNumbers(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, setting) {
     var i = 1;
     for (const rune in this.runes) {
+      if (this.lvl1Highlight.includes(i)) {
+        this.runes[rune] = this.generateHighlight(this.runes[rune], PATTERN2, RED, PADDING1);
+      }
+
+
+
       if (i > 20 && this.highlightSettings.includes(setting)) 
-        this.runes[rune] = this.runes[rune] + ` ${lowMidRuneColor}(${i})`;
+        this.runes[rune] = this.runes[rune] + ` ${midHighRuneColor}(${i})`;
       else
-        this.runes[rune] = this.runes[rune] + ` ${highRuneColor}(${i})`;
+        this.runes[rune] = this.runes[rune] + ` ${lowRuneColor}(${i})`;
 
       i++;
     }
   },
-
+  
   addHighlighting() {    
     var i = 1;
     for (const rune in this.runes) {
@@ -429,13 +470,13 @@ const customItems = {
   },
 
   customizeThrowingPotions(setting) {
-    const gpl = `${DARKGREEN1}o ${WHITE}Gas 1`; // Strangling Gas Potion
-    const gpm = `${DARKGREEN1}o ${WHITE}Gas 2`; // Choking Gas Potion
-    const gps = `${DARKGREEN1}o ${WHITE}Gas 3`; // Rancid Gas Potion
+    const gpl = `${DARKGREEN1}o${WHITE} Gas 1`; // Strangling Gas Potion
+    const gpm = `${DARKGREEN1}o${WHITE} Gas 2`; // Choking Gas Potion
+    const gps = `${DARKGREEN1}o${WHITE} Gas 3`; // Rancid Gas Potion
     
-    const opl = `${ORANGE}o ${WHITE}Oil 1`; // Fulminating Potion
-    const opm = `${ORANGE}o ${WHITE}Oil 2`; // Exploding Potion
-    const ops = `${ORANGE}o ${WHITE}Oil 3`; // Oil Potion
+    const opl = `${ORANGE}o${WHITE} Oil 1`; // Fulminating Potion
+    const opm = `${ORANGE}o${WHITE} Oil 2`; // Exploding Potion
+    const ops = `${ORANGE}o${WHITE} Oil 3`; // Oil Potion
 
     // apply above custom names, unless set to "none"
     switch (setting) {
@@ -492,8 +533,8 @@ const customItems = {
   },
 
   customizeArrowsAndBolts(setting) {
-    const aqv = `${GRAY}o ${WHITE}Arrows`;
-    const cqv = `${GRAY}o ${WHITE}Bolts`;
+    const aqv = `${GRAY}o${WHITE} Arrows`;
+    const cqv = `${GRAY}o${WHITE} Bolts`;
 
     switch (setting) {
       case "none":
@@ -584,45 +625,45 @@ const customItems = {
     // For Ruby, Sapphire, Emerald and Diamond, see "Affixes" above.
     // For some reason, the devs put these gems in another JSON file.
 
-    const gcv = `${PURPLE}o ${WHITE}Chipped`;  // Chipped Amethyst
-    const gcw =  `${WHITE}o ${WHITE}Chipped`;  // Chipped Diamond
-    const gcg =  `${GREEN}o ${WHITE}Chipped`;  // Chipped Emerald
-    const gcr =    `${RED}o ${WHITE}Chipped`;  // Chipped Ruby
-    const gcb =   `${BLUE}o ${WHITE}Chipped`;  // Chipped Sapphire
-    const gcy = `${YELLOW}o ${WHITE}Chipped`;  // Chipped Topaz
-    const skc =   `${GRAY}o ${WHITE}Chipped`;  // Chipped Skull
+    const gcv = `${PURPLE}o${WHITE} Chipped`;  // Chipped Amethyst
+    const gcw =  `${WHITE}o${WHITE} Chipped`;  // Chipped Diamond
+    const gcg =  `${GREEN}o${WHITE} Chipped`;  // Chipped Emerald
+    const gcr =    `${RED}o${WHITE} Chipped`;  // Chipped Ruby
+    const gcb =   `${BLUE}o${WHITE} Chipped`;  // Chipped Sapphire
+    const gcy = `${YELLOW}o${WHITE} Chipped`;  // Chipped Topaz
+    const skc =   `${GRAY}o${WHITE} Chipped`;  // Chipped Skull
     
-    const gfv = `${PURPLE}o ${WHITE}Flawed`;   // Flawed Amethyst
-    const gfw =  `${WHITE}o ${WHITE}Flawed`;   // Flawed Diamond
-    const gfg =  `${GREEN}o ${WHITE}Flawed`;   // Flawed Emerald
-    const gfr =    `${RED}o ${WHITE}Flawed`;   // Flawed Ruby
-    const gfb =   `${BLUE}o ${WHITE}Flawed`;   // Flawed Sapphire
-    const gfy = `${YELLOW}o ${WHITE}Flawed`;   // Flawed Topaz
-    const skf =   `${GRAY}o ${WHITE}Flawed`;   // Flawed Skull
+    const gfv = `${PURPLE}o${WHITE} Flawed`;   // Flawed Amethyst
+    const gfw =  `${WHITE}o${WHITE} Flawed`;   // Flawed Diamond
+    const gfg =  `${GREEN}o${WHITE} Flawed`;   // Flawed Emerald
+    const gfr =    `${RED}o${WHITE} Flawed`;   // Flawed Ruby
+    const gfb =   `${BLUE}o${WHITE} Flawed`;   // Flawed Sapphire
+    const gfy = `${YELLOW}o${WHITE} Flawed`;   // Flawed Topaz
+    const skf =   `${GRAY}o${WHITE} Flawed`;   // Flawed Skull
 
-    const gsv = `${PURPLE}o ${WHITE}Amethyst`; // Amethyst
-    // const gsw =  `${WHITE}o ${WHITE}Diamond`;  // Diamond
-    // const gsg =  `${GREEN}o ${WHITE}Emerald`;  // Emerald
-    // const gsr =    `${RED}o ${WHITE}Ruby`;     // Ruby
-    // const gsb =   `${BLUE}o ${WHITE}Sapphire`; // Sapphire
-    const gsy = `${YELLOW}o ${WHITE}Topaz`;    // Topaz
-    const sku =   `${GRAY}o ${WHITE}Skull`;    // Skull
+    const gsv = `${PURPLE}o${WHITE} Amethyst`; // Amethyst
+ // const gsw =  `${WHITE}o${WHITE} Diamond`;  // Diamond
+ // const gsg =  `${GREEN}o${WHITE} Emerald`;  // Emerald
+ // const gsr =    `${RED}o${WHITE} Ruby`;     // Ruby
+ // const gsb =   `${BLUE}o${WHITE} Sapphire`; // Sapphire
+    const gsy = `${YELLOW}o${WHITE} Topaz`;    // Topaz
+    const sku =   `${GRAY}o${WHITE} Skull`;    // Skull
 
-    const gzv = `${PURPLE}o ${WHITE}Flawless`; // Flawless Amethyst
-    const glw =  `${WHITE}o ${WHITE}Flawless`; // Flawless Diamond
-    const glg =  `${GREEN}o ${WHITE}Flawless`; // Flawless Emerald
-    const glr =    `${RED}o ${WHITE}Flawless`; // Flawless Ruby
-    const glb =   `${BLUE}o ${WHITE}Flawless`; // Flawless Sapphire
-    const gly = `${YELLOW}o ${WHITE}Flawless`; // Flawless Topaz
-    const skl =   `${GRAY}o ${WHITE}Flawless`; // Flawless Skull
+    const gzv = `${PURPLE}o${WHITE} Flawless`; // Flawless Amethyst
+    const glw =  `${WHITE}o${WHITE} Flawless`; // Flawless Diamond
+    const glg =  `${GREEN}o${WHITE} Flawless`; // Flawless Emerald
+    const glr =    `${RED}o${WHITE} Flawless`; // Flawless Ruby
+    const glb =   `${BLUE}o${WHITE} Flawless`; // Flawless Sapphire
+    const gly = `${YELLOW}o${WHITE} Flawless`; // Flawless Topaz
+    const skl =   `${GRAY}o${WHITE} Flawless`; // Flawless Skull
 
-    const gpv = `${PURPLE}o ${WHITE}Perfect`;  // Perfect Amethyst
-    const gpw =  `${WHITE}o ${WHITE}Perfect`;  // Perfect Diamond
-    const gpg =  `${GREEN}o ${WHITE}Perfect`;  // Perfect Emerald
-    const gpr =    `${RED}o ${WHITE}Perfect`;  // Perfect Ruby
-    const gpb =   `${BLUE}o ${WHITE}Perfect`;  // Perfect Sapphire
-    const gpy = `${YELLOW}o ${WHITE}Perfect`;  // Perfect Topaz
-    const skz =   `${GRAY}o ${WHITE}Perfect`;  // Perfect Skull
+    const gpv = `${PURPLE}o${WHITE} Perfect`;  // Perfect Amethyst
+    const gpw =  `${WHITE}o${WHITE} Perfect`;  // Perfect Diamond
+    const gpg =  `${GREEN}o${WHITE} Perfect`;  // Perfect Emerald
+    const gpr =    `${RED}o${WHITE} Perfect`;  // Perfect Ruby
+    const gpb =   `${BLUE}o${WHITE} Perfect`;  // Perfect Sapphire
+    const gpy = `${YELLOW}o${WHITE} Perfect`;  // Perfect Topaz
+    const skz =   `${GRAY}o${WHITE} Perfect`;  // Perfect Skull
     
     // apply above custom names, unless set to "none" or "custom"
     switch (setting) {
@@ -647,10 +688,10 @@ const customItems = {
         this.items.skf = skf;
         // regular
         this.items.gsv = gsv;
-        // this.items.gsw = gsw;
-        // this.items.gsg = gsg;
-        // this.items.gsr = gsr;
-        // this.items.gsb = gsb;
+     // this.items.gsw = gsw;
+     // this.items.gsg = gsg;
+     // this.items.gsr = gsr;
+     // this.items.gsb = gsb;
         this.items.gsy = gsy;
         this.items.sku = sku;
         // flawless
@@ -670,7 +711,7 @@ const customItems = {
         this.items.gpy = gpy;
         this.items.skz = skz;
         break;
-      case "flawless": // hide lvl 1-3 potions, show small/full rejuvs
+      case "flawless": // hide chipped/flawed/regular gems
         this.hideGems();
         // flawless
         this.items.gzv = gzv;
@@ -689,7 +730,7 @@ const customItems = {
         this.items.gpy = gpy;
         this.items.skz = skz;
         break;
-      case "perfect": // hide lvl 1-4 potions, show small/full rejuvs
+      case "perfect": // hide chipped/flawed/regular/flawless gems
       this.hideGems();
         // perfect
         this.items.gpv = gpv;
@@ -708,45 +749,45 @@ const customItems = {
   },
 
   hideGems() {
-    this.items.gcv = ``;
-    this.items.gcw = ``;
-    this.items.gcg = ``;
-    this.items.gcr = ``;
-    this.items.gcb = ``;
-    this.items.gcy = ``;
-    this.items.skc = ``;
+    this.items.gcv = HIDDEN;
+    this.items.gcw = HIDDEN;
+    this.items.gcg = HIDDEN;
+    this.items.gcr = HIDDEN;
+    this.items.gcb = HIDDEN;
+    this.items.gcy = HIDDEN;
+    this.items.skc = HIDDEN;
 
-    this.items.gfv = ``;
-    this.items.gfw = ``;
-    this.items.gfg = ``;
-    this.items.gfr = ``;
-    this.items.gfb = ``;
-    this.items.gfy = ``;
-    this.items.skf = ``;
+    this.items.gfv = HIDDEN;
+    this.items.gfw = HIDDEN;
+    this.items.gfg = HIDDEN;
+    this.items.gfr = HIDDEN;
+    this.items.gfb = HIDDEN;
+    this.items.gfy = HIDDEN;
+    this.items.skf = HIDDEN;
 
-    this.items.gsv = ``;
-    // this.items.gsw = ``;
-    // this.items.gsg = ``;
-    // this.items.gsr = ``;
-    // this.items.gsb = ``;
-    this.items.gsy = ``;
-    this.items.sku = ``;
+    this.items.gsv = HIDDEN;
+    // this.items.gsw = HIDDEN;
+    // this.items.gsg = HIDDEN;
+    // this.items.gsr = HIDDEN;
+    // this.items.gsb = HIDDEN;
+    this.items.gsy = HIDDEN;
+    this.items.sku = HIDDEN;
 
-    this.items.gzv = ``;
-    this.items.glw = ``;
-    this.items.glg = ``;
-    this.items.glr = ``;
-    this.items.glb = ``;
-    this.items.gly = ``;
-    this.items.skl = ``;
+    this.items.gzv = HIDDEN;
+    this.items.glw = HIDDEN;
+    this.items.glg = HIDDEN;
+    this.items.glr = HIDDEN;
+    this.items.glb = HIDDEN;
+    this.items.gly = HIDDEN;
+    this.items.skl = HIDDEN;
 
-    this.items.gpv = ``;
-    this.items.gpw = ``;
-    this.items.gpg = ``;
-    this.items.gpr = ``;
-    this.items.gpb = ``;
-    this.items.gpy = ``;
-    this.items.skz = ``;
+    this.items.gpv = HIDDEN;
+    this.items.gpw = HIDDEN;
+    this.items.gpg = HIDDEN;
+    this.items.gpr = HIDDEN;
+    this.items.gpb = HIDDEN;
+    this.items.gpy = HIDDEN;
+    this.items.skz = HIDDEN;
   },
   
   //=================//
@@ -762,52 +803,99 @@ const customItems = {
       case "none": // no change
         return;
       case "all": // highlight all
-      
-        // Act 1
-        this.items.leg = `${prefix}Wirt's Leg${suffix}`;           // Wirt's Leg
-        this.items.hdm = `${prefix}Horadric Malus${suffix}`;       // Horadric Malus
-        this.items.bks = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss
-        this.items.bkd = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss (deciphered)
-        // Act 2
-        this.items.ass = `${prefix}Book of Skill${suffix}`;        // Book of Skill
-        this.items.box = `${prefix}Horadric Cube${suffix}`;        // Horadric Cube
-        this.items.tr1 = `${prefix}Horadric Scroll${suffix}`;      // Horadric Scroll
-        this.items.msf = `${prefix}Staff of Kings${suffix}`;       // Staff of Kings
-        this.items.vip = `${prefix}Amulet of the Viper${suffix}`;  // Amulet of the Viper
-        this.items.hst = `${prefix}Horadric Staff${suffix}`;       // Horadric Staff
-        // Act 3
-        this.items.xyz = `${prefix}Potion of Life${suffix}`;       // Potion of Life
-        this.items.j34 = `${prefix}A Jade Figurine${suffix}`;      // A Jade Figurine
-        this.items.g34 = `${prefix}The Golden Bird${suffix}`;      // The Golden Bird
-        this.items.bbb = `${prefix}Lam Esen's Tome${suffix}`;      // Lam Esen's Tome
-        this.items.g33 = `${prefix}The Gidbinn${suffix}`;          // The Gidbinn
-        this.items.qf1 = `${prefix}Khalim's Flail${suffix}`;       // Khalim's Flail
-        this.items.qf2 = `${prefix}Khalim's Will${suffix}`;        // Khalim's Will
-        this.items.qey = `${prefix}Khalim's Eye${suffix}`;         // Khalim's Eye
-        this.items.qhr = `${prefix}Khalim's Heart${suffix}`;       // Khalim's Heart
-        this.items.qbr = `${prefix}Khalim's Brain${suffix}`;       // Khalim's Brain
-        this.items.mss = `${prefix}Mephisto's Soulstone${suffix}`; // Mephisto's Soulstone
-        // Act 4
-        this.items.hfh = `${prefix}Hell Forge Hammer${suffix}`;    // Hellforge Hammer
-        // Act 5
-        this.items.ice = `${prefix}Malah's Potion${suffix}`;       // Malah's Potion
-        this.items.tr2 = `${prefix}Scroll of Resistance${suffix}`; // Scroll of Resistance
-
-        // Extra
-        this.items["Staff of Kings"]      = `${prefix}Staff of Kings${suffix}`;      // Staff of Kings
-        this.items["Amulet of the Viper"] = `${prefix}Amulet of the Viper${suffix}`; // Amulet of the Viper
-        this.items["Horadric Staff"]      = `${prefix}Horadric Staff${suffix}`;      // Horadric Staff
-        this.items.LamTome                = `${prefix}Lam Esen's Tome${suffix}`;     // Lam Esen's Tome
-        this.items.KhalimFlail            = `${prefix}Khalim's Flail${suffix}`;      // Khalim's Flail
-        this.items.SuperKhalimFlail       = `${prefix}Khalim's Will${suffix}`;       // Khalim's Will
-        this.items["Hell Forge Hammer"]   = `${prefix}Hell Forge Hammer${suffix}`;   // Hellforge Hammer
+        highlightQuestItems(prefix, suffix);
+        highlightCube(prefix, suffix);
+        break;
+      case "xhc": // exclude cube
+        highlightQuestItems(prefix, suffix);
         break;
       case "custom": // [CSTM-QST1]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
+        // Act 1
+        this.items.leg = `Wirt's Leg`;           // Wirt's Leg
+        this.items.hdm = `Horadric Malus`;       // Horadric Malus
+        this.items.bks = `Scroll of Inifuss`;    // Scroll of Inifuss
+        this.items.bkd = `Scroll of Inifuss`;    // Scroll of Inifuss (deciphered)
+        // Act 2
+        this.items.ass = `Book of Skill`;        // Book of Skill
+        this.items.tr1 = `Horadric Scroll`;      // Horadric Scroll
+        this.items.box = `Horadric Cube`;        // Horadric Cube
+        this.items.msf = `Staff of Kings`;       // Staff of Kings
+        this.items.vip = `Amulet of the Viper`;  // Amulet of the Viper
+        this.items.hst = `Horadric Staff`;       // Horadric Staff
+        // Act 3
+        this.items.xyz = `Potion of Life`;       // Potion of Life
+        this.items.j34 = `A Jade Figurine`;      // A Jade Figurine
+        this.items.g34 = `The Golden Bird`;      // The Golden Bird
+        this.items.bbb = `Lam Esen's Tome`;      // Lam Esen's Tome
+        this.items.g33 = `The Gidbinn`;          // The Gidbinn
+        this.items.qf1 = `Khalim's Flail`;       // Khalim's Flail
+        this.items.qf2 = `Khalim's Will`;        // Khalim's Will
+        this.items.qey = `Khalim's Eye`;         // Khalim's Eye
+        this.items.qhr = `Khalim's Heart`;       // Khalim's Heart
+        this.items.qbr = `Khalim's Brain`;       // Khalim's Brain
+        this.items.mss = `Mephisto's Soulstone`; // Mephisto's Soulstone
+        // Act 4
+        this.items.hfh = `Hell Forge Hammer`;    // Hell Forge Hammer
+        // Act 5
+        this.items.ice = `Malah's Potion`;       // Malah's Potion
+        this.items.tr2 = `Scroll of Resistance`; // Scroll of Resistance
+    
+        // Extra
+        this.items["Staff of Kings"]      = `Staff of Kings`;      // Staff of Kings
+        this.items["Amulet of the Viper"] = `Amulet of the Viper`; // Amulet of the Viper
+        this.items["Horadric Staff"]      = `Horadric Staff`;      // Horadric Staff
+        this.items.LamTome                = `Lam Esen's Tome`;     // Lam Esen's Tome
+        this.items.KhalimFlail            = `Khalim's Flail`;      // Khalim's Flail
+        this.items.SuperKhalimFlail       = `Khalim's Will`;       // Khalim's Will
+        this.items["Hell Forge Hammer"]   = `Hell Forge Hammer`;   // Hell Forge Hammer
         break;
     }
   },
 
+  highlightQuestItems(prefix, suffix) {
+    // Act 1
+    this.items.leg = `${prefix}Wirt's Leg${suffix}`;           // Wirt's Leg
+    this.items.hdm = `${prefix}Horadric Malus${suffix}`;       // Horadric Malus
+    this.items.bks = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss
+    this.items.bkd = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss (deciphered)
+    // Act 2
+    this.items.ass = `${prefix}Book of Skill${suffix}`;        // Book of Skill
+    this.items.tr1 = `${prefix}Horadric Scroll${suffix}`;      // Horadric Scroll
+    this.items.msf = `${prefix}Staff of Kings${suffix}`;       // Staff of Kings
+    this.items.vip = `${prefix}Amulet of the Viper${suffix}`;  // Amulet of the Viper
+    this.items.hst = `${prefix}Horadric Staff${suffix}`;       // Horadric Staff
+    // Act 3
+    this.items.xyz = `${prefix}Potion of Life${suffix}`;       // Potion of Life
+    this.items.j34 = `${prefix}A Jade Figurine${suffix}`;      // A Jade Figurine
+    this.items.g34 = `${prefix}The Golden Bird${suffix}`;      // The Golden Bird
+    this.items.bbb = `${prefix}Lam Esen's Tome${suffix}`;      // Lam Esen's Tome
+    this.items.g33 = `${prefix}The Gidbinn${suffix}`;          // The Gidbinn
+    this.items.qf1 = `${prefix}Khalim's Flail${suffix}`;       // Khalim's Flail
+    this.items.qf2 = `${prefix}Khalim's Will${suffix}`;        // Khalim's Will
+    this.items.qey = `${prefix}Khalim's Eye${suffix}`;         // Khalim's Eye
+    this.items.qhr = `${prefix}Khalim's Heart${suffix}`;       // Khalim's Heart
+    this.items.qbr = `${prefix}Khalim's Brain${suffix}`;       // Khalim's Brain
+    this.items.mss = `${prefix}Mephisto's Soulstone${suffix}`; // Mephisto's Soulstone
+    // Act 4
+    this.items.hfh = `${prefix}Hell Forge Hammer${suffix}`;    // Hell Forge Hammer
+    // Act 5
+    this.items.ice = `${prefix}Malah's Potion${suffix}`;       // Malah's Potion
+    this.items.tr2 = `${prefix}Scroll of Resistance${suffix}`; // Scroll of Resistance
+
+    // Extra
+    this.items["Staff of Kings"]      = `${prefix}Staff of Kings${suffix}`;      // Staff of Kings
+    this.items["Amulet of the Viper"] = `${prefix}Amulet of the Viper${suffix}`; // Amulet of the Viper
+    this.items["Horadric Staff"]      = `${prefix}Horadric Staff${suffix}`;      // Horadric Staff
+    this.items.LamTome                = `${prefix}Lam Esen's Tome${suffix}`;     // Lam Esen's Tome
+    this.items.KhalimFlail            = `${prefix}Khalim's Flail${suffix}`;      // Khalim's Flail
+    this.items.SuperKhalimFlail       = `${prefix}Khalim's Will${suffix}`;       // Khalim's Will
+    this.items["Hell Forge Hammer"]   = `${prefix}Hell Forge Hammer${suffix}`;   // Hell Forge Hammer
+  },
+
+  highlightCube(prefix, suffix) {
+    this.items.box = `${prefix}Horadric Cube${suffix}`;      // Horadric Cube
+  },
+    
   //===================================================//
   //   Endgame: Pandemonium Event, Tokens & Essences   //
   //===================================================//
@@ -855,7 +943,7 @@ const customItems = {
         this.highlightKeys(prefix2, suffix2);
         this.highlightOrgans(prefix3, suffix3);
         this.highlightAnniTorch(prefix4, suffix4);
-        this.items.std = ``;
+        this.items.std = HIDDEN;
         break;
       case "xat-xsh": // exclude Annihilus, Hellfire Torch and Standard of Heroes from highlighting
         this.highlightEssences(prefix1, suffix1);
@@ -868,7 +956,7 @@ const customItems = {
         this.highlightToken(prefix2, suffix2);
         this.highlightKeys(prefix2, suffix2);
         this.highlightOrgans(prefix3, suffix3);
-        this.items.std = ``;
+        this.items.std = HIDDEN;
         break;
       case "custom": // [CSTM-END]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -941,8 +1029,11 @@ const customItems = {
 const customUi = {
   items: {},
   
-  // Section specific to Book of Skill and Potion of Life, as these items are in a different file.
+  //=================//
+  //   Quest Items   //
+  //=================//
   customizeQuestItems(setting) {
+    // Section specific to Book of Skill and Potion of Life, as these items are in a different file.
     const highlight = `${RED}${PATTERN3}${GOLD}`;
     const padding = '' + ' '.repeat(5);
     const prefix = `${highlight}${padding}`;
@@ -957,6 +1048,8 @@ const customUi = {
         break;
       case "custom": // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.ass = `Book of Skill`;  // Book of Skill
+        this.items.xyz = `Potion of Life`; // Potion of Life
         break;
     }
   },

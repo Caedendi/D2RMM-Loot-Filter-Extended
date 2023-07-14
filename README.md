@@ -40,6 +40,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 ### 1.0.2
 
 - Fixed certain quest items not highlighting correctly
+- Added option to exclude the Horadric Cube from highlighting
 - Added highlighting to Hellfire Torch and Annihilus (as part of the Endgame filter)
 - Added highlighting to Rainbow Facets (as part of the Jewels filter)
 - Changed Small/Full Rejuvenation Potion name from +SRP/+FRP to +RPS/+RPF
@@ -72,73 +73,100 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ## Presets Overview
 
-| Item Type                                    | Presets                                                    |
-|----------------------------------------------|------------------------------------------------------------|
-| **Gold**                                     | No change                                                  |
-|                                              | Gold text                                                  |
-|                                              | **Gold G (default)**                                       |
-|                                              | White G                                                    |
-|                                              | Hide affix                                                 |
-|                                              | Custom                                                     |
-| **Runes**                                    | No change                                                  |
-|                                              | **Add rune numbers + highlights + remove affix (default)** |
-|                                              | Add rune numbers + remove affix                            |
-|                                              | Add rune numbers + highlights                              |
-|                                              | Add highlights + remove affix                              |
-|                                              | Add rune numbers                                           |
-|                                              | Add highlights                                             |
-|                                              | Remove affix                                               |
-|                                              | Custom                                                     |
-| **Healing Potions**                          | No change                                                  |
-|                                              | **All (default)**                                          |
-|                                              | Hide lvl 3                                                 |
-|                                              | Hide lvl 4                                                 |
-|                                              | Hide lvl 3 + small rejuvs                                  |
-|                                              | Hide lvl 4 + small rejuvs                                  |
-|                                              | Show only rejuvs                                           |
-|                                              | Show only full rejuvs                                      |
-|                                              | Hide all                                                   |
-|                                              | Custom                                                     |
-| **Buff Potions**                             | No change                                                  |
-|                                              | **All (default)**                                          |
-|                                              | Hide                                                       |
-|                                              | Custom                                                     |
-| **Throwing Potions**                         | No change                                                  |
-|                                              | **All (default)**                                          |
-|                                              | Hide                                                       |
-|                                              | Custom                                                     |
-| **Scrolls & Tomes**                          | No change                                                  |
-|                                              | **All (default)**                                          |
-|                                              | Hide scrolls                                               |
-|                                              | Custom                                                     |
-| **Arrows & Bolts**                           | No change                                                  |
-|                                              | **Highlight (default)**                                    |
-|                                              | Hide                                                       |
-|                                              | Custom                                                     |
-| **Keys**                                     | **No change (default)**                                    |
-|                                              | Hide                                                       |
-|                                              | Custom                                                     |
-| **Rings, Amulets, Jewels & Charms [BUGGED]** | **No change (default)**                                    |
-|                                              | Highlight                                                  |
-|                                              | Custom                                                     |
-| **Gems**                                     | No change                                                  |
-|                                              | **Highlight all (default)**                                |
-|                                              | Highlight, show only flawless & perfect                    |
-|                                              | Highlight, show only perfect                               |
-|                                              | Custom                                                     |
-| **Quest items**                              | No change                                                  |
-|                                              | **Highlight (default)**                                    |
-|                                              | Custom                                                     |
-| **Endgame Items**                            | No change                                                  |
-|                                              | **Highlight (default)**                                    |
-|                                              | Highlight (exclude Standard of Heroes)                     |
-|                                              | Highlight, hide Standard of Heroes                         |
-|                                              | Custom                                                     |
-| **Tooltip size for hidden items**            | **0 (default)** to 25 (max) spaces                         |
-| **Tooltip**                                  | **No change (default)**                                    |
-|                                              | Opacity & Size                                             |
-|                                              | Opactiy                                                    |
-|                                              | Size                                                       |
+| Item Type                                    | Presets                                                       |
+|----------------------------------------------|---------------------------------------------------------------|
+| **Gold**                                     | No change                                                     |
+|                                              | Gold text                                                     |
+|                                              | **Gold G (default)**                                          |
+|                                              | White G                                                       |
+|                                              | Hide affix                                                    |
+|                                              | Custom                                                        |
+| **Runes**                                    | No change                                                     |
+|                                              | **Add rune numbers + highlights + remove affix (default)**    |
+|                                              | Add rune numbers + remove affix                               |
+|                                              | Add rune numbers + highlights                                 |
+|                                              | Add highlights + remove affix                                 |
+|                                              | Add rune numbers                                              |
+|                                              | Add highlights                                                |
+|                                              | Remove affix                                                  |
+|                                              | Custom                                                        |
+| **Healing Potions**                          | No change                                                     |
+|                                              | **All (default)**                                             |
+|                                              | Hide lvl 3                                                    |
+|                                              | Hide lvl 4                                                    |
+|                                              | Hide lvl 3 + small rejuvs                                     |
+|                                              | Hide lvl 4 + small rejuvs                                     |
+|                                              | Show only rejuvs                                              |
+|                                              | Show only full rejuvs                                         |
+|                                              | Hide all                                                      |
+|                                              | Custom                                                        |
+| **Buff Potions**                             | No change                                                     |
+|                                              | **All (default)**                                             |
+|                                              | Hide                                                          |
+|                                              | Custom                                                        |
+| **Throwing Potions**                         | No change                                                     |
+|                                              | **All (default)**                                             |
+|                                              | Hide                                                          |
+|                                              | Custom                                                        |
+| **Scrolls & Tomes**                          | No change                                                     |
+|                                              | **All (default)**                                             |
+|                                              | Hide scrolls                                                  |
+|                                              | Custom                                                        |
+| **Arrows & Bolts**                           | No change                                                     |
+|                                              | **Highlight (default)**                                       |
+|                                              | Hide                                                          |
+|                                              | Custom                                                        |
+| **Keys**                                     | **No change (default)**                                       |
+|                                              | Hide                                                          |
+|                                              | Custom                                                        |
+| **Rings, Amulets, Jewels & Charms [BUGGED]** | **No change (default)**                                       |
+|                                              | Highlight                                                     |
+|                                              | Custom                                                        |
+| **Gems**                                     | No change                                                     |
+|                                              | **Highlight all (default)**                                   |
+|                                              | Highlight, show only flawless & perfect                       |
+|                                              | Highlight, show only perfect                                  |
+|                                              | Custom                                                        |
+| **Quest items**                              | No change                                                     |
+|                                              | **Highlight (default)**                                       |
+|                                              | Highlight, exclude Cube                                       |
+|                                              | Custom                                                        |
+| **Endgame Items**                            | No change                                                     |
+|                                              | **Highlight (default)**                                       |
+|                                              | Highlight, exclude Annihilus & Torch                          |
+|                                              | Highlight, exclude Standard of Heroes                         |
+|                                              | Highlight, hide Standard of Heroes                            |
+|                                              | Highlight, exclude Annihilus, Torch & Standard of Heroes      |
+|                                              | Highlight, exclude Annihilus & Torch, hide Standard of Heroes |
+|                                              | Custom                                                        |
+| **Highlight character**                      | **\* (asterisk) (default)**                                   |
+|                                              | • (bullet)                                                    |
+|                                              | · (middle dot)                                                |
+|                                              | = (equals)                                                    |
+|                                              | + (plus)                                                      |
+|                                              | - (hyphen/dash/minus)                                         |
+|                                              | x (small letter x)                                            |
+|                                              | X (capital letter x)                                          |
+|                                              | o (small letter o)                                            |
+|                                              | O (capital letter o)                                          |
+|                                              | 0 (zero)                                                      |
+|                                              | @ (at)                                                        |
+|                                              | $ (dollar)                                                    |
+|                                              | % (percent)                                                   |
+|                                              | & (ampersand)                                                 |
+|                                              | ~ (tilde)                                                     |
+|                                              | ¤ (currency sign)                                             |
+|                                              | ※ (reference mark)                                            |
+|                                              | ★ (black star)                                                |
+|                                              | ° (degree sign)                                               |
+|                                              | ⁂ (asterism)                                                  |
+|                                              | ‼ (double exclamation mark)                                   |
+|                                              | Custom                                                        |
+| **Tooltip size for hidden items**            | **0 (default)** to 25 (max) spaces                            |
+| **Tooltip**                                  | **No change (default)**                                       |
+|                                              | Opacity & Size                                                |
+|                                              | Opactiy                                                       |
+|                                              | Size                                                          |
 
 
 ## Installation
@@ -173,13 +201,13 @@ In addition to this, I recommend you also use the following D2RMM mods:
     - [ ] Book of Skill
     - [ ] Staff of Kings
     - [ ] Amulet of the Viper
-    - [X] Horadric Staff
+    - [x] Horadric Staff
     - [ ] Khalim's Flail
-    - [X] Khalim's Will
+    - [x] Khalim's Will
     - [ ] Potion of Life (xyz)
     - [ ] Hell Forge Hammer
     - [ ] Malah's Potion
-    - [ ] Update toggle description regarding [CSTM-QST1] and [CSTM-QST2]
+    - [x] Update toggle description regarding [CSTM-QST1] and [CSTM-QST2]
   - [ ] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
   - [ ] Enabling jewelry turns crafted/rare/set/unique jewelry blue
   - [ ] Item name alignment out of place for items with ilvls when combining this mod with [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174)
