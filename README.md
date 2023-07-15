@@ -126,6 +126,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 |                                              | **Highlight all (default)**                                   |
 |                                              | Highlight, show only flawless & perfect                       |
 |                                              | Highlight, show only perfect                                  |
+|                                              | Hide all                                                      |
 |                                              | Custom                                                        |
 | **Quest items**                              | No change                                                     |
 |                                              | **Highlight (default)**                                       |

@@ -184,6 +184,7 @@
         { "label": "Highlight", "value": "all" },
         { "label": "Highlight, show only Flawless and Perfect Gems", "value": "flawless" },
         { "label": "Highlight, show only Perfect Gems", "value": "perfect" },
+        { "label": "Hide all", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
     },

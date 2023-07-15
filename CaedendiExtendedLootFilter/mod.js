@@ -60,23 +60,82 @@ const LIGHTPINK = `${COLOR_PREFIX}G`;
 const PURPLE = `${COLOR_PREFIX};`;
 
 // Naming
-const HIDDEN = '' + ' '.repeat(config.HiddenItemTooltipSize);
+const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
 const HIGHLIGHT = config.HighlightCharacter !== 'custom' ? config.HighlightCharacter : '*'; // [CSTM-HLC] replace * with custom character
 
+
+//=========================//
+//   Parameters - Global   //
+//=========================//
+
+const EMPTY_STRING = '';
+const SINGLE_SPACE = ' ';
+const NO_COLOR = EMPTY_STRING;
+const NO_PATTERN = EMPTY_STRING;
+const NO_PADDING = EMPTY_STRING;
+
+const SMALL_O = 'o';
+const PLUS = '+';
+const ZERO = '0';
 const PATTERN_2 = HIGHLIGHT.repeat(2);
 const PATTERN_5 = HIGHLIGHT.repeat(5);
 const PATTERN_10 = HIGHLIGHT.repeat(10);
 const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)} ${HIGHLIGHT.repeat(10)} ${HIGHLIGHT.repeat(10)}`;
-const SMALL_O = 'o';
-const PLUS = '+';
-const ZERO = '0';
 
-const PADDING_0 = '';
-const PADDING_1 = ' ';
-const PADDING_2 = ' '.repeat(2);
-const PADDING_3 = ' '.repeat(3);
-const PADDING_4 = ' '.repeat(4);
-const PADDING_5 = ' '.repeat(5);
+const PADDING_1 = SINGLE_SPACE;
+const PADDING_2 = SINGLE_SPACE.repeat(2);
+const PADDING_3 = SINGLE_SPACE.repeat(3);
+const PADDING_5 = SINGLE_SPACE.repeat(5);
+
+//========================//
+//   Parameters - Runes   //
+//========================//
+
+// I consider the rune tiers to be:
+// - low: 1-15 (El-Hel)
+// - low-mid: 16-20 (Io-Lem)
+// - mid: 21-15 (Pul-Gul)
+// - high: 26-33 (Vex-Zod)
+// I have however switched Ral (8), Hel (15) and Lem (20) around because of their usefulness.
+
+const RUNES_TIER_LOW = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14]; // El, Eld, Tir, Nef, Eth, Ith, Tal, Ort, Thul, Amn, Sol, Shael, Dol
+const RUNES_TIER_LOWMID = [8, 15, 16, 17, 18, 19];                   // Ral, Hel, Io, Lum, Ko, Fal
+const RUNES_TIER_MID = [20, 21, 22, 23, 24, 25];                     // Lem, Pul, Um, Mal, Ist, Gul
+const RUNES_TIER_HIGH = [26, 27, 28, 29, 30, 31, 32, 33];            // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
+
+const RUNES_COLOR_DEFAULT = `${ORANGE1}`;
+const RUNES_COLOR_HIGHLIGHT = `${RED}`;
+
+const RUNES_PATTERN_LOW = NO_PATTERN;
+const RUNES_PATTERN_LOWMID = PATTERN_5;
+const RUNES_PATTERN_MID = PATTERN_10;
+const RUNES_PATTERN_HIGH = PATTERN_3x10;
+
+const RUNES_PADDING_LOW = NO_PADDING;
+const RUNES_PADDING_LOWMID = PADDING_3;
+const RUNES_PADDING_MID = PADDING_5;
+const RUNES_PADDING_HIGH = PADDING_5;
+
+const RUNES_TIER_HIGHLIGHTED = [].concat(RUNES_TIER_LOWMID, RUNES_TIER_MID, RUNES_TIER_HIGH); // runes with a highlight pattern (***** rune *****)
+const RUNES_TIER_HIGHLIGHTED_NUMBERS = [].concat(RUNES_TIER_MID, RUNES_TIER_HIGH);            // runes where the added numbers (33) are in the highlight color instead of default
+const RUNES_TIER_HIGHLIGHTED_NAMES = RUNES_TIER_HIGH;                                         // runes where the rune name is in the highlight color instead of default
+
+
+//========================//
+//   Parameters - Items   //
+//========================//
+
+const FACET_COLOR_NAME = GOLD;
+const FACET_PATTERN = PATTERN_2;
+const FACET_PADDING_1 = PADDING_2; // padding between patterns
+const FACET_PADDING_2 = PADDING_5; // padding between name and highlight
+const FACET_PREFIX = `${RED}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${GREEN}${FACET_PATTERN}${FACET_COLOR_NAME}${FACET_PADDING_2}`;
+const FACET_SUFFIX = `${FACET_PADDING_2}${GREEN}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${RED}${FACET_PATTERN}${FACET_COLOR_NAME}`;
+
+
+//======================//
+//   Global Functions   //
+//======================//
 
 function generateSingleHighlight(patternColor, pattern, padding, itemColor, itemName) {
   return `${patternColor}${pattern}${itemColor}${padding}${itemName}${itemColor}`;
@@ -100,25 +159,25 @@ const customAffixes = {
         return;
       case "gold": // Gold displays as "1234 Gold" with white numbers and gold text.
         this.items.gld = `${GOLD1}Gold`; 
-        break;
+        return;
       case "goldg": // Gold displays as "1234 G" with white numbers and a gold-colored G.
         this.items.gld = `${GOLD1}G`;
-        break;
+        return;
       case "white": // Gold displays as "1234 G" in white.
         this.items.gld = `G`;
-        break;
+        return;
       case "hide": // Gold displays as "1234".
         this.items.gld = HIDDEN;
-        break;
+        return;
       case "custom": // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.gld = `Gold`;
-        break;
+        return;
     }
   },
 
-  // For some reason, the devs put these 4 gems in the wrong JSON file
   customizeGems(setting) {
+    // For some reason, the devs put these 4 gems in the wrong JSON file
     switch (setting) {
       case "none":
         return;
@@ -128,20 +187,20 @@ const customAffixes = {
         this.items.gsg = generateSingleHighlight(GREEN, SMALL_O, PADDING_1, WHITE, 'Emerald');  // Emerald
         this.items.gsr = generateSingleHighlight(RED,   SMALL_O, PADDING_1, WHITE, 'Ruby');     // Ruby
         this.items.gsb = generateSingleHighlight(BLUE,  SMALL_O, PADDING_1, WHITE, 'Sapphire'); // Sapphire
-        break;
+        return;
       case "flawless": // hide chipped/flawed/regular gems
         this.hideGems();
-        break;
+        return;
       case "perfect": // hide chipped/flawed/regular/flawless gems
-      this.hideGems();
-        break;
+        this.hideGems();
+        return;
       case "custom": // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.gsw = `Diamond`; 
         this.items.gsg = `Emerald`; 
         this.items.gsr = `Ruby`;
         this.items.gsb = `Sapphire`;
-        break;
+        return;
     }
   },
 
@@ -190,54 +249,54 @@ const customRunes = {
     r33: "Zod",
   },
   
-  highlightSettings: ["all", "nrs-hls", "hls-raf", "hls"], // settings that enable highlighting
-  
-  // I consider the rune tiers to be:
-  // - low: 1-15 (El-Hel)
-  // - low-mid: 16-20 (Io-Lem)
-  // - mid: 21-15 (Pul-Gul)
-  // - high: 26-33 (Vex-Zod)
-  // I have however switched Ral (8), Hel (15) and Lem (20) around because of their usefulness.
-
-  lowRunes: [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14],  // El, Eld, Tir, Nef, Eth, Ith, Tal, Ort, Thul, Amn, Sol, Shael, Dol
-  lowMidRunes: [8, 15, 16, 17, 18, 19],                    // Ral, Hel, Io, Lum, Ko, Fal
-  midRunes: [20, 21, 22, 23, 24, 25],                      // Lem, Pul, Um, Mal, Ist, Gul
-  highRunes: [26, 27, 28, 29, 30, 31, 32, 33],             // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
-
   customizeRunes(setting) {
+    const RUNES_SETTINGS_AFFIX = ["nrs-hls", "nrs", "hls"];                // settings that add the " Rune" affix
+    const RUNES_SETTINGS_NUMBER = ["all", "nrs-raf", "nrs-hls", "nrs"];    // settings that add rune numbers
+    const RUNES_SETTINGS_HIGHLIGHT = ["all", "nrs-hls", "hls-raf", "hls"]; // settings that add highlighting
+
     switch (setting) {
       case "none":
       case "raf": // Remove affix
         return;
       case "all": // Add rune numbers + highlights + remove affix
-        this.setColor(ORANGE1, RED, setting);
-        this.addRuneNumbers(ORANGE1, RED, setting);
-        this.addHighlighting()
-        break;
       case "nrs-raf": // Add rune numbers + remove affix
-        this.setColor(ORANGE1, ORANGE1, setting);
-        this.addRuneNumbers(ORANGE1, ORANGE1, setting);
-        break;
       case "nrs-hls": // Add rune numbers + highlights
-        this.addRuneAffix();
-        this.setColor(ORANGE1, RED, setting);
-        this.addRuneNumbers(ORANGE1, RED, setting); 
-        this.addHighlighting();
-        break;
       case "hls-raf": // Add highlights + remove affix
-        this.setColor(ORANGE1, RED, setting);
-        this.addHighlighting();
-        break;
       case "nrs": // Add rune numbers
-        this.addRuneAffix();
-        this.setColor(ORANGE1, ORANGE1, setting);
-        this.addRuneNumbers(ORANGE1, ORANGE1, setting);
-        break;
       case "hls": // Add highlights
-        this.addRuneAffix();
-        this.setColor(ORANGE1, RED, setting);
-        this.addHighlighting();
-        break;
+        generateRuneNames(setting, RUNES_SETTINGS_AFFIX, RUNES_SETTINGS_NUMBER, RUNES_SETTINGS_HIGHLIGHT);
+        return;
+
+      // case "all": // Add rune numbers + highlights + remove affix
+      //   this.setColor(ORANGE1, RED, setting);
+      //   this.addRuneNumbers(ORANGE1, RED, setting);
+      //   this.addHighlighting()
+      //   break;
+      // case "nrs-raf": // Add rune numbers + remove affix
+      //   this.setColor(ORANGE1, ORANGE1, setting);
+      //   this.addRuneNumbers(ORANGE1, ORANGE1, setting);
+      //   break;
+      // case "nrs-hls": // Add rune numbers + highlights
+      //   this.addRuneAffix();
+      //   this.setColor(ORANGE1, RED, setting);
+      //   this.addRuneNumbers(ORANGE1, RED, setting); 
+      //   this.addHighlighting();
+      //   break;
+      // case "hls-raf": // Add highlights + remove affix
+      //   this.setColor(ORANGE1, RED, setting);
+      //   this.addHighlighting();
+      //   break;
+      // case "nrs": // Add rune numbers
+      //   this.addRuneAffix();
+      //   this.setColor(ORANGE1, ORANGE1, setting);
+      //   this.addRuneNumbers(ORANGE1, ORANGE1, setting);
+      //   break;
+      // case "hls": // Add highlights
+      //   this.addRuneAffix();
+      //   this.setColor(ORANGE1, RED, setting);
+      //   this.addHighlighting();
+      //   break;
+
       case "custom": // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.runes.r01 = `${ORANGE1}El (1)`;                                                        // El
@@ -275,9 +334,98 @@ const customRunes = {
         // this.runes.r33 = `${RED}**********${ORANGE1}     Zod (33)     ${RED}**********${ORANGE1}`;  // Zod
         // this.runes.r33 = `${RED}${HIGHLIGHT.repeat(10)}${PADDING3}${ORANGE1}Zod (33)${PADDING3}${RED}${HIGHLIGHT.repeat(10)}`;  // Zod
         this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE1, 'Zod Rune (33)'); // Zod
-        break;
+        return;
     }
   },
+
+  generateRuneNames(setting, settingsAffix, settingsNumbers, settingsHighlighting) {
+    var i = 1;
+    for (const rune in this.runes) {
+      this.runes[rune] = this.generateRuneName(this.runes[rune], i, setting, settingsAffix, settingsNumbers, settingsHighlighting);
+      i++;
+    }
+  },
+
+  generateRuneName(name, number, setting, settingsAffix, settingsNumbers, settingsHighlighting) {
+    const hasAffix = settingsAffix.includes(setting);
+    const hasNumber = settingsNumbers.includes(setting);
+    const hasHighlighting = (settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED.includes(runeNumber));
+    const hasHighlightedNumber = (settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(runeNumber));
+    const hasHighlightedName = (settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(runeNumber));
+
+    const highlightColor1 = hasHighlighting ? this.RUNES_COLOR_HIGHLIGHT : NO_COLOR;
+    const highlightColor2 = highlightColor1;
+    const nameColor1 = hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_DEFAULT;
+    const nameColor2 = nameColor1;
+    const numberColor = hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_DEFAULT;
+    const padding = this.determinePadding(number);
+    const highlightPattern = this.determinePattern(number);
+
+    if (hasAffix) {
+      name = `${name} Rune`;
+    }
+
+    // remove duplicate color codes where necessary
+    if (hasHighlighting && nameColor2 == highlightColor2) {
+      nameColor2 = NO_COLOR;
+    }
+    if (hasHighlighting && ((hasNumber && highlightColor2 === numberColor) || (!hasNumber && highlightColor2 === nameColor1))) {
+      highlightColor2 = NO_COLOR;
+    }
+    // set rune number
+    if (hasNumber) {
+      if (numberColor === nameColor1) {
+        numberColor = NO_COLOR;
+      }
+      name = `${name} ${numberColor}(${number})`;
+    }
+    // remove last duplicate color code where necessary
+    if (hasHighlighting && highlightColor1 === nameColor1) {
+      nameColor1 = NO_COLOR;
+    }
+
+    return `${highlightColor1}${highlightPattern}${nameColor1}${padding}${name}${padding}${highlightColor2}${highlightPattern}${nameColor2}`;
+  },
+
+  determinePadding(runeNumber) {
+    if (RUNES_TIER_LOW.includes(runeNumber)) {
+      return RUNES_PADDING_LOW;
+    }
+    else if (RUNES_TIER_LOWMID.includes(runeNumber)) {
+      return RUNES_PADDING_LOWMID;
+    }
+    else if (RUNES_TIER_MID.includes(runeNumber)) {
+      return RUNES_PADDING_MID;
+    }
+    else if (RUNES_TIER_HIGH.includes(runeNumber)) {
+      return RUNES_PADDING_HIGH;
+    }
+
+    return NO_PADDING;
+  },
+
+  determinePattern(runeNumber) {
+    if (RUNES_TIER_LOW.includes(runeNumber)) {
+      return RUNES_PATTERN_LOW;
+    }
+    else if (RUNES_TIER_LOWMID.includes(runeNumber)) {
+      return RUNES_PATTERN_LOWMID;
+    }
+    else if (RUNES_TIER_MID.includes(runeNumber)) {
+      return RUNES_PATTERN_MID;
+    }
+    else if (RUNES_TIER_HIGH.includes(runeNumber)) {
+      return RUNES_PATTERN_HIGH;
+    }
+
+    return NO_PATTERN;
+  },
+
+
+
+  /////////////////////////
+
+  /*
 
   addRuneAffix() {
     for (const rune in this.runes) {
@@ -285,42 +433,48 @@ const customRunes = {
     }
   },
 
-  // lowRunes
-  // lowMidRunes
-  // midRunes
-  // highRunes
+  // low no highlight default colors
+  // lowmid ***** padding3 default colors
+  // mid ********** padding5 orange name red numbers
+  // high 3x10 padding 5 red name red numbers
 
-  setNameColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, setting) {
+  setNameColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor) {
     var i = 1;
+    var color = STRING_EMPTY;
     for (const rune in this.runes) {
-      if (i > 25 && this.highlightSettings.includes(setting))
-        this.runes[rune] = `${highRuneColor}${this.runes[rune]}`;
-      else 
-        this.runes[rune] = `${lowMidRuneColor}${this.runes[rune]}`;
-
+      color = this.selectColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, i);
+      this.runes[rune] = `${color}${this.runes[rune]}`;
       i++;
     }
   },
   
-  addRuneNumbers(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, setting) {
+  addRuneNumbers(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor) {
     var i = 1;
+    var color = STRING_EMPTY;
     for (const rune in this.runes) {
-      if (this.lvl1Highlight.includes(i)) {
-        this.runes[rune] = this.generateHighlight(this.runes[rune], PATTERN2, RED, PADDING1);
-      }
-
-
-
-      if (i > 20 && this.highlightSettings.includes(setting)) 
-        this.runes[rune] = this.runes[rune] + ` ${midHighRuneColor}(${i})`;
-      else
-        this.runes[rune] = this.runes[rune] + ` ${lowRuneColor}(${i})`;
-
+      color = this.selectColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, i);
+      this.runes[rune] = `${this.runes[rune]} ${color}(${i})`;
       i++;
     }
   },
+
+  selectColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, i) {
+    if (RUNES_TIER_LOW.includes(i)) {
+      return lowRuneColor;
+    }
+    else if (RUNES_TIER_LOWMID.includes(i)) {
+      return lowMidRuneColor;
+    }
+    else if (RUNES_TIER_MID.includes(i)) {
+      return midRuneColor;
+    }
+    else if (RUNES_TIER_HIGH.includes(i)) {
+      return highRuneColor;
+    }
+    return STRING_EMPTY;
+  },
   
-  addHighlighting() {    
+  addHighlighting() {
     var i = 1;
     for (const rune in this.runes) {
       if (this.lvl1Highlight.includes(i)) {
@@ -340,12 +494,19 @@ const customRunes = {
   generateHighlight(rune, pattern, patternColor, padding) {
     return `${patternColor}${pattern}${padding}${rune}${padding}${patternColor}${pattern}`;
   }
+
+  */
 };
 
 const customItems = {
   items: {},
 
   customizeHealingPotions(setting) {
+    const healingPatternColor = RED;
+    const manaPatternColor = BLUE;
+    const pattern = PLUS;
+    const nameColor = WHITE;
+
     const hp1 = `${RED}+${WHITE}HP1`;    // Minor Healing Potion
     const hp2 = `${RED}+${WHITE}HP2`;    // Light Healing Potion
     const hp3 = `${RED}+${WHITE}HP3`;    // Healing Potion
@@ -359,7 +520,10 @@ const customItems = {
     const mp5 = `${BLUE}+${WHITE}MP5`;   // Super Mana Potion
     
     const rvs = `${PURPLE}+${WHITE}RPS`; // Rejuvenation Potion
-    const rvl = `${PURPLE}+${WHITE}RPF`; // Full Rejuvenation Potion
+    // const rvl = `${PURPLE}+${WHITE}RPF`; // Full Rejuvenation Potion
+
+    
+    const rvl = generateSingleHighlight(PURPLE, PLUS, NO_PADDING, WHITE, 'RPF');  // Full Rejuvenation Potion
 
     // apply above custom names, unless set to "none" or "custom"
     switch (setting) {
@@ -378,7 +542,7 @@ const customItems = {
         this.items.mp5 = mp5;
         this.items.rvs = rvs;
         this.items.rvl = rvl;
-        break;
+        return;
       case "hide3": // hide lvl 1-3 potions, show small/full rejuvs
         this.hideHealingPotions();
         this.items.hp4 = hp4;
@@ -387,14 +551,14 @@ const customItems = {
         this.items.mp5 = mp5;
         this.items.rvs = rvs;
         this.items.rvl = rvl;
-        break;
+        return;
       case "hide4": // hide lvl 1-4 potions, show small/full rejuvs
         this.hideHealingPotions();
         this.items.hp5 = hp5;
         this.items.mp5 = mp5;
         this.items.rvs = rvs;
         this.items.rvl = rvl;
-        break;
+        return;
       case "hide3sr": // hide lvl 1-3 potions and small rejuvs, show full rejuvs
         this.hideHealingPotions();
         this.items.hp4 = hp4;
@@ -402,28 +566,28 @@ const customItems = {
         this.items.hp5 = hp5;
         this.items.mp5 = mp5;
         this.items.rvl = rvl;
-        break;
+        return;
       case "hide4sr": // hide lvl 1-4 potions and small rejuvs, show full rejuvs
         this.hideHealingPotions();
         this.items.hp5 = hp5;
         this.items.mp5 = mp5;
         this.items.rvl = rvl;
-        break;
+        return;
       case "sfr": // hide all healing/mana potions, show only small/full rejuvs
         this.hideHealingPotions();
         this.items.rvs = rvs;
         this.items.rvl = rvl;
-        break;
+        return;
       case "fr": // hide all healing/mana potions and small rejuvs, show only full rejuvs
         this.hideHealingPotions();
         this.items.rvl = rvl;
-        break;
+        return;
       case "hide": // hide all healing potions
         this.hideHealingPotions();
-        break;
+        return;
       case "custom": // [CSTM-HPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        return;
     }
   },
 
@@ -457,15 +621,15 @@ const customItems = {
         this.items.yps = yps;
         this.items.wms = wms;
         this.items.vps = vps;
-        break;
+        return;
       case "hide": // hide all
         this.items.yps = HIDDEN;
         this.items.wms = HIDDEN;
         this.items.vps = HIDDEN;
-        break;
+        return;
       case "custom": // [CSTM-BPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        return;
     }
   },
 
@@ -489,7 +653,7 @@ const customItems = {
         this.items.opl = opl;
         this.items.opm = opm;
         this.items.ops = ops;
-        break;
+        return;
       case "hide": // hide all
         this.items.gpl = HIDDEN;
         this.items.gpm = HIDDEN;
@@ -497,10 +661,10 @@ const customItems = {
         this.items.opl = HIDDEN;
         this.items.opm = HIDDEN;
         this.items.ops = HIDDEN;
-        break;
+        return;
       case "custom": // [CSTM-TPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        return;
     }
   },
 
@@ -519,16 +683,16 @@ const customItems = {
         this.items.ibk = ibk;
         this.items.tsc = tsc;
         this.items.isc = isc;
-        break;
+        return;
       case "hide": // hide scrolls, show books
         this.items.tbk = tbk;
         this.items.ibk = ibk;
         this.items.tsc = HIDDEN; // Scroll of Town Portal
         this.items.isc = HIDDEN; // Scroll of Identify
-        break;
+        return;
       case "custom": // [CSTM-SCR]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        return;
     }
   },
 
@@ -542,14 +706,14 @@ const customItems = {
       case "highlight":
         this.items.aqv = aqv;
         this.items.cqv = cqv;
-        break;
+        return;
       case "hide":
         this.items.aqv = HIDDEN; // Arrow Quiver
         this.items.cqv = HIDDEN; // Crossbow Bolt Quiver
-        break;
+        return;
       case "custom": // [CSTM-ARB]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        return;
     }
   },
 
@@ -559,13 +723,204 @@ const customItems = {
         return;
       case "hide":
         this.items.key = HIDDEN;
-        break;
+        return;
       case "custom": // [CSTM-KEY]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        this.items.key = "Key";
+        return;
     }
   },
   
+
+  //==========//
+  //   Gems   //
+  //==========//
+  customizeGems(setting) {
+    switch (setting) {
+      case "none":
+        return;
+      case "all": // show all
+        this.highlightChipped();
+        this.highlightFlawed();
+        this.highlightRegular();
+        this.highlightFlawless();
+        this.highlightPerfect();
+        return;
+      case "flawless": // hide chipped/flawed/regular gems
+        this.hideChipped();
+        this.hideFlawed();
+        this.hideRegular();
+        this.highlightFlawless();
+        this.highlightPerfect();
+        return;
+      case "perfect": // hide chipped/flawed/regular/flawless gems
+        this.hideChipped();
+        this.hideFlawed();
+        this.hideRegular();
+        this.hideFlawless();
+        this.highlightPerfect();
+        return;
+      case "hide": // hide chipped/flawed/regular/flawless gems
+        this.hideChipped();
+        this.hideFlawed();
+        this.hideRegular();
+        this.hideFlawless();
+        this.hidePerfect();
+        return;
+      case "custom": // [CSTM-GEM1]
+        // ADD YOUR CUSTOM ITEM NAMES HERE
+        // For Ruby, Sapphire, Emerald and Diamond, see [CSTM-GEM2] in the "Affixes" section above.
+        // For some reason, the devs put these gems in another JSON file.
+
+        // chipped
+        this.items.gcv = `Chipped Amethyst`;
+        this.items.gcw = `Chipped Diamond`;
+        this.items.gcg = `Chipped Emerald`;
+        this.items.gcr = `Chipped Ruby`;
+        this.items.gcb = `Chipped Sapphire`;
+        this.items.gcy = `Chipped Topaz`;
+        this.items.skc = `Chipped Skull`;
+        // flawed
+        this.items.gfv = `Flawed Amethyst`;
+        this.items.gfw = `Flawed Diamond`;
+        this.items.gfg = `Flawed Emerald`;
+        this.items.gfr = `Flawed Ruby`;
+        this.items.gfb = `Flawed Sapphire`;
+        this.items.gfy = `Flawed Topaz`;
+        this.items.skf = `Flawed Skull`;
+        // regular
+        this.items.gsv = `Amethyst`;
+     // this.items.gsw = `Diamond`;  // See [CSTM-GEM2]
+     // this.items.gsg = `Emerald`;  // See [CSTM-GEM2]
+     // this.items.gsr = `Ruby`;     // See [CSTM-GEM2]
+     // this.items.gsb = `Sapphire`; // See [CSTM-GEM2]
+        this.items.gsy = `Topaz`;
+        this.items.sku = `Skull`;
+        // flawless
+        this.items.gzv = `Flawless Amethyst`;
+        this.items.glw = `Flawless Diamond`;
+        this.items.glg = `Flawless Emerald`;
+        this.items.glr = `Flawless Ruby`;
+        this.items.glb = `Flawless Sapphire`;
+        this.items.gly = `Flawless Topaz`;
+        this.items.skl = `Flawless Skull`;
+        //perfect
+        this.items.gpv = `Perfect Amethyst`;
+        this.items.gpw = `Perfect Diamond`;
+        this.items.gpg = `Perfect Emerald`;
+        this.items.gpr = `Perfect Ruby`;
+        this.items.gpb = `Perfect Sapphire`;
+        this.items.gpy = `Perfect Topaz`;
+        this.items.skz = `Perfect Skull`;
+        return;
+    }
+  },
+
+  hideChipped() {
+    this.items.gcv = HIDDEN;
+    this.items.gcw = HIDDEN;
+    this.items.gcg = HIDDEN;
+    this.items.gcr = HIDDEN;
+    this.items.gcb = HIDDEN;
+    this.items.gcy = HIDDEN;
+    this.items.skc = HIDDEN;
+  },
+
+  hideFlawed() {
+    this.items.gfv = HIDDEN;
+    this.items.gfw = HIDDEN;
+    this.items.gfg = HIDDEN;
+    this.items.gfr = HIDDEN;
+    this.items.gfb = HIDDEN;
+    this.items.gfy = HIDDEN;
+    this.items.skf = HIDDEN;
+  },
+
+  hideRegular() {
+    // For Ruby, Sapphire, Emerald and Diamond, see the "Affixes" section above.
+    // For some reason, the devs put these gems in another JSON file.
+    this.items.gsv = HIDDEN;
+    // this.items.gsw = HIDDEN;
+    // this.items.gsg = HIDDEN;
+    // this.items.gsr = HIDDEN;
+    // this.items.gsb = HIDDEN;
+    this.items.gsy = HIDDEN;
+    this.items.sku = HIDDEN;
+  },
+
+  hideFlawless() {
+    this.items.gzv = HIDDEN;
+    this.items.glw = HIDDEN;
+    this.items.glg = HIDDEN;
+    this.items.glr = HIDDEN;
+    this.items.glb = HIDDEN;
+    this.items.gly = HIDDEN;
+    this.items.skl = HIDDEN;
+  },
+
+  hidePerfect() {
+    this.items.gpv = HIDDEN;
+    this.items.gpw = HIDDEN;
+    this.items.gpg = HIDDEN;
+    this.items.gpr = HIDDEN;
+    this.items.gpb = HIDDEN;
+    this.items.gpy = HIDDEN;
+    this.items.skz = HIDDEN;
+  },
+
+  highlightChipped() {
+    this.items.gcv = `${PURPLE}o${WHITE} Chipped`;  // Chipped Amethyst
+    this.items.gcw =  `${WHITE}o${WHITE} Chipped`;  // Chipped Diamond
+    this.items.gcg =  `${GREEN}o${WHITE} Chipped`;  // Chipped Emerald
+    this.items.gcr =    `${RED}o${WHITE} Chipped`;  // Chipped Ruby
+    this.items.gcb =   `${BLUE}o${WHITE} Chipped`;  // Chipped Sapphire
+    this.items.gcy = `${YELLOW}o${WHITE} Chipped`;  // Chipped Topaz
+    this.items.skc =   `${GRAY}o${WHITE} Chipped`;  // Chipped Skull
+  },
+
+  highlightFlawed() {
+    this.items.gfv = `${PURPLE}o${WHITE} Flawed`;   // Flawed Amethyst
+    this.items.gfw =  `${WHITE}o${WHITE} Flawed`;   // Flawed Diamond
+    this.items.gfg =  `${GREEN}o${WHITE} Flawed`;   // Flawed Emerald
+    this.items.gfr =    `${RED}o${WHITE} Flawed`;   // Flawed Ruby
+    this.items.gfb =   `${BLUE}o${WHITE} Flawed`;   // Flawed Sapphire
+    this.items.gfy = `${YELLOW}o${WHITE} Flawed`;   // Flawed Topaz
+    this.items.skf =   `${GRAY}o${WHITE} Flawed`;   // Flawed Skull
+  },
+
+  highlightRegular() {
+    // For Ruby, Sapphire, Emerald and Diamond, see the "Affixes" section above.
+    // For some reason, the devs put these gems in another JSON file.
+    this.items.gsv = `${PURPLE}o${WHITE} Amethyst`; // Amethyst
+ // this.items.gsw =  `${WHITE}o${WHITE} Diamond`;  // Diamond
+ // this.items.gsg =  `${GREEN}o${WHITE} Emerald`;  // Emerald
+ // this.items.gsr =    `${RED}o${WHITE} Ruby`;     // Ruby
+ // this.items.gsb =   `${BLUE}o${WHITE} Sapphire`; // Sapphire
+    this.items.gsy = `${YELLOW}o${WHITE} Topaz`;    // Topaz
+    this.items.sku =   `${GRAY}o${WHITE} Skull`;    // Skull
+  },
+
+  highlightFlawless() {
+    this.items.gzv = `${PURPLE}o${WHITE} Flawless`; // Flawless Amethyst
+    this.items.glw =  `${WHITE}o${WHITE} Flawless`; // Flawless Diamond
+    this.items.glg =  `${GREEN}o${WHITE} Flawless`; // Flawless Emerald
+    this.items.glr =    `${RED}o${WHITE} Flawless`; // Flawless Ruby
+    this.items.glb =   `${BLUE}o${WHITE} Flawless`; // Flawless Sapphire
+    this.items.gly = `${YELLOW}o${WHITE} Flawless`; // Flawless Topaz
+    this.items.skl =   `${GRAY}o${WHITE} Flawless`; // Flawless Skull
+  },
+
+  highlightPerfect() {
+    this.items.gpv = `${PURPLE}o${WHITE} Perfect`;  // Perfect Amethyst
+    this.items.gpw =  `${WHITE}o${WHITE} Perfect`;  // Perfect Diamond
+    this.items.gpg =  `${GREEN}o${WHITE} Perfect`;  // Perfect Emerald
+    this.items.gpr =    `${RED}o${WHITE} Perfect`;  // Perfect Ruby
+    this.items.gpb =   `${BLUE}o${WHITE} Perfect`;  // Perfect Sapphire
+    this.items.gpy = `${YELLOW}o${WHITE} Perfect`;  // Perfect Topaz
+    this.items.skz =   `${GRAY}o${WHITE} Perfect`;  // Perfect Skull
+  },
+  
+
   //=============//
   //   Jewelry   //   BUGGED: crafted/rare/set/unique jewelry and charms show up as blue
   //=============//
@@ -576,30 +931,31 @@ const customItems = {
       case "highlight":
         this.items.amu = `${RED}0${BLUE} Amulet ${RED}0${BLUE}`; // Amulet
         this.items.rin = `${RED}0${BLUE} Ring ${RED}0${BLUE}`;   // Ring
-        break;
+        return;
       case "custom": // [CSTM-RAM]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        return;
     }
   },
 
+  // todo: remove broken highlighting, facets only
   customizeJewels(setting) {
     switch (setting) {
       case "none":
         return;
       case "all":
         this.items.jew = `${RED}0${BLUE} Jewel ${RED}0${BLUE}`;
-        this.items["Rainbow Facet"] = `${RED}${PATTERN1} ${YELLOW}${PATTERN1} ${BLUE}${PATTERN1} ${GREEN}${PATTERN1}${GOLD}${PADDING3}Rainbow Facet${PADDING3}${GREEN}${PATTERN1} ${BLUE}${PATTERN1} ${YELLOW}${PATTERN1} ${RED}${PATTERN1}${GOLD}`;
-        break;
+        this.items["Rainbow Facet"] = `${FACET_PREFIX}Rainbow Facet${FACET_SUFFIX}`;
+        return;
       case "jewel":
         this.items.jew = `${RED}0${BLUE} Jewel ${RED}0${BLUE}`;
-        break;
+        return;
       case "facet":
-        this.items["Rainbow Facet"] = `${RED}${PATTERN1} ${YELLOW}${PATTERN1} ${BLUE}${PATTERN1} ${GREEN}${PATTERN1}${GOLD}${PADDING3}Rainbow Facet${PADDING3}${GREEN}${PATTERN1} ${BLUE}${PATTERN1} ${YELLOW}${PATTERN1} ${RED}${PATTERN1}${GOLD}`;
-        break;
+        this.items["Rainbow Facet"] = `${FACET_PREFIX}Rainbow Facet${FACET_SUFFIX}`;
+        return;
       case "custom": // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        return;
     }
   },
   
@@ -611,191 +967,20 @@ const customItems = {
         this.items.cm1 = `${RED}0${BLUE} Small Charm ${RED}0${BLUE}`; // Small Charm
         this.items.cm2 = `${RED}0${BLUE} Large Charm ${RED}0${BLUE}`; // Large Charm
         this.items.cm3 = `${RED}0${BLUE} Grand Charm ${RED}0${BLUE}`; // Grand Charm
-        break;
+        return;
       case "custom": // [CSTM-CHA]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
-    }
-  },
-  
-  //==========//
-  //   Gems   //
-  //==========//
-  customizeGems(setting) {
-    // For Ruby, Sapphire, Emerald and Diamond, see "Affixes" above.
-    // For some reason, the devs put these gems in another JSON file.
-
-    const gcv = `${PURPLE}o${WHITE} Chipped`;  // Chipped Amethyst
-    const gcw =  `${WHITE}o${WHITE} Chipped`;  // Chipped Diamond
-    const gcg =  `${GREEN}o${WHITE} Chipped`;  // Chipped Emerald
-    const gcr =    `${RED}o${WHITE} Chipped`;  // Chipped Ruby
-    const gcb =   `${BLUE}o${WHITE} Chipped`;  // Chipped Sapphire
-    const gcy = `${YELLOW}o${WHITE} Chipped`;  // Chipped Topaz
-    const skc =   `${GRAY}o${WHITE} Chipped`;  // Chipped Skull
-    
-    const gfv = `${PURPLE}o${WHITE} Flawed`;   // Flawed Amethyst
-    const gfw =  `${WHITE}o${WHITE} Flawed`;   // Flawed Diamond
-    const gfg =  `${GREEN}o${WHITE} Flawed`;   // Flawed Emerald
-    const gfr =    `${RED}o${WHITE} Flawed`;   // Flawed Ruby
-    const gfb =   `${BLUE}o${WHITE} Flawed`;   // Flawed Sapphire
-    const gfy = `${YELLOW}o${WHITE} Flawed`;   // Flawed Topaz
-    const skf =   `${GRAY}o${WHITE} Flawed`;   // Flawed Skull
-
-    const gsv = `${PURPLE}o${WHITE} Amethyst`; // Amethyst
- // const gsw =  `${WHITE}o${WHITE} Diamond`;  // Diamond
- // const gsg =  `${GREEN}o${WHITE} Emerald`;  // Emerald
- // const gsr =    `${RED}o${WHITE} Ruby`;     // Ruby
- // const gsb =   `${BLUE}o${WHITE} Sapphire`; // Sapphire
-    const gsy = `${YELLOW}o${WHITE} Topaz`;    // Topaz
-    const sku =   `${GRAY}o${WHITE} Skull`;    // Skull
-
-    const gzv = `${PURPLE}o${WHITE} Flawless`; // Flawless Amethyst
-    const glw =  `${WHITE}o${WHITE} Flawless`; // Flawless Diamond
-    const glg =  `${GREEN}o${WHITE} Flawless`; // Flawless Emerald
-    const glr =    `${RED}o${WHITE} Flawless`; // Flawless Ruby
-    const glb =   `${BLUE}o${WHITE} Flawless`; // Flawless Sapphire
-    const gly = `${YELLOW}o${WHITE} Flawless`; // Flawless Topaz
-    const skl =   `${GRAY}o${WHITE} Flawless`; // Flawless Skull
-
-    const gpv = `${PURPLE}o${WHITE} Perfect`;  // Perfect Amethyst
-    const gpw =  `${WHITE}o${WHITE} Perfect`;  // Perfect Diamond
-    const gpg =  `${GREEN}o${WHITE} Perfect`;  // Perfect Emerald
-    const gpr =    `${RED}o${WHITE} Perfect`;  // Perfect Ruby
-    const gpb =   `${BLUE}o${WHITE} Perfect`;  // Perfect Sapphire
-    const gpy = `${YELLOW}o${WHITE} Perfect`;  // Perfect Topaz
-    const skz =   `${GRAY}o${WHITE} Perfect`;  // Perfect Skull
-    
-    // apply above custom names, unless set to "none" or "custom"
-    switch (setting) {
-      case "none":
         return;
-      case "all": // show all
-        // chipped
-        this.items.gcv = gcv;
-        this.items.gcw = gcw;
-        this.items.gcg = gcg;
-        this.items.gcr = gcr;
-        this.items.gcb = gcb;
-        this.items.gcy = gcy;
-        this.items.skc = skc;
-        // flawed
-        this.items.gfv = gfv;
-        this.items.gfw = gfw;
-        this.items.gfg = gfg;
-        this.items.gfr = gfr;
-        this.items.gfb = gfb;
-        this.items.gfy = gfy;
-        this.items.skf = skf;
-        // regular
-        this.items.gsv = gsv;
-     // this.items.gsw = gsw;
-     // this.items.gsg = gsg;
-     // this.items.gsr = gsr;
-     // this.items.gsb = gsb;
-        this.items.gsy = gsy;
-        this.items.sku = sku;
-        // flawless
-        this.items.gzv = gzv;
-        this.items.glw = glw;
-        this.items.glg = glg;
-        this.items.glr = glr;
-        this.items.glb = glb;
-        this.items.gly = gly;
-        this.items.skl = skl;
-        // perfect
-        this.items.gpv = gpv;
-        this.items.gpw = gpw;
-        this.items.gpg = gpg;
-        this.items.gpr = gpr;
-        this.items.gpb = gpb;
-        this.items.gpy = gpy;
-        this.items.skz = skz;
-        break;
-      case "flawless": // hide chipped/flawed/regular gems
-        this.hideGems();
-        // flawless
-        this.items.gzv = gzv;
-        this.items.glw = glw;
-        this.items.glg = glg;
-        this.items.glr = glr;
-        this.items.glb = glb;
-        this.items.gly = gly;
-        this.items.skl = skl;
-        // perfect
-        this.items.gpv = gpv;
-        this.items.gpw = gpw;
-        this.items.gpg = gpg;
-        this.items.gpr = gpr;
-        this.items.gpb = gpb;
-        this.items.gpy = gpy;
-        this.items.skz = skz;
-        break;
-      case "perfect": // hide chipped/flawed/regular/flawless gems
-      this.hideGems();
-        // perfect
-        this.items.gpv = gpv;
-        this.items.gpw = gpw;
-        this.items.gpg = gpg;
-        this.items.gpr = gpr;
-        this.items.gpb = gpb;
-        this.items.gpy = gpy;
-        this.items.skz = skz;
-        break;
-      case "custom": // [CSTM-GEM1]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
-        // NOTE: Ruby, Sapphire, Emerald and Diamond have to be set in the "Affixes" section on line 110. See [CSTM-GEM2].
-        break;
     }
   },
 
-  hideGems() {
-    this.items.gcv = HIDDEN;
-    this.items.gcw = HIDDEN;
-    this.items.gcg = HIDDEN;
-    this.items.gcr = HIDDEN;
-    this.items.gcb = HIDDEN;
-    this.items.gcy = HIDDEN;
-    this.items.skc = HIDDEN;
-
-    this.items.gfv = HIDDEN;
-    this.items.gfw = HIDDEN;
-    this.items.gfg = HIDDEN;
-    this.items.gfr = HIDDEN;
-    this.items.gfb = HIDDEN;
-    this.items.gfy = HIDDEN;
-    this.items.skf = HIDDEN;
-
-    this.items.gsv = HIDDEN;
-    // this.items.gsw = HIDDEN;
-    // this.items.gsg = HIDDEN;
-    // this.items.gsr = HIDDEN;
-    // this.items.gsb = HIDDEN;
-    this.items.gsy = HIDDEN;
-    this.items.sku = HIDDEN;
-
-    this.items.gzv = HIDDEN;
-    this.items.glw = HIDDEN;
-    this.items.glg = HIDDEN;
-    this.items.glr = HIDDEN;
-    this.items.glb = HIDDEN;
-    this.items.gly = HIDDEN;
-    this.items.skl = HIDDEN;
-
-    this.items.gpv = HIDDEN;
-    this.items.gpw = HIDDEN;
-    this.items.gpg = HIDDEN;
-    this.items.gpr = HIDDEN;
-    this.items.gpb = HIDDEN;
-    this.items.gpy = HIDDEN;
-    this.items.skz = HIDDEN;
-  },
   
   //=================//
   //   Quest Items   //
   //=================//
   customizeQuestItems(setting) {
     const highlight = `${RED}${PATTERN3}${GOLD}`;
-    const padding = '' + ' '.repeat(5);
+    const padding = STRING_EMPTY + SINGLE_SPACE.repeat(5);
     const prefix = `${highlight}${padding}`;
     const suffix = `${padding}${highlight}`;
 
@@ -805,10 +990,10 @@ const customItems = {
       case "all": // highlight all
         highlightQuestItems(prefix, suffix);
         highlightCube(prefix, suffix);
-        break;
+        return;
       case "xhc": // exclude cube
         highlightQuestItems(prefix, suffix);
-        break;
+        return;
       case "custom": // [CSTM-QST1]
         // Act 1
         this.items.leg = `Wirt's Leg`;           // Wirt's Leg
@@ -848,7 +1033,7 @@ const customItems = {
         this.items.KhalimFlail            = `Khalim's Flail`;      // Khalim's Flail
         this.items.SuperKhalimFlail       = `Khalim's Will`;       // Khalim's Will
         this.items["Hell Forge Hammer"]   = `Hell Forge Hammer`;   // Hell Forge Hammer
-        break;
+        return;
     }
   },
 
@@ -922,21 +1107,21 @@ const customItems = {
         this.highlightOrgans(prefix3, suffix3);
         this.highlightAnniTorch(prefix4, suffix4);
         this.highlightStandardOfHeroes(prefix5, suffix5);
-        break;
+        return;
       case "xat": // exclude Annihilus and Hellfire Torch from highlighting
         this.highlightEssences(prefix1, suffix1);
         this.highlightToken(prefix2, suffix2);
         this.highlightKeys(prefix2, suffix2);
         this.highlightOrgans(prefix3, suffix3);
         this.highlightStandardOfHeroes(prefix5, suffix5);
-        break;
+        return;
       case "xsh": // exclude Standard of Heroes from highlighting
         this.highlightEssences(prefix1, suffix1);
         this.highlightToken(prefix2, suffix2);
         this.highlightKeys(prefix2, suffix2);
         this.highlightOrgans(prefix3, suffix3);
         this.highlightAnniTorch(prefix4, suffix4);
-        break;
+        return;
       case "hsh": // hide Standard of Heroes
         this.highlightEssences(prefix1, suffix1);
         this.highlightToken(prefix2, suffix2);
@@ -944,13 +1129,13 @@ const customItems = {
         this.highlightOrgans(prefix3, suffix3);
         this.highlightAnniTorch(prefix4, suffix4);
         this.items.std = HIDDEN;
-        break;
+        return;
       case "xat-xsh": // exclude Annihilus, Hellfire Torch and Standard of Heroes from highlighting
         this.highlightEssences(prefix1, suffix1);
         this.highlightToken(prefix2, suffix2);
         this.highlightKeys(prefix2, suffix2);
         this.highlightOrgans(prefix3, suffix3);
-        break;
+        return;
       case "xat-hsh": // exclude Annihilus and Hellfire Torch from highlighting, hide Standard of Heroes
         this.highlightEssences(prefix1, suffix1);
         this.highlightToken(prefix2, suffix2);
@@ -960,7 +1145,7 @@ const customItems = {
         break;
       case "custom": // [CSTM-END]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        break;
+        return;
     }
   },
   
@@ -1035,7 +1220,7 @@ const customUi = {
   customizeQuestItems(setting) {
     // Section specific to Book of Skill and Potion of Life, as these items are in a different file.
     const highlight = `${RED}${PATTERN3}${GOLD}`;
-    const padding = '' + ' '.repeat(5);
+    const padding = STRING_EMPTY + SINGLE_SPACE.repeat(5);
     const prefix = `${highlight}${padding}`;
     const suffix = `${padding}${highlight}`;
 
@@ -1045,12 +1230,12 @@ const customUi = {
       case "all": // highlight all
         this.items.ass = `${prefix}Book of Skill${suffix}`;  // Book of Skill
         this.items.xyz = `${prefix}Potion of Life${suffix}`; // Potion of Life
-        break;
+        return;
       case "custom": // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.ass = `Book of Skill`;  // Book of Skill
         this.items.xyz = `Potion of Life`; // Potion of Life
-        break;
+        return;
     }
   },
 };
@@ -1132,13 +1317,13 @@ function applyTooltipMods() {
     case "all":
       profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, config.TooltipOpacity]; // [R, G, B, opacity]
       profileHD.TooltipFontSize = config.TooltipSize;
-      break;
+      return;
     case "opacity":
       profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, config.TooltipOpacity]; // [R, G, B, opacity]
-      break;
+      return;
     case "size":
       profileHD.TooltipFontSize = config.TooltipSize;
-      break;
+      return;
   }
   
   D2RMM.writeJson(profileHdPath, profileHD);
