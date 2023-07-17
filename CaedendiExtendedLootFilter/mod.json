@@ -11,12 +11,12 @@
       "name": "Show Item Level",
       "description": "Show the item level between brackets in the item's tooltip.",
       "defaultValue": "true"
-    }, 
+    },
     {
       "id": "ilvlfix",
       "type": "checkbox",
       "name": "Fix Item Level indentation",
-      "description": "Fix the mismatched indentation when Show Item Level is enabled",
+      "description": "Fix the mismatched indentation on highlighted items when Show Item Level is enabled.",
       "defaultValue": "true"
     }, 
     {
@@ -52,6 +52,13 @@
         { "label": "Custom", "value": "custom" }
       ]
     },
+    {
+      "id": "RunesAlternateColor",
+      "type": "checkbox",
+      "name": "Runes: Alternate Color",
+      "description": "Changes the color scheme of runes from the default orange to purple (both with red highlights if set).",
+      "defaultValue": "false"
+    }, 
     {
       "id": "HealingPotions",
       "type": "select",
@@ -136,28 +143,14 @@
       ]
     },
     {
-      "id": "RingsAmulets",
-      "type": "select",
-      "name": "Rings & Amulets (bugged)",
-      "description": "Customize Rings & Amulets. KNOWN BUG: turns crafted/rare/set/unique Rings/Amulets blue. [CSTM-RAM]",
-      "defaultValue": "none",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "highlight" },
-        { "label": "Custom", "value": "custom" }
-      ]
-    },
-    {
       "id": "Jewels",
       "type": "select",
-      "name": "Jewels (bugged)",
-      "description": "Customize Jewels. KNOWN BUG: turns rare Jewels and Facets blue. [CSTM-JWL]",
+      "name": "Jewels",
+      "description": "Customize Jewels. Currently Facets only; I have not yet found a way to customize Magic/Rare Jewels without making all Jewels blue. [CSTM-JWL]",
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "all" },
-        { "label": "Exclude facets", "value": "jewel" },
-        { "label": "Only facets", "value": "facet" },
+        { "label": "Facets", "value": "facets" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -165,11 +158,13 @@
       "id": "Charms",
       "type": "select",
       "name": "Charms (bugged)",
-      "description": "Customize Small, Large and Grand Charms. KNOWN BUG: turns unique Charms blue. [CSTM-CHA]",
+      "description": "Customize Magic, Unique and Sunder Charms. Highlight unidentified Charms by coloring \"Charm\" red. The Small/Large/Grand-part stays in its original color to distinguish rarity.",
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "highlight" },
+        { "label": "Highlight", "value": "all" },
+        { "label": "Highlight Unique Charms only", "value": "uniq" },
+        { "label": "Highlight unidentified Charms only", "value": "unid" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -205,16 +200,13 @@
       "id": "Endgame",
       "type": "select",
       "name": "Endgame Items",
-      "description": "Highlight Essences, Tokens, Keys, Organs and optionally Annihilus, Torch and the Standard of Heroes. [CSTM-END]",
+      "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. For Annihilus and Hellfire Torch, see Charms. [CSTM-END]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },
-        { "label": "Highlight, exclude Annihilus & Torch", "value": "xat" },
         { "label": "Highlight, exclude Standard of Heroes", "value": "xsh" },
         { "label": "Highlight, hide Standard of Heroes", "value": "hsh" },
-        { "label": "Highlight, exclude Annihilus, Torch & Standard of Heroes", "value": "xat-xsh" },
-        { "label": "Highlight, exclude Annihilus & Torch, hide Standard of Heroes", "value": "xat-hsh" },
         { "label": "Custom", "value": "custom" }
       ]
     },
