@@ -78,15 +78,16 @@ const NO_PADDING = EMPTY_STRING;
 const SMALL_O = 'o';
 const PLUS = '+';
 const ZERO = '0';
-const PATTERN_2 = HIGHLIGHT.repeat(2);
-const PATTERN_5 = HIGHLIGHT.repeat(5);
-const PATTERN_10 = HIGHLIGHT.repeat(10);
-const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)} ${HIGHLIGHT.repeat(10)} ${HIGHLIGHT.repeat(10)}`;
 
 const PADDING_1 = SINGLE_SPACE;
 const PADDING_2 = SINGLE_SPACE.repeat(2);
 const PADDING_3 = SINGLE_SPACE.repeat(3);
 const PADDING_5 = SINGLE_SPACE.repeat(5);
+
+const PATTERN_2 = HIGHLIGHT.repeat(2);
+const PATTERN_5 = HIGHLIGHT.repeat(5);
+const PATTERN_10 = HIGHLIGHT.repeat(10);
+const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}`;
 
 
 //========================//
@@ -149,9 +150,9 @@ const GEM_PADDING = PADDING_1;
 
 // facets
 const FACET_COLOR_NAME = GOLD;
-const FACET_PATTERN = PATTERN_2;
-const FACET_PADDING_1 = PADDING_2; // padding between individual patterns
-const FACET_PADDING_2 = PADDING_5; // padding between name and FACET_PREFIX/FACET_SUFFIX
+const FACET_PATTERN = PATTERN_5;
+const FACET_PADDING_1 = PADDING_1; // padding between individual patterns
+const FACET_PADDING_2 = PADDING_3; // padding between name and FACET_PREFIX/FACET_SUFFIX
 const FACET_PREFIX = `${RED}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${GREEN}${FACET_PATTERN}${FACET_COLOR_NAME}${FACET_PADDING_2}`;
 const FACET_SUFFIX = `${FACET_PADDING_2}${GREEN}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${RED}${FACET_PATTERN}${FACET_COLOR_NAME}`;
 
@@ -164,16 +165,16 @@ const QUEST_PREFIX = UNIQUE_PREFIX;
 const QUEST_SUFFIX = UNIQUE_SUFFIX;
 
 // endgame
-const ESSENCE_PREFIX = `${RED}${PATTERN2}${ORANGE}${PADDING2}`;
-const ESSENCE_SUFFIX = `${PADDING2}${RED}${PATTERN2}${ORANGE}`;
-const KEY_PREFIX = `${RED}${PATTERN3}${ORANGE}${PADDING3}`;
-const KEY_SUFFIX = `${PADDING3}${RED}${PATTERN3}${ORANGE}`;
+const ESSENCE_PREFIX = `${RED}${PATTERN_5}${ORANGE}${PADDING_3}`;
+const ESSENCE_SUFFIX = `${PADDING_3}${RED}${PATTERN_5}${ORANGE}`;
+const KEY_PREFIX = `${RED}${PATTERN_10}${ORANGE}${PADDING_5}`;
+const KEY_SUFFIX = `${PADDING_5}${RED}${PATTERN_10}${ORANGE}`;
 const TOKEN_PREFIX = KEY_PREFIX;
 const TOKEN_SUFFIX = KEY_SUFFIX;
-const ORGAN_PREFIX = `${RED}${PATTERN4}${ORANGE}${PADDING3}`;
-const ORGAN_SUFFIX = `${PADDING3}${RED}${PATTERN4}${ORANGE}`;
-const STANDARD_OF_HEROES_PREFIX = `${RED}${PATTERN2}${GOLD}${PADDING2}`;
-const STANDARD_OF_HEROES_SUFFIX = `${PADDING2}${RED}${PATTERN2}${GOLD}`;
+const ORGAN_PREFIX = `${RED}${PATTERN_3x10}${ORANGE}${PADDING_5}`;
+const ORGAN_SUFFIX = `${PADDING_5}${RED}${PATTERN_3x10}${ORANGE}`;
+const STANDARD_OF_HEROES_PREFIX = `${RED}${PATTERN_5}${GOLD}${PADDING_3}`;
+const STANDARD_OF_HEROES_SUFFIX = `${PADDING_3}${RED}${PATTERN_5}${GOLD}`;
 
 
 //======================//
@@ -396,11 +397,11 @@ const customRunes = {
     const hasHighlightedNumber = (settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(runeNumber));
     const hasHighlightedName = (settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(runeNumber));
 
-    const highlightColor1 = hasHighlighting ? this.RUNES_COLOR_HIGHLIGHT : NO_COLOR;
-    const highlightColor2 = highlightColor1;
-    const nameColor1 = hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_DEFAULT;
-    const nameColor2 = nameColor1;
-    const numberColor = hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_DEFAULT;
+    var highlightColor1 = hasHighlighting ? RUNES_COLOR_HIGHLIGHT : NO_COLOR;
+    var highlightColor2 = highlightColor1;
+    var nameColor1 = hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_DEFAULT;
+    var nameColor2 = nameColor1;
+    var numberColor = hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_DEFAULT;
     const padding = this.determinePadding(number);
     const highlightPattern = this.determinePattern(number);
 
@@ -1015,9 +1016,9 @@ const customItems = {
   },
 
   highlightUnidentifiedCharms() {
-    this.items.cm1 = `Small ${RED}Charm`;
-    this.items.cm2 = `Large ${RED}Charm`;
-    this.items.cm3 = `Grand ${RED}Charm`;
+    this.items.cm1 = `Small ${RED}Charm${BLUE}`;
+    this.items.cm2 = `Large ${RED}Charm${BLUE}`;
+    this.items.cm3 = `Grand ${RED}Charm${BLUE}`;
   },
 
   highlightUniqueCharms(){
