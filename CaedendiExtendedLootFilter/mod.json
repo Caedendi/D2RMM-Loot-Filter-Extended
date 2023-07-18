@@ -10,14 +10,14 @@
       "type": "checkbox",
       "name": "Show Item Level",
       "description": "Show the item level between brackets in the item's tooltip.",
-      "defaultValue": "true"
+      "defaultValue": true
     },
     {
       "id": "ilvlfix",
       "type": "checkbox",
       "name": "Fix Item Level indentation",
       "description": "Fix the mismatched indentation on highlighted items when Show Item Level is enabled.",
-      "defaultValue": "true"
+      "defaultValue": true
     }, 
     {
       "id": "Gold",
@@ -55,9 +55,9 @@
     {
       "id": "RunesAlternateColor",
       "type": "checkbox",
-      "name": "Runes: Alternate Color",
-      "description": "Changes the color scheme of runes from the default orange to purple (both with red highlights if set).",
-      "defaultValue": "false"
+      "name": "Runes: Alternate Color Scheme",
+      "description": "Changes the name/highlight color scheme for runes from the default orange/red to purple/red.",
+      "defaultValue": false
     }, 
     {
       "id": "HealingPotions",
@@ -147,19 +147,19 @@
       "type": "select",
       "name": "Jewels",
       "description": "Customize Jewels. Currently Facets only; I have not yet found a way to customize Magic/Rare Jewels without making all Jewels blue. [CSTM-JWL]",
-      "defaultValue": "none",
+      "defaultValue": "facet",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Facets", "value": "facets" },
+        { "label": "Facets", "value": "facet" },
         { "label": "Custom", "value": "custom" }
       ]
     },
     {
       "id": "Charms",
       "type": "select",
-      "name": "Charms (bugged)",
-      "description": "Customize Magic, Unique and Sunder Charms. Highlight unidentified Charms by coloring \"Charm\" red. The Small/Large/Grand-part stays in its original color to distinguish rarity.",
-      "defaultValue": "none",
+      "name": "Charms",
+      "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
+      "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },
@@ -187,8 +187,8 @@
       "id": "Quest",
       "type": "select",
       "name": "Quest Items",
-      "description": "Highlight quest items. Highlighting the Horadric Cube slightly messes up the Cube menu's header and some NPC dialog where it is mentioned. [CSTM-QST1] and [CSTM-QST2]",
-      "defaultValue": "all",
+      "description": "Highlight quest items. Highlighting the Horadric Cube slightly messes up the Cube window's header and some NPC dialog where it is mentioned, but is otherwise harmless. [CSTM-QST1] and [CSTM-QST2]",
+      "defaultValue": "xhc",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },

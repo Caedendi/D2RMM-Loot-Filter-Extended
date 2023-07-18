@@ -971,7 +971,7 @@ const customItems = {
     switch (setting) {
       case "none":
         return;
-      case "facets":
+      case "facet":
         this.items["Rainbow Facet"] = `${FACET_PREFIX}Rainbow Facet${FACET_SUFFIX}`;
         return;
       case "custom": // [CSTM-JWL]
