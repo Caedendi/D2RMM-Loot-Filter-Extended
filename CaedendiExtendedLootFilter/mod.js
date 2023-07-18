@@ -66,10 +66,11 @@ const PURPLE = `${COLOR_PREFIX};`;
 
 // Naming
 const EMPTY_STRING = '';
+const SINGLE_SPACE = ' ';
+
 const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
 const HIGHLIGHT = config.HighlightCharacter !== 'custom' ? config.HighlightCharacter : '*'; // [CSTM-HLC] replace * with desired custom character
 
-const SINGLE_SPACE = ' ';
 const NO_COLOR = EMPTY_STRING;
 const NO_PATTERN = EMPTY_STRING;
 const NO_PADDING = EMPTY_STRING;
@@ -97,7 +98,7 @@ const PADDING_5 = SINGLE_SPACE.repeat(5);
 // - low-mid: 16-20 (Io-Lem)
 // - mid: 21-15 (Pul-Gul)
 // - high: 26-33 (Vex-Zod)
-// I have however switched Ral (8), Hel (15) and Lem (20) around because of their usefulness.
+// I have however moved Ral (8), Hel (15) and Lem (20) a tier up because of their usefulness.
 
 const RUNES_TIER_LOW = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14]; // El, Eld, Tir, Nef, Eth, Ith, Tal, Ort, Thul, Amn, Sol, Shael, Dol
 const RUNES_TIER_LOWMID = [8, 15, 16, 17, 18, 19];                   // Ral, Hel, Io, Lum, Ko, Fal
@@ -161,6 +162,18 @@ const CHARMS_UNIQUE_SUFFIX = UNIQUE_SUFFIX;
 // quest
 const QUEST_PREFIX = UNIQUE_PREFIX;
 const QUEST_SUFFIX = UNIQUE_SUFFIX;
+
+// endgame
+const ESSENCE_PREFIX = `${RED}${PATTERN2}${ORANGE}${PADDING2}`;
+const ESSENCE_SUFFIX = `${PADDING2}${RED}${PATTERN2}${ORANGE}`;
+const KEY_PREFIX = `${RED}${PATTERN3}${ORANGE}${PADDING3}`;
+const KEY_SUFFIX = `${PADDING3}${RED}${PATTERN3}${ORANGE}`;
+const TOKEN_PREFIX = KEY_PREFIX;
+const TOKEN_SUFFIX = KEY_SUFFIX;
+const ORGAN_PREFIX = `${RED}${PATTERN4}${ORANGE}${PADDING3}`;
+const ORGAN_SUFFIX = `${PADDING3}${RED}${PATTERN4}${ORANGE}`;
+const STANDARD_OF_HEROES_PREFIX = `${RED}${PATTERN2}${GOLD}${PADDING2}`;
+const STANDARD_OF_HEROES_SUFFIX = `${PADDING2}${RED}${PATTERN2}${GOLD}`;
 
 
 //======================//
@@ -294,7 +307,7 @@ const customRunes = {
       case "hls-raf": // Add highlights + remove affix
       case "nrs": // Add rune numbers
       case "hls": // Add highlights
-        generateRuneNames(setting, RUNES_SETTINGS_AFFIX, RUNES_SETTINGS_NUMBER, RUNES_SETTINGS_HIGHLIGHT);
+        this.generateRuneNames(setting, RUNES_SETTINGS_AFFIX, RUNES_SETTINGS_NUMBER, RUNES_SETTINGS_HIGHLIGHT);
         return;
 
       // case "all": // Add rune numbers + highlights + remove affix
@@ -532,91 +545,76 @@ const customItems = {
   items: {},
 
   customizeHealingPotions(setting) {
-    const healingPatternColor = RED;
-    const manaPatternColor = BLUE;
+    const colorHealing = RED;
+    const colorMana = BLUE;
+    const colorRejuv = PURPLE;
+    const colorName = WHITE;
     const pattern = PLUS;
-    const nameColor = WHITE;
-
-    const hp1 = `${RED}+${WHITE}HP1`;    // Minor Healing Potion
-    const hp2 = `${RED}+${WHITE}HP2`;    // Light Healing Potion
-    const hp3 = `${RED}+${WHITE}HP3`;    // Healing Potion
-    const hp4 = `${RED}+${WHITE}HP4`;    // Greater Healing Potion
-    const hp5 = `${RED}+${WHITE}HP5`;    // Super Healing Potion
-    
-    const mp1 = `${BLUE}+${WHITE}MP1`;   // Minor Mana Potion
-    const mp2 = `${BLUE}+${WHITE}MP2`;   // Light Mana Potion
-    const mp3 = `${BLUE}+${WHITE}MP3`;   // Mana Potion
-    const mp4 = `${BLUE}+${WHITE}MP4`;   // Greater Mana Potion
-    const mp5 = `${BLUE}+${WHITE}MP5`;   // Super Mana Potion
-    
-    const rvs = `${PURPLE}+${WHITE}RPS`; // Rejuvenation Potion
-    // const rvl = `${PURPLE}+${WHITE}RPF`; // Full Rejuvenation Potion
-
-    
-    const rvl = generateSingleHighlight(PURPLE, PLUS, NO_PADDING, WHITE, 'RPF');  // Full Rejuvenation Potion
+    const padding = NO_PADDING;
 
     // apply above custom names, unless set to "none" or "custom"
     switch (setting) {
       case "none":
         return;
       case "all": // show all
-        this.items.hp1 = hp1;
-        this.items.hp2 = hp2;
-        this.items.hp3 = hp3;
-        this.items.hp4 = hp4;
-        this.items.hp5 = hp5;
-        this.items.mp1 = mp1;
-        this.items.mp2 = mp2;
-        this.items.mp3 = mp3;
-        this.items.mp4 = mp4;
-        this.items.mp5 = mp5;
-        this.items.rvs = rvs;
-        this.items.rvl = rvl;
+        this.highlightLv123Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightLv4Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightLv5Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightSmallRejuvs(colorRejuv, colorName, pattern, padding);
+        this.highlightFullRejuvs(colorRejuv, colorName, pattern, padding);
         return;
       case "hide3": // hide lvl 1-3 potions, show small/full rejuvs
         this.hideHealingPotions();
-        this.items.hp4 = hp4;
-        this.items.mp4 = mp4;
-        this.items.hp5 = hp5;
-        this.items.mp5 = mp5;
-        this.items.rvs = rvs;
-        this.items.rvl = rvl;
+        this.highlightLv4Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightLv5Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightSmallRejuvs(colorRejuv, colorName, pattern, padding);
+        this.highlightFullRejuvs(colorRejuv, colorName, pattern, padding);
         return;
       case "hide4": // hide lvl 1-4 potions, show small/full rejuvs
         this.hideHealingPotions();
-        this.items.hp5 = hp5;
-        this.items.mp5 = mp5;
-        this.items.rvs = rvs;
-        this.items.rvl = rvl;
+        this.highlightLv5Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightSmallRejuvs(colorRejuv, colorName, pattern, padding);
+        this.highlightFullRejuvs(colorRejuv, colorName, pattern, padding);
         return;
       case "hide3sr": // hide lvl 1-3 potions and small rejuvs, show full rejuvs
         this.hideHealingPotions();
-        this.items.hp4 = hp4;
-        this.items.mp4 = mp4;
-        this.items.hp5 = hp5;
-        this.items.mp5 = mp5;
-        this.items.rvl = rvl;
+        this.highlightLv4Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightLv5Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightFullRejuvs(colorRejuv, colorName, pattern, padding);
         return;
       case "hide4sr": // hide lvl 1-4 potions and small rejuvs, show full rejuvs
         this.hideHealingPotions();
-        this.items.hp5 = hp5;
-        this.items.mp5 = mp5;
-        this.items.rvl = rvl;
+        this.highlightLv5Potions(colorHealing, colorMana, colorName, pattern, padding);
+        this.highlightFullRejuvs(colorRejuv, colorName, pattern, padding);
         return;
       case "sfr": // hide all healing/mana potions, show only small/full rejuvs
         this.hideHealingPotions();
-        this.items.rvs = rvs;
-        this.items.rvl = rvl;
+        this.highlightSmallRejuvs(colorRejuv, colorName, pattern, padding);
+        this.highlightFullRejuvs(colorRejuv, colorName, pattern, padding);
         return;
       case "fr": // hide all healing/mana potions and small rejuvs, show only full rejuvs
         this.hideHealingPotions();
-        this.items.rvl = rvl;
+        this.highlightFullRejuvs(colorRejuv, colorName, pattern, padding);
         return;
       case "hide": // hide all healing potions
         this.hideHealingPotions();
         return;
       case "custom": // [CSTM-HPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.hp1 = `${RED}+${WHITE}HP1`;    // Minor Healing Potion
+        this.items.hp2 = `${RED}+${WHITE}HP2`;    // Light Healing Potion
+        this.items.hp3 = `${RED}+${WHITE}HP3`;    // Healing Potion
+        this.items.hp4 = `${RED}+${WHITE}HP4`;    // Greater Healing Potion
+        this.items.hp5 = `${RED}+${WHITE}HP5`;    // Super Healing Potion
+        
+        this.items.mp1 = `${BLUE}+${WHITE}MP1`;   // Minor Mana Potion
+        this.items.mp2 = `${BLUE}+${WHITE}MP2`;   // Light Mana Potion
+        this.items.mp3 = `${BLUE}+${WHITE}MP3`;   // Mana Potion
+        this.items.mp4 = `${BLUE}+${WHITE}MP4`;   // Greater Mana Potion
+        this.items.mp5 = `${BLUE}+${WHITE}MP5`;   // Super Mana Potion
+        
+        this.items.rvs = `${PURPLE}+${WHITE}RPS`; // Rejuvenation Potion
+        this.items.rvl = `${PURPLE}+${WHITE}RPF`; // Full Rejuvenation Potion
         return;
     }
   },
@@ -638,19 +636,46 @@ const customItems = {
     this.items.rvl = HIDDEN; // Full Rejuvenation Potion
   },
 
-  customizeBuffPotions(setting) {
-    const yps = `${GREEN}+${WHITE}Antidote`; // Antidote Potion
-    const wms = `${GREEN}+${WHITE}Thawing`;  // Thawing Potion
-    const vps = `${GREEN}+${WHITE}Stamina`;  // Stamina Potion
+  highlightLv123Potions(colorHealing, colorMana, colorName, pattern, padding) {
+    this.items.hp1 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP1'); // Minor Healing Potion
+    this.items.hp2 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP2'); // Light Healing Potion
+    this.items.hp3 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP3'); // Healing Potion
+    this.items.mp1 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP1');    // Minor Mana Potion
+    this.items.mp2 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP2');    // Light Mana Potion
+    this.items.mp3 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP3');    // Mana Potion
+  },
 
-    // apply above custom names, unless set to "none"
+  highlightLv4Potions(colorHealing, colorMana, colorName, pattern, padding) {
+    this.items.hp4 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP4'); // Greater Healing Potion
+    this.items.mp4 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP4');    // Greater Mana Potion
+  },
+
+  highlightLv5Potions(colorHealing, colorMana, colorName, pattern, padding) {
+    this.items.hp5 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP5'); // Super Healing Potion
+    this.items.mp5 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP5');    // Super Mana Potion
+  },
+
+  highlightSmallRejuvs(colorRejuv, colorName, pattern, padding) {
+    this.items.rvs = generateSingleHighlight(colorRejuv, pattern, padding, colorName, 'RPS');   // Rejuvenation Potion
+  },
+
+  highlightFullRejuvs(colorRejuv, colorName, pattern, padding) {
+    this.items.rvs = generateSingleHighlight(colorRejuv, pattern, padding, colorName, 'RPF');   // Full Rejuvenation Potion
+  },
+
+  customizeBuffPotions(setting) {
+    const colorHighlight = GREEN;
+    const colorName = WHITE;
+    const pattern = PLUS;
+    const padding = NO_PADDING;
+
     switch (setting) {
       case "none": // no change
         return;
       case "all": // show all
-        this.items.yps = yps;
-        this.items.wms = wms;
-        this.items.vps = vps;
+        this.items.yps = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Antidote'); // Antidote Potion
+        this.items.wms = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Thawing');  // Thawing Potion
+        this.items.vps = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Stamina');  // Stamina Potion
         return;
       case "hide": // hide all
         this.items.yps = HIDDEN;
@@ -664,25 +689,22 @@ const customItems = {
   },
 
   customizeThrowingPotions(setting) {
-    const gpl = `${DARKGREEN1}o${WHITE} Gas 1`; // Strangling Gas Potion
-    const gpm = `${DARKGREEN1}o${WHITE} Gas 2`; // Choking Gas Potion
-    const gps = `${DARKGREEN1}o${WHITE} Gas 3`; // Rancid Gas Potion
-    
-    const opl = `${ORANGE}o${WHITE} Oil 1`; // Fulminating Potion
-    const opm = `${ORANGE}o${WHITE} Oil 2`; // Exploding Potion
-    const ops = `${ORANGE}o${WHITE} Oil 3`; // Oil Potion
+    const colorGas = DARKGREEN1;
+    const colorOil = ORANGE;
+    const colorName = WHITE;
+    const pattern = SMALL_O;
+    const padding = NO_PADDING;
 
-    // apply above custom names, unless set to "none"
     switch (setting) {
       case "none": // no change
         return;
       case "all": // show all
-        this.items.gpl = gpl;
-        this.items.gpm = gpm;
-        this.items.gps = gps;
-        this.items.opl = opl;
-        this.items.opm = opm;
-        this.items.ops = ops;
+        this.items.gpl = generateSingleHighlight(colorGas, pattern, padding, colorName, 'Gas 1'); // Strangling Gas Potion
+        this.items.gpm = generateSingleHighlight(colorGas, pattern, padding, colorName, 'Gas 2'); // Choking Gas Potion
+        this.items.gps = generateSingleHighlight(colorGas, pattern, padding, colorName, 'Gas 3'); // Rancid Gas Potion
+        this.items.opl = generateSingleHighlight(colorOil, pattern, padding, colorName, 'Oil 1'); // Fulminating Potion
+        this.items.opm = generateSingleHighlight(colorOil, pattern, padding, colorName, 'Oil 2'); // Exploding Potion
+        this.items.ops = generateSingleHighlight(colorOil, pattern, padding, colorName, 'Oil 3'); // Oil Potion
         return;
       case "hide": // hide all
         this.items.gpl = HIDDEN;
@@ -694,48 +716,71 @@ const customItems = {
         return;
       case "custom": // [CSTM-TPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.gpl = 'Strangling Gas Potion';
+        this.items.gpm = 'Choking Gas Potion';
+        this.items.gps = 'Rancid Gas Potion';
+        this.items.opl = 'Fulminating Potion';
+        this.items.opm = 'Exploding Potion';
+        this.items.ops = 'Oil Potion';
         return;
     }
   },
 
   customizeScrollsAndTomes(setting) {
-    const tbk = `${DARKGREEN1}+${WHITE}TP Tome`; // Tome of Town Portal
-    const ibk = `${DARKGREEN1}+${WHITE}ID Tome`; // Tome of Identify
-    const tsc = `${GREEN}+${WHITE}TP`;           // Scroll of Town Portal
-    const isc = `${GREEN}+${WHITE}ID`;           // Scroll of Identify
+    const colorScroll = GREEN;
+    const colorTome = DARKGREEN1;
+    const colorName = WHITE;
+    const pattern = PLUS;
+    const padding = NO_PADDING;
 
-    // apply above custom names, unless set to "none"
     switch (setting) {
       case "none": // no change
         return;
       case "all": // show all
-        this.items.tbk = tbk;
-        this.items.ibk = ibk;
-        this.items.tsc = tsc;
-        this.items.isc = isc;
+        this.highlightScrolls(colorScroll, colorName, pattern, padding);
+        this.highlightTomes(colorTome, colorName, pattern, padding);
         return;
       case "hide": // hide scrolls, show books
-        this.items.tbk = tbk;
-        this.items.ibk = ibk;
-        this.items.tsc = HIDDEN; // Scroll of Town Portal
-        this.items.isc = HIDDEN; // Scroll of Identify
+        this.highlightTomes(colorTome, colorName, pattern, padding);
+        this.hideScrolls();
         return;
       case "custom": // [CSTM-SCR]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.tsc = 'Scroll of Town Portal';
+        this.items.isc = 'Scroll of Identify';
+        this.items.tbk = 'Tome of Town Portal';
+        this.items.ibk = 'Tome of Identify';
         return;
     }
   },
 
+  hideScrolls() {
+    this.items.tsc = HIDDEN; // Scroll of Town Portal
+    this.items.isc = HIDDEN; // Scroll of Identify
+  },
+
+  highlightScrolls(colorHighlight, colorName, pattern, padding) {
+    this.items.tbk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'TP'); // Scroll of Town Portal
+    this.items.ibk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'ID'); // Scroll of Identify
+  },
+
+  highlightTomes(colorHighlight, colorName, pattern, padding) {
+    this.items.tbk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'TP Tome'); // Tome of Town Portal
+    this.items.ibk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'ID Tome'); // Tome of Identify
+  },
+
   customizeArrowsAndBolts(setting) {
-    const aqv = `${GRAY}o${WHITE} Arrows`;
-    const cqv = `${GRAY}o${WHITE} Bolts`;
+    const colorHighlight = GRAY;
+    const colorName = WHITE;
+    const pattern = SMALL_O;
+    const padding = NO_PADDING;
 
     switch (setting) {
       case "none":
         return;
       case "highlight":
-        this.items.aqv = aqv;
-        this.items.cqv = cqv;
+        this.items.aqv = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Arrows');
+        this.items.cqv = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Bolts');
         return;
       case "hide":
         this.items.aqv = HIDDEN; // Arrow Quiver
@@ -770,30 +815,22 @@ const customItems = {
       case "none":
         return;
       case "all": // show all
-        this.highlightChipped();
-        this.highlightFlawed();
-        this.highlightRegular();
+        this.highlightChippedFlawedRegular();
         this.highlightFlawless();
         this.highlightPerfect();
         return;
       case "flawless": // hide chipped/flawed/regular gems
-        this.hideChipped();
-        this.hideFlawed();
-        this.hideRegular();
+        this.hideChippedFlawedRegular();
         this.highlightFlawless();
         this.highlightPerfect();
         return;
       case "perfect": // hide chipped/flawed/regular/flawless gems
-        this.hideChipped();
-        this.hideFlawed();
-        this.hideRegular();
+        this.hideChippedFlawedRegular();
         this.hideFlawless();
         this.highlightPerfect();
         return;
       case "hide": // hide chipped/flawed/regular/flawless gems
-        this.hideChipped();
-        this.hideFlawed();
-        this.hideRegular();
+        this.hideChippedFlawedRegular();
         this.hideFlawless();
         this.hidePerfect();
         return;
@@ -841,7 +878,7 @@ const customItems = {
     }
   },
 
-  hideChipped() {
+  hideChippedFlawedRegular() {
     this.items.gcv = HIDDEN;
     this.items.gcw = HIDDEN;
     this.items.gcg = HIDDEN;
@@ -849,9 +886,6 @@ const customItems = {
     this.items.gcb = HIDDEN;
     this.items.gcy = HIDDEN;
     this.items.skc = HIDDEN;
-  },
-
-  hideFlawed() {
     this.items.gfv = HIDDEN;
     this.items.gfw = HIDDEN;
     this.items.gfg = HIDDEN;
@@ -859,9 +893,6 @@ const customItems = {
     this.items.gfb = HIDDEN;
     this.items.gfy = HIDDEN;
     this.items.skf = HIDDEN;
-  },
-
-  hideRegular() {
     this.items.gsv = HIDDEN;
     // For Ruby, Sapphire, Emerald and Diamond, see the "Affixes" section above.
     // For some reason, the devs put these gems in another JSON file.
@@ -889,7 +920,7 @@ const customItems = {
     this.items.skz = HIDDEN;
   },
 
-  highlightChipped() {
+  highlightChippedFlawedRegular() {
     this.items.gcv = generateSingleHighlight(PURPLE, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_CHIPPED); // Chipped Amethyst
     this.items.gcw = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_CHIPPED); // Chipped Diamond
     this.items.gcg = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_CHIPPED); // Chipped Emerald
@@ -897,9 +928,6 @@ const customItems = {
     this.items.gcb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_CHIPPED); // Chipped Sapphire
     this.items.gcy = generateSingleHighlight(YELLOW, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_CHIPPED); // Chipped Topaz
     this.items.skc = generateSingleHighlight(GRAY,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_CHIPPED); // Chipped Skull
-  },
-
-  highlightFlawed() {
     this.items.gfv = generateSingleHighlight(PURPLE, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Amethyst
     this.items.gfw = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Diamond
     this.items.gfg = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Emerald
@@ -907,9 +935,6 @@ const customItems = {
     this.items.gfb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Sapphire
     this.items.gfy = generateSingleHighlight(YELLOW, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Topaz
     this.items.skf = generateSingleHighlight(GRAY,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Skull
-  },
-
-  highlightRegular() {
     this.items.gsv = generateSingleHighlight(PURPLE, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, 'Amethyst'); // Amethyst
     // For Ruby, Sapphire, Emerald and Diamond, see the "Affixes" section above.
     // For some reason, the devs put these gems in another JSON file.
@@ -939,7 +964,7 @@ const customItems = {
   
 
   //=============//
-  //   Jewelry   //   BUGGED: crafted/rare/set/unique jewelry and charms show up as blue
+  //   Jewelry   //
   //=============//
   customizeJewels(setting) {
     switch (setting) {
@@ -950,8 +975,8 @@ const customItems = {
         return;
       case "custom": // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items.jew = `Jewel`; // changes all magic, rare and unique jewels
         this.items["Rainbow Facet"] = `Rainbow Facet`;
+        this.items.jew = `Jewel`; // includes magic, rare and unique jewels
         return;
     }
   },
@@ -996,9 +1021,9 @@ const customItems = {
   },
 
   highlightUniqueCharms(){
-    this.items["Gheed's Fortune"] = `${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Annihilus"]       = `${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Hellfire Torch"]  = `${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Gheed's Fortune"]      = `${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Annihilus"]            = `${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Hellfire Torch"]       = `${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
   },
 
   highlightSunderCharms(){
@@ -1019,11 +1044,11 @@ const customItems = {
       case "none": // no change
         return;
       case "all": // highlight all
-        highlightQuestItems();
-        highlightCube();
+        this.highlightQuestItems();
+        this.highlightCube();
         return;
       case "xhc": // exclude cube
-        highlightQuestItems();
+        this.highlightQuestItems();
         return;
       case "custom": // [CSTM-QST1]
         // Act 1
@@ -1109,44 +1134,34 @@ const customItems = {
   },
 
   highlightCube() {
-    this.items.box = `${QUEST_PREFIX}Horadric Cube${QUEST_SUFFIX}`;      // Horadric Cube
+    this.items.box = `${QUEST_PREFIX}Horadric Cube${QUEST_SUFFIX}`; // Horadric Cube
   },
     
   //===================================================//
   //   Endgame: Pandemonium Event, Tokens & Essences   //
   //===================================================//
   customizeEndgameItems(setting){
-    const prefix1 = `${RED}${PATTERN2}${ORANGE}${PADDING2}`; // essences
-    const prefix2 = `${RED}${PATTERN3}${ORANGE}${PADDING3}`; // token, keys
-    const prefix3 = `${RED}${PATTERN4}${ORANGE}${PADDING3}`; // pandemonium organs
-    const prefix4 = `${RED}${PATTERN2}${GOLD}${PADDING2}`;   // standard of heroes
-
-    const suffix1 = `${PADDING2}${RED}${PATTERN2}${ORANGE}`; // essences
-    const suffix2 = `${PADDING3}${RED}${PATTERN3}${ORANGE}`; // token, keys
-    const suffix3 = `${PADDING3}${RED}${PATTERN4}${ORANGE}`; // pandemonium organs
-    const suffix4 = `${PADDING2}${RED}${PATTERN2}${GOLD}`;   // standard of heroes
-
     switch(setting) {
       case "none": // no change
         return;
       case "all": // highlight all
-        this.highlightEssences(prefix1, suffix1);
-        this.highlightToken(prefix2, suffix2);
-        this.highlightKeys(prefix2, suffix2);
-        this.highlightOrgans(prefix3, suffix3);
-        this.highlightStandardOfHeroes(prefix4, suffix4);
+        this.highlightEssences(ESSENCE_PREFIX, ESSENCE_SUFFIX);
+        this.highlightToken(TOKEN_PREFIX, TOKEN_SUFFIX);
+        this.highlightKeys(KEY_PREFIX, KEY_SUFFIX);
+        this.highlightOrgans(ORGAN_PREFIX, ORGAN_SUFFIX);
+        this.highlightStandardOfHeroes(STANDARD_OF_HEROES_PREFIX, STANDARD_OF_HEROES_SUFFIX);
         return;
       case "xsh": // exclude Standard of Heroes from highlighting
-        this.highlightEssences(prefix1, suffix1);
-        this.highlightToken(prefix2, suffix2);
-        this.highlightKeys(prefix2, suffix2);
-        this.highlightOrgans(prefix3, suffix3);
+        this.highlightEssences(ESSENCE_PREFIX, ESSENCE_SUFFIX);
+        this.highlightToken(TOKEN_PREFIX, TOKEN_SUFFIX);
+        this.highlightKeys(KEY_PREFIX, KEY_SUFFIX);
+        this.highlightOrgans(ORGAN_PREFIX, ORGAN_SUFFIX);
         return;
       case "hsh": // hide Standard of Heroes
-        this.highlightEssences(prefix1, suffix1);
-        this.highlightToken(prefix2, suffix2);
-        this.highlightKeys(prefix2, suffix2);
-        this.highlightOrgans(prefix3, suffix3);
+        this.highlightEssences(ESSENCE_PREFIX, ESSENCE_SUFFIX);
+        this.highlightToken(TOKEN_PREFIX, TOKEN_SUFFIX);
+        this.highlightKeys(KEY_PREFIX, KEY_SUFFIX);
+        this.highlightOrgans(ORGAN_PREFIX, ORGAN_SUFFIX);
         this.items.std = HIDDEN;
         return;
       case "custom": // [CSTM-END]
@@ -1194,13 +1209,8 @@ const customItems = {
     this.items.std = `${prefix}Standard of Heroes${suffix}`; // Standard of Heroes
   },
 
-
-
   // fixIlvlIndent(){
-
   // },
-
-
 };
 
 const customUi = {

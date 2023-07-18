@@ -3,7 +3,7 @@
   "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
   "author": "Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
-  "version": "1.0.0",
+  "version": "2.0.0b",
   "config": [
     {
       "id": "ilvl",
@@ -147,7 +147,7 @@
       "type": "select",
       "name": "Jewels",
       "description": "Customize Jewels. Currently Facets only; I have not yet found a way to customize Magic/Rare Jewels without making all Jewels blue. [CSTM-JWL]",
-      "defaultValue": "none",
+      "defaultValue": "facets",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Facets", "value": "facets" },
@@ -159,7 +159,7 @@
       "type": "select",
       "name": "Charms (bugged)",
       "description": "Customize Magic, Unique and Sunder Charms. Highlight unidentified Charms by coloring \"Charm\" red. The Small/Large/Grand-part stays in its original color to distinguish rarity.",
-      "defaultValue": "none",
+      "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },
