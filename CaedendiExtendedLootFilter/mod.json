@@ -6,20 +6,6 @@
   "version": "2.0.0b",
   "config": [
     {
-      "id": "ilvl",
-      "type": "checkbox",
-      "name": "Show Item Level",
-      "description": "Show the item level between brackets in the item's tooltip.",
-      "defaultValue": true
-    },
-    {
-      "id": "ilvlfix",
-      "type": "checkbox",
-      "name": "Fix Item Level indentation",
-      "description": "Fix the mismatched indentation on highlighted items when Show Item Level is enabled.",
-      "defaultValue": true
-    }, 
-    {
       "id": "Gold",
       "type": "select",
       "name": "Gold",
@@ -35,10 +21,45 @@
       ]
     }, 
     {
+      "id": "ShouldShowItemLevel",
+      "type": "checkbox",
+      "name": "Show Item Level",
+      "description": "Show the item level between brackets in the item's tooltip. Works the same as olegbl's mod.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldFixItemLevelIndentation",
+      "type": "checkbox",
+      "name": "Fix Item Level Indentation",
+      "description": "Fix the mismatched indentation on highlighted items when Show Item Level is enabled.",
+      "defaultValue": true
+    }, 
+    {
+      "id": "ShouldFixItemLevelIndentation",
+      "type": "checkbox",
+      "name": "Fix Item Level Indentation",
+      "description": "Fix the mismatched indentation on highlighted items when Show Item Level is enabled.",
+      "defaultValue": true
+    }, 
+    {
+      "id": "ShouldShortenQualityPrefixes",
+      "type": "checkbox",
+      "name": "Short Quality Prefixes",
+      "description": "Replaces the 'Superior' and 'Inferior' prefixes on equipment with + (plus) and - (minus/dash). Works the same as Jobus' mod.",
+      "defaultValue": true
+    }, 
+    {
+      "id": "ShouldColorInferiorItems",
+      "type": "checkbox",
+      "name": "Gray Inferior Items",
+      "description": "Color inferior items gray.",
+      "defaultValue": false
+    }, 
+    {
       "id": "Runes",
       "type": "select",
       "name": "Runes",
-      "description": "Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel, Ko and up). [CSTM-RUN]",
+      "description": "Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel, Io and up). [CSTM-RUN]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -53,10 +74,10 @@
       ]
     },
     {
-      "id": "RunesAlternateColor",
+      "id": "UseRunesAlternateColors",
       "type": "checkbox",
       "name": "Runes: Alternate Color Scheme",
-      "description": "Changes the name/highlight color scheme for runes from the default orange/red to purple/red.",
+      "description": "Changes the color scheme for runes from the default orange (turning (partly) red for higher tiers) to name/number always being purple. Both have the same red highlighting.",
       "defaultValue": false
     }, 
     {
@@ -146,11 +167,11 @@
       "id": "Jewels",
       "type": "select",
       "name": "Jewels",
-      "description": "Customize Jewels. Currently Facets only; I have not yet found a way to customize Magic/Rare Jewels without making all Jewels blue. [CSTM-JWL]",
+      "description": "Customize Jewels. Currently identified Facets only; I have not yet found a good way to customize unidentified/Magic/Rare Jewels. [CSTM-JWL]",
       "defaultValue": "facet",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Facets", "value": "facet" },
+        { "label": "Highlight Facets", "value": "facet" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -164,7 +185,7 @@
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },
         { "label": "Highlight Unique Charms only", "value": "uniq" },
-        { "label": "Highlight unidentified Charms only", "value": "unid" },
+        { "label": "Highlight non-Unique Charms only", "value": "unid" },
         { "label": "Custom", "value": "custom" }
       ]
     },

@@ -198,7 +198,7 @@ In addition to this, I recommend you also use the following D2RMM mods:
 
 - [ ] Fix known bugs:
   - [x] Regular Ruby, Sapphire, Emerald and Diamond not working
-  - [ ] Certain quest items not working:
+  - [ ] Certain quest item customization not working:
     - [ ] Book of Skill
     - [ ] Staff of Kings
     - [ ] Amulet of the Viper

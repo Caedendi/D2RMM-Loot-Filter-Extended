@@ -12,12 +12,16 @@
 //===============//
 
 // File paths
-const profileHdPath = 'global\\ui\\layouts\\_profilehd.json';
+const FILE_PROFILE_HD_PATH = 'global\\ui\\layouts\\_profilehd.json';
 
-const itemNameAffixesPath = 'local\\lng\\strings\\item-nameaffixes.json';
-const itemNamesPath = 'local\\lng\\strings\\item-names.json';
-const itemRunesPath = 'local\\lng\\strings\\item-runes.json';
-const uiPath = 'local\\lng\\strings\\ui.json';
+const FILE_ITEM_NAMEAFFIXES_PATH = 'local\\lng\\strings\\item-nameaffixes.json';
+const FILE_ITEM_NAMES_PATH = 'local\\lng\\strings\\item-names.json';
+const FILE_ITEM_RUNES_PATH = 'local\\lng\\strings\\item-runes.json';
+const FILE_UI_PATH = 'local\\lng\\strings\\ui.json';
+
+const FILE_WEAPONS_PATH = 'global\\excel\\weapons.txt';
+const FILE_ARMOR_PATH = 'global\\excel\\armor.txt';
+const FILE_MISC_PATH = 'global\\excel\\misc.txt';
 
 // Color
 const COLOR_PREFIX = 'ÿc';
@@ -106,9 +110,10 @@ const RUNES_TIER_LOWMID = [8, 15, 16, 17, 18, 19];                   // Ral, Hel
 const RUNES_TIER_MID = [20, 21, 22, 23, 24, 25];                     // Lem, Pul, Um, Mal, Ist, Gul
 const RUNES_TIER_HIGH = [26, 27, 28, 29, 30, 31, 32, 33];            // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
 
-const RUNES_COLOR_DEFAULT = !config.RunesAlternateColor ? `${ORANGE1}` : `${PURPLE}`; 
+const RUNES_COLOR_NAME = !config.UseRunesAlternateColors ? `${ORANGE1}` : `${PURPLE}`; 
+const RUNES_COLOR_IS_ALTERNATE = config.UseRunesAlternateColors;
 const RUNES_COLOR_HIGHLIGHT = `${RED}`;
-// const RUNES_COLOR_HIGHLIGHT = !config.RunesAlternateColor ? `${RED}` : `${RED}`;
+// const RUNES_COLOR_HIGHLIGHT = !config.UseRunesAlternateColors ? `${RED}` : `${RED}`;
 
 // set the highlight patterns for each rune tier
 const RUNES_PATTERN_LOW = NO_PATTERN;    // 
@@ -294,53 +299,22 @@ const customRunes = {
   },
   
   customizeRunes(setting) {
-    const RUNES_SETTINGS_AFFIX = ["nrs-hls", "nrs", "hls"];                // settings that add the " Rune" affix
+    const RUNES_SETTINGS_AFFIX = ["nrs-hls", "nrs", "hls"];                // settings that keep the " Rune" affix
     const RUNES_SETTINGS_NUMBER = ["all", "nrs-raf", "nrs-hls", "nrs"];    // settings that add rune numbers
     const RUNES_SETTINGS_HIGHLIGHT = ["all", "nrs-hls", "hls-raf", "hls"]; // settings that add highlighting
 
     switch (setting) {
-      case "none":
-      case "raf": // Remove affix
+      case "none":    // should not be reached
+      case "raf":     // Remove affix
         return;
-      case "all": // Add rune numbers + highlights + remove affix
+      case "all":     // Add rune numbers + highlights + remove affix
       case "nrs-raf": // Add rune numbers + remove affix
       case "nrs-hls": // Add rune numbers + highlights
       case "hls-raf": // Add highlights + remove affix
-      case "nrs": // Add rune numbers
-      case "hls": // Add highlights
+      case "nrs":     // Add rune numbers
+      case "hls":     // Add highlights
         this.generateRuneNames(setting, RUNES_SETTINGS_AFFIX, RUNES_SETTINGS_NUMBER, RUNES_SETTINGS_HIGHLIGHT);
         return;
-
-      // case "all": // Add rune numbers + highlights + remove affix
-      //   this.setColor(ORANGE1, RED, setting);
-      //   this.addRuneNumbers(ORANGE1, RED, setting);
-      //   this.addHighlighting()
-      //   break;
-      // case "nrs-raf": // Add rune numbers + remove affix
-      //   this.setColor(ORANGE1, ORANGE1, setting);
-      //   this.addRuneNumbers(ORANGE1, ORANGE1, setting);
-      //   break;
-      // case "nrs-hls": // Add rune numbers + highlights
-      //   this.addRuneAffix();
-      //   this.setColor(ORANGE1, RED, setting);
-      //   this.addRuneNumbers(ORANGE1, RED, setting); 
-      //   this.addHighlighting();
-      //   break;
-      // case "hls-raf": // Add highlights + remove affix
-      //   this.setColor(ORANGE1, RED, setting);
-      //   this.addHighlighting();
-      //   break;
-      // case "nrs": // Add rune numbers
-      //   this.addRuneAffix();
-      //   this.setColor(ORANGE1, ORANGE1, setting);
-      //   this.addRuneNumbers(ORANGE1, ORANGE1, setting);
-      //   break;
-      // case "hls": // Add highlights
-      //   this.addRuneAffix();
-      //   this.setColor(ORANGE1, RED, setting);
-      //   this.addHighlighting();
-      //   break;
-
       case "custom": // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.runes.r01 = `${ORANGE1}El (1)`;                                                        // El
@@ -376,7 +350,7 @@ const customRunes = {
         this.runes.r31 = `${RED}**********${ORANGE1}     Jah (31)     ${RED}**********${ORANGE1}`;  // Jah
         this.runes.r32 = `${RED}**********${ORANGE1}     Cham (32)     ${RED}**********${ORANGE1}`; // Cham
         // this.runes.r33 = `${RED}**********${ORANGE1}     Zod (33)     ${RED}**********${ORANGE1}`;  // Zod
-        // this.runes.r33 = `${RED}${HIGHLIGHT.repeat(10)}${PADDING3}${ORANGE1}Zod (33)${PADDING3}${RED}${HIGHLIGHT.repeat(10)}`;  // Zod
+        // this.runes.r33 = `${RED}${PATTERN_10}${PADDING_5}${ORANGE1}Zod (33)${PADDING_5}${RED}${PATTERN_10}`;  // Zod
         this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE1, 'Zod Rune (33)'); // Zod
         return;
     }
@@ -393,15 +367,15 @@ const customRunes = {
   generateRuneName(name, number, setting, settingsAffix, settingsNumbers, settingsHighlighting) {
     const hasAffix = settingsAffix.includes(setting);
     const hasNumber = settingsNumbers.includes(setting);
-    const hasHighlighting = (settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED.includes(runeNumber));
-    const hasHighlightedNumber = (settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(runeNumber));
-    const hasHighlightedName = (settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(runeNumber));
+    const hasHighlighting = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED.includes(number);
+    const hasHighlightedNumber = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(number) && !RUNES_COLOR_IS_ALTERNATE;
+    const hasHighlightedName = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(number) && !RUNES_COLOR_IS_ALTERNATE;
 
     var highlightColor1 = hasHighlighting ? RUNES_COLOR_HIGHLIGHT : NO_COLOR;
     var highlightColor2 = highlightColor1;
-    var nameColor1 = hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_DEFAULT;
+    var nameColor1 = hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME;
     var nameColor2 = nameColor1;
-    var numberColor = hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_DEFAULT;
+    var numberColor = hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME;
     const padding = this.determinePadding(number);
     const highlightPattern = this.determinePattern(number);
 
@@ -464,82 +438,6 @@ const customRunes = {
 
     return NO_PATTERN;
   },
-
-
-
-  /////////////////////////
-
-  /*
-
-  addRuneAffix() {
-    for (const rune in this.runes) {
-      this.runes[rune] = `${this.runes[rune]} Rune`;
-    }
-  },
-
-  // low no highlight default colors
-  // lowmid ***** padding3 default colors
-  // mid ********** padding5 orange name red numbers
-  // high 3x10 padding 5 red name red numbers
-
-  setNameColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor) {
-    var i = 1;
-    var color = STRING_EMPTY;
-    for (const rune in this.runes) {
-      color = this.selectColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, i);
-      this.runes[rune] = `${color}${this.runes[rune]}`;
-      i++;
-    }
-  },
-  
-  addRuneNumbers(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor) {
-    var i = 1;
-    var color = STRING_EMPTY;
-    for (const rune in this.runes) {
-      color = this.selectColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, i);
-      this.runes[rune] = `${this.runes[rune]} ${color}(${i})`;
-      i++;
-    }
-  },
-
-  selectColor(lowRuneColor, lowMidRuneColor, midRuneColor, highRuneColor, i) {
-    if (RUNES_TIER_LOW.includes(i)) {
-      return lowRuneColor;
-    }
-    else if (RUNES_TIER_LOWMID.includes(i)) {
-      return lowMidRuneColor;
-    }
-    else if (RUNES_TIER_MID.includes(i)) {
-      return midRuneColor;
-    }
-    else if (RUNES_TIER_HIGH.includes(i)) {
-      return highRuneColor;
-    }
-    return STRING_EMPTY;
-  },
-  
-  addHighlighting() {
-    var i = 1;
-    for (const rune in this.runes) {
-      if (this.lvl1Highlight.includes(i)) {
-        this.runes[rune] = this.generateHighlight(this.runes[rune], PATTERN2, RED, PADDING1);
-      }
-      else if (this.lvl2Highlight.includes(i)) {
-        this.runes[rune] = this.generateHighlight(this.runes[rune], PATTERN3, RED, PADDING2);
-      }
-      else if (this.lvl3Highlight.includes(i)) {
-        this.runes[rune] = this.generateHighlight(this.runes[rune], PATTERN4, RED, PADDING3);
-      }
-
-      i++;
-    }
-  },
-  
-  generateHighlight(rune, pattern, patternColor, padding) {
-    return `${patternColor}${pattern}${padding}${rune}${padding}${patternColor}${pattern}`;
-  }
-
-  */
 };
 
 const customItems = {
@@ -694,7 +592,7 @@ const customItems = {
     const colorOil = ORANGE;
     const colorName = WHITE;
     const pattern = SMALL_O;
-    const padding = NO_PADDING;
+    const padding = PADDING_1;
 
     switch (setting) {
       case "none": // no change
@@ -774,7 +672,7 @@ const customItems = {
     const colorHighlight = GRAY;
     const colorName = WHITE;
     const pattern = SMALL_O;
-    const padding = NO_PADDING;
+    const padding = PADDING_1;
 
     switch (setting) {
       case "none":
@@ -976,8 +874,8 @@ const customItems = {
         return;
       case "custom": // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items["Rainbow Facet"] = `Rainbow Facet`;
         this.items.jew = `Jewel`; // includes magic, rare and unique jewels
+        this.items["Rainbow Facet"] = `Rainbow Facet`;
         return;
     }
   },
@@ -1242,6 +1140,7 @@ const customUi = {
 //   Applying the magic   //
 //========================//
 function applyLootFilter() {
+  showItemLevel();
   applyCustomAffixes();
   applyCustomRuneNames();
   applyCustomItemNames();
@@ -1249,13 +1148,89 @@ function applyLootFilter() {
   applyTooltipMods();
 }
 
+function showItemLevel() {
+  if (!config.ShouldShowItemLevel) {
+    return;
+  }
+
+  const fileWeapons = D2RMM.readTsv(FILE_WEAPONS_PATH);
+  const fileArmor = D2RMM.readTsv(FILE_ARMOR_PATH);
+  const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
+
+  fileWeapons.rows.forEach((row) => {
+    if (row.type !== 'tpot') { // exclude throwing potions
+      row.ShowLevel = 1;
+    }
+  });
+  
+  fileArmor.rows.forEach((row) => {
+    row.ShowLevel = 1;
+  });
+  
+  fileMisc.rows.forEach((row) => {
+    if (['amu', 'rin'].indexOf(row.code) !== -1) {
+      row.ShowLevel = 1;
+    }
+    if (['cm1', 'cm2', 'cm3'].indexOf(row.code) !== -1) {
+      row.ShowLevel = 1;
+    }
+    if (['jew'].indexOf(row.code) !== -1) {
+      row.ShowLevel = 1;
+    }
+  });
+
+  D2RMM.writeTsv(FILE_WEAPONS_PATH, fileWeapons);
+  D2RMM.writeTsv(FILE_ARMOR_PATH, fileArmor);
+  D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
+}
+
+
+
+// TODO
+// TODO
+// TODO
+
+function shortenQualityPrefixes() {
+  const itemNames = D2RMM.readJson(FILE_ITEM_NAMEAFFIXES_PATH);
+  itemNames.forEach((item) => {
+    let newName = null;
+  
+    if (item.Key === 'Hiquality') {
+      newName = config.superiorPrefix;
+    }
+  
+    if (item.Key === 'Damaged' || item.Key === 'Cracked' || item.Key === 'Low Quality' || item.Key === 'Crude') {
+      if (config.grayInferior) {
+        newName = `ÿc5` + config.inferiorPrefix;
+      }
+      else {
+        newName = config.inferiorPrefix;
+      }
+    }
+  
+    if (newName != null) {
+      // update all localizations
+      for (const key in item) {
+        if (key !== 'id' && key !== 'Key') {
+          item[key] = newName;
+        }
+      }
+    }
+  });
+  D2RMM.writeJson(FILE_ITEM_NAMEAFFIXES_PATH, itemNames);
+}
+
+// TODO
+// TODO
+// TODO
+
 function applyCustomAffixes() {
   if (config.Gold == "none" && config.Gems == "none")
     return;
   
   customAffixes.customizeGold(config.Gold);
   customAffixes.customizeGems(config.Gems);
-  applyCustomNames(itemNameAffixesPath, customAffixes.items);
+  applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, customAffixes.items);
 }
 
 function applyCustomRuneNames() {
@@ -1263,7 +1238,7 @@ function applyCustomRuneNames() {
     return;
   
   customRunes.customizeRunes(config.Runes);
-  applyCustomNames(itemRunesPath, customRunes.runes);
+  applyCustomNames(FILE_ITEM_RUNES_PATH, customRunes.runes);
 }
 
 function applyCustomItemNames() {
@@ -1279,7 +1254,7 @@ function applyCustomItemNames() {
   customItems.customizeQuestItems(config.Quest);
   customItems.customizeEndgameItems(config.Endgame);
 
-  applyCustomNames(itemNamesPath, customItems.items);
+  applyCustomNames(FILE_ITEM_NAMES_PATH, customItems.items);
 }
 
 function applyCustomUiNames() {
@@ -1287,7 +1262,7 @@ function applyCustomUiNames() {
     return;
 
   customUi.customizeQuestItems(config.Quest);
-  applyCustomNames(uiPath, customUi.items);
+  applyCustomNames(FILE_UI_PATH, customUi.items);
 }
 
 function applyCustomNames(path, customNames) {
@@ -1308,7 +1283,7 @@ function applyTooltipMods() {
   if (config.Tooltip == "none")
     return
 
-  let profileHD = D2RMM.readJson(profileHdPath);
+  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
 
   switch (config.Tooltip) {
     case "all":
@@ -1323,7 +1298,7 @@ function applyTooltipMods() {
       return;
   }
   
-  D2RMM.writeJson(profileHdPath, profileHD);
+  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
   D2RMM.copyFile('hd', 'hd', true);
   // This simply copies the rune.json files instead of modifying each one with code which 
   // I am too dumb to understand how to do. It gets the job done, it may cause issues if 
