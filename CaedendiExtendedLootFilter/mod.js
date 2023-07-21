@@ -187,9 +187,9 @@ const STANDARD_OF_HEROES_SUFFIX = `${PADDING_3}${RED}${PATTERN_5}${GOLD}`;
 //   Parameters - Item Quality   //
 //===============================//
 
-const ITEM_QUALITY_NORMAL      = config.ItemQuality !== "custom" ? 'n' : "poep1"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-const ITEM_QUALITY_EXCEPTIONAL = config.ItemQuality !== "custom" ? 'x' : "poep2"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "poep3"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+const ITEM_QUALITY_NORMAL      = config.ItemQuality !== "custom" ? 'n' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+const ITEM_QUALITY_EXCEPTIONAL = config.ItemQuality !== "custom" ? 'x' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
 
 
 //======================//
