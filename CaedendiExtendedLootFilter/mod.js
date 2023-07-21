@@ -73,7 +73,7 @@ const EMPTY_STRING = '';
 const SINGLE_SPACE = ' ';
 
 const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
-const HIGHLIGHT = config.HighlightCharacter !== 'custom' ? config.HighlightCharacter : '*'; // [CSTM-HLC] replace * with desired custom character
+const HIGHLIGHT = config.HighlightCharacter !== 'custom' ? config.HighlightCharacter : '*'; // replace * with desired custom character [CSTM-HLC]
 
 const NO_COLOR = EMPTY_STRING;
 const NO_PATTERN = EMPTY_STRING;
@@ -81,6 +81,7 @@ const NO_PADDING = EMPTY_STRING;
 
 const SMALL_O = 'o';
 const PLUS = '+';
+const MINUS = '-';
 const ZERO = '0';
 
 const PADDING_1 = SINGLE_SPACE;
@@ -110,10 +111,10 @@ const RUNES_TIER_LOWMID = [8, 15, 16, 17, 18, 19];                   // Ral, Hel
 const RUNES_TIER_MID = [20, 21, 22, 23, 24, 25];                     // Lem, Pul, Um, Mal, Ist, Gul
 const RUNES_TIER_HIGH = [26, 27, 28, 29, 30, 31, 32, 33];            // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
 
-const RUNES_COLOR_NAME = !config.UseRunesAlternateColors ? `${ORANGE1}` : `${PURPLE}`; 
-const RUNES_COLOR_IS_ALTERNATE = config.UseRunesAlternateColors;
+const RUNES_COLOR_NAME = !config.ShouldUseAlternateColorsForRunes ? `${ORANGE1}` : `${PURPLE}`; 
+const RUNES_COLOR_IS_ALTERNATE = config.ShouldUseAlternateColorsForRunes;
 const RUNES_COLOR_HIGHLIGHT = `${RED}`;
-// const RUNES_COLOR_HIGHLIGHT = !config.UseRunesAlternateColors ? `${RED}` : `${RED}`;
+// const RUNES_COLOR_HIGHLIGHT = !config.ShouldUseAlternateColorsForRunes ? `${RED}` : `${RED}`;
 
 // set the highlight patterns for each rune tier
 const RUNES_PATTERN_LOW = NO_PATTERN;    // 
@@ -182,6 +183,15 @@ const STANDARD_OF_HEROES_PREFIX = `${RED}${PATTERN_5}${GOLD}${PADDING_3}`;
 const STANDARD_OF_HEROES_SUFFIX = `${PADDING_3}${RED}${PATTERN_5}${GOLD}`;
 
 
+//===============================//
+//   Parameters - Item Quality   //
+//===============================//
+
+const ITEM_QUALITY_NORMAL      = config.ItemQuality !== "custom" ? 'n' : "poep1"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+const ITEM_QUALITY_EXCEPTIONAL = config.ItemQuality !== "custom" ? 'x' : "poep2"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "poep3"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+
+
 //======================//
 //   Global Functions   //
 //======================//
@@ -221,6 +231,33 @@ const customAffixes = {
       case "custom": // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.gld = `Gold`;
+        return;
+    }
+  },
+  
+  shortenSupInferiorPrefixes(setting) {
+    var color = (setting === "color") ? GRAY : NO_COLOR;
+    var superior = `${color}${PLUS}`;
+    var inferior = `${color}${MINUS}`;
+
+    switch (setting) {
+      case "none":
+        return;
+      case "short": // Enable
+      case "color":   // Enable, gray Inferior items
+        this.items["Hiquality"] = superior;
+        this.items["Damaged"] = inferior;
+        this.items["Cracked"] = inferior;
+        this.items["Low Quality"] = inferior;
+        this.items["Crude"] = inferior;
+        return;
+      case "custom": // [CSTM-SPIF]
+        // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items["Hiquality"] = `Superior`;
+        this.items["Damaged"] = `Damaged`;
+        this.items["Cracked"] = `Cracked`;
+        this.items["Low Quality"] = `Low Quality`;
+        this.items["Crude"] = `Crude`;
         return;
     }
   },
@@ -384,7 +421,7 @@ const customRunes = {
     }
 
     // remove duplicate color codes where necessary
-    if (hasHighlighting && nameColor2 == highlightColor2) {
+    if (hasHighlighting && nameColor2 === highlightColor2) {
       nameColor2 = NO_COLOR;
     }
     if (hasHighlighting && ((hasNumber && highlightColor2 === numberColor) || (!hasNumber && highlightColor2 === nameColor1))) {
@@ -1140,101 +1177,28 @@ const customUi = {
 //   Applying the magic   //
 //========================//
 function applyLootFilter() {
-  showItemLevel();
   applyCustomAffixes();
   applyCustomRuneNames();
   applyCustomItemNames();
   applyCustomUiNames();
+  showItemLevel();
+  showItemQuality();
   applyTooltipMods();
 }
 
-function showItemLevel() {
-  if (!config.ShouldShowItemLevel) {
+function applyCustomAffixes() {
+  if (config.Gold === "none" && config.Gems === "none" && config.ShortSupInferiorPrefixes === "none") {
     return;
   }
-
-  const fileWeapons = D2RMM.readTsv(FILE_WEAPONS_PATH);
-  const fileArmor = D2RMM.readTsv(FILE_ARMOR_PATH);
-  const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
-
-  fileWeapons.rows.forEach((row) => {
-    if (row.type !== 'tpot') { // exclude throwing potions
-      row.ShowLevel = 1;
-    }
-  });
   
-  fileArmor.rows.forEach((row) => {
-    row.ShowLevel = 1;
-  });
-  
-  fileMisc.rows.forEach((row) => {
-    if (['amu', 'rin'].indexOf(row.code) !== -1) {
-      row.ShowLevel = 1;
-    }
-    if (['cm1', 'cm2', 'cm3'].indexOf(row.code) !== -1) {
-      row.ShowLevel = 1;
-    }
-    if (['jew'].indexOf(row.code) !== -1) {
-      row.ShowLevel = 1;
-    }
-  });
-
-  D2RMM.writeTsv(FILE_WEAPONS_PATH, fileWeapons);
-  D2RMM.writeTsv(FILE_ARMOR_PATH, fileArmor);
-  D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
-}
-
-
-
-// TODO
-// TODO
-// TODO
-
-function shortenQualityPrefixes() {
-  const itemNames = D2RMM.readJson(FILE_ITEM_NAMEAFFIXES_PATH);
-  itemNames.forEach((item) => {
-    let newName = null;
-  
-    if (item.Key === 'Hiquality') {
-      newName = config.superiorPrefix;
-    }
-  
-    if (item.Key === 'Damaged' || item.Key === 'Cracked' || item.Key === 'Low Quality' || item.Key === 'Crude') {
-      if (config.grayInferior) {
-        newName = `ÿc5` + config.inferiorPrefix;
-      }
-      else {
-        newName = config.inferiorPrefix;
-      }
-    }
-  
-    if (newName != null) {
-      // update all localizations
-      for (const key in item) {
-        if (key !== 'id' && key !== 'Key') {
-          item[key] = newName;
-        }
-      }
-    }
-  });
-  D2RMM.writeJson(FILE_ITEM_NAMEAFFIXES_PATH, itemNames);
-}
-
-// TODO
-// TODO
-// TODO
-
-function applyCustomAffixes() {
-  if (config.Gold == "none" && config.Gems == "none")
-    return;
-  
+  customAffixes.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes);
   customAffixes.customizeGold(config.Gold);
   customAffixes.customizeGems(config.Gems);
   applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, customAffixes.items);
 }
 
 function applyCustomRuneNames() {
-  if (config.Runes == "none")
+  if (config.Runes === "none")
     return;
   
   customRunes.customizeRunes(config.Runes);
@@ -1258,7 +1222,7 @@ function applyCustomItemNames() {
 }
 
 function applyCustomUiNames() {
-  if (config.Quest == "none")
+  if (config.Quest === "none")
     return;
 
   customUi.customizeQuestItems(config.Quest);
@@ -1279,8 +1243,99 @@ function applyCustomNames(path, customNames) {
   D2RMM.writeJson(path, file); // overwrite existing file with new file
 }
 
+function showItemLevel() {
+  if (!(config.ItemLevel === "show" || config.ItemLevel === "fix")) {
+    return;
+  }
+
+  const fileWeapons = D2RMM.readTsv(FILE_WEAPONS_PATH);
+  const fileArmor = D2RMM.readTsv(FILE_ARMOR_PATH);
+  const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
+
+  fileWeapons.rows.forEach((row) => {
+    if (row.type === 'tpot') { // exclude throwing potions
+      return;
+    }
+    row.ShowLevel = 1;
+  });
+  
+  fileArmor.rows.forEach((row) => {
+    row.ShowLevel = 1;
+  });
+  
+  fileMisc.rows.forEach((row) => {
+    if (['amu', 'rin'].indexOf(row.code) !== -1) { // amulets & rings
+      row.ShowLevel = 1;
+      return;
+    }
+    if (['cm1', 'cm2', 'cm3'].indexOf(row.code) !== -1) { // small, large and grand charms
+      row.ShowLevel = 1;
+      return;
+    }
+    if (['jew'].indexOf(row.code) !== -1) { // jewels
+      row.ShowLevel = 1;
+      return;
+    }
+  });
+
+  D2RMM.writeTsv(FILE_WEAPONS_PATH, fileWeapons);
+  D2RMM.writeTsv(FILE_ARMOR_PATH, fileArmor);
+  D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
+}
+
+function showItemQuality() {
+  if (config.ItemQuality === "none") {
+    return;
+  }
+
+  const fileWeapons = D2RMM.readTsv(FILE_WEAPONS_PATH);
+  const fileArmor = D2RMM.readTsv(FILE_ARMOR_PATH);
+  const fileItemNames = D2RMM.readJson(FILE_ITEM_NAMES_PATH);
+
+  const fileWeaponsWithQuality = fileWeapons.rows.filter(row => row.ubercode && row.ultracode);
+  const fileArmorsWithQuality = fileArmor.rows.filter(row => row.ubercode && row.ultracode);
+
+  addEquipmentQuality(fileWeaponsWithQuality, fileItemNames, config.ItemQuality);
+  addEquipmentQuality(fileArmorsWithQuality, fileItemNames, config.ItemQuality);
+
+  D2RMM.writeJson(FILE_ITEM_NAMES_PATH, fileItemNames);
+}
+
+function addEquipmentQuality(equipment, itemNames, setting) {
+  equipment.forEach(item => {
+    var quality = (item.code === item.ultracode ? ITEM_QUALITY_ELITE : (item.code === item.ubercode ? ITEM_QUALITY_EXCEPTIONAL : ITEM_QUALITY_NORMAL));
+
+    const index = itemNames.findIndex((x) => x.Key === item.code);
+    if (index < 0) {
+      return;
+    }
+    
+    for (const key in itemNames[index]) {
+      if (key !== 'id' && key !== 'Key') {
+        switch (setting) {
+          case "suf-par":
+            itemNames[index][key] = `${itemNames[index][key]} (${quality})`;
+            continue;
+          case "suf-bts":
+            itemNames[index][key] = `${itemNames[index][key]} [${quality}]`;
+            continue;
+          case "pre-par":
+            itemNames[index][key] = `(${quality}) ${itemNames[index][key]}`;
+            continue;
+          case "pre-bts":
+            itemNames[index][key] = `[${quality}] ${itemNames[index][key]}`;
+            continue;
+          case "custom":
+            itemNames[index][key] = `${itemNames[index][key]} (${quality})`; // to set custom quality indicator, see [CSTM-QLTY]
+            continue;
+        }
+      }
+    }
+  })
+}
+
 function applyTooltipMods() {
-  if (config.Tooltip == "none")
+  if (config.Tooltip === "none")
     return
 
   let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
