@@ -190,7 +190,7 @@
       "id": "Quest",
       "type": "select",
       "name": "Quest Items",
-      "description": "Highlight quest items. Highlighting the Horadric Cube slightly messes up the Cube window's header and some NPC dialog where it is mentioned, but is otherwise harmless. [CSTM-QST1] and [CSTM-QST2]",
+      "description": "Highlight Quest Items. Exclude the Horadric Cube to fix messing up the Cube window's title and some NPC dialog where it is mentioned. [CSTM-QST1] and [CSTM-QST2]",
       "defaultValue": "xhc",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -260,9 +260,43 @@
       ]
     },
     {
-      "id": "ModSettingsSection",
+      "id": "LightPillarsSection",
       "type": "section",
-      "name": "Mod Settings",
+      "name": "Light Pillars",
+      "defaultExpanded": false
+    },
+    {
+      "id": "ShouldAddLightPillarRunes",
+      "type": "checkbox",
+      "name": "Runes",
+      "description": "Shine a Light Pillar on Runes on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarGemsJewels",
+      "type": "checkbox",
+      "name": "Gems & Jewels",
+      "description": "Shine a Light Pillar on Gems on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarCharms",
+      "type": "checkbox",
+      "name": "Charms",
+      "description": "Shine a Light Pillar on Charms on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarKeys",
+      "type": "checkbox",
+      "name": "Keys",
+      "description": "Shine a Light Pillar on Keys of Terror/Hate/Destruction on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "MiscSection",
+      "type": "section",
+      "name": "Misc",
       "defaultExpanded": false
     },
     {
@@ -301,6 +335,7 @@
         { "label": "~ (tilde)", "value": "~" },
         { "label": "! (exclamation mark)", "value": "!" },
         { "label": "@ (at)", "value": "@" },
+        { "label": "# (number/pound/hash)", "value": "#" },
         { "label": "$ (dollar)", "value": "$" },
         { "label": "% (percent)", "value": "%" },
         { "label": "& (ampersand)", "value": "&" },

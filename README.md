@@ -189,18 +189,23 @@ In addition to this, I recommend you also use the following D2RMM mods:
 
 ## Roadmap
 
-- [ ] Fix known bugs:
+- [x] Fix known bugs:
   - [x] Regular Ruby, Sapphire, Emerald and Diamond not working
   - [x] Certain quest item customization not working
   - [x] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
   - [x] Enabling jewelry turns crafted/rare/set/unique jewelry blue
-  - [ ] Item name alignment out of place for items with ilvls when [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) is enabled
-  - [ ] Redundant item color mod on tier 1 runes
+  - [x] Item name alignment out of place when [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) is enabled
+  - [x] Redundant item color mod on tier 1 runes
 - [ ] Add features:
   - [x] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by olegbl
   - [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214) by Jobus
   - [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351) by minseoksuh
-  - [ ] Integrate [LightPillar for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/197) by qhu91it
+  - [x] Integrate [LightPillar for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/197) by qhu91it
+    - [ ] Add support for Torch/Anni
+    - [ ] Add support for Rings/Amulets
+    - [ ] Add support for Essences & Token of Absolution
+    - [ ] Add support for Pandemonium Organs
+    - [ ] Add support for Quest Items?
   - [x] Rework alternate color schemes into optional drop-down setting
     - [x] Alternate color scheme for Facets (rainbow highlights)
     - [x] Alternate color scheme for Sunder Charms (element-colored highlights)

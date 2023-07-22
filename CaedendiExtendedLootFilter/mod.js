@@ -94,9 +94,16 @@ const PATTERN_5 = HIGHLIGHT.repeat(5);
 const PATTERN_10 = HIGHLIGHT.repeat(10);
 const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}`;
 
-const ILVL_INDENT_FIX_1 = SINGLE_SPACE.repeat(6); // for single digit ilvl items
-const ILVL_INDENT_FIX_2 = SINGLE_SPACE.repeat(6); // for double digit ilvl items
-const ILVL_INDENT_FIX_3 = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
+const SHOULD_FIX_ILVL_INDENT = config.ItemLevel === "fix";
+const ILVL_INDENT_FIX_SINGLE  = SINGLE_SPACE.repeat(4); // for single digit ilvl items
+const ILVL_INDENT_FIX_DOUBLE  = SINGLE_SPACE.repeat(6); // for double digit ilvl items
+const ILVL_INDENT_FIX_QUALITY = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
+
+const ILVL_INDENT_FIX_FACET = SHOULD_FIX_ILVL_INDENT ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
+const ILVL_INDENT_FIX_CHARMS = SHOULD_FIX_ILVL_INDENT ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
+const ILVL_INDENT_FIX_QUEST1 = ILVL_INDENT_FIX_SINGLE; // quest items with a single digit ilvl
+const ILVL_INDENT_FIX_QUEST2 = ILVL_INDENT_FIX_DOUBLE; // quest items with a double digit ilvl
+
 
 
 //==========================================//
@@ -205,6 +212,111 @@ const STANDARD_OF_HEROES_SUFFIX = `${PADDING_3}${RED}${PATTERN_5}${GOLD}`;
 const ITEM_QUALITY_NORMAL      = config.ItemQuality !== "custom" ? 'n' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
 const ITEM_QUALITY_EXCEPTIONAL = config.ItemQuality !== "custom" ? 'x' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
 const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+
+
+//================================//
+//   Parameters - Light Pillars   //
+//================================//
+
+const PATH_VFX_BASE = "data/hd/vfx/particles/overlays/";
+const PATH_HORADRIC_LIGHT = `${PATH_VFX_BASE}object/horadric_light/fx_horadric_light.particles`;
+const PATH_PALADIN_FANATICISM = `${PATH_VFX_BASE}paladin/aura_fanatic/aura_fanatic.particles`;
+const PATH_VALKYRIE_START = `${PATH_VFX_BASE}common/valkyriestart/valkriestart_overlay.particles`;
+
+const PATH_ITEMS_MISC = "hd\\items\\misc\\";
+const PATH_RUNE = `${PATH_ITEMS_MISC}rune\\`;
+const PATH_GEM = `${PATH_ITEMS_MISC}gem\\`;
+const PATH_CHARM = `${PATH_ITEMS_MISC}charm\\`;
+const PATH_KEY = `${PATH_ITEMS_MISC}key\\mephisto_key`;
+const PATH_EXTENSION_JSON = ".json";
+
+const DEFINITION_COMPONENT_TRANSFORM = "TransformDefinitionComponent";
+const DEFINITION_COMPONENT_VFX = "VfxDefinitionComponent";
+const NAME_TRANSFORM1 = "component_transform1";
+const NAME_VFX_STOLEN = "entity_vfx_filthyStolenMod";
+const NAME_VFX_ROOT = "entity_root_VfxDefinition";
+
+const TYPE_ENTITY = "Entity";
+const NAME_DROPLIGHT = "droplight";
+const NAME_ENTITY_ROOT = "entity_root";
+const ID_DROPLIGHT = 9999996974;
+const ID_ENTITY_ROOT = 1079187010;
+
+const RUNES = [
+  'el', 'eld', 'tir', 'nef', 'eth', 'ith', 'tal', 'ral', 'ort', 'thul', 'amn', 
+  'sol', 'shael', 'dol', 'hel', 'io','lum', 'ko', 'fal', 'lem', 'pul','um', 
+  'mal', 'ist', 'gul', 'vex', 'ohm', 'lo', 'sur', 'ber', 'jah', 'cham', 'zod',
+];
+
+const RUNES_SUFFIX = "_rune";
+
+const GEM_QUALITIES = ['chipped_', 'flawed_', '', 'flawless_', 'perfect_'];
+const GEM_TYPES = ['amethyst', 'diamond', 'emerald', 'ruby', 'saphire', 'topaz', 'skull'];
+
+const charms = ['charm_small', 'charm_medium', 'charm_large'];
+
+const LIGHT_COMPONENT = {
+  particle: {
+    path: PATH_HORADRIC_LIGHT,
+  },
+  entities: [
+    {
+      type: TYPE_ENTITY,
+      name: NAME_DROPLIGHT,
+      id: ID_DROPLIGHT,
+      components: [
+        {
+          type: DEFINITION_COMPONENT_TRANSFORM,
+          name: NAME_TRANSFORM1,
+          position: { x: 0.0, y: 0.0, z: 0.0 },
+          orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
+          scale: { x: 1.0, y: 1.0, z: 1.0 },
+          inheritOnlyPosition: false
+        },
+        {
+          type: DEFINITION_COMPONENT_VFX,
+          name: NAME_VFX_STOLEN,
+          filename: PATH_HORADRIC_LIGHT,
+          hardKillOnDestroy: false
+        }
+      ]
+    },
+    {
+      type: TYPE_ENTITY,
+      name: NAME_ENTITY_ROOT,
+      id: ID_ENTITY_ROOT,
+      components: [
+        {
+          type: DEFINITION_COMPONENT_VFX,
+          name: NAME_VFX_ROOT,
+          filename: PATH_PALADIN_FANATICISM,
+          hardKillOnDestroy: false
+        }
+      ]
+    },
+    {
+      type: TYPE_ENTITY,
+      name: NAME_DROPLIGHT,
+      id: ID_DROPLIGHT,
+      components: [
+        {
+          type: DEFINITION_COMPONENT_TRANSFORM,
+          name: NAME_TRANSFORM1,
+          position: { x: 0.0, y: 0.0, z: 0.0 },
+          orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
+          scale: { x: 1.0, y: 1.0, z: 1.0 },
+          inheritOnlyPosition: false
+        },
+        {
+          type: DEFINITION_COMPONENT_VFX,
+          name: NAME_VFX_STOLEN,
+          filename: PATH_VALKYRIE_START,
+          hardKillOnDestroy: false
+        }
+      ]
+    }
+  ]
+};
 
 
 //======================//
@@ -455,7 +567,7 @@ const customRunes = {
     }
 
     // remove duplicate color codes where necessary
-    if (hasHighlighting && nameColor2 === highlightColor2) {
+    if ((hasHighlighting && nameColor2 === highlightColor2) || !hasHighlighting) {
       nameColor2 = NO_COLOR;
     }
     if (hasHighlighting && ((hasNumber && highlightColor2 === numberColor) || (!hasNumber && highlightColor2 === nameColor1))) {
@@ -941,7 +1053,7 @@ const customItems = {
       case "none":
         return;
       case "facet":
-        this.items["Rainbow Facet"] = `${FACET_PREFIX}Rainbow Facet${FACET_SUFFIX}`;
+        this.items["Rainbow Facet"] = `${ILVL_INDENT_FIX_FACET}${FACET_PREFIX}Rainbow Facet${FACET_SUFFIX}`;
         return;
       case "custom": // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -991,27 +1103,27 @@ const customItems = {
   },
 
   highlightUniqueCharms(){
-    this.items["Gheed's Fortune"]      = `${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Annihilus"]            = `      ${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Hellfire Torch"]       = `      ${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Gheed's Fortune"]      = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Annihilus"]            = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Hellfire Torch"]       = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
   },
 
   highlightSunderCharms(){
     if (IS_ALTERNATE_SUNDER_HIGHLIGHT) {
-      this.items["Black Cleft"]          = generateDoubleHighlight(GRAY,    UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Black Cleft");
-      this.items["Bone Break"]           = generateDoubleHighlight(WHITE,   UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Bone Break");
-      this.items["Cold Rupture"]         = generateDoubleHighlight(SKYBLUE, UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Cold Rupture");
-      this.items["Crack of the Heavens"] = generateDoubleHighlight(YELLOW,  UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Crack of the Heavens");
-      this.items["Flame Rift"]           = generateDoubleHighlight(RED,     UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Flame Rift");
-      this.items["Rotting Fissure"]      = generateDoubleHighlight(GREEN,   UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Rotting Fissure");
+      this.items["Black Cleft"]          = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(GRAY,    UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Black Cleft");
+      this.items["Bone Break"]           = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(WHITE,   UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Bone Break");
+      this.items["Cold Rupture"]         = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(SKYBLUE, UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Cold Rupture");
+      this.items["Crack of the Heavens"] = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(YELLOW,  UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Crack of the Heavens");
+      this.items["Flame Rift"]           = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(RED,     UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Flame Rift");
+      this.items["Rotting Fissure"]      = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(GREEN,   UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Rotting Fissure");
     }
     else {
-      this.items["Black Cleft"]          = `${CHARMS_UNIQUE_PREFIX}Black Cleft${CHARMS_UNIQUE_SUFFIX}`;
-      this.items["Bone Break"]           = `${CHARMS_UNIQUE_PREFIX}Bone Break${CHARMS_UNIQUE_SUFFIX}`;
-      this.items["Cold Rupture"]         = `${CHARMS_UNIQUE_PREFIX}Cold Rupture${CHARMS_UNIQUE_SUFFIX}`;
-      this.items["Crack of the Heavens"] = `${CHARMS_UNIQUE_PREFIX}Crack of the Heavens${CHARMS_UNIQUE_SUFFIX}`;
-      this.items["Flame Rift"]           = `${CHARMS_UNIQUE_PREFIX}Flame Rift${CHARMS_UNIQUE_SUFFIX}`;
-      this.items["Rotting Fissure"]      = `${CHARMS_UNIQUE_PREFIX}Rotting Fissure${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Black Cleft"]          = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Black Cleft${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Bone Break"]           = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Bone Break${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Cold Rupture"]         = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Cold Rupture${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Crack of the Heavens"] = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Crack of the Heavens${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Flame Rift"]           = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Flame Rift${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Rotting Fissure"]      = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Rotting Fissure${CHARMS_UNIQUE_SUFFIX}`;
     } 
   },
   
@@ -1110,6 +1222,25 @@ const customItems = {
     this.items.KhalimFlail            = `${QUEST_PREFIX}Khalim's Flail${QUEST_SUFFIX}`;      // Khalim's Flail
     this.items.SuperKhalimFlail       = `${QUEST_PREFIX}Khalim's Will${QUEST_SUFFIX}`;       // Khalim's Will
     this.items["Hell Forge Hammer"]   = `${QUEST_PREFIX}Hell Forge Hammer${QUEST_SUFFIX}`;   // Hell Forge Hammer
+
+    if (SHOULD_FIX_ILVL_INDENT) {
+      // single digit ilvl
+      this.items.qf2 = ILVL_INDENT_FIX_QUEST1 + this.items.qf2;
+      this.items.SuperKhalimFlail = ILVL_INDENT_FIX_QUEST1 + this.items.SuperKhalimFlail;
+
+      // double digit ilvl
+      this.items.leg = ILVL_INDENT_FIX_QUEST2 + this.items.leg;
+      this.items.hdm = ILVL_INDENT_FIX_QUEST2 + this.items.hdm;
+      this.items.msf = ILVL_INDENT_FIX_QUEST2 + this.items.msf;
+      this.items.hst = ILVL_INDENT_FIX_QUEST2 + this.items.hst;
+      this.items.g33 = ILVL_INDENT_FIX_QUEST2 + this.items.g33;
+      this.items.qf1 = ILVL_INDENT_FIX_QUEST2 + this.items.qf1;
+      this.items.hfh = ILVL_INDENT_FIX_QUEST2 + this.items.hfh;
+      this.items["Staff of Kings"]    = ILVL_INDENT_FIX_QUEST2 + this.items["Staff of Kings"];
+      this.items["Horadric Staff"]    = ILVL_INDENT_FIX_QUEST2 + this.items["Horadric Staff"];
+      this.items.KhalimFlail          = ILVL_INDENT_FIX_QUEST2 + this.items.KhalimFlail;
+      this.items["Hell Forge Hammer"] = ILVL_INDENT_FIX_QUEST2 + this.items["Hell Forge Hammer"];
+    }
   },
 
   highlightCube() {
@@ -1187,9 +1318,6 @@ const customItems = {
   highlightStandardOfHeroes(prefix, suffix) {
     this.items.std = `${prefix}Standard of Heroes${suffix}`; // Standard of Heroes
   },
-
-  // fixIlvlIndent(){
-  // },
 };
 
 const customUi = {
@@ -1227,6 +1355,7 @@ function applyLootFilter() {
   showItemLevel();
   showItemQuality();
   applyTooltipMods();
+  addLightPillars();
 }
 
 function applyCustomAffixes() {
@@ -1401,6 +1530,50 @@ function applyTooltipMods() {
   // This simply copies the rune.json files instead of modifying each one with code which 
   // I am too dumb to understand how to do. It gets the job done, it may cause issues if 
   // you have other mods that modify the runes.json files.
+}
+
+function addLightPillars() {
+  if (config.ShouldAddLightPillarRunes) {
+    RUNES.forEach((rune) => {
+      pushLightPillarToPath(`${PATH_RUNE}${rune}${RUNES_SUFFIX}${PATH_EXTENSION_JSON}`);
+    });
+  }
+
+  if (config.ShouldAddLightPillarGemsJewels) {
+    GEM_QUALITIES.forEach((quality) => {
+      GEM_TYPES.forEach((type) => {
+        pushLightPillarToPath(`${PATH_GEM}${quality}${type}${PATH_EXTENSION_JSON}`);
+      });
+    });
+  }
+
+  if (config.ShouldAddLightPillarCharms) {
+    charms.forEach((charm) => {
+      pushLightPillarToPath(`${PATH_CHARM}${charm}${PATH_EXTENSION_JSON}`)
+    });
+  }
+
+  if (config.ShouldAddLightPillarKeys) {
+    var file = D2RMM.readJson(`${PATH_KEY}${PATH_EXTENSION_JSON}`);
+    pushLightPillarToFile(file);
+
+    for (var i = 1; i <= 3; i++) {
+      const index = (i == 1) ? '' : `${i}`;
+      const path = `${PATH_KEY}${index}${PATH_EXTENSION_JSON}`;
+      D2RMM.writeJson(path, file);
+    }
+  }
+}
+
+function pushLightPillarToPath(filePath) {
+  const file = D2RMM.readJson(filePath);
+  pushLightPillarToFile(file);
+  D2RMM.writeJson(filePath, file);
+}
+
+function pushLightPillarToFile(file) {
+  file.dependencies.particles.push(LIGHT_COMPONENT.particle);
+  file.entities = file.entities.concat(LIGHT_COMPONENT.entities);
 }
 
 applyLootFilter();
