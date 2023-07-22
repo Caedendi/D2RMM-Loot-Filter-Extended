@@ -96,8 +96,16 @@ const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}
 
 const ILVL_INDENT_FIX_1 = SINGLE_SPACE.repeat(6); // for single digit ilvl items
 const ILVL_INDENT_FIX_2 = SINGLE_SPACE.repeat(6); // for double digit ilvl items
-const ILVL_INDENT_FIX_3 = SINGLE_SPACE.repeat(6); // for single digit ilvl items when item quality is enabled
-const ILVL_INDENT_FIX_4 = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
+const ILVL_INDENT_FIX_3 = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
+
+
+//==========================================//
+//   Parameters - Alternate Color Schemes   //
+//==========================================//
+
+const IS_ALTERNATE_RUNES_COLOR = ["all", "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
+const IS_ALTERNATE_FACET_HIGHLIGHT = ["all", "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
+const IS_ALTERNATE_SUNDER_HIGHLIGHT = ["all", "fac-sun", "sun-run", "sun"].includes(config.AlternateColorSchemes);
 
 
 //========================//
@@ -118,9 +126,7 @@ const RUNES_TIER_HIGH = [26, 27, 28, 29, 30, 31, 32, 33];            // Vex, Ohm
 
 const RUNES_COLOR_NAME = ORANGE
 const RUNES_COLOR_NAME_ALTERNATE = PURPLE;
-const IS_ALTERNATE_RUNES_COLOR = ["all", "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
 const RUNES_COLOR_HIGHLIGHT = RED;
-// const RUNES_COLOR_HIGHLIGHT = !config.ShouldUseAlternateColorsForRunes ? `${RED}` : `${RED}`;
 
 // set the highlight patterns for each rune tier
 const RUNES_PATTERN_LOW = NO_PATTERN;    // 
@@ -165,17 +171,15 @@ const GEM_PADDING = PADDING_1;
 const FACET_COLOR_NAME = GOLD;
 const FACET_PATTERN = PATTERN_5;
 const FACET_PADDING_1 = PADDING_1; // padding between individual patterns
-const FACET_PADDING_2 = PADDING_3; // padding between name and FACET_PREFIX/FACET_SUFFIX
+const FACET_PADDING_2 = PADDING_3; // padding between name and FACET_ALTERNATE_PREFIX / FACET_ALTERNATE_SUFFIX
 const FACET_ALTERNATE_PREFIX = `${RED}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${GREEN}${FACET_PATTERN}${FACET_COLOR_NAME}${FACET_PADDING_2}`;
 const FACET_ALTERNATE_SUFFIX = `${FACET_PADDING_2}${GREEN}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${RED}${FACET_PATTERN}${FACET_COLOR_NAME}`;
-const IS_ALTERNATE_FACET_HIGHLIGHT = ["all", "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
 const FACET_PREFIX = !IS_ALTERNATE_FACET_HIGHLIGHT ? UNIQUE_PREFIX : FACET_ALTERNATE_PREFIX;
 const FACET_SUFFIX = !IS_ALTERNATE_FACET_HIGHLIGHT ? UNIQUE_SUFFIX : FACET_ALTERNATE_SUFFIX;
 
 // charms
 const CHARMS_UNIQUE_PREFIX = UNIQUE_PREFIX;
 const CHARMS_UNIQUE_SUFFIX = UNIQUE_SUFFIX;
-const IS_ALTERNATE_SUNDER_HIGHLIGHT = ["all", "fac-sun", "sun-run", "sun"].includes(config.AlternateColorSchemes);
 
 // quest
 const QUEST_PREFIX = UNIQUE_PREFIX;
@@ -207,10 +211,28 @@ const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "custom
 //   Global Functions   //
 //======================//
 
+/**
+ * Generate an item name with a highlight pattern on the left side: `${RED}+HP1` or `${GRAY}o Arrows`
+ * @param {*} patternColor The color of the highlight pattern
+ * @param {*} pattern The pattern for the highlight
+ * @param {*} padding The padding between the highlights and the item name
+ * @param {*} itemColor The color of the item name
+ * @param {*} itemName The name of the item
+ * @returns A complete item name with a colored highlight pattern on the left side
+ */
 function generateSingleHighlight(patternColor, pattern, padding, itemColor, itemName) {
   return `${patternColor}${pattern}${itemColor}${padding}${itemName}`;
 }
-  
+
+/**
+ * Generate an item name with a highlight pattern on both sides: `${RED}**********${GOLD}     ${NAME}     ${RED}**********${GOLD}`
+ * @param {*} patternColor The color of the highlight pattern
+ * @param {*} pattern The pattern for the highlight
+ * @param {*} padding The padding between the highlights and the item name
+ * @param {*} itemColor The color of the item name
+ * @param {*} itemName The name of the item
+ * @returns A complete item name with colored highlight patterns on both sides
+ */
 function generateDoubleHighlight(patternColor, pattern, padding, itemColor, itemName) {
   return `${patternColor}${pattern}${itemColor}${padding}${itemName}${padding}${patternColor}${pattern}${itemColor}`;
 }
@@ -608,7 +630,7 @@ const customItems = {
   },
 
   highlightFullRejuvs(colorRejuv, colorName, pattern, padding) {
-    this.items.rvs = generateSingleHighlight(colorRejuv, pattern, padding, colorName, 'RPF');   // Full Rejuvenation Potion
+    this.items.rvl = generateSingleHighlight(colorRejuv, pattern, padding, colorName, 'RPF');   // Full Rejuvenation Potion
   },
 
   customizeBuffPotions(setting) {
