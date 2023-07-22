@@ -198,24 +198,19 @@ In addition to this, I recommend you also use the following D2RMM mods:
 
 - [ ] Fix known bugs:
   - [x] Regular Ruby, Sapphire, Emerald and Diamond not working
-  - [ ] Certain quest item customization not working:
-    - [ ] Book of Skill
-    - [ ] Staff of Kings
-    - [ ] Amulet of the Viper
-    - [x] Horadric Staff
-    - [ ] Khalim's Flail
-    - [x] Khalim's Will
-    - [ ] Potion of Life (xyz)
-    - [ ] Hell Forge Hammer
-    - [ ] Malah's Potion
-    - [x] Update toggle description regarding [CSTM-QST1] and [CSTM-QST2]
-  - [ ] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
-  - [ ] Enabling jewelry turns crafted/rare/set/unique jewelry blue
+  - [x] Certain quest item customization not working
+  - [x] Update toggle description regarding [CSTM-QST1] and [CSTM-QST2]
+  - [x] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
+  - [x] Enabling jewelry turns crafted/rare/set/unique jewelry blue
   - [ ] Item name alignment out of place for items with ilvls when combining this mod with [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174)
 - [ ] Add features:
-  - [ ] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by olegbl
-  - [ ] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214/?tab=files&category=archived) or [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351)
-  - [ ] Different emphasis for unique charms, rare jewels and facets (rainbow color)
+  - [x] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by olegbl
+  - [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214/?tab=files&category=archived)
+  - [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351)
+  - [x] Alternate highlights on Facets
+    - [ ] Make optional
+  - [ ] Alternate color scheme (highlights) for Sunder Charms
+  - [x] Alternate color scheme (name) for mid/high runes
 
 
 ## Credits

@@ -111,9 +111,10 @@ const RUNES_TIER_LOWMID = [8, 15, 16, 17, 18, 19];                   // Ral, Hel
 const RUNES_TIER_MID = [20, 21, 22, 23, 24, 25];                     // Lem, Pul, Um, Mal, Ist, Gul
 const RUNES_TIER_HIGH = [26, 27, 28, 29, 30, 31, 32, 33];            // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
 
-const RUNES_COLOR_NAME = !config.ShouldUseAlternateColorsForRunes ? `${ORANGE1}` : `${PURPLE}`; 
+const RUNES_COLOR_NAME = ORANGE
+const RUNES_COLOR_NAME_ALTERNATE = PURPLE;
 const RUNES_COLOR_IS_ALTERNATE = config.ShouldUseAlternateColorsForRunes;
-const RUNES_COLOR_HIGHLIGHT = `${RED}`;
+const RUNES_COLOR_HIGHLIGHT = RED;
 // const RUNES_COLOR_HIGHLIGHT = !config.ShouldUseAlternateColorsForRunes ? `${RED}` : `${RED}`;
 
 // set the highlight patterns for each rune tier
@@ -131,6 +132,7 @@ const RUNES_PADDING_HIGH = PADDING_5;
 const RUNES_TIER_HIGHLIGHTED = [].concat(RUNES_TIER_LOWMID, RUNES_TIER_MID, RUNES_TIER_HIGH); // runes with a highlight pattern (***** rune *****)
 const RUNES_TIER_HIGHLIGHTED_NUMBERS = [].concat(RUNES_TIER_MID, RUNES_TIER_HIGH);            // runes where the added numbers (33) are in the highlight color instead of default
 const RUNES_TIER_HIGHLIGHTED_NAMES = RUNES_TIER_HIGH;                                         // runes where the rune name is in the highlight color instead of default
+const RUNES_TIER_ALTERNATE_NAME_COLOR = RUNES_TIER_HIGHLIGHTED_NUMBERS;                       // runes that have a purple name when alternate color scheme is enabled
 
 
 //========================//
@@ -405,14 +407,15 @@ const customRunes = {
     const hasAffix = settingsAffix.includes(setting);
     const hasNumber = settingsNumbers.includes(setting);
     const hasHighlighting = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED.includes(number);
-    const hasHighlightedNumber = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(number) && !RUNES_COLOR_IS_ALTERNATE;
-    const hasHighlightedName = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(number) && !RUNES_COLOR_IS_ALTERNATE;
+    const hasHighlightedNumber = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(number);
+    const hasHighlightedName = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(number);
+    const hasAlternateNameColor = RUNES_COLOR_IS_ALTERNATE && RUNES_TIER_ALTERNATE_NAME_COLOR.includes(number);
 
     var highlightColor1 = hasHighlighting ? RUNES_COLOR_HIGHLIGHT : NO_COLOR;
     var highlightColor2 = highlightColor1;
-    var nameColor1 = hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME;
+    var nameColor1 = !hasAlternateNameColor ? (hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME) : RUNES_COLOR_NAME_ALTERNATE;
     var nameColor2 = nameColor1;
-    var numberColor = hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME;
+    var numberColor = !hasAlternateNameColor ? (hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME) : NO_COLOR;
     const padding = this.determinePadding(number);
     const highlightPattern = this.determinePattern(number);
 
@@ -963,6 +966,7 @@ const customItems = {
   },
 
   highlightSunderCharms(){
+    // todo: optional alternate highlight colors for sunder charms
     this.items["Black Cleft"]          = `${CHARMS_UNIQUE_PREFIX}Black Cleft${CHARMS_UNIQUE_SUFFIX}`;
     this.items["Bone Break"]           = `${CHARMS_UNIQUE_PREFIX}Bone Break${CHARMS_UNIQUE_SUFFIX}`;
     this.items["Cold Rupture"]         = `${CHARMS_UNIQUE_PREFIX}Cold Rupture${CHARMS_UNIQUE_SUFFIX}`;

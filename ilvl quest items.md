@@ -26,5 +26,5 @@
 |    hfh    | Hell Forge Hammer              | item-names.json     |  xx  |  no   |
 |    ice    | Malah's Potion                 | item-modifiers.json |  -   |  no   |
 |    tr2    | Scroll of Resistance           | item-modifiers.json |  -   |  no   |
-|           | Annihilus                      | item-modifiers.json |  -   |  no   |
-|           | Hellfire Torch                 | item-modifiers.json |  -   |  no   |
+|           | Annihilus                      | item-modifiers.json |  xx  |  no   |
+|           | Hellfire Torch                 | item-modifiers.json |  xx  |  no   |
