@@ -140,6 +140,21 @@
       "defaultExpanded": false
     },
     {
+      "id": "Gems",
+      "type": "select",
+      "name": "Gems",
+      "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "all" },
+        { "label": "Highlight, show only Flawless and Perfect Gems", "value": "flawless" },
+        { "label": "Highlight, show only Perfect Gems", "value": "perfect" },
+        { "label": "Hide all", "value": "hide" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
       "id": "Jewels",
       "type": "select",
       "name": "Jewels",
@@ -162,21 +177,6 @@
         { "label": "Highlight", "value": "all" },
         { "label": "Highlight Unique Charms only", "value": "uniq" },
         { "label": "Highlight non-Unique Charms only", "value": "unid" },
-        { "label": "Custom", "value": "custom" }
-      ]
-    },
-    {
-      "id": "Gems",
-      "type": "select",
-      "name": "Gems",
-      "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
-      "defaultValue": "all",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "all" },
-        { "label": "Highlight, show only Flawless and Perfect Gems", "value": "flawless" },
-        { "label": "Highlight, show only Perfect Gems", "value": "perfect" },
-        { "label": "Hide all", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -275,8 +275,9 @@
         { "label": "Disable", "value": "none" },
         { "label": "Facets, Sunder Charms, Runes", "value": "all" },
         { "label": "Facets, Sunder Charms", "value": "fac-sun" },
-        { "label": "Facets, Runes", "value": "rac-run" },
+        { "label": "Facets, Runes", "value": "fac-run" },
         { "label": "Sunder Charms, Runes", "value": "sun-run" },
+        { "label": "Facets", "value": "fac" },
         { "label": "Sunder Charms", "value": "sun" },
         { "label": "Runes", "value": "run" }
       ]

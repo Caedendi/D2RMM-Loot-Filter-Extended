@@ -141,8 +141,6 @@ If you'd rather have a compact list to act as a template for your own naming sch
 |                                              | Highlight, exclude Annihilus & Torch, hide Standard of Heroes |
 |                                              | Custom                                                        |
 | **Highlight character**                      | **\* (asterisk) (default)**                                   |
-|                                              | • (bullet)                                                    |
-|                                              | · (middle dot)                                                |
 |                                              | = (equals)                                                    |
 |                                              | + (plus)                                                      |
 |                                              | - (hyphen/dash/minus)                                         |
@@ -151,17 +149,12 @@ If you'd rather have a compact list to act as a template for your own naming sch
 |                                              | o (small letter o)                                            |
 |                                              | O (capital letter o)                                          |
 |                                              | 0 (zero)                                                      |
+|                                              | ~ (tilde)                                                     |
+|                                              | ! (exclamation mark)                                          |
 |                                              | @ (at)                                                        |
 |                                              | $ (dollar)                                                    |
 |                                              | % (percent)                                                   |
 |                                              | & (ampersand)                                                 |
-|                                              | ~ (tilde)                                                     |
-|                                              | ¤ (currency sign)                                             |
-|                                              | ※ (reference mark)                                            |
-|                                              | ★ (black star)                                                |
-|                                              | ° (degree sign)                                               |
-|                                              | ⁂ (asterism)                                                  |
-|                                              | ‼ (double exclamation mark)                                   |
 |                                              | Custom                                                        |
 | **Tooltip size for hidden items**            | **0 (default)** to 25 (max) spaces                            |
 | **Tooltip**                                  | **No change (default)**                                       |
@@ -199,18 +192,19 @@ In addition to this, I recommend you also use the following D2RMM mods:
 - [ ] Fix known bugs:
   - [x] Regular Ruby, Sapphire, Emerald and Diamond not working
   - [x] Certain quest item customization not working
-  - [x] Update toggle description regarding [CSTM-QST1] and [CSTM-QST2]
   - [x] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
   - [x] Enabling jewelry turns crafted/rare/set/unique jewelry blue
-  - [ ] Item name alignment out of place for items with ilvls when combining this mod with [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174)
+  - [ ] Item name alignment out of place for items with ilvls when [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) is enabled
+  - [ ] Redundant item color mod on tier 1 runes
 - [ ] Add features:
   - [x] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by olegbl
-  - [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214/?tab=files&category=archived)
-  - [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351)
-  - [x] Alternate highlights on Facets
-    - [ ] Make optional
-  - [ ] Alternate color scheme (highlights) for Sunder Charms
-  - [x] Alternate color scheme (name) for mid/high runes
+  - [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214) by Jobus
+  - [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351) by minseoksuh
+  - [ ] Integrate [LightPillar for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/197) by qhu91it
+  - [x] Rework alternate color schemes into optional drop-down setting
+    - [x] Alternate color scheme for Facets (rainbow highlights)
+    - [x] Alternate color scheme for Sunder Charms (element-colored highlights)
+    - [x] Alternate color scheme for mid/high runes (purple names)
 
 
 ## Credits

@@ -94,6 +94,11 @@ const PATTERN_5 = HIGHLIGHT.repeat(5);
 const PATTERN_10 = HIGHLIGHT.repeat(10);
 const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}`;
 
+const ILVL_INDENT_FIX_1 = SINGLE_SPACE.repeat(6); // for single digit ilvl items
+const ILVL_INDENT_FIX_2 = SINGLE_SPACE.repeat(6); // for double digit ilvl items
+const ILVL_INDENT_FIX_3 = SINGLE_SPACE.repeat(6); // for single digit ilvl items when item quality is enabled
+const ILVL_INDENT_FIX_4 = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
+
 
 //========================//
 //   Parameters - Runes   //
@@ -113,7 +118,7 @@ const RUNES_TIER_HIGH = [26, 27, 28, 29, 30, 31, 32, 33];            // Vex, Ohm
 
 const RUNES_COLOR_NAME = ORANGE
 const RUNES_COLOR_NAME_ALTERNATE = PURPLE;
-const RUNES_COLOR_IS_ALTERNATE = config.ShouldUseAlternateColorsForRunes;
+const IS_ALTERNATE_RUNES_COLOR = ["all", "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
 const RUNES_COLOR_HIGHLIGHT = RED;
 // const RUNES_COLOR_HIGHLIGHT = !config.ShouldUseAlternateColorsForRunes ? `${RED}` : `${RED}`;
 
@@ -161,12 +166,16 @@ const FACET_COLOR_NAME = GOLD;
 const FACET_PATTERN = PATTERN_5;
 const FACET_PADDING_1 = PADDING_1; // padding between individual patterns
 const FACET_PADDING_2 = PADDING_3; // padding between name and FACET_PREFIX/FACET_SUFFIX
-const FACET_PREFIX = `${RED}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${GREEN}${FACET_PATTERN}${FACET_COLOR_NAME}${FACET_PADDING_2}`;
-const FACET_SUFFIX = `${FACET_PADDING_2}${GREEN}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${RED}${FACET_PATTERN}${FACET_COLOR_NAME}`;
+const FACET_ALTERNATE_PREFIX = `${RED}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${GREEN}${FACET_PATTERN}${FACET_COLOR_NAME}${FACET_PADDING_2}`;
+const FACET_ALTERNATE_SUFFIX = `${FACET_PADDING_2}${GREEN}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${RED}${FACET_PATTERN}${FACET_COLOR_NAME}`;
+const IS_ALTERNATE_FACET_HIGHLIGHT = ["all", "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
+const FACET_PREFIX = !IS_ALTERNATE_FACET_HIGHLIGHT ? UNIQUE_PREFIX : FACET_ALTERNATE_PREFIX;
+const FACET_SUFFIX = !IS_ALTERNATE_FACET_HIGHLIGHT ? UNIQUE_SUFFIX : FACET_ALTERNATE_SUFFIX;
 
 // charms
 const CHARMS_UNIQUE_PREFIX = UNIQUE_PREFIX;
 const CHARMS_UNIQUE_SUFFIX = UNIQUE_SUFFIX;
+const IS_ALTERNATE_SUNDER_HIGHLIGHT = ["all", "fac-sun", "sun-run", "sun"].includes(config.AlternateColorSchemes);
 
 // quest
 const QUEST_PREFIX = UNIQUE_PREFIX;
@@ -409,7 +418,7 @@ const customRunes = {
     const hasHighlighting = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED.includes(number);
     const hasHighlightedNumber = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(number);
     const hasHighlightedName = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(number);
-    const hasAlternateNameColor = RUNES_COLOR_IS_ALTERNATE && RUNES_TIER_ALTERNATE_NAME_COLOR.includes(number);
+    const hasAlternateNameColor = IS_ALTERNATE_RUNES_COLOR && RUNES_TIER_ALTERNATE_NAME_COLOR.includes(number);
 
     var highlightColor1 = hasHighlighting ? RUNES_COLOR_HIGHLIGHT : NO_COLOR;
     var highlightColor2 = highlightColor1;
@@ -961,20 +970,28 @@ const customItems = {
 
   highlightUniqueCharms(){
     this.items["Gheed's Fortune"]      = `${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Annihilus"]            = `${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Hellfire Torch"]       = `${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Annihilus"]            = `      ${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Hellfire Torch"]       = `      ${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
   },
 
   highlightSunderCharms(){
-    // todo: optional alternate highlight colors for sunder charms
-    this.items["Black Cleft"]          = `${CHARMS_UNIQUE_PREFIX}Black Cleft${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Bone Break"]           = `${CHARMS_UNIQUE_PREFIX}Bone Break${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Cold Rupture"]         = `${CHARMS_UNIQUE_PREFIX}Cold Rupture${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Crack of the Heavens"] = `${CHARMS_UNIQUE_PREFIX}Crack of the Heavens${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Flame Rift"]           = `${CHARMS_UNIQUE_PREFIX}Flame Rift${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Rotting Fissure"]      = `${CHARMS_UNIQUE_PREFIX}Rotting Fissure${CHARMS_UNIQUE_SUFFIX}`;
+    if (IS_ALTERNATE_SUNDER_HIGHLIGHT) {
+      this.items["Black Cleft"]          = generateDoubleHighlight(GRAY,    UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Black Cleft");
+      this.items["Bone Break"]           = generateDoubleHighlight(WHITE,   UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Bone Break");
+      this.items["Cold Rupture"]         = generateDoubleHighlight(SKYBLUE, UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Cold Rupture");
+      this.items["Crack of the Heavens"] = generateDoubleHighlight(YELLOW,  UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Crack of the Heavens");
+      this.items["Flame Rift"]           = generateDoubleHighlight(RED,     UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Flame Rift");
+      this.items["Rotting Fissure"]      = generateDoubleHighlight(GREEN,   UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Rotting Fissure");
+    }
+    else {
+      this.items["Black Cleft"]          = `${CHARMS_UNIQUE_PREFIX}Black Cleft${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Bone Break"]           = `${CHARMS_UNIQUE_PREFIX}Bone Break${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Cold Rupture"]         = `${CHARMS_UNIQUE_PREFIX}Cold Rupture${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Crack of the Heavens"] = `${CHARMS_UNIQUE_PREFIX}Crack of the Heavens${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Flame Rift"]           = `${CHARMS_UNIQUE_PREFIX}Flame Rift${CHARMS_UNIQUE_SUFFIX}`;
+      this.items["Rotting Fissure"]      = `${CHARMS_UNIQUE_PREFIX}Rotting Fissure${CHARMS_UNIQUE_SUFFIX}`;
+    } 
   },
-
   
   //=================//
   //   Quest Items   //
