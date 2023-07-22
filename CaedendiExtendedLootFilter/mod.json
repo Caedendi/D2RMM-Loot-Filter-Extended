@@ -6,6 +6,12 @@
   "version": "2.0.0b",
   "config": [
     {
+      "id": "GoldRunesSection",
+      "type": "section",
+      "name": "Gold & Runes",
+      "defaultExpanded": false
+    },
+    {
       "id": "Gold",
       "type": "select",
       "name": "Gold",
@@ -16,7 +22,7 @@
         { "label": "Gold text", "value": "gold" },
         { "label": "Gold G", "value": "goldg" },
         { "label": "White G", "value": "whiteg" },
-        { "label": "Hide affix", "value": "hide" },
+        { "label": "Hide suffix", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
     }, 
@@ -39,51 +45,10 @@
       ]
     },
     {
-      "id": "ShouldUseAlternateColorsForRunes",
-      "type": "checkbox",
-      "name": "Runes: Alternate Color Scheme",
-      "description": "Change the color scheme from the default orange to purple for Lem and higher runes. Highlights remain red and the name will not color (partly) red for these runes.",
-      "defaultValue": false
-    }, 
-    {
-      "id": "ItemLevel",
-      "type": "select",
-      "name": "Item Level",
-      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix.",
-      "defaultValue": "fix",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable, fix indentation", "value": "fix" },
-        { "label": "Enable", "value": "show" }
-      ]
-    },
-    {
-      "id": "ShortSupInferiorPrefixes",
-      "type": "select",
-      "name": "Short Superior/Inferior Prefixes",
-      "description": "Shorten the Superior/Damaged/Cracked/Crude/Low Quality modifiers on weapons and armor to + (plus) and - (minus/dash). Optionally color Inferior items gray. Works the same as mod Short Quality Prefixes by Jobus. [CSTM-SPIF]",
-      "defaultValue": "short",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable", "value": "short" },
-        { "label": "Enable, gray Inferior items", "value": "color" },
-        { "label": "Custom", "value": "custom" }
-      ]
-    },
-    {
-      "id": "ItemQuality",
-      "type": "select",
-      "name": "Item Quality",
-      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to select suffix to match the Item Level suffix if enabled. [CSTM-QLTY]",
-      "defaultValue": "none",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Suffix, parentheses", "value": "suf-par" },
-        { "label": "Suffix, square brackets", "value": "suf-bts" },
-        { "label": "Prefix, parentheses", "value": "pre-par" },
-        { "label": "Prefix, square brackets", "value": "pre-bts" },
-        { "label": "Custom", "value": "custom" }
-      ]
+      "id": "JunkSection",
+      "type": "section",
+      "name": "Junk",
+      "defaultExpanded": false
     },
     {
       "id": "HealingPotions",
@@ -169,6 +134,12 @@
       ]
     },
     {
+      "id": "JewelrySection",
+      "type": "section",
+      "name": "Jewelry",
+      "defaultExpanded": false
+    },
+    {
       "id": "Jewels",
       "type": "select",
       "name": "Jewels",
@@ -210,6 +181,12 @@
       ]
     },
     {
+      "id": "QuestEndgame",
+      "type": "section",
+      "name": "Quest & Endgame",
+      "defaultExpanded": false
+    },
+    {
       "id": "Quest",
       "type": "select",
       "name": "Quest Items",
@@ -234,6 +211,74 @@
         { "label": "Highlight, exclude Standard of Heroes", "value": "xsh" },
         { "label": "Highlight, hide Standard of Heroes", "value": "hsh" },
         { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ItemStatsModifiersSection",
+      "type": "section",
+      "name": "Item Stats & Modifiers",
+      "defaultExpanded": false
+    },
+    {
+      "id": "ItemLevel",
+      "type": "select",
+      "name": "Item Level",
+      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix.",
+      "defaultValue": "fix",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Enable, fix indentation", "value": "fix" },
+        { "label": "Enable", "value": "show" }
+      ]
+    },
+    {
+      "id": "ShortSupInferiorPrefixes",
+      "type": "select",
+      "name": "Short Superior/Inferior Prefixes",
+      "description": "Shorten the Superior/Damaged/Cracked/Crude/Low Quality modifiers on weapons and armor to + (plus) and - (minus/dash). Optionally color Inferior items gray. Works the same as mod Short Quality Prefixes by Jobus. [CSTM-SPIF]",
+      "defaultValue": "short",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Enable", "value": "short" },
+        { "label": "Enable, gray Inferior items", "value": "color" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ItemQuality",
+      "type": "select",
+      "name": "Item Quality",
+      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix if enabled. [CSTM-QLTY]",
+      "defaultValue": "none",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Suffix, parentheses", "value": "suf-par" },
+        { "label": "Suffix, square brackets", "value": "suf-bts" },
+        { "label": "Prefix, parentheses", "value": "pre-par" },
+        { "label": "Prefix, square brackets", "value": "pre-bts" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ModSettingsSection",
+      "type": "section",
+      "name": "Mod Settings",
+      "defaultExpanded": false
+    },
+    {
+      "id": "AlternateColorSchemes",
+      "type": "select",
+      "name": "Alternate Color Schemes",
+      "description": "Use alternate color schemes for certain item types.\n\nFacets: rainbow-colored highlights.\n\nSunder Charms: highlight colors match their elements.\n\nRunes: change name color from the default orange to purple for Lem and higher runes. Highlights remain red and the name will not color (partly) red for these runes.",
+      "defaultValue": "fac-sun",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Facets, Sunder Charms, Runes", "value": "all" },
+        { "label": "Facets, Sunder Charms", "value": "fac-sun" },
+        { "label": "Facets, Runes", "value": "rac-run" },
+        { "label": "Sunder Charms, Runes", "value": "sun-run" },
+        { "label": "Sunder Charms", "value": "sun" },
+        { "label": "Runes", "value": "run" }
       ]
     },
     {
@@ -269,6 +314,12 @@
       "defaultValue": 0,
       "minValue": 0,
       "maxValue": 25
+    },
+    {
+      "id": "TooltipModsSection",
+      "type": "section",
+      "name": "Tooltip Mods",
+      "defaultExpanded": false
     },
     {
       "id": "Tooltip",
