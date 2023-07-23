@@ -2,6 +2,7 @@
 ////===============================================////
 ////                                               ////
 ////   Caedendi's Extended Loot Filter for D2RMM   ////
+////                    v2.0.0                     ////
 ////                                               ////
 ////===============================================////
 ////===============================================////
@@ -12,19 +13,19 @@
 //===============//
 
 // File paths
-const FILE_PROFILE_HD_PATH = 'global\\ui\\layouts\\_profilehd.json';
+const FILE_PROFILE_HD_PATH = "global\\ui\\layouts\\_profilehd.json";
 
-const FILE_ITEM_NAMEAFFIXES_PATH = 'local\\lng\\strings\\item-nameaffixes.json';
-const FILE_ITEM_NAMES_PATH = 'local\\lng\\strings\\item-names.json';
-const FILE_ITEM_RUNES_PATH = 'local\\lng\\strings\\item-runes.json';
-const FILE_UI_PATH = 'local\\lng\\strings\\ui.json';
+const FILE_ITEM_NAMEAFFIXES_PATH = "local\\lng\\strings\\item-nameaffixes.json";
+const FILE_ITEM_NAMES_PATH = "local\\lng\\strings\\item-names.json";
+const FILE_ITEM_RUNES_PATH = "local\\lng\\strings\\item-runes.json";
+const FILE_UI_PATH = "local\\lng\\strings\\ui.json";
 
-const FILE_WEAPONS_PATH = 'global\\excel\\weapons.txt';
-const FILE_ARMOR_PATH = 'global\\excel\\armor.txt';
-const FILE_MISC_PATH = 'global\\excel\\misc.txt';
+const FILE_WEAPONS_PATH = "global\\excel\\weapons.txt";
+const FILE_ARMOR_PATH = "global\\excel\\armor.txt";
+const FILE_MISC_PATH = "global\\excel\\misc.txt";
 
 // Color
-const COLOR_PREFIX = 'ÿc';
+const COLOR_PREFIX = "ÿc";
 
 const WHITE = `${COLOR_PREFIX}0`;
 const WHITE1 = `${COLOR_PREFIX}=`;
@@ -73,7 +74,7 @@ const EMPTY_STRING = '';
 const SINGLE_SPACE = ' ';
 
 const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
-const HIGHLIGHT = config.HighlightCharacter !== 'custom' ? config.HighlightCharacter : '*'; // replace * with desired custom character [CSTM-HLC]
+const HIGHLIGHT = config.HighlightCharacter !== "custom" ? config.HighlightCharacter : '*'; // replace * with desired custom character [CSTM-HLC]
 
 const NO_COLOR = EMPTY_STRING;
 const NO_PATTERN = EMPTY_STRING;
@@ -166,10 +167,10 @@ const UNIQUE_PREFIX = `${UNIQUE_COLOR_HIGHLIGHT}${UNIQUE_PATTERN}${UNIQUE_COLOR_
 const UNIQUE_SUFFIX = `${UNIQUE_PADDING}${UNIQUE_COLOR_HIGHLIGHT}${UNIQUE_PATTERN}${UNIQUE_COLOR_NAME}`;
 
 // gems
-const GEM_CHIPPED = 'Chipped';
-const GEM_FLAWED = 'Flawed';
-const GEM_FLAWLESS = 'Flawless';
-const GEM_PERFECT = 'Perfect';
+const GEM_CHIPPED = "Chipped";
+const GEM_FLAWED = "Flawed";
+const GEM_FLAWLESS = "Flawless";
+const GEM_PERFECT = "Perfect";
 const GEM_COLOR_NAME = WHITE;
 const GEM_HIGHLIGHT = SMALL_O;
 const GEM_PADDING = PADDING_1;
@@ -218,99 +219,108 @@ const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "custom
 //   Parameters - Light Pillars   //
 //================================//
 
-const PATH_VFX_BASE = "data/hd/vfx/particles/overlays/";
-const PATH_HORADRIC_LIGHT = `${PATH_VFX_BASE}object/horadric_light/fx_horadric_light.particles`;
-const PATH_PALADIN_FANATICISM = `${PATH_VFX_BASE}paladin/aura_fanatic/aura_fanatic.particles`;
-const PATH_VALKYRIE_START = `${PATH_VFX_BASE}common/valkyriestart/valkriestart_overlay.particles`;
+// item paths
+const LP_PATH_ITEMS_MISC = "hd\\items\\misc\\";
+const LP_PATH_ITEMS_ARMOR = "hd\\items\\armor\\";
+const LP_PATH_EXTENSION_JSON = ".json";
+const LP_PATH_RUNE = `${LP_PATH_ITEMS_MISC}rune\\`;
+const LP_PATH_CIRCLET = `${LP_PATH_ITEMS_ARMOR}circlet\\`;
+const LP_PATH_RING = `${LP_PATH_ITEMS_MISC}ring\\ring${LP_PATH_EXTENSION_JSON}`;
+const LP_PATH_AMULET = `${LP_PATH_ITEMS_MISC}amulet\\amulet${LP_PATH_EXTENSION_JSON}`;
+const LP_PATH_GEM = `${LP_PATH_ITEMS_MISC}gem\\`;
+const LP_PATH_CHARM = `${LP_PATH_ITEMS_MISC}charm\\`;
+const LP_PATH_TORCH = `${LP_PATH_ITEMS_MISC}torch\\torch${LP_PATH_EXTENSION_JSON}`;
+const LP_PATH_KEY = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
 
-const PATH_ITEMS_MISC = "hd\\items\\misc\\";
-const PATH_RUNE = `${PATH_ITEMS_MISC}rune\\`;
-const PATH_GEM = `${PATH_ITEMS_MISC}gem\\`;
-const PATH_CHARM = `${PATH_ITEMS_MISC}charm\\`;
-const PATH_KEY = `${PATH_ITEMS_MISC}key\\mephisto_key`;
-const PATH_EXTENSION_JSON = ".json";
-
-const DEFINITION_COMPONENT_TRANSFORM = "TransformDefinitionComponent";
-const DEFINITION_COMPONENT_VFX = "VfxDefinitionComponent";
-const NAME_TRANSFORM1 = "component_transform1";
-const NAME_VFX_STOLEN = "entity_vfx_filthyStolenMod";
-const NAME_VFX_ROOT = "entity_root_VfxDefinition";
-
-const TYPE_ENTITY = "Entity";
-const NAME_DROPLIGHT = "droplight";
-const NAME_ENTITY_ROOT = "entity_root";
-const ID_DROPLIGHT = 9999996974;
-const ID_ENTITY_ROOT = 1079187010;
-
-const RUNES = [
-  'el', 'eld', 'tir', 'nef', 'eth', 'ith', 'tal', 'ral', 'ort', 'thul', 'amn', 
-  'sol', 'shael', 'dol', 'hel', 'io','lum', 'ko', 'fal', 'lem', 'pul','um', 
-  'mal', 'ist', 'gul', 'vex', 'ohm', 'lo', 'sur', 'ber', 'jah', 'cham', 'zod',
+// item names
+const LP_RUNES = [
+  "el", "eld", "tir", "nef", "eth", "ith", "tal", "ral", "ort", "thul", "amn", 
+  "sol", "shael", "dol", "hel", "io","lum", "ko", "fal", "lem", "pul","um", 
+  "mal", "ist", "gul", "vex", "ohm", "lo", "sur", "ber", "jah", "cham", "zod",
 ];
+const LP_RUNES_SUFFIX = "_rune";
+const LP_CIRCLETS = ["circlet", "coronet", "tiara", "diadem"];
+const LP_GEM_QUALITIES = ["chipped_", "flawed_", EMPTY_STRING, "flawless_", "perfect_"];
+const LP_GEM_TYPES = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];
+const LP_CHARMS = ["charm_small", "charm_medium", "charm_large"];
 
-const RUNES_SUFFIX = "_rune";
+// vfx paths
+const LP_PATH_VFX_BASE = "data/hd/vfx/particles/overlays/";
+const LP_PATH_HORADRIC_LIGHT = `${PATH_VFX_BASE}object/horadric_light/fx_horadric_light.particles`;
+const LP_PATH_PALADIN_FANATICISM = `${PATH_VFX_BASE}paladin/aura_fanatic/aura_fanatic.particles`;
+const LP_PATH_VALKYRIE_START = `${PATH_VFX_BASE}common/valkyriestart/valkriestart_overlay.particles`;
 
-const GEM_QUALITIES = ['chipped_', 'flawed_', '', 'flawless_', 'perfect_'];
-const GEM_TYPES = ['amethyst', 'diamond', 'emerald', 'ruby', 'saphire', 'topaz', 'skull'];
+// vfx names
+const LP_DEFINITION_COMPONENT_TRANSFORM = "TransformDefinitionComponent";
+const LP_DEFINITION_COMPONENT_VFX = "VfxDefinitionComponent";
+const LP_NAME_TRANSFORM1 = "component_transform1";
+const LP_NAME_VFX_STOLEN = "entity_vfx_filthyStolenMod";
+const LP_NAME_VFX_ROOT = "entity_root_VfxDefinition";
 
-const charms = ['charm_small', 'charm_medium', 'charm_large'];
+// vfx params
+const LP_TYPE_ENTITY = "Entity";
+const LP_NAME_DROPLIGHT = "droplight";
+const LP_NAME_ENTITY_ROOT = "entity_root";
+const LP_ID_DROPLIGHT = 9999996974;
+const LP_ID_ENTITY_ROOT = 1079187010;
 
-const LIGHT_COMPONENT = {
+// vfx light pillar
+const LP_LIGHT_COMPONENT = {
   particle: {
-    path: PATH_HORADRIC_LIGHT,
+    path: LP_PATH_HORADRIC_LIGHT,
   },
   entities: [
     {
-      type: TYPE_ENTITY,
-      name: NAME_DROPLIGHT,
-      id: ID_DROPLIGHT,
+      type: LP_TYPE_ENTITY,
+      name: LP_NAME_DROPLIGHT,
+      id: LP_ID_DROPLIGHT,
       components: [
         {
-          type: DEFINITION_COMPONENT_TRANSFORM,
-          name: NAME_TRANSFORM1,
+          type: LP_DEFINITION_COMPONENT_TRANSFORM,
+          name: LP_NAME_TRANSFORM1,
           position: { x: 0.0, y: 0.0, z: 0.0 },
           orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
           scale: { x: 1.0, y: 1.0, z: 1.0 },
           inheritOnlyPosition: false
         },
         {
-          type: DEFINITION_COMPONENT_VFX,
-          name: NAME_VFX_STOLEN,
-          filename: PATH_HORADRIC_LIGHT,
+          type: LP_DEFINITION_COMPONENT_VFX,
+          name: LP_NAME_VFX_STOLEN,
+          filename: LP_PATH_HORADRIC_LIGHT,
           hardKillOnDestroy: false
         }
       ]
     },
     {
-      type: TYPE_ENTITY,
-      name: NAME_ENTITY_ROOT,
-      id: ID_ENTITY_ROOT,
+      type: LP_TYPE_ENTITY,
+      name: LP_NAME_ENTITY_ROOT,
+      id: LP_ID_ENTITY_ROOT,
       components: [
         {
-          type: DEFINITION_COMPONENT_VFX,
-          name: NAME_VFX_ROOT,
-          filename: PATH_PALADIN_FANATICISM,
+          type: LP_DEFINITION_COMPONENT_VFX,
+          name: LP_NAME_VFX_ROOT,
+          filename: LP_PATH_PALADIN_FANATICISM,
           hardKillOnDestroy: false
         }
       ]
     },
     {
-      type: TYPE_ENTITY,
-      name: NAME_DROPLIGHT,
-      id: ID_DROPLIGHT,
+      type: LP_TYPE_ENTITY,
+      name: LP_NAME_DROPLIGHT,
+      id: LP_ID_DROPLIGHT,
       components: [
         {
-          type: DEFINITION_COMPONENT_TRANSFORM,
-          name: NAME_TRANSFORM1,
+          type: LP_DEFINITION_COMPONENT_TRANSFORM,
+          name: LP_NAME_TRANSFORM1,
           position: { x: 0.0, y: 0.0, z: 0.0 },
           orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
           scale: { x: 1.0, y: 1.0, z: 1.0 },
           inheritOnlyPosition: false
         },
         {
-          type: DEFINITION_COMPONENT_VFX,
-          name: NAME_VFX_STOLEN,
-          filename: PATH_VALKYRIE_START,
+          type: LP_DEFINITION_COMPONENT_VFX,
+          name: LP_NAME_VFX_STOLEN,
+          filename: LP_PATH_VALKYRIE_START,
           hardKillOnDestroy: false
         }
       ]
@@ -414,10 +424,10 @@ const customAffixes = {
         return;
       case "all": // show all
         // `${GREEN}o${WHITE} Emerald`;
-        this.items.gsw = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, 'Diamond');  // Diamond
-        this.items.gsg = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, 'Emerald');  // Emerald
-        this.items.gsr = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, 'Ruby');     // Ruby
-        this.items.gsb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, 'Sapphire'); // Sapphire
+        this.items.gsw = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
+        this.items.gsg = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
+        this.items.gsr = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
+        this.items.gsb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
         return;
       case "flawless": // hide chipped/flawed/regular gems
         this.hideGems();
@@ -533,7 +543,7 @@ const customRunes = {
         this.runes.r32 = `${RED}**********${ORANGE1}     Cham (32)     ${RED}**********${ORANGE1}`; // Cham
         // this.runes.r33 = `${RED}**********${ORANGE1}     Zod (33)     ${RED}**********${ORANGE1}`;  // Zod
         // this.runes.r33 = `${RED}${PATTERN_10}${PADDING_5}${ORANGE1}Zod (33)${PADDING_5}${RED}${PATTERN_10}`;  // Zod
-        this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE1, 'Zod Rune (33)'); // Zod
+        this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE1, "Zod Rune (33)"); // Zod
         return;
     }
   },
@@ -719,30 +729,30 @@ const customItems = {
   },
 
   highlightLv123Potions(colorHealing, colorMana, colorName, pattern, padding) {
-    this.items.hp1 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP1'); // Minor Healing Potion
-    this.items.hp2 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP2'); // Light Healing Potion
-    this.items.hp3 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP3'); // Healing Potion
-    this.items.mp1 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP1');    // Minor Mana Potion
-    this.items.mp2 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP2');    // Light Mana Potion
-    this.items.mp3 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP3');    // Mana Potion
+    this.items.hp1 = generateSingleHighlight(colorHealing, pattern, padding, colorName, "HP1"); // Minor Healing Potion
+    this.items.hp2 = generateSingleHighlight(colorHealing, pattern, padding, colorName, "HP2"); // Light Healing Potion
+    this.items.hp3 = generateSingleHighlight(colorHealing, pattern, padding, colorName, "HP3"); // Healing Potion
+    this.items.mp1 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP1");    // Minor Mana Potion
+    this.items.mp2 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP2");    // Light Mana Potion
+    this.items.mp3 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP3");    // Mana Potion
   },
 
   highlightLv4Potions(colorHealing, colorMana, colorName, pattern, padding) {
-    this.items.hp4 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP4'); // Greater Healing Potion
-    this.items.mp4 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP4');    // Greater Mana Potion
+    this.items.hp4 = generateSingleHighlight(colorHealing, pattern, padding, colorName, "HP4"); // Greater Healing Potion
+    this.items.mp4 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP4");    // Greater Mana Potion
   },
 
   highlightLv5Potions(colorHealing, colorMana, colorName, pattern, padding) {
-    this.items.hp5 = generateSingleHighlight(colorHealing, pattern, padding, colorName, 'HP5'); // Super Healing Potion
-    this.items.mp5 = generateSingleHighlight(colorMana, pattern, padding, colorName, 'MP5');    // Super Mana Potion
+    this.items.hp5 = generateSingleHighlight(colorHealing, pattern, padding, colorName, "HP5"); // Super Healing Potion
+    this.items.mp5 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP5");    // Super Mana Potion
   },
 
   highlightSmallRejuvs(colorRejuv, colorName, pattern, padding) {
-    this.items.rvs = generateSingleHighlight(colorRejuv, pattern, padding, colorName, 'RPS');   // Rejuvenation Potion
+    this.items.rvs = generateSingleHighlight(colorRejuv, pattern, padding, colorName, "RPS");   // Rejuvenation Potion
   },
 
   highlightFullRejuvs(colorRejuv, colorName, pattern, padding) {
-    this.items.rvl = generateSingleHighlight(colorRejuv, pattern, padding, colorName, 'RPF');   // Full Rejuvenation Potion
+    this.items.rvl = generateSingleHighlight(colorRejuv, pattern, padding, colorName, "RPF");   // Full Rejuvenation Potion
   },
 
   customizeBuffPotions(setting) {
@@ -755,9 +765,9 @@ const customItems = {
       case "none": // no change
         return;
       case "all": // show all
-        this.items.yps = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Antidote'); // Antidote Potion
-        this.items.wms = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Thawing');  // Thawing Potion
-        this.items.vps = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Stamina');  // Stamina Potion
+        this.items.yps = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "Antidote"); // Antidote Potion
+        this.items.wms = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "Thawing");  // Thawing Potion
+        this.items.vps = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "Stamina");  // Stamina Potion
         return;
       case "hide": // hide all
         this.items.yps = HIDDEN;
@@ -781,12 +791,12 @@ const customItems = {
       case "none": // no change
         return;
       case "all": // show all
-        this.items.gpl = generateSingleHighlight(colorGas, pattern, padding, colorName, 'Gas 1'); // Strangling Gas Potion
-        this.items.gpm = generateSingleHighlight(colorGas, pattern, padding, colorName, 'Gas 2'); // Choking Gas Potion
-        this.items.gps = generateSingleHighlight(colorGas, pattern, padding, colorName, 'Gas 3'); // Rancid Gas Potion
-        this.items.opl = generateSingleHighlight(colorOil, pattern, padding, colorName, 'Oil 1'); // Fulminating Potion
-        this.items.opm = generateSingleHighlight(colorOil, pattern, padding, colorName, 'Oil 2'); // Exploding Potion
-        this.items.ops = generateSingleHighlight(colorOil, pattern, padding, colorName, 'Oil 3'); // Oil Potion
+        this.items.gpl = generateSingleHighlight(colorGas, pattern, padding, colorName, "Gas 1"); // Strangling Gas Potion
+        this.items.gpm = generateSingleHighlight(colorGas, pattern, padding, colorName, "Gas 2"); // Choking Gas Potion
+        this.items.gps = generateSingleHighlight(colorGas, pattern, padding, colorName, "Gas 3"); // Rancid Gas Potion
+        this.items.opl = generateSingleHighlight(colorOil, pattern, padding, colorName, "Oil 1"); // Fulminating Potion
+        this.items.opm = generateSingleHighlight(colorOil, pattern, padding, colorName, "Oil 2"); // Exploding Potion
+        this.items.ops = generateSingleHighlight(colorOil, pattern, padding, colorName, "Oil 3"); // Oil Potion
         return;
       case "hide": // hide all
         this.items.gpl = HIDDEN;
@@ -798,12 +808,12 @@ const customItems = {
         return;
       case "custom": // [CSTM-TPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items.gpl = 'Strangling Gas Potion';
-        this.items.gpm = 'Choking Gas Potion';
-        this.items.gps = 'Rancid Gas Potion';
-        this.items.opl = 'Fulminating Potion';
-        this.items.opm = 'Exploding Potion';
-        this.items.ops = 'Oil Potion';
+        this.items.gpl = "Strangling Gas Potion";
+        this.items.gpm = "Choking Gas Potion";
+        this.items.gps = "Rancid Gas Potion";
+        this.items.opl = "Fulminating Potion";
+        this.items.opm = "Exploding Potion";
+        this.items.ops = "Oil Potion";
         return;
     }
   },
@@ -828,10 +838,10 @@ const customItems = {
         return;
       case "custom": // [CSTM-SCR]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items.tsc = 'Scroll of Town Portal';
-        this.items.isc = 'Scroll of Identify';
-        this.items.tbk = 'Tome of Town Portal';
-        this.items.ibk = 'Tome of Identify';
+        this.items.tsc = "Scroll of Town Portal";
+        this.items.isc = "Scroll of Identify";
+        this.items.tbk = "Tome of Town Portal";
+        this.items.ibk = "Tome of Identify";
         return;
     }
   },
@@ -842,13 +852,13 @@ const customItems = {
   },
 
   highlightScrolls(colorHighlight, colorName, pattern, padding) {
-    this.items.tbk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'TP'); // Scroll of Town Portal
-    this.items.ibk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'ID'); // Scroll of Identify
+    this.items.tbk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "TP"); // Scroll of Town Portal
+    this.items.ibk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "ID"); // Scroll of Identify
   },
 
   highlightTomes(colorHighlight, colorName, pattern, padding) {
-    this.items.tbk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'TP Tome'); // Tome of Town Portal
-    this.items.ibk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'ID Tome'); // Tome of Identify
+    this.items.tbk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "TP Tome"); // Tome of Town Portal
+    this.items.ibk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "ID Tome"); // Tome of Identify
   },
 
   customizeArrowsAndBolts(setting) {
@@ -861,8 +871,8 @@ const customItems = {
       case "none":
         return;
       case "highlight":
-        this.items.aqv = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Arrows');
-        this.items.cqv = generateSingleHighlight(colorHighlight, pattern, padding, colorName, 'Bolts');
+        this.items.aqv = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "Arrows");
+        this.items.cqv = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "Bolts");
         return;
       case "hide":
         this.items.aqv = HIDDEN; // Arrow Quiver
@@ -1017,11 +1027,11 @@ const customItems = {
     this.items.gfb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Sapphire
     this.items.gfy = generateSingleHighlight(YELLOW, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Topaz
     this.items.skf = generateSingleHighlight(GRAY,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWED); // Flawed Skull
-    this.items.gsv = generateSingleHighlight(PURPLE, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, 'Amethyst'); // Amethyst
+    this.items.gsv = generateSingleHighlight(PURPLE, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Amethyst"); // Amethyst
     // For Ruby, Sapphire, Emerald and Diamond, see the "Affixes" section above.
     // For some reason, the devs put these gems in another JSON file.
-    this.items.gsy = generateSingleHighlight(YELLOW, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, 'Topaz');    // Topaz
-    this.items.sku = generateSingleHighlight(GRAY,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, 'Skull');    // Skull
+    this.items.gsy = generateSingleHighlight(YELLOW, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Topaz");    // Topaz
+    this.items.sku = generateSingleHighlight(GRAY,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Skull");    // Skull
   },
 
   highlightFlawless() {
@@ -1344,20 +1354,13 @@ const customUi = {
   },
 };
 
-//========================//
-//   Applying the magic   //
-//========================//
-function applyLootFilter() {
-  applyCustomAffixes();
-  applyCustomRuneNames();
-  applyCustomItemNames();
-  applyCustomUiNames();
-  showItemLevel();
-  showItemQuality();
-  applyTooltipMods();
-  addLightPillars();
-}
 
+
+//========================================//
+//   How to apply the magic: item names   //
+//========================================//
+
+// Gold, Superior/Inferior affixes, Gems (exceptions)
 function applyCustomAffixes() {
   if (config.Gold === "none" && config.Gems === "none" && config.ShortSupInferiorPrefixes === "none") {
     return;
@@ -1369,6 +1372,7 @@ function applyCustomAffixes() {
   applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, customAffixes.items);
 }
 
+// Runes
 function applyCustomRuneNames() {
   if (config.Runes === "none")
     return;
@@ -1377,6 +1381,7 @@ function applyCustomRuneNames() {
   applyCustomNames(FILE_ITEM_RUNES_PATH, customRunes.runes);
 }
 
+// Most item names
 function applyCustomItemNames() {
   customItems.customizeHealingPotions(config.HealingPotions);
   customItems.customizeBuffPotions(config.BuffPotions);
@@ -1393,6 +1398,7 @@ function applyCustomItemNames() {
   applyCustomNames(FILE_ITEM_NAMES_PATH, customItems.items);
 }
 
+// Quest items (exceptions)
 function applyCustomUiNames() {
   if (config.Quest === "none")
     return;
@@ -1406,7 +1412,7 @@ function applyCustomNames(path, customNames) {
   file.forEach((item) => { // overwrite provided entries with new names
     if (item.Key in customNames) {
       for (const key in item) {
-        if (key !== 'id' && key !== 'Key') {
+        if (key !== "id" && key !== "Key") {
           item[key] = customNames[item.Key];
         }
       }
@@ -1415,6 +1421,12 @@ function applyCustomNames(path, customNames) {
   D2RMM.writeJson(path, file); // overwrite existing file with new file
 }
 
+
+//====================================================//
+//   How to apply the magic: item stats & modifiers   //
+//====================================================//
+
+// ilvl
 function showItemLevel() {
   if (!(config.ItemLevel === "show" || config.ItemLevel === "fix")) {
     return;
@@ -1425,7 +1437,7 @@ function showItemLevel() {
   const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
 
   fileWeapons.rows.forEach((row) => {
-    if (row.type === 'tpot') { // exclude throwing potions
+    if (row.type === "tpot") { // exclude throwing potions
       return;
     }
     row.ShowLevel = 1;
@@ -1436,15 +1448,15 @@ function showItemLevel() {
   });
   
   fileMisc.rows.forEach((row) => {
-    if (['amu', 'rin'].indexOf(row.code) !== -1) { // amulets & rings
+    if (["amu", "rin"].indexOf(row.code) !== -1) { // amulets & rings
       row.ShowLevel = 1;
       return;
     }
-    if (['cm1', 'cm2', 'cm3'].indexOf(row.code) !== -1) { // small, large and grand charms
+    if (["cm1", "cm2", "cm3"].indexOf(row.code) !== -1) { // small, large and grand charms
       row.ShowLevel = 1;
       return;
     }
-    if (['jew'].indexOf(row.code) !== -1) { // jewels
+    if (["jew"].indexOf(row.code) !== -1) { // jewels
       row.ShowLevel = 1;
       return;
     }
@@ -1455,6 +1467,7 @@ function showItemLevel() {
   D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
 }
 
+// quality: normal/exceptional/elite
 function showItemQuality() {
   if (config.ItemQuality === "none") {
     return;
@@ -1483,7 +1496,7 @@ function addEquipmentQuality(equipment, itemNames, setting) {
     }
     
     for (const key in itemNames[index]) {
-      if (key !== 'id' && key !== 'Key') {
+      if (key !== "id" && key !== "Key") {
         switch (setting) {
           case "suf-par":
             itemNames[index][key] = `${itemNames[index][key]} (${quality})`;
@@ -1506,6 +1519,72 @@ function addEquipmentQuality(equipment, itemNames, setting) {
   })
 }
 
+
+//===========================================//
+//   How to apply the magic: light pillars   //
+//===========================================//
+
+function addLightPillars() {
+  // runes
+  if (config.ShouldAddLightPillarRunes) {
+    LP_RUNES.forEach((rune) => {
+      pushLightPillarToPath(`${LP_PATH_RUNE}${rune}${LP_RUNES_SUFFIX}${LP_PATH_EXTENSION_JSON}`);
+    });
+  }
+  // circlets
+  if (config.ShouldAddLightPillarCirclets) {
+    LP_CIRCLETS.forEach((circlet) => {
+      pushLightPillarToPath(`${LP_PATH_CIRCLET}${circlet}${LP_PATH_EXTENSION_JSON}`);
+    });
+  }
+  // rings & amulets
+  if (config.ShouldAddLightPillarRingsAmulets) {
+    pushLightPillarToPath(LP_PATH_RING);
+    pushLightPillarToPath(LP_PATH_AMULET);
+  }
+  // jewels
+  if (config.ShouldAddLightPillarGemsJewels) {
+    LP_GEM_QUALITIES.forEach((quality) => {
+      LP_GEM_TYPES.forEach((type) => {
+        pushLightPillarToPath(`${LP_PATH_GEM}${quality}${type}${LP_PATH_EXTENSION_JSON}`);
+      });
+    });
+  }
+  // charms
+  if (config.ShouldAddLightPillarCharms) {
+    LP_CHARMS.forEach((charm) => {
+      pushLightPillarToPath(`${LP_PATH_CHARM}${charm}${LP_PATH_EXTENSION_JSON}`)
+    });
+    pushLightPillarToPath(LP_PATH_TORCH);
+  }
+  // pandemonium keys
+  if (config.ShouldAddLightPillarKeys) {
+    var file = D2RMM.readJson(`${LP_PATH_KEY}${LP_PATH_EXTENSION_JSON}`);
+    pushLightPillarToFile(file);
+
+    for (var i = 1; i <= 3; i++) {
+      const index = (i == 1) ? EMPTY_STRING : `${i}`;
+      const path = `${LP_PATH_KEY}${index}${LP_PATH_EXTENSION_JSON}`;
+      D2RMM.writeJson(path, file);
+    }
+  }
+}
+
+function pushLightPillarToPath(filePath) {
+  const file = D2RMM.readJson(filePath);
+  pushLightPillarToFile(file);
+  D2RMM.writeJson(filePath, file);
+}
+
+function pushLightPillarToFile(file) {
+  file.dependencies.particles.push(LP_LIGHT_COMPONENT.particle);
+  file.entities = file.entities.concat(LP_LIGHT_COMPONENT.entities);
+}
+
+
+//==========================================//
+//   How to apply the magic: tooltip mods   //
+//==========================================//
 function applyTooltipMods() {
   if (config.Tooltip === "none")
     return
@@ -1526,54 +1605,26 @@ function applyTooltipMods() {
   }
   
   D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
-  D2RMM.copyFile('hd', 'hd', true);
+  D2RMM.copyFile("hd", "hd", true);
   // This simply copies the rune.json files instead of modifying each one with code which 
   // I am too dumb to understand how to do. It gets the job done, it may cause issues if 
   // you have other mods that modify the runes.json files.
 }
 
-function addLightPillars() {
-  if (config.ShouldAddLightPillarRunes) {
-    RUNES.forEach((rune) => {
-      pushLightPillarToPath(`${PATH_RUNE}${rune}${RUNES_SUFFIX}${PATH_EXTENSION_JSON}`);
-    });
-  }
 
-  if (config.ShouldAddLightPillarGemsJewels) {
-    GEM_QUALITIES.forEach((quality) => {
-      GEM_TYPES.forEach((type) => {
-        pushLightPillarToPath(`${PATH_GEM}${quality}${type}${PATH_EXTENSION_JSON}`);
-      });
-    });
-  }
+//========================//
+//   Applying the magic   //
+//========================//
 
-  if (config.ShouldAddLightPillarCharms) {
-    charms.forEach((charm) => {
-      pushLightPillarToPath(`${PATH_CHARM}${charm}${PATH_EXTENSION_JSON}`)
-    });
-  }
-
-  if (config.ShouldAddLightPillarKeys) {
-    var file = D2RMM.readJson(`${PATH_KEY}${PATH_EXTENSION_JSON}`);
-    pushLightPillarToFile(file);
-
-    for (var i = 1; i <= 3; i++) {
-      const index = (i == 1) ? '' : `${i}`;
-      const path = `${PATH_KEY}${index}${PATH_EXTENSION_JSON}`;
-      D2RMM.writeJson(path, file);
-    }
-  }
-}
-
-function pushLightPillarToPath(filePath) {
-  const file = D2RMM.readJson(filePath);
-  pushLightPillarToFile(file);
-  D2RMM.writeJson(filePath, file);
-}
-
-function pushLightPillarToFile(file) {
-  file.dependencies.particles.push(LIGHT_COMPONENT.particle);
-  file.entities = file.entities.concat(LIGHT_COMPONENT.entities);
+function applyLootFilter() {
+  applyCustomAffixes();
+  applyCustomRuneNames();
+  applyCustomItemNames();
+  applyCustomUiNames();
+  showItemLevel();
+  showItemQuality();
+  addLightPillars();
+  applyTooltipMods();
 }
 
 applyLootFilter();

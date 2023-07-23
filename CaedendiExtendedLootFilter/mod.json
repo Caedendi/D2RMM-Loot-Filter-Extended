@@ -273,10 +273,24 @@
       "defaultValue": true
     },
     {
+      "id": "ShouldAddLightPillarCirclets",
+      "type": "checkbox",
+      "name": "Circlets",
+      "description": "Shine a Light Pillar on Circlets, Coronets, Tiaras and Diadems on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarRingsAmulets",
+      "type": "checkbox",
+      "name": "Rings & Amulets",
+      "description": "Shine a Light Pillar on Rings and Amulets on the ground.",
+      "defaultValue": true
+    },
+    {
       "id": "ShouldAddLightPillarGemsJewels",
       "type": "checkbox",
       "name": "Gems & Jewels",
-      "description": "Shine a Light Pillar on Gems on the ground.",
+      "description": "Shine a Light Pillar on Gems and Jewels on the ground.",
       "defaultValue": true
     },
     {
