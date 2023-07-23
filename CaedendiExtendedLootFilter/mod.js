@@ -220,16 +220,14 @@ const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "custom
 //================================//
 
 // item paths
-const LP_PATH_ITEMS_MISC = "hd\\items\\misc\\";
 const LP_PATH_ITEMS_ARMOR = "hd\\items\\armor\\";
+const LP_PATH_ITEMS_MISC = "hd\\items\\misc\\";
+const LP_PATH_ITEMS_MISC_QUEST = `${LP_PATH_ITEMS_MISC}quest\\`;
 const LP_PATH_EXTENSION_JSON = ".json";
 const LP_PATH_RUNE = `${LP_PATH_ITEMS_MISC}rune\\`;
 const LP_PATH_CIRCLET = `${LP_PATH_ITEMS_ARMOR}circlet\\`;
-const LP_PATH_RING = `${LP_PATH_ITEMS_MISC}ring\\ring${LP_PATH_EXTENSION_JSON}`;
-const LP_PATH_AMULET = `${LP_PATH_ITEMS_MISC}amulet\\amulet${LP_PATH_EXTENSION_JSON}`;
 const LP_PATH_GEM = `${LP_PATH_ITEMS_MISC}gem\\`;
 const LP_PATH_CHARM = `${LP_PATH_ITEMS_MISC}charm\\`;
-const LP_PATH_TORCH = `${LP_PATH_ITEMS_MISC}torch\\torch${LP_PATH_EXTENSION_JSON}`;
 const LP_PATH_KEY = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
 
 // item names
@@ -243,12 +241,14 @@ const LP_CIRCLETS = ["circlet", "coronet", "tiara", "diadem"];
 const LP_GEM_QUALITIES = ["chipped_", "flawed_", EMPTY_STRING, "flawless_", "perfect_"];
 const LP_GEM_TYPES = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];
 const LP_CHARMS = ["charm_small", "charm_medium", "charm_large"];
+const LP_ESSENCES = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
+const LP_TOKEN = "token_of_absolution";
 
 // vfx paths
 const LP_PATH_VFX_BASE = "data/hd/vfx/particles/overlays/";
-const LP_PATH_HORADRIC_LIGHT = `${PATH_VFX_BASE}object/horadric_light/fx_horadric_light.particles`;
-const LP_PATH_PALADIN_FANATICISM = `${PATH_VFX_BASE}paladin/aura_fanatic/aura_fanatic.particles`;
-const LP_PATH_VALKYRIE_START = `${PATH_VFX_BASE}common/valkyriestart/valkriestart_overlay.particles`;
+const LP_PATH_HORADRIC_LIGHT = `${LP_PATH_VFX_BASE}object/horadric_light/fx_horadric_light.particles`;
+const LP_PATH_PALADIN_FANATICISM = `${LP_PATH_VFX_BASE}paladin/aura_fanatic/aura_fanatic.particles`;
+const LP_PATH_VALKYRIE_START = `${LP_PATH_VFX_BASE}common/valkyriestart/valkriestart_overlay.particles`;
 
 // vfx names
 const LP_DEFINITION_COMPONENT_TRANSFORM = "TransformDefinitionComponent";
@@ -1539,8 +1539,8 @@ function addLightPillars() {
   }
   // rings & amulets
   if (config.ShouldAddLightPillarRingsAmulets) {
-    pushLightPillarToPath(LP_PATH_RING);
-    pushLightPillarToPath(LP_PATH_AMULET);
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\ring${LP_PATH_EXTENSION_JSON}`);
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\amulet${LP_PATH_EXTENSION_JSON}`);
   }
   // jewels
   if (config.ShouldAddLightPillarGemsJewels) {
@@ -1555,7 +1555,21 @@ function addLightPillars() {
     LP_CHARMS.forEach((charm) => {
       pushLightPillarToPath(`${LP_PATH_CHARM}${charm}${LP_PATH_EXTENSION_JSON}`)
     });
-    pushLightPillarToPath(LP_PATH_TORCH);
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch\\torch${LP_PATH_EXTENSION_JSON}`);
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}mephisto_soul_stone${LP_PATH_EXTENSION_JSON}`);
+  }
+  // quest items
+  if (config.ShouldAddLightPillarQuest) {
+    /*
+     * todo
+     */
+  }
+  // essences & tokens
+  if (config.ShouldAddLightPillarEssencesTokens) {
+    LP_ESSENCES.forEach((essence) => {
+      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}${essence}${LP_PATH_EXTENSION_JSON}`);
+    });
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}token_of_absolution${LP_PATH_EXTENSION_JSON}`);
   }
   // pandemonium keys
   if (config.ShouldAddLightPillarKeys) {

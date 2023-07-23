@@ -301,6 +301,20 @@
       "defaultValue": true
     },
     {
+      "id": "ShouldAddLightPillarQuest",
+      "type": "checkbox",
+      "name": "Quest Items",
+      "description": "Shine a Light Pillar on Quest Items (including Uber Organs) on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarEssencesTokens",
+      "type": "checkbox",
+      "name": "Essences & Tokens",
+      "description": "Shine a Light Pillar on Essences and Tokens of Absolution on the ground.",
+      "defaultValue": true
+    },
+    {
       "id": "ShouldAddLightPillarKeys",
       "type": "checkbox",
       "name": "Keys",
