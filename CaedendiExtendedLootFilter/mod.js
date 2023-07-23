@@ -220,15 +220,23 @@ const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "custom
 //================================//
 
 // item paths
-const LP_PATH_ITEMS_ARMOR = "hd\\items\\armor\\";
-const LP_PATH_ITEMS_MISC = "hd\\items\\misc\\";
-const LP_PATH_ITEMS_MISC_QUEST = `${LP_PATH_ITEMS_MISC}quest\\`;
-const LP_PATH_EXTENSION_JSON = ".json";
-const LP_PATH_RUNE = `${LP_PATH_ITEMS_MISC}rune\\`;
-const LP_PATH_CIRCLET = `${LP_PATH_ITEMS_ARMOR}circlet\\`;
-const LP_PATH_GEM = `${LP_PATH_ITEMS_MISC}gem\\`;
-const LP_PATH_CHARM = `${LP_PATH_ITEMS_MISC}charm\\`;
-const LP_PATH_KEY = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
+const LP_PATH_ITEMS                = "hd\\items\\";
+const LP_PATH_ITEMS_ARMOR          = `${LP_PATH_ITEMS}armor\\`;
+const LP_PATH_ITEMS_MISC           = `${LP_PATH_ITEMS}misc\\`;
+const LP_PATH_ITEMS_WEAPON         = `${LP_PATH_ITEMS}weapon\\`;
+
+const LP_PATH_ITEMS_ARMOR_CIRCLET  = `${LP_PATH_ITEMS_ARMOR}circlet\\`;
+const LP_PATH_ITEMS_MISC_BODY_PART = `${LP_PATH_ITEMS_MISC}body_part\\`;
+const LP_PATH_ITEMS_MISC_CHARM     = `${LP_PATH_ITEMS_MISC}charm\\`;
+const LP_PATH_ITEMS_MISC_GEM       = `${LP_PATH_ITEMS_MISC}gem\\`;
+const LP_PATH_ITEMS_MISC_KEY       = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
+const LP_PATH_ITEMS_MISC_RUNE      = `${LP_PATH_ITEMS_MISC}rune\\`;
+const LP_PATH_ITEMS_MISC_QUEST     = `${LP_PATH_ITEMS_MISC}quest\\`;
+const LP_PATH_ITEMS_WEAPON_HAMMER  = `${LP_PATH_ITEMS_WEAPON}hammer\\`;
+const LP_PATH_ITEMS_WEAPON_FLAIL   = `${LP_PATH_ITEMS_WEAPON}flail\\`;
+const LP_PATH_ITEMS_WEAPON_STAFF   = `${LP_PATH_ITEMS_WEAPON}staff\\`;
+
+const LP_PATH_EXTENSION_JSON       = ".json";
 
 // item names
 const LP_RUNES = [
@@ -243,6 +251,11 @@ const LP_GEM_TYPES = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topa
 const LP_CHARMS = ["charm_small", "charm_medium", "charm_large"];
 const LP_ESSENCES = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
 const LP_TOKEN = "token_of_absolution";
+const LP_ORGANS = ["brain", "eye", "horn"];
+const LP_QUEST = [
+  ["path", "item"],
+  ["path", "item"],
+];
 
 // vfx paths
 const LP_PATH_VFX_BASE = "data/hd/vfx/particles/overlays/";
@@ -1528,63 +1541,70 @@ function addLightPillars() {
   // runes
   if (config.ShouldAddLightPillarRunes) {
     LP_RUNES.forEach((rune) => {
-      pushLightPillarToPath(`${LP_PATH_RUNE}${rune}${LP_RUNES_SUFFIX}${LP_PATH_EXTENSION_JSON}`);
+      pushLightPillarToPath(LP_PATH_ITEMS_MISC_RUNE, `${rune}${LP_RUNES_SUFFIX}`);
     });
   }
   // circlets
   if (config.ShouldAddLightPillarCirclets) {
     LP_CIRCLETS.forEach((circlet) => {
-      pushLightPillarToPath(`${LP_PATH_CIRCLET}${circlet}${LP_PATH_EXTENSION_JSON}`);
+      pushLightPillarToPath(LP_PATH_ITEMS_ARMOR_CIRCLET, circlet);
     });
   }
   // rings & amulets
   if (config.ShouldAddLightPillarRingsAmulets) {
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\ring${LP_PATH_EXTENSION_JSON}`);
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\amulet${LP_PATH_EXTENSION_JSON}`);
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring`, "ring");
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet`, "amulet");
   }
   // jewels
   if (config.ShouldAddLightPillarGemsJewels) {
     LP_GEM_QUALITIES.forEach((quality) => {
       LP_GEM_TYPES.forEach((type) => {
-        pushLightPillarToPath(`${LP_PATH_GEM}${quality}${type}${LP_PATH_EXTENSION_JSON}`);
+        pushLightPillarToPath(LP_PATH_ITEMS_MISC_GEM, `${quality}${type}`);
       });
     });
   }
   // charms
   if (config.ShouldAddLightPillarCharms) {
     LP_CHARMS.forEach((charm) => {
-      pushLightPillarToPath(`${LP_PATH_CHARM}${charm}${LP_PATH_EXTENSION_JSON}`)
+      pushLightPillarToPath(LP_PATH_ITEMS_MISC_CHARM, charm);
     });
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch\\torch${LP_PATH_EXTENSION_JSON}`);
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}mephisto_soul_stone${LP_PATH_EXTENSION_JSON}`);
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch`, "torch");
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
   }
   // quest items
   if (config.ShouldAddLightPillarQuest) {
-    /*
-     * todo
-     */
+    LP_QUEST.forEach((questItem) => {
+      pushLightPillarToPath(questItem[0], questItem[1]);
+    });
   }
   // essences & tokens
-  if (config.ShouldAddLightPillarEssencesTokens) {
+  if (config.ShouldAddLightPillarEssences) {
     LP_ESSENCES.forEach((essence) => {
-      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}${essence}${LP_PATH_EXTENSION_JSON}`);
+      pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, essence);
     });
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}token_of_absolution${LP_PATH_EXTENSION_JSON}`);
+  }
+  if (config.ShouldAddLightPillarTokens) {
+    pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, "token_of_absolution");
   }
   // pandemonium keys
   if (config.ShouldAddLightPillarKeys) {
-    var file = D2RMM.readJson(`${LP_PATH_KEY}${LP_PATH_EXTENSION_JSON}`);
+    var file = D2RMM.readJson(LP_PATH_ITEMS_MISC_KEY);
     pushLightPillarToFile(file);
-
     for (var i = 1; i <= 3; i++) {
-      const index = (i == 1) ? EMPTY_STRING : `${i}`;
-      const path = `${LP_PATH_KEY}${index}${LP_PATH_EXTENSION_JSON}`;
-      D2RMM.writeJson(path, file);
+      let index = (i == 1) ? EMPTY_STRING : `${i}`;
+      D2RMM.writeJson(`${LP_PATH_ITEMS_MISC_KEY}${index}${LP_PATH_EXTENSION_JSON}`, file);
     }
+  }
+  // pandemonium event (ubers) organs
+  if (config.ShouldAddLightPillarOrgans) {
+    LP_ORGANS.forEach((organ) => {
+      pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, organ);
+    });
   }
 }
 
-function pushLightPillarToPath(filePath) {
+function pushLightPillarToPath(path, item) {
+  let filePath = `${path}${item}${LP_PATH_EXTENSION_JSON}`;
   const file = D2RMM.readJson(filePath);
   pushLightPillarToFile(file);
   D2RMM.writeJson(filePath, file);

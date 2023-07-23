@@ -290,28 +290,35 @@
       "id": "ShouldAddLightPillarGemsJewels",
       "type": "checkbox",
       "name": "Gems & Jewels",
-      "description": "Shine a Light Pillar on Gems and Jewels on the ground.",
+      "description": "Shine a Light Pillar on Gems and Jewels on the ground. Since these item types share the same graphics, they can not be set separately.",
       "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarCharms",
       "type": "checkbox",
       "name": "Charms",
-      "description": "Shine a Light Pillar on Charms on the ground.",
+      "description": "Shine a Light Pillar on Charms on the ground. Annihilus shares its graphics with Mephisto's Soulstone, so enabling either Charms or Quest Items results in Light Pillars for both.",
       "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarQuest",
       "type": "checkbox",
       "name": "Quest Items",
-      "description": "Shine a Light Pillar on Quest Items (including Uber Organs) on the ground.",
+      "description": "Shine a Light Pillar on Quest Items on the ground. Khalim's Eye and Brain share graphics with Baal's Eye and Mephisto's Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
       "defaultValue": true
     },
     {
-      "id": "ShouldAddLightPillarEssencesTokens",
+      "id": "ShouldAddLightPillarEssences",
       "type": "checkbox",
-      "name": "Essences & Tokens",
-      "description": "Shine a Light Pillar on Essences and Tokens of Absolution on the ground.",
+      "name": "Essences",
+      "description": "Shine a Light Pillar on Essences on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarTokens",
+      "type": "checkbox",
+      "name": "Token of Absolution",
+      "description": "Shine a Light Pillar on Tokens of Absolution on the ground.",
       "defaultValue": true
     },
     {
@@ -319,6 +326,13 @@
       "type": "checkbox",
       "name": "Keys",
       "description": "Shine a Light Pillar on Keys of Terror/Hate/Destruction on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarOrgans",
+      "type": "checkbox",
+      "name": "Organs",
+      "description": "Shine a Light Pillar on Uber Organs on the ground. Baal's Eye and Mephisto's Brainshare graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
       "defaultValue": true
     },
     {
