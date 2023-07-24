@@ -297,7 +297,7 @@
       "id": "ShouldAddLightPillarCharms",
       "type": "checkbox",
       "name": "Charms",
-      "description": "Shine a Light Pillar on Charms on the ground. Annihilus shares its graphics with Mephisto's Soulstone, so enabling either Charms or Quest Items results in Light Pillars for both.",
+      "description": "Shine a Light Pillar on Charms on the ground. Annihilus shares its graphics with Mephisto's Soulstone, so enabling either Charms or Quest Items results in Light Pillars for both. Unfortunately Hellfire Torch is not supported because some monsters carry Torches. I can't enable Light Pillars for Torches without turning certain monster groups into a dance party.",
       "defaultValue": true
     },
     {
