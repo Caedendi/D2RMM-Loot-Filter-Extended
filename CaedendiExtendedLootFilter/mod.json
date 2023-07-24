@@ -332,7 +332,14 @@
       "id": "ShouldAddLightPillarOrgans",
       "type": "checkbox",
       "name": "Organs",
-      "description": "Shine a Light Pillar on Uber Organs on the ground. Baal's Eye and Mephisto's Brainshare graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
+      "description": "Shine a Light Pillar on Uber Organs on the ground. Baal's Eye and Mephisto's Brain share graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarStandardOfHeroes",
+      "type": "checkbox",
+      "name": "Standard of Heroes",
+      "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported, this will still shine a Light Pillar when you kill the Übers.",
       "defaultValue": true
     },
     {

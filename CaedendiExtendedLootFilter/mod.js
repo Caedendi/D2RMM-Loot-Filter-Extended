@@ -1616,6 +1616,10 @@ function addLightPillars() {
       pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "eye");
     }
   }
+  // pandemonium event (ubers) organs
+  if (config.ShouldAddLightPillarStandardOfHeroes) {
+    pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "flag");
+  }
 }
 
 function pushLightPillarToPath(path, item) {
