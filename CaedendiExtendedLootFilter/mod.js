@@ -841,8 +841,8 @@ const customItems = {
   },
 
   highlightScrolls(colorHighlight, colorName, pattern, padding) {
-    this.items.tbk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "TP"); // Scroll of Town Portal
-    this.items.ibk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "ID"); // Scroll of Identify
+    this.items.tsc = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "TP"); // Scroll of Town Portal
+    this.items.isc = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "ID"); // Scroll of Identify
   },
 
   highlightTomes(colorHighlight, colorName, pattern, padding) {
