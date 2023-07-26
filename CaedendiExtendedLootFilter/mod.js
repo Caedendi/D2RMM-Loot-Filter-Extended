@@ -762,6 +762,9 @@ const customItems = {
         return;
       case "custom": // [CSTM-BPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.yps = "Antidote Potion";
+        this.items.wms = "Thawing Potion";
+        this.items.vps = "Stamina Potion";
         return;
     }
   },
@@ -866,6 +869,8 @@ const customItems = {
         return;
       case "custom": // [CSTM-ARB]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.aqv = "Arrows";
+        this.items.cqv = "Bolts";
         return;
     }
   },
@@ -1359,7 +1364,7 @@ function applyCustomAffixes() {
 
 // Runes
 function applyCustomRuneNames() {
-  if (config.Runes === "none")
+  if (config.Runes === "none" || config.Runes === "raf")
     return;
   
   customRunes.customizeRunes(config.Runes);
