@@ -13,16 +13,21 @@
 //===============//
 
 // File paths
-const FILE_PROFILE_HD_PATH = "global\\ui\\layouts\\_profilehd.json";
+const FILE_EXTENSION_JSON = ".json";
+const FILE_EXTENSION_TXT = ".txt";
 
-const FILE_ITEM_NAMEAFFIXES_PATH = "local\\lng\\strings\\item-nameaffixes.json";
-const FILE_ITEM_NAMES_PATH = "local\\lng\\strings\\item-names.json";
-const FILE_ITEM_RUNES_PATH = "local\\lng\\strings\\item-runes.json";
-const FILE_UI_PATH = "local\\lng\\strings\\ui.json";
+const FILE_PROFILE_HD_PATH = `global\\ui\\layouts\\_profilehd${FILE_EXTENSION_JSON}`;
 
-const FILE_WEAPONS_PATH = "global\\excel\\weapons.txt";
-const FILE_ARMOR_PATH = "global\\excel\\armor.txt";
-const FILE_MISC_PATH = "global\\excel\\misc.txt";
+const FILE_PATH_STRINGS          = "local\\lng\\strings\\";
+const FILE_ITEM_NAMEAFFIXES_PATH = `${FILE_PATH_STRINGS}item-nameaffixes${FILE_EXTENSION_JSON}`;
+const FILE_ITEM_NAMES_PATH       = `${FILE_PATH_STRINGS}item-names${FILE_EXTENSION_JSON}`;
+const FILE_ITEM_RUNES_PATH       = `${FILE_PATH_STRINGS}item-runes${FILE_EXTENSION_JSON}`;
+const FILE_UI_PATH               = `${FILE_PATH_STRINGS}ui${FILE_EXTENSION_JSON}`;
+
+const FILE_EXCEL        = "global\\excel\\"
+const FILE_WEAPONS_PATH = `${FILE_EXCEL}weapons${FILE_EXTENSION_TXT}`;
+const FILE_ARMOR_PATH   = `${FILE_EXCEL}armor${FILE_EXTENSION_TXT}`;
+const FILE_MISC_PATH    = `${FILE_EXCEL}misc${FILE_EXTENSION_TXT}`;
 
 // Color
 const COLOR_PREFIX = "ÿc";
@@ -228,7 +233,6 @@ const LP_PATH_ITEMS_MISC_QUEST     = `${LP_PATH_ITEMS_MISC}quest\\`;
 const LP_PATH_ITEMS_WEAPON_HAMMER  = `${LP_PATH_ITEMS_WEAPON}hammer\\`;
 const LP_PATH_ITEMS_WEAPON_MACE    = `${LP_PATH_ITEMS_WEAPON}mace\\`;
 const LP_PATH_ITEMS_WEAPON_STAFF   = `${LP_PATH_ITEMS_WEAPON}staff\\`;
-const LP_PATH_EXTENSION_JSON       = ".json";
 
 // vfx paths
 const LP_PATH_VFX_BASE = "data/hd/vfx/particles/overlays/";
@@ -1149,14 +1153,12 @@ const customItems = {
         this.items.bks = `Scroll of Inifuss`;    // Scroll of Inifuss
         this.items.bkd = `Scroll of Inifuss`;    // Scroll of Inifuss (deciphered)
         // Act 2
-        this.items.ass = `Book of Skill`;        // Book of Skill
         this.items.tr1 = `Horadric Scroll`;      // Horadric Scroll
         this.items.box = `Horadric Cube`;        // Horadric Cube
         this.items.msf = `Staff of Kings`;       // Staff of Kings
         this.items.vip = `Amulet of the Viper`;  // Amulet of the Viper
         this.items.hst = `Horadric Staff`;       // Horadric Staff
         // Act 3
-        this.items.xyz = `Potion of Life`;       // Potion of Life
         this.items.j34 = `A Jade Figurine`;      // A Jade Figurine
         this.items.g34 = `The Golden Bird`;      // The Golden Bird
         this.items.bbb = `Lam Esen's Tome`;      // Lam Esen's Tome
@@ -1186,19 +1188,18 @@ const customItems = {
   },
 
   highlightQuestItems() {
+    // for Book of Skill and Potion of Life, see [CSTM-QST2]
     // Act 1
     this.items.leg = `${QUEST_PREFIX}Wirt's Leg${QUEST_SUFFIX}`;           // Wirt's Leg
     this.items.hdm = `${QUEST_PREFIX}Horadric Malus${QUEST_SUFFIX}`;       // Horadric Malus
     this.items.bks = `${QUEST_PREFIX}Scroll of Inifuss${QUEST_SUFFIX}`;    // Scroll of Inifuss
     this.items.bkd = `${QUEST_PREFIX}Scroll of Inifuss${QUEST_SUFFIX}`;    // Scroll of Inifuss (deciphered)
     // Act 2
-    this.items.ass = `${QUEST_PREFIX}Book of Skill${QUEST_SUFFIX}`;        // Book of Skill
     this.items.tr1 = `${QUEST_PREFIX}Horadric Scroll${QUEST_SUFFIX}`;      // Horadric Scroll
     this.items.msf = `${QUEST_PREFIX}Staff of Kings${QUEST_SUFFIX}`;       // Staff of Kings
     this.items.vip = `${QUEST_PREFIX}Amulet of the Viper${QUEST_SUFFIX}`;  // Amulet of the Viper
     this.items.hst = `${QUEST_PREFIX}Horadric Staff${QUEST_SUFFIX}`;       // Horadric Staff
     // Act 3
-    this.items.xyz = `${QUEST_PREFIX}Potion of Life${QUEST_SUFFIX}`;       // Potion of Life
     this.items.j34 = `${QUEST_PREFIX}A Jade Figurine${QUEST_SUFFIX}`;      // A Jade Figurine
     this.items.g34 = `${QUEST_PREFIX}The Golden Bird${QUEST_SUFFIX}`;      // The Golden Bird
     this.items.bbb = `${QUEST_PREFIX}Lam Esen's Tome${QUEST_SUFFIX}`;      // Lam Esen's Tome
@@ -1323,7 +1324,7 @@ const customItems = {
 
 const customUi = {
   items: {},
-  
+
   //=================//
   //   Quest Items   //
   //=================//
@@ -1333,8 +1334,9 @@ const customUi = {
       case "none": // no change
         return;
       case "all": // highlight all
-        this.items.ass = `${QUEST_PREFIX}Book of Skill${QUEST_PREFIX}`;  // Book of Skill
-        this.items.xyz = `${QUEST_PREFIX}Potion of Life${QUEST_PREFIX}`; // Potion of Life
+      case "xhc": // exclude horadric cube
+        this.items.ass = `${QUEST_PREFIX}Book of Skill${QUEST_SUFFIX}`;  // Book of Skill
+        this.items.xyz = `${QUEST_PREFIX}Potion of Life${QUEST_SUFFIX}`; // Potion of Life
         return;
       case "custom": // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -1606,11 +1608,11 @@ function addLightPillars() {
   // pandemonium keys
   if (config.ShouldAddLightPillarKeys) {
     let path = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
-    var file = D2RMM.readJson(`${path}${LP_PATH_EXTENSION_JSON}`);
+    var file = D2RMM.readJson(`${path}${FILE_EXTENSION_JSON}`);
     pushLightPillarToFile(file);
     for (var i = 1; i <= 3; i++) {
       let index = (i == 1) ? EMPTY_STRING : `${i}`;
-      D2RMM.writeJson(`${path}${index}${LP_PATH_EXTENSION_JSON}`, file);
+      D2RMM.writeJson(`${path}${index}${FILE_EXTENSION_JSON}`, file);
     }
   }
   // pandemonium event (ubers) organs
@@ -1628,7 +1630,7 @@ function addLightPillars() {
 }
 
 function pushLightPillarToPath(path, item) {
-  let filePath = `${path}${item}${LP_PATH_EXTENSION_JSON}`;
+  let filePath = `${path}${item}${FILE_EXTENSION_JSON}`;
   let file = D2RMM.readJson(filePath);
   pushLightPillarToFile(file);
   D2RMM.writeJson(filePath, file);
