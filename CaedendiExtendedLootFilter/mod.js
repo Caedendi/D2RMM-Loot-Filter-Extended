@@ -19,6 +19,7 @@ const FILE_EXTENSION_TXT = ".txt";
 const FILE_PROFILE_HD_PATH = `global\\ui\\layouts\\_profilehd${FILE_EXTENSION_JSON}`;
 
 const FILE_PATH_STRINGS          = "local\\lng\\strings\\";
+const FILE_ITEM_MODIFIERS_PATH   = `${FILE_PATH_STRINGS}item-modifiers${FILE_EXTENSION_JSON}`;
 const FILE_ITEM_NAMEAFFIXES_PATH = `${FILE_PATH_STRINGS}item-nameaffixes${FILE_EXTENSION_JSON}`;
 const FILE_ITEM_NAMES_PATH       = `${FILE_PATH_STRINGS}item-names${FILE_EXTENSION_JSON}`;
 const FILE_ITEM_RUNES_PATH       = `${FILE_PATH_STRINGS}item-runes${FILE_EXTENSION_JSON}`;
@@ -1172,8 +1173,7 @@ const customItems = {
         // Act 4
         this.items.hfh = `Hell Forge Hammer`;    // Hell Forge Hammer
         // Act 5
-        this.items.ice = `Malah's Potion`;       // Malah's Potion
-        this.items.tr2 = `Scroll of Resistance`; // Scroll of Resistance
+        // See exceptions [CSTM-QST2]
 
         // Extra
         this.items["Staff of Kings"]      = `Staff of Kings`;      // Staff of Kings
@@ -1216,8 +1216,7 @@ const customItems = {
     // Act 4
     this.items.hfh = `${prefix}Hell Forge Hammer${suffix}`;    // Hell Forge Hammer
     // Act 5
-    this.items.ice = `${prefix}Malah's Potion${suffix}`;       // Malah's Potion
-    this.items.tr2 = `${prefix}Scroll of Resistance${suffix}`; // Scroll of Resistance
+    // See exceptions [CSTM-QST2]
 
     // Extra
     this.items["Staff of Kings"]      = `${prefix}Staff of Kings${suffix}`;      // Staff of Kings
@@ -1262,23 +1261,14 @@ const customItems = {
       case "none": // no change
         return;
       case "all": // highlight all
-        this.highlightEssences(ESSENCE_PREFIX, ESSENCE_SUFFIX);
-        this.highlightToken(TOKEN_PREFIX, TOKEN_SUFFIX);
-        this.highlightKeys(KEY_PREFIX, KEY_SUFFIX);
-        this.highlightOrgans(ORGAN_PREFIX, ORGAN_SUFFIX);
-        this.highlightStandardOfHeroes(STANDARD_OF_HEROES_PREFIX, STANDARD_OF_HEROES_SUFFIX);
+        this.highlightEndgameItems();
+        this.items.std = `${STANDARD_OF_HEROES_PREFIX}Standard of Heroes${STANDARD_OF_HEROES_SUFFIX}`; // Standard of Heroes
         return;
       case "xsh": // exclude Standard of Heroes from highlighting
-        this.highlightEssences(ESSENCE_PREFIX, ESSENCE_SUFFIX);
-        this.highlightToken(TOKEN_PREFIX, TOKEN_SUFFIX);
-        this.highlightKeys(KEY_PREFIX, KEY_SUFFIX);
-        this.highlightOrgans(ORGAN_PREFIX, ORGAN_SUFFIX);
+        this.highlightEndgameItems();
         return;
       case "hsh": // hide Standard of Heroes
-        this.highlightEssences(ESSENCE_PREFIX, ESSENCE_SUFFIX);
-        this.highlightToken(TOKEN_PREFIX, TOKEN_SUFFIX);
-        this.highlightKeys(KEY_PREFIX, KEY_SUFFIX);
-        this.highlightOrgans(ORGAN_PREFIX, ORGAN_SUFFIX);
+        this.highlightEndgameItems();
         this.items.std = HIDDEN;
         return;
       case "custom": // [CSTM-END]
@@ -1297,6 +1287,13 @@ const customItems = {
         this.items.std = `Standard of Heroes`;
         return;
     }
+  },
+
+  highlightEndgameItems() {
+    this.highlightEssences(ESSENCE_PREFIX, ESSENCE_SUFFIX);
+    this.highlightToken(TOKEN_PREFIX, TOKEN_SUFFIX);
+    this.highlightKeys(KEY_PREFIX, KEY_SUFFIX);
+    this.highlightOrgans(ORGAN_PREFIX, ORGAN_SUFFIX);
   },
   
   highlightEssences(prefix, suffix) {
@@ -1321,10 +1318,6 @@ const customItems = {
     this.items.bey = `${prefix}Baal's Eye${suffix}`;                       // Baal's Eye
     this.items.mbr = `${prefix}Mephisto's Brain${suffix}`;                 // Mephisto's Brain
   },
-
-  highlightStandardOfHeroes(prefix, suffix) {
-    this.items.std = `${prefix}Standard of Heroes${suffix}`; // Standard of Heroes
-  },
 };
 
 const customUi = {
@@ -1347,6 +1340,31 @@ const customUi = {
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.ass = `Book of Skill`;  // Book of Skill
         this.items.xyz = `Potion of Life`; // Potion of Life
+        return;
+    }
+  },
+};
+
+const customModifiers = {
+  items: {},
+
+  //=================//
+  //   Quest Items   //
+  //=================//
+  customizeQuestItems(setting) {
+    // Section specific to Malah's Potion and Scroll of Resistance, as these items are in a different file.
+    switch (setting) {
+      case "none": // no change
+        return;
+      case "all": // highlight all
+      case "xhc": // exclude horadric cube
+        this.items.ice = `${QUEST_PREFIX}Malah's Potion${QUEST_SUFFIX}`;       // Malah's Potion
+        this.items.tr2 = `${QUEST_PREFIX}Scroll of Resistance${QUEST_SUFFIX}`; // Scroll of Resistance
+        return;
+      case "custom": // [CSTM-QST2]
+        // ADD YOUR CUSTOM ITEM NAMES HERE
+        this.items.ice = `Malah's Potion`;       // Malah's Potion
+        this.items.tr2 = `Scroll of Resistance`; // Scroll of Resistance
         return;
     }
   },
@@ -1402,6 +1420,14 @@ function applyCustomUiNames() {
 
   customUi.customizeQuestItems(config.Quest);
   applyCustomNames(FILE_UI_PATH, customUi.items);
+}
+
+function applyCustomModifiers() {
+  if (config.Quest === "none")
+    return;
+
+  customModifiers.customizeQuestItems(config.Quest);
+  applyCustomNames(FILE_ITEM_MODIFIERS_PATH, customModifiers.items);
 }
 
 function applyCustomNames(path, customNames) {
@@ -1526,7 +1552,7 @@ function addLightPillars() {
   if (config.ShouldAddLightPillarRunes) {
     [
       "el", "eld", "tir", "nef", "eth", "ith", "tal", "ral", "ort", "thul", "amn", 
-      "sol", "shael", "dol", "hel", "io","lum", "ko", "fal", "lem", "pul","um", 
+      "sol", "shael", "dol", "hel", "io", "lum", "ko", "fal", "lem", "pul", "um", 
       "mal", "ist", "gul", "vex", "ohm", "lo", "sur", "ber", "jah", "cham", "zod",
     ].forEach((rune) => {
       pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune}_rune`);
@@ -1567,96 +1593,46 @@ function addLightPillars() {
   if (config.ShouldAddLightPillarQuest) {
     let questItems = [
       // act 1
-      [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
-      [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
       [`${LP_PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
       // act 2
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
-      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
       [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
-      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
       // act 3
-      // potion of life
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life
-      [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
-      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
       [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
       [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
       [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
-      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
+      // act 4
+      // none
+      // act 5
+      // Malah's Potion       => see Potion of Life (scroll_of_self_resurrect)
+      // Scroll of Resistance => see Scroll of Inifuss (bark_scroll)
+    ];
+    if (!config.ShouldExcludeLightPillarQuestWeapons) {
+      questItems.concat([
+      // act 1
+      [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
+      [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
+      // act 2
+      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
+      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
+      // act 3
+      [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
+      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
+      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
       // act 4
       [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
       // act 5
-      // malah's potion ?                                                   // Malah's Potion
-      // scroll of resistance ?                                             // Scroll of Resistance
-
-
-      // data:data\hd\items\misc\potion\antidote_potion
-      // data:data\hd\items\misc\potion\elixir
-      // data:data\hd\items\misc\potion\full_healing_potion
-      // data:data\hd\items\misc\potion\full_mana_potion
-      // data:data\hd\items\misc\potion\full_rejuv_potion
-      // data:data\hd\items\misc\potion\greater_healing_potion
-      // data:data\hd\items\misc\potion\greater_mana_potion
-      // data:data\hd\items\misc\potion\healing_potion
-      // data:data\hd\items\misc\potion\healing_potion2
-      // data:data\hd\items\misc\potion\lesser_healing_potion
-      // data:data\hd\items\misc\potion\lesser_mana_potion
-      // data:data\hd\items\misc\potion\light_healing_potion
-      // data:data\hd\items\misc\potion\light_mana_potion
-      // data:data\hd\items\misc\potion\mana_potion
-      // data:data\hd\items\misc\potion\mana_potion2
-      // data:data\hd\items\misc\potion\rejuv_potion
-      // data:data\hd\items\misc\potion\stamina_potion
-      // data:data\hd\items\misc\potion\strong_healing_potion
-      // data:data\hd\items\misc\potion\strong_mana_potion
-      // data:data\hd\items\misc\potion\thawing_potion
-      // data:data\hd\items\misc\quest\scroll_of_self_resurrect
-
-
-      // [`${LP_PATH_ITEMS_MISC}potion\\_monsters\\`,   "lysander_potion"],                        // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "antidote_potion"],                        // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "elixir"],                        // Potion of Life TODO
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "full_healing_potion"],           // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "full_mana_potion"],              // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "full_rejuv_potion"],             // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "greater_healing_potion"],        // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "greater_mana_potion"],           // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "healing_potion"],                // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "healing_potion2"],               // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "lesser_healing_potion"],         // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "lesser_mana_potion"],            // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "light_healing_potion"],          // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "light_mana_potion"],             // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "mana_potion"],                   // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "mana_potion2"],                  // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "rejuv_potion"],                  // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "stamina_potion"],                // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "strong_healing_potion"],         // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "strong_mana_potion"],            // ??
-      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "thawing_potion"],                // ??
-      // [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
-      // [`${LP_PATH_ITEMS_MISC_QUEST}`,   "scroll_of_self_resurrect"],
-      // [`${LP_PATH_ITEMS_MISC}herb\\`,   "herb"],
-      // [`${LP_PATH_ITEMS_MISC}whetstone\\`,   "fe_axe_whetstone"],
-
-      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "choking_gas_potion"],
-      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "exploding_potion"],
-      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "fulminating_potion"],
-      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "oil_potion"],
-      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "rancid_gas_potion"],
-      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "strangling_gas_potion"],
-      // [`${LP_PATH_ITEMS_WEAPON}potion\\_monster\\`,   "slinger_gas_potion"],
-      // [`${LP_PATH_ITEMS_WEAPON}potion\\_monster\\`,   "slinger_oil_potion"],
-      
-    ];
+      // none
+      ]);
+    }
     questItems.forEach((item) => {
       pushLightPillarToPath(item[0], item[1]);
     });
@@ -1747,6 +1723,7 @@ function applyLootFilter() {
   applyCustomRuneNames();
   applyCustomItemNames();
   applyCustomUiNames();
+  applyCustomModifiers();
   showItemLevel();
   showItemQuality();
   addLightPillars();

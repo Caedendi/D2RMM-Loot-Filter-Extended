@@ -308,6 +308,13 @@
       "defaultValue": true
     },
     {
+      "id": "ShouldExcludeLightPillarQuestWeapons",
+      "type": "checkbox",
+      "name": "Quest Items: exclude weapons",
+      "description": "Exclude Light Pillars on Quest Weapons on the ground. Equipping a Quest Weapon with Light Pillars enabled will also shine a Light Pillar on your character's weapon. Enable this if for instance you want to use Khalim's Will on a low level character.",
+      "defaultValue": false
+    },
+    {
       "id": "ShouldAddLightPillarEssences",
       "type": "checkbox",
       "name": "Essences",
