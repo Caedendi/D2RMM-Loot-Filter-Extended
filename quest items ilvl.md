@@ -11,7 +11,7 @@
 |    tr1    | Horadric Scroll                | item-names.json     |  -   |  no   |
 |    msf    | Staff of Kings                 | item-names.json     |  xx  |  no   |
 |    vip    | Amulet of the Viper            | item-names.json     |  -   |  no   |
-|    hst    | Horadric Staff                 | item-names.json     |  xx  |  no   |
+|    hst    | Horadric Staff                 | item-names.json     |  x   |  no   |
 |    j34    | A Jade Figurine                | item-names.json     |  -   |  no   |
 |    g34    | The Golden Bird                | item-names.json     |  -   |  no   |
 |    xyz    | Potion of Life                 | ui.json             |  -   |  no   |

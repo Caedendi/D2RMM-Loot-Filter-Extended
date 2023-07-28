@@ -1189,59 +1189,64 @@ const customItems = {
 
   highlightQuestItems() {
     // for Book of Skill and Potion of Life, see [CSTM-QST2]
+    let prefix = QUEST_PREFIX;
+    let suffix = QUEST_SUFFIX;
+
     // Act 1
-    this.items.leg = `${QUEST_PREFIX}Wirt's Leg${QUEST_SUFFIX}`;           // Wirt's Leg
-    this.items.hdm = `${QUEST_PREFIX}Horadric Malus${QUEST_SUFFIX}`;       // Horadric Malus
-    this.items.bks = `${QUEST_PREFIX}Scroll of Inifuss${QUEST_SUFFIX}`;    // Scroll of Inifuss
-    this.items.bkd = `${QUEST_PREFIX}Scroll of Inifuss${QUEST_SUFFIX}`;    // Scroll of Inifuss (deciphered)
+    this.items.leg = `${prefix}Wirt's Leg${suffix}`;           // Wirt's Leg
+    this.items.hdm = `${prefix}Horadric Malus${suffix}`;       // Horadric Malus
+    this.items.bks = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss
+    this.items.bkd = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss (deciphered)
     // Act 2
-    this.items.tr1 = `${QUEST_PREFIX}Horadric Scroll${QUEST_SUFFIX}`;      // Horadric Scroll
-    this.items.msf = `${QUEST_PREFIX}Staff of Kings${QUEST_SUFFIX}`;       // Staff of Kings
-    this.items.vip = `${QUEST_PREFIX}Amulet of the Viper${QUEST_SUFFIX}`;  // Amulet of the Viper
-    this.items.hst = `${QUEST_PREFIX}Horadric Staff${QUEST_SUFFIX}`;       // Horadric Staff
+    this.items.tr1 = `${prefix}Horadric Scroll${suffix}`;      // Horadric Scroll
+    this.items.msf = `${prefix}Staff of Kings${suffix}`;       // Staff of Kings
+    this.items.vip = `${prefix}Amulet of the Viper${suffix}`;  // Amulet of the Viper
+    this.items.hst = `${prefix}Horadric Staff${suffix}`;       // Horadric Staff
     // Act 3
-    this.items.j34 = `${QUEST_PREFIX}A Jade Figurine${QUEST_SUFFIX}`;      // A Jade Figurine
-    this.items.g34 = `${QUEST_PREFIX}The Golden Bird${QUEST_SUFFIX}`;      // The Golden Bird
-    this.items.bbb = `${QUEST_PREFIX}Lam Esen's Tome${QUEST_SUFFIX}`;      // Lam Esen's Tome
-    this.items.g33 = `${QUEST_PREFIX}The Gidbinn${QUEST_SUFFIX}`;          // The Gidbinn
-    this.items.qf1 = `${QUEST_PREFIX}Khalim's Flail${QUEST_SUFFIX}`;       // Khalim's Flail
-    this.items.qf2 = `${QUEST_PREFIX}Khalim's Will${QUEST_SUFFIX}`;        // Khalim's Will
-    this.items.qey = `${QUEST_PREFIX}Khalim's Eye${QUEST_SUFFIX}`;         // Khalim's Eye
-    this.items.qhr = `${QUEST_PREFIX}Khalim's Heart${QUEST_SUFFIX}`;       // Khalim's Heart
-    this.items.qbr = `${QUEST_PREFIX}Khalim's Brain${QUEST_SUFFIX}`;       // Khalim's Brain
-    this.items.mss = `${QUEST_PREFIX}Mephisto's Soulstone${QUEST_SUFFIX}`; // Mephisto's Soulstone
+    this.items.j34 = `${prefix}A Jade Figurine${suffix}`;      // A Jade Figurine
+    this.items.g34 = `${prefix}The Golden Bird${suffix}`;      // The Golden Bird
+    this.items.bbb = `${prefix}Lam Esen's Tome${suffix}`;      // Lam Esen's Tome
+    this.items.g33 = `${prefix}The Gidbinn${suffix}`;          // The Gidbinn
+    this.items.qf1 = `${prefix}Khalim's Flail${suffix}`;       // Khalim's Flail
+    this.items.qf2 = `${prefix}Khalim's Will${suffix}`;        // Khalim's Will
+    this.items.qey = `${prefix}Khalim's Eye${suffix}`;         // Khalim's Eye
+    this.items.qhr = `${prefix}Khalim's Heart${suffix}`;       // Khalim's Heart
+    this.items.qbr = `${prefix}Khalim's Brain${suffix}`;       // Khalim's Brain
+    this.items.mss = `${prefix}Mephisto's Soulstone${suffix}`; // Mephisto's Soulstone
     // Act 4
-    this.items.hfh = `${QUEST_PREFIX}Hell Forge Hammer${QUEST_SUFFIX}`;    // Hell Forge Hammer
+    this.items.hfh = `${prefix}Hell Forge Hammer${suffix}`;    // Hell Forge Hammer
     // Act 5
-    this.items.ice = `${QUEST_PREFIX}Malah's Potion${QUEST_SUFFIX}`;       // Malah's Potion
-    this.items.tr2 = `${QUEST_PREFIX}Scroll of Resistance${QUEST_SUFFIX}`; // Scroll of Resistance
+    this.items.ice = `${prefix}Malah's Potion${suffix}`;       // Malah's Potion
+    this.items.tr2 = `${prefix}Scroll of Resistance${suffix}`; // Scroll of Resistance
 
     // Extra
-    this.items["Staff of Kings"]      = `${QUEST_PREFIX}Staff of Kings${QUEST_SUFFIX}`;      // Staff of Kings
-    this.items["Amulet of the Viper"] = `${QUEST_PREFIX}Amulet of the Viper${QUEST_SUFFIX}`; // Amulet of the Viper
-    this.items["Horadric Staff"]      = `${QUEST_PREFIX}Horadric Staff${QUEST_SUFFIX}`;      // Horadric Staff
-    this.items.LamTome                = `${QUEST_PREFIX}Lam Esen's Tome${QUEST_SUFFIX}`;     // Lam Esen's Tome
-    this.items.KhalimFlail            = `${QUEST_PREFIX}Khalim's Flail${QUEST_SUFFIX}`;      // Khalim's Flail
-    this.items.SuperKhalimFlail       = `${QUEST_PREFIX}Khalim's Will${QUEST_SUFFIX}`;       // Khalim's Will
-    this.items["Hell Forge Hammer"]   = `${QUEST_PREFIX}Hell Forge Hammer${QUEST_SUFFIX}`;   // Hell Forge Hammer
+    this.items["Staff of Kings"]      = `${prefix}Staff of Kings${suffix}`;      // Staff of Kings
+    this.items["Amulet of the Viper"] = `${prefix}Amulet of the Viper${suffix}`; // Amulet of the Viper
+    this.items["Horadric Staff"]      = `${prefix}Horadric Staff${suffix}`;      // Horadric Staff
+    this.items.LamTome                = `${prefix}Lam Esen's Tome${suffix}`;     // Lam Esen's Tome
+    this.items.KhalimFlail            = `${prefix}Khalim's Flail${suffix}`;      // Khalim's Flail
+    this.items.SuperKhalimFlail       = `${prefix}Khalim's Will${suffix}`;       // Khalim's Will
+    this.items["Hell Forge Hammer"]   = `${prefix}Hell Forge Hammer${suffix}`;   // Hell Forge Hammer
 
     if (SHOULD_FIX_ILVL_INDENT) {
       // single digit ilvl
-      this.items.qf2 = ILVL_INDENT_FIX_QUEST1 + this.items.qf2;
-      this.items.SuperKhalimFlail = ILVL_INDENT_FIX_QUEST1 + this.items.SuperKhalimFlail;
+      let indent = ILVL_INDENT_FIX_QUEST1;
+      this.items.hst = indent + this.items.hst;
+      this.items.qf2 = indent + this.items.qf2;
+      this.items["Horadric Staff"] = indent + this.items["Horadric Staff"];
+      this.items.SuperKhalimFlail  = indent + this.items.SuperKhalimFlail;
 
       // double digit ilvl
-      this.items.leg = ILVL_INDENT_FIX_QUEST2 + this.items.leg;
-      this.items.hdm = ILVL_INDENT_FIX_QUEST2 + this.items.hdm;
-      this.items.msf = ILVL_INDENT_FIX_QUEST2 + this.items.msf;
-      this.items.hst = ILVL_INDENT_FIX_QUEST2 + this.items.hst;
-      this.items.g33 = ILVL_INDENT_FIX_QUEST2 + this.items.g33;
-      this.items.qf1 = ILVL_INDENT_FIX_QUEST2 + this.items.qf1;
-      this.items.hfh = ILVL_INDENT_FIX_QUEST2 + this.items.hfh;
-      this.items["Staff of Kings"]    = ILVL_INDENT_FIX_QUEST2 + this.items["Staff of Kings"];
-      this.items["Horadric Staff"]    = ILVL_INDENT_FIX_QUEST2 + this.items["Horadric Staff"];
-      this.items.KhalimFlail          = ILVL_INDENT_FIX_QUEST2 + this.items.KhalimFlail;
-      this.items["Hell Forge Hammer"] = ILVL_INDENT_FIX_QUEST2 + this.items["Hell Forge Hammer"];
+      indent = ILVL_INDENT_FIX_QUEST2;
+      this.items.leg = indent + this.items.leg;
+      this.items.hdm = indent + this.items.hdm;
+      this.items.msf = indent + this.items.msf;
+      this.items.g33 = indent + this.items.g33;
+      this.items.qf1 = indent + this.items.qf1;
+      this.items.hfh = indent + this.items.hfh;
+      this.items["Staff of Kings"]    = indent + this.items["Staff of Kings"];
+      this.items.KhalimFlail          = indent + this.items.KhalimFlail;
+      this.items["Hell Forge Hammer"] = indent + this.items["Hell Forge Hammer"];
     }
   },
 
@@ -1574,10 +1579,11 @@ function addLightPillars() {
       [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
       [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
       // act 3
-      // potion of life?                                                    // Potion of Life
+      // potion of life
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
       [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life
       [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
       [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
       [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
@@ -1590,6 +1596,66 @@ function addLightPillars() {
       // act 5
       // malah's potion ?                                                   // Malah's Potion
       // scroll of resistance ?                                             // Scroll of Resistance
+
+
+      // data:data\hd\items\misc\potion\antidote_potion
+      // data:data\hd\items\misc\potion\elixir
+      // data:data\hd\items\misc\potion\full_healing_potion
+      // data:data\hd\items\misc\potion\full_mana_potion
+      // data:data\hd\items\misc\potion\full_rejuv_potion
+      // data:data\hd\items\misc\potion\greater_healing_potion
+      // data:data\hd\items\misc\potion\greater_mana_potion
+      // data:data\hd\items\misc\potion\healing_potion
+      // data:data\hd\items\misc\potion\healing_potion2
+      // data:data\hd\items\misc\potion\lesser_healing_potion
+      // data:data\hd\items\misc\potion\lesser_mana_potion
+      // data:data\hd\items\misc\potion\light_healing_potion
+      // data:data\hd\items\misc\potion\light_mana_potion
+      // data:data\hd\items\misc\potion\mana_potion
+      // data:data\hd\items\misc\potion\mana_potion2
+      // data:data\hd\items\misc\potion\rejuv_potion
+      // data:data\hd\items\misc\potion\stamina_potion
+      // data:data\hd\items\misc\potion\strong_healing_potion
+      // data:data\hd\items\misc\potion\strong_mana_potion
+      // data:data\hd\items\misc\potion\thawing_potion
+      // data:data\hd\items\misc\quest\scroll_of_self_resurrect
+
+
+      // [`${LP_PATH_ITEMS_MISC}potion\\_monsters\\`,   "lysander_potion"],                        // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "antidote_potion"],                        // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "elixir"],                        // Potion of Life TODO
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "full_healing_potion"],           // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "full_mana_potion"],              // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "full_rejuv_potion"],             // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "greater_healing_potion"],        // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "greater_mana_potion"],           // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "healing_potion"],                // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "healing_potion2"],               // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "lesser_healing_potion"],         // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "lesser_mana_potion"],            // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "light_healing_potion"],          // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "light_mana_potion"],             // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "mana_potion"],                   // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "mana_potion2"],                  // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "rejuv_potion"],                  // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "stamina_potion"],                // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "strong_healing_potion"],         // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "strong_mana_potion"],            // ??
+      // [`${LP_PATH_ITEMS_MISC}potion\\`,   "thawing_potion"],                // ??
+      // [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
+      // [`${LP_PATH_ITEMS_MISC_QUEST}`,   "scroll_of_self_resurrect"],
+      // [`${LP_PATH_ITEMS_MISC}herb\\`,   "herb"],
+      // [`${LP_PATH_ITEMS_MISC}whetstone\\`,   "fe_axe_whetstone"],
+
+      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "choking_gas_potion"],
+      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "exploding_potion"],
+      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "fulminating_potion"],
+      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "oil_potion"],
+      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "rancid_gas_potion"],
+      // [`${LP_PATH_ITEMS_WEAPON}potion\\`,   "strangling_gas_potion"],
+      // [`${LP_PATH_ITEMS_WEAPON}potion\\_monster\\`,   "slinger_gas_potion"],
+      // [`${LP_PATH_ITEMS_WEAPON}potion\\_monster\\`,   "slinger_oil_potion"],
+      
     ];
     questItems.forEach((item) => {
       pushLightPillarToPath(item[0], item[1]);
