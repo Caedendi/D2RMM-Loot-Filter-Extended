@@ -1569,7 +1569,7 @@ function addLightPillars() {
     pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\`, "ring");
     pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\`, "amulet");
   }
-  // jewels
+  // gems & jewels
   if (config.ShouldAddLightPillarGemsJewels) {
     let gemQualities = ["chipped_", "flawed_", EMPTY_STRING, "flawless_", "perfect_"];
     let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];

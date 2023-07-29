@@ -290,7 +290,7 @@
       "id": "ShouldAddLightPillarGemsJewels",
       "type": "checkbox",
       "name": "Gems & Jewels",
-      "description": "Shine a Light Pillar on Gems and Jewels on the ground. Since these item types share the same graphics, they can not be set separately.",
+      "description": "Shine a Light Pillar on Gems and Jewels on the ground. Since these item types share some of the same graphics, they can not be set separately.",
       "defaultValue": true
     },
     {

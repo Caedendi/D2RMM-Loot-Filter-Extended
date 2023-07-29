@@ -1,16 +1,16 @@
 # Caedendi's Extended Loot Filter for D2RMM
 
-_See also: [Caedendi's Simple Loot Filter for D2RMM](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)_
-
 Adds an expansive customizable loot filter with a shitload of presets to Diablo 2: Resurrected using D2RMM. <br>
 Hide junk, clean up tooltips to remove clutter and emphasize important items. For the full feature list, see below.
 
 Recommended for those who prefer toggling presets to reach their desired functionality. <br>
-If you'd rather have a compact list to act as a template for your own naming schemes, see the Simple version above.
+If you'd rather have a compact list to act as a template for your own naming schemes, see the Simple version at the bottom of the page.
 
 ## Table of Contents
 
 - [Screenshots](#screenshots)
+- [Changelog](#changelog)
+  - [1.0.2](#102)
 - [Features](#features)
 - [Presets Overview](#presets-overview)
 - [Installation](#installation)
@@ -20,6 +20,8 @@ If you'd rather have a compact list to act as a template for your own naming sch
   - [Code](#code)
   - [Filter Style](#filter-style)
 - [License/Permissions](#licensepermissions)
+- [All My Mods + Source](#all-my-mods--source)
+  - [Diablo 2: Resurrected](#diablo-2-resurrected)
 
 
 ## Screenshots
@@ -37,17 +39,32 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ## Changelog
 
-### 1.0.2
+### 2.0.0
 
-- Fixed certain quest items not highlighting correctly
-- Added option to exclude the Horadric Cube from highlighting
-- Added highlighting to Hellfire Torch and Annihilus (as part of the Endgame filter)
-- Added highlighting to Rainbow Facets (as part of the Jewels filter)
+- The mod settings menu is now divided into sections. Make sure to use D2RMM 1.4.6 or higher!
+- Fixed high rune numbers incorrectly being highlighted in red when number is enabled and highlighting is disabled
+- Fixed half of the quest items not having highlighting patterns
+- Fixed cube window's title being all messy when highlighting quest items is enabled by adding an option to exclude the cube
+- Fixed Hell Forge Hammer incorrectly displaying as "Hellforge Hammer" when highlighting is enabled
+- Fixed some gem names not being filtered correctly
+- Fixed bugged support for charms
+- Removed bugged support for jewels, rings and amulets
 - Changed Small/Full Rejuvenation Potion name from +SRP/+FRP to +RPS/+RPF
-- Corrected "Hellforge Hammer" to "Hell Forge Hammer" when highlighting is enabled
-- Added custom highlight character support: you can now pick the character/symbol that is used for highlighting, or set a custom character by only changing a single character in the mod.js file
-- fixed red high rune numbers while highlighting is disabled
-- Expanded jewel settings
+- Improved highlight patterns
+- Added charm support including unid'd highlighting while keeping rarity colors and highlighting of id'd uniques
+- Added highlighting to Rainbow Facets
+- Added built-in ilvl support
+- Fixed indentation being all messy for highlighted items when ilvl is enabled
+- Added built-in short superior/inferior prefixes mod
+- Added built-in item quality (normal/exceptional/elite) tags
+- Added alternate color schemes for runes, facets and sunder charms
+- Added customization of the highlight character (can now be set to characters other than *)
+- Added built-in expanded light pillar support (for a lot more item types than currently available in other mods)
+- Custom sections in the code are now pre-filled with examples, making it more intuitive for those who want to add their own custom naming
+
+### 1.0.0
+
+First official release!
 
 
 ## Features
@@ -201,11 +218,11 @@ In addition to this, I recommend you also use the following D2RMM mods:
   - [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214) by Jobus
   - [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351) by minseoksuh
   - [x] Integrate [LightPillar for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/197) by qhu91it
-    - [ ] Add support for Torch/Anni
-    - [ ] Add support for Rings/Amulets
-    - [ ] Add support for Essences & Token of Absolution
-    - [ ] Add support for Pandemonium Organs
-    - [ ] Add support for Quest Items?
+    - [x] Add support for Torch/Anni
+    - [x] Add support for Rings/Amulets
+    - [x] Add support for Essences & Token of Absolution
+    - [x] Add support for Pandemonium Organs
+    - [x] Add support for Quest Items
   - [x] Rework alternate color schemes into optional drop-down setting
     - [x] Alternate color scheme for Facets (rainbow highlights)
     - [x] Alternate color scheme for Sunder Charms (element-colored highlights)
@@ -239,3 +256,12 @@ This code is licensed under GPL.
 You are free to use and distribute all code in this mod, as long as you ask for permission (and permission is given), it stays open source, free of charge and all due credit is given. 
 
 If you are trying to profit off this mod in any way, then you're a dick and forbidden from using this code.
+
+
+## All My Mods + Source ##
+
+### Diablo 2: Resurrected ###
+
+- [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple) | [Nexus Mods](https://www.nexusmods.com/diablo2resurrected/mods/360) | **Caedendi's Simple Loot Filter for D2RMM**
+- [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended) | [Nexus Mods](https://www.nexusmods.com/diablo2resurrected/mods/361) | **Caedendi's Extended Loot Filter for D2RMM**
+- [GitHub](https://github.com/Caedendi/D2RMM-Skip-Videos) | [Nexus Mods](https://www.nexusmods.com/diablo2resurrected/mods/397) | **Skip Videos for D2RMM**
