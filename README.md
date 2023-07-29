@@ -101,15 +101,15 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 
 ## Presets Overview
 
-|          Section           | Setting                              | Default | Options                                      |
-|:--------------------------:|--------------------------------------|:-------:|----------------------------------------------|
-|      **Gold & Runes**      | **Gold**                             |         | No change                                    |
+|          Section           |               Setting                | Default | Options                                      |
+|:--------------------------:|:------------------------------------:|:-------:|:---------------------------------------------|
+|      **Gold & Runes**      |               **Gold**               |         | No change                                    |
 |                            |                                      |         | Gold text                                    |
 |                            |                                      |    x    | Gold G                                       |
 |                            |                                      |         | White G                                      |
 |                            |                                      |         | Hide affix                                   |
 |                            |                                      |         | Custom                                       |
-|                            | **Runes**                            |         | No change                                    |
+|                            |              **Runes**               |         | No change                                    |
 |                            |                                      |    x    | Add rune numbers + highlights + remove affix |
 |                            |                                      |         | Add rune numbers + highlights                |
 |                            |                                      |         | Add rune numbers + remove affix              |
@@ -118,7 +118,7 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Add highlights                               |
 |                            |                                      |         | Remove affix                                 |
 |                            |                                      |         | Custom                                       |
-|          **Junk**          | **Healing Potions**                  |         | No change                                    |
+|          **Junk**          |         **Healing Potions**          |         | No change                                    |
 |                            |                                      |    x    | All                                          |
 |                            |                                      |         | Hide lvl 3                                   |
 |                            |                                      |         | Hide lvl 4                                   |
@@ -128,62 +128,62 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Show only full rejuvs                        |
 |                            |                                      |         | Hide all                                     |
 |                            |                                      |         | Custom                                       |
-|                            | **Buff Potions**                     |         | No change                                    |
+|                            |           **Buff Potions**           |         | No change                                    |
 |                            |                                      |    x    | All                                          |
 |                            |                                      |         | Hide                                         |
 |                            |                                      |         | Custom                                       |
-|                            | **Throwing Potions**                 |         | No change                                    |
+|                            |         **Throwing Potions**         |         | No change                                    |
 |                            |                                      |    x    | All                                          |
 |                            |                                      |         | Hide                                         |
 |                            |                                      |         | Custom                                       |
-|                            | **Scrolls & Tomes**                  |         | No change                                    |
+|                            |         **Scrolls & Tomes**          |         | No change                                    |
 |                            |                                      |    x    | All                                          |
 |                            |                                      |         | Hide scrolls                                 |
 |                            |                                      |         | Custom                                       |
-|                            | **Arrows & Bolts**                   |         | No change                                    |
+|                            |          **Arrows & Bolts**          |         | No change                                    |
 |                            |                                      |    x    | Highlight                                    |
 |                            |                                      |         | Hide                                         |
 |                            |                                      |         | Custom                                       |
-|                            | **Keys**                             |    x    | No change                                    |
+|                            |               **Keys**               |    x    | No change                                    |
 |                            |                                      |         | Hide                                         |
 |                            |                                      |         | Custom                                       |
-|        **Jewelry**         | **Gems**                             |         | No change                                    |
+|        **Jewelry**         |               **Gems**               |         | No change                                    |
 |                            |                                      |    x    | Highlight all                                |
 |                            |                                      |         | Highlight, show only flawless & perfect      |
 |                            |                                      |         | Highlight, show only perfect                 |
 |                            |                                      |         | Hide all                                     |
 |                            |                                      |         | Custom                                       |
-|                            | **Jewels**                           |         | No change                                    |
+|                            |              **Jewels**              |         | No change                                    |
 |                            |                                      |    x    | Highlight Facets                             |
 |                            |                                      |         | Custom                                       |
-|                            | **Charms**                           |         | No change                                    |
+|                            |              **Charms**              |         | No change                                    |
 |                            |                                      |    x    | Highlight all                                |
 |                            |                                      |         | Highlight unique charms only                 |
 |                            |                                      |         | Highlight non-unique charms only             |
 |                            |                                      |         | Custom                                       |
-|    **Quest & Endgame**     | **Quest items**                      |         | No change                                    |
+|    **Quest & Endgame**     |           **Quest items**            |         | No change                                    |
 |                            |                                      |         | Highlight                                    |
 |                            |                                      |    x    | Highlight, exclude Cube                      |
 |                            |                                      |         | Custom                                       |
-|                            | **Endgame Items**                    |         | No change                                    |
+|                            |          **Endgame Items**           |         | No change                                    |
 |                            |                                      |    x    | Highlight                                    |
 |                            |                                      |         | Highlight, exclude Standard of Heroes        |
 |                            |                                      |         | Highlight, hide Standard of Heroes           |
 |                            |                                      |         | Custom                                       |
-| **Item Stats & Modifiers** | **Item Level**                       |         | No change                                    |
+| **Item Stats & Modifiers** |            **Item Level**            |         | No change                                    |
 |                            |                                      |    x    | Enable, fix indentation                      |
 |                            |                                      |         | Enable                                       |
 |                            | **Short Superior/Inferior Prefixes** |         | No change                                    |
 |                            |                                      |    x    | Enable                                       |
 |                            |                                      |         | Enable, gray inferior items                  |
 |                            |                                      |         | Custom                                       |
-|                            | **Item Quality**                     |    x    | No change                                    |
+|                            |           **Item Quality**           |    x    | No change                                    |
 |                            |                                      |         | Suffix, parentheses                          |
 |                            |                                      |         | Suffix, square brackets                      |
 |                            |                                      |         | Prefix, parentheses                          |
 |                            |                                      |         | Prefix, square brackets                      |
 |                            |                                      |         | Custom                                       |
-|     **Light Pillars**      | **Light Pillars**                    |    x    | Runes                                        |
+|     **Light Pillars**      |          **Light Pillars**           |    x    | Runes                                        |
 |                            |                                      |    x    | Circlets                                     |
 |                            |                                      |    x    | Rings & Amulets                              |
 |                            |                                      |    x    | Gems & Jewels                                |
@@ -195,7 +195,7 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |    x    | Keys                                         |
 |                            |                                      |    x    | Organs                                       |
 |                            |                                      |    x    | Standard of Heroes                           |
-|          **Misc**          | **Alternate Color Schemes**          |         | No change                                    |
+|          **Misc**          |     **Alternate Color Schemes**      |         | No change                                    |
 |                            |                                      |         | Facets, Sunder Charms, Runes                 |
 |                            |                                      |    x    | Facets, Sunder Charms                        |
 |                            |                                      |         | Facets, Runes                                |
@@ -203,7 +203,7 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Facets                                       |
 |                            |                                      |         | Sunder Charms                                |
 |                            |                                      |         | Runes                                        |
-|                            | **Highlight character**              |    x    | \* (asterisk)                                |
+|                            |       **Highlight character**        |    x    | \* (asterisk)                                |
 |                            |                                      |         | = (equals)                                   |
 |                            |                                      |         | + (plus)                                     |
 |                            |                                      |         | - (hyphen/dash/minus)                        |
@@ -220,13 +220,13 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | % (percent)                                  |
 |                            |                                      |         | & (ampersand)                                |
 |                            |                                      |         | Custom                                       |
-|                            | **Tooltip size for hidden items**    |    0    | 0 (min) to 25 (max) spaces                   |
-|      **Tooltip Mods**      | **Tooltip mods**                     |    x    | No change                                    |
+|                            |  **Tooltip size for hidden items**   |    0    | 0 (min) to 25 (max) spaces                   |
+|      **Tooltip Mods**      |           **Tooltip mods**           |    x    | No change                                    |
 |                            |                                      |         | Opacity & Size                               |
 |                            |                                      |         | Opactiy                                      |
 |                            |                                      |         | Size                                         |
-|                            | **Tooltip: opacity**                 |  0.75   | 0 (min) to 1 (max), unmodded = 0.6           |
-|                            | **Tooltip: font size**               |   33    | 20 (min) to 50 (max), unmodded = 36          |
+|                            |         **Tooltip: opacity**         |  0.75   | 0 (min) to 1 (max), unmodded = 0.6           |
+|                            |        **Tooltip: font size**        |   33    | 20 (min) to 50 (max), unmodded = 36          |
 
 
 ## Roadmap
@@ -273,7 +273,7 @@ In addition to this, I recommend you also use the following D2RMM mods:
 ### Diablo 2: Resurrected ###
 
 | Mod Name & Page                                                                                    | Source                                                           |
-|----------------------------------------------------------------------------------------------------|------------------------------------------------------------------|
+|:---------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------|
 | [Caedendi's Extended Loot Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/361) | [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended) |
 | [Caedendi's Simple Loot Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/360)   | [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)   |
 | [Skip Videos for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/397)                     | [GitHub](https://github.com/Caedendi/D2RMM-Skip-Videos)          |
