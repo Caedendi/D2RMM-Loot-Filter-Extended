@@ -89,7 +89,6 @@ const NO_PADDING = EMPTY_STRING;
 const SMALL_O = 'o';
 const PLUS = '+';
 const MINUS = '-';
-const ZERO = '0';
 
 const PADDING_1 = SINGLE_SPACE;
 const PADDING_2 = SINGLE_SPACE.repeat(2);
@@ -112,14 +111,13 @@ const ILVL_INDENT_FIX_QUEST1 = ILVL_INDENT_FIX_SINGLE; // quest items with a sin
 const ILVL_INDENT_FIX_QUEST2 = ILVL_INDENT_FIX_DOUBLE; // quest items with a double digit ilvl
 
 
-
 //==========================================//
 //   Parameters - Alternate Color Schemes   //
 //==========================================//
 
-const IS_ALTERNATE_RUNES_COLOR = ["all", "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
-const IS_ALTERNATE_FACET_HIGHLIGHT = ["all", "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
-const IS_ALTERNATE_SUNDER_HIGHLIGHT = ["all", "fac-sun", "sun-run", "sun"].includes(config.AlternateColorSchemes);
+const IS_ALTERNATE_COLOR_RUNES = ["all", "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
+const IS_ALTERNATE_HIGHLIGHT_FACET = ["all", "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
+const IS_ALTERNATE_HIGHLIGHT_SUNDER = ["all", "fac-sun", "sun-run", "sun"].includes(config.AlternateColorSchemes);
 
 
 //========================//
@@ -188,8 +186,8 @@ const FACET_PADDING_1 = PADDING_1; // padding between individual patterns
 const FACET_PADDING_2 = PADDING_3; // padding between name and FACET_ALTERNATE_PREFIX / FACET_ALTERNATE_SUFFIX
 const FACET_ALTERNATE_PREFIX = `${RED}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${GREEN}${FACET_PATTERN}${FACET_COLOR_NAME}${FACET_PADDING_2}`;
 const FACET_ALTERNATE_SUFFIX = `${FACET_PADDING_2}${GREEN}${FACET_PATTERN}${FACET_PADDING_1}${BLUE}${FACET_PATTERN}${FACET_PADDING_1}${YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${RED}${FACET_PATTERN}${FACET_COLOR_NAME}`;
-const FACET_PREFIX = !IS_ALTERNATE_FACET_HIGHLIGHT ? UNIQUE_PREFIX : FACET_ALTERNATE_PREFIX;
-const FACET_SUFFIX = !IS_ALTERNATE_FACET_HIGHLIGHT ? UNIQUE_SUFFIX : FACET_ALTERNATE_SUFFIX;
+const FACET_PREFIX = !IS_ALTERNATE_HIGHLIGHT_FACET ? UNIQUE_PREFIX : FACET_ALTERNATE_PREFIX;
+const FACET_SUFFIX = !IS_ALTERNATE_HIGHLIGHT_FACET ? UNIQUE_SUFFIX : FACET_ALTERNATE_SUFFIX;
 
 // charms
 const CHARMS_UNIQUE_PREFIX = UNIQUE_PREFIX;
@@ -553,7 +551,7 @@ const customRunes = {
     const hasHighlighting = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED.includes(number);
     const hasHighlightedNumber = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(number);
     const hasHighlightedName = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(number);
-    const hasAlternateNameColor = IS_ALTERNATE_RUNES_COLOR && RUNES_TIER_ALTERNATE_NAME_COLOR.includes(number);
+    const hasAlternateNameColor = IS_ALTERNATE_COLOR_RUNES && RUNES_TIER_ALTERNATE_NAME_COLOR.includes(number);
 
     var highlightColor1 = hasHighlighting ? RUNES_COLOR_HIGHLIGHT : NO_COLOR;
     var highlightColor2 = highlightColor1;
@@ -1115,7 +1113,7 @@ const customItems = {
   },
 
   highlightSunderCharms(){
-    if (IS_ALTERNATE_SUNDER_HIGHLIGHT) {
+    if (IS_ALTERNATE_HIGHLIGHT_SUNDER) {
       this.items["Black Cleft"]          = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(GRAY,    UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Black Cleft");
       this.items["Bone Break"]           = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(WHITE,   UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Bone Break");
       this.items["Cold Rupture"]         = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(SKYBLUE, UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Cold Rupture");
