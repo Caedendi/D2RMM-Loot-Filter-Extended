@@ -381,7 +381,7 @@ const customAffixes = {
   
   shortenSupInferiorPrefixes(setting) {
     var color = (setting === "color") ? GRAY : NO_COLOR;
-    var superior = `${color}${PLUS}`;
+    var superior = `${PLUS}`;
     var inferior = `${color}${MINUS}`;
 
     switch (setting) {
