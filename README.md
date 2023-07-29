@@ -220,13 +220,13 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | % (percent)                                  |
 |                            |                                      |         | & (ampersand)                                |
 |                            |                                      |         | Custom                                       |
-|                            |  **Tooltip size for hidden items**   |    0    | 0 (min) to 25 (max) spaces                   |
+|                            |  **Tooltip size for hidden items**   |    0    | 0 - 25 spaces                                |
 |      **Tooltip Mods**      |           **Tooltip mods**           |    x    | No change                                    |
 |                            |                                      |         | Opacity & Size                               |
 |                            |                                      |         | Opactiy                                      |
 |                            |                                      |         | Size                                         |
-|                            |         **Tooltip: opacity**         |  0.75   | 0 (min) to 1 (max), unmodded = 0.6           |
-|                            |        **Tooltip: font size**        |   33    | 20 (min) to 50 (max), unmodded = 36          |
+|                            |         **Tooltip: opacity**         |  0.75   | 0.00 - 1.00, unmodded = 0.60                 |
+|                            |        **Tooltip: font size**        |   33    | 20 - 50, unmodded = 36                       |
 
 
 ## Roadmap
