@@ -66,7 +66,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 - Fixed Hell Forge Hammer incorrectly displaying as "Hellforge Hammer" when highlighting is enabled
 - Fixed some gem names not being filtered correctly
 - Fixed bugged support for charms and added highlighting of id'd uniques
-- Removed bugged support for jewels, rings and amulets as it can not be fixed
+- Removed bugged support for jewels, rings and amulets as they can't be fixed
 - Changed Small/Full Rejuvenation Potion name from +SRP/+FRP to +RPS/+RPF
 - Improved highlight patterns
 - Added highlighting to Rainbow Facets
