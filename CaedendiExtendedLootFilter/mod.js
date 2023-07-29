@@ -1087,9 +1087,9 @@ const customItems = {
         this.items.cm1                     = `Small Charm`;
         this.items.cm2                     = `Large Charm`;
         this.items.cm3                     = `Grand Charm`;
-        this.items["Gheed's Fortune"]      = `Gheed's Fortune`;
         this.items["Annihilus"]            = `Annihilus`;
         this.items["Hellfire Torch"]       = `Hellfire Torch`;
+        this.items["Gheed's Fortune"]      = `Gheed's Fortune`;
         this.items["Black Cleft"]          = `Black Cleft`;
         this.items["Bone Break"]           = `Bone Break`;
         this.items["Cold Rupture"]         = `Cold Rupture`;
@@ -1107,9 +1107,9 @@ const customItems = {
   },
 
   highlightUniqueCharms(){
-    this.items["Gheed's Fortune"]      = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
     this.items["Annihilus"]            = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
     this.items["Hellfire Torch"]       = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Gheed's Fortune"]      = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
   },
 
   highlightSunderCharms(){
@@ -1448,7 +1448,7 @@ function applyCustomNames(path, customNames) {
 //====================================================//
 
 // ilvl
-function showItemLevel() {
+function applyItemLevel() {
   if (!(config.ItemLevel === "show" || config.ItemLevel === "fix")) {
     return;
   }
@@ -1489,7 +1489,7 @@ function showItemLevel() {
 }
 
 // quality: normal/exceptional/elite
-function showItemQuality() {
+function applyItemQuality() {
   if (config.ItemQuality === "none") {
     return;
   }
@@ -1545,7 +1545,7 @@ function addEquipmentQuality(equipment, itemNames, setting) {
 //   How to apply the magic: light pillars   //
 //===========================================//
 
-function addLightPillars() {
+function applyLightPillars() {
   // runes
   if (config.ShouldAddLightPillarRunes) {
     [
@@ -1705,10 +1705,6 @@ function applyTooltipMods() {
   }
   
   D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
-  D2RMM.copyFile("hd", "hd", true);
-  // This simply copies the rune.json files instead of modifying each one with code which 
-  // I am too dumb to understand how to do. It gets the job done, it may cause issues if 
-  // you have other mods that modify the runes.json files.
 }
 
 
@@ -1722,9 +1718,9 @@ function applyLootFilter() {
   applyCustomItemNames();
   applyCustomUiNames();
   applyCustomModifiers();
-  showItemLevel();
-  showItemQuality();
-  addLightPillars();
+  applyItemLevel();
+  applyItemQuality();
+  applyLightPillars();
   applyTooltipMods();
 }
 
