@@ -3,8 +3,14 @@
   "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
   "author": "Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "config": [
+    {
+      "id": "GoldRunesSection",
+      "type": "section",
+      "name": "Gold & Runes",
+      "defaultExpanded": false
+    },
     {
       "id": "Gold",
       "type": "select",
@@ -16,7 +22,7 @@
         { "label": "Gold text", "value": "gold" },
         { "label": "Gold G", "value": "goldg" },
         { "label": "White G", "value": "whiteg" },
-        { "label": "Hide affix", "value": "hide" },
+        { "label": "Hide suffix", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
     }, 
@@ -24,7 +30,7 @@
       "id": "Runes",
       "type": "select",
       "name": "Runes",
-      "description": "Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel, Ko and up). [CSTM-RUN]",
+      "description": "Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel, Io and up). [CSTM-RUN]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -37,6 +43,12 @@
         { "label": "Remove affix", "value": "raf" },
         { "label": "Custom", "value": "custom" }
       ]
+    },
+    {
+      "id": "JunkSection",
+      "type": "section",
+      "name": "Junk",
+      "defaultExpanded": false
     },
     {
       "id": "HealingPotions",
@@ -104,7 +116,7 @@
       "defaultValue": "highlight",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "highlight" },
+        { "label": "Enable", "value": "highlight" },
         { "label": "Hide", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
@@ -122,40 +134,10 @@
       ]
     },
     {
-      "id": "RingsAmulets",
-      "type": "select",
-      "name": "Rings & Amulets (bugged)",
-      "description": "Customize Rings & Amulets. KNOWN BUG: turns crafted/rare/set/unique Rings/Amulets blue. [CSTM-RAM]",
-      "defaultValue": "none",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "highlight" },
-        { "label": "Custom", "value": "custom" }
-      ]
-    },
-    {
-      "id": "Jewels",
-      "type": "select",
-      "name": "Jewels (bugged)",
-      "description": "Customize Jewels. KNOWN BUG: turns rare Jewels and Facets blue. [CSTM-JWL]",
-      "defaultValue": "none",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "highlight" },
-        { "label": "Custom", "value": "custom" }
-      ]
-    },
-    {
-      "id": "Charms",
-      "type": "select",
-      "name": "Charms (bugged)",
-      "description": "Customize Small, Large and Grand Charms. KNOWN BUG: turns unique Charms blue. [CSTM-CHA]",
-      "defaultValue": "none",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "highlight" },
-        { "label": "Custom", "value": "custom" }
-      ]
+      "id": "JewelrySection",
+      "type": "section",
+      "name": "Jewelry",
+      "defaultExpanded": false
     },
     {
       "id": "Gems",
@@ -168,18 +150,52 @@
         { "label": "Highlight", "value": "all" },
         { "label": "Highlight, show only Flawless and Perfect Gems", "value": "flawless" },
         { "label": "Highlight, show only Perfect Gems", "value": "perfect" },
+        { "label": "Hide all", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
+    },
+    {
+      "id": "Jewels",
+      "type": "select",
+      "name": "Jewels",
+      "description": "Customize Jewels. Currently identified Facets only; I have not yet found a good way to customize unidentified/Magic/Rare Jewels. [CSTM-JWL]",
+      "defaultValue": "facet",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight Facets", "value": "facet" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "Charms",
+      "type": "select",
+      "name": "Charms",
+      "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
+      "defaultValue": "all",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Highlight", "value": "all" },
+        { "label": "Highlight Unique Charms only", "value": "uniq" },
+        { "label": "Highlight non-Unique Charms only", "value": "unid" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "QuestEndgame",
+      "type": "section",
+      "name": "Quest & Endgame",
+      "defaultExpanded": false
     },
     {
       "id": "Quest",
       "type": "select",
       "name": "Quest Items",
-      "description": "Highlight quest items. [CSTM-QST]",
-      "defaultValue": "all",
+      "description": "Highlight Quest Items. Exclude the Horadric Cube to fix messing up the Cube window's title and some NPC dialog where it is mentioned. [CSTM-QST1] and [CSTM-QST2]",
+      "defaultValue": "xhc",
       "options": [
         { "label": "Disable", "value": "none" },
         { "label": "Highlight", "value": "all" },
+        { "label": "Highlight, exclude Cube", "value": "xhc" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -187,7 +203,7 @@
       "id": "Endgame",
       "type": "select",
       "name": "Endgame Items",
-      "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. [CSTM-END]",
+      "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. For Annihilus and Hellfire Torch, see Charms. [CSTM-END]",
       "defaultValue": "all",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -198,13 +214,204 @@
       ]
     },
     {
+      "id": "ItemStatsModifiersSection",
+      "type": "section",
+      "name": "Item Stats & Modifiers",
+      "defaultExpanded": false
+    },
+    {
+      "id": "ItemLevel",
+      "type": "select",
+      "name": "Item Level",
+      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix.",
+      "defaultValue": "fix",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Enable, fix indentation", "value": "fix" },
+        { "label": "Enable", "value": "show" }
+      ]
+    },
+    {
+      "id": "ShortSupInferiorPrefixes",
+      "type": "select",
+      "name": "Short Superior/Inferior Prefixes",
+      "description": "Shorten the Superior/Damaged/Cracked/Crude/Low Quality modifiers on weapons and armor to + (plus) and - (minus/dash). Optionally color Inferior items gray. Works the same as mod Short Quality Prefixes by Jobus. [CSTM-SPIF]",
+      "defaultValue": "short",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Enable", "value": "short" },
+        { "label": "Enable, gray Inferior items", "value": "color" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ItemQuality",
+      "type": "select",
+      "name": "Item Quality",
+      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix if enabled. [CSTM-QLTY]",
+      "defaultValue": "none",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Suffix, parentheses", "value": "suf-par" },
+        { "label": "Suffix, square brackets", "value": "suf-bts" },
+        { "label": "Prefix, parentheses", "value": "pre-par" },
+        { "label": "Prefix, square brackets", "value": "pre-bts" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "LightPillarsSection",
+      "type": "section",
+      "name": "Light Pillars",
+      "defaultExpanded": false
+    },
+    {
+      "id": "ShouldAddLightPillarRunes",
+      "type": "checkbox",
+      "name": "Runes",
+      "description": "Shine a Light Pillar on Runes on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarCirclets",
+      "type": "checkbox",
+      "name": "Circlets",
+      "description": "Shine a Light Pillar on Circlets, Coronets, Tiaras and Diadems on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarRingsAmulets",
+      "type": "checkbox",
+      "name": "Rings & Amulets",
+      "description": "Shine a Light Pillar on Rings and Amulets on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarGemsJewels",
+      "type": "checkbox",
+      "name": "Gems & Jewels",
+      "description": "Shine a Light Pillar on Gems and Jewels on the ground. Since these item types share some of the same graphics, they can not be set separately.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarCharms",
+      "type": "checkbox",
+      "name": "Charms",
+      "description": "Shine a Light Pillar on Charms on the ground. Annihilus shares its graphics with Mephisto's Soulstone, so enabling either Charms or Quest Items results in Light Pillars for both. Unfortunately Hellfire Torch is not supported because some monsters carry Torches. I can't enable Light Pillars for Torches without turning certain monster groups into a dance party.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarQuest",
+      "type": "checkbox",
+      "name": "Quest Items",
+      "description": "Shine a Light Pillar on Quest Items on the ground. Khalim's Eye and Brain share graphics with Baal's Eye and Mephisto's Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldExcludeLightPillarQuestWeapons",
+      "type": "checkbox",
+      "name": "Quest Items: exclude weapons",
+      "description": "Exclude Light Pillars on Quest Weapons on the ground. Equipping a Quest Weapon with Light Pillars enabled will also shine a Light Pillar on your character's weapon. Enable this if for instance you want to use Khalim's Will on a low level character.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldAddLightPillarEssences",
+      "type": "checkbox",
+      "name": "Essences",
+      "description": "Shine a Light Pillar on Essences on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarTokens",
+      "type": "checkbox",
+      "name": "Token of Absolution",
+      "description": "Shine a Light Pillar on Tokens of Absolution on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarKeys",
+      "type": "checkbox",
+      "name": "Keys",
+      "description": "Shine a Light Pillar on Keys of Terror/Hate/Destruction on the ground.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarOrgans",
+      "type": "checkbox",
+      "name": "Organs",
+      "description": "Shine a Light Pillar on Uber Organs on the ground. Baal's Eye and Mephisto's Brain share graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarStandardOfHeroes",
+      "type": "checkbox",
+      "name": "Standard of Heroes",
+      "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported, this will still shine a Light Pillar when you kill the Übers.",
+      "defaultValue": true
+    },
+    {
+      "id": "MiscSection",
+      "type": "section",
+      "name": "Misc",
+      "defaultExpanded": false
+    },
+    {
+      "id": "AlternateColorSchemes",
+      "type": "select",
+      "name": "Alternate Color Schemes",
+      "description": "Use alternate color schemes for certain item types.\n\nFacets: rainbow-colored highlights.\n\nSunder Charms: highlight colors match their elements.\n\nRunes: change name color from the default orange to purple for Lem and higher runes. Highlights remain red and the name will not color (partly) red for these runes.",
+      "defaultValue": "fac-sun",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Facets, Sunder Charms, Runes", "value": "all" },
+        { "label": "Facets, Sunder Charms", "value": "fac-sun" },
+        { "label": "Facets, Runes", "value": "fac-run" },
+        { "label": "Sunder Charms, Runes", "value": "sun-run" },
+        { "label": "Facets", "value": "fac" },
+        { "label": "Sunder Charms", "value": "sun" },
+        { "label": "Runes", "value": "run" }
+      ]
+    },
+    {
+      "id": "HighlightCharacter",
+      "type": "select",
+      "name": "Highlight character",
+      "description": "Character used to highlight select items. [CSTM-HLC]",
+      "defaultValue": "*",
+      "options": [
+        { "label": "* (asterisk)", "value": "*" },
+        { "label": "= (equals)", "value": "=" },
+        { "label": "+ (plus)", "value": "+" },
+        { "label": "- (hyphen/dash/minus)", "value": "-" },
+        { "label": "x (small letter x)", "value": "x" },
+        { "label": "X (capital letter x)", "value": "X" },
+        { "label": "o (small letter o)", "value": "o" },
+        { "label": "O (capital letter o)", "value": "O" },
+        { "label": "0 (zero)", "value": "0" },
+        { "label": "~ (tilde)", "value": "~" },
+        { "label": "! (exclamation mark)", "value": "!" },
+        { "label": "@ (at)", "value": "@" },
+        { "label": "# (number/pound/hash)", "value": "#" },
+        { "label": "$ (dollar)", "value": "$" },
+        { "label": "% (percent)", "value": "%" },
+        { "label": "& (ampersand)", "value": "&" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
       "id": "HiddenItemTooltipSize",
       "type": "number",
       "name": "Tooltip width for hidden items",
-      "description": "Set how many spaces wide the tooltip for hidden items is (max 25).",
+      "description": "Set how many spaces wide the tooltip for hidden items is (0-25).",
       "defaultValue": 0,
       "minValue": 0,
       "maxValue": 25
+    },
+    {
+      "id": "TooltipModsSection",
+      "type": "section",
+      "name": "Tooltip Mods",
+      "defaultExpanded": false
     },
     {
       "id": "Tooltip",
