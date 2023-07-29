@@ -30,13 +30,28 @@ If you'd rather have a compact list to act as a template for your own naming sch
 ## Screenshots
 
 <p float="left">
-  <img src="https://i.imgur.com/AGELRY4.png" alt="01_pots_scrolls_gold" width="49%">
-  <img src="https://i.imgur.com/ObIq8LL.png" alt="02_gems_quest_endgame" width="49%">
+  <img src="https://i.imgur.com/mxQB5wx.png" alt="01_pots_scrolls_gold" width="49%">
+  <img src="https://i.imgur.com/63Oygn8.png" alt="02_gems_keys_essences" width="49%">
 </p>
 
 <p float="left">
-  <img src="https://i.imgur.com/x91wdr9.png" alt="03_runes_numbers" width="49%">
-  <img src="https://i.imgur.com/f1DxeAI.png" alt="04_runes_numbers_highlights_no-affix" width="49%">
+  <img src="https://i.imgur.com/AU2d8Hy.png" alt="03_sup_inferior_affix" width="49%">
+  <img src="https://i.imgur.com/8mu49cv.png" alt="04_item_quality" width="49%">
+</p>
+
+<p float="left">
+  <img src="https://i.imgur.com/8g9brig.png" alt="05_runes_numbers" width="49%">
+  <img src="https://i.imgur.com/AK8NfuC.png" alt="06_runes_highlights" width="49%">
+</p>
+
+<p float="left">
+  <img src="https://i.imgur.com/QvtWvmw.png" alt="07_runes_alternate" width="49%">
+  <img src="https://i.imgur.com/0dLY9NC.png" alt="08_jewelry" width="49%">
+</p>
+
+<p float="left">
+  <img src="https://i.imgur.com/MS1cNK1.png" alt="09_act3_quest_items" width="49%">
+  <img src="https://i.imgur.com/v7zYs7q.png" alt="10_facet_sunder_alternate" width="49%">
 </p>
 
 
