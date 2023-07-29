@@ -1614,7 +1614,7 @@ function applyLightPillars() {
       // Scroll of Resistance => see Scroll of Inifuss (bark_scroll)
     ];
     if (!config.ShouldExcludeLightPillarQuestWeapons) {
-      questItems.concat([
+      questItems = questItems.concat([
       // act 1
       [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
       [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
