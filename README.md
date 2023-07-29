@@ -40,14 +40,6 @@ If you'd rather have a compact list to act as a template for your own naming sch
 </p>
 
 
-## How to Install
-
-- Download and install [D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/169), then run it.
-- Download and extract this mod folder to /D2RMM/mods/.
-- See D2RMM instructions on how to configure and enable.
-- Play the game!
-
-
 ## Changelog
 
 ### 2.0.0
@@ -76,28 +68,12 @@ If you'd rather have a compact list to act as a template for your own naming sch
 First official release!
 
 
-## Roadmap
+## How to Install
 
-None at the moment. If you have a request for a feature, please open a GitHub issue (preferred) or post a comment on Nexus Mods.
-
-### Fix known bugs
-
-- [x] Regular Ruby, Sapphire, Emerald and Diamond not working
-- [x] Certain quest item customization not working
-- [x] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
-- [x] Enabling jewelry turns crafted/rare/set/unique jewelry blue
-- [x] Item name alignment out of place when [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) is enabled
-
-### Add features
-
-- [x] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by olegbl
-- [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214) by Jobus
-- [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351) by minseoksuh
-- [x] Integrate [LightPillar for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/197) by qhu91it
-- [x] Rework alternate color schemes into optional setting as a drop-down menu
-  - [x] Alternate color scheme for Facets (rainbow highlights)
-  - [x] Alternate color scheme for Sunder Charms (element-colored highlights)
-  - [x] Alternate color scheme for mid/high runes (purple names)
+- Download and install [D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/169), then run it.
+- Download and extract this mod folder to /D2RMM/mods/.
+- See D2RMM instructions on how to configure and enable.
+- Play the game!
 
 
 ## Features
@@ -251,6 +227,30 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Size                                         |
 |                            | **Tooltip: opacity**                 |  0.75   | 0 (min) to 1 (max), unmodded = 0.6           |
 |                            | **Tooltip: font size**               |   33    | 20 (min) to 50 (max), unmodded = 36          |
+
+
+## Roadmap
+
+None at the moment. If you have a request for a feature, please open a GitHub issue (preferred) or post a comment on Nexus Mods.
+
+### Fix known bugs
+
+- [x] Regular Ruby, Sapphire, Emerald and Diamond not working
+- [x] Certain quest item customization not working
+- [x] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
+- [x] Enabling jewelry turns crafted/rare/set/unique jewelry blue
+- [x] Item name alignment out of place when [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) is enabled
+
+### Add features
+
+- [x] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by olegbl
+- [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214) by Jobus
+- [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351) by minseoksuh
+- [x] Integrate [LightPillar for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/197) by qhu91it
+- [x] Rework alternate color schemes into optional setting as a drop-down menu
+  - [x] Alternate color scheme for Facets (rainbow highlights)
+  - [x] Alternate color scheme for Sunder Charms (element-colored highlights)
+  - [x] Alternate color scheme for mid/high runes (purple names)
 
 
 ## Recommended Mods
