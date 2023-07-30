@@ -102,10 +102,10 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 - **Completely optional:** 
   - Disabling everything means no modding will be applied.
 - **Integrated mods:**
-  - Show the item level on all items that have one
-  - Shorten superior/inferior prefixes to + and -
-  - Show the item quality (normal/exceptional/elite) on all equipment with short (n), (x) and (e) tags
-  - Shine light pillars on those special drops! Mod functionality expanded to support runes, circlets, rings/amulets, gems, jewels, quest items and endgame items
+  - Show the item level on all items that have one.
+  - Shorten superior/inferior prefixes to + and -.
+  - Show the item quality (normal/exceptional/elite) on all equipment with short (n), (x) and (e) tags.
+  - Shine light pillars on those special drops! Mod functionality expanded to support runes, circlets, rings/amulets, gems, jewels, quest items and endgame items.
 - **Apply your own custom naming schemes**:
   - Set the item type to "Custom", open the mod.js file in Notepad or VSCodium and add your personalized naming schemes on the lines mentioned in the item type's setting description.
   - To hide an item, change its name to HIDDEN (without quotes). The value of HIDDEN (amount of spaces) can be changed in the D2RMM settings.
@@ -258,10 +258,10 @@ None at the moment. If you have a request for a feature, please open a GitHub is
 
 ### Add features
 
-- [x] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by olegbl
-- [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214) by Jobus
-- [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351) by minseoksuh
-- [x] Integrate [LightPillar for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/197) by qhu91it
+- [x] Integrate [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) by [olegbl](https://github.com/olegbl)
+- [x] Integrate [Short Quality Prefixes for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/214) by [Jobus](https://www.nexusmods.com/diablo2resurrected/users/3107665)
+- [x] Integrate [Show Item Quality for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/351) by [minseoksuh](https://www.nexusmods.com/diablo2resurrected/users/176581440)
+- [x] Integrate [LightPillar for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/197) by [qhu91it](https://github.com/qhu91it) and [buzh](https://www.nexusmods.com/diablo2resurrected/users/2596633)
 - [x] Rework alternate color schemes into optional setting as a drop-down menu
   - [x] Alternate color scheme for Facets (rainbow highlights)
   - [x] Alternate color scheme for Sunder Charms (element-colored highlights)
@@ -272,26 +272,15 @@ None at the moment. If you have a request for a feature, please open a GitHub is
 
 In addition to this, I recommend you also use the following D2RMM mods:
 
-| Mod                                                                                 |   Creator   | Notes                                                                                              |
-|-------------------------------------------------------------------------------------|:-----------:|----------------------------------------------------------------------------------------------------|
-| [Disable Battle.net](https://github.com/olegbl/d2rmm.mods)                          |   olegbl    | So you don't accidentally get yourself banned.                                                     |
-| [Skip Videos](https://www.nexusmods.com/diablo2resurrected/mods/179)                |  caedendi   | Disable launch intro videos and cinematic cutscenes when transitioning between acts.               |
-| [Improved Potion Visibility](https://www.nexusmods.com/diablo2resurrected/mods/384) |  MetalTxus  | Changes healing/mana potion sprites so it's easier to distinguish different potion levels.         |
-| [UI Fixes](https://www.nexusmods.com/diablo2resurrected/mods/387)                   |  MetalTxus  | Fixes the placement of a few item grids.                                                           |
-| [Towns QoL Changes](https://www.nexusmods.com/diablo2resurrected/mods/310)          | night0wl117 | Move town starting points, TP locations and Cain's position in Act 5.                              |
-| [Town Cast](https://www.nexusmods.com/diablo2resurrected/mods/183)                  |   olegbl    | Teleport and buff in town. _(BREAKING: allows teleporting past Jerhyn during the Act 2 questline)_ |
-| [Settings Font Fix](https://www.nexusmods.com/diablo2resurrected/mods/200)          |   olegbl    | In case any mod touches __profilehd_ and screws up the font size in the settings menu.             |
-
-
-## My Mods + Source ##
-
-### Diablo 2: Resurrected ###
-
-| Mod Name & Page                                                                                    | Source                                                           |
-|:---------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------|
-| [Caedendi's Extended Loot Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/361) | [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended) |
-| [Caedendi's Simple Loot Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/360)   | [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)   |
-| [Skip Videos for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/397)                     | [GitHub](https://github.com/Caedendi/D2RMM-Skip-Videos)          |
+| Mod                                                                                 |                                    Creator                                    | Notes                                                                                              |
+|-------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------|
+| [Disable Battle.net](https://github.com/olegbl/d2rmm.mods)                          |                      [olegbl](https://github.com/olegbl)                      | So you don't accidentally get yourself banned.                                                     |
+| [Skip Videos](https://www.nexusmods.com/diablo2resurrected/mods/179)                | [Caedendi](https://www.nexusmods.com/diablo2resurrected/users/179695179) (me) | Disable launch intro videos and cinematic cutscenes when transitioning between acts.               |
+| [Improved Potion Visibility](https://www.nexusmods.com/diablo2resurrected/mods/384) |   [MetalTxus](https://www.nexusmods.com/diablo2resurrected/users/18894694)    | Changes healing/mana potion sprites so it's easier to distinguish different potion levels.         |
+| [UI Fixes](https://www.nexusmods.com/diablo2resurrected/mods/387)                   |   [MetalTxus](https://www.nexusmods.com/diablo2resurrected/users/18894694)    | Fixes the placement of a few item grids.                                                           |
+| [Towns QoL Changes](https://www.nexusmods.com/diablo2resurrected/mods/310)          |  [night0wl117](https://www.nexusmods.com/diablo2resurrected/users/33697975)   | Move town starting points, TP locations and Cain's position in Act 5.                              |
+| [Town Cast](https://www.nexusmods.com/diablo2resurrected/mods/183)                  |                      [olegbl](https://github.com/olegbl)                      | Teleport and buff in town. _(BREAKING: allows teleporting past Jerhyn during the Act 2 questline)_ |
+| [Settings Font Fix](https://www.nexusmods.com/diablo2resurrected/mods/200)          |                      [olegbl](https://github.com/olegbl)                      | In case any mod touches __profilehd_ and screws up the font size in the settings menu.             |
 
 
 ## License/Permissions
@@ -325,4 +314,15 @@ Many thanks to:
 - [Path of Diablo filters](https://pathofdiablo.com/wiki/index.php?title=List_of_Loot_Filters) for removing all that clutter on Path of Diablo and inspiring me to create this loot filter for D2R.
   - Mainly [Darkgale](https://www.twitch.tv/darkgale)'s filter called [Filtergale](https://www.reddit.com/r/pathofdiablo/comments/i9hdw7/filtergale/) ([download](https://greendu.de/s/ZbDwHekAg3rmeRB/download?path=%2F&files=item.filter)) regarding styling.
 - [Practical Item Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/317)
-- [Cbraqz](https://www.nexusmods.com/diablo2resurrected/users/3106975)'s [D2R Simple Loot Filter](https://www.nexusmods.com/diablo2resurrected/mods/54) mod for giving me an idea on how to fix highlighted charms without removing rarity coloring
+- [Cbraqz](https://www.nexusmods.com/diablo2resurrected/users/3106975)'s [D2R Simple Loot Filter](https://www.nexusmods.com/diablo2resurrected/mods/54) mod for giving me an idea on how to fix highlighting charms without removing rarity coloring
+
+
+## My Mods + Source ##
+
+### Diablo 2: Resurrected ###
+
+| Nexus Mods Page                                                                                    | Source                                                           |
+|:---------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------|
+| [Caedendi's Extended Loot Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/361) | [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended) |
+| [Caedendi's Simple Loot Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/360)   | [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)   |
+| [Skip Videos for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/397)                     | [GitHub](https://github.com/Caedendi/D2RMM-Skip-Videos)          |
