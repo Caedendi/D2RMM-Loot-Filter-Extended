@@ -19,12 +19,12 @@ If you'd rather have a compact list to act as a template for your own naming sch
   - [Fix known bugs](#fix-known-bugs)
   - [Add features](#add-features)
 - [Recommended Mods](#recommended-mods)
-- [My Mods + Source](#my-mods--source)
-  - [Diablo 2: Resurrected](#diablo-2-resurrected)
 - [License/Permissions](#licensepermissions)
 - [Credits](#credits)
   - [Code](#code)
   - [Filter Style](#filter-style)
+- [My Mods + Source](#my-mods--source)
+  - [Diablo 2: Resurrected](#diablo-2-resurrected)
 
 
 ## Screenshots
