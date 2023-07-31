@@ -59,6 +59,10 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ## Changelog
 
+### 2.0.1
+
+- Removed light pillar support for circlets
+
 ### 2.0.0
 
 - The mod settings menu is now divided into sections. Make sure to use D2RMM 1.4.6 or higher!
