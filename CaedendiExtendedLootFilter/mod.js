@@ -1556,12 +1556,6 @@ function applyLightPillars() {
       pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune}_rune`);
     });
   }
-  // circlets
-  if (config.ShouldAddLightPillarCirclets) {
-    ["circlet", "coronet", "tiara", "diadem"].forEach((circlet) => {
-      pushLightPillarToPath(`${LP_PATH_ITEMS}armor\\circlet\\`, circlet);
-    });
-  }
   // rings & amulets
   if (config.ShouldAddLightPillarRingsAmulets) {
     pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\`, "ring");
