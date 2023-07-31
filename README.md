@@ -323,7 +323,7 @@ Many thanks to:
 - [Cbraqz](https://www.nexusmods.com/diablo2resurrected/users/3106975)'s [D2R Simple Loot Filter](https://www.nexusmods.com/diablo2resurrected/mods/54) mod for giving me an idea on how to fix highlighting charms without removing rarity coloring
 
 
-## My Mods + Source ##
+## My Mods + Source
 
 ### Diablo II: Resurrected ###
 
