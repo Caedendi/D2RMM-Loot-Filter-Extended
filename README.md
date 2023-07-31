@@ -1,6 +1,8 @@
 # Caedendi's Extended Loot Filter for D2RMM
 
-Adds an expansive customizable loot filter with a shitload of presets to Diablo 2: Resurrected using D2RMM. <br>
+_See also: [Caedendi's Simple Loot Filter for D2RMM](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)_
+
+Adds an expansive customizable loot filter with a shitload of presets to Diablo II: Resurrected using D2RMM. <br>
 Hide junk, clean up tooltips to remove clutter and emphasize important items. For the full feature list, see below.
 
 Recommended for those who prefer toggling presets to reach their desired functionality. <br>
@@ -318,7 +320,7 @@ Many thanks to:
 
 ## My Mods + Source ##
 
-### Diablo 2: Resurrected ###
+### Diablo II: Resurrected ###
 
 | Nexus Mods Page                                                                                    | Source                                                           |
 |:---------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------|
