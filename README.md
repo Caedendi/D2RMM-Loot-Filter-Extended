@@ -12,6 +12,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 - [Screenshots](#screenshots)
 - [Changelog](#changelog)
+  - [2.0.1](#201)
   - [2.0.0](#200)
   - [1.0.0](#100)
 - [How to Install](#how-to-install)
@@ -26,7 +27,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
   - [Code](#code)
   - [Filter Style](#filter-style)
 - [My Mods + Source](#my-mods--source)
-  - [Diablo 2: Resurrected](#diablo-2-resurrected)
+  - [Diablo II: Resurrected](#diablo-ii-resurrected)
 
 
 ## Screenshots
