@@ -1,6 +1,8 @@
 # Caedendi's Extended Loot Filter for D2RMM
 
-Adds an expansive customizable loot filter with a shitload of presets to Diablo 2: Resurrected using D2RMM. <br>
+_See also: [Caedendi's Simple Loot Filter for D2RMM](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)_
+
+Adds an expansive customizable loot filter with a shitload of presets to Diablo II: Resurrected using D2RMM. <br>
 Hide junk, clean up tooltips to remove clutter and emphasize important items. For the full feature list, see below.
 
 Recommended for those who prefer toggling presets to reach their desired functionality. <br>
@@ -105,7 +107,7 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
   - Show the item level on all items that have one.
   - Shorten superior/inferior prefixes to + and -.
   - Show the item quality (normal/exceptional/elite) on all equipment with short (n), (x) and (e) tags.
-  - Shine light pillars on those special drops! Mod functionality expanded to support runes, circlets, rings/amulets, gems, jewels, quest items and endgame items.
+  - Shine light pillars on those special drops! Mod functionality expanded to support runes, rings/amulets, gems, jewels, quest items and endgame items.
 - **Apply your own custom naming schemes**:
   - Set the item type to "Custom", open the mod.js file in Notepad or VSCodium and add your personalized naming schemes on the lines mentioned in the item type's setting description.
   - To hide an item, change its name to HIDDEN (without quotes). The value of HIDDEN (amount of spaces) can be changed in the D2RMM settings.
@@ -199,7 +201,6 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Prefix, square brackets                      |
 |                            |                                      |         | Custom                                       |
 |     **Light Pillars**      |          **Light Pillars**           |    x    | Runes                                        |
-|                            |                                      |    x    | Circlets                                     |
 |                            |                                      |    x    | Rings & Amulets                              |
 |                            |                                      |    x    | Gems & Jewels                                |
 |                            |                                      |    x    | Charms                                       |
@@ -319,7 +320,7 @@ Many thanks to:
 
 ## My Mods + Source ##
 
-### Diablo 2: Resurrected ###
+### Diablo II: Resurrected ###
 
 | Nexus Mods Page                                                                                    | Source                                                           |
 |:---------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------|

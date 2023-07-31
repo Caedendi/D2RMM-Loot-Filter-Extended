@@ -273,13 +273,6 @@
       "defaultValue": true
     },
     {
-      "id": "ShouldAddLightPillarCirclets",
-      "type": "checkbox",
-      "name": "Circlets",
-      "description": "Shine a Light Pillar on Circlets, Coronets, Tiaras and Diadems on the ground.",
-      "defaultValue": true
-    },
-    {
       "id": "ShouldAddLightPillarRingsAmulets",
       "type": "checkbox",
       "name": "Rings & Amulets",
