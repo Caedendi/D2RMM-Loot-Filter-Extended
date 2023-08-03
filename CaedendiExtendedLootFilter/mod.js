@@ -2,7 +2,7 @@
 ////===============================================////
 ////                                               ////
 ////   Caedendi's Extended Loot Filter for D2RMM   ////
-////                    v2.0.0                     ////
+////                    v2.1.0                     ////
 ////                                               ////
 ////===============================================////
 ////===============================================////
@@ -1369,6 +1369,176 @@ const customModifiers = {
 };
 
 
+//===================//
+//   Light Pillars   //
+//===================//
+
+// runes
+function pushLightPillarsForRunes() {
+  [ 
+    "el", "eld", "tir", "nef", "eth", "ith", "tal", "ral", "ort", "thul", "amn", 
+    "sol", "shael", "dol", "hel", "io", "lum", "ko", "fal", "lem", "pul", "um", 
+    "mal", "ist", "gul", "vex", "ohm", "lo", "sur", "ber", "jah", "cham", "zod",
+  ].forEach((rune) => {
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune}_rune`);
+  });
+}
+
+// rings & amulets
+function pushLightPillarsForRingsAmulets() {
+  pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\`, "ring");
+  pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\`, "amulet");
+}
+
+// gems & jewels
+function pushLightPillarsForGemsJewels() {
+  if (config.ShouldDisableLightPillarForHidden && config.Gems == "hide") {
+    return;
+  }
+
+  let gemQualities = getLightPillarGemQualities();
+
+  let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];
+  gemQualities.forEach((quality) => {
+    gemTypes.forEach((type) => {
+      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
+    });
+  });
+}
+
+function getLightPillarGemQualities() {
+  let gemQualities = ["perfect_"];
+  if (config.Gems === "perfect" && config.ShouldDisableLightPillarForHidden) {
+    return gemQualities;
+  }
+  gemQualities.push("flawless_");
+  if (config.Gems === "flawless" && config.ShouldDisableLightPillarForHidden) {
+    return gemQualities;
+  }
+
+  return gemQualities.concat([EMPTY_STRING, "flawed_", "chipped_"]);
+}
+
+// charms
+function pushLightPillarsForCharms() {
+  ["charm_small", "charm_medium", "charm_large"].forEach((charm) => {
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}charm\\`, charm);
+  });
+  // pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
+  if (!config.ShouldAddLightPillarQuest) {
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
+  }
+}
+
+// quest items
+function pushLightPillarsForQuestItems() {
+  let questItems = [
+    // act 1
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
+    [`${LP_PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
+    // act 2
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
+    [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
+    // act 3
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
+    [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
+    [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
+    [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
+    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
+    // act 4
+    // none
+    // act 5
+    // Malah's Potion       => see Potion of Life (scroll_of_self_resurrect)
+    // Scroll of Resistance => see Scroll of Inifuss (bark_scroll)
+  ];
+
+  // quest weapons
+  if (!config.ShouldExcludeLightPillarQuestWeapons) {
+    questItems = questItems.concat([
+    // act 1
+    [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
+    [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
+    // act 2
+    [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
+    [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
+    // act 3
+    [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
+    [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
+    [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
+    // act 4
+    [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
+    // act 5
+    // none
+    ]);
+  }
+
+  questItems.forEach((item) => {
+    pushLightPillarToPath(item[0], item[1]);
+  });
+}
+
+// essences
+function pushLightPillarsForEssences() {
+  let essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
+  essences.forEach((essence) => {
+    pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, essence);
+  });
+}
+
+// token
+function pushLightPillarForToken() {
+  pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, "token_of_absolution");
+}
+
+// pandemonium keys
+function pushLightPillarsForKeys() {
+  let path = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
+  var file = D2RMM.readJson(`${path}${FILE_EXTENSION_JSON}`);
+  pushLightPillarToFile(file);
+  for (var i = 1; i <= 3; i++) {
+    let index = (i == 1) ? EMPTY_STRING : `${i}`;
+    D2RMM.writeJson(`${path}${index}${FILE_EXTENSION_JSON}`, file);
+  }
+}
+
+// pandemonium event (ubers) organs
+function pushLightPillarsForUberOrgans() {
+  pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "horn");
+  if (config.ShouldAddLightPillarQuest) {
+    return;
+  }
+
+  pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "brain");
+  pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "eye");
+}
+
+// standard of heroes
+function pushLightPillarForStandardOfHeroes() {
+  if (config.ShouldDisableLightPillarForHidden && config.Endgame === "hsh") {
+    return;
+  }
+  
+  pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "flag");
+}
+
+function pushLightPillarToPath(path, item) {
+  let filePath = `${path}${item}${FILE_EXTENSION_JSON}`;
+  let file = D2RMM.readJson(filePath);
+  pushLightPillarToFile(file);
+  D2RMM.writeJson(filePath, file);
+}
+
+function pushLightPillarToFile(file) {
+  file.dependencies.particles.push(LP_LIGHT_COMPONENT.particle);
+  file.entities = file.entities.concat(LP_LIGHT_COMPONENT.entities);
+}
+
+
 //========================================//
 //   How to apply the magic: item names   //
 //========================================//
@@ -1546,133 +1716,36 @@ function addEquipmentQuality(equipment, itemNames, setting) {
 //===========================================//
 
 function applyLightPillars() {
-  // runes
   if (config.ShouldAddLightPillarRunes) {
-    [
-      "el", "eld", "tir", "nef", "eth", "ith", "tal", "ral", "ort", "thul", "amn", 
-      "sol", "shael", "dol", "hel", "io", "lum", "ko", "fal", "lem", "pul", "um", 
-      "mal", "ist", "gul", "vex", "ohm", "lo", "sur", "ber", "jah", "cham", "zod",
-    ].forEach((rune) => {
-      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune}_rune`);
-    });
+    pushLightPillarsForRunes();
   }
-  // rings & amulets
   if (config.ShouldAddLightPillarRingsAmulets) {
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\`, "ring");
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\`, "amulet");
+    pushLightPillarsForRingsAmulets();
   }
-  // gems & jewels
   if (config.ShouldAddLightPillarGemsJewels) {
-    let gemQualities = ["chipped_", "flawed_", EMPTY_STRING, "flawless_", "perfect_"];
-    let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];
-    gemQualities.forEach((quality) => {
-      gemTypes.forEach((type) => {
-        pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
-      });
-    });
+    pushLightPillarsForGemsJewels();
   }
-  // charms
   if (config.ShouldAddLightPillarCharms) {
-    ["charm_small", "charm_medium", "charm_large"].forEach((charm) => {
-      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}charm\\`, charm);
-    });
-    // pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
-    if (!config.ShouldAddLightPillarQuest) {
-      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
-    }
+    pushLightPillarsForCharms();
   }
-  // quest items
   if (config.ShouldAddLightPillarQuest) {
-    let questItems = [
-      // act 1
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
-      [`${LP_PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
-      // act 2
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
-      [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
-      // act 3
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
-      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
-      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
-      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
-      // act 4
-      // none
-      // act 5
-      // Malah's Potion       => see Potion of Life (scroll_of_self_resurrect)
-      // Scroll of Resistance => see Scroll of Inifuss (bark_scroll)
-    ];
-    if (!config.ShouldExcludeLightPillarQuestWeapons) {
-      questItems = questItems.concat([
-      // act 1
-      [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
-      [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
-      // act 2
-      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
-      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
-      // act 3
-      [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
-      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
-      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
-      // act 4
-      [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
-      // act 5
-      // none
-      ]);
-    }
-    questItems.forEach((item) => {
-      pushLightPillarToPath(item[0], item[1]);
-    });
+    pushLightPillarsForQuestItems();
   }
-  // essences & tokens
   if (config.ShouldAddLightPillarEssences) {
-    let essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
-    essences.forEach((essence) => {
-      pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, essence);
-    });
+    pushLightPillarsForEssences();
   }
   if (config.ShouldAddLightPillarTokens) {
-    pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, "token_of_absolution");
+    pushLightPillarForToken();
   }
-  // pandemonium keys
   if (config.ShouldAddLightPillarKeys) {
-    let path = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
-    var file = D2RMM.readJson(`${path}${FILE_EXTENSION_JSON}`);
-    pushLightPillarToFile(file);
-    for (var i = 1; i <= 3; i++) {
-      let index = (i == 1) ? EMPTY_STRING : `${i}`;
-      D2RMM.writeJson(`${path}${index}${FILE_EXTENSION_JSON}`, file);
-    }
+    pushLightPillarsForKeys();
   }
-  // pandemonium event (ubers) organs
   if (config.ShouldAddLightPillarOrgans) {
-    pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "horn");
-    if (!config.ShouldAddLightPillarQuest) {
-      pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "brain");
-      pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "eye");
-    }
+    pushLightPillarsForUberOrgans();
   }
-  // pandemonium event (ubers) organs
   if (config.ShouldAddLightPillarStandardOfHeroes) {
-    pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "flag");
+    pushLightPillarForStandardOfHeroes();
   }
-}
-
-function pushLightPillarToPath(path, item) {
-  let filePath = `${path}${item}${FILE_EXTENSION_JSON}`;
-  let file = D2RMM.readJson(filePath);
-  pushLightPillarToFile(file);
-  D2RMM.writeJson(filePath, file);
-}
-
-function pushLightPillarToFile(file) {
-  file.dependencies.particles.push(LP_LIGHT_COMPONENT.particle);
-  file.entities = file.entities.concat(LP_LIGHT_COMPONENT.entities);
 }
 
 

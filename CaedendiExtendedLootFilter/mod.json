@@ -3,7 +3,7 @@
   "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
   "author": "Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "config": [
     {
       "id": "GoldRunesSection",
@@ -340,6 +340,13 @@
       "type": "checkbox",
       "name": "Standard of Heroes",
       "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported, this will still shine a Light Pillar when you kill the Übers.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldDisableLightPillarForHidden",
+      "type": "checkbox",
+      "name": "Disable for Hidden Items",
+      "description": "Do not shine Light Pillars on items set to hidden. NOTE: Does not work with custom settings.",
       "defaultValue": true
     },
     {

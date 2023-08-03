@@ -12,6 +12,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 - [Screenshots](#screenshots)
 - [Changelog](#changelog)
+  - [2.1.0](#210)
   - [2.0.1](#201)
   - [2.0.0](#200)
   - [1.0.0](#100)
@@ -59,6 +60,10 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 
 ## Changelog
+
+### 2.1.0
+
+- Added option to disable light pillars for hidden items
 
 ### 2.0.1
 
@@ -272,6 +277,7 @@ None at the moment. If you have a request for a feature, please open a GitHub is
   - [x] Alternate color scheme for Facets (rainbow highlights)
   - [x] Alternate color scheme for Sunder Charms (element-colored highlights)
   - [x] Alternate color scheme for mid/high runes (purple names)
+- [x] Only show Light Pillars on non-hidden items
 
 
 ## Recommended Mods
