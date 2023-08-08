@@ -1753,18 +1753,20 @@ function applyLightPillars() {
 //   How to apply the magic: tooltip mods   //
 //==========================================//
 function applyTooltipMods() {
-  if (config.Tooltip === "none")
-    return
+  if (config.Tooltip === "none") {
+    return;
+  }
 
+  let bgColor = [0, 0, 0, config.TooltipOpacity]; // [R, G, B, opacity]
   let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
 
   switch (config.Tooltip) {
     case "all":
-      profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, config.TooltipOpacity]; // [R, G, B, opacity]
+      profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
       profileHD.TooltipFontSize = config.TooltipSize;
       return;
     case "opacity":
-      profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, config.TooltipOpacity]; // [R, G, B, opacity]
+      profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
       return;
     case "size":
       profileHD.TooltipFontSize = config.TooltipSize;
