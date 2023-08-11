@@ -12,6 +12,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 - [Screenshots](#screenshots)
 - [Changelog](#changelog)
+  - [2.1.1](#211)
   - [2.1.0](#210)
   - [2.0.1](#201)
   - [2.0.0](#200)
@@ -60,6 +61,10 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 
 ## Changelog
+
+### 2.1.1
+
+- Fixed tooltip mods (broken since 2.0.0)
 
 ### 2.1.0
 
@@ -251,8 +256,8 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Opacity & Size                               |
 |                            |                                      |         | Opactiy                                      |
 |                            |                                      |         | Size                                         |
-|                            |         **Tooltip: opacity**         |  0.75   | 0.00 - 1.00, unmodded = 0.60                 |
-|                            |        **Tooltip: font size**        |   33    | 20 - 50, unmodded = 36                       |
+|                            |         **Tooltip: opacity**         |  0.75   | 0.00 - 1.00 (unmodded = 0.60)                |
+|                            |        **Tooltip: font size**        |   33    | 20 - 50 (unmodded = 36)                      |
 
 
 ## Roadmap
@@ -266,6 +271,7 @@ None at the moment. If you have a request for a feature, please open a GitHub is
 - [x] Enabling quest item highlighting screws up the Horadric Cube's displayed name when the cube menu is open.
 - [x] Enabling jewelry turns crafted/rare/set/unique jewelry blue
 - [x] Item name alignment out of place when [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) is enabled
+- [x] Tooltip mods not working
 
 ### Add features
 

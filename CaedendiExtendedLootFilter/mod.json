@@ -3,7 +3,7 @@
   "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
   "author": "Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "config": [
     {
       "id": "GoldRunesSection",
