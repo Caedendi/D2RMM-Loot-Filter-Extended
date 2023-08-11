@@ -1756,24 +1756,27 @@ function applyTooltipMods() {
   if (config.Tooltip === "none") {
     return;
   }
-
+  
+  let path = FILE_PROFILE_HD_PATH;
+  let profileHD = D2RMM.readJson(path);
+  
   let bgColor = [0, 0, 0, config.TooltipOpacity]; // [R, G, B, opacity]
-  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
+  let tooltipSize = config.TooltipSize;
 
   switch (config.Tooltip) {
     case "all":
       profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
-      profileHD.TooltipFontSize = config.TooltipSize;
+      profileHD.TooltipFontSize = tooltipSize;
       return;
     case "opacity":
       profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
       return;
     case "size":
-      profileHD.TooltipFontSize = config.TooltipSize;
+      profileHD.TooltipFontSize = tooltipSize;
       return;
   }
   
-  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
+  D2RMM.writeJson(path, profileHD);
 }
 
 
