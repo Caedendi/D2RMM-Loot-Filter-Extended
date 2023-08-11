@@ -1767,13 +1767,13 @@ function applyTooltipMods() {
     case "all":
       profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
       profileHD.TooltipFontSize = tooltipSize;
-      return;
+      break;
     case "opacity":
       profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
-      return;
+      break;
     case "size":
       profileHD.TooltipFontSize = tooltipSize;
-      return;
+      break;
   }
   
   D2RMM.writeJson(path, profileHD);
