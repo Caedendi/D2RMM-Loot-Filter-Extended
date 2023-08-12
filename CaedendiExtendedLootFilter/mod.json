@@ -273,6 +273,13 @@
       "defaultValue": true
     },
     {
+      "id": "ShouldExcludeLightPillarLowRunes",
+      "type": "checkbox",
+      "name": "Runes: exclude low",
+      "description": "Exclude Light Pillars on Low Runes on the ground (El-Dol, excluding Ral).",
+      "defaultValue": false
+    },
+    {
       "id": "ShouldAddLightPillarRingsAmulets",
       "type": "checkbox",
       "name": "Rings & Amulets",
