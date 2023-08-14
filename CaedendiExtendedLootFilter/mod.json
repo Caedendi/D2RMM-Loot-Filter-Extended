@@ -3,7 +3,7 @@
   "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
   "author": "Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "config": [
     {
       "id": "GoldRunesSection",
@@ -326,7 +326,7 @@
       "type": "checkbox",
       "name": "Quest: Weapons",
       "description": "Shine a Light Pillar on Quest Weapons on the ground. Equipping a Quest Weapon with this enabled will also shine a Light Pillar on your character's weapon. Disable this if for instance you want to use Khalim's Will on a low level character.",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarEssences",
@@ -360,7 +360,7 @@
       "id": "ShouldAddLightPillarStandardOfHeroes",
       "type": "checkbox",
       "name": "Standard of Heroes",
-      "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported, this will still shine a Light Pillar when you kill the Übers.",
+      "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported (some monsters carry torches), this will still shine a Light Pillar when you kill the Übers.",
       "defaultValue": true
     },
     {

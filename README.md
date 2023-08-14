@@ -12,6 +12,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 - [Screenshots](#screenshots)
 - [Changelog](#changelog)
+  - [2.2.0](#220)
   - [2.1.1](#211)
   - [2.1.0](#210)
   - [2.0.1](#201)
@@ -61,6 +62,12 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 
 ## Changelog
+
+### 2.2.0
+
+- Split Light Pillars settings for Runes into 4 tiers
+- Changed Light Pillars settings for Quest Weapons from "exclude" to "include" 
+- Slightly changed some settings tooltips
 
 ### 2.1.1
 
