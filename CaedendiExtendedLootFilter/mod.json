@@ -248,7 +248,7 @@
       "id": "ItemQuality",
       "type": "select",
       "name": "Item Quality",
-      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix if enabled. [CSTM-QLTY]",
+      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix indentation if Item Level is enabled. [CSTM-QLTY]",
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -266,18 +266,32 @@
       "defaultExpanded": false
     },
     {
-      "id": "ShouldAddLightPillarRunes",
+      "id": "ShouldAddLightPillarRunesLow",
       "type": "checkbox",
-      "name": "Runes",
-      "description": "Shine a Light Pillar on Runes on the ground.",
+      "name": "Runes: Low",
+      "description": "Shine a Light Pillar on Low Runes on the ground (El-Dol, excluding Ral).",
       "defaultValue": true
     },
     {
-      "id": "ShouldExcludeLightPillarLowRunes",
+      "id": "ShouldAddLightPillarRunesLowMid",
       "type": "checkbox",
-      "name": "Runes: exclude low",
-      "description": "Exclude Light Pillars on Low Runes on the ground (El-Dol, excluding Ral).",
-      "defaultValue": false
+      "name": "Runes: Low-Mid",
+      "description": "Shine a Light Pillar on Low-Mid Runes on the ground (Ral and Hel-Fal.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarRunesMid",
+      "type": "checkbox",
+      "name": "Runes: Mid",
+      "description": "Shine a Light Pillar on Mid Runes on the ground (Lem-Gul).",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarRunesHigh",
+      "type": "checkbox",
+      "name": "Runes: High",
+      "description": "Shine a Light Pillar on High Runes on the ground (Vex-Zod).",
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRingsAmulets",
@@ -301,17 +315,17 @@
       "defaultValue": true
     },
     {
-      "id": "ShouldAddLightPillarQuest",
+      "id": "ShouldAddLightPillarQuestItems",
       "type": "checkbox",
-      "name": "Quest Items",
+      "name": "Quest: Items",
       "description": "Shine a Light Pillar on Quest Items on the ground. Khalim's Eye and Brain share graphics with Baal's Eye and Mephisto's Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
       "defaultValue": true
     },
     {
-      "id": "ShouldExcludeLightPillarQuestWeapons",
+      "id": "ShouldAddLightPillarQuestWeapons",
       "type": "checkbox",
-      "name": "Quest Items: exclude weapons",
-      "description": "Exclude Light Pillars on Quest Weapons on the ground. Equipping a Quest Weapon with Light Pillars enabled will also shine a Light Pillar on your character's weapon. Enable this if for instance you want to use Khalim's Will on a low level character.",
+      "name": "Quest: Weapons",
+      "description": "Shine a Light Pillar on Quest Weapons on the ground. Equipping a Quest Weapon with this enabled will also shine a Light Pillar on your character's weapon. Disable this if for instance you want to use Khalim's Will on a low level character.",
       "defaultValue": false
     },
     {

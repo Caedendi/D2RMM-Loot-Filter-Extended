@@ -14,7 +14,7 @@
 
 // File paths
 const FILE_EXTENSION_JSON = ".json";
-const FILE_EXTENSION_TXT = ".txt";
+const FILE_EXTENSION_TXT  = ".txt";
 
 const FILE_PROFILE_HD_PATH = `global\\ui\\layouts\\_profilehd${FILE_EXTENSION_JSON}`;
 
@@ -33,42 +33,42 @@ const FILE_MISC_PATH    = `${FILE_EXCEL}misc${FILE_EXTENSION_TXT}`;
 // Color
 const COLOR_PREFIX = "ÿc";
 
-const WHITE = `${COLOR_PREFIX}0`;
-const WHITE1 = `${COLOR_PREFIX}=`;
-const GRAY = `${COLOR_PREFIX}5`;
-const GRAY1 = `${COLOR_PREFIX}K`;
-const GRAY2 = `${COLOR_PREFIX}I`;
-const BLACK = `${COLOR_PREFIX}6`;
-const BLACK1 = `${COLOR_PREFIX}M`;
-const RED = `${COLOR_PREFIX}1`;
-const RED1 = `${COLOR_PREFIX}U`;
-const LIGHTRED = `${COLOR_PREFIX}E`;
-const DARKRED = `${COLOR_PREFIX}S`;
-const GREEN = `${COLOR_PREFIX}2`;
-const GREEN1 = `${COLOR_PREFIX}Q`;
-const GREEN2 = `${COLOR_PREFIX}C`;
-const GREEN3 = `${COLOR_PREFIX}<`;
+const WHITE      = `${COLOR_PREFIX}0`;
+const WHITE1     = `${COLOR_PREFIX}=`;
+const GRAY       = `${COLOR_PREFIX}5`;
+const GRAY1      = `${COLOR_PREFIX}K`;
+const GRAY2      = `${COLOR_PREFIX}I`;
+const BLACK      = `${COLOR_PREFIX}6`;
+const BLACK1     = `${COLOR_PREFIX}M`;
+const RED        = `${COLOR_PREFIX}1`;
+const RED1       = `${COLOR_PREFIX}U`;
+const LIGHTRED   = `${COLOR_PREFIX}E`;
+const DARKRED    = `${COLOR_PREFIX}S`;
+const GREEN      = `${COLOR_PREFIX}2`;
+const GREEN1     = `${COLOR_PREFIX}Q`;
+const GREEN2     = `${COLOR_PREFIX}C`;
+const GREEN3     = `${COLOR_PREFIX}<`;
 const DARKGREEN1 = `${COLOR_PREFIX}A`;
 const DARKGREEN2 = `${COLOR_PREFIX}:`;
-const TURQUOISE = `${COLOR_PREFIX}N`;
-const BLUE = `${COLOR_PREFIX}3`;
-const BLUE1 = `${COLOR_PREFIX}B`;
+const TURQUOISE  = `${COLOR_PREFIX}N`;
+const BLUE       = `${COLOR_PREFIX}3`;
+const BLUE1      = `${COLOR_PREFIX}B`;
 const LIGHTBLUE1 = `${COLOR_PREFIX}F`;
 const LIGHTBLUE2 = `${COLOR_PREFIX}P`;
-const SKYBLUE = `${COLOR_PREFIX}T`;
-const ORANGE = `${COLOR_PREFIX}8`;
-const ORANGE1 = `${COLOR_PREFIX}@`;
-const ORANGE2 = `${COLOR_PREFIX}J`;
-const ORANGE3 = `${COLOR_PREFIX}L`;
-const TAN = `${COLOR_PREFIX}7`;
-const YELLOW = `${COLOR_PREFIX}9`;
-const YELLOW1 = `${COLOR_PREFIX}R`;
-const GOLD = `${COLOR_PREFIX}4`;
-const GOLD1 = `${COLOR_PREFIX}D`;
+const SKYBLUE    = `${COLOR_PREFIX}T`;
+const ORANGE     = `${COLOR_PREFIX}8`;
+const ORANGE1    = `${COLOR_PREFIX}@`;
+const ORANGE2    = `${COLOR_PREFIX}J`;
+const ORANGE3    = `${COLOR_PREFIX}L`;
+const TAN        = `${COLOR_PREFIX}7`;
+const YELLOW     = `${COLOR_PREFIX}9`;
+const YELLOW1    = `${COLOR_PREFIX}R`;
+const GOLD       = `${COLOR_PREFIX}4`;
+const GOLD1      = `${COLOR_PREFIX}D`;
 const LIGHTGOLD1 = `${COLOR_PREFIX}H`;
-const PINK = `${COLOR_PREFIX}O`;
-const LIGHTPINK = `${COLOR_PREFIX}G`;
-const PURPLE = `${COLOR_PREFIX};`;
+const PINK       = `${COLOR_PREFIX}O`;
+const LIGHTPINK  = `${COLOR_PREFIX}G`;
+const PURPLE     = `${COLOR_PREFIX};`;
 
 
 //=========================//
@@ -82,41 +82,40 @@ const SINGLE_SPACE = ' ';
 const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
 const HIGHLIGHT = config.HighlightCharacter !== "custom" ? config.HighlightCharacter : '*'; // replace * with desired custom character [CSTM-HLC]
 
-const NO_COLOR = EMPTY_STRING;
+const NO_COLOR   = EMPTY_STRING;
 const NO_PATTERN = EMPTY_STRING;
 const NO_PADDING = EMPTY_STRING;
 
 const SMALL_O = 'o';
-const PLUS = '+';
-const MINUS = '-';
+const PLUS    = '+';
+const MINUS   = '-';
 
 const PADDING_1 = SINGLE_SPACE;
 const PADDING_2 = SINGLE_SPACE.repeat(2);
 const PADDING_3 = SINGLE_SPACE.repeat(3);
 const PADDING_5 = SINGLE_SPACE.repeat(5);
 
-const PATTERN_2 = HIGHLIGHT.repeat(2);
-const PATTERN_5 = HIGHLIGHT.repeat(5);
-const PATTERN_10 = HIGHLIGHT.repeat(10);
+const PATTERN_2    = HIGHLIGHT.repeat(2);
+const PATTERN_5    = HIGHLIGHT.repeat(5);
+const PATTERN_10   = HIGHLIGHT.repeat(10);
 const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}`;
 
 const SHOULD_FIX_ILVL_INDENT = config.ItemLevel === "fix";
 const ILVL_INDENT_FIX_SINGLE  = SINGLE_SPACE.repeat(4); // for single digit ilvl items
 const ILVL_INDENT_FIX_DOUBLE  = SINGLE_SPACE.repeat(6); // for double digit ilvl items
 const ILVL_INDENT_FIX_QUALITY = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
-
-const ILVL_INDENT_FIX_FACET = SHOULD_FIX_ILVL_INDENT ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
-const ILVL_INDENT_FIX_CHARMS = SHOULD_FIX_ILVL_INDENT ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
-const ILVL_INDENT_FIX_QUEST1 = ILVL_INDENT_FIX_SINGLE; // quest items with a single digit ilvl
-const ILVL_INDENT_FIX_QUEST2 = ILVL_INDENT_FIX_DOUBLE; // quest items with a double digit ilvl
+const ILVL_INDENT_FIX_FACET   = SHOULD_FIX_ILVL_INDENT ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
+const ILVL_INDENT_FIX_CHARMS  = SHOULD_FIX_ILVL_INDENT ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
+const ILVL_INDENT_FIX_QUEST1  = ILVL_INDENT_FIX_SINGLE; // quest items with a single digit ilvl
+const ILVL_INDENT_FIX_QUEST2  = ILVL_INDENT_FIX_DOUBLE; // quest items with a double digit ilvl
 
 
 //==========================================//
 //   Parameters - Alternate Color Schemes   //
 //==========================================//
 
-const IS_ALTERNATE_COLOR_RUNES = ["all", "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
-const IS_ALTERNATE_HIGHLIGHT_FACET = ["all", "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
+const IS_ALTERNATE_COLOR_RUNES      = ["all", "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
+const IS_ALTERNATE_HIGHLIGHT_FACET  = ["all", "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
 const IS_ALTERNATE_HIGHLIGHT_SUNDER = ["all", "fac-sun", "sun-run", "sun"].includes(config.AlternateColorSchemes);
 
 
@@ -130,21 +129,24 @@ const IS_ALTERNATE_HIGHLIGHT_SUNDER = ["all", "fac-sun", "sun-run", "sun"].inclu
 // - mid: 21-15 (Pul-Gul)
 // - high: 26-33 (Vex-Zod)
 // I have however moved Ral (8), Hel (15) and Lem (20) a tier up because of their usefulness.
+const RUNE_TIER_NAMES_LOW      = ["el", "eld", "tir", "nef", "eth", "ith", "tal", "ort", "thul", "amn", "sol", "shael", "dol"];
+const RUNE_TIER_NAMES_LOWMID   = ["ral", "hel", "io", "lum", "ko", "fal"];
+const RUNE_TIER_NAMES_MID      = ["lem", "pul", "um", "mal", "ist", "gul"];
+const RUNE_TIER_NAMES_HIGH     = ["vex", "ohm", "lo", "sur", "ber", "jah", "cham", "zod"];
+const RUNE_TIER_NUMBERS_LOW    = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14]; // El, Eld, Tir, Nef, Eth, Ith, Tal, Ort, Thul, Amn, Sol, Shael, Dol
+const RUNE_TIER_NUMBERS_LOWMID = [8, 15, 16, 17, 18, 19];                      // Ral, Hel, Io, Lum, Ko, Fal
+const RUNE_TIER_NUMBERS_MID    = [20, 21, 22, 23, 24, 25];                     // Lem, Pul, Um, Mal, Ist, Gul
+const RUNE_TIER_NUMBERS_HIGH   = [26, 27, 28, 29, 30, 31, 32, 33];             // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
 
-const RUNES_TIER_LOW = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14]; // El, Eld, Tir, Nef, Eth, Ith, Tal, Ort, Thul, Amn, Sol, Shael, Dol
-const RUNES_TIER_LOWMID = [8, 15, 16, 17, 18, 19];                   // Ral, Hel, Io, Lum, Ko, Fal
-const RUNES_TIER_MID = [20, 21, 22, 23, 24, 25];                     // Lem, Pul, Um, Mal, Ist, Gul
-const RUNES_TIER_HIGH = [26, 27, 28, 29, 30, 31, 32, 33];            // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
-
-const RUNES_COLOR_NAME = ORANGE
+const RUNES_COLOR_NAME           = ORANGE
 const RUNES_COLOR_NAME_ALTERNATE = PURPLE;
-const RUNES_COLOR_HIGHLIGHT = RED;
+const RUNES_COLOR_HIGHLIGHT      = RED;
 
 // set the highlight patterns for each rune tier
-const RUNES_PATTERN_LOW = NO_PATTERN;    // 
-const RUNES_PATTERN_LOWMID = PATTERN_5;  // *****
-const RUNES_PATTERN_MID = PATTERN_10;    // **********
-const RUNES_PATTERN_HIGH = PATTERN_3x10; // ********** ********** **********
+const RUNES_PATTERN_LOW    = NO_PATTERN;   // 
+const RUNES_PATTERN_LOWMID = PATTERN_5;    // *****
+const RUNES_PATTERN_MID    = PATTERN_10;   // **********
+const RUNES_PATTERN_HIGH   = PATTERN_3x10; // ********** ********** **********
 
 // set the amount of spaces between the rune name and the highlight patterns for each rune tier
 const RUNES_PADDING_LOW = NO_PADDING;
@@ -152,10 +154,10 @@ const RUNES_PADDING_LOWMID = PADDING_3;
 const RUNES_PADDING_MID = PADDING_5;
 const RUNES_PADDING_HIGH = PADDING_5;
 
-const RUNES_TIER_HIGHLIGHTED = [].concat(RUNES_TIER_LOWMID, RUNES_TIER_MID, RUNES_TIER_HIGH); // runes with a highlight pattern (***** rune *****)
-const RUNES_TIER_HIGHLIGHTED_NUMBERS = [].concat(RUNES_TIER_MID, RUNES_TIER_HIGH);            // runes where the added numbers (33) are in the highlight color instead of default
-const RUNES_TIER_HIGHLIGHTED_NAMES = RUNES_TIER_HIGH;                                         // runes where the rune name is in the highlight color instead of default
-const RUNES_TIER_ALTERNATE_NAME_COLOR = RUNES_TIER_HIGHLIGHTED_NUMBERS;                       // runes that have a purple name when alternate color scheme is enabled
+const RUNES_TIER_HIGHLIGHTED = [].concat(RUNE_TIER_NUMBERS_LOWMID, RUNE_TIER_NUMBERS_MID, RUNE_TIER_NUMBERS_HIGH); // runes with a highlight pattern (***** rune *****)
+const RUNES_TIER_HIGHLIGHTED_NUMBERS = [].concat(RUNE_TIER_NUMBERS_MID, RUNE_TIER_NUMBERS_HIGH);                   // runes where the added numbers (33) are in the highlight color instead of default
+const RUNES_TIER_HIGHLIGHTED_NAMES = RUNE_TIER_NUMBERS_HIGH;                                                       // runes where the rune name is in the highlight color instead of default
+const RUNES_TIER_ALTERNATE_NAME_COLOR = RUNES_TIER_HIGHLIGHTED_NUMBERS;                                            // runes that have a purple name when alternate color scheme is enabled
 
 
 //========================//
@@ -588,16 +590,16 @@ const customRunes = {
   },
 
   determinePadding(runeNumber) {
-    if (RUNES_TIER_LOW.includes(runeNumber)) {
+    if (RUNE_TIER_NUMBERS_LOW.includes(runeNumber)) {
       return RUNES_PADDING_LOW;
     }
-    else if (RUNES_TIER_LOWMID.includes(runeNumber)) {
+    else if (RUNE_TIER_NUMBERS_LOWMID.includes(runeNumber)) {
       return RUNES_PADDING_LOWMID;
     }
-    else if (RUNES_TIER_MID.includes(runeNumber)) {
+    else if (RUNE_TIER_NUMBERS_MID.includes(runeNumber)) {
       return RUNES_PADDING_MID;
     }
-    else if (RUNES_TIER_HIGH.includes(runeNumber)) {
+    else if (RUNE_TIER_NUMBERS_HIGH.includes(runeNumber)) {
       return RUNES_PADDING_HIGH;
     }
 
@@ -605,16 +607,16 @@ const customRunes = {
   },
 
   determinePattern(runeNumber) {
-    if (RUNES_TIER_LOW.includes(runeNumber)) {
+    if (RUNE_TIER_NUMBERS_LOW.includes(runeNumber)) {
       return RUNES_PATTERN_LOW;
     }
-    else if (RUNES_TIER_LOWMID.includes(runeNumber)) {
+    else if (RUNE_TIER_NUMBERS_LOWMID.includes(runeNumber)) {
       return RUNES_PATTERN_LOWMID;
     }
-    else if (RUNES_TIER_MID.includes(runeNumber)) {
+    else if (RUNE_TIER_NUMBERS_MID.includes(runeNumber)) {
       return RUNES_PATTERN_MID;
     }
-    else if (RUNES_TIER_HIGH.includes(runeNumber)) {
+    else if (RUNE_TIER_NUMBERS_HIGH.includes(runeNumber)) {
       return RUNES_PATTERN_HIGH;
     }
 
@@ -1375,24 +1377,43 @@ const customModifiers = {
 
 // runes
 function pushLightPillarsForRunes() {
-  [ 
-    "el", "eld", "tir", "nef", "eth", "ith", "tal", "ral", "ort", "thul", "amn", 
-    "sol", "shael", "dol", "hel", "io", "lum", "ko", "fal", "lem", "pul", "um", 
-    "mal", "ist", "gul", "vex", "ohm", "lo", "sur", "ber", "jah", "cham", "zod",
-  ].forEach((rune) => {
+  if ( !config.ShouldAddLightPillarRunesLow && !config.ShouldAddLightPillarRunesLowMid 
+    && !config.ShouldAddLightPillarRunesMid && !config.ShouldAddLightPillarRunesHigh ) {
+    return;
+  }
+
+  let toPush = [];
+  if (config.ShouldAddLightPillarRunesLow) {
+    toPush = toPush.concat(RUNE_TIER_NAMES_LOW);
+  }
+  if (config.ShouldAddLightPillarRunesLowMid) {
+    toPush = toPush.concat(RUNE_TIER_NAMES_LOWMID);
+  }
+  if (config.ShouldAddLightPillarRunesMid) {
+    toPush = toPush.concat(RUNE_TIER_NAMES_MID);
+  }
+  if (config.ShouldAddLightPillarRunesHigh) {
+    toPush = toPush.concat(RUNE_TIER_NAMES_HIGH);
+  }
+  toPush.forEach((rune) => {
     pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune}_rune`);
   });
 }
 
 // rings & amulets
 function pushLightPillarsForRingsAmulets() {
+  if (!config.ShouldAddLightPillarRingsAmulets) {
+    return;
+  }
+
   pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\`, "ring");
   pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\`, "amulet");
 }
 
 // gems & jewels
 function pushLightPillarsForGemsJewels() {
-  if (config.ShouldDisableLightPillarForHidden && config.Gems == "hide") {
+  if ( !config.ShouldAddLightPillarGemsJewels 
+    || (config.ShouldDisableLightPillarForHidden && config.Gems == "hide")) {
     return;
   }
 
@@ -1421,69 +1442,86 @@ function getLightPillarGemQualities() {
 
 // charms
 function pushLightPillarsForCharms() {
-  ["charm_small", "charm_medium", "charm_large"].forEach((charm) => {
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}charm\\`, charm);
+  if (!config.ShouldAddLightPillarCharms) {
+    return;
+  }
+
+  ["small", "medium", "large"].forEach((charm) => {
+    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}charm\\`, `charm_${charm}`);
   });
   // pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
-  if (!config.ShouldAddLightPillarQuest) {
+  if (!config.ShouldAddLightPillarQuestItems) {
     pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
   }
 }
 
 // quest items
 function pushLightPillarsForQuestItems() {
-  let questItems = [
-    // act 1
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
-    [`${LP_PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
-    // act 2
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
-    [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
-    // act 3
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
-    [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
-    [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
-    [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
-    [`${LP_PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
-    // act 4
-    // none
-    // act 5
-    // Malah's Potion       => see Potion of Life (scroll_of_self_resurrect)
-    // Scroll of Resistance => see Scroll of Inifuss (bark_scroll)
-  ];
+  if (!config.ShouldAddLightPillarQuestItems && !config.ShouldAddLightPillarQuestWeapons) {
+    return;
+  }
 
-  // quest weapons
-  if (!config.ShouldExcludeLightPillarQuestWeapons) {
-    questItems = questItems.concat([
-    // act 1
-    [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
-    [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
-    // act 2
-    [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
-    [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
-    // act 3
-    [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
-    [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
-    [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
-    // act 4
-    [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
-    // act 5
-    // none
+  let toPush = [];
+
+  // quest items
+  if (config.ShouldAddLightPillarQuestItems) {
+    toPush = toPush.concat([
+      // act 1
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
+      [`${LP_PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
+      // act 2
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
+      [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
+      // act 3
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
+      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
+      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
+      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
+      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
+      // act 4
+      // none
+      // act 5
+      // Malah's Potion       => see Potion of Life (scroll_of_self_resurrect)
+      // Scroll of Resistance => see Scroll of Inifuss (bark_scroll)
     ]);
   }
 
-  questItems.forEach((item) => {
+  // quest weapons
+  if (config.ShouldAddLightPillarQuestWeapons) {
+    toPush = toPush.concat([
+      // act 1
+      [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
+      [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
+      // act 2
+      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
+      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
+      // act 3
+      [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
+      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
+      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
+      // act 4
+      [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
+      // act 5
+      // none
+    ]);
+  }
+
+  toPush.forEach((item) => {
     pushLightPillarToPath(item[0], item[1]);
   });
 }
 
 // essences
 function pushLightPillarsForEssences() {
+  if (!config.ShouldAddLightPillarEssences) {
+    return;
+  }
+
   let essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
   essences.forEach((essence) => {
     pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, essence);
@@ -1492,11 +1530,19 @@ function pushLightPillarsForEssences() {
 
 // token
 function pushLightPillarForToken() {
+  if (!config.ShouldAddLightPillarTokens) {
+    return;
+  }
+
   pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, "token_of_absolution");
 }
 
 // pandemonium keys
 function pushLightPillarsForKeys() {
+  if (!config.ShouldAddLightPillarKeys) {
+    return;
+  }
+
   let path = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
   var file = D2RMM.readJson(`${path}${FILE_EXTENSION_JSON}`);
   pushLightPillarToFile(file);
@@ -1508,8 +1554,12 @@ function pushLightPillarsForKeys() {
 
 // pandemonium event (ubers) organs
 function pushLightPillarsForUberOrgans() {
+  if (!config.ShouldAddLightPillarOrgans) {
+    return;
+  }
+
   pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "horn");
-  if (config.ShouldAddLightPillarQuest) {
+  if (config.ShouldAddLightPillarQuestItems) {
     return;
   }
 
@@ -1519,7 +1569,8 @@ function pushLightPillarsForUberOrgans() {
 
 // standard of heroes
 function pushLightPillarForStandardOfHeroes() {
-  if (config.ShouldDisableLightPillarForHidden && config.Endgame === "hsh") {
+  if ( !config.ShouldAddLightPillarStandardOfHeroes 
+    || (config.ShouldDisableLightPillarForHidden && config.Endgame === "hsh")) {
     return;
   }
   
@@ -1716,36 +1767,16 @@ function addEquipmentQuality(equipment, itemNames, setting) {
 //===========================================//
 
 function applyLightPillars() {
-  if (config.ShouldAddLightPillarRunes) {
-    pushLightPillarsForRunes();
-  }
-  if (config.ShouldAddLightPillarRingsAmulets) {
-    pushLightPillarsForRingsAmulets();
-  }
-  if (config.ShouldAddLightPillarGemsJewels) {
-    pushLightPillarsForGemsJewels();
-  }
-  if (config.ShouldAddLightPillarCharms) {
-    pushLightPillarsForCharms();
-  }
-  if (config.ShouldAddLightPillarQuest) {
-    pushLightPillarsForQuestItems();
-  }
-  if (config.ShouldAddLightPillarEssences) {
-    pushLightPillarsForEssences();
-  }
-  if (config.ShouldAddLightPillarTokens) {
-    pushLightPillarForToken();
-  }
-  if (config.ShouldAddLightPillarKeys) {
-    pushLightPillarsForKeys();
-  }
-  if (config.ShouldAddLightPillarOrgans) {
-    pushLightPillarsForUberOrgans();
-  }
-  if (config.ShouldAddLightPillarStandardOfHeroes) {
-    pushLightPillarForStandardOfHeroes();
-  }
+  pushLightPillarsForRunes();
+  pushLightPillarsForRingsAmulets();
+  pushLightPillarsForGemsJewels();
+  pushLightPillarsForCharms();
+  pushLightPillarsForQuestItems();
+  pushLightPillarsForEssences();
+  pushLightPillarForToken();
+  pushLightPillarsForKeys();
+  pushLightPillarsForUberOrgans();
+  pushLightPillarForStandardOfHeroes();
 }
 
 
