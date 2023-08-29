@@ -45,6 +45,34 @@
       ]
     },
     {
+      "id": "ShouldShowRunesLow",
+      "type": "checkbox",
+      "name": "Show Runes: Low",
+      "description": "Show Low Runes (El [1] - Dol [14], except Ral [8])",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldShowRunesLowMid",
+      "type": "checkbox",
+      "name": "Show Runes: Low-Mid",
+      "description": "Show Low-Mid Runes (Hel [15] - Fal [19] and Ral [8])",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldShowRunesMid",
+      "type": "checkbox",
+      "name": "Show Runes: Mid",
+      "description": "Show Mid Runes (Lem [20] - Gul [25])",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldShowRunesHigh",
+      "type": "checkbox",
+      "name": "Show Runes: High",
+      "description": "Show High Runes (Vex [26] - Zod [33])",
+      "defaultValue": true
+    },
+    {
       "id": "JunkSection",
       "type": "section",
       "name": "Junk",
@@ -125,7 +153,7 @@
       "id": "Keys",
       "type": "select",
       "name": "Keys",
-      "description": "Customize regular keys for opening locked chests. For Uber keys, see Endgame. [CSTM-KEY]",
+      "description": "Customize regular keys for opening locked chests. For Über keys, see Endgame. [CSTM-KEY]",
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
@@ -345,15 +373,15 @@
     {
       "id": "ShouldAddLightPillarKeys",
       "type": "checkbox",
-      "name": "Keys",
+      "name": "Pandemonium Keys",
       "description": "Shine a Light Pillar on Keys of Terror/Hate/Destruction on the ground.",
       "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarOrgans",
       "type": "checkbox",
-      "name": "Organs",
-      "description": "Shine a Light Pillar on Uber Organs on the ground. Baal's Eye and Mephisto's Brain share graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
+      "name": "Pandemonium Organs",
+      "description": "Shine a Light Pillar on Über Organs on the ground. Baal's Eye and Mephisto's Brain share graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
       "defaultValue": true
     },
     {
@@ -396,8 +424,8 @@
     {
       "id": "HighlightCharacter",
       "type": "select",
-      "name": "Highlight character",
-      "description": "Character used to highlight select items. [CSTM-HLC]",
+      "name": "Highlight Character",
+      "description": "Character used to highlight select items. [CSTM-HLCTR]",
       "defaultValue": "*",
       "options": [
         { "label": "* (asterisk)", "value": "*" },
@@ -416,6 +444,31 @@
         { "label": "$ (dollar)", "value": "$" },
         { "label": "% (percent)", "value": "%" },
         { "label": "& (ampersand)", "value": "&" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "HighlightColor",
+      "type": "select",
+      "name": "Highlight Color",
+      "description": "Color used to highlight select items. [CSTM-HLCLR]",
+      "defaultValue": "1",
+      "options": [
+        { "label": "White", "value": "0" },
+        { "label": "Gray", "value": "5" },
+        { "label": "Black", "value": "6" },
+        { "label": "Red", "value": "1" },
+        { "label": "Dark Red", "value": "S" },
+        { "label": "Green", "value": "2" },
+        { "label": "Dark Green", "value": "A" },
+        { "label": "Turquoise", "value": "N" },
+        { "label": "Blue", "value": "3" },
+        { "label": "Sky Blue", "value": "T" },
+        { "label": "Orange", "value": "8" },
+        { "label": "Yellow", "value": "9" },
+        { "label": "Gold", "value": "4" },
+        { "label": "Pink", "value": "O" },
+        { "label": "Purple", "value": ";" },
         { "label": "Custom", "value": "custom" }
       ]
     },

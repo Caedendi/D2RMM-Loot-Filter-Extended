@@ -80,7 +80,8 @@ const EMPTY_STRING = '';
 const SINGLE_SPACE = ' ';
 
 const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
-const HIGHLIGHT = config.HighlightCharacter !== "custom" ? config.HighlightCharacter : '*'; // replace * with desired custom character [CSTM-HLC]
+const HIGHLIGHT       = config.HighlightCharacter !== "custom" ? config.HighlightCharacter                 : '*'; // replace * with desired custom character [CSTM-HLCTR]
+const HIGHLIGHT_COLOR = config.HighlightColor     !== "custom" ? `${COLOR_PREFIX}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
 
 const NO_COLOR   = EMPTY_STRING;
 const NO_PATTERN = EMPTY_STRING;
@@ -133,14 +134,52 @@ const RUNE_TIER_NAMES_LOW      = ["el", "eld", "tir", "nef", "eth", "ith", "tal"
 const RUNE_TIER_NAMES_LOWMID   = ["ral", "hel", "io", "lum", "ko", "fal"];
 const RUNE_TIER_NAMES_MID      = ["lem", "pul", "um", "mal", "ist", "gul"];
 const RUNE_TIER_NAMES_HIGH     = ["vex", "ohm", "lo", "sur", "ber", "jah", "cham", "zod"];
-const RUNE_TIER_NUMBERS_LOW    = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14]; // El, Eld, Tir, Nef, Eth, Ith, Tal, Ort, Thul, Amn, Sol, Shael, Dol
-const RUNE_TIER_NUMBERS_LOWMID = [8, 15, 16, 17, 18, 19];                      // Ral, Hel, Io, Lum, Ko, Fal
-const RUNE_TIER_NUMBERS_MID    = [20, 21, 22, 23, 24, 25];                     // Lem, Pul, Um, Mal, Ist, Gul
-const RUNE_TIER_NUMBERS_HIGH   = [26, 27, 28, 29, 30, 31, 32, 33];             // Vex, Ohm, Lo, Sur, Ber, Jah, Cham, Zod
+
+const RUNE_TIER_LOW = [
+  { number: 1,  name: "El"    }, 
+  { number: 2,  name: "Eld"   }, 
+  { number: 3,  name: "Tir"   }, 
+  { number: 4,  name: "Nef"   }, 
+  { number: 5,  name: "Eth"   }, 
+  { number: 6,  name: "Ith"   }, 
+  { number: 7,  name: "Tal"   }, 
+  { number: 9,  name: "Ort"   }, 
+  { number: 10, name: "Thul"  }, 
+  { number: 11, name: "Amn"   }, 
+  { number: 12, name: "Sol"   }, 
+  { number: 13, name: "Shael" }, 
+  { number: 14, name: "Dol"   }, 
+];
+const RUNE_TIER_LOWMID = [
+  { number: 8,  name: "Ral" }, 
+  { number: 15, name: "Hel" }, 
+  { number: 16, name: "Io"  }, 
+  { number: 17, name: "Lum" }, 
+  { number: 18, name: "Ko"  }, 
+  { number: 19, name: "Fal" }, 
+];
+const RUNE_TIER_MID = [
+  { number: 20, name: "Lem" }, 
+  { number: 21, name: "Pul" }, 
+  { number: 22, name: "Um"  }, 
+  { number: 23, name: "Mal" }, 
+  { number: 24, name: "Ist" }, 
+  { number: 25, name: "Gul" }, 
+];
+const RUNE_TIER_HIGH = [
+  { number: 26, name: "Vex"  }, 
+  { number: 27, name: "Ohm"  }, 
+  { number: 28, name: "Lo"   }, 
+  { number: 29, name: "Sur"  }, 
+  { number: 30, name: "Ber"  }, 
+  { number: 31, name: "Jah"  }, 
+  { number: 32, name: "Cham" }, 
+  { number: 33, name: "Zod"  }, 
+];
 
 const RUNES_COLOR_NAME           = ORANGE
 const RUNES_COLOR_NAME_ALTERNATE = PURPLE;
-const RUNES_COLOR_HIGHLIGHT      = RED;
+const RUNES_COLOR_HIGHLIGHT      = HIGHLIGHT_COLOR;
 
 // set the highlight patterns for each rune tier
 const RUNES_PATTERN_LOW    = NO_PATTERN;   // 
@@ -154,10 +193,17 @@ const RUNES_PADDING_LOWMID = PADDING_3;
 const RUNES_PADDING_MID = PADDING_5;
 const RUNES_PADDING_HIGH = PADDING_5;
 
-const RUNES_TIER_HIGHLIGHTED = [].concat(RUNE_TIER_NUMBERS_LOWMID, RUNE_TIER_NUMBERS_MID, RUNE_TIER_NUMBERS_HIGH); // runes with a highlight pattern (***** rune *****)
-const RUNES_TIER_HIGHLIGHTED_NUMBERS = [].concat(RUNE_TIER_NUMBERS_MID, RUNE_TIER_NUMBERS_HIGH);                   // runes where the added numbers (33) are in the highlight color instead of default
-const RUNES_TIER_HIGHLIGHTED_NAMES = RUNE_TIER_NUMBERS_HIGH;                                                       // runes where the rune name is in the highlight color instead of default
-const RUNES_TIER_ALTERNATE_NAME_COLOR = RUNES_TIER_HIGHLIGHTED_NUMBERS;                                            // runes that have a purple name when alternate color scheme is enabled
+const RUNE_TIERS = [
+  { level: 1, runes: RUNE_TIER_LOW,    padding: RUNES_PADDING_LOW,    pattern: RUNES_PATTERN_LOW,    isVisible: config.ShouldShowRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow    },
+  { level: 2, runes: RUNE_TIER_LOWMID, padding: RUNES_PADDING_LOWMID, pattern: RUNES_PATTERN_LOWMID, isVisible: config.ShouldShowRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid },
+  { level: 3, runes: RUNE_TIER_MID,    padding: RUNES_PADDING_MID,    pattern: RUNES_PATTERN_MID,    isVisible: config.ShouldShowRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid    },
+  { level: 4, runes: RUNE_TIER_HIGH,   padding: RUNES_PADDING_HIGH,   pattern: RUNES_PATTERN_HIGH,   isVisible: config.ShouldShowRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh   },
+];
+
+const RUNE_TIERS_HIGHLIGHTED          = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
+const RUNE_TIERS_HIGHLIGHTED_NUMBERS  = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default
+const RUNE_TIERS_HIGHLIGHTED_NAMES    = [4];       // rune tiers where the rune name is in the highlight color instead of default
+const RUNE_TIERS_ALTERNATE_NAME_COLOR = [3, 4];    // rune tiers that have a purple name when alternate color scheme is enabled
 
 
 //========================//
@@ -166,7 +212,7 @@ const RUNES_TIER_ALTERNATE_NAME_COLOR = RUNES_TIER_HIGHLIGHTED_NUMBERS;         
 
 // uniques
 const UNIQUE_COLOR_NAME = GOLD;
-const UNIQUE_COLOR_HIGHLIGHT = RED;
+const UNIQUE_COLOR_HIGHLIGHT = HIGHLIGHT_COLOR;
 const UNIQUE_PATTERN = PATTERN_10;
 const UNIQUE_PADDING = PADDING_5;
 const UNIQUE_PREFIX = `${UNIQUE_COLOR_HIGHLIGHT}${UNIQUE_PATTERN}${UNIQUE_COLOR_NAME}${UNIQUE_PADDING}`;
@@ -200,16 +246,20 @@ const QUEST_PREFIX = UNIQUE_PREFIX;
 const QUEST_SUFFIX = UNIQUE_SUFFIX;
 
 // endgame
-const ESSENCE_PREFIX = `${RED}${PATTERN_5}${ORANGE}${PADDING_3}`;
-const ESSENCE_SUFFIX = `${PADDING_3}${RED}${PATTERN_5}${ORANGE}`;
-const KEY_PREFIX = `${RED}${PATTERN_10}${ORANGE}${PADDING_5}`;
-const KEY_SUFFIX = `${PADDING_5}${RED}${PATTERN_10}${ORANGE}`;
+const ENDGAME_COLOR_NAME = ORANGE;
+const ENDGAME_COLOR_HIGHLIGHT = HIGHLIGHT_COLOR;
+
+const ESSENCE_PREFIX = `${ENDGAME_COLOR_HIGHLIGHT}${PATTERN_5}${ENDGAME_COLOR_NAME}${PADDING_3}`;
+const ESSENCE_SUFFIX = `${PADDING_3}${ENDGAME_COLOR_HIGHLIGHT}${PATTERN_5}${ENDGAME_COLOR_NAME}`;
+const KEY_PREFIX = `${ENDGAME_COLOR_HIGHLIGHT}${PATTERN_10}${ENDGAME_COLOR_NAME}${PADDING_5}`;
+const KEY_SUFFIX = `${PADDING_5}${ENDGAME_COLOR_HIGHLIGHT}${PATTERN_10}${ENDGAME_COLOR_NAME}`;
 const TOKEN_PREFIX = KEY_PREFIX;
 const TOKEN_SUFFIX = KEY_SUFFIX;
-const ORGAN_PREFIX = `${RED}${PATTERN_3x10}${ORANGE}${PADDING_5}`;
-const ORGAN_SUFFIX = `${PADDING_5}${RED}${PATTERN_3x10}${ORANGE}`;
-const STANDARD_OF_HEROES_PREFIX = `${RED}${PATTERN_5}${GOLD}${PADDING_3}`;
-const STANDARD_OF_HEROES_SUFFIX = `${PADDING_3}${RED}${PATTERN_5}${GOLD}`;
+const ORGAN_PREFIX = `${ENDGAME_COLOR_HIGHLIGHT}${PATTERN_3x10}${ENDGAME_COLOR_NAME}${PADDING_5}`;
+const ORGAN_SUFFIX = `${PADDING_5}${ENDGAME_COLOR_HIGHLIGHT}${PATTERN_3x10}${ENDGAME_COLOR_NAME}`;
+
+const STANDARD_OF_HEROES_PREFIX = `${ENDGAME_COLOR_HIGHLIGHT}${PATTERN_5}${UNIQUE_COLOR_NAME}${PADDING_3}`;
+const STANDARD_OF_HEROES_SUFFIX = `${PADDING_3}${ENDGAME_COLOR_HIGHLIGHT}${PATTERN_5}${UNIQUE_COLOR_NAME}`;
 
 
 //===============================//
@@ -445,41 +495,7 @@ const customAffixes = {
 };
 
 const customRunes = {
-  runes: {
-    r01: "El",
-    r02: "Eld",
-    r03: "Tir",
-    r04: "Nef",
-    r05: "Eth",
-    r06: "Ith",
-    r07: "Tal",
-    r08: "Ral",
-    r09: "Ort",
-    r10: "Thul",
-    r11: "Amn",
-    r12: "Sol",
-    r13: "Shael",
-    r14: "Dol",
-    r15: "Hel",
-    r16: "Io",
-    r17: "Lum",
-    r18: "Ko",
-    r19: "Fal",
-    r20: "Lem",
-    r21: "Pul",
-    r22: "Um",
-    r23: "Mal",
-    r24: "Ist",
-    r25: "Gul",
-    r26: "Vex",
-    r27: "Ohm",
-    r28: "Lo",
-    r29: "Sur",
-    r30: "Ber",
-    r31: "Jah",
-    r32: "Cham",
-    r33: "Zod",
-  },
+  runes: {},
   
   customizeRunes(setting) {
     const RUNES_SETTINGS_AFFIX = ["nrs-hls", "nrs", "hls"];                // settings that keep the " Rune" affix
@@ -533,35 +549,35 @@ const customRunes = {
         this.runes.r31 = `${RED}**********${ORANGE1}     Jah (31)     ${RED}**********${ORANGE1}`;  // Jah
         this.runes.r32 = `${RED}**********${ORANGE1}     Cham (32)     ${RED}**********${ORANGE1}`; // Cham
         // this.runes.r33 = `${RED}**********${ORANGE1}     Zod (33)     ${RED}**********${ORANGE1}`;  // Zod
-        // this.runes.r33 = `${RED}${PATTERN_10}${PADDING_5}${ORANGE1}Zod (33)${PADDING_5}${RED}${PATTERN_10}`;  // Zod
+        // this.runes.r33 = `${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${PADDING_5}${RUNES_COLOR_NAME}Zod (33)${PADDING_5}${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${RUNES_COLOR_NAME}`;  // Zod
         this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE1, "Zod Rune (33)"); // Zod
         return;
     }
   },
 
   generateRuneNames(setting, settingsAffix, settingsNumbers, settingsHighlighting) {
-    var i = 1;
-    for (const rune in this.runes) {
-      this.runes[rune] = this.generateRuneName(this.runes[rune], i, setting, settingsAffix, settingsNumbers, settingsHighlighting);
-      i++;
-    }
+    RUNE_TIERS.forEach((tier) => {
+      tier.runes.forEach((rune) => {
+        let itemCode = rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`;
+        this.runes[itemCode] = !tier.isVisible ? HIDDEN : this.generateRuneName(rune.name, rune.number, tier.level, tier.pattern, tier.padding, setting, settingsAffix, settingsNumbers, settingsHighlighting);
+      });
+    });
   },
 
-  generateRuneName(name, number, setting, settingsAffix, settingsNumbers, settingsHighlighting) {
+  generateRuneName(name, number, tier, highlightPattern, padding, setting, settingsAffix, settingsNumbers, settingsHighlighting) {
     const hasAffix = settingsAffix.includes(setting);
     const hasNumber = settingsNumbers.includes(setting);
-    const hasHighlighting = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED.includes(number);
-    const hasHighlightedNumber = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NUMBERS.includes(number);
-    const hasHighlightedName = settingsHighlighting.includes(setting) && RUNES_TIER_HIGHLIGHTED_NAMES.includes(number);
-    const hasAlternateNameColor = IS_ALTERNATE_COLOR_RUNES && RUNES_TIER_ALTERNATE_NAME_COLOR.includes(number);
+
+    const hasHighlighting       = settingsHighlighting.includes(setting) && RUNE_TIERS_HIGHLIGHTED.includes(tier);
+    const hasHighlightedNumber  = settingsHighlighting.includes(setting) && RUNE_TIERS_HIGHLIGHTED_NUMBERS.includes(tier);
+    const hasHighlightedName    = settingsHighlighting.includes(setting) && RUNE_TIERS_HIGHLIGHTED_NAMES.includes(tier);
+    const hasAlternateNameColor = IS_ALTERNATE_COLOR_RUNES && RUNE_TIERS_ALTERNATE_NAME_COLOR.includes(tier);
 
     var highlightColor1 = hasHighlighting ? RUNES_COLOR_HIGHLIGHT : NO_COLOR;
     var highlightColor2 = highlightColor1;
     var nameColor1 = !hasAlternateNameColor ? (hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME) : RUNES_COLOR_NAME_ALTERNATE;
     var nameColor2 = nameColor1;
     var numberColor = !hasAlternateNameColor ? (hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME) : NO_COLOR;
-    const padding = this.determinePadding(number);
-    const highlightPattern = this.determinePattern(number);
 
     if (hasAffix) {
       name = `${name} Rune`;
@@ -587,40 +603,6 @@ const customRunes = {
     }
 
     return `${highlightColor1}${highlightPattern}${nameColor1}${padding}${name}${padding}${highlightColor2}${highlightPattern}${nameColor2}`;
-  },
-
-  determinePadding(runeNumber) {
-    if (RUNE_TIER_NUMBERS_LOW.includes(runeNumber)) {
-      return RUNES_PADDING_LOW;
-    }
-    else if (RUNE_TIER_NUMBERS_LOWMID.includes(runeNumber)) {
-      return RUNES_PADDING_LOWMID;
-    }
-    else if (RUNE_TIER_NUMBERS_MID.includes(runeNumber)) {
-      return RUNES_PADDING_MID;
-    }
-    else if (RUNE_TIER_NUMBERS_HIGH.includes(runeNumber)) {
-      return RUNES_PADDING_HIGH;
-    }
-
-    return NO_PADDING;
-  },
-
-  determinePattern(runeNumber) {
-    if (RUNE_TIER_NUMBERS_LOW.includes(runeNumber)) {
-      return RUNES_PATTERN_LOW;
-    }
-    else if (RUNE_TIER_NUMBERS_LOWMID.includes(runeNumber)) {
-      return RUNES_PATTERN_LOWMID;
-    }
-    else if (RUNE_TIER_NUMBERS_MID.includes(runeNumber)) {
-      return RUNES_PATTERN_MID;
-    }
-    else if (RUNE_TIER_NUMBERS_HIGH.includes(runeNumber)) {
-      return RUNES_PATTERN_HIGH;
-    }
-
-    return NO_PATTERN;
   },
 };
 
@@ -1382,21 +1364,15 @@ function pushLightPillarsForRunes() {
     return;
   }
 
-  let toPush = [];
-  if (config.ShouldAddLightPillarRunesLow) {
-    toPush = toPush.concat(RUNE_TIER_NAMES_LOW);
-  }
-  if (config.ShouldAddLightPillarRunesLowMid) {
-    toPush = toPush.concat(RUNE_TIER_NAMES_LOWMID);
-  }
-  if (config.ShouldAddLightPillarRunesMid) {
-    toPush = toPush.concat(RUNE_TIER_NAMES_MID);
-  }
-  if (config.ShouldAddLightPillarRunesHigh) {
-    toPush = toPush.concat(RUNE_TIER_NAMES_HIGH);
-  }
-  toPush.forEach((rune) => {
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune}_rune`);
+  // let toPush = [];
+  RUNE_TIERS.forEach((tier) => {
+    if (!tier.hasLightPillar || (config.ShouldDisableLightPillarForHidden && !tier.isVisible)) {
+      return;
+    }
+
+    tier.runes.forEach((rune) => {
+      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune.name.toLowerCase()}_rune`);
+    });
   });
 }
 
