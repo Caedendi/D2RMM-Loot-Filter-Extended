@@ -294,6 +294,20 @@
       "defaultExpanded": false
     },
     {
+      "id": "ShouldEnableLightPillars",
+      "type": "checkbox",
+      "name": "Enable",
+      "description": "Enable shining Light Pillars on the item types toggled below.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldDisableLightPillarForHidden",
+      "type": "checkbox",
+      "name": "Disable for Hidden Items",
+      "description": "Do not shine Light Pillars on items set to hidden. NOTE: Does not work with custom settings.",
+      "defaultValue": true
+    },
+    {
       "id": "ShouldAddLightPillarRunesLow",
       "type": "checkbox",
       "name": "Runes: Low",
@@ -392,13 +406,6 @@
       "defaultValue": true
     },
     {
-      "id": "ShouldDisableLightPillarForHidden",
-      "type": "checkbox",
-      "name": "Disable for Hidden Items",
-      "description": "Do not shine Light Pillars on items set to hidden. NOTE: Does not work with custom settings.",
-      "defaultValue": true
-    },
-    {
       "id": "MiscSection",
       "type": "section",
       "name": "Misc",
@@ -455,20 +462,29 @@
       "defaultValue": "1",
       "options": [
         { "label": "White", "value": "0" },
-        { "label": "Gray", "value": "5" },
+        { "label": "White Smoke", "value": "=" },
+        { "label": "Dim Gray", "value": "I" },
+        { "label": "Dimmer Gray", "value": "5" },
         { "label": "Black", "value": "6" },
-        { "label": "Red", "value": "1" },
-        { "label": "Dark Red", "value": "S" },
-        { "label": "Green", "value": "2" },
-        { "label": "Dark Green", "value": "A" },
-        { "label": "Turquoise", "value": "N" },
-        { "label": "Blue", "value": "3" },
-        { "label": "Sky Blue", "value": "T" },
-        { "label": "Orange", "value": "8" },
+        { "label": "Red", "value": "U" },
+        { "label": "Tomato", "value": "1" },
+        { "label": "Crimson", "value": "S" },
+        { "label": "Lime", "value": "2" },
+        { "label": "Lime v2", "value": "C" },
+        { "label": "Lime Green", "value": "<" },
+        { "label": "Green", "value": "A" },
+        { "label": "Deep Sky Blue", "value": "N" },
+        { "label": "Light Sky Blue", "value": "T" },
+        { "label": "Medium Slate Blue", "value": "P" },
+        { "label": "Corn Flower Blue", "value": "3" },
         { "label": "Yellow", "value": "9" },
-        { "label": "Gold", "value": "4" },
-        { "label": "Pink", "value": "O" },
-        { "label": "Purple", "value": ";" },
+        { "label": "Light Yellow", "value": "R" },
+        { "label": "Orange", "value": "8" },
+        { "label": "Violet", "value": "O" },
+        { "label": "Dark Violet", "value": ";" },
+        { "label": "Tan", "value": "4" },
+        { "label": "Tan v2", "value": "7" },
+        { "label": "Wheat", "value": "M" },
         { "label": "Custom", "value": "custom" }
       ]
     },
