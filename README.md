@@ -140,165 +140,200 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 
 ## Presets Overview
 
-|          Section           |               Setting                | Default | Options                                      |
-|:--------------------------:|:------------------------------------:|:-------:|:---------------------------------------------|
-|      **Gold & Runes**      |               **Gold**               |         | No change                                    |
-|                            |                                      |         | Gold text                                    |
-|                            |                                      |    x    | Gold G                                       |
-|                            |                                      |         | White G                                      |
-|                            |                                      |         | Hide affix                                   |
-|                            |                                      |         | Custom                                       |
-|                            |              **Runes**               |         | No change                                    |
-|                            |                                      |    x    | Add rune numbers + highlights + remove affix |
-|                            |                                      |         | Add rune numbers + highlights                |
-|                            |                                      |         | Add rune numbers + remove affix              |
-|                            |                                      |         | Add highlights + remove affix                |
-|                            |                                      |         | Add rune numbers                             |
-|                            |                                      |         | Add highlights                               |
-|                            |                                      |         | Remove affix                                 |
-|                            |                                      |         | Custom                                       |
-|                            |            **Show Runes**            |         | Show Runes: Low                              |
-|                            |                                      |         | Show Runes: Low-Mid                          |
-|                            |                                      |         | Show Runes: Mid                              |
-|                            |                                      |         | Show Runes: High                             |
-|          **Junk**          |         **Healing Potions**          |         | No change                                    |
-|                            |                                      |    x    | All                                          |
-|                            |                                      |         | Hide lvl 3                                   |
-|                            |                                      |         | Hide lvl 4                                   |
-|                            |                                      |         | Hide lvl 3 + small rejuvs                    |
-|                            |                                      |         | Hide lvl 4 + small rejuvs                    |
-|                            |                                      |         | Show only rejuvs                             |
-|                            |                                      |         | Show only full rejuvs                        |
-|                            |                                      |         | Hide all                                     |
-|                            |                                      |         | Custom                                       |
-|                            |           **Buff Potions**           |         | No change                                    |
-|                            |                                      |    x    | All                                          |
-|                            |                                      |         | Hide                                         |
-|                            |                                      |         | Custom                                       |
-|                            |         **Throwing Potions**         |         | No change                                    |
-|                            |                                      |    x    | All                                          |
-|                            |                                      |         | Hide                                         |
-|                            |                                      |         | Custom                                       |
-|                            |         **Scrolls & Tomes**          |         | No change                                    |
-|                            |                                      |    x    | All                                          |
-|                            |                                      |         | Hide scrolls                                 |
-|                            |                                      |         | Custom                                       |
-|                            |          **Arrows & Bolts**          |         | No change                                    |
-|                            |                                      |    x    | Highlight                                    |
-|                            |                                      |         | Hide                                         |
-|                            |                                      |         | Custom                                       |
-|                            |               **Keys**               |    x    | No change                                    |
-|                            |                                      |         | Hide                                         |
-|                            |                                      |         | Custom                                       |
-|        **Jewelry**         |               **Gems**               |         | No change                                    |
-|                            |                                      |    x    | Highlight all                                |
-|                            |                                      |         | Highlight, show only flawless & perfect      |
-|                            |                                      |         | Highlight, show only perfect                 |
-|                            |                                      |         | Hide all                                     |
-|                            |                                      |         | Custom                                       |
-|                            |              **Jewels**              |         | No change                                    |
-|                            |                                      |    x    | Highlight Facets                             |
-|                            |                                      |         | Custom                                       |
-|                            |              **Charms**              |         | No change                                    |
-|                            |                                      |    x    | Highlight all                                |
-|                            |                                      |         | Highlight unique charms only                 |
-|                            |                                      |         | Highlight non-unique charms only             |
-|                            |                                      |         | Custom                                       |
-|    **Quest & Endgame**     |           **Quest items**            |         | No change                                    |
-|                            |                                      |         | Highlight                                    |
-|                            |                                      |    x    | Highlight, exclude Cube                      |
-|                            |                                      |         | Custom                                       |
-|                            |          **Endgame Items**           |         | No change                                    |
-|                            |                                      |    x    | Highlight                                    |
-|                            |                                      |         | Highlight, exclude Standard of Heroes        |
-|                            |                                      |         | Highlight, hide Standard of Heroes           |
-|                            |                                      |         | Custom                                       |
-| **Item Stats & Modifiers** |            **Item Level**            |         | No change                                    |
-|                            |                                      |    x    | Enable, fix indentation                      |
-|                            |                                      |         | Enable                                       |
-|                            | **Short Superior/Inferior Prefixes** |         | No change                                    |
-|                            |                                      |    x    | Enable                                       |
-|                            |                                      |         | Enable, gray inferior items                  |
-|                            |                                      |         | Custom                                       |
-|                            |           **Item Quality**           |    x    | No change                                    |
-|                            |                                      |         | Suffix, parentheses                          |
-|                            |                                      |         | Suffix, square brackets                      |
-|                            |                                      |         | Prefix, parentheses                          |
-|                            |                                      |         | Prefix, square brackets                      |
-|                            |                                      |         | Custom                                       |
-|     **Light Pillars**      |          **Light Pillars**           |    x    | Enable                                       |
-|                            |                                      |    x    | Disable for Hidden Items                     |
-|                            |                                      |    x    | Runes: Low                                   |
-|                            |                                      |    x    | Runes: Low-Mid                               |
-|                            |                                      |    x    | Runes: Mid                                   |
-|                            |                                      |    x    | Runes: High                                  |
-|                            |                                      |    x    | Rings & Amulets                              |
-|                            |                                      |    x    | Gems & Jewels                                |
-|                            |                                      |    x    | Charms                                       |
-|                            |                                      |    x    | Quest: Items                                 |
-|                            |                                      |    x    | Quest: Weapons                               |
-|                            |                                      |    x    | Essences                                     |
-|                            |                                      |    x    | Token of Absolution                          |
-|                            |                                      |    x    | Pandemonium Keys                             |
-|                            |                                      |    x    | Pandemonium Organs                           |
-|                            |                                      |    x    | Standard of Heroes                           |
-|          **Misc**          |     **Alternate Color Schemes**      |         | No change                                    |
-|                            |                                      |         | Facets, Sunder Charms, Runes                 |
-|                            |                                      |    x    | Facets, Sunder Charms                        |
-|                            |                                      |         | Facets, Runes                                |
-|                            |                                      |         | Sunder Charms, Runes                         |
-|                            |                                      |         | Facets                                       |
-|                            |                                      |         | Sunder Charms                                |
-|                            |                                      |         | Runes                                        |
-|                            |       **Highlight Character**        |    x    | \* (asterisk)                                |
-|                            |                                      |         | = (equals)                                   |
-|                            |                                      |         | + (plus)                                     |
-|                            |                                      |         | - (hyphen/dash/minus)                        |
-|                            |                                      |         | x (small letter x)                           |
-|                            |                                      |         | X (capital letter x)                         |
-|                            |                                      |         | o (small letter o)                           |
-|                            |                                      |         | O (capital letter o)                         |
-|                            |                                      |         | 0 (zero)                                     |
-|                            |                                      |         | ~ (tilde)                                    |
-|                            |                                      |         | ! (exclamation mark)                         |
-|                            |                                      |         | @ (at)                                       |
-|                            |                                      |         | # (number/pound/hash)                        |
-|                            |                                      |         | $ (dollar)                                   |
-|                            |                                      |         | % (percent)                                  |
-|                            |                                      |         | & (ampersand)                                |
-|                            |                                      |         | Custom                                       |
-|                            |         **Highlight Color**          |         | White                                        |
-|                            |                                      |         | White Smoke                                  |
-|                            |                                      |         | Dim Gray                                     |
-|                            |                                      |         | Dimmer Gray                                  |
-|                            |                                      |         | Black                                        |
-|                            |                                      |         | Red                                          |
-|                            |                                      |    x    | Tomato                                       |
-|                            |                                      |         | Crimson                                      |
-|                            |                                      |         | Lime                                         |
-|                            |                                      |         | Lime v2                                      |
-|                            |                                      |         | Lime Green                                   |
-|                            |                                      |         | Green                                        |
-|                            |                                      |         | Deep Sky Blue                                |
-|                            |                                      |         | Light Sky Blue                               |
-|                            |                                      |         | Medium Slate Blue                            |
-|                            |                                      |         | Corn Flower Blue                             |
-|                            |                                      |         | Yellow                                       |
-|                            |                                      |         | Light Yellow                                 |
-|                            |                                      |         | Orange                                       |
-|                            |                                      |         | Violet                                       |
-|                            |                                      |         | Dark Violet                                  |
-|                            |                                      |         | Tan                                          |
-|                            |                                      |         | Tan v2                                       |
-|                            |                                      |         | Wheat                                        |
-|                            |                                      |         | Custom                                       |
-|                            |  **Tooltip width for hidden items**  |    0    | 0 - 25 spaces                                |
-|      **Tooltip Mods**      |           **Tooltip mods**           |    x    | No change                                    |
-|                            |                                      |         | Opacity & Size                               |
-|                            |                                      |         | Opactiy                                      |
-|                            |                                      |         | Size                                         |
-|                            |         **Tooltip: opacity**         |  0.75   | 0.00 - 1.00 (unmodded = 0.60)                |
-|                            |        **Tooltip: font size**        |   33    | 20 - 50 (unmodded = 36)                      |
+|          Section           |               Setting                | Default | Options                                                         |
+|:--------------------------:|:------------------------------------:|:-------:|:----------------------------------------------------------------|
+|      **Gold & Runes**      |               **Gold**               |         | No change                                                       |
+|                            |                                      |         | Gold text                                                       |
+|                            |                                      |    x    | Gold G                                                          |
+|                            |                                      |         | White G                                                         |
+|                            |                                      |         | Hide affix                                                      |
+|                            |                                      |         | Custom                                                          |
+|                            |              **Runes**               |         | No change                                                       |
+|                            |                                      |    x    | Add rune numbers + highlights + remove affix                    |
+|                            |                                      |         | Add rune numbers + highlights                                   |
+|                            |                                      |         | Add rune numbers + remove affix                                 |
+|                            |                                      |         | Add highlights + remove affix                                   |
+|                            |                                      |         | Add rune numbers                                                |
+|                            |                                      |         | Add highlights                                                  |
+|                            |                                      |         | Remove affix                                                    |
+|                            |                                      |         | Custom                                                          |
+|                            |            **Show Runes**            |         | Show Runes: Low                                                 |
+|                            |                                      |         | Show Runes: Low-Mid                                             |
+|                            |                                      |         | Show Runes: Mid                                                 |
+|                            |                                      |         | Show Runes: High                                                |
+|          **Junk**          |         **Healing Potions**          |         | No change                                                       |
+|                            |                                      |    x    | All                                                             |
+|                            |                                      |         | Hide lvl 3                                                      |
+|                            |                                      |         | Hide lvl 4                                                      |
+|                            |                                      |         | Hide lvl 3 + small rejuvs                                       |
+|                            |                                      |         | Hide lvl 4 + small rejuvs                                       |
+|                            |                                      |         | Show only rejuvs                                                |
+|                            |                                      |         | Show only full rejuvs                                           |
+|                            |                                      |         | Hide all                                                        |
+|                            |                                      |         | Custom                                                          |
+|                            |           **Buff Potions**           |         | No change                                                       |
+|                            |                                      |    x    | All                                                             |
+|                            |                                      |         | Hide                                                            |
+|                            |                                      |         | Custom                                                          |
+|                            |         **Throwing Potions**         |         | No change                                                       |
+|                            |                                      |    x    | All                                                             |
+|                            |                                      |         | Hide                                                            |
+|                            |                                      |         | Custom                                                          |
+|                            |         **Scrolls & Tomes**          |         | No change                                                       |
+|                            |                                      |    x    | All                                                             |
+|                            |                                      |         | Hide scrolls                                                    |
+|                            |                                      |         | Custom                                                          |
+|                            |          **Arrows & Bolts**          |         | No change                                                       |
+|                            |                                      |    x    | Highlight                                                       |
+|                            |                                      |         | Hide                                                            |
+|                            |                                      |         | Custom                                                          |
+|                            |               **Keys**               |    x    | No change                                                       |
+|                            |                                      |         | Hide                                                            |
+|                            |                                      |         | Custom                                                          |
+|        **Jewelry**         |               **Gems**               |         | No change                                                       |
+|                            |                                      |    x    | Highlight all                                                   |
+|                            |                                      |         | Highlight, show only flawless & perfect                         |
+|                            |                                      |         | Highlight, show only perfect                                    |
+|                            |                                      |         | Hide all                                                        |
+|                            |                                      |         | Custom                                                          |
+|                            |              **Jewels**              |         | No change                                                       |
+|                            |                                      |    x    | Highlight Facets                                                |
+|                            |                                      |         | Custom                                                          |
+|                            |              **Charms**              |         | No change                                                       |
+|                            |                                      |    x    | Highlight all                                                   |
+|                            |                                      |         | Highlight unique charms only                                    |
+|                            |                                      |         | Highlight non-unique charms only                                |
+|                            |                                      |         | Custom                                                          |
+|    **Quest & Endgame**     |           **Quest items**            |         | No change                                                       |
+|                            |                                      |         | Highlight                                                       |
+|                            |                                      |    x    | Highlight, exclude Cube                                         |
+|                            |                                      |         | Custom                                                          |
+|                            |          **Endgame Items**           |         | No change                                                       |
+|                            |                                      |    x    | Highlight                                                       |
+|                            |                                      |         | Highlight, exclude Standard of Heroes                           |
+|                            |                                      |         | Highlight, hide Standard of Heroes                              |
+|                            |                                      |         | Custom                                                          |
+| **Item Stats & Modifiers** |            **Item Level**            |         | No change                                                       |
+|                            |                                      |    x    | Enable, fix indentation                                         |
+|                            |                                      |         | Enable                                                          |
+|                            | **Short Superior/Inferior Prefixes** |         | No change                                                       |
+|                            |                                      |    x    | Enable                                                          |
+|                            |                                      |         | Enable, gray inferior items                                     |
+|                            |                                      |         | Custom                                                          |
+|                            |           **Item Quality**           |    x    | No change                                                       |
+|                            |                                      |         | Suffix, parentheses                                             |
+|                            |                                      |         | Suffix, square brackets                                         |
+|                            |                                      |         | Prefix, parentheses                                             |
+|                            |                                      |         | Prefix, square brackets                                         |
+|                            |                                      |         | Custom                                                          |
+|     **Light Pillars**      |          **Light Pillars**           |    x    | Enable                                                          |
+|                            |                                      |    x    | Disable for Hidden Items                                        |
+|                            |                                      |    x    | Runes: Low                                                      |
+|                            |                                      |    x    | Runes: Low-Mid                                                  |
+|                            |                                      |    x    | Runes: Mid                                                      |
+|                            |                                      |    x    | Runes: High                                                     |
+|                            |                                      |    x    | Rings & Amulets                                                 |
+|                            |                                      |    x    | Gems & Jewels                                                   |
+|                            |                                      |    x    | Charms                                                          |
+|                            |                                      |    x    | Quest: Items                                                    |
+|                            |                                      |    x    | Quest: Weapons                                                  |
+|                            |                                      |    x    | Essences                                                        |
+|                            |                                      |    x    | Token of Absolution                                             |
+|                            |                                      |    x    | Pandemonium Keys                                                |
+|                            |                                      |    x    | Pandemonium Organs                                              |
+|                            |                                      |    x    | Standard of Heroes                                              |
+|          **Misc**          |     **Alternate Color Schemes**      |         | No change                                                       |
+|                            |                                      |         | Facets, Sunder Charms, Runes                                    |
+|                            |                                      |    x    | Facets, Sunder Charms                                           |
+|                            |                                      |         | Facets, Runes                                                   |
+|                            |                                      |         | Sunder Charms, Runes                                            |
+|                            |                                      |         | Facets                                                          |
+|                            |                                      |         | Sunder Charms                                                   |
+|                            |                                      |         | Runes                                                           |
+|                            |       **Highlight Character**        |    x    | \* (asterisk)                                                   |
+|                            |                                      |         | = (equals)                                                      |
+|                            |                                      |         | + (plus)                                                        |
+|                            |                                      |         | - (hyphen/dash/minus)                                           |
+|                            |                                      |         | x (small letter x)                                              |
+|                            |                                      |         | X (capital letter x)                                            |
+|                            |                                      |         | o (small letter o)                                              |
+|                            |                                      |         | O (capital letter o)                                            |
+|                            |                                      |         | 0 (zero)                                                        |
+|                            |                                      |         | ~ (tilde)                                                       |
+|                            |                                      |         | ! (exclamation mark)                                            |
+|                            |                                      |         | @ (at)                                                          |
+|                            |                                      |         | # (number/pound/hash)                                           |
+|                            |                                      |         | $ (dollar)                                                      |
+|                            |                                      |         | % (percent)                                                     |
+|                            |                                      |         | & (ampersand)                                                   |
+|                            |                                      |         | Custom                                                          |
+|                            |         **Highlight Color**          |         | <span style="color:rgb(255, 255, 255)">White</span>             |
+|                            |                                      |         | <span style="color:rgb(241, 241, 241)">White Smoke</span>       |
+|                            |                                      |         | <span style="color:rgb(107, 107, 107)">Dim Gray</span>          |
+|                            |                                      |         | <span style="color:rgb(113, 113, 113)">Dimmer Gray</span>       |
+|                            |                                      |         | <span style="color:rgb(  0,   0,   0)">Black</span>             |
+|                            |                                      |         | <span style="color:rgb(255,   0,   0)">Red</span>               |
+|                            |                                      |    x    | <span style="color:rgb(255,  85,  85)">Tomato</span>            |
+|                            |                                      |         | <span style="color:rgb(211,  70,  70)">Crimson</span>           |
+|                            |                                      |         | <span style="color:rgb(  0, 255,   0)">Lime</span>              |
+|                            |                                      |         | <span style="color:rgb(  0, 252,   0)">Lime v2</span>           |
+|                            |                                      |         | <span style="color:rgb(  0, 204,   0)">Lime Green</span>        |
+|                            |                                      |         | <span style="color:rgb(  0, 135,   0)">Green</span>             |
+|                            |                                      |         | <span style="color:rgb(  9, 171, 223)">Deep Sky Blue</span>     |
+|                            |                                      |         | <span style="color:rgb(137, 201, 255)">Light Sky Blue</span>    |
+|                            |                                      |         | <span style="color:rgb(175, 175, 255)">Medium Slate Blue</span> |
+|                            |                                      |         | <span style="color:rgb(118, 118, 255)">Corn Flower Blue</span>  |
+|                            |                                      |         | <span style="color:rgb(255, 255, 108)">Yellow</span>            |
+|                            |                                      |         | <span style="color:rgb(255, 255, 125)">Light Yellow</span>      |
+|                            |                                      |         | <span style="color:rgb(255, 173,   0)">Orange</span>            |
+|                            |                                      |         | <span style="color:rgb(255, 135, 255)">Violet</span>            |
+|                            |                                      |         | <span style="color:rgb(179,   0, 255)">Dark Violet</span>       |
+|                            |                                      |         | <span style="color:rgb(203, 184, 126)">Tan</span>               |
+|                            |                                      |         | <span style="color:rgb(211, 198, 132)">Tan v2</span>            |
+|                            |                                      |         | <span style="color:rgb(239, 217, 148)">Wheat</span>             |
+|                            |                                      |         | Custom                                                          |
+|                            |  **Tooltip width for hidden items**  |    0    | 0 - 25 spaces                                                   |
+|      **Tooltip Mods**      |           **Tooltip mods**           |    x    | No change                                                       |
+|                            |                                      |         | Opacity & Size                                                  |
+|                            |                                      |         | Opactiy                                                         |
+|                            |                                      |         | Size                                                            |
+|                            |         **Tooltip: opacity**         |  0.75   | 0.00 - 1.00 (unmodded = 0.60)                                   |
+|                            |        **Tooltip: font size**        |   33    | 20 - 50 (unmodded = 36)                                         |
+
+
+
+
+
+
+<span style="color:rgb(255, 255, 255)">White</span>            
+<span style="color:rgb(241, 241, 241)">White Smoke</span>      
+<span style="color:rgb(107, 107, 107)">Dim Gray</span>         
+<span style="color:rgb(113, 113, 113)">Dimmer Gray</span>      
+<span style="color:rgb(  0,   0,   0)">Black</span>            
+<span style="color:rgb(255,   0,   0)">Red</span>              
+<span style="color:rgb(255,  85,  85)">Tomato</span>           
+<span style="color:rgb(211,  70,  70)">Crimson</span>          
+<span style="color:rgb(  0, 255,   0)">Lime</span>             
+<span style="color:rgb(  0, 252,   0)">Lime v2</span>          
+<span style="color:rgb(  0, 204,   0)">Lime Green</span>       
+<span style="color:rgb(  0, 135,   0)">Green</span>            
+<span style="color:rgb(  9, 171, 223)">Deep Sky Blue</span>    
+<span style="color:rgb(137, 201, 255)">Light Sky Blue</span>   
+<span style="color:rgb(175, 175, 255)">Medium Slate Blue</span>
+<span style="color:rgb(118, 118, 255)">Corn Flower Blue</span> 
+<span style="color:rgb(255, 255, 108)">Yellow</span>           
+<span style="color:rgb(255, 255, 125)">Light Yellow</span>     
+<span style="color:rgb(255, 173,   0)">Orange</span>           
+<span style="color:rgb(255, 135, 255)">Violet</span>           
+<span style="color:rgb(179,   0, 255)">Dark Violet</span>      
+<span style="color:rgb(203, 184, 126)">Tan</span>              
+<span style="color:rgb(211, 198, 132)">Tan v2</span>           
+<span style="color:rgb(239, 217, 148)">Wheat</span>            
+
+
+
+
+
 
 
 ## Roadmap
