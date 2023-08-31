@@ -301,41 +301,6 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |        **Tooltip: font size**        |   33    | 20 - 50 (unmodded = 36)                                         |
 
 
-
-
-
-
-<span style="color:rgb(255, 255, 255)">White</span>            
-<span style="color:rgb(241, 241, 241)">White Smoke</span>      
-<span style="color:rgb(107, 107, 107)">Dim Gray</span>         
-<span style="color:rgb(113, 113, 113)">Dimmer Gray</span>      
-<span style="color:rgb(  0,   0,   0)">Black</span>            
-<span style="color:rgb(255,   0,   0)">Red</span>              
-<span style="color:rgb(255,  85,  85)">Tomato</span>           
-<span style="color:rgb(211,  70,  70)">Crimson</span>          
-<span style="color:rgb(  0, 255,   0)">Lime</span>             
-<span style="color:rgb(  0, 252,   0)">Lime v2</span>          
-<span style="color:rgb(  0, 204,   0)">Lime Green</span>       
-<span style="color:rgb(  0, 135,   0)">Green</span>            
-<span style="color:rgb(  9, 171, 223)">Deep Sky Blue</span>    
-<span style="color:rgb(137, 201, 255)">Light Sky Blue</span>   
-<span style="color:rgb(175, 175, 255)">Medium Slate Blue</span>
-<span style="color:rgb(118, 118, 255)">Corn Flower Blue</span> 
-<span style="color:rgb(255, 255, 108)">Yellow</span>           
-<span style="color:rgb(255, 255, 125)">Light Yellow</span>     
-<span style="color:rgb(255, 173,   0)">Orange</span>           
-<span style="color:rgb(255, 135, 255)">Violet</span>           
-<span style="color:rgb(179,   0, 255)">Dark Violet</span>      
-<span style="color:rgb(203, 184, 126)">Tan</span>              
-<span style="color:rgb(211, 198, 132)">Tan v2</span>           
-<span style="color:rgb(239, 217, 148)">Wheat</span>            
-
-
-
-
-
-
-
 ## Roadmap
 
 None at the moment. If you have a request for a feature, please open a GitHub issue (preferred) or post a comment on Nexus Mods.
