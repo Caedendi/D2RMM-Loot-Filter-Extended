@@ -8,9 +8,9 @@
 ////===============================================////
 
 
-//===============//
-//   Constants   //
-//===============//
+//=======================//
+//   Constants - Files   //
+//=======================//
 
 // File paths
 const FILE_EXTENSION_JSON = ".json";
@@ -30,46 +30,65 @@ const FILE_WEAPONS_PATH = `${FILE_EXCEL}weapons${FILE_EXTENSION_TXT}`;
 const FILE_ARMOR_PATH   = `${FILE_EXCEL}armor${FILE_EXTENSION_TXT}`;
 const FILE_MISC_PATH    = `${FILE_EXCEL}misc${FILE_EXTENSION_TXT}`;
 
-// Color
+//========================//
+//   Constants - Colors   //
+//========================//
+
 const COLOR_PREFIX = "ÿc";
 
-                                         // | Color (RGB)     | Name          | HTML Match (ish)  | HTML Color RGB  |
-const WHITE        = `${COLOR_PREFIX}0`; // | (255, 255, 255) | white         |                   |                 |
-const WHITESMOKE   = `${COLOR_PREFIX}=`; // | (241, 241, 241) | white smoke   | white smoke       | (245, 245, 245) |
-const WHITESMOKE2  = `${COLOR_PREFIX}E`; // | (241, 241, 241) | white smoke   | white smoke       | (245, 245, 245) |
-const WHITESMOKE3  = `${COLOR_PREFIX}F`; // | (241, 241, 241) | white smoke   | white smoke       | (245, 245, 245) |
-const GRAYDIM      = `${COLOR_PREFIX}I`; // | (107, 107, 107) | gray (dim)    | dim gray          | (105, 105, 105) |
-const GRAYDIM2     = `${COLOR_PREFIX}K`; // | (107, 107, 107) | gray (dim)    | dim gray          | (105, 105, 105) |
-const GRAYDIMMER   = `${COLOR_PREFIX}5`; // | (113, 113, 113) | gray (dimmer) | dim gray          | (105, 105, 105) |
-const BLACK        = `${COLOR_PREFIX}6`; // | (  0,   0,   0) | black         |                   |                 |
-const BLACK1       = `${COLOR_PREFIX}M`; // | (239, 217, 148) | gold          |                   |                 |
-const RED          = `${COLOR_PREFIX}1`; // | (255,  85,  85) | red (tomato)  | tomato            | (255,  99,  71) |
-const RED1         = `${COLOR_PREFIX}U`; // | (255,   0,   0) | red           |                   |                 |
-const DARKRED      = `${COLOR_PREFIX}S`; // | (211,  70,  70) | red (crimson) | crimson           | (220,  20,  60) |
-const GREEN        = `${COLOR_PREFIX}2`; // | (  0, 255,   0) | lime          |                   |                 |
-const GREEN1       = `${COLOR_PREFIX}Q`; // | (  0, 255,   0) | lime          |                   |                 |
-const GREEN2       = `${COLOR_PREFIX}C`; // | (  0, 252,   0) | lime 2        |                   |                 |
-const GREEN3       = `${COLOR_PREFIX}<`; // | (  0, 204,   0) | lime green    | lime green        | ( 50, 205,  50) |
-const DARKGREEN1   = `${COLOR_PREFIX}A`; // | (  0, 135,   0) | green         | green             | (  0, 128,   0) |
-const DARKGREEN2   = `${COLOR_PREFIX}:`; // | (  0, 135,   0) | green         | green             | (  0, 128,   0) |
-const TURQUOISE    = `${COLOR_PREFIX}N`; // | (  9, 171, 223) | green         | deep sky blue     | (  0, 191, 255) |
-const BLUE         = `${COLOR_PREFIX}3`; // | (118, 118, 255) | blue          | corn flower blue  | (100, 149, 255) |
-const BLUE1        = `${COLOR_PREFIX}B`; // | (118, 118, 255) | blue          | corn flower blue  | (100, 149, 255) |
-const LIGHTBLUE2   = `${COLOR_PREFIX}P`; // | (175, 175, 255) | blue          | medium slate blue | (123, 104, 238) |
-const LIGHTSKYBLUE = `${COLOR_PREFIX}T`; // | (137, 201, 255) | blue          | light sky blue    | (135, 206, 250) |
-const ORANGE       = `${COLOR_PREFIX}8`; 
-const ORANGE1      = `${COLOR_PREFIX}@`; 
-const ORANGE2      = `${COLOR_PREFIX}J`; 
-const ORANGE3      = `${COLOR_PREFIX}L`; 
-const TAN          = `${COLOR_PREFIX}7`; 
-const YELLOW       = `${COLOR_PREFIX}9`; 
-const YELLOW1      = `${COLOR_PREFIX}R`; 
-const GOLD         = `${COLOR_PREFIX}4`; 
-const GOLD1        = `${COLOR_PREFIX}D`; 
-const LIGHTGOLD1   = `${COLOR_PREFIX}H`; 
-const PINK         = `${COLOR_PREFIX}O`; 
-const LIGHTPINK    = `${COLOR_PREFIX}G`; 
-const PURPLE       = `${COLOR_PREFIX};`; 
+// all known colors in the game code
+// note: all numbered colors (except v2) are the exact same color as their non-number counterpart
+const CLR_WHITE             = `${COLOR_PREFIX}0`;
+const CLR_WHITE_SMOKE       = `${COLOR_PREFIX}=`;
+const CLR_WHITE_SMOKE2      = `${COLOR_PREFIX}E`;
+const CLR_WHITE_SMOKE3      = `${COLOR_PREFIX}F`;
+const CLR_WHITE_SMOKE4      = `${COLOR_PREFIX}G`;
+const CLR_WHITE_SMOKE5      = `${COLOR_PREFIX}H`;
+const CLR_GRAY_DIM          = `${COLOR_PREFIX}I`;
+const CLR_GRAY_DIM2         = `${COLOR_PREFIX}K`;
+const CLR_GRAY_DIMMER       = `${COLOR_PREFIX}5`;
+const CLR_BLACK             = `${COLOR_PREFIX}6`;
+const CLR_RED               = `${COLOR_PREFIX}U`;
+const CLR_TOMATO            = `${COLOR_PREFIX}1`;
+const CLR_CRIMSON           = `${COLOR_PREFIX}S`;
+const CLR_LIME              = `${COLOR_PREFIX}2`;
+const CLR_LIME2             = `${COLOR_PREFIX}Q`;
+const CLR_LIME_V2           = `${COLOR_PREFIX}C`;
+const CLR_LIME_GREEN        = `${COLOR_PREFIX}<`;
+const CLR_GREEN             = `${COLOR_PREFIX}A`;
+const CLR_GREEN2            = `${COLOR_PREFIX}:`;
+const CLR_DEEP_SKY_BLUE     = `${COLOR_PREFIX}N`;
+const CLR_LIGHT_SKY_BLUE    = `${COLOR_PREFIX}T`;
+const CLR_MEDIUM_SLATE_BLUE = `${COLOR_PREFIX}P`;
+const CLR_CORN_FLOWER_BLUE  = `${COLOR_PREFIX}3`;
+const CLR_CORN_FLOWER_BLUE2 = `${COLOR_PREFIX}B`;
+const CLR_YELLOW            = `${COLOR_PREFIX}9`;
+const CLR_LIGHT_YELLOW      = `${COLOR_PREFIX}R`;
+const CLR_ORANGE            = `${COLOR_PREFIX}8`;
+const CLR_ORANGE1           = `${COLOR_PREFIX}J`;
+const CLR_ORANGE2           = `${COLOR_PREFIX}L`;
+const CLR_ORANGE3           = `${COLOR_PREFIX}@`;
+const CLR_VIOLET            = `${COLOR_PREFIX}O`;
+const CLR_DARK_VIOLET       = `${COLOR_PREFIX};`;
+const CLR_TAN               = `${COLOR_PREFIX}4`;
+const CLR_TAN2              = `${COLOR_PREFIX}D`;
+const CLR_TAN_V2            = `${COLOR_PREFIX}7`;
+const CLR_WHEAT             = `${COLOR_PREFIX}M`;
+
+// loot filter colors
+const WHITE     = CLR_PURE_WHITE;
+const GRAY      = CLR_GRAY_DIMMER;
+const BLACK     = CLR_PURE_BLACK;
+const RED       = CLR_TOMATO;
+const GREEN     = CLR_LIME;
+const DARKGREEN = CLR_GREEN;
+const BLUE      = CLR_CORN_FLOWER_BLUE;
+const LIGHTBLUE = CLR_LIGHT_SKY_BLUE;
+const YELLOW    = CLR_YELLOW;
+const ORANGE    = CLR_ORANGE;
+const GOLD      = CLR_TAN;
+const PURPLE    = CLR_DARK_VIOLET;
+const PINK      = CLR_VIOLET;
 
 
 //=========================//
@@ -758,7 +777,7 @@ const customItems = {
   },
 
   customizeThrowingPotions(setting) {
-    const colorGas = DARKGREEN1;
+    const colorGas = DARKGREEN;
     const colorOil = ORANGE;
     const colorName = WHITE;
     const pattern = SMALL_O;
@@ -797,7 +816,7 @@ const customItems = {
 
   customizeScrollsAndTomes(setting) {
     const colorScroll = GREEN;
-    const colorTome = DARKGREEN1;
+    const colorTome = DARKGREEN;
     const colorName = WHITE;
     const pattern = PLUS;
     const padding = NO_PADDING;
@@ -1101,7 +1120,7 @@ const customItems = {
     if (IS_ALTERNATE_HIGHLIGHT_SUNDER) {
       this.items["Black Cleft"]          = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(GRAY,         UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Black Cleft");
       this.items["Bone Break"]           = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(WHITE,        UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Bone Break");
-      this.items["Cold Rupture"]         = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(LIGHTSKYBLUE, UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Cold Rupture");
+      this.items["Cold Rupture"]         = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(LIGHTBLUE, UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Cold Rupture");
       this.items["Crack of the Heavens"] = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(YELLOW,       UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Crack of the Heavens");
       this.items["Flame Rift"]           = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(RED,          UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Flame Rift");
       this.items["Rotting Fissure"]      = ILVL_INDENT_FIX_CHARMS + generateDoubleHighlight(GREEN,        UNIQUE_PATTERN, UNIQUE_PADDING, UNIQUE_COLOR_NAME, "Rotting Fissure");
@@ -1744,6 +1763,10 @@ function addEquipmentQuality(equipment, itemNames, setting) {
 //===========================================//
 
 function applyLightPillars() {
+  if (!config.ShouldEnableLightPillars) {
+    return;
+  }
+
   pushLightPillarsForRunes();
   pushLightPillarsForRingsAmulets();
   pushLightPillarsForGemsJewels();
