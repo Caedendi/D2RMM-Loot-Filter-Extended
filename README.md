@@ -157,6 +157,10 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Add highlights                               |
 |                            |                                      |         | Remove affix                                 |
 |                            |                                      |         | Custom                                       |
+|                            |            **Show Runes**            |         | Show Runes: Low                              |
+|                            |                                      |         | Show Runes: Low-Mid                          |
+|                            |                                      |         | Show Runes: Mid                              |
+|                            |                                      |         | Show Runes: High                             |
 |          **Junk**          |         **Healing Potions**          |         | No change                                    |
 |                            |                                      |    x    | All                                          |
 |                            |                                      |         | Hide lvl 3                                   |
@@ -222,16 +226,21 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Prefix, parentheses                          |
 |                            |                                      |         | Prefix, square brackets                      |
 |                            |                                      |         | Custom                                       |
-|     **Light Pillars**      |          **Light Pillars**           |    x    | Runes                                        |
+|     **Light Pillars**      |          **Light Pillars**           |    x    | Enable                                       |
+|                            |                                      |    x    | Disable for Hidden Items                     |
+|                            |                                      |    x    | Runes: Low                                   |
+|                            |                                      |    x    | Runes: Low-Mid                               |
+|                            |                                      |    x    | Runes: Mid                                   |
+|                            |                                      |    x    | Runes: High                                  |
 |                            |                                      |    x    | Rings & Amulets                              |
 |                            |                                      |    x    | Gems & Jewels                                |
 |                            |                                      |    x    | Charms                                       |
-|                            |                                      |    x    | Quest items                                  |
-|                            |                                      |         | Quest items: exclude weapons                 |
+|                            |                                      |    x    | Quest: Items                                 |
+|                            |                                      |    x    | Quest: Weapons                               |
 |                            |                                      |    x    | Essences                                     |
 |                            |                                      |    x    | Token of Absolution                          |
-|                            |                                      |    x    | Keys                                         |
-|                            |                                      |    x    | Organs                                       |
+|                            |                                      |    x    | Pandemonium Keys                             |
+|                            |                                      |    x    | Pandemonium Organs                           |
 |                            |                                      |    x    | Standard of Heroes                           |
 |          **Misc**          |     **Alternate Color Schemes**      |         | No change                                    |
 |                            |                                      |         | Facets, Sunder Charms, Runes                 |
@@ -241,7 +250,7 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Facets                                       |
 |                            |                                      |         | Sunder Charms                                |
 |                            |                                      |         | Runes                                        |
-|                            |       **Highlight character**        |    x    | \* (asterisk)                                |
+|                            |       **Highlight Character**        |    x    | \* (asterisk)                                |
 |                            |                                      |         | = (equals)                                   |
 |                            |                                      |         | + (plus)                                     |
 |                            |                                      |         | - (hyphen/dash/minus)                        |
@@ -258,7 +267,32 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | % (percent)                                  |
 |                            |                                      |         | & (ampersand)                                |
 |                            |                                      |         | Custom                                       |
-|                            |  **Tooltip size for hidden items**   |    0    | 0 - 25 spaces                                |
+|                            |         **Highlight Color**          |         | White                                        |
+|                            |                                      |         | White Smoke                                  |
+|                            |                                      |         | Dim Gray                                     |
+|                            |                                      |         | Dimmer Gray                                  |
+|                            |                                      |         | Black                                        |
+|                            |                                      |         | Red                                          |
+|                            |                                      |    x    | Tomato                                       |
+|                            |                                      |         | Crimson                                      |
+|                            |                                      |         | Lime                                         |
+|                            |                                      |         | Lime v2                                      |
+|                            |                                      |         | Lime Green                                   |
+|                            |                                      |         | Green                                        |
+|                            |                                      |         | Deep Sky Blue                                |
+|                            |                                      |         | Light Sky Blue                               |
+|                            |                                      |         | Medium Slate Blue                            |
+|                            |                                      |         | Corn Flower Blue                             |
+|                            |                                      |         | Yellow                                       |
+|                            |                                      |         | Light Yellow                                 |
+|                            |                                      |         | Orange                                       |
+|                            |                                      |         | Violet                                       |
+|                            |                                      |         | Dark Violet                                  |
+|                            |                                      |         | Tan                                          |
+|                            |                                      |         | Tan v2                                       |
+|                            |                                      |         | Wheat                                        |
+|                            |                                      |         | Custom                                       |
+|                            |  **Tooltip width for hidden items**  |    0    | 0 - 25 spaces                                |
 |      **Tooltip Mods**      |           **Tooltip mods**           |    x    | No change                                    |
 |                            |                                      |         | Opacity & Size                               |
 |                            |                                      |         | Opactiy                                      |
