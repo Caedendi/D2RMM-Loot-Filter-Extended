@@ -37,7 +37,7 @@ const FILE_MISC_PATH    = `${FILE_EXCEL}misc${FILE_EXTENSION_TXT}`;
 const COLOR_PREFIX = "ÿc";
 
 // all known colors in the game code
-// note: all numbered colors (except v2) are the exact same color as their non-number counterpart
+// note: all numbered colors that are not a v2 are the exact same color as their non-number counterpart
 const CLR_WHITE             = `${COLOR_PREFIX}0`;
 const CLR_WHITE_SMOKE       = `${COLOR_PREFIX}=`;
 const CLR_WHITE_SMOKE2      = `${COLOR_PREFIX}E`;
@@ -150,10 +150,6 @@ const IS_ALTERNATE_HIGHLIGHT_SUNDER = ["all", "fac-sun", "sun-run", "sun"].inclu
 // - mid: 21-15 (Pul-Gul)
 // - high: 26-33 (Vex-Zod)
 // I have however moved Ral (8), Hel (15) and Lem (20) a tier up because of their usefulness.
-const RUNE_TIER_NAMES_LOW      = ["el", "eld", "tir", "nef", "eth", "ith", "tal", "ort", "thul", "amn", "sol", "shael", "dol"];
-const RUNE_TIER_NAMES_LOWMID   = ["ral", "hel", "io", "lum", "ko", "fal"];
-const RUNE_TIER_NAMES_MID      = ["lem", "pul", "um", "mal", "ist", "gul"];
-const RUNE_TIER_NAMES_HIGH     = ["vex", "ohm", "lo", "sur", "ber", "jah", "cham", "zod"];
 
 const RUNE_TIER_LOW = [
   { number: 1,  name: "El"    }, 
@@ -197,9 +193,9 @@ const RUNE_TIER_HIGH = [
   { number: 33, name: "Zod"  }, 
 ];
 
-const RUNES_COLOR_NAME           = ORANGE
-const RUNES_COLOR_NAME_ALTERNATE = PURPLE;
-const RUNES_COLOR_HIGHLIGHT      = HIGHLIGHT_COLOR;
+const RUNES_COLOR_NAME      = ORANGE
+const RUNES_COLOR_HIGHLIGHT = HIGHLIGHT_COLOR;
+const RUNES_COLOR_ALTERNATE = config.HighlightColorRunesAlternate !== "custom" ? `${COLOR_PREFIX}${config.HighlightColorRunesAlternate}` : ';'; // replace 1 with desired custom color character (see above) [CSTM-HLCRA]
 
 // set the highlight patterns for each rune tier
 const RUNES_PATTERN_LOW    = NO_PATTERN;   // 
@@ -220,10 +216,10 @@ const RUNE_TIERS = [
   { level: 4, runes: RUNE_TIER_HIGH,   padding: RUNES_PADDING_HIGH,   pattern: RUNES_PATTERN_HIGH,   isVisible: config.ShouldShowRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh   },
 ];
 
-const RUNE_TIERS_HIGHLIGHTED          = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
-const RUNE_TIERS_HIGHLIGHTED_NUMBERS  = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default
-const RUNE_TIERS_HIGHLIGHTED_NAMES    = [4];       // rune tiers where the rune name is in the highlight color instead of default
-const RUNE_TIERS_ALTERNATE_NAME_COLOR = [3, 4];    // rune tiers that have a purple name when alternate color scheme is enabled
+const RUNE_TIERS_HIGHLIGHTED         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
+const RUNE_TIERS_HIGHLIGHTED_NUMBERS = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default
+const RUNE_TIERS_HIGHLIGHTED_NAMES   = [4];       // rune tiers where the rune name is in the highlight color instead of default
+const RUNE_TIERS_ALTERNATE_COLOR     = [3, 4];    // rune tiers that use the alternate color if enabled
 
 
 //========================//
@@ -591,11 +587,11 @@ const customRunes = {
     const hasHighlighting       = settingsHighlighting.includes(setting) && RUNE_TIERS_HIGHLIGHTED.includes(tier);
     const hasHighlightedNumber  = settingsHighlighting.includes(setting) && RUNE_TIERS_HIGHLIGHTED_NUMBERS.includes(tier);
     const hasHighlightedName    = settingsHighlighting.includes(setting) && RUNE_TIERS_HIGHLIGHTED_NAMES.includes(tier);
-    const hasAlternateNameColor = IS_ALTERNATE_COLOR_RUNES && RUNE_TIERS_ALTERNATE_NAME_COLOR.includes(tier);
+    const hasAlternateNameColor = IS_ALTERNATE_COLOR_RUNES && RUNE_TIERS_ALTERNATE_COLOR.includes(tier);
 
     var highlightColor1 = hasHighlighting ? RUNES_COLOR_HIGHLIGHT : NO_COLOR;
     var highlightColor2 = highlightColor1;
-    var nameColor1 = !hasAlternateNameColor ? (hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME) : RUNES_COLOR_NAME_ALTERNATE;
+    var nameColor1 = !hasAlternateNameColor ? (hasHighlightedName ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME) : RUNES_COLOR_ALTERNATE;
     var nameColor2 = nameColor1;
     var numberColor = !hasAlternateNameColor ? (hasHighlightedNumber ? RUNES_COLOR_HIGHLIGHT : RUNES_COLOR_NAME) : NO_COLOR;
 
@@ -603,7 +599,7 @@ const customRunes = {
       name = `${name} Rune`;
     }
 
-    // remove duplicate color codes where necessary
+    // remove duplicate color codes where possible
     if ((hasHighlighting && nameColor2 === highlightColor2) || !hasHighlighting) {
       nameColor2 = NO_COLOR;
     }
@@ -617,7 +613,7 @@ const customRunes = {
       }
       name = `${name} ${numberColor}(${number})`;
     }
-    // remove last duplicate color code where necessary
+    // remove last duplicate color code where possible
     if (hasHighlighting && highlightColor1 === nameColor1) {
       nameColor1 = NO_COLOR;
     }

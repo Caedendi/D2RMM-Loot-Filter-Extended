@@ -21,6 +21,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 - [How to Install](#how-to-install)
 - [Features](#features)
 - [Presets Overview](#presets-overview)
+  - [Text Colors](#text-colors)
 - [Roadmap](#roadmap)
   - [Fix known bugs](#fix-known-bugs)
   - [Add features](#add-features)
@@ -65,9 +66,13 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ### 2.2.0
 
-- Split Light Pillars settings for Runes into 4 tiers
+- Code refactor
+- Redid color names, added /docs/colors.md
+- Added option to change the color for the alternate rune color scheme
+- Added option to disable _all_ Light Pillars
+- Split runes into 4 tiers, for each of which you can individually disable visibility and Light Pillars
 - Changed Light Pillars settings for Quest Weapons from "exclude" to "include" 
-- Slightly changed some settings tooltips
+- Slightly changed some setting names and tooltips
 
 ### 2.1.1
 
@@ -299,6 +304,10 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Size                                                            |
 |                            |         **Tooltip: opacity**         |  0.75   | 0.00 - 1.00 (unmodded = 0.60)                                   |
 |                            |        **Tooltip: font size**        |   33    | 20 - 50 (unmodded = 36)                                         |
+
+### Text Colors
+
+See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for an overview of all the colors in the game that I know of and their RGB decimal codes.
 
 
 ## Roadmap

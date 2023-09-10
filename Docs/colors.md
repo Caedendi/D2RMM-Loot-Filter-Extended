@@ -55,5 +55,5 @@ I have tried naming them according to the HTML color they most closely match (ev
 
 
 ## Sources
-- [olegbl](https://github.com/olegbl)'s [Short Potion Names](https://www.nexusmods.com/diablo2resurrected/mods/177) mod
+- [olegbl](https://github.com/olegbl)'s [Short Potion Names](https://www.nexusmods.com/diablo2resurrected/mods/177) mod for the list of D2R color codes
 - [RapidTables.com](https://www.rapidtables.com/web/color/RGB_Color.html) for the HTML color names and RGB decimal codes
