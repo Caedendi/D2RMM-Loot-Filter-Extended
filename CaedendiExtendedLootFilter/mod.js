@@ -76,9 +76,9 @@ const CLR_TAN_V2            = `${COLOR_PREFIX}7`;
 const CLR_WHEAT             = `${COLOR_PREFIX}M`;
 
 // loot filter colors
-const WHITE     = CLR_PURE_WHITE;
+const WHITE     = CLR_WHITE;
 const GRAY      = CLR_GRAY_DIMMER;
-const BLACK     = CLR_PURE_BLACK;
+const BLACK     = CLR_BLACK;
 const RED       = CLR_TOMATO;
 const GREEN     = CLR_LIME;
 const DARKGREEN = CLR_GREEN;
@@ -429,10 +429,10 @@ const customAffixes = {
       case "none": // no change
         return;
       case "gold": // Gold displays as "1234 Gold" with white numbers and gold text.
-        this.items.gld = `${GOLD1}Gold`; 
+        this.items.gld = `${GOLD}Gold`; 
         return;
       case "goldg": // Gold displays as "1234 G" with white numbers and a gold-colored G.
-        this.items.gld = `${GOLD1}G`;
+        this.items.gld = `${GOLD}G`;
         return;
       case "white": // Gold displays as "1234 G" in white.
         this.items.gld = `G`;
@@ -532,41 +532,41 @@ const customRunes = {
         return;
       case "custom": // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.runes.r01 = `${ORANGE1}El (1)`;                                                        // El
-        this.runes.r02 = `${ORANGE1}Eld (2)`;                                                       // Eld
-        this.runes.r03 = `${ORANGE1}Tir (3)`;                                                       // Tir
-        this.runes.r04 = `${ORANGE1}Nef (4)`;                                                       // Nef
-        this.runes.r05 = `${ORANGE1}Eth (5)`;                                                       // Eth
-        this.runes.r06 = `${ORANGE1}Ith (6)`;                                                       // Ith
-        this.runes.r07 = `${ORANGE1}Tal (7)`;                                                       // Tal
-        this.runes.r08 = `${RED}**${ORANGE1}  Ral (8)  ${RED}**${ORANGE1}`;                         // Ral
-        this.runes.r09 = `${ORANGE1}Ort (9)`;                                                       // Ort
-        this.runes.r10 = `${ORANGE1}Thul (10)`;                                                     // Thul
-        this.runes.r11 = `${ORANGE1}Amn (11)`;                                                      // Amn
-        this.runes.r12 = `${ORANGE1}Sol (12)`;                                                      // Sol
-        this.runes.r13 = `${ORANGE1}Shael (13)`;                                                    // Shael
-        this.runes.r14 = `${ORANGE1}Dol (14)`;                                                      // Dol
-        this.runes.r15 = `${RED}**${ORANGE1}  Hel (15) ${RED}**${ORANGE1}`;                         // Hel
-        this.runes.r16 = `${ORANGE1}Io (16)`;                                                       // Io
-        this.runes.r17 = `${ORANGE1}Lum (17)`;                                                      // Lum
-        this.runes.r18 = `${RED}**${ORANGE1}  Ko (18)  ${RED}**${ORANGE1}`;                         // Ko
-        this.runes.r19 = `${RED}**${ORANGE1}  Fal (19)  ${RED}**${ORANGE1}`;                        // Fal
-        this.runes.r20 = `${RED}**${ORANGE1}  Lem (20)  ${RED}**${ORANGE1}`;                        // Lem
-        this.runes.r21 = `${RED}*****${ORANGE1}   Pul (21)   ${RED}*****${ORANGE1}`;                // Pul
-        this.runes.r22 = `${RED}*****${ORANGE1}   Um (22)   ${RED}*****${ORANGE1}`;                 // Um
-        this.runes.r23 = `${RED}*****${ORANGE1}   Mal (23)   ${RED}*****${ORANGE1}`;                // Mal
-        this.runes.r24 = `${RED}*****${ORANGE1}   Ist (24)   ${RED}*****${ORANGE1}`;                // Ist
-        this.runes.r25 = `${RED}*****${ORANGE1}   Gul (25)   ${RED}*****${ORANGE1}`;                // Gul
-        this.runes.r26 = `${RED}**********${ORANGE1}     Vex (26)     ${RED}**********${ORANGE1}`;  // Vex
-        this.runes.r27 = `${RED}**********${ORANGE1}     Ohm (27)     ${RED}**********${ORANGE1}`;  // Ohm
-        this.runes.r28 = `${RED}**********${ORANGE1}     Lo (28)     ${RED}**********${ORANGE1}`;   // Lo
-        this.runes.r29 = `${RED}**********${ORANGE1}     Sur (29)     ${RED}**********${ORANGE1}`;  // Sur
-        this.runes.r30 = `${RED}**********${ORANGE1}     Ber (30)     ${RED}**********${ORANGE1}`;  // Ber
-        this.runes.r31 = `${RED}**********${ORANGE1}     Jah (31)     ${RED}**********${ORANGE1}`;  // Jah
-        this.runes.r32 = `${RED}**********${ORANGE1}     Cham (32)     ${RED}**********${ORANGE1}`; // Cham
-        // this.runes.r33 = `${RED}**********${ORANGE1}     Zod (33)     ${RED}**********${ORANGE1}`;  // Zod
+        this.runes.r01 = `${ORANGE}El (1)`;                                                        // El
+        this.runes.r02 = `${ORANGE}Eld (2)`;                                                       // Eld
+        this.runes.r03 = `${ORANGE}Tir (3)`;                                                       // Tir
+        this.runes.r04 = `${ORANGE}Nef (4)`;                                                       // Nef
+        this.runes.r05 = `${ORANGE}Eth (5)`;                                                       // Eth
+        this.runes.r06 = `${ORANGE}Ith (6)`;                                                       // Ith
+        this.runes.r07 = `${ORANGE}Tal (7)`;                                                       // Tal
+        this.runes.r08 = `${RED}**${ORANGE}  Ral (8)  ${RED}**${ORANGE}`;                         // Ral
+        this.runes.r09 = `${ORANGE}Ort (9)`;                                                       // Ort
+        this.runes.r10 = `${ORANGE}Thul (10)`;                                                     // Thul
+        this.runes.r11 = `${ORANGE}Amn (11)`;                                                      // Amn
+        this.runes.r12 = `${ORANGE}Sol (12)`;                                                      // Sol
+        this.runes.r13 = `${ORANGE}Shael (13)`;                                                    // Shael
+        this.runes.r14 = `${ORANGE}Dol (14)`;                                                      // Dol
+        this.runes.r15 = `${RED}**${ORANGE}  Hel (15) ${RED}**${ORANGE}`;                         // Hel
+        this.runes.r16 = `${ORANGE}Io (16)`;                                                       // Io
+        this.runes.r17 = `${ORANGE}Lum (17)`;                                                      // Lum
+        this.runes.r18 = `${RED}**${ORANGE}  Ko (18)  ${RED}**${ORANGE}`;                         // Ko
+        this.runes.r19 = `${RED}**${ORANGE}  Fal (19)  ${RED}**${ORANGE}`;                        // Fal
+        this.runes.r20 = `${RED}**${ORANGE}  Lem (20)  ${RED}**${ORANGE}`;                        // Lem
+        this.runes.r21 = `${RED}*****${ORANGE}   Pul (21)   ${RED}*****${ORANGE}`;                // Pul
+        this.runes.r22 = `${RED}*****${ORANGE}   Um (22)   ${RED}*****${ORANGE}`;                 // Um
+        this.runes.r23 = `${RED}*****${ORANGE}   Mal (23)   ${RED}*****${ORANGE}`;                // Mal
+        this.runes.r24 = `${RED}*****${ORANGE}   Ist (24)   ${RED}*****${ORANGE}`;                // Ist
+        this.runes.r25 = `${RED}*****${ORANGE}   Gul (25)   ${RED}*****${ORANGE}`;                // Gul
+        this.runes.r26 = `${RED}**********${ORANGE}     Vex (26)     ${RED}**********${ORANGE}`;  // Vex
+        this.runes.r27 = `${RED}**********${ORANGE}     Ohm (27)     ${RED}**********${ORANGE}`;  // Ohm
+        this.runes.r28 = `${RED}**********${ORANGE}     Lo (28)     ${RED}**********${ORANGE}`;   // Lo
+        this.runes.r29 = `${RED}**********${ORANGE}     Sur (29)     ${RED}**********${ORANGE}`;  // Sur
+        this.runes.r30 = `${RED}**********${ORANGE}     Ber (30)     ${RED}**********${ORANGE}`;  // Ber
+        this.runes.r31 = `${RED}**********${ORANGE}     Jah (31)     ${RED}**********${ORANGE}`;  // Jah
+        this.runes.r32 = `${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`; // Cham
+        // this.runes.r33 = `${RED}**********${ORANGE}     Zod (33)     ${RED}**********${ORANGE}`;  // Zod
         // this.runes.r33 = `${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${PADDING_5}${RUNES_COLOR_NAME}Zod (33)${PADDING_5}${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${RUNES_COLOR_NAME}`;  // Zod
-        this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE1, "Zod Rune (33)"); // Zod
+        this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE, "Zod Rune (33)"); // Zod
         return;
     }
   },
