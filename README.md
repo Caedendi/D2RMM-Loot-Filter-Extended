@@ -66,12 +66,12 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ### 2.2.0
 
+- Renamed colors to more standardized names, see /docs/colors.md for details
 - Added option to change the color for the alternate rune color scheme
 - Added option to disable _all_ Light Pillars
-- Split runes into 4 tiers, for each of which you can individually disable visibility and Light Pillars
+- Split runes into 4 tiers, for each of which you can individually enable/disable visibility and Light Pillars
 - Changed Light Pillars settings for Quest Weapons from "exclude" to "include" 
 - Slightly changed some setting names and tooltips
-- Redid color names, added /docs/colors.md
 
 ### 2.1.1
 

@@ -119,7 +119,7 @@ const PADDING_5 = SINGLE_SPACE.repeat(5);
 const PATTERN_2    = HIGHLIGHT.repeat(2);
 const PATTERN_5    = HIGHLIGHT.repeat(5);
 const PATTERN_10   = HIGHLIGHT.repeat(10);
-const PATTERN_3x10 = `${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}${PADDING_2}${HIGHLIGHT.repeat(10)}`;
+const PATTERN_3x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}${PADDING_2}${PATTERN_10}`;
 
 const SHOULD_FIX_ILVL_INDENT = config.ItemLevel === "fix";
 const ILVL_INDENT_FIX_SINGLE  = SINGLE_SPACE.repeat(4); // for single digit ilvl items
@@ -193,7 +193,7 @@ const RUNE_TIER_HIGH = [
   { number: 33, name: "Zod"  }, 
 ];
 
-const RUNES_COLOR_NAME      = ORANGE
+const RUNES_COLOR_NAME      = ORANGE;
 const RUNES_COLOR_HIGHLIGHT = HIGHLIGHT_COLOR;
 const RUNES_COLOR_ALTERNATE = config.HighlightColorRunesAlternate !== "custom" ? `${COLOR_PREFIX}${config.HighlightColorRunesAlternate}` : ';'; // replace 1 with desired custom color character (see above) [CSTM-HLCRA]
 
@@ -1380,7 +1380,6 @@ function pushLightPillarsForRunes() {
     return;
   }
 
-  // let toPush = [];
   RUNE_TIERS.forEach((tier) => {
     if (!tier.hasLightPillar || (config.ShouldDisableLightPillarForHidden && !tier.isVisible)) {
       return;
