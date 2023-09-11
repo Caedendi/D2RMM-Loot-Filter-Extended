@@ -71,7 +71,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 - Added customization of the alternate rune color scheme (can now be set to colors other than dark violet)
 - Added option to disable _all_ Light Pillars
 - Split runes into 4 tiers, each of which you can individually enable/disable visibility and Light Pillars for
-- Changed Light Pillars setting for Quest Weapons from "exclude" to "include" 
+- Changed the Light Pillars setting for Quest Weapons from "exclude" to "include" 
 - Slightly changed some setting names and tooltips
 
 ### 2.1.1
