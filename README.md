@@ -66,11 +66,12 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ### 2.2.0
 
-- Renamed colors to more standardized names, see /docs/colors.md for details
-- Added option to change the color for the alternate rune color scheme
+- Renamed colors to more standardized names, see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details
+- Added customization of the highlight color (can now be set to colors other than tomato red)
+- Added customization of the alternate rune color scheme (can now be set to colors other than dark violet)
 - Added option to disable _all_ Light Pillars
-- Split runes into 4 tiers, for each of which you can individually enable/disable visibility and Light Pillars
-- Changed Light Pillars settings for Quest Weapons from "exclude" to "include" 
+- Split runes into 4 tiers, each of which you can individually enable/disable visibility and Light Pillars for
+- Changed Light Pillars setting for Quest Weapons from "exclude" to "include" 
 - Slightly changed some setting names and tooltips
 
 ### 2.1.1
