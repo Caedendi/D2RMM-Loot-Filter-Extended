@@ -210,10 +210,10 @@ const RUNES_PADDING_MID = PADDING_5;
 const RUNES_PADDING_HIGH = PADDING_5;
 
 const RUNE_TIERS = [
-  { level: 1, runes: RUNE_TIER_LOW,    padding: RUNES_PADDING_LOW,    pattern: RUNES_PATTERN_LOW,    isVisible: config.ShouldShowRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow    },
-  { level: 2, runes: RUNE_TIER_LOWMID, padding: RUNES_PADDING_LOWMID, pattern: RUNES_PATTERN_LOWMID, isVisible: config.ShouldShowRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid },
-  { level: 3, runes: RUNE_TIER_MID,    padding: RUNES_PADDING_MID,    pattern: RUNES_PATTERN_MID,    isVisible: config.ShouldShowRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid    },
-  { level: 4, runes: RUNE_TIER_HIGH,   padding: RUNES_PADDING_HIGH,   pattern: RUNES_PATTERN_HIGH,   isVisible: config.ShouldShowRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh   },
+  { level: 1, runes: RUNE_TIER_LOW,    padding: RUNES_PADDING_LOW,    pattern: RUNES_PATTERN_LOW,    isVisible: config.ShouldShowRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow,    hasDropSound: config.ShouldChangeDropSoundRunesLow    },
+  { level: 2, runes: RUNE_TIER_LOWMID, padding: RUNES_PADDING_LOWMID, pattern: RUNES_PATTERN_LOWMID, isVisible: config.ShouldShowRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid, hasDropSound: config.ShouldChangeDropSoundRunesLowMid },
+  { level: 3, runes: RUNE_TIER_MID,    padding: RUNES_PADDING_MID,    pattern: RUNES_PATTERN_MID,    isVisible: config.ShouldShowRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid,    hasDropSound: config.ShouldChangeDropSoundRunesMid    },
+  { level: 4, runes: RUNE_TIER_HIGH,   padding: RUNES_PADDING_HIGH,   pattern: RUNES_PATTERN_HIGH,   isVisible: config.ShouldShowRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh,   hasDropSound: config.ShouldChangeDropSoundRunesHigh   },
 ];
 
 const RUNE_TIERS_HIGHLIGHTED         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
@@ -322,7 +322,7 @@ const LP_ID_DROPLIGHT = 9999996974;
 const LP_ID_ENTITY_ROOT = 1079187010;
 
 // vfx light pillar
-const LP_LIGHT_COMPONENT = {
+const LP_LIGHT_PILLAR_COMPONENT = {
   particle: {
     path: LP_PATH_HORADRIC_LIGHT,
   },
@@ -384,6 +384,23 @@ const LP_LIGHT_COMPONENT = {
     }
   ]
 };
+
+
+//==============================//
+//   Parameters - Drop Sounds   //
+//==============================//
+
+const DS_PATH_MISC = FILE_MISC_PATH;
+
+const DS_SOUND_HOSTILE = "cursor_hostile";
+const DS_SOUND_HF_PLACE = "quest_hellforge_place";
+const DS_SOUND_HF_SMASH = "quest_hellforge_smash";
+const DS_SOUND_CAIRN_SUCCESS = "cairn_success";
+const DS_SOUND_PORTAL_OPEN = "object_townportal";
+const DS_SOUND_NECRO_SELECT = "cursor_necromancer_select";
+const DS_SOUND_QUEST_DONE = "cursor_questdone";
+
+const DS_FRAME_NONE = 0;
 
 
 //======================//
@@ -1576,8 +1593,55 @@ function pushLightPillarToPath(path, item) {
 }
 
 function pushLightPillarToFile(file) {
-  file.dependencies.particles.push(LP_LIGHT_COMPONENT.particle);
-  file.entities = file.entities.concat(LP_LIGHT_COMPONENT.entities);
+  file.dependencies.particles.push(LP_LIGHT_PILLAR_COMPONENT.particle);
+  file.entities = file.entities.concat(LP_LIGHT_PILLAR_COMPONENT.entities);
+}
+
+
+//=================//
+//   Drop Sounds   //
+//=================//
+
+function modifyDropSoundForRunes() {
+  if ( !config.ShouldChangeDropSoundRunesLow && !config.ShouldChangeDropSoundRunesLowMid 
+    && !config.ShouldChangeDropSoundRunesMid && !config.ShouldChangeDropSoundRunesHigh ) {
+    return;
+  }
+
+  RUNE_TIERS.forEach((tier) => {
+    if (!tier.hasDropSound || (config.ShouldDisableDropSoundForHidden && !tier.isVisible)) {
+      return;
+    }
+
+    let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
+    pushDropSoundForList(itemCodes, DS_SOUND_HOSTILE)
+  });
+}
+
+function pushDropSoundForList(itemCodes, dropSound) {
+  const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
+
+  fileMisc.rows.forEach((row) => {
+    if (itemCodes.indexOf(row.code) !== -1) {
+      row.dropsound = dropSound;
+      return;
+    }
+  });
+
+  D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
+}
+
+function pushDropSoundForItem(itemCode, dropSound) {
+  const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
+
+  fileMisc.rows.forEach((row) => {
+    if (row.code === itemCode) {
+      row.dropsound = dropSound;
+      return;
+    }
+  });
+
+  D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
 }
 
 
@@ -1758,7 +1822,7 @@ function addEquipmentQuality(equipment, itemNames, setting) {
 //===========================================//
 
 function applyLightPillars() {
-  if (!config.ShouldEnableLightPillars) {
+  if (!config.IsLightPillarsEnabled) {
     return;
   }
 
@@ -1772,6 +1836,19 @@ function applyLightPillars() {
   pushLightPillarsForKeys();
   pushLightPillarsForUberOrgans();
   pushLightPillarForStandardOfHeroes();
+}
+
+
+//===========================================//
+//   How to apply the magic: drop sounds   //
+//===========================================//
+
+function applyDropSounds() {
+  if (!config.IsDropSoundsEnabled) {
+    return;
+  }
+
+  modifyDropSoundForRunes();
 }
 
 
@@ -1819,6 +1896,7 @@ function applyLootFilter() {
   applyItemLevel();
   applyItemQuality();
   applyLightPillars();
+  applyDropSounds();
   applyTooltipMods();
 }
 

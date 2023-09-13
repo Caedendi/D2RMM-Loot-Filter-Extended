@@ -294,7 +294,7 @@
       "defaultExpanded": false
     },
     {
-      "id": "ShouldEnableLightPillars",
+      "id": "IsLightPillarsEnabled",
       "type": "checkbox",
       "name": "Enable",
       "description": "Enable shining Light Pillars on the item types toggled below.",
@@ -318,7 +318,7 @@
       "id": "ShouldAddLightPillarRunesLowMid",
       "type": "checkbox",
       "name": "Runes: Low-Mid",
-      "description": "Shine a Light Pillar on Low-Mid Runes on the ground (Ral and Hel-Fal.",
+      "description": "Shine a Light Pillar on Low-Mid Runes on the ground (Ral, Hel-Fal).",
       "defaultValue": true
     },
     {
@@ -404,6 +404,96 @@
       "name": "Standard of Heroes",
       "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported (some monsters carry torches), this will still shine a Light Pillar when you kill the Übers.",
       "defaultValue": true
+    },
+    {
+      "id": "DropSoundSection",
+      "type": "section",
+      "name": "Drop Sounds",
+      "defaultExpanded": false
+    },
+    {
+      "id": "IsDropSoundsEnabled",
+      "type": "checkbox",
+      "name": "Enable",
+      "description": "Enable custom drop sounds on the item types toggled below.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldDisableDropSoundForHidden",
+      "type": "checkbox",
+      "name": "Disable for Hidden Items",
+      "description": "Do not modify drop sounds on items set to hidden. NOTE: Does not work with custom settings.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldChangeDropSoundRunesLow",
+      "type": "checkbox",
+      "name": "Runes: Low",
+      "description": "Enable custom drop sound for Low Runes (El-Dol, excluding Ral).",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundRunesLowMid",
+      "type": "checkbox",
+      "name": "Runes: Low-Mid",
+      "description": "Enable custom drop sound for Low-Mid Runes (Ral, Hel-Fal).",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundRunesMid",
+      "type": "checkbox",
+      "name": "Runes: Mid",
+      "description": "Enable custom drop sound for Mid Runes (Lem-Gul).",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundRunesHigh",
+      "type": "checkbox",
+      "name": "Runes: High",
+      "description": "Enable custom drop sound for High Runes (Vex-Zod).",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundQuest",
+      "type": "checkbox",
+      "name": "Quest Items",
+      "description": "Enable custom drop sound for Quest Items.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundEssences",
+      "type": "checkbox",
+      "name": "Essences",
+      "description": "Enable custom drop sound for Essences.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundTokens",
+      "type": "checkbox",
+      "name": "Token of Absolution",
+      "description": "Enable custom drop sound for Tokens of Absolution.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundKeys",
+      "type": "checkbox",
+      "name": "Pandemonium Keys",
+      "description": "Enable custom drop sound for Keys of Terror/Hate/Destruction.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundOrgans",
+      "type": "checkbox",
+      "name": "Pandemonium Organs",
+      "description": "Enable custom drop sound for Über Organs.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldChangeDropSoundStandardOfHeroes",
+      "type": "checkbox",
+      "name": "Standard of Heroes",
+      "description": "Enable custom drop sound for the Standard of Heroes.",
+      "defaultValue": false
     },
     {
       "id": "MiscSection",
