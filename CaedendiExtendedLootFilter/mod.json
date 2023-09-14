@@ -438,6 +438,78 @@
       "defaultValue": true
     },
     {
+      "id": "DropSoundRunesLow",
+      "type": "select",
+      "name": "Runes: Low",
+      "description": "Sound effect to use for enabled item types.",
+      "defaultValue": "default",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Town Portal", "value": "object_townportal" },
+        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
+        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
+        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
+        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "DropSoundRunesLowMid",
+      "type": "select",
+      "name": "Runes: Low-Mid",
+      "description": "Sound effect to use for enabled item types.",
+      "defaultValue": "default",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Town Portal", "value": "object_townportal" },
+        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
+        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
+        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
+        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "DropSoundRunesMid",
+      "type": "select",
+      "name": "Runes: Mid",
+      "description": "Sound effect to use for enabled item types.",
+      "defaultValue": "hostile",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Town Portal", "value": "object_townportal" },
+        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
+        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
+        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
+        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "DropSoundRunesHigh",
+      "type": "select",
+      "name": "Runes: High",
+      "description": "Sound effect to use for enabled item types.",
+      "defaultValue": "hostile",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Town Portal", "value": "object_townportal" },
+        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
+        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
+        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
+        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
       "id": "DropSound",
       "type": "select",
       "name": "Drop Sound",
@@ -453,34 +525,6 @@
         { "label": "Quest Done", "value": "cursor_questdone" },
         { "label": "Custom", "value": "custom" }
       ]
-    },
-    {
-      "id": "ShouldChangeDropSoundRunesLow",
-      "type": "checkbox",
-      "name": "Runes: Low",
-      "description": "Enable custom drop sound for Low Runes (El-Dol, excluding Ral).",
-      "defaultValue": false
-    },
-    {
-      "id": "ShouldChangeDropSoundRunesLowMid",
-      "type": "checkbox",
-      "name": "Runes: Low-Mid",
-      "description": "Enable custom drop sound for Low-Mid Runes (Ral, Hel-Fal).",
-      "defaultValue": false
-    },
-    {
-      "id": "ShouldChangeDropSoundRunesMid",
-      "type": "checkbox",
-      "name": "Runes: Mid",
-      "description": "Enable custom drop sound for Mid Runes (Lem-Gul).",
-      "defaultValue": false
-    },
-    {
-      "id": "ShouldChangeDropSoundRunesHigh",
-      "type": "checkbox",
-      "name": "Runes: High",
-      "description": "Enable custom drop sound for High Runes (Vex-Zod).",
-      "defaultValue": false
     },
     {
       "id": "ShouldChangeDropSoundQuest",

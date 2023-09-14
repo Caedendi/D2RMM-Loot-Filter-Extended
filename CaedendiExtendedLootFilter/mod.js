@@ -29,6 +29,7 @@ const FILE_EXCEL        = "global\\excel\\"
 const FILE_WEAPONS_PATH = `${FILE_EXCEL}weapons${FILE_EXTENSION_TXT}`;
 const FILE_ARMOR_PATH   = `${FILE_EXCEL}armor${FILE_EXTENSION_TXT}`;
 const FILE_MISC_PATH    = `${FILE_EXCEL}misc${FILE_EXTENSION_TXT}`;
+const FILE_SOUNDS_PATH  = `${FILE_EXCEL}sounds${FILE_EXTENSION_TXT}`;
 
 //========================//
 //   Constants - Colors   //
@@ -210,10 +211,10 @@ const RUNES_PADDING_MID = PADDING_5;
 const RUNES_PADDING_HIGH = PADDING_5;
 
 const RUNE_TIERS = [
-  { level: 1, runes: RUNE_TIER_LOW,    padding: RUNES_PADDING_LOW,    pattern: RUNES_PATTERN_LOW,    isVisible: config.ShouldShowRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow,    hasDropSound: config.ShouldChangeDropSoundRunesLow    },
-  { level: 2, runes: RUNE_TIER_LOWMID, padding: RUNES_PADDING_LOWMID, pattern: RUNES_PATTERN_LOWMID, isVisible: config.ShouldShowRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid, hasDropSound: config.ShouldChangeDropSoundRunesLowMid },
-  { level: 3, runes: RUNE_TIER_MID,    padding: RUNES_PADDING_MID,    pattern: RUNES_PATTERN_MID,    isVisible: config.ShouldShowRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid,    hasDropSound: config.ShouldChangeDropSoundRunesMid    },
-  { level: 4, runes: RUNE_TIER_HIGH,   padding: RUNES_PADDING_HIGH,   pattern: RUNES_PATTERN_HIGH,   isVisible: config.ShouldShowRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh,   hasDropSound: config.ShouldChangeDropSoundRunesHigh   },
+  { level: 1, runes: RUNE_TIER_LOW,    padding: RUNES_PADDING_LOW,    pattern: RUNES_PATTERN_LOW,    isVisible: config.ShouldShowRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow,    dropSound: config.DropSoundRunesLow    },
+  { level: 2, runes: RUNE_TIER_LOWMID, padding: RUNES_PADDING_LOWMID, pattern: RUNES_PATTERN_LOWMID, isVisible: config.ShouldShowRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid, dropSound: config.DropSoundRunesLowMid },
+  { level: 3, runes: RUNE_TIER_MID,    padding: RUNES_PADDING_MID,    pattern: RUNES_PATTERN_MID,    isVisible: config.ShouldShowRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid,    dropSound: config.DropSoundRunesMid    },
+  { level: 4, runes: RUNE_TIER_HIGH,   padding: RUNES_PADDING_HIGH,   pattern: RUNES_PATTERN_HIGH,   isVisible: config.ShouldShowRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh,   dropSound: config.DropSoundRunesHigh   },
 ];
 
 const RUNE_TIERS_HIGHLIGHTED         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
@@ -391,7 +392,7 @@ const LP_LIGHT_PILLAR_COMPONENT = {
 //==============================//
 
 const DS_PATH_MISC = FILE_MISC_PATH;
-
+// todo
 const DS_SOUND_HOSTILE = "cursor_hostile";
 const DS_SOUND_HF_PLACE = "quest_hellforge_place";
 const DS_SOUND_HF_SMASH = "quest_hellforge_smash";
@@ -400,7 +401,18 @@ const DS_SOUND_PORTAL_OPEN = "object_townportal";
 const DS_SOUND_NECRO_SELECT = "cursor_necromancer_select";
 const DS_SOUND_QUEST_DONE = "cursor_questdone";
 
+const DS_FILE_NONE = "none.flac"
+
 const DS_FRAME_NONE = 0;
+
+
+
+const DS_SOUND_EFFECTS = {
+  hostile: {
+    sd: { name: "cursor_hostile",      index: 16,   channel: "sfx/cursor-ui_sd", fileName: "cursor\\hostile.flac",             redirect: "cursor_hostile_hd_1" },
+    hd: { name: "cursor_hostile_hd_1", index: 7705, channel: "sfx/cursor-ui_hd", fileName: "cursor\\cursor_hostile_1_hd.flac", redirect: EMPTY_STRING          },
+  },
+};
 
 
 //======================//
@@ -442,13 +454,7 @@ const customAffixes = {
   items: {},
 
   customizeGold(settingAmount, settingAffix) {
-    let color = NO_COLOR;
-    if (settingAmount === "wg") {
-      color = GOLD;
-    }
-    else if (settingAmount === "gw") {
-      color = WHITE;
-    }
+    let color = settingAmount === "wg" ? GOLD : settingAmount === "gw" ? WHITE : NO_COLOR;
 
     switch (settingAffix) {
       case "none": // Gold displays as "1234 Gold".
@@ -458,7 +464,7 @@ const customAffixes = {
         return;
       case "g": // Gold displays as "1234 G".
         this.items.gld = `${color}G`; 
-      return;
+        return;
       case "hide": // Gold displays as "1234".
         this.items.gld = HIDDEN;
         return;
@@ -1129,9 +1135,9 @@ const customItems = {
   },
 
   highlightUniqueCharms(){
-    this.items["Annihilus"]            = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Hellfire Torch"]       = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
-    this.items["Gheed's Fortune"]      = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Annihilus"]       = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Hellfire Torch"]  = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
+    this.items["Gheed's Fortune"] = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
   },
 
   highlightSunderCharms(){
@@ -1250,19 +1256,19 @@ const customItems = {
     if (SHOULD_FIX_ILVL_INDENT) {
       // single digit ilvl
       let indent = ILVL_INDENT_FIX_QUEST1;
-      this.items.hst = indent + this.items.hst;
-      this.items.qf2 = indent + this.items.qf2;
-      this.items["Horadric Staff"] = indent + this.items["Horadric Staff"];
-      this.items.SuperKhalimFlail  = indent + this.items.SuperKhalimFlail;
+      this.items.hst                  = indent + this.items.hst;
+      this.items.qf2                  = indent + this.items.qf2;
+      this.items["Horadric Staff"]    = indent + this.items["Horadric Staff"];
+      this.items.SuperKhalimFlail     = indent + this.items.SuperKhalimFlail;
 
       // double digit ilvl
       indent = ILVL_INDENT_FIX_QUEST2;
-      this.items.leg = indent + this.items.leg;
-      this.items.hdm = indent + this.items.hdm;
-      this.items.msf = indent + this.items.msf;
-      this.items.g33 = indent + this.items.g33;
-      this.items.qf1 = indent + this.items.qf1;
-      this.items.hfh = indent + this.items.hfh;
+      this.items.leg                  = indent + this.items.leg;
+      this.items.hdm                  = indent + this.items.hdm;
+      this.items.msf                  = indent + this.items.msf;
+      this.items.g33                  = indent + this.items.g33;
+      this.items.qf1                  = indent + this.items.qf1;
+      this.items.hfh                  = indent + this.items.hfh;
       this.items["Staff of Kings"]    = indent + this.items["Staff of Kings"];
       this.items.KhalimFlail          = indent + this.items.KhalimFlail;
       this.items["Hell Forge Hammer"] = indent + this.items["Hell Forge Hammer"];
@@ -1608,22 +1614,52 @@ function pushLightPillarToFile(file) {
 //=================//
 
 function modifyDropSoundForRunes() {
-  if ( !config.ShouldChangeDropSoundRunesLow && !config.ShouldChangeDropSoundRunesLowMid 
-    && !config.ShouldChangeDropSoundRunesMid && !config.ShouldChangeDropSoundRunesHigh ) {
-    return;
-  }
-
   RUNE_TIERS.forEach((tier) => {
-    if (!tier.hasDropSound || (config.ShouldDisableDropSoundForHidden && !tier.isVisible)) {
+    if (tier.dropSound === "default" || (config.ShouldDisableDropSoundForHidden && !tier.isVisible)) {
       return;
     }
-
+    
     let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
-    pushDropSoundForList(itemCodes, config.DropSound)
+
+    let newSoundSd = addDropSound(`rune${tier.level}`,    DS_SOUND_EFFECTS[tier.dropSound].sd.channel, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, DS_SOUND_EFFECTS[tier.dropSound].sd.redirect);
+    let newSoundHd = addDropSound(`rune${tier.level}_hd`, DS_SOUND_EFFECTS[tier.dropSound].hd.channel, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_SOUND_EFFECTS[tier.dropSound].hd.redirect);
+
+    modifyDropSoundForItems(itemCodes, newSoundSd)
   });
 }
 
-function pushDropSoundForList(itemCodes, dropSound) {
+function addDropSound(nameSuffix, sfxChannel, sfxFileName, sfxRedirect) {
+  const fileSounds = D2RMM.readTsv(FILE_SOUNDS_PATH);
+
+  // copy template
+  // find last index
+  // new:
+  // - index ["*Index"]
+  // - name
+  // - channel
+  // - file
+  // - redirect (hd)
+  // repeat for redirect
+
+  let name = `celf_${nameSuffix}`; // celf = Caedendi's Extended Loot Filter
+  let index = fileSounds.rows.length;
+
+  let template = fileSounds.rows.find((sound) => sound.Sound === "cursor_hostile");
+
+  fileSounds.rows[index] = template;
+  fileSounds.rows[index].Sound = "new";
+  // fileSounds.rows[index].Sound = name;
+  fileSounds.rows[index].FileName = sfxFileName;
+  fileSounds.rows[index]["*Index"] = index - 1;
+  fileSounds.rows[index].Channel = sfxChannel;
+  fileSounds.rows[index].Redirect = sfxRedirect;
+
+  D2RMM.writeTsv(FILE_SOUNDS_PATH, fileSounds);
+
+  return name;
+}
+
+function modifyDropSoundForItems(itemCodes, dropSound) {
   const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
 
   fileMisc.rows.forEach((row) => {
@@ -1636,18 +1672,18 @@ function pushDropSoundForList(itemCodes, dropSound) {
   D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
 }
 
-function pushDropSoundForItem(itemCode, dropSound) {
-  const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
+// function pushDropSoundForItem(itemCode, dropSound) {
+//   const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
 
-  fileMisc.rows.forEach((row) => {
-    if (row.code === itemCode) {
-      row.dropsound = dropSound;
-      return;
-    }
-  });
+//   fileMisc.rows.forEach((row) => {
+//     if (row.code === itemCode) {
+//       row.dropsound = dropSound;
+//       return;
+//     }
+//   });
 
-  D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
-}
+//   D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
+// }
 
 
 //========================================//
@@ -1656,7 +1692,7 @@ function pushDropSoundForItem(itemCode, dropSound) {
 
 // Gold, Superior/Inferior affixes, Gems (exceptions)
 function applyCustomAffixes() {
-  if (config.Gold === "none" && config.Gems === "none" && config.ShortSupInferiorPrefixes === "none") {
+  if (config.GoldAmount === "none" && config.GoldSuffix === "none" && config.Gems === "none" && config.ShortSupInferiorPrefixes === "none") {
     return;
   }
   
@@ -1739,10 +1775,9 @@ function applyItemLevel() {
   const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
 
   fileWeapons.rows.forEach((row) => {
-    if (row.type === "tpot") { // exclude throwing potions
-      return;
+    if (row.type !== "tpot") { // exclude throwing potions
+      row.ShowLevel = 1;
     }
-    row.ShowLevel = 1;
   });
   
   fileArmor.rows.forEach((row) => {
@@ -1750,15 +1785,8 @@ function applyItemLevel() {
   });
   
   fileMisc.rows.forEach((row) => {
-    if (["amu", "rin"].indexOf(row.code) !== -1) { // amulets & rings
-      row.ShowLevel = 1;
-      return;
-    }
-    if (["cm1", "cm2", "cm3"].indexOf(row.code) !== -1) { // small, large and grand charms
-      row.ShowLevel = 1;
-      return;
-    }
-    if (["jew"].indexOf(row.code) !== -1) { // jewels
+    // amulets, rings, small/large/grand charms, jewels
+    if (["amu", "rin", "cm1", "cm2", "cm3", "jew"].indexOf(row.code) !== -1) { 
       row.ShowLevel = 1;
       return;
     }
@@ -1862,8 +1890,32 @@ function applyDropSounds() {
 //==================================================//
 
 function applyProfileHdMods() {
-  applyTooltipMods(config.Tooltip, config.TooltipOpacity, config.TooltipSize);
   applyCustomGoldColor(config.GoldAmount);
+  applyTooltipMods(config.Tooltip, config.TooltipOpacity, config.TooltipSize);
+}
+
+function applyCustomGoldColor(setting) {
+  if (setting === "none" || setting === "wg") {
+    return;
+  }
+
+  let goldColor = NO_COLOR;
+  switch (setting) {
+    case "none":
+    case "wg":
+      return;
+    case "g":
+    case "gw":
+      goldColor = "$FontColorCurrencyGold";
+      break;
+    case "custom":
+      goldColor = "FontColorLightTeal";
+      break;
+  }
+  
+  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
+  profileHD.TooltipStyle.GoldColor = goldColor;
+  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
 }
 
 function applyTooltipMods(setting, opacity, tooltipSize) {
@@ -1887,27 +1939,6 @@ function applyTooltipMods(setting, opacity, tooltipSize) {
       break;
   }
   
-  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
-}
-
-function applyCustomGoldColor(setting) {
-  let goldColor = NO_COLOR;
-
-  switch (setting) {
-    case "none":
-    case "wg":
-      return;
-    case "g":
-    case "gw":
-      goldColor = "$FontColorCurrencyGold";
-      break;
-    case "custom":
-      goldColor = "FontColorLightTeal";
-      break;
-  }
-  
-  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
-  profileHD.TooltipStyle.GoldColor = goldColor;
   D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
 }
 
