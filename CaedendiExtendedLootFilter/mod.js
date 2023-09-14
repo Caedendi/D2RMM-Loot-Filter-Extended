@@ -441,25 +441,30 @@ function generateDoubleHighlight(patternColor, pattern, padding, itemColor, item
 const customAffixes = {
   items: {},
 
-  customizeGold(setting) {
-    switch (setting) {
-      case "none": // no change
+  customizeGold(settingAmount, settingAffix) {
+    let color = NO_COLOR;
+    if (settingAmount === "wg") {
+      color = GOLD;
+    }
+    else if (settingAmount === "gw") {
+      color = WHITE;
+    }
+
+    switch (settingAffix) {
+      case "none": // Gold displays as "1234 Gold".
+        if (color !== NO_COLOR) {
+          this.items.gld = `${color}Gold`; 
+        }
         return;
-      case "gold": // Gold displays as "1234 Gold" with white numbers and gold text.
-        this.items.gld = `${GOLD}Gold`; 
-        return;
-      case "goldg": // Gold displays as "1234 G" with white numbers and a gold-colored G.
-        this.items.gld = `${GOLD}G`;
-        return;
-      case "white": // Gold displays as "1234 G" in white.
-        this.items.gld = `G`;
-        return;
+      case "g": // Gold displays as "1234 G".
+        this.items.gld = `${color}G`; 
+      return;
       case "hide": // Gold displays as "1234".
         this.items.gld = HIDDEN;
         return;
       case "custom": // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items.gld = `Gold`;
+        this.items.gld = `${PURPLE}Gold`;
         return;
     }
   },
@@ -1614,7 +1619,7 @@ function modifyDropSoundForRunes() {
     }
 
     let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
-    pushDropSoundForList(itemCodes, DS_SOUND_HOSTILE)
+    pushDropSoundForList(itemCodes, config.DropSound)
   });
 }
 
@@ -1656,7 +1661,7 @@ function applyCustomAffixes() {
   }
   
   customAffixes.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes);
-  customAffixes.customizeGold(config.Gold);
+  customAffixes.customizeGold(config.GoldAmount, config.GoldSuffix);
   customAffixes.customizeGems(config.Gems);
   applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, customAffixes.items);
 }
@@ -1852,21 +1857,24 @@ function applyDropSounds() {
 }
 
 
-//==========================================//
-//   How to apply the magic: tooltip mods   //
-//==========================================//
-function applyTooltipMods() {
-  if (config.Tooltip === "none") {
+//==================================================//
+//   How to apply the magic: _profilehd.json mods   //
+//==================================================//
+
+function applyProfileHdMods() {
+  applyTooltipMods(config.Tooltip, config.TooltipOpacity, config.TooltipSize);
+  applyCustomGoldColor(config.GoldAmount);
+}
+
+function applyTooltipMods(setting, opacity, tooltipSize) {
+  if (setting === "none") {
     return;
   }
-  
-  let path = FILE_PROFILE_HD_PATH;
-  let profileHD = D2RMM.readJson(path);
-  
-  let bgColor = [0, 0, 0, config.TooltipOpacity]; // [R, G, B, opacity]
-  let tooltipSize = config.TooltipSize;
 
-  switch (config.Tooltip) {
+  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
+  let bgColor = [0, 0, 0, opacity]; // [R, G, B, opacity]
+
+  switch (setting) {
     case "all":
       profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
       profileHD.TooltipFontSize = tooltipSize;
@@ -1879,7 +1887,28 @@ function applyTooltipMods() {
       break;
   }
   
-  D2RMM.writeJson(path, profileHD);
+  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
+}
+
+function applyCustomGoldColor(setting) {
+  let goldColor = NO_COLOR;
+
+  switch (setting) {
+    case "none":
+    case "wg":
+      return;
+    case "g":
+    case "gw":
+      goldColor = "$FontColorCurrencyGold";
+      break;
+    case "custom":
+      goldColor = "FontColorLightTeal";
+      break;
+  }
+  
+  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
+  profileHD.TooltipStyle.GoldColor = goldColor;
+  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
 }
 
 
@@ -1897,7 +1926,7 @@ function applyLootFilter() {
   applyItemQuality();
   applyLightPillars();
   applyDropSounds();
-  applyTooltipMods();
+  applyProfileHdMods();
 }
 
 applyLootFilter();

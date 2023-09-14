@@ -12,16 +12,28 @@
       "defaultExpanded": false
     },
     {
-      "id": "Gold",
+      "id": "GoldAmount",
       "type": "select",
-      "name": "Gold",
-      "description": "Customize the \"Gold\" affix for gold drops. [CSTM-GLD]",
-      "defaultValue": "goldg",
+      "name": "Gold: Color",
+      "description": "Customize the color of the tooltip for gold drops. [CSTM-GLD]",
+      "defaultValue": "wg",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Gold text", "value": "gold" },
-        { "label": "Gold G", "value": "goldg" },
-        { "label": "White G", "value": "whiteg" },
+        { "label": "Default", "value": "none" },
+        { "label": "Gold", "value": "g" },
+        { "label": "White amount, gold suffix", "value": "wg" },
+        { "label": "Gold amount, white suffix", "value": "gw" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    }, 
+    {
+      "id": "GoldSuffix",
+      "type": "select",
+      "name": "Gold: Suffix",
+      "description": "Customize the \"Gold\" suffix for gold drops. [CSTM-GLD]",
+      "defaultValue": "g",
+      "options": [
+        { "label": "Default", "value": "none" },
+        { "label": "G", "value": "g" },
         { "label": "Hide suffix", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
@@ -426,6 +438,23 @@
       "defaultValue": true
     },
     {
+      "id": "DropSound",
+      "type": "select",
+      "name": "Drop Sound",
+      "description": "Sound effect to use for enabled item types.",
+      "defaultValue": "cursor_hostile",
+      "options": [
+        { "label": "Hostile (PVP)", "value": "cursor_hostile" },
+        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Town Portal", "value": "object_townportal" },
+        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
+        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
+        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
+        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
       "id": "ShouldChangeDropSoundRunesLow",
       "type": "checkbox",
       "name": "Runes: Low",
@@ -548,7 +577,7 @@
       "id": "HighlightColor",
       "type": "select",
       "name": "Highlight Color",
-      "description": "Color used to highlight select items. [CSTM-HLCLR]",
+      "description": "Color used for the highlight character for items that have highlight patterns. [CSTM-HLCLR]",
       "defaultValue": "1",
       "options": [
         { "label": "White", "value": "0" },
@@ -582,7 +611,7 @@
       "id": "HighlightColorRunesAlternate",
       "type": "select",
       "name": "Highlight Color: Runes (alternate)",
-      "description": "Color used for the alternate rune highlighting. [CSTM-HLCRA]",
+      "description": "Color used for Mid and High Runes when the alternate color scheme for Runes is selected. [CSTM-HLCRA]",
       "defaultValue": ";",
       "options": [
         { "label": "White", "value": "0" },
