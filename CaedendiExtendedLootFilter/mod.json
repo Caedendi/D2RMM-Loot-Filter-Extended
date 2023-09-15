@@ -446,10 +446,10 @@
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
-        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Success", "value": "cairn" },
         { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
-        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
         { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
         { "label": "Quest Done", "value": "cursor_questdone" },
         { "label": "Custom", "value": "custom" }
@@ -464,10 +464,10 @@
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
-        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Success", "value": "cairn" },
         { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
-        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
         { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
         { "label": "Quest Done", "value": "cursor_questdone" },
         { "label": "Custom", "value": "custom" }
@@ -482,10 +482,10 @@
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
-        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Success", "value": "cairn" },
         { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
-        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
         { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
         { "label": "Quest Done", "value": "cursor_questdone" },
         { "label": "Custom", "value": "custom" }
@@ -500,10 +500,10 @@
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
-        { "label": "Cairn Success", "value": "cairn_success" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Success", "value": "cairn" },
         { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
-        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
         { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
         { "label": "Quest Done", "value": "cursor_questdone" },
         { "label": "Custom", "value": "custom" }

@@ -402,15 +402,25 @@ const DS_SOUND_NECRO_SELECT = "cursor_necromancer_select";
 const DS_SOUND_QUEST_DONE = "cursor_questdone";
 
 const DS_FILE_NONE = "none.flac"
-
 const DS_FRAME_NONE = 0;
-
 
 
 const DS_SOUND_EFFECTS = {
   hostile: {
-    sd: { name: "cursor_hostile",      index: 16,   channel: "sfx/cursor-ui_sd", fileName: "cursor\\hostile.flac",             redirect: "cursor_hostile_hd_1" },
-    hd: { name: "cursor_hostile_hd_1", index: 7705, channel: "sfx/cursor-ui_hd", fileName: "cursor\\cursor_hostile_1_hd.flac", redirect: EMPTY_STRING          },
+    sd: { name: "cursor_hostile",           index: 16,   channel: "sfx/cursor-ui_sd",                   fileName: "cursor\\hostile.flac",                 redirect: "cursor_hostile_hd_1"      },
+    hd: { name: "cursor_hostile_hd_1",      index: 7705, channel: "sfx/cursor-ui_hd",                   fileName: "cursor\\cursor_hostile_1_hd.flac",     redirect: EMPTY_STRING               },
+  },
+  hf_place: {
+    sd: { name: "quest_hellforge_place",    index: 34,   channel: "sfx/ambient/event-3d_sd",            fileName: "object\\hellforgeplace.flac",           redirect: "quest_hellforge_place_hd" },
+    hd: { name: "quest_hellforge_place_hd", index: 4977, channel: "sfx/ambient/event-3d_hd",            fileName: "object\\object_hellforgeplace_hd.flac", redirect: EMPTY_STRING               },
+  },
+  hf_smash: {
+    sd: { name: "quest_hellforge_smash",    index: 35,   channel: "sfx/ambient/event-3d_sd",            fileName: "object\\hellforgesmash.flac",           redirect: "quest_hellforge_smash_hd" },
+    hd: { name: "quest_hellforge_smash_hd", index: 4978, channel: "sfx/ambient/event-3d_hd",            fileName: "object\\object_hellforgesmash_hd.flac", redirect: EMPTY_STRING               },
+  },
+  cairn: {
+    sd: { name: "cairn_success",            index: 418,  channel: "sfx/ambient/environment-objects_sd", fileName: "object\\cairnsuccess.flac",             redirect: "cairn_success_hd"         },
+    hd: { name: "cairn_success_hd",         index: 4922, channel: "sfx/ambient/environment-objects_hd", fileName: "object\\object_cairnsuccess_hd.flac",   redirect: EMPTY_STRING               },
   },
 };
 
@@ -1621,8 +1631,8 @@ function modifyDropSoundForRunes() {
     
     let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
 
-    let newSoundSd = addDropSound(`rune${tier.level}`,    DS_SOUND_EFFECTS[tier.dropSound].sd.channel, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, DS_SOUND_EFFECTS[tier.dropSound].sd.redirect);
-    let newSoundHd = addDropSound(`rune${tier.level}_hd`, DS_SOUND_EFFECTS[tier.dropSound].hd.channel, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_SOUND_EFFECTS[tier.dropSound].hd.redirect);
+    let newSoundSd = addDropSound(`rune_tier_${tier.level}`,    DS_SOUND_EFFECTS[tier.dropSound].sd.channel, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, DS_SOUND_EFFECTS[tier.dropSound].sd.redirect);
+    let newSoundHd = addDropSound(`rune_tier_${tier.level}_hd`, DS_SOUND_EFFECTS[tier.dropSound].hd.channel, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_SOUND_EFFECTS[tier.dropSound].hd.redirect);
 
     modifyDropSoundForItems(itemCodes, newSoundSd)
   });
@@ -1630,28 +1640,18 @@ function modifyDropSoundForRunes() {
 
 function addDropSound(nameSuffix, sfxChannel, sfxFileName, sfxRedirect) {
   const fileSounds = D2RMM.readTsv(FILE_SOUNDS_PATH);
-
-  // copy template
-  // find last index
-  // new:
-  // - index ["*Index"]
-  // - name
-  // - channel
-  // - file
-  // - redirect (hd)
-  // repeat for redirect
-
+  
   let name = `celf_${nameSuffix}`; // celf = Caedendi's Extended Loot Filter
   let index = fileSounds.rows.length;
-
-  let template = fileSounds.rows.find((sound) => sound.Sound === "cursor_hostile");
-
-  fileSounds.rows[index] = template;
-  fileSounds.rows[index].Sound = "new";
-  // fileSounds.rows[index].Sound = name;
-  fileSounds.rows[index].FileName = sfxFileName;
-  fileSounds.rows[index]["*Index"] = index - 1;
+  
+  let template = fileSounds.rows.find((sound) => sound.Sound === "item_rune");
+  // let template = fileSounds.rows.find((sound) => sound.Sound === "cursor_hostile");
+  let newSound = { ...template };
+  fileSounds.rows.push(newSound);
+  fileSounds.rows[index].Sound = name;
+  fileSounds.rows[index]["*Index"] = index;
   fileSounds.rows[index].Channel = sfxChannel;
+  fileSounds.rows[index].FileName = sfxFileName;
   fileSounds.rows[index].Redirect = sfxRedirect;
 
   D2RMM.writeTsv(FILE_SOUNDS_PATH, fileSounds);
