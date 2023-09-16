@@ -392,7 +392,12 @@ const LP_LIGHT_PILLAR_COMPONENT = {
 //==============================//
 
 const DS_PATH_MISC = FILE_MISC_PATH;
+const DS_FRAME_NONE = 0;
+
 // todo
+
+// sound names
+const DS_SOUND_ITEM_RUNE = "item_rune";
 const DS_SOUND_HOSTILE = "cursor_hostile";
 const DS_SOUND_HF_PLACE = "quest_hellforge_place";
 const DS_SOUND_HF_SMASH = "quest_hellforge_smash";
@@ -401,9 +406,15 @@ const DS_SOUND_PORTAL_OPEN = "object_townportal";
 const DS_SOUND_NECRO_SELECT = "cursor_necromancer_select";
 const DS_SOUND_QUEST_DONE = "cursor_questdone";
 
-const DS_FILE_NONE = "none.flac"
-const DS_FRAME_NONE = 0;
+// redirects
+const DS_REDIRECT_NONE = EMPTY_STRING;
 
+// channels
+const DS_CHANNEL_ITEMS_SD = "sfx/items_sd";
+const DS_CHANNEL_ITEMS_HD = "sfx/items_hd";
+
+// file names
+const DS_FILE_NONE = "none.flac"
 
 const DS_SOUND_EFFECTS = {
   hostile: {
@@ -1631,21 +1642,35 @@ function modifyDropSoundForRunes() {
     
     let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
 
-    let newSoundSd = addDropSound(`rune_tier_${tier.level}`,    DS_SOUND_EFFECTS[tier.dropSound].sd.channel, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, DS_SOUND_EFFECTS[tier.dropSound].sd.redirect);
-    let newSoundHd = addDropSound(`rune_tier_${tier.level}_hd`, DS_SOUND_EFFECTS[tier.dropSound].hd.channel, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_SOUND_EFFECTS[tier.dropSound].hd.redirect);
+    let newSoundNameSd = createNewSoundName(`rune_tier_${tier.level}`, false);
+    let newSoundNameHd = createNewSoundName(`rune_tier_${tier.level}`, true);
+    let newSoundSd = addDropSound(newSoundNameSd, DS_CHANNEL_ITEMS_SD, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, newSoundNameHd);
+    let newSoundHd = addDropSound(newSoundNameHd, DS_CHANNEL_ITEMS_HD, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_REDIRECT_NONE);
+    // let newSoundSd = addDropSound(newSoundNameSd, DS_SOUND_EFFECTS[tier.dropSound].sd.channel, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, DS_SOUND_EFFECTS[tier.dropSound].sd.redirect);
+    // let newSoundHd = addDropSound(newSoundNameHd, DS_SOUND_EFFECTS[tier.dropSound].hd.channel, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_SOUND_EFFECTS[tier.dropSound].hd.redirect);
 
     modifyDropSoundForItems(itemCodes, newSoundSd)
   });
 }
 
+function createNewSoundName(name, isHd = false) {
+  let result = `celf_${name}`;
+  return isHd ? `${result}_hd` : result;
+}
+
 function addDropSound(nameSuffix, sfxChannel, sfxFileName, sfxRedirect) {
+  // sfxChannel = DS_CHANNEL_ITEMS_SD;
+  // sfxRedirect = DS_REDIRECT_NONE;
+  let name = nameSuffix;
+
+
   const fileSounds = D2RMM.readTsv(FILE_SOUNDS_PATH);
   
-  let name = `celf_${nameSuffix}`; // celf = Caedendi's Extended Loot Filter
+  // let name = `celf_${nameSuffix}`; // celf = Caedendi's Extended Loot Filter
   let index = fileSounds.rows.length;
   
-  let template = fileSounds.rows.find((sound) => sound.Sound === "item_rune");
-  // let template = fileSounds.rows.find((sound) => sound.Sound === "cursor_hostile");
+  let template = fileSounds.rows.find((sound) => sound.Sound === DS_SOUND_ITEM_RUNE);
+  // let template = fileSounds.rows.find((sound) => sound.Sound === DS_SOUND_HOSTILE);
   let newSound = { ...template };
   fileSounds.rows.push(newSound);
   fileSounds.rows[index].Sound = name;
@@ -1653,6 +1678,10 @@ function addDropSound(nameSuffix, sfxChannel, sfxFileName, sfxRedirect) {
   fileSounds.rows[index].Channel = sfxChannel;
   fileSounds.rows[index].FileName = sfxFileName;
   fileSounds.rows[index].Redirect = sfxRedirect;
+  fileSounds.rows[index].Priority = 255;
+  fileSounds.rows[index]["Stop Inst"] = 0;
+  fileSounds.rows[index]["Defer Inst"] = 0;
+  fileSounds.rows[index].Faloff = 4;
 
   D2RMM.writeTsv(FILE_SOUNDS_PATH, fileSounds);
 
