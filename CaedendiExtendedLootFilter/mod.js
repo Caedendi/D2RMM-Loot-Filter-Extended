@@ -1642,21 +1642,21 @@ function modifyDropSoundForRunes() {
     
     let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
 
-    let newSoundNameSd = createNewSoundName(`rune_tier_${tier.level}`, false);
-    let newSoundNameHd = createNewSoundName(`rune_tier_${tier.level}`, true);
-    addDropSound(DS_SOUND_ITEM_RUNE, newSoundNameSd, DS_CHANNEL_ITEMS_SD, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, newSoundNameHd);
-    addDropSound(DS_SOUND_ITEM_RUNE, newSoundNameHd, DS_CHANNEL_ITEMS_HD, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_REDIRECT_NONE);
+    let newSoundNameSd = createSoundName(`rune_tier_${tier.level}`, false);
+    let newSoundNameHd = createSoundName(`rune_tier_${tier.level}`, true);
+    createNewDropSound(DS_SOUND_ITEM_RUNE, newSoundNameSd, DS_CHANNEL_ITEMS_SD, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, newSoundNameHd);
+    createNewDropSound(DS_SOUND_ITEM_RUNE, newSoundNameHd, DS_CHANNEL_ITEMS_HD, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_REDIRECT_NONE);
 
     modifyDropSoundForItems(itemCodes, newSoundSd)
   });
 }
 
-function createNewSoundName(name, isHd = false) {
+function createSoundName(name, isHd = false) {
   let result = `celf_${name}`;
   return isHd ? `${result}_hd` : result;
 }
 
-function addDropSound(templateName, soundName, sfxChannel, sfxFileName, sfxRedirect) {
+function createNewDropSound(templateName, soundName, sfxChannel, sfxFileName, sfxRedirect) {
   const fileSounds = D2RMM.readTsv(FILE_SOUNDS_PATH);
   
   let index = fileSounds.rows.length;
