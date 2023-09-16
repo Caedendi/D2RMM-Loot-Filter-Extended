@@ -1644,10 +1644,8 @@ function modifyDropSoundForRunes() {
 
     let newSoundNameSd = createNewSoundName(`rune_tier_${tier.level}`, false);
     let newSoundNameHd = createNewSoundName(`rune_tier_${tier.level}`, true);
-    let newSoundSd = addDropSound(newSoundNameSd, DS_CHANNEL_ITEMS_SD, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, newSoundNameHd);
-    let newSoundHd = addDropSound(newSoundNameHd, DS_CHANNEL_ITEMS_HD, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_REDIRECT_NONE);
-    // let newSoundSd = addDropSound(newSoundNameSd, DS_SOUND_EFFECTS[tier.dropSound].sd.channel, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, DS_SOUND_EFFECTS[tier.dropSound].sd.redirect);
-    // let newSoundHd = addDropSound(newSoundNameHd, DS_SOUND_EFFECTS[tier.dropSound].hd.channel, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_SOUND_EFFECTS[tier.dropSound].hd.redirect);
+    addDropSound(DS_SOUND_ITEM_RUNE, newSoundNameSd, DS_CHANNEL_ITEMS_SD, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, newSoundNameHd);
+    addDropSound(DS_SOUND_ITEM_RUNE, newSoundNameHd, DS_CHANNEL_ITEMS_HD, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_REDIRECT_NONE);
 
     modifyDropSoundForItems(itemCodes, newSoundSd)
   });
@@ -1658,22 +1656,15 @@ function createNewSoundName(name, isHd = false) {
   return isHd ? `${result}_hd` : result;
 }
 
-function addDropSound(nameSuffix, sfxChannel, sfxFileName, sfxRedirect) {
-  // sfxChannel = DS_CHANNEL_ITEMS_SD;
-  // sfxRedirect = DS_REDIRECT_NONE;
-  let name = nameSuffix;
-
-
+function addDropSound(templateName, soundName, sfxChannel, sfxFileName, sfxRedirect) {
   const fileSounds = D2RMM.readTsv(FILE_SOUNDS_PATH);
   
-  // let name = `celf_${nameSuffix}`; // celf = Caedendi's Extended Loot Filter
   let index = fileSounds.rows.length;
-  
-  let template = fileSounds.rows.find((sound) => sound.Sound === DS_SOUND_ITEM_RUNE);
-  // let template = fileSounds.rows.find((sound) => sound.Sound === DS_SOUND_HOSTILE);
+  let template = fileSounds.rows.find((sound) => sound.Sound === templateName);
   let newSound = { ...template };
+
   fileSounds.rows.push(newSound);
-  fileSounds.rows[index].Sound = name;
+  fileSounds.rows[index].Sound = soundName;
   fileSounds.rows[index]["*Index"] = index;
   fileSounds.rows[index].Channel = sfxChannel;
   fileSounds.rows[index].FileName = sfxFileName;
@@ -1684,8 +1675,6 @@ function addDropSound(nameSuffix, sfxChannel, sfxFileName, sfxRedirect) {
   fileSounds.rows[index].Faloff = 4;
 
   D2RMM.writeTsv(FILE_SOUNDS_PATH, fileSounds);
-
-  return name;
 }
 
 function modifyDropSoundForItems(itemCodes, dropSound) {
@@ -1700,19 +1689,6 @@ function modifyDropSoundForItems(itemCodes, dropSound) {
 
   D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
 }
-
-// function pushDropSoundForItem(itemCode, dropSound) {
-//   const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
-
-//   fileMisc.rows.forEach((row) => {
-//     if (row.code === itemCode) {
-//       row.dropsound = dropSound;
-//       return;
-//     }
-//   });
-
-//   D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
-// }
 
 
 //========================================//
