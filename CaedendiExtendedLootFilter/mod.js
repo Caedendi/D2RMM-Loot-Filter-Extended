@@ -398,40 +398,52 @@ const DS_FRAME_NONE = 0;
 
 // sound names
 const DS_SOUND_ITEM_RUNE = "item_rune";
-const DS_SOUND_HOSTILE = "cursor_hostile";
-const DS_SOUND_HF_PLACE = "quest_hellforge_place";
-const DS_SOUND_HF_SMASH = "quest_hellforge_smash";
-const DS_SOUND_CAIRN_SUCCESS = "cairn_success";
-const DS_SOUND_PORTAL_OPEN = "object_townportal";
-const DS_SOUND_NECRO_SELECT = "cursor_necromancer_select";
-const DS_SOUND_QUEST_DONE = "cursor_questdone";
 
-// redirects
-const DS_REDIRECT_NONE = EMPTY_STRING;
+const DS_SOUND_PREFIX = "celf_";
+const DS_SOUND_NONE = "";
 
 // channels
 const DS_CHANNEL_ITEMS_SD = "sfx/items_sd";
 const DS_CHANNEL_ITEMS_HD = "sfx/items_hd";
 
 // file names
-const DS_FILE_NONE = "none.flac"
+const DS_FILE_CURSOR = "cursor\\";
+const DS_FILE_OBJECT = "object\\";
+const DS_FILE_EXTENSION_FLAC = ".flac";
+const DS_FILE_NONE = `none${DS_FILE_EXTENSION_FLAC}`;
 
 const DS_SOUND_EFFECTS = {
   hostile: {
-    sd: { name: "cursor_hostile",           index: 16,   channel: "sfx/cursor-ui_sd",                   fileName: "cursor\\hostile.flac",                 redirect: "cursor_hostile_hd_1"      },
-    hd: { name: "cursor_hostile_hd_1",      index: 7705, channel: "sfx/cursor-ui_hd",                   fileName: "cursor\\cursor_hostile_1_hd.flac",     redirect: EMPTY_STRING               },
+    sd: `${DS_FILE_CURSOR}hostile${DS_FILE_EXTENSION_FLAC}`,
+    hd: `${DS_FILE_CURSOR}cursor_hostile_1_hd${DS_FILE_EXTENSION_FLAC}`,
   },
   hf_place: {
-    sd: { name: "quest_hellforge_place",    index: 34,   channel: "sfx/ambient/event-3d_sd",            fileName: "object\\hellforgeplace.flac",           redirect: "quest_hellforge_place_hd" },
-    hd: { name: "quest_hellforge_place_hd", index: 4977, channel: "sfx/ambient/event-3d_hd",            fileName: "object\\object_hellforgeplace_hd.flac", redirect: EMPTY_STRING               },
+    sd: `${DS_FILE_OBJECT}hellforgeplace${DS_FILE_EXTENSION_FLAC}`,
+    hd: `${DS_FILE_OBJECT}object_hellforgeplace_hd${DS_FILE_EXTENSION_FLAC}`,
   },
   hf_smash: {
-    sd: { name: "quest_hellforge_smash",    index: 35,   channel: "sfx/ambient/event-3d_sd",            fileName: "object\\hellforgesmash.flac",           redirect: "quest_hellforge_smash_hd" },
-    hd: { name: "quest_hellforge_smash_hd", index: 4978, channel: "sfx/ambient/event-3d_hd",            fileName: "object\\object_hellforgesmash_hd.flac", redirect: EMPTY_STRING               },
+    sd: `${DS_FILE_OBJECT}hellforgesmash${DS_FILE_EXTENSION_FLAC}`,
+    hd: `${DS_FILE_OBJECT}object_hellforgesmash_hd${DS_FILE_EXTENSION_FLAC}`,
   },
-  cairn: {
-    sd: { name: "cairn_success",            index: 418,  channel: "sfx/ambient/environment-objects_sd", fileName: "object\\cairnsuccess.flac",             redirect: "cairn_success_hd"         },
-    hd: { name: "cairn_success_hd",         index: 4922, channel: "sfx/ambient/environment-objects_hd", fileName: "object\\object_cairnsuccess_hd.flac",   redirect: EMPTY_STRING               },
+  cairn_success: {
+    sd: `${DS_FILE_OBJECT}cairnsuccess${DS_FILE_EXTENSION_FLAC}`,
+    hd: `${DS_FILE_OBJECT}object_cairnsuccess_hd${DS_FILE_EXTENSION_FLAC}`,
+  },
+  portal_open: {
+    sd: `${DS_FILE_OBJECT}portalopen${DS_FILE_EXTENSION_FLAC}`,
+    hd: `${DS_FILE_OBJECT}object_portalopen_hd${DS_FILE_EXTENSION_FLAC}`,
+  },
+  quest_done: {
+    sd: `${DS_FILE_CURSOR}questdone${DS_FILE_EXTENSION_FLAC}`,
+    hd: `${DS_FILE_CURSOR}cursor_questdone_1_hd${DS_FILE_EXTENSION_FLAC}`,
+  },
+  none: {
+    sd: DS_FILE_NONE,
+    hd: DS_FILE_NONE,
+  },
+  custom: {
+    sd: DS_FILE_NONE, // Put your custom drop sound here [CSTM-DSND]
+    hd: DS_FILE_NONE, // Put your custom drop sound here [CSTM-DSND]
   },
 };
 
@@ -1302,7 +1314,7 @@ const customItems = {
     
   //===================================================//
   //   Endgame: Pandemonium Event, Tokens & Essences   //
-  //===================================================//
+  //===================================================// 
   customizeEndgameItems(setting){
     switch(setting) {
       case "none": // no change
@@ -1636,49 +1648,127 @@ function pushLightPillarToFile(file) {
 
 function modifyDropSoundForRunes() {
   RUNE_TIERS.forEach((tier) => {
-    if (tier.dropSound === "default" || (config.ShouldDisableDropSoundForHidden && !tier.isVisible)) {
+    if (config.ShouldDisableDropSoundForHidden && !tier.isVisible) {
       return;
     }
-    
+
     let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
-
-    let newSoundNameSd = createSoundName(`rune_tier_${tier.level}`, false);
-    let newSoundNameHd = createSoundName(`rune_tier_${tier.level}`, true);
-    createNewDropSound(DS_SOUND_ITEM_RUNE, newSoundNameSd, DS_CHANNEL_ITEMS_SD, DS_SOUND_EFFECTS[tier.dropSound].sd.fileName, newSoundNameHd);
-    createNewDropSound(DS_SOUND_ITEM_RUNE, newSoundNameHd, DS_CHANNEL_ITEMS_HD, DS_SOUND_EFFECTS[tier.dropSound].hd.fileName, DS_REDIRECT_NONE);
-
-    modifyDropSoundForItems(itemCodes, newSoundSd)
+    modifyDropSoundForMiscItems(itemCodes, `rune_tier_${tier.level}`, tier.dropSound);
   });
 }
 
-function createSoundName(name, isHd = false) {
-  let result = `celf_${name}`;
-  return isHd ? `${result}_hd` : result;
+function modifyDropSoundForQuestItems() {
+  let itemCodesWeapons = [
+    "leg", // Wirt's Leg
+    "hdm", // Horadric Malus
+    "hst", // Horadric Staff
+    "msf", // Staff of Kings
+    "g33", // The Gidbinn
+    "qf1", // Khalim's Flail
+    "qf2", // Khalim's Will
+    "hfh", // Hell Forge Hammer
+  ];
+
+  let itemCodesMisc = [
+    "bks", // Scroll of Inifuss
+    "bkd", // Scroll of Inifuss (deciphered)
+    "tr1", // Horadric Scroll
+    "ass", // Book of Skill
+    "box", // Horadric Cube
+    "vip", // Amulet of the Viper
+    "j34", // A Jade Figurine
+    "g34", // The Golden Bird
+    "xyz", // Potion of Life
+    "bbb", // Lam Esen's Tome
+    "qey", // Khalim's Eye
+    "qhr", // Khalim's Heart
+    "qbr", // Khalim's Brain
+    "mss", // Mephisto's Soulstone
+    "ice", // Malah's Potion
+    "tr2", // Scroll of Resistance
+  ];
+
+  let suffix = "quest";
+  modifyDropSoundForMiscItems(itemCodesMisc, suffix, config.DropSoundQuest);
+  modifyDropSoundForWeapons(itemCodesWeapons, suffix, config.DropSoundQuest);
 }
 
-function createNewDropSound(templateName, soundName, sfxChannel, sfxFileName, sfxRedirect) {
-  const fileSounds = D2RMM.readTsv(FILE_SOUNDS_PATH);
+function modifyDropSoundForEssences() {
+  modifyDropSoundForMiscItems(["tes", "ceh", "bet", "fed"], "essence", config.DropSoundEssences);
+}
+
+function modifyDropSoundForTokens() {
+  modifyDropSoundForMiscItems(["toa"], "token", config.DropSoundToken);
+}
+
+function modifyDropSoundForKeys() {
+  modifyDropSoundForMiscItems(["pk1", "pk2", "pk3"], "key", config.DropSoundKeys);
+}
+
+function modifyDropSoundForOrgans() {
+  modifyDropSoundForMiscItems(["eyz", "brz", "hrn"], "organ", config.DropSoundOrgans);
+}
+
+function modifyDropSoundForStandardOfHeroes() {
+  modifyDropSoundForMiscItems(["std"], "flag", config.DropSoundStandard);
+}
+
+function modifyDropSoundForMiscItems(itemCodes, newNameSuffix, dropSound) {
+  modifyDropSoundForItems(FILE_MISC_PATH, itemCodes, newNameSuffix, dropSound);
+}
+
+function modifyDropSoundForWeapons(itemCodes, newNameSuffix, dropSound) {
+  modifyDropSoundForItems(FILE_WEAPONS_PATH, itemCodes, newNameSuffix, dropSound);
+}
+
+// master dropsound function:
+// - check if set dropSound is not default
+// - create a new SD and HD dropsound pair in sounds.txt with the right settings
+// - link the newly created dropsound to the right items
+function modifyDropSoundForItems(filePath, itemCodes, newNameSuffix, dropSound) {
+  if (dropSound === "default") {
+    return;
+  }
   
-  let index = fileSounds.rows.length;
-  let template = fileSounds.rows.find((sound) => sound.Sound === templateName);
-  let newSound = { ...template };
+  let newSoundName = createNewDropSound(newNameSuffix, DS_SOUND_EFFECTS[dropSound]);
+  pushNewDropSoundToItems(filePath, itemCodes, newSoundName);
+}
 
+// create SD and HD sound, redirect SD to HD
+function createNewDropSound(soundNameSuffix, sfxFileNames) {
+  let soundNameSd = `${DS_SOUND_PREFIX}${soundNameSuffix}`;
+  let soundNameHd = `${soundNameSd}_hd`;
+  
+  pushSound(soundNameSd, DS_SOUND_ITEM_RUNE, DS_CHANNEL_ITEMS_SD, sfxFileNames.sd, soundNameHd);
+  pushSound(soundNameHd, DS_SOUND_ITEM_RUNE, DS_CHANNEL_ITEMS_HD, sfxFileNames.hd, DS_SOUND_NONE);
+
+  return soundNameSd;
+}
+
+// create new entry in sounds.txt
+function pushSound(soundName, template, sfxChannel, sfxFileName, sfxRedirect) {
+  const fileSounds = D2RMM.readTsv(FILE_SOUNDS_PATH);
+
+  let newSound = { ...(fileSounds.rows.find((sound) => sound.Sound === template)) }; // create deep copy
+  newSound.Sound = soundName;
+  newSound["*Index"] = fileSounds.rows.length;
+  newSound.Channel = sfxChannel;
+  newSound.FileName = sfxFileName;
+  newSound.Redirect = sfxRedirect;
+  newSound["Volume Min"] = 255;
+  newSound["Volume Max"] = 255;
+  newSound.Priority = 255;
+  newSound["Stop Inst"] = 0;
+  newSound["Defer Inst"] = 0;
+  newSound.Falloff = 4;
   fileSounds.rows.push(newSound);
-  fileSounds.rows[index].Sound = soundName;
-  fileSounds.rows[index]["*Index"] = index;
-  fileSounds.rows[index].Channel = sfxChannel;
-  fileSounds.rows[index].FileName = sfxFileName;
-  fileSounds.rows[index].Redirect = sfxRedirect;
-  fileSounds.rows[index].Priority = 255;
-  fileSounds.rows[index]["Stop Inst"] = 0;
-  fileSounds.rows[index]["Defer Inst"] = 0;
-  fileSounds.rows[index].Faloff = 4;
-
+  
   D2RMM.writeTsv(FILE_SOUNDS_PATH, fileSounds);
 }
 
-function modifyDropSoundForItems(itemCodes, dropSound) {
-  const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
+// give items in filePath with corresponding itemCodes the newly created dropSound in sounds.txt
+function pushNewDropSoundToItems(filePath, itemCodes, dropSound) {
+  const fileMisc = D2RMM.readTsv(filePath);
 
   fileMisc.rows.forEach((row) => {
     if (itemCodes.indexOf(row.code) !== -1) {
@@ -1687,7 +1777,7 @@ function modifyDropSoundForItems(itemCodes, dropSound) {
     }
   });
 
-  D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
+  D2RMM.writeTsv(filePath, fileMisc);
 }
 
 
@@ -1887,6 +1977,12 @@ function applyDropSounds() {
   }
 
   modifyDropSoundForRunes();
+  modifyDropSoundForQuestItems();
+  modifyDropSoundForEssences();
+  modifyDropSoundForTokens();
+  modifyDropSoundForKeys();
+  modifyDropSoundForOrgans();
+  modifyDropSoundForStandardOfHeroes();
 }
 
 

@@ -427,7 +427,7 @@
       "id": "IsDropSoundsEnabled",
       "type": "checkbox",
       "name": "Enable",
-      "description": "Enable custom drop sounds on the item types toggled below.",
+      "description": "Enable custom drop sounds on the item types toggled below. [CSTM-DSND]",
       "defaultValue": false
     },
     {
@@ -441,17 +441,16 @@
       "id": "DropSoundRunesLow",
       "type": "select",
       "name": "Runes: Low",
-      "description": "Sound effect to use for enabled item types.",
+      "description": "Select a custom drop sound for Low Runes.",
       "defaultValue": "default",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
         { "label": "Hell Forge Place", "value": "hf_place" },
         { "label": "Hell Forge Smash", "value": "hf_smash" },
-        { "label": "Cairn Success", "value": "cairn" },
-        { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
-        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -459,17 +458,16 @@
       "id": "DropSoundRunesLowMid",
       "type": "select",
       "name": "Runes: Low-Mid",
-      "description": "Sound effect to use for enabled item types.",
+      "description": "Select a custom drop sound for Low-Mid Runes.",
       "defaultValue": "default",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
         { "label": "Hell Forge Place", "value": "hf_place" },
         { "label": "Hell Forge Smash", "value": "hf_smash" },
-        { "label": "Cairn Success", "value": "cairn" },
-        { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
-        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -477,17 +475,16 @@
       "id": "DropSoundRunesMid",
       "type": "select",
       "name": "Runes: Mid",
-      "description": "Sound effect to use for enabled item types.",
-      "defaultValue": "hostile",
+      "description": "Select a custom drop sound for Mid Runes.",
+      "defaultValue": "hf_place",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
         { "label": "Hell Forge Place", "value": "hf_place" },
         { "label": "Hell Forge Smash", "value": "hf_smash" },
-        { "label": "Cairn Success", "value": "cairn" },
-        { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
-        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -495,78 +492,120 @@
       "id": "DropSoundRunesHigh",
       "type": "select",
       "name": "Runes: High",
-      "description": "Sound effect to use for enabled item types.",
-      "defaultValue": "hostile",
+      "description": "Select a custom drop sound for High Runes.",
+      "defaultValue": "hf_place",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
         { "label": "Hell Forge Place", "value": "hf_place" },
         { "label": "Hell Forge Smash", "value": "hf_smash" },
-        { "label": "Cairn Success", "value": "cairn" },
-        { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
-        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
         { "label": "Custom", "value": "custom" }
       ]
     },
     {
-      "id": "DropSound",
+      "id": "DropSoundQuest",
       "type": "select",
-      "name": "Drop Sound",
-      "description": "Sound effect to use for enabled item types.",
-      "defaultValue": "cursor_hostile",
+      "name": "Quest Items",
+      "description": "Select a custom drop sound for Quest Items.",
+      "defaultValue": "hf_smash",
       "options": [
-        { "label": "Hostile (PVP)", "value": "cursor_hostile" },
-        { "label": "Cairn Success", "value": "cairn_success" },
-        { "label": "Town Portal", "value": "object_townportal" },
-        { "label": "Hell Forge Smash", "value": "quest_hellforge_smash" },
-        { "label": "Hell Forge Place", "value": "quest_hellforge_place" },
-        { "label": "Necromancer Select", "value": "cursor_necromancer_select" },
-        { "label": "Quest Done", "value": "cursor_questdone" },
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
         { "label": "Custom", "value": "custom" }
       ]
     },
     {
-      "id": "ShouldChangeDropSoundQuest",
-      "type": "checkbox",
-      "name": "Quest Items",
-      "description": "Enable custom drop sound for Quest Items.",
-      "defaultValue": false
-    },
-    {
-      "id": "ShouldChangeDropSoundEssences",
-      "type": "checkbox",
+      "id": "DropSoundEssences",
+      "type": "select",
       "name": "Essences",
-      "description": "Enable custom drop sound for Essences.",
-      "defaultValue": false
+      "description": "Select a custom drop sound for Essences.",
+      "defaultValue": "default",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
+        { "label": "Custom", "value": "custom" }
+      ]
     },
     {
-      "id": "ShouldChangeDropSoundTokens",
-      "type": "checkbox",
+      "id": "DropSoundToken",
+      "type": "select",
       "name": "Token of Absolution",
-      "description": "Enable custom drop sound for Tokens of Absolution.",
-      "defaultValue": false
+      "description": "Select a custom drop sound for Tokens of Absolution.",
+      "defaultValue": "default",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
+        { "label": "Custom", "value": "custom" }
+      ]
     },
     {
-      "id": "ShouldChangeDropSoundKeys",
-      "type": "checkbox",
+      "id": "DropSoundKeys",
+      "type": "select",
       "name": "Pandemonium Keys",
-      "description": "Enable custom drop sound for Keys of Terror/Hate/Destruction.",
-      "defaultValue": false
+      "description": "Select a custom drop sound for Über Keys.",
+      "defaultValue": "hf_smash",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
+        { "label": "Custom", "value": "custom" }
+      ]
     },
     {
-      "id": "ShouldChangeDropSoundOrgans",
-      "type": "checkbox",
+      "id": "DropSoundOrgans",
+      "type": "select",
       "name": "Pandemonium Organs",
-      "description": "Enable custom drop sound for Über Organs.",
-      "defaultValue": false
+      "description": "Select a custom drop sound for Über Organs.",
+      "defaultValue": "hf_smash",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
+        { "label": "Custom", "value": "custom" }
+      ]
     },
     {
-      "id": "ShouldChangeDropSoundStandardOfHeroes",
-      "type": "checkbox",
+      "id": "DropSoundStandard",
+      "type": "select",
       "name": "Standard of Heroes",
-      "description": "Enable custom drop sound for the Standard of Heroes.",
-      "defaultValue": false
+      "description": "Select a custom drop sound for the Standard of Heroes.",
+      "defaultValue": "hf_smash",
+      "options": [
+        { "label": "Default", "value": "default" },
+        { "label": "Hostile (PVP)", "value": "hostile" },
+        { "label": "Hell Forge Place", "value": "hf_place" },
+        { "label": "Hell Forge Smash", "value": "hf_smash" },
+        { "label": "Cairn Stones Success", "value": "cairn_success" },
+        { "label": "Town Portal Open", "value": "portal_open" },
+        { "label": "Quest Done", "value": "quest_done" },
+        { "label": "Custom", "value": "custom" }
+      ]
     },
     {
       "id": "MiscSection",
