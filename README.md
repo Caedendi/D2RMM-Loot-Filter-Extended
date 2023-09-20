@@ -249,6 +249,25 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |    x    | Pandemonium Keys                                                |
 |                            |                                      |    x    | Pandemonium Organs                                              |
 |                            |                                      |    x    | Standard of Heroes                                              |
+|      **Drop Sounds**       |              **Enable**              |    x    | On/Off                                                          |
+|                            |     **Disable for Hidden Items**     |    x    | On/Off                                                          |
+|                            |            **Runes: Low**            |    x    | Default                                                         |
+|                            |                                      |         | Hostile (PVP)                                                   |
+|                            |                                      |         | Hell Forge Place                                                |
+|                            |                                      |         | Hell Forge Smash                                                |
+|                            |                                      |         | Cairn Stones Success                                            |
+|                            |                                      |         | Town Portal Open                                                |
+|                            |                                      |         | Quest Done                                                      |
+|                            |                                      |         | Custom                                                          |
+|                            |          **Runes: Low-Mid**          |         | See "Runes: Low" (default: Default)                             |
+|                            |            **Runes: Mid**            |         | See "Runes: Low" (default: Hell Forge Place)                    |
+|                            |           **Runes: High**            |         | See "Runes: Low" (default: Hell Forge Place)                    |
+|                            |           **Quest Items**            |         | See "Runes: Low" (default: Hell Forge Smash)                    |
+|                            |             **Essences**             |         | See "Runes: Low" (default: Default)                             |
+|                            |       **Token of Absolution**        |         | See "Runes: Low" (default: Default)                             |
+|                            |         **Pandemonium Keys**         |         | See "Runes: Low" (default: Hell Forge Smash)                    |
+|                            |        **Pandemonium Organs**        |         | See "Runes: Low" (default: Hell Forge Smash)                    |
+|                            |        **Standard of Heroes**        |         | See "Runes: Low" (default: Quest Done)                          |
 |          **Misc**          |     **Alternate Color Schemes**      |         | No change                                                       |
 |                            |                                      |         | Facets, Sunder Charms, Runes                                    |
 |                            |                                      |    x    | Facets, Sunder Charms                                           |
@@ -314,7 +333,10 @@ See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Do
 
 ## Roadmap
 
-None at the moment. If you have a request for a feature, please open a GitHub issue (preferred) or post a comment on Nexus Mods.
+- Multi-line tooltips (both empty or with highlight patterns)
+- Charm coloring including size (prevents discerning rarities on unidentified Charms)
+- Jewel coloring (prevents discerning rarities on unidentified Jewels)
+
 
 ### Fix known bugs
 
@@ -324,6 +346,7 @@ None at the moment. If you have a request for a feature, please open a GitHub is
 - [x] Enabling jewelry turns crafted/rare/set/unique jewelry blue
 - [x] Item name alignment out of place when [Show Item Level](https://www.nexusmods.com/diablo2resurrected/mods/174) is enabled
 - [x] Tooltip mods not working
+
 
 ### Add features
 
