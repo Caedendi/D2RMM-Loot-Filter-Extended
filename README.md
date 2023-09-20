@@ -67,6 +67,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 ### 2.2.0
 
 - Introducing Drop Sounds! Configure new sound effects for when select item types drop so you'll never miss one again!
+- For those running Custom filter options: all colors have been renamed to more standardized names (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
 - Added option to disable _all_ Light Pillars
 - Added customization of the Gold amount color _(in addition to the already implemented suffix customization)_
 - Added customization of the highlight color (can now be set to colors other than tomato red)
@@ -74,7 +75,6 @@ If you'd rather have a compact list to act as a template for your own naming sch
 - Split runes into 4 tiers, each of which you can individually enable/disable visibility, Light Pillars and Drop Sounds for
 - Changed the Light Pillars setting for Quest Weapons from "exclude" to "include" 
 - Slightly changed some existing setting names and tooltips
-- Code: renamed colors to more standardized names (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
 
 ### 2.1.1
 

@@ -2,12 +2,15 @@
 https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md
 
 ## Description
-This file contains an overview of all the colors in the game that I know of. 
+This file contains an overview of all the colors in the game that I know of. I have tried naming them according to the HTML color they most closely match (though some are not really close).
 
-I have tried naming them according to the HTML color they most closely match (though some are far from close).
+To view the actual colors, either:
+- Open this file in [VSCodium](https://vscodium.com/) ([GitHub](https://github.com/VSCodium/vscodium)) with the [Markdown Preview Mermaid Support](https://open-vsx.org/extension/bierner/markdown-mermaid) extension by [bierner](https://open-vsx.org/namespace/bierner)
+- Paste this file's contents into [this](https://codebeautify.org/markdown-viewer) online markdown viewer
 
 
 ## Overview
+
 * Character: used in D2RMM code
 * Name: the color name in the code
 * Color: the RGB decimal code for this color

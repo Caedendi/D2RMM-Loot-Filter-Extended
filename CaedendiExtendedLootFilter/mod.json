@@ -19,7 +19,7 @@
       "defaultValue": "wg",
       "options": [
         { "label": "Default", "value": "none" },
-        { "label": "Gold", "value": "g" },
+        { "label": "All Gold", "value": "g" },
         { "label": "White amount, gold suffix", "value": "wg" },
         { "label": "Gold amount, white suffix", "value": "gw" },
         { "label": "Custom", "value": "custom" }
