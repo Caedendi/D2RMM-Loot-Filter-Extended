@@ -428,7 +428,7 @@
       "type": "checkbox",
       "name": "Enable",
       "description": "Enable custom drop sounds on the item types toggled below. [CSTM-DSND]",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "id": "ShouldDisableDropSoundForHidden",
@@ -476,7 +476,7 @@
       "type": "select",
       "name": "Runes: Mid",
       "description": "Select a custom drop sound for Mid Runes.",
-      "defaultValue": "hf_place",
+      "defaultValue": "hostile",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
@@ -493,7 +493,7 @@
       "type": "select",
       "name": "Runes: High",
       "description": "Select a custom drop sound for High Runes.",
-      "defaultValue": "hf_place",
+      "defaultValue": "hostile",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
@@ -510,7 +510,7 @@
       "type": "select",
       "name": "Quest Items",
       "description": "Select a custom drop sound for Quest Items.",
-      "defaultValue": "hf_smash",
+      "defaultValue": "default",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
@@ -595,7 +595,7 @@
       "type": "select",
       "name": "Standard of Heroes",
       "description": "Select a custom drop sound for the Standard of Heroes.",
-      "defaultValue": "hf_smash",
+      "defaultValue": "quest_done",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },

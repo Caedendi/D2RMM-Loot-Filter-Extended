@@ -233,22 +233,22 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                      |         | Prefix, parentheses                                             |
 |                            |                                      |         | Prefix, square brackets                                         |
 |                            |                                      |         | Custom                                                          |
-|     **Light Pillars**      |          **Light Pillars**           |    x    | Enable                                                          |
-|                            |                                      |    x    | Disable for Hidden Items                                        |
-|                            |                                      |    x    | Runes: Low                                                      |
-|                            |                                      |    x    | Runes: Low-Mid                                                  |
-|                            |                                      |    x    | Runes: Mid                                                      |
-|                            |                                      |    x    | Runes: High                                                     |
-|                            |                                      |    x    | Rings & Amulets                                                 |
-|                            |                                      |    x    | Gems & Jewels                                                   |
-|                            |                                      |    x    | Charms                                                          |
-|                            |                                      |    x    | Quest: Items                                                    |
-|                            |                                      |    x    | Quest: Weapons                                                  |
-|                            |                                      |    x    | Essences                                                        |
-|                            |                                      |    x    | Token of Absolution                                             |
-|                            |                                      |    x    | Pandemonium Keys                                                |
-|                            |                                      |    x    | Pandemonium Organs                                              |
-|                            |                                      |    x    | Standard of Heroes                                              |
+|     **Light Pillars**      |              **Enable**              |    x    | On/Off                                                          |
+|                            |     **Disable for Hidden Items**     |    x    | On/Off                                                          |
+|                            |            **Runes: Low**            |    x    | On/Off                                                          |
+|                            |          **Runes: Low-Mid**          |    x    | On/Off                                                          |
+|                            |            **Runes: Mid**            |    x    | On/Off                                                          |
+|                            |           **Runes: High**            |    x    | On/Off                                                          |
+|                            |         **Rings & Amulets**          |    x    | On/Off                                                          |
+|                            |          **Gems & Jewels**           |    x    | On/Off                                                          |
+|                            |              **Charms**              |    x    | On/Off                                                          |
+|                            |           **Quest: Items**           |    x    | On/Off                                                          |
+|                            |          **Quest: Weapons**          |    x    | On/Off                                                          |
+|                            |             **Essences**             |    x    | On/Off                                                          |
+|                            |       **Token of Absolution**        |    x    | On/Off                                                          |
+|                            |         **Pandemonium Keys**         |    x    | On/Off                                                          |
+|                            |        **Pandemonium Organs**        |    x    | On/Off                                                          |
+|                            |        **Standard of Heroes**        |    x    | On/Off                                                          |
 |      **Drop Sounds**       |              **Enable**              |    x    | On/Off                                                          |
 |                            |     **Disable for Hidden Items**     |    x    | On/Off                                                          |
 |                            |            **Runes: Low**            |    x    | Default                                                         |
