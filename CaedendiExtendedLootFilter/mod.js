@@ -1314,7 +1314,7 @@ const customItems = {
     
   //===================================================//
   //   Endgame: Pandemonium Event, Tokens & Essences   //
-  //===================================================// 
+  //===================================================//
   customizeEndgameItems(setting){
     switch(setting) {
       case "none": // no change
@@ -1870,9 +1870,10 @@ function applyItemLevel() {
   const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
 
   fileWeapons.rows.forEach((row) => {
-    if (row.type !== "tpot") { // exclude throwing potions
-      row.ShowLevel = 1;
+    if (row.type === "tpot") { // exclude throwing potions
+      return;
     }
+    row.ShowLevel = 1;
   });
   
   fileArmor.rows.forEach((row) => {
