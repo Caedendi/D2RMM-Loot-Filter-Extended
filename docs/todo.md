@@ -12,9 +12,3 @@
   - [ ] whitespace only
   - [ ] highlight pattern + whitespace above/below
   - [ ] Pick Up
-- [ ] Charms:
-  - [ ] partially red (show rarity)
-  - [ ] full red (no rarity)
-- [ ] Jewels:
-  - [ ] partially red (show rarity)
-  - [ ] full red (no rarity)
