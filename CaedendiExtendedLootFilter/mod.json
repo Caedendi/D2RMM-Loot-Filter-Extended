@@ -19,7 +19,7 @@
       "defaultValue": "wg",
       "options": [
         { "label": "Default", "value": "none" },
-        { "label": "All Gold", "value": "g" },
+        { "label": "All gold", "value": "g" },
         { "label": "White amount, gold suffix", "value": "wg" },
         { "label": "Gold amount, white suffix", "value": "gw" },
         { "label": "Custom", "value": "custom" }
@@ -302,7 +302,7 @@
     {
       "id": "EthItemsColor",
       "type": "select",
-      "name": "Ethereal Items Color",
+      "name": "Ethereal Items Tooltip Color",
       "description": "Customize the color of Ethereal items to better discern them from socketed items. [CSTM-ETH]",
       "defaultValue": "none",
       "options": [
@@ -780,7 +780,7 @@
       "type": "number",
       "minValue": 0,
       "maxValue": 1,
-      "name": "Tooltip: opacity",
+      "name": "Tooltip mods: opacity",
       "description": "Set the tooltip background opacity (unmodded = 0.6).",
       "defaultValue": 0.75
     },
@@ -789,7 +789,7 @@
       "type": "number",
       "minValue": 20,
       "maxValue": 50,
-      "name": "Tooltip: font size",
+      "name": "Tooltip mods: font size",
       "description": "Set the tooltip font size (unmodded = 36).",
       "defaultValue": 33
     }
