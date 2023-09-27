@@ -272,6 +272,21 @@
       ]
     },
     {
+      "id": "ItemQuality",
+      "type": "select",
+      "name": "Item Quality",
+      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix indentation if Item Level is enabled. [CSTM-QLTY]",
+      "defaultValue": "none",
+      "options": [
+        { "label": "Disable", "value": "none" },
+        { "label": "Suffix, parentheses", "value": "suf-par" },
+        { "label": "Suffix, square brackets", "value": "suf-bts" },
+        { "label": "Prefix, parentheses", "value": "pre-par" },
+        { "label": "Prefix, square brackets", "value": "pre-bts" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
       "id": "ShortSupInferiorPrefixes",
       "type": "select",
       "name": "Short Superior/Inferior Prefixes",
@@ -285,17 +300,25 @@
       ]
     },
     {
-      "id": "ItemQuality",
+      "id": "EthItemsColor",
       "type": "select",
-      "name": "Item Quality",
-      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix indentation if Item Level is enabled. [CSTM-QLTY]",
+      "name": "Ethereal Items Color",
+      "description": "Customize the color of Ethereal items to better discern them from socketed items. [CSTM-ETH]",
       "defaultValue": "none",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Suffix, parentheses", "value": "suf-par" },
-        { "label": "Suffix, square brackets", "value": "suf-bts" },
-        { "label": "Prefix, parentheses", "value": "pre-par" },
-        { "label": "Prefix, square brackets", "value": "pre-bts" },
+        { "value": "Beige", "label": "Beige" },
+        { "value": "Black", "label": "Black" },
+        { "value": "DarkGreen", "label": "Dark Green" },
+        { "value": "Green", "label": "Green" },
+        { "value": "LightBlue", "label": "Light Blue" },
+        { "value": "LightGray", "label": "Light Gray" },
+        { "value": "LightPurple", "label": "Light Purple" },
+        { "value": "LightRed", "label": "Light Red" },
+        { "value": "LightTeal", "label": "Light Teal" },
+        { "value": "Red", "label": "Red" },
+        { "value": "VeryLightGray", "label": "Very Light Gray" },
+        { "value": "White", "label": "White" },
         { "label": "Custom", "value": "custom" }
       ]
     },
@@ -476,7 +499,7 @@
       "type": "select",
       "name": "Runes: Mid",
       "description": "Select a custom drop sound for Mid Runes.",
-      "defaultValue": "hostile",
+      "defaultValue": "hf_place",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
@@ -493,7 +516,7 @@
       "type": "select",
       "name": "Runes: High",
       "description": "Select a custom drop sound for High Runes.",
-      "defaultValue": "hostile",
+      "defaultValue": "hf_place",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },
@@ -510,7 +533,7 @@
       "type": "select",
       "name": "Quest Items",
       "description": "Select a custom drop sound for Quest Items.",
-      "defaultValue": "default",
+      "defaultValue": "hf_smash",
       "options": [
         { "label": "Default", "value": "default" },
         { "label": "Hostile (PVP)", "value": "hostile" },

@@ -91,6 +91,22 @@ const GOLD      = CLR_TAN;
 const PURPLE    = CLR_DARK_VIOLET;
 const PINK      = CLR_VIOLET;
 
+// _profilehd.json colors
+const PHD_COLORS = {
+  Beige:         '$FontColorBeige',
+  Black:         '$FontColorBlack',
+  DarkGreen:     '$FontColorDarkGreen',
+  Green:         '$FontColorGreen',
+  LightBlue:     '$FontColorLightBlue',
+  LightGray:     '$FontColorLightGray',
+  LightPurple:   '$FontColorLightPurple',
+  LightRed:      '$FontColorLightRed',
+  LightTeal:     '$FontColorLightTeal',
+  Red:           '$FontColorRed',
+  VeryLightGray: '$FontColorVeryLightGray',
+  White:         '$FontColorWhite',
+};
+
 
 //=========================//
 //   Parameters - Global   //
@@ -1993,11 +2009,16 @@ function applyDropSounds() {
 //==================================================//
 
 function applyProfileHdMods() {
-  applyCustomGoldColor(config.GoldAmount);
-  applyTooltipMods(config.Tooltip, config.TooltipOpacity, config.TooltipSize);
+  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
+
+  applyCustomGoldColor(profileHD, config.GoldAmount);
+  applyCustomEtherealColor(profileHD, config.EthItemsColor);
+  applyTooltipMods(profileHD, config.Tooltip, config.TooltipOpacity, config.TooltipSize);
+  
+  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
 }
 
-function applyCustomGoldColor(setting) {
+function applyCustomGoldColor(profileHD, setting) {
   if (setting === "none" || setting === "wg") {
     return;
   }
@@ -2012,23 +2033,27 @@ function applyCustomGoldColor(setting) {
       goldColor = "$FontColorCurrencyGold";
       break;
     case "custom":
-      goldColor = "FontColorLightTeal";
+      goldColor = "$FontColorLightTeal";
       break;
   }
   
-  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
   profileHD.TooltipStyle.GoldColor = goldColor;
-  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
 }
 
-function applyTooltipMods(setting, opacity, tooltipSize) {
+function applyCustomEtherealColor(profileHD, setting) {
   if (setting === "none") {
     return;
   }
 
-  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
-  let bgColor = [0, 0, 0, opacity]; // [R, G, B, opacity]
+  profileHD.TooltipStyle.EtherealColor = (setting !== "custom") ? PHD_COLORS[setting] : "$FontColorLightTeal"; // [CSTM-ETH] change $FontColorLightTeal into any color variable in _profilehd.json
+}
 
+function applyTooltipMods(profileHD, setting, opacity, tooltipSize) {
+  if (setting === "none") {
+    return;
+  }
+
+  let bgColor = [0, 0, 0, opacity]; // [R, G, B, opacity]
   switch (setting) {
     case "all":
       profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
@@ -2041,8 +2066,6 @@ function applyTooltipMods(setting, opacity, tooltipSize) {
       profileHD.TooltipFontSize = tooltipSize;
       break;
   }
-  
-  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
 }
 
 
