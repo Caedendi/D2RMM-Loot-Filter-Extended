@@ -357,6 +357,7 @@ See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Do
   - [ ] whitespace only
   - [ ] highlight pattern + whitespace above/below
   - [ ] Colored "Pick Up" text above item name
+- [ ] Custom weapon/armor filter list (as suggested by [Stealan88](https://www.nexusmods.com/users/181188678))
 
 
 ### Fix known bugs
