@@ -37,7 +37,7 @@
         { "label": "Hide suffix", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
-    }, 
+    },
     {
       "id": "Runes",
       "type": "select",
@@ -60,28 +60,28 @@
       "id": "ShouldShowRunesLow",
       "type": "checkbox",
       "name": "Show Runes: Low",
-      "description": "Show Low Runes (El [1] - Dol [14], except Ral [8])",
+      "description": "Show Low Runes (El [1] - Dol [14], except Ral [8]).",
       "defaultValue": true
     },
     {
       "id": "ShouldShowRunesLowMid",
       "type": "checkbox",
       "name": "Show Runes: Low-Mid",
-      "description": "Show Low-Mid Runes (Hel [15] - Fal [19] and Ral [8])",
+      "description": "Show Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
       "defaultValue": true
     },
     {
       "id": "ShouldShowRunesMid",
       "type": "checkbox",
       "name": "Show Runes: Mid",
-      "description": "Show Mid Runes (Lem [20] - Gul [25])",
+      "description": "Show Mid Runes (Lem [20] - Gul [25]).",
       "defaultValue": true
     },
     {
       "id": "ShouldShowRunesHigh",
       "type": "checkbox",
       "name": "Show Runes: High",
-      "description": "Show High Runes (Vex [26] - Zod [33])",
+      "description": "Show High Runes (Vex [26] - Zod [33]).",
       "defaultValue": true
     },
     {
@@ -254,6 +254,26 @@
       ]
     },
     {
+      "id": "WeaponsArmorSection",
+      "type": "section",
+      "name": "Weapons & Armor",
+      "defaultExpanded": false
+    },
+    {
+      "id": "ShouldFilterWeapons",
+      "type": "checkbox",
+      "name": "Use Personal Weapon Filter List",
+      "description": "Use the personal filter list for weapons. Searches weapons.txt for the provided item codes and changes the base item names. Use at your own risk. [CSTM-WEP]",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldFilterArmor",
+      "type": "checkbox",
+      "name": "Use Personal Armor Filter List",
+      "description": "Use the personal filter list for armor. Searches armor.txt for the provided item codes and changes the base item names. Use at your own risk. [CSTM-ARM]",
+      "defaultValue": false
+    },
+    {
       "id": "ItemStatsModifiersSection",
       "type": "section",
       "name": "Item Stats & Modifiers",
@@ -346,28 +366,28 @@
       "id": "ShouldAddLightPillarRunesLow",
       "type": "checkbox",
       "name": "Runes: Low",
-      "description": "Shine a Light Pillar on Low Runes on the ground (El-Dol, excluding Ral).",
+      "description": "Shine a Light Pillar on Low Runes on the ground (El [1] - Dol [14], except Ral [8]).",
       "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRunesLowMid",
       "type": "checkbox",
       "name": "Runes: Low-Mid",
-      "description": "Shine a Light Pillar on Low-Mid Runes on the ground (Ral, Hel-Fal).",
+      "description": "Shine a Light Pillar on Low-Mid Runes on the ground (Hel [15] - Fal [19] and Ral [8]).",
       "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRunesMid",
       "type": "checkbox",
       "name": "Runes: Mid",
-      "description": "Shine a Light Pillar on Mid Runes on the ground (Lem-Gul).",
+      "description": "Shine a Light Pillar on Mid Runes on the ground (Lem [20] - Gul [25]).",
       "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRunesHigh",
       "type": "checkbox",
       "name": "Runes: High",
-      "description": "Shine a Light Pillar on High Runes on the ground (Vex-Zod).",
+      "description": "Shine a Light Pillar on High Runes on the ground (Vex [26] - Zod [33]).",
       "defaultValue": true
     },
     {
@@ -464,7 +484,7 @@
       "id": "DropSoundRunesLow",
       "type": "select",
       "name": "Runes: Low",
-      "description": "Select a custom drop sound for Low Runes.",
+      "description": "Select a custom drop sound for Low Runes (El [1] - Dol [14], except Ral [8]).",
       "defaultValue": "default",
       "options": [
         { "label": "Default", "value": "default" },
@@ -481,7 +501,7 @@
       "id": "DropSoundRunesLowMid",
       "type": "select",
       "name": "Runes: Low-Mid",
-      "description": "Select a custom drop sound for Low-Mid Runes.",
+      "description": "Select a custom drop sound for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
       "defaultValue": "default",
       "options": [
         { "label": "Default", "value": "default" },
@@ -498,7 +518,7 @@
       "id": "DropSoundRunesMid",
       "type": "select",
       "name": "Runes: Mid",
-      "description": "Select a custom drop sound for Mid Runes.",
+      "description": "Select a custom drop sound for Mid Runes (Lem [20] - Gul [25]).",
       "defaultValue": "hf_place",
       "options": [
         { "label": "Default", "value": "default" },
@@ -515,7 +535,7 @@
       "id": "DropSoundRunesHigh",
       "type": "select",
       "name": "Runes: High",
-      "description": "Select a custom drop sound for High Runes.",
+      "description": "Select a custom drop sound for High Runes (Vex [26] - Zod [33]).",
       "defaultValue": "hf_place",
       "options": [
         { "label": "Default", "value": "default" },
@@ -532,7 +552,7 @@
       "id": "DropSoundQuest",
       "type": "select",
       "name": "Quest Items",
-      "description": "Select a custom drop sound for Quest Items.",
+      "description": "Select a custom drop sound for Quest Items. The Horadric Cube is disabled by default since it already has a unique sound effect. To enable, search [CSTM_DSBOX] and uncomment the line.",
       "defaultValue": "hf_smash",
       "options": [
         { "label": "Default", "value": "default" },

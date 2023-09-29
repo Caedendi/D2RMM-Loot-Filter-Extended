@@ -1395,6 +1395,48 @@ const customItems = {
   },
 };
 
+const customWeapons = {
+  items: {},
+  
+  customizeWeapons(settingWeapons) {
+    // const AMAZING_COLOR_NAME   = PURPLE;
+    // const AMAZING_COLOR_PATTERN = RED;
+    // const AMAZING_PATTERN = PATTERN_3x10;
+    // const AMAZING_PADDING = PADDING_5;
+
+    if (settingWeapons) { // [CSTM-WEP]
+      // ADD YOUR CUSTOM ITEM NAMES HERE
+
+      // examples
+      // this.items["jav"] = HIDDEN;                                // Javelin, hide
+      // this.items["jav"] = `${BLACK}${this.items["jav"]}`;        // Javelin, color name black
+      // this.items["7gw"] = `${BLACK}${this.items["7gw"]}${BLUE}`; // Unearthed Wand, color name red
+      // this.items["7gw"] = ILVL_INDENT_FIX_DOUBLE + generateDoubleHighlight(AMAZING_COLOR_PATTERN, AMAZING_PATTERN, AMAZING_PADDING, AMAZING_COLOR_NAME, this.items["ci3"]); // Unearthed Wand, highlight
+    }
+  },
+};
+
+const customArmor = {
+  items: {},
+
+  customizeArmor(settingArmor) {
+    // const AMAZING_COLOR_NAME   = PURPLE;
+    // const AMAZING_COLOR_PATTERN = RED;
+    // const AMAZING_PATTERN = PATTERN_3x10;
+    // const AMAZING_PADDING = PADDING_5;
+
+    if (settingArmor) { // [CSTM-ARM]
+      // ADD YOUR CUSTOM ITEM NAMES HERE
+
+      // examples
+      // this.items["skp"] = HIDDEN;                              // Skull Cap, hide
+      // this.items["skp"] = `${BLACK}${this.items["skp"]}`;      // Skull Cap, color name black
+      // this.items["ci3"] = `${RED}${this.items["ci3"]}${BLUE}`; // Diadem, color name red
+      // this.items["ci3"] = ILVL_INDENT_FIX_DOUBLE + generateDoubleHighlight(AMAZING_COLOR_PATTERN, AMAZING_PATTERN, AMAZING_PADDING, AMAZING_COLOR_NAME, this.items["ci3"]); // Diadem, highlight
+    }
+  },
+};
+
 const customUi = {
   items: {},
 
@@ -1690,7 +1732,7 @@ function modifyDropSoundForQuestItems(soundsFile) {
     "bkd", // Scroll of Inifuss (deciphered)
     "tr1", // Horadric Scroll
     "ass", // Book of Skill
-    "box", // Horadric Cube
+    // "box", // Horadric Cube [CSTM_DSBOX]
     "vip", // Amulet of the Viper
     "j34", // A Jade Figurine
     "g34", // The Golden Bird
@@ -1776,6 +1818,7 @@ function pushSound(soundsFile, soundName, template, sfxChannel, sfxFileName, sfx
   newSound["Stop Inst"] = 0;
   newSound["Defer Inst"] = 0;
   newSound.Falloff = 4;
+  
   soundsFile.rows.push(newSound);
 }
 
@@ -1834,6 +1877,16 @@ function applyCustomItemNames() {
   customItems.customizeEndgameItems(config.Endgame);
 
   applyCustomNames(FILE_ITEM_NAMES_PATH, customItems.items);
+}
+
+function applyCustomWeaponNames() {
+  customWeapons.customizeWeapons(config.ShouldFilterWeapons);
+  applyCustomNames(FILE_WEAPONS_PATH, customWeapons.items)
+}
+
+function applyCustomArmorNames() {
+  customArmor.customizeArmor(config.ShouldFilterArmor);
+  applyCustomNames(FILE_WEAPONS_PATH, customArmor.items)
 }
 
 // Quest items (exceptions)
@@ -2077,6 +2130,8 @@ function applyLootFilter() {
   applyCustomAffixes();
   applyCustomRuneNames();
   applyCustomItemNames();
+  applyCustomWeaponNames();
+  applyCustomArmorNames();
   applyCustomUiNames();
   applyCustomModifiers();
   applyItemLevel();

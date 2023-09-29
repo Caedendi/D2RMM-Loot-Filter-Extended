@@ -3,7 +3,7 @@
 _See also: [Caedendi's Simple Loot Filter for D2RMM](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)_
 
 Adds an expansive customizable loot filter with a shitload of presets to Diablo II: Resurrected using D2RMM. <br>
-Hide junk, clean up tooltips to remove clutter and emphasize important items. For the full feature list, see below.
+Hide junk, clean up tooltips to remove clutter and emphasize important items in various ways. For the full feature list, see below.
 
 Recommended for those who prefer toggling presets to reach their desired functionality. <br>
 If you'd rather have a compact list to act as a template for your own naming schemes, see the Simple version at the bottom of the page.
