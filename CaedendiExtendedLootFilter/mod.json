@@ -343,6 +343,195 @@
       ]
     },
     {
+      "id": "BigTooltipsSection",
+      "type": "section",
+      "name": "Big Tooltips",
+      "defaultExpanded": false
+    },
+    {
+      "id": "IsBigTooltipsEnabled",
+      "type": "checkbox",
+      "name": "Enable",
+      "description": "Enable Big Tooltips on the item types toggled below.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldAddPickUpMessage",
+      "type": "checkbox",
+      "name": "Add \"Pick Up\" Message",
+      "description": "Add the message \"Pick Up\" in purple above the item name if Big Tooltips is enabled.",
+      "defaultValue": false
+    },
+    {
+      "id": "ShouldAddBigTooltipForRunesLow",
+      "type": "select",
+      "name": "Runes: Low",
+      "description": " (El [1] - Dol [14], except Ral [8]).",
+      "defaultValue": "disabled",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForRunesLowMid",
+      "type": "select",
+      "name": "Runes: Low-Mid",
+      "description": " (Hel [15] - Fal [19] and Ral [8]).",
+      "defaultValue": "disabled",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForRunesMid",
+      "type": "select",
+      "name": "Runes: Mid",
+      "description": " (Lem [20] - Gul [25]).",
+      "defaultValue": "big",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForRunesHigh",
+      "type": "select",
+      "name": "Runes: High",
+      "description": " (Vex [26] - Zod [33]).",
+      "defaultValue": "huge",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForGems",
+      "type": "select",
+      "name": "Gems",
+      "description": "",
+      "defaultValue": "disabled",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForFacets",
+      "type": "select",
+      "name": "Facets",
+      "description": "",
+      "defaultValue": "huge",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForUniqueCharms",
+      "type": "select",
+      "name": "Unique Charms",
+      "description": "Anni, Torch, Gheed's and Sunder Charms.",
+      "defaultValue": "huge",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForQuestItems",
+      "type": "select",
+      "name": "Quest Items",
+      "description": " Quest Items on the ground.",
+      "defaultValue": "big",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForEssences",
+      "type": "select",
+      "name": "Essences",
+      "description": " on Essences on the ground.",
+      "defaultValue": "big",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForTokens",
+      "type": "select",
+      "name": "Token of Absolution",
+      "description": " on Tokens of Absolution on the ground.",
+      "defaultValue": "big",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForKeys",
+      "type": "select",
+      "name": "Pandemonium Keys",
+      "description": " Keys of Terror/Hate/Destruction on the ground.",
+      "defaultValue": "big",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForOrgans",
+      "type": "select",
+      "name": "Pandemonium Organs",
+      "description": " Über Organs on the ground. ",
+      "defaultValue": "huge",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
+      "id": "ShouldAddBigTooltipForStandardOfHeroes",
+      "type": "select",
+      "name": "Standard of Heroes",
+      "description": " when you kill the Übers.",
+      "defaultValue": "disabled",
+      "options": [
+        { "label": "Disable", "value": "disabled" },
+        { "label": "Big", "value": "big" },
+        { "label": "Huge", "value": "huge" },
+        { "label": "Custom", "value": "custom" }
+      ]
+    },
+    {
       "id": "LightPillarsSection",
       "type": "section",
       "name": "Light Pillars",
