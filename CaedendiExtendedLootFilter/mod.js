@@ -555,7 +555,7 @@ const customAffixes = {
 
   customizeGems(setting) {
     // These gem names also function as affixes, which is why they are located in the item-nameaffixes.json file.
-    // Enabling filtering for gems could also change for example the Ruby-part in a magic "Ruby Jewel of Fervor".
+    // Enabling filtering for these gems could also change for example the Ruby-part in a "Ruby Jewel of Fervor".
     switch (setting) {
       case "none":
         return;
@@ -655,7 +655,7 @@ const customRunes = {
   },
 
   generateTallTooltip(name) {
-    // new lines work upside-down: adding \n will add a new line on top of the current one
+    // new lines work upside-down: adding \n will add a new line on top of the current one (instead of below, like you would expect)
     const LTT_PADDING = PADDING_5;
     const LTT_NEW_LINE = "\n";
 
@@ -1417,7 +1417,7 @@ const customItems = {
     // const WA_PADDING     = PADDING_5;
     // const WA_CLR_NAME    = PURPLE;
 
-    if (shouldFilterWeapons) { // [CSTM-WEP]
+    if (shouldFilterWeapons) { // This list changes entries in item-names.json, so Set and Unique names like "Death's Web" are also supported. Search the file for what Key to use. [CSTM-WEP]
       // ADD YOUR CUSTOM ITEM NAMES HERE
 
       // examples
@@ -1427,7 +1427,7 @@ const customItems = {
       // this.items["7gw"] = `${ILVL_INDENT_FIX_DOUBLE}${generateDoubleHighlight(WA_CLR_PATTERN, WA_PATTERN, WA_PADDING, WA_CLR_NAME, "Unearthed Wand")}${BLUE}`; // Unearthed Wand, highlight
     }
 
-    if (shouldFilterArmor) { // [CSTM-ARM]
+    if (shouldFilterArmor) { // This list changes entries in item-names.json, so Set and Unique names like "Griffon's Eye" are also supported. Search the file for what Key to use. [CSTM-ARM]
       // ADD YOUR CUSTOM ITEM NAMES HERE
 
       // examples
