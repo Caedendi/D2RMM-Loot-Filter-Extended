@@ -262,14 +262,14 @@
     {
       "id": "ShouldFilterWeapons",
       "type": "checkbox",
-      "name": "Use Personal Weapon Filter List",
+      "name": "Use Custom Weapon Filter",
       "description": "Use the personal filter list for weapons. Searches weapons.txt for the provided item codes and changes the base item names. Use at your own risk. [CSTM-WEP]",
       "defaultValue": false
     },
     {
       "id": "ShouldFilterArmor",
       "type": "checkbox",
-      "name": "Use Personal Armor Filter List",
+      "name": "Use Custom Armor Filter",
       "description": "Use the personal filter list for armor. Searches armor.txt for the provided item codes and changes the base item names. Use at your own risk. [CSTM-ARM]",
       "defaultValue": false
     },
@@ -680,6 +680,7 @@
       "description": "Character used to highlight select items. [CSTM-HLCTR]",
       "defaultValue": "*",
       "options": [
+        { "label": "  (space)", "value": " " },
         { "label": "* (asterisk)", "value": "*" },
         { "label": "= (equals)", "value": "=" },
         { "label": "+ (plus)", "value": "+" },

@@ -64,15 +64,18 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ## Changelog
 
-### 2.2.0
+### 3.0.0
 
 - Introducing Drop Sounds! Configure new sound effects for when select item types drop so you'll never miss one again!
-- For those running Custom filter options: all colors have been renamed to more standardized names (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
+- For those running custom filter options: all colors have been renamed to more standardized names (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
+- Added multi-line tooltips! Enable for select items to increase the height of the tooltips of items on the ground. If you prefer to have a big transparent box, enable highlighting and set the highlight character to _space_
+- Added custom filter lists for weapons and armor that support _all_ base items! Search for _[CSTM-WEP]_ and _[CSTM-ARM]_ in the code and add whatever you like!
 - Added option to customize the tooltip color for Ethereal items when on the ground
 - Added option to disable _all_ Light Pillars
 - Added customization of the Gold amount color _(in addition to the already implemented suffix customization)_
 - Added customization of the highlight color (can now be set to colors other than tomato red)
 - Added customization of the alternate rune color scheme (can now be set to colors other than dark violet)
+- Added space as a highlight character option
 - Split runes into 4 tiers, each of which you can individually enable/disable visibility, Light Pillars and Drop Sounds for
 - Changed the Light Pillars setting for Quest Weapons from "exclude" to "include" 
 - Slightly changed some existing setting names and tooltips
@@ -169,10 +172,10 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                        |         | Add highlights                                                  |
 |                            |                                        |         | Remove affix                                                    |
 |                            |                                        |         | Custom                                                          |
-|                            |             **Show Runes**             |    x    | Show Runes: Low                                                 |
-|                            |                                        |    x    | Show Runes: Low-Mid                                             |
-|                            |                                        |    x    | Show Runes: Mid                                                 |
-|                            |                                        |    x    | Show Runes: High                                                |
+|                            |          **Show Runes: Low**           |   On    | On/Off                                                          |
+|                            |        **Show Runes: Low-Mid**         |   On    | On/Off                                                          |
+|                            |          **Show Runes: Mid**           |   On    | On/Off                                                          |
+|                            |          **Show Runes: High**          |   On    | On/Off                                                          |
 |          **Junk**          |          **Healing Potions**           |         | No change                                                       |
 |                            |                                        |    x    | All                                                             |
 |                            |                                        |         | Hide lvl 3                                                      |
@@ -225,6 +228,8 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                        |         | Highlight, exclude Standard of Heroes                           |
 |                            |                                        |         | Highlight, hide Standard of Heroes                              |
 |                            |                                        |         | Custom                                                          |
+|    **Weapons & Armor**     |      **Use Custom Weapon Filter**      |   Off   | On/Off                                                          |
+|                            |      **Use Custom Armor Filter**       |   Off   | On/Off                                                          |
 | **Item Stats & Modifiers** |             **Item Level**             |         | No change                                                       |
 |                            |                                        |    x    | Enable, fix indentation                                         |
 |                            |                                        |         | Enable                                                          |
@@ -252,24 +257,24 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                        |         | Very Light Gray                                                 |
 |                            |                                        |         | White                                                           |
 |                            |                                        |         | Custom                                                          |
-|     **Light Pillars**      |               **Enable**               |    x    | On/Off                                                          |
-|                            |      **Disable for Hidden Items**      |    x    | On/Off                                                          |
-|                            |             **Runes: Low**             |    x    | On/Off                                                          |
-|                            |           **Runes: Low-Mid**           |    x    | On/Off                                                          |
-|                            |             **Runes: Mid**             |    x    | On/Off                                                          |
-|                            |            **Runes: High**             |    x    | On/Off                                                          |
-|                            |          **Rings & Amulets**           |    x    | On/Off                                                          |
-|                            |           **Gems & Jewels**            |    x    | On/Off                                                          |
-|                            |               **Charms**               |    x    | On/Off                                                          |
-|                            |            **Quest: Items**            |    x    | On/Off                                                          |
-|                            |           **Quest: Weapons**           |    x    | On/Off                                                          |
-|                            |              **Essences**              |    x    | On/Off                                                          |
-|                            |        **Token of Absolution**         |    x    | On/Off                                                          |
-|                            |          **Pandemonium Keys**          |    x    | On/Off                                                          |
-|                            |         **Pandemonium Organs**         |    x    | On/Off                                                          |
-|                            |         **Standard of Heroes**         |    x    | On/Off                                                          |
-|      **Drop Sounds**       |               **Enable**               |    x    | On/Off                                                          |
-|                            |      **Disable for Hidden Items**      |    x    | On/Off                                                          |
+|     **Light Pillars**      |               **Enable**               |   On    | On/Off                                                          |
+|                            |      **Disable for Hidden Items**      |   On    | On/Off                                                          |
+|                            |             **Runes: Low**             |   On    | On/Off                                                          |
+|                            |           **Runes: Low-Mid**           |   On    | On/Off                                                          |
+|                            |             **Runes: Mid**             |   On    | On/Off                                                          |
+|                            |            **Runes: High**             |   On    | On/Off                                                          |
+|                            |          **Rings & Amulets**           |   On    | On/Off                                                          |
+|                            |           **Gems & Jewels**            |   On    | On/Off                                                          |
+|                            |               **Charms**               |   On    | On/Off                                                          |
+|                            |            **Quest: Items**            |   On    | On/Off                                                          |
+|                            |           **Quest: Weapons**           |   On    | On/Off                                                          |
+|                            |              **Essences**              |   On    | On/Off                                                          |
+|                            |        **Token of Absolution**         |   On    | On/Off                                                          |
+|                            |          **Pandemonium Keys**          |   On    | On/Off                                                          |
+|                            |         **Pandemonium Organs**         |   On    | On/Off                                                          |
+|                            |         **Standard of Heroes**         |   On    | On/Off                                                          |
+|      **Drop Sounds**       |               **Enable**               |   On    | On/Off                                                          |
+|                            |      **Disable for Hidden Items**      |   On    | On/Off                                                          |
 |                            |             **Runes: Low**             |    x    | Default                                                         |
 |                            |                                        |         | Hostile (PVP)                                                   |
 |                            |                                        |         | Hell Forge Place                                                |
@@ -295,7 +300,8 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 |                            |                                        |         | Facets                                                          |
 |                            |                                        |         | Sunder Charms                                                   |
 |                            |                                        |         | Runes                                                           |
-|                            |        **Highlight Character**         |    x    | \* (asterisk)                                                   |
+|                            |        **Highlight Character**         |         | (space)                                                         |
+|                            |                                        |    x    | \* (asterisk)                                                   |
 |                            |                                        |         | = (equals)                                                      |
 |                            |                                        |         | + (plus)                                                        |
 |                            |                                        |         | - (hyphen/dash/minus)                                           |
@@ -356,8 +362,8 @@ See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Do
 - [ ] Multi-line tooltips:
   - [ ] whitespace only
   - [ ] highlight pattern + whitespace above/below
-  - [ ] Colored "Pick Up" text above item name
-- [ ] Custom weapon/armor filter list (as suggested by [Stealan88](https://www.nexusmods.com/users/181188678))
+  - [ ] colored "Pick Up" text above item name
+  - [ ] custom
 
 
 ### Fix known bugs
@@ -384,12 +390,13 @@ See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Do
 - [x] Option to disable _all_ light pillars
 - [x] Highlight color customization
 - [x] Runes alternate color scheme customization
-- [x] Split runes into 4 tiers for visibility, light pillars and drop sounds
+- [x] Split runes into 4 tiers for visibility, highlighting, light pillars and drop sounds
 - [x] Invert light pillars for quest weapons option (exclude => include)
 - [x] Rename colors to standardized names and document them better
 - [x] Custom drop sounds
 - [x] Gold mods (gold amount coloring + variations)
 - [x] Ethereal tooltip customization
+- [x] Custom weapon/armor filter list (as suggested by [Stealan88](https://www.nexusmods.com/users/181188678))
 
 
 ## Recommended Mods

@@ -132,10 +132,12 @@ const PADDING_1 = SINGLE_SPACE;
 const PADDING_2 = SINGLE_SPACE.repeat(2);
 const PADDING_3 = SINGLE_SPACE.repeat(3);
 const PADDING_5 = SINGLE_SPACE.repeat(5);
+const PADDING_10 = SINGLE_SPACE.repeat(10);
 
 const PATTERN_2    = HIGHLIGHT.repeat(2);
 const PATTERN_5    = HIGHLIGHT.repeat(5);
 const PATTERN_10   = HIGHLIGHT.repeat(10);
+const PATTERN_2x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}`;
 const PATTERN_3x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}${PADDING_2}${PATTERN_10}`;
 
 const SHOULD_FIX_ILVL_INDENT = config.ItemLevel === "fix";
@@ -552,7 +554,8 @@ const customAffixes = {
   },
 
   customizeGems(setting) {
-    // For some reason, the devs put these 4 gems in the wrong JSON file
+    // These gem names also function as affixes, which is why they are located in the item-nameaffixes.json file.
+    // Enabling filtering for gems could also change for example the Ruby-part in a magic "Ruby Jewel of Fervor".
     switch (setting) {
       case "none":
         return;
@@ -609,43 +612,57 @@ const customRunes = {
         return;
       case "custom": // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.runes.r01 = `${ORANGE}El (1)`;                                                        // El
-        this.runes.r02 = `${ORANGE}Eld (2)`;                                                       // Eld
-        this.runes.r03 = `${ORANGE}Tir (3)`;                                                       // Tir
-        this.runes.r04 = `${ORANGE}Nef (4)`;                                                       // Nef
-        this.runes.r05 = `${ORANGE}Eth (5)`;                                                       // Eth
-        this.runes.r06 = `${ORANGE}Ith (6)`;                                                       // Ith
-        this.runes.r07 = `${ORANGE}Tal (7)`;                                                       // Tal
-        this.runes.r08 = `${RED}**${ORANGE}  Ral (8)  ${RED}**${ORANGE}`;                         // Ral
-        this.runes.r09 = `${ORANGE}Ort (9)`;                                                       // Ort
-        this.runes.r10 = `${ORANGE}Thul (10)`;                                                     // Thul
-        this.runes.r11 = `${ORANGE}Amn (11)`;                                                      // Amn
-        this.runes.r12 = `${ORANGE}Sol (12)`;                                                      // Sol
-        this.runes.r13 = `${ORANGE}Shael (13)`;                                                    // Shael
-        this.runes.r14 = `${ORANGE}Dol (14)`;                                                      // Dol
-        this.runes.r15 = `${RED}**${ORANGE}  Hel (15) ${RED}**${ORANGE}`;                         // Hel
-        this.runes.r16 = `${ORANGE}Io (16)`;                                                       // Io
-        this.runes.r17 = `${ORANGE}Lum (17)`;                                                      // Lum
-        this.runes.r18 = `${RED}**${ORANGE}  Ko (18)  ${RED}**${ORANGE}`;                         // Ko
-        this.runes.r19 = `${RED}**${ORANGE}  Fal (19)  ${RED}**${ORANGE}`;                        // Fal
-        this.runes.r20 = `${RED}**${ORANGE}  Lem (20)  ${RED}**${ORANGE}`;                        // Lem
-        this.runes.r21 = `${RED}*****${ORANGE}   Pul (21)   ${RED}*****${ORANGE}`;                // Pul
-        this.runes.r22 = `${RED}*****${ORANGE}   Um (22)   ${RED}*****${ORANGE}`;                 // Um
-        this.runes.r23 = `${RED}*****${ORANGE}   Mal (23)   ${RED}*****${ORANGE}`;                // Mal
-        this.runes.r24 = `${RED}*****${ORANGE}   Ist (24)   ${RED}*****${ORANGE}`;                // Ist
-        this.runes.r25 = `${RED}*****${ORANGE}   Gul (25)   ${RED}*****${ORANGE}`;                // Gul
-        this.runes.r26 = `${RED}**********${ORANGE}     Vex (26)     ${RED}**********${ORANGE}`;  // Vex
-        this.runes.r27 = `${RED}**********${ORANGE}     Ohm (27)     ${RED}**********${ORANGE}`;  // Ohm
-        this.runes.r28 = `${RED}**********${ORANGE}     Lo (28)     ${RED}**********${ORANGE}`;   // Lo
-        this.runes.r29 = `${RED}**********${ORANGE}     Sur (29)     ${RED}**********${ORANGE}`;  // Sur
-        this.runes.r30 = `${RED}**********${ORANGE}     Ber (30)     ${RED}**********${ORANGE}`;  // Ber
-        this.runes.r31 = `${RED}**********${ORANGE}     Jah (31)     ${RED}**********${ORANGE}`;  // Jah
-        this.runes.r32 = `${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`; // Cham
+        this.runes.r01 = `${ORANGE}El (1)`;                                                      // El
+        this.runes.r02 = `${ORANGE}Eld (2)`;                                                     // Eld
+        this.runes.r03 = `${ORANGE}Tir (3)`;                                                     // Tir
+        this.runes.r04 = `${ORANGE}Nef (4)`;                                                     // Nef
+        this.runes.r05 = `${ORANGE}Eth (5)`;                                                     // Eth
+        this.runes.r06 = `${ORANGE}Ith (6)`;                                                     // Ith
+        this.runes.r07 = `${ORANGE}Tal (7)`;                                                     // Tal
+        this.runes.r08 = `${RED}**${ORANGE}  Ral (8)  ${RED}**${ORANGE}`;                        // Ral
+        this.runes.r09 = `${ORANGE}Ort (9)`;                                                     // Ort
+        this.runes.r10 = `${ORANGE}Thul (10)`;                                                   // Thul
+        this.runes.r11 = `${ORANGE}Amn (11)`;                                                    // Amn
+        this.runes.r12 = `${ORANGE}Sol (12)`;                                                    // Sol
+        this.runes.r13 = `${ORANGE}Shael (13)`;                                                  // Shael
+        this.runes.r14 = `${ORANGE}Dol (14)`;                                                    // Dol
+        this.runes.r15 = `${RED}**${ORANGE}  Hel (15) ${RED}**${ORANGE}`;                        // Hel
+        this.runes.r16 = `${ORANGE}Io (16)`;                                                     // Io
+        this.runes.r17 = `${ORANGE}Lum (17)`;                                                    // Lum
+        this.runes.r18 = `${RED}**${ORANGE}  Ko (18)  ${RED}**${ORANGE}`;                        // Ko
+        this.runes.r19 = `${RED}**${ORANGE}  Fal (19)  ${RED}**${ORANGE}`;                       // Fal
+        this.runes.r20 = `${RED}**${ORANGE}  Lem (20)  ${RED}**${ORANGE}`;                       // Lem
+        this.runes.r21 = `${RED}*****${ORANGE}   Pul (21)   ${RED}*****${ORANGE}`;               // Pul
+        this.runes.r22 = `${RED}*****${ORANGE}   Um (22)   ${RED}*****${ORANGE}`;                // Um
+        this.runes.r23 = `${RED}*****${ORANGE}   Mal (23)   ${RED}*****${ORANGE}`;               // Mal
+        this.runes.r24 = `${RED}*****${ORANGE}   Ist (24)   ${RED}*****${ORANGE}`;               // Ist
+        this.runes.r25 = `${RED}*****${ORANGE}   Gul (25)   ${RED}*****${ORANGE}`;               // Gul
+        this.runes.r26 = `${RED}**********${ORANGE}     Vex (26)     ${RED}**********${ORANGE}`; // Vex
+        this.runes.r27 = `${RED}**********${ORANGE}     Ohm (27)     ${RED}**********${ORANGE}`; // Ohm
+        this.runes.r28 = `${RED}**********${ORANGE}     Lo (28)     ${RED}**********${ORANGE}`;  // Lo
+        this.runes.r29 = `${RED}**********${ORANGE}     Sur (29)     ${RED}**********${ORANGE}`; // Sur
+        this.runes.r30 = `${RED}**********${ORANGE}     Ber (30)     ${RED}**********${ORANGE}`; // Ber
+        this.runes.r31 = `${RED}**********${ORANGE}     Jah (31)     ${RED}**********${ORANGE}`; // Jah
+        // this.runes.r32 = `${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`; // Cham
+        // this.runes.r32 = `\n\n${PURPLE}Pick Up\n${LTT_PADDING}${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}${LTT_PADDING}\n\n`; // Cham
+        this.runes.r32 = this.generateTallTooltip(`${RED}${PATTERN_2x10}${ORANGE}${PADDING_10}Cham (32)${PADDING_10}${RED}${PATTERN_2x10}${ORANGE}`); // Cham
+        // this.runes.r32 = generateTallTooltip(`${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`); // Cham
         // this.runes.r33 = `${RED}**********${ORANGE}     Zod (33)     ${RED}**********${ORANGE}`;  // Zod
         // this.runes.r33 = `${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${PADDING_5}${RUNES_COLOR_NAME}Zod (33)${PADDING_5}${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${RUNES_COLOR_NAME}`;  // Zod
         this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE, "Zod Rune (33)"); // Zod
         return;
     }
+  },
+
+  generateTallTooltip(name) {
+    // new lines work upside-down: adding \n will add a new line on top of the current one
+    const LTT_PADDING = PADDING_5;
+    const LTT_NEW_LINE = "\n";
+
+    return LTT_NEW_LINE + 
+    `${LTT_PADDING}${name}${LTT_PADDING}` + LTT_NEW_LINE +
+    `${PURPLE}Pick Up` +  
+    LTT_NEW_LINE;
   },
 
   generateRuneNames(setting, settingsAffix, settingsNumbers, settingsHighlighting) {
@@ -1393,46 +1410,31 @@ const customItems = {
     this.items.bey = `${prefix}Baal's Eye${suffix}`;                       // Baal's Eye
     this.items.mbr = `${prefix}Mephisto's Brain${suffix}`;                 // Mephisto's Brain
   },
-};
-
-const customWeapons = {
-  items: {},
   
-  customizeWeapons(settingWeapons) {
-    // const AMAZING_COLOR_NAME   = PURPLE;
-    // const AMAZING_COLOR_PATTERN = RED;
-    // const AMAZING_PATTERN = PATTERN_3x10;
-    // const AMAZING_PADDING = PADDING_5;
+  customizeWeaponsAndArmor(shouldFilterWeapons, shouldFilterArmor) {
+    // const WA_CLR_PATTERN = RED;
+    // const WA_PATTERN     = PATTERN_10;
+    // const WA_PADDING     = PADDING_5;
+    // const WA_CLR_NAME    = PURPLE;
 
-    if (settingWeapons) { // [CSTM-WEP]
+    if (shouldFilterWeapons) { // [CSTM-WEP]
       // ADD YOUR CUSTOM ITEM NAMES HERE
 
       // examples
-      // this.items["jav"] = HIDDEN;                                // Javelin, hide
-      // this.items["jav"] = `${BLACK}${this.items["jav"]}`;        // Javelin, color name black
-      // this.items["7gw"] = `${BLACK}${this.items["7gw"]}${BLUE}`; // Unearthed Wand, color name red
-      // this.items["7gw"] = ILVL_INDENT_FIX_DOUBLE + generateDoubleHighlight(AMAZING_COLOR_PATTERN, AMAZING_PATTERN, AMAZING_PADDING, AMAZING_COLOR_NAME, this.items["ci3"]); // Unearthed Wand, highlight
+      // this.items["jav"] = HIDDEN;                          // Javelin, hide
+      // this.items["jav"] = `${BLACK}Javelin`;               // Javelin, color name black
+      // this.items["7gw"] = `${BLACK}Unearthed Wand${BLUE}`; // Unearthed Wand, color name red
+      // this.items["7gw"] = `${ILVL_INDENT_FIX_DOUBLE}${generateDoubleHighlight(WA_CLR_PATTERN, WA_PATTERN, WA_PADDING, WA_CLR_NAME, "Unearthed Wand")}${BLUE}`; // Unearthed Wand, highlight
     }
-  },
-};
 
-const customArmor = {
-  items: {},
-
-  customizeArmor(settingArmor) {
-    // const AMAZING_COLOR_NAME   = PURPLE;
-    // const AMAZING_COLOR_PATTERN = RED;
-    // const AMAZING_PATTERN = PATTERN_3x10;
-    // const AMAZING_PADDING = PADDING_5;
-
-    if (settingArmor) { // [CSTM-ARM]
+    if (shouldFilterArmor) { // [CSTM-ARM]
       // ADD YOUR CUSTOM ITEM NAMES HERE
 
       // examples
-      // this.items["skp"] = HIDDEN;                              // Skull Cap, hide
-      // this.items["skp"] = `${BLACK}${this.items["skp"]}`;      // Skull Cap, color name black
-      // this.items["ci3"] = `${RED}${this.items["ci3"]}${BLUE}`; // Diadem, color name red
-      // this.items["ci3"] = ILVL_INDENT_FIX_DOUBLE + generateDoubleHighlight(AMAZING_COLOR_PATTERN, AMAZING_PATTERN, AMAZING_PADDING, AMAZING_COLOR_NAME, this.items["ci3"]); // Diadem, highlight
+      // this.items["skp"] = HIDDEN;                // Skull Cap, hide
+      // this.items["skp"] = `${BLACK}Skull Cap`;   // Skull Cap, color name black
+      // this.items["ci3"] = `${RED}Diadem${BLUE}`; // Diadem, color name red
+      // this.items["ci3"] = `${ILVL_INDENT_FIX_DOUBLE}${generateDoubleHighlight(WA_CLR_PATTERN, WA_PATTERN, WA_PADDING, WA_CLR_NAME, "Diadem")}${BLUE}`; // Diadem, highlight
     }
   },
 };
@@ -1875,18 +1877,9 @@ function applyCustomItemNames() {
   customItems.customizeGems(config.Gems);
   customItems.customizeQuestItems(config.Quest);
   customItems.customizeEndgameItems(config.Endgame);
+  customItems.customizeWeaponsAndArmor(config.ShouldFilterWeapons, config.ShouldFilterArmor);
 
   applyCustomNames(FILE_ITEM_NAMES_PATH, customItems.items);
-}
-
-function applyCustomWeaponNames() {
-  customWeapons.customizeWeapons(config.ShouldFilterWeapons);
-  applyCustomNames(FILE_WEAPONS_PATH, customWeapons.items)
-}
-
-function applyCustomArmorNames() {
-  customArmor.customizeArmor(config.ShouldFilterArmor);
-  applyCustomNames(FILE_WEAPONS_PATH, customArmor.items)
 }
 
 // Quest items (exceptions)
@@ -1907,6 +1900,10 @@ function applyCustomModifiers() {
 }
 
 function applyCustomNames(path, customNames) {
+  if (customNames.length == 0) {
+    return;
+  }
+  
   let file = D2RMM.readJson(path); // copy existing file
   file.forEach((item) => { // overwrite provided entries with new names
     if (item.Key in customNames) {
@@ -2130,8 +2127,6 @@ function applyLootFilter() {
   applyCustomAffixes();
   applyCustomRuneNames();
   applyCustomItemNames();
-  applyCustomWeaponNames();
-  applyCustomArmorNames();
   applyCustomUiNames();
   applyCustomModifiers();
   applyItemLevel();
