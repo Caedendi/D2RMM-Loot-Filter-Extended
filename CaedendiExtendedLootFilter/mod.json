@@ -352,70 +352,75 @@
       "id": "IsBigTooltipsEnabled",
       "type": "checkbox",
       "name": "Enable",
-      "description": "Enable Big Tooltips on the item types toggled below.",
+      "description": "Enable Big Tooltips on the item types toggled below. Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space]. Note: ",
       "defaultValue": false
     },
     {
-      "id": "ShouldAddPickUpMessage",
-      "type": "checkbox",
-      "name": "Add \"Pick Up\" Message",
-      "description": "Add the message \"Pick Up\" in purple above the item name if Big Tooltips is enabled.",
-      "defaultValue": false
-    },
-    {
-      "id": "ShouldAddBigTooltipForRunesLow",
+      "id": "BigTooltipRunesLow",
       "type": "select",
       "name": "Runes: Low",
       "description": " (El [1] - Dol [14], except Ral [8]).",
-      "defaultValue": "disabled",
+      "defaultValue": "disable",
       "options": [
-        { "label": "Disable", "value": "disabled" },
-        { "label": "Big", "value": "big" },
-        { "label": "Huge", "value": "huge" },
+        { "label": "Disable", "value": "disable" },
+        { "label": "Two Lines", "value": "2" },
+        { "label": "Two Lines + Pick Up", "value": "2pu" },
+        { "label": "Three Lines", "value": "3" },
+        { "label": "Four Lines + Pick Up", "value": "4pu" },
+        { "label": "Five Lines", "value": "5" },
         { "label": "Custom", "value": "custom" }
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForRunesLowMid",
+      "id": "BigTooltipRunesLowMid",
       "type": "select",
       "name": "Runes: Low-Mid",
       "description": " (Hel [15] - Fal [19] and Ral [8]).",
-      "defaultValue": "disabled",
+      "defaultValue": "2",
       "options": [
-        { "label": "Disable", "value": "disabled" },
-        { "label": "Big", "value": "big" },
-        { "label": "Huge", "value": "huge" },
+        { "label": "Disable", "value": "disable" },
+        { "label": "Two Lines", "value": "2" },
+        { "label": "Two Lines + Pick Up", "value": "2pu" },
+        { "label": "Three Lines", "value": "3" },
+        { "label": "Four Lines + Pick Up", "value": "4pu" },
+        { "label": "Five Lines", "value": "5" },
         { "label": "Custom", "value": "custom" }
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForRunesMid",
+      "id": "BigTooltipRunesMid",
       "type": "select",
       "name": "Runes: Mid",
       "description": " (Lem [20] - Gul [25]).",
-      "defaultValue": "big",
+      "defaultValue": "3",
       "options": [
-        { "label": "Disable", "value": "disabled" },
-        { "label": "Big", "value": "big" },
-        { "label": "Huge", "value": "huge" },
+        { "label": "Disable", "value": "disable" },
+        { "label": "Two Lines", "value": "2" },
+        { "label": "Two Lines + Pick Up", "value": "2pu" },
+        { "label": "Three Lines", "value": "3" },
+        { "label": "Four Lines + Pick Up", "value": "4pu" },
+        { "label": "Five Lines", "value": "5" },
         { "label": "Custom", "value": "custom" }
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForRunesHigh",
+      "id": "BigTooltipRunesHigh",
       "type": "select",
       "name": "Runes: High",
       "description": " (Vex [26] - Zod [33]).",
-      "defaultValue": "huge",
+      "defaultValue": "4pu",
       "options": [
-        { "label": "Disable", "value": "disabled" },
-        { "label": "Big", "value": "big" },
-        { "label": "Huge", "value": "huge" },
+        { "label": "Disable", "value": "disable" },
+        { "label": "Two Lines", "value": "2" },
+        { "label": "Two Lines + Pick Up", "value": "2pu" },
+        { "label": "Three Lines", "value": "3" },
+        { "label": "Four Lines + Pick Up", "value": "4pu" },
+        { "label": "Five Lines", "value": "5" },
         { "label": "Custom", "value": "custom" }
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForGems",
+      "id": "BigTooltipGems",
       "type": "select",
       "name": "Gems",
       "description": "",
@@ -428,7 +433,7 @@
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForFacets",
+      "id": "BigTooltipFacets",
       "type": "select",
       "name": "Facets",
       "description": "",
@@ -441,7 +446,7 @@
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForUniqueCharms",
+      "id": "BigTooltipUniqueCharms",
       "type": "select",
       "name": "Unique Charms",
       "description": "Anni, Torch, Gheed's and Sunder Charms.",
@@ -454,7 +459,7 @@
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForQuestItems",
+      "id": "BigTooltipQuestItems",
       "type": "select",
       "name": "Quest Items",
       "description": " Quest Items on the ground.",
@@ -467,7 +472,7 @@
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForEssences",
+      "id": "BigTooltipEssences",
       "type": "select",
       "name": "Essences",
       "description": " on Essences on the ground.",
@@ -480,7 +485,7 @@
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForTokens",
+      "id": "BigTooltipTokens",
       "type": "select",
       "name": "Token of Absolution",
       "description": " on Tokens of Absolution on the ground.",
@@ -493,7 +498,7 @@
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForKeys",
+      "id": "BigTooltipKeys",
       "type": "select",
       "name": "Pandemonium Keys",
       "description": " Keys of Terror/Hate/Destruction on the ground.",
@@ -506,7 +511,7 @@
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForOrgans",
+      "id": "BigTooltipOrgans",
       "type": "select",
       "name": "Pandemonium Organs",
       "description": " Über Organs on the ground. ",
@@ -519,7 +524,7 @@
       ]
     },
     {
-      "id": "ShouldAddBigTooltipForStandardOfHeroes",
+      "id": "BigTooltipStandardOfHeroes",
       "type": "select",
       "name": "Standard of Heroes",
       "description": " when you kill the Übers.",

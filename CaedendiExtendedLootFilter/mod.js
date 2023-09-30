@@ -115,6 +115,7 @@ const PHD_COLORS = {
 // Naming
 const EMPTY_STRING = '';
 const SINGLE_SPACE = ' ';
+const NEW_LINE = "\n";
 
 const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
 const HIGHLIGHT       = config.HighlightCharacter !== "custom" ? config.HighlightCharacter                 : '*'; // replace * with desired custom character [CSTM-HLCTR]
@@ -229,10 +230,10 @@ const RUNES_PADDING_MID = PADDING_5;
 const RUNES_PADDING_HIGH = PADDING_5;
 
 const RUNE_TIERS = [
-  { level: 1, runes: RUNE_TIER_LOW,    padding: RUNES_PADDING_LOW,    pattern: RUNES_PATTERN_LOW,    isVisible: config.ShouldShowRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow,    dropSound: config.DropSoundRunesLow    },
-  { level: 2, runes: RUNE_TIER_LOWMID, padding: RUNES_PADDING_LOWMID, pattern: RUNES_PATTERN_LOWMID, isVisible: config.ShouldShowRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid, dropSound: config.DropSoundRunesLowMid },
-  { level: 3, runes: RUNE_TIER_MID,    padding: RUNES_PADDING_MID,    pattern: RUNES_PATTERN_MID,    isVisible: config.ShouldShowRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid,    dropSound: config.DropSoundRunesMid    },
-  { level: 4, runes: RUNE_TIER_HIGH,   padding: RUNES_PADDING_HIGH,   pattern: RUNES_PATTERN_HIGH,   isVisible: config.ShouldShowRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh,   dropSound: config.DropSoundRunesHigh   },
+  { level: 1, runes: RUNE_TIER_LOW,    padding: RUNES_PADDING_LOW,    pattern: RUNES_PATTERN_LOW,    isVisible: config.ShouldShowRunesLow,    bigTooltipSetting: config.BigTooltipRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow,    dropSound: config.DropSoundRunesLow    },
+  { level: 2, runes: RUNE_TIER_LOWMID, padding: RUNES_PADDING_LOWMID, pattern: RUNES_PATTERN_LOWMID, isVisible: config.ShouldShowRunesLowMid, bigTooltipSetting: config.BigTooltipRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid, dropSound: config.DropSoundRunesLowMid },
+  { level: 3, runes: RUNE_TIER_MID,    padding: RUNES_PADDING_MID,    pattern: RUNES_PATTERN_MID,    isVisible: config.ShouldShowRunesMid,    bigTooltipSetting: config.BigTooltipRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid,    dropSound: config.DropSoundRunesMid    },
+  { level: 4, runes: RUNE_TIER_HIGH,   padding: RUNES_PADDING_HIGH,   pattern: RUNES_PATTERN_HIGH,   isVisible: config.ShouldShowRunesHigh,   bigTooltipSetting: config.BigTooltipRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh,   dropSound: config.DropSoundRunesHigh   },
 ];
 
 const RUNE_TIERS_HIGHLIGHTED         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
@@ -304,6 +305,14 @@ const STANDARD_OF_HEROES_SUFFIX = `${PADDING_3}${ENDGAME_COLOR_HIGHLIGHT}${PATTE
 const ITEM_QUALITY_NORMAL      = config.ItemQuality !== "custom" ? 'n' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
 const ITEM_QUALITY_EXCEPTIONAL = config.ItemQuality !== "custom" ? 'x' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
 const ITEM_QUALITY_ELITE       = config.ItemQuality !== "custom" ? 'e' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+
+
+//===============================//
+//   Parameters - Big Tooltips   //
+//===============================//
+
+const BTT_PADDING = PADDING_5;
+const BTT_PICK_UP = `${NEW_LINE}${PURPLE}Pick Up`;
 
 
 //================================//
@@ -471,29 +480,66 @@ const DS_SOUND_EFFECTS = {
 //======================//
 
 /**
- * Generate an item name with a highlight pattern on the left side: `${RED}+HP1` or `${GRAY}o Arrows`
- * @param {*} patternColor The color of the highlight pattern
- * @param {*} pattern The pattern for the highlight
- * @param {*} padding The padding between the highlights and the item name
- * @param {*} itemColor The color of the item name
- * @param {*} itemName The name of the item
- * @returns A complete item name with a colored highlight pattern on the left side
+ * Generate an item name with a highlight pattern on the left side: `${RED}+HP1` or `${GRAY}o Arrows`.
+ * @param {*} patternColor The color of the highlight pattern.
+ * @param {*} pattern The pattern for the highlight.
+ * @param {*} padding The padding between the highlights and the item name.
+ * @param {*} itemColor The color of the item name.
+ * @param {*} itemName The name of the item.
+ * @returns A complete item name with a colored highlight pattern on the left side.
  */
 function generateSingleHighlight(patternColor, pattern, padding, itemColor, itemName) {
   return `${patternColor}${pattern}${itemColor}${padding}${itemName}`;
 }
 
 /**
- * Generate an item name with a highlight pattern on both sides: `${RED}**********${GOLD}     ${NAME}     ${RED}**********${GOLD}`
- * @param {*} patternColor The color of the highlight pattern
- * @param {*} pattern The pattern for the highlight
- * @param {*} padding The padding between the highlights and the item name
- * @param {*} itemColor The color of the item name
- * @param {*} itemName The name of the item
- * @returns A complete item name with colored highlight patterns on both sides
+ * Generate an item name with a highlight pattern on both sides: `${RED}**********${GOLD}     ${NAME}     ${RED}**********${GOLD}`.
+ * @param {*} patternColor The color of the highlight pattern.
+ * @param {*} pattern The pattern for the highlight.
+ * @param {*} padding The padding between the highlights and the item name.
+ * @param {*} itemColor The color of the item name.
+ * @param {*} itemName The name of the item.
+ * @returns A complete item name with colored highlight patterns on both sides.
  */
 function generateDoubleHighlight(patternColor, pattern, padding, itemColor, itemName) {
   return `${patternColor}${pattern}${itemColor}${padding}${itemName}${padding}${patternColor}${pattern}${itemColor}`;
+}
+
+/**
+ * 
+ * @param {*} setting A setting as set in the Big Tooltips section of the settings menu. Determines the height of the Big Tooltip and if it contains the Pick Up message.
+ * @param {*} name The item name (after other filtering and highlighting has been applied). Nothing in this line will be changed.
+ * @returns A multi-line item name, which will show as a Big Tooltip when the item is on the ground.
+ */
+function generateBigTooltip(setting, name) {
+  if (setting === "disable") {
+    return name;
+  }
+
+  // new lines work upside-down: adding \n will add a new line on top of the current one (instead of below like you would expect)
+  if (setting === "custom") { // [CSTM-BTT]
+    // ADD YOUR CUSTOM BIG TOOLTIP HERE
+    return NEW_LINE + `${BTT_PADDING}${name}${BTT_PADDING}` + NEW_LINE;
+  }
+
+  name = `${BTT_PADDING}${name}${BTT_PADDING}`;
+  if (setting === "2") {
+    return name + NEW_LINE;
+  }
+  if (setting === "2pu") {
+    return name + BTT_PICK_UP;
+  }
+  if (setting === "3") {
+    return NEW_LINE + name + NEW_LINE;
+  }
+  if (setting === "4pu") {
+    return NEW_LINE + name + BTT_PICK_UP + NEW_LINE;
+  }
+  if (setting === "5") {
+    return NEW_LINE + NEW_LINE + name + NEW_LINE + NEW_LINE;
+  }
+
+  return "undefined";
 }
 
 
@@ -510,18 +556,18 @@ const customAffixes = {
     switch (settingAffix) {
       case "none": // Gold displays as "1234 Gold".
         if (color !== NO_COLOR) {
-          this.items.gld = `${color}Gold`; 
+          this.items["gld"] = `${color}Gold`; 
         }
         return;
       case "g": // Gold displays as "1234 G".
-        this.items.gld = `${color}G`; 
+        this.items["gld"] = `${color}G`; 
         return;
       case "hide": // Gold displays as "1234".
-        this.items.gld = HIDDEN;
+        this.items["gld"] = HIDDEN;
         return;
       case "custom": // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items.gld = `${PURPLE}Gold`;
+        this.items["gld"] = `${PURPLE}Gold`;
         return;
     }
   },
@@ -561,10 +607,10 @@ const customAffixes = {
         return;
       case "all": // show all
         // `${GREEN}o${WHITE} Emerald`;
-        this.items.gsw = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
-        this.items.gsg = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
-        this.items.gsr = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
-        this.items.gsb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
+        this.items["gsw"] = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
+        this.items["gsg"] = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
+        this.items["gsr"] = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
+        this.items["gsb"] = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
         return;
       case "flawless": // hide chipped/flawed/regular gems
         this.hideGems();
@@ -574,19 +620,19 @@ const customAffixes = {
         return;
       case "custom": // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items.gsw = `Diamond`; 
-        this.items.gsg = `Emerald`; 
-        this.items.gsr = `Ruby`;
-        this.items.gsb = `Sapphire`;
+        this.items["gsw"] = `Diamond`; 
+        this.items["gsg"] = `Emerald`; 
+        this.items["gsr"] = `Ruby`;
+        this.items["gsb"] = `Sapphire`;
         return;
     }
   },
 
   hideGems() {
-    this.items.gsw = HIDDEN;
-    this.items.gsg = HIDDEN;
-    this.items.gsr = HIDDEN;
-    this.items.gsb = HIDDEN;
+    this.items["gsw"] = HIDDEN;
+    this.items["gsg"] = HIDDEN;
+    this.items["gsr"] = HIDDEN;
+    this.items["gsb"] = HIDDEN;
   },
 };
 
@@ -611,7 +657,7 @@ const customRunes = {
         this.generateRuneNames(setting, RUNES_SETTINGS_AFFIX, RUNES_SETTINGS_NUMBER, RUNES_SETTINGS_HIGHLIGHT);
         return;
       case "custom": // [CSTM-RUN]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
+        // ADD YOUR CUSTOM ITEM NAMES HERE. NOTE: THIS BYPASSES BIG TOOLTIPS SETTINGS.
         this.runes.r01 = `${ORANGE}El (1)`;                                                      // El
         this.runes.r02 = `${ORANGE}Eld (2)`;                                                     // Eld
         this.runes.r03 = `${ORANGE}Tir (3)`;                                                     // Tir
@@ -645,8 +691,8 @@ const customRunes = {
         this.runes.r31 = `${RED}**********${ORANGE}     Jah (31)     ${RED}**********${ORANGE}`; // Jah
         // this.runes.r32 = `${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`; // Cham
         // this.runes.r32 = `\n\n${PURPLE}Pick Up\n${LTT_PADDING}${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}${LTT_PADDING}\n\n`; // Cham
-        this.runes.r32 = this.generateTallTooltip(`${RED}${PATTERN_2x10}${ORANGE}${PADDING_10}Cham (32)${PADDING_10}${RED}${PATTERN_2x10}${ORANGE}`); // Cham
-        // this.runes.r32 = generateTallTooltip(`${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`); // Cham
+        this.runes.r32 = generateBigTooltip(config.BigTooltipRunesHigh, `${RED}${PATTERN_2x10}${ORANGE}${PADDING_10}Cham (32)${PADDING_10}${RED}${PATTERN_2x10}${ORANGE}`); // Cham
+        // this.runes.r32 = generateBigTooltip(`${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`); // Cham
         // this.runes.r33 = `${RED}**********${ORANGE}     Zod (33)     ${RED}**********${ORANGE}`;  // Zod
         // this.runes.r33 = `${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${PADDING_5}${RUNES_COLOR_NAME}Zod (33)${PADDING_5}${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${RUNES_COLOR_NAME}`;  // Zod
         this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE, "Zod Rune (33)"); // Zod
@@ -654,27 +700,16 @@ const customRunes = {
     }
   },
 
-  generateTallTooltip(name) {
-    // new lines work upside-down: adding \n will add a new line on top of the current one (instead of below, like you would expect)
-    const LTT_PADDING = PADDING_5;
-    const LTT_NEW_LINE = "\n";
-
-    return LTT_NEW_LINE + 
-    `${LTT_PADDING}${name}${LTT_PADDING}` + LTT_NEW_LINE +
-    `${PURPLE}Pick Up` +  
-    LTT_NEW_LINE;
-  },
-
   generateRuneNames(setting, settingsAffix, settingsNumbers, settingsHighlighting) {
     RUNE_TIERS.forEach((tier) => {
       tier.runes.forEach((rune) => {
         let itemCode = rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`;
-        this.runes[itemCode] = !tier.isVisible ? HIDDEN : this.generateRuneName(rune.name, rune.number, tier.level, tier.pattern, tier.padding, setting, settingsAffix, settingsNumbers, settingsHighlighting);
+        this.runes[itemCode] = !tier.isVisible ? HIDDEN : this.generateRuneName(rune.name, rune.number, tier.level, tier.pattern, tier.padding, setting, settingsAffix, settingsNumbers, settingsHighlighting, tier.bigTooltipSetting);
       });
     });
   },
 
-  generateRuneName(name, number, tier, highlightPattern, padding, setting, settingsAffix, settingsNumbers, settingsHighlighting) {
+  generateRuneName(name, number, tier, highlightPattern, padding, setting, settingsAffix, settingsNumbers, settingsHighlighting, settingBigTooltip) {
     const hasAffix = settingsAffix.includes(setting);
     const hasNumber = settingsNumbers.includes(setting);
 
@@ -712,7 +747,9 @@ const customRunes = {
       nameColor1 = NO_COLOR;
     }
 
-    return `${highlightColor1}${highlightPattern}${nameColor1}${padding}${name}${padding}${highlightColor2}${highlightPattern}${nameColor2}`;
+    let runeName = `${highlightColor1}${highlightPattern}${nameColor1}${padding}${name}${padding}${highlightColor2}${highlightPattern}${nameColor2}`;
+
+    return settingBigTooltip !== "disable" ? generateBigTooltip(settingBigTooltip, runeName) : runeName;
   },
 };
 
