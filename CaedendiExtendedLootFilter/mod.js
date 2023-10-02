@@ -108,6 +108,26 @@ const PHD_COLORS = {
 };
 
 
+//==============================//
+//   Parameters - Collections   //
+//==============================//
+
+const COL_HEALPOTS  = "healingPotions";
+const COL_BUFFPOTS  = "buffPotions";
+const COL_THROWPOTS = "throwingPotions";
+const COL_SCROLLS   = "scrollsTomes";
+const COL_AMMO      = "arrowsBolts";
+const COL_KEYS      = "keys";
+const COL_GEMS      = "gems";
+const COL_JEWELS    = "jewels";
+const COL_CHARMS    = "charms";
+const COL_QUEST     = "quest";
+const COL_ENDGAME   = "endgame";
+const COL_WEPARM    = "weaponsArmor";
+const COL_QUALITY   = "quality";
+const COL_GOLD      = "gold";
+
+
 //=========================//
 //   Parameters - Global   //
 //=========================//
@@ -479,6 +499,12 @@ const DS_SOUND_EFFECTS = {
 //   Global Functions   //
 //======================//
 
+function initIndexes(x, collections) {
+  for (let i = 0; i < collections.length; i++) {
+    x[collections[i]] = i;
+  }
+}
+
 /**
  * Generate an item name with a highlight pattern on the left side: `${RED}+HP1` or `${GRAY}o Arrows`.
  * @param {*} patternColor The color of the highlight pattern.
@@ -547,8 +573,17 @@ function generateBigTooltip(setting, name) {
 //   Custom Item Name Lists   //
 //============================//
 
+const ca = {};
+
 const customAffixes = {
-  items: {},
+  items: [],
+
+  init() {
+    initIndexes(ca, [ COL_GOLD, COL_QUALITY, COL_GEMS ]);
+    this.items[ca[COL_GOLD]] = {};
+    this.items[ca[COL_QUALITY]] = {};
+    this.items[ca[COL_GEMS]] = {};
+  },
 
   customizeGold(settingAmount, settingAffix) {
     let color = settingAmount === "wg" ? GOLD : settingAmount === "gw" ? WHITE : NO_COLOR;
@@ -556,18 +591,18 @@ const customAffixes = {
     switch (settingAffix) {
       case "none": // Gold displays as "1234 Gold".
         if (color !== NO_COLOR) {
-          this.items["gld"] = `${color}Gold`; 
+          this.items[ca.gold].gld = `${color}Gold`; 
         }
         return;
       case "g": // Gold displays as "1234 G".
-        this.items["gld"] = `${color}G`; 
+        this.items[ca.gold].gld = `${color}G`; 
         return;
       case "hide": // Gold displays as "1234".
-        this.items["gld"] = HIDDEN;
+        this.items[ca.gold].gld = HIDDEN;
         return;
       case "custom": // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items["gld"] = `${PURPLE}Gold`;
+        this.items[ca.gold].gld = `${PURPLE}Gold`;
         return;
     }
   },
@@ -582,19 +617,19 @@ const customAffixes = {
         return;
       case "short": // Enable
       case "color":   // Enable, gray Inferior items
-        this.items["Hiquality"] = superior;
-        this.items["Damaged"] = inferior;
-        this.items["Cracked"] = inferior;
-        this.items["Low Quality"] = inferior;
-        this.items["Crude"] = inferior;
+        this.items[ca.quality]["Hiquality"] = superior;
+        this.items[ca.quality]["Damaged"] = inferior;
+        this.items[ca.quality]["Cracked"] = inferior;
+        this.items[ca.quality]["Low Quality"] = inferior;
+        this.items[ca.quality]["Crude"] = inferior;
         return;
       case "custom": // [CSTM-SPIF]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items["Hiquality"] = `Superior`;
-        this.items["Damaged"] = `Damaged`;
-        this.items["Cracked"] = `Cracked`;
-        this.items["Low Quality"] = `Low Quality`;
-        this.items["Crude"] = `Crude`;
+        this.items[ca.quality]["Hiquality"] = `Superior`;
+        this.items[ca.quality]["Damaged"] = `Damaged`;
+        this.items[ca.quality]["Cracked"] = `Cracked`;
+        this.items[ca.quality]["Low Quality"] = `Low Quality`;
+        this.items[ca.quality]["Crude"] = `Crude`;
         return;
     }
   },
@@ -607,10 +642,10 @@ const customAffixes = {
         return;
       case "all": // show all
         // `${GREEN}o${WHITE} Emerald`;
-        this.items["gsw"] = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
-        this.items["gsg"] = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
-        this.items["gsr"] = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
-        this.items["gsb"] = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
+        this.items[ca.gems]["gsw"] = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
+        this.items[ca.gems]["gsg"] = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
+        this.items[ca.gems]["gsr"] = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
+        this.items[ca.gems]["gsb"] = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
         return;
       case "flawless": // hide chipped/flawed/regular gems
         this.hideGems();
@@ -620,10 +655,10 @@ const customAffixes = {
         return;
       case "custom": // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items["gsw"] = `Diamond`; 
-        this.items["gsg"] = `Emerald`; 
-        this.items["gsr"] = `Ruby`;
-        this.items["gsb"] = `Sapphire`;
+        this.items[ca.gems]["gsw"] = `Diamond`; 
+        this.items[ca.gems]["gsg"] = `Emerald`; 
+        this.items[ca.gems]["gsr"] = `Ruby`;
+        this.items[ca.gems]["gsb"] = `Sapphire`;
         return;
     }
   },
@@ -753,8 +788,20 @@ const customRunes = {
   },
 };
 
+const ci = {
+}
+
 const customItems = {
-  items: {},
+  items: [],
+
+  init() {
+    let collections = [ COL_HEALPOTS, COL_HEALPOTS, COL_BUFFPOTS, COL_THROWPOTS, COL_SCROLLS, 
+      COL_AMMO, COL_KEYS, COL_GEMS, COL_JEWELS, COL_CHARMS, COL_QUEST, COL_ENDGAME, COL_WEPARM, ];
+    initIndexes(ci, collections);
+    collections.forEach(col => {
+      this.items[col] = {};
+    });
+  },
 
   customizeHealingPotions(setting) {
     const colorHealing = RED;
@@ -1886,10 +1933,14 @@ function applyCustomAffixes() {
     return;
   }
   
-  customAffixes.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes);
+  customAffixes.init();
   customAffixes.customizeGold(config.GoldAmount, config.GoldSuffix);
+  customAffixes.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes);
   customAffixes.customizeGems(config.Gems);
-  applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, customAffixes.items);
+
+  customAffixes.items.forEach(collection => {
+    applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, collection);
+  });
 }
 
 // Runes
