@@ -31,6 +31,7 @@ const FILE_ARMOR_PATH   = `${FILE_EXCEL}armor${FILE_EXTENSION_TXT}`;
 const FILE_MISC_PATH    = `${FILE_EXCEL}misc${FILE_EXTENSION_TXT}`;
 const FILE_SOUNDS_PATH  = `${FILE_EXCEL}sounds${FILE_EXTENSION_TXT}`;
 
+
 //========================//
 //   Constants - Colors   //
 //========================//
@@ -90,22 +91,6 @@ const ORANGE    = CLR_ORANGE;
 const GOLD      = CLR_TAN;
 const PURPLE    = CLR_DARK_VIOLET;
 const PINK      = CLR_VIOLET;
-
-// _profilehd.json colors
-const PHD_COLORS = {
-  Beige:         '$FontColorBeige',
-  Black:         '$FontColorBlack',
-  DarkGreen:     '$FontColorDarkGreen',
-  Green:         '$FontColorGreen',
-  LightBlue:     '$FontColorLightBlue',
-  LightGray:     '$FontColorLightGray',
-  LightPurple:   '$FontColorLightPurple',
-  LightRed:      '$FontColorLightRed',
-  LightTeal:     '$FontColorLightTeal',
-  Red:           '$FontColorRed',
-  VeryLightGray: '$FontColorVeryLightGray',
-  White:         '$FontColorWhite',
-};
 
 
 //==============================//
@@ -779,44 +764,51 @@ class CustomRunesBuilder extends AbstractItemNamesBuilder {
         return;
       case "custom": // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE. NOTE: THIS BYPASSES BIG TOOLTIPS SETTINGS.
-        this.runes.r01 = `${ORANGE}El (1)`;                                                      // El
-        this.runes.r02 = `${ORANGE}Eld (2)`;                                                     // Eld
-        this.runes.r03 = `${ORANGE}Tir (3)`;                                                     // Tir
-        this.runes.r04 = `${ORANGE}Nef (4)`;                                                     // Nef
-        this.runes.r05 = `${ORANGE}Eth (5)`;                                                     // Eth
-        this.runes.r06 = `${ORANGE}Ith (6)`;                                                     // Ith
-        this.runes.r07 = `${ORANGE}Tal (7)`;                                                     // Tal
-        this.runes.r08 = `${RED}**${ORANGE}  Ral (8)  ${RED}**${ORANGE}`;                        // Ral
-        this.runes.r09 = `${ORANGE}Ort (9)`;                                                     // Ort
-        this.runes.r10 = `${ORANGE}Thul (10)`;                                                   // Thul
-        this.runes.r11 = `${ORANGE}Amn (11)`;                                                    // Amn
-        this.runes.r12 = `${ORANGE}Sol (12)`;                                                    // Sol
-        this.runes.r13 = `${ORANGE}Shael (13)`;                                                  // Shael
-        this.runes.r14 = `${ORANGE}Dol (14)`;                                                    // Dol
-        this.runes.r15 = `${RED}**${ORANGE}  Hel (15) ${RED}**${ORANGE}`;                        // Hel
-        this.runes.r16 = `${ORANGE}Io (16)`;                                                     // Io
-        this.runes.r17 = `${ORANGE}Lum (17)`;                                                    // Lum
-        this.runes.r18 = `${RED}**${ORANGE}  Ko (18)  ${RED}**${ORANGE}`;                        // Ko
-        this.runes.r19 = `${RED}**${ORANGE}  Fal (19)  ${RED}**${ORANGE}`;                       // Fal
-        this.runes.r20 = `${RED}**${ORANGE}  Lem (20)  ${RED}**${ORANGE}`;                       // Lem
-        this.runes.r21 = `${RED}*****${ORANGE}   Pul (21)   ${RED}*****${ORANGE}`;               // Pul
-        this.runes.r22 = `${RED}*****${ORANGE}   Um (22)   ${RED}*****${ORANGE}`;                // Um
-        this.runes.r23 = `${RED}*****${ORANGE}   Mal (23)   ${RED}*****${ORANGE}`;               // Mal
-        this.runes.r24 = `${RED}*****${ORANGE}   Ist (24)   ${RED}*****${ORANGE}`;               // Ist
-        this.runes.r25 = `${RED}*****${ORANGE}   Gul (25)   ${RED}*****${ORANGE}`;               // Gul
-        this.runes.r26 = `${RED}**********${ORANGE}     Vex (26)     ${RED}**********${ORANGE}`; // Vex
-        this.runes.r27 = `${RED}**********${ORANGE}     Ohm (27)     ${RED}**********${ORANGE}`; // Ohm
-        this.runes.r28 = `${RED}**********${ORANGE}     Lo (28)     ${RED}**********${ORANGE}`;  // Lo
-        this.runes.r29 = `${RED}**********${ORANGE}     Sur (29)     ${RED}**********${ORANGE}`; // Sur
-        this.runes.r30 = `${RED}**********${ORANGE}     Ber (30)     ${RED}**********${ORANGE}`; // Ber
-        this.runes.r31 = `${RED}**********${ORANGE}     Jah (31)     ${RED}**********${ORANGE}`; // Jah
-        // this.runes.r32 = `${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`; // Cham
-        // this.runes.r32 = `\n\n${PURPLE}Pick Up\n${LTT_PADDING}${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}${LTT_PADDING}\n\n`; // Cham
-        this.runes.r32 = generateBigTooltip(config.BigTooltipRunesHigh, `${RED}${PATTERN_2x10}${ORANGE}${PADDING_10}Cham (32)${PADDING_10}${RED}${PATTERN_2x10}${ORANGE}`); // Cham
-        // this.runes.r32 = generateBigTooltip(`${RED}**********${ORANGE}     Cham (32)     ${RED}**********${ORANGE}`); // Cham
-        // this.runes.r33 = `${RED}**********${ORANGE}     Zod (33)     ${RED}**********${ORANGE}`;  // Zod
+        let clrRune = ORANGE;
+        let clrMsg = PURPLE;
+        let clrHighlight = RED;
+        let highlight1 = "**";
+        let highlight2 = "*****";
+        let highlight3 = "**********";
+
+        this.runes.r01 = `${clrRune}El (1)`;                                                                               // El
+        this.runes.r02 = `${clrRune}Eld (2)`;                                                                              // Eld
+        this.runes.r03 = `${clrRune}Tir (3)`;                                                                              // Tir
+        this.runes.r04 = `${clrRune}Nef (4)`;                                                                              // Nef
+        this.runes.r05 = `${clrRune}Eth (5)`;                                                                              // Eth
+        this.runes.r06 = `${clrRune}Ith (6)`;                                                                              // Ith
+        this.runes.r07 = `${clrRune}Tal (7)`;                                                                              // Tal
+        this.runes.r08 = `${clrHighlight}${highlight1}${clrRune}  Ral (8)  ${clrHighlight}${highlight1}${clrRune}`;        // Ral
+        this.runes.r09 = `${clrRune}Ort (9)`;                                                                              // Ort
+        this.runes.r10 = `${clrRune}Thul (10)`;                                                                            // Thul
+        this.runes.r11 = `${clrRune}Amn (11)`;                                                                             // Amn
+        this.runes.r12 = `${clrRune}Sol (12)`;                                                                             // Sol
+        this.runes.r13 = `${clrRune}Shael (13)`;                                                                           // Shael
+        this.runes.r14 = `${clrRune}Dol (14)`;                                                                             // Dol
+        this.runes.r15 = `${clrHighlight}${highlight1}${clrRune}  Hel (15) ${clrHighlight}${highlight1}${clrRune}`;        // Hel
+        this.runes.r16 = `${clrRune}Io (16)`;                                                                              // Io
+        this.runes.r17 = `${clrRune}Lum (17)`;                                                                             // Lum
+        this.runes.r18 = `${clrHighlight}${highlight1}${clrRune}  Ko (18)  ${clrHighlight}${highlight1}${clrRune}`;        // Ko
+        this.runes.r19 = `${clrHighlight}${highlight1}${clrRune}  Fal (19)  ${clrHighlight}${highlight1}${clrRune}`;       // Fal
+        this.runes.r20 = `${clrHighlight}${highlight1}${clrRune}  Lem (20)  ${clrHighlight}${highlight1}${clrRune}`;       // Lem
+        this.runes.r21 = `${clrHighlight}${highlight2}${clrRune}   Pul (21)   ${clrHighlight}${highlight2}${clrRune}`;     // Pul
+        this.runes.r22 = `${clrHighlight}${highlight2}${clrRune}   Um (22)   ${clrHighlight}${highlight2}${clrRune}`;      // Um
+        this.runes.r23 = `${clrHighlight}${highlight2}${clrRune}   Mal (23)   ${clrHighlight}${highlight2}${clrRune}`;     // Mal
+        this.runes.r24 = `${clrHighlight}${highlight2}${clrRune}   Ist (24)   ${clrHighlight}${highlight2}${clrRune}`;     // Ist
+        this.runes.r25 = `${clrHighlight}${highlight2}${clrRune}   Gul (25)   ${clrHighlight}${highlight2}${clrRune}`;     // Gul
+        this.runes.r26 = `${clrHighlight}${highlight3}${clrRune}     Vex (26)     ${clrHighlight}${highlight3}${clrRune}`; // Vex
+        this.runes.r27 = `${clrHighlight}${highlight3}${clrRune}     Ohm (27)     ${clrHighlight}${highlight3}${clrRune}`; // Ohm
+        this.runes.r28 = `${clrHighlight}${highlight3}${clrRune}     Lo (28)     ${clrHighlight}${highlight3}${clrRune}`;  // Lo
+        this.runes.r29 = `${clrHighlight}${highlight3}${clrRune}     Sur (29)     ${clrHighlight}${highlight3}${clrRune}`; // Sur
+        this.runes.r30 = `${clrHighlight}${highlight3}${clrRune}     Ber (30)     ${clrHighlight}${highlight3}${clrRune}`; // Ber
+        this.runes.r31 = `${clrHighlight}${highlight3}${clrRune}     Jah (31)     ${clrHighlight}${highlight3}${clrRune}`; // Jah
+        // this.runes.r32 = `${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}`; // Cham
+        // this.runes.r32 = `\n\n${clrMsg}Pick Up\n${LTT_PADDING}${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}${LTT_PADDING}\n\n`; // Cham
+        this.runes.r32 = generateBigTooltip(config.BigTooltipRunesHigh, `${clrHighlight}${PATTERN_2x10}${clrRune}${PADDING_10}Cham (32)${PADDING_10}${clrHighlight}${PATTERN_2x10}${clrRune}`); // Cham
+        // this.runes.r32 = generateBigTooltip(`${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}`); // Cham
+        // this.runes.r33 = `${clrHighlight}${highlight3}${clrRune}     Zod (33)     ${clrHighlight}${highlight3}${clrRune}`;  // Zod
         // this.runes.r33 = `${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${PADDING_5}${RUNES_COLOR_NAME}Zod (33)${PADDING_5}${RUNES_COLOR_HIGHLIGHT}${PATTERN_10}${RUNES_COLOR_NAME}`;  // Zod
-        this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE, "Zod Rune (33)"); // Zod
+        this.runes.r33 = generateDoubleHighlight(clrHighlight, PATTERN_10, PADDING_5, clrRune, "Zod Rune (33)"); // Zod
         return;
     }
   }
@@ -2164,6 +2156,21 @@ class DropSoundBuilder {
 };
 
 class ProfileHdModsBuilder {
+  colors = { // _profilehd.json colors
+    Beige:         '$FontColorBeige',
+    Black:         '$FontColorBlack',
+    DarkGreen:     '$FontColorDarkGreen',
+    Green:         '$FontColorGreen',
+    LightBlue:     '$FontColorLightBlue',
+    LightGray:     '$FontColorLightGray',
+    LightPurple:   '$FontColorLightPurple',
+    LightRed:      '$FontColorLightRed',
+    LightTeal:     '$FontColorLightTeal',
+    Red:           '$FontColorRed',
+    VeryLightGray: '$FontColorVeryLightGray',
+    White:         '$FontColorWhite',
+  }
+
   build() {
     let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
 
@@ -2201,7 +2208,7 @@ class ProfileHdModsBuilder {
       return;
     }
 
-    profileHD.TooltipStyle.EtherealColor = (setting !== "custom") ? PHD_COLORS[setting] : "$FontColorLightTeal"; // [CSTM-ETH] change $FontColorLightTeal into any color variable in _profilehd.json
+    profileHD.TooltipStyle.EtherealColor = (setting !== "custom") ? this.colors[setting] : "$FontColorLightTeal"; // [CSTM-ETH] change $FontColorLightTeal into any color variable in _profilehd.json
   }
 
   applyTooltipMods(profileHD, setting, opacity, tooltipSize) {
