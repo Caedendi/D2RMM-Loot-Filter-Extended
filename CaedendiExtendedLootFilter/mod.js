@@ -591,18 +591,18 @@ const customAffixes = {
     switch (settingAffix) {
       case "none": // Gold displays as "1234 Gold".
         if (color !== NO_COLOR) {
-          this.items[ca.gold].gld = `${color}Gold`; 
+          this.items[ca[COL_GOLD]].gld = `${color}Gold`; 
         }
         return;
       case "g": // Gold displays as "1234 G".
-        this.items[ca.gold].gld = `${color}G`; 
+        this.items[ca[COL_GOLD]].gld = `${color}G`; 
         return;
       case "hide": // Gold displays as "1234".
-        this.items[ca.gold].gld = HIDDEN;
+        this.items[ca[COL_GOLD]].gld = HIDDEN;
         return;
       case "custom": // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items[ca.gold].gld = `${PURPLE}Gold`;
+        this.items[ca[COL_GOLD]].gld = `${PURPLE}Gold`;
         return;
     }
   },
