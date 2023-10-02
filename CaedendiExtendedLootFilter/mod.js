@@ -325,160 +325,158 @@ const BTT_PICK_UP = `${NEW_LINE}${PURPLE}Pick Up`;
 //   Parameters - Light Pillars   //
 //================================//
 
-// item paths
-const LP_PATH_ITEMS                = "hd\\items\\";
-const LP_PATH_ITEMS_MISC           = `${LP_PATH_ITEMS}misc\\`;
-const LP_PATH_ITEMS_WEAPON         = `${LP_PATH_ITEMS}weapon\\`;
-const LP_PATH_ITEMS_MISC_BODY_PART = `${LP_PATH_ITEMS_MISC}body_part\\`;
-const LP_PATH_ITEMS_MISC_QUEST     = `${LP_PATH_ITEMS_MISC}quest\\`;
-const LP_PATH_ITEMS_WEAPON_HAMMER  = `${LP_PATH_ITEMS_WEAPON}hammer\\`;
-const LP_PATH_ITEMS_WEAPON_MACE    = `${LP_PATH_ITEMS_WEAPON}mace\\`;
-const LP_PATH_ITEMS_WEAPON_STAFF   = `${LP_PATH_ITEMS_WEAPON}staff\\`;
+class LightPillarConstants {
+  // item paths
+  static PATH_ITEMS                = "hd\\items\\";
+  static PATH_ITEMS_MISC           = `${this.PATH_ITEMS}misc\\`;
+  static PATH_ITEMS_WEAPON         = `${this.PATH_ITEMS}weapon\\`;
+  static PATH_ITEMS_MISC_BODY_PART = `${this.PATH_ITEMS_MISC}body_part\\`;
+  static PATH_ITEMS_MISC_QUEST     = `${this.PATH_ITEMS_MISC}quest\\`;
+  static PATH_ITEMS_WEAPON_HAMMER  = `${this.PATH_ITEMS_WEAPON}hammer\\`;
+  static PATH_ITEMS_WEAPON_MACE    = `${this.PATH_ITEMS_WEAPON}mace\\`;
+  static PATH_ITEMS_WEAPON_STAFF   = `${this.PATH_ITEMS_WEAPON}staff\\`;
 
-// vfx paths
-const LP_PATH_VFX_BASE = "data/hd/vfx/particles/overlays/";
-const LP_PATH_HORADRIC_LIGHT = `${LP_PATH_VFX_BASE}object/horadric_light/fx_horadric_light.particles`;
-const LP_PATH_PALADIN_FANATICISM = `${LP_PATH_VFX_BASE}paladin/aura_fanatic/aura_fanatic.particles`;
-const LP_PATH_VALKYRIE_START = `${LP_PATH_VFX_BASE}common/valkyriestart/valkriestart_overlay.particles`;
+  // vfx paths
+  static PATH_VFX_BASE           = "data/hd/vfx/particles/overlays/";
+  static PATH_HORADRIC_LIGHT     = `${this.PATH_VFX_BASE}object/horadric_light/fx_horadric_light.particles`;
+  static PATH_PALADIN_FANATICISM = `${this.PATH_VFX_BASE}paladin/aura_fanatic/aura_fanatic.particles`;
+  static PATH_VALKYRIE_START     = `${this.PATH_VFX_BASE}common/valkyriestart/valkriestart_overlay.particles`;
 
-// vfx names
-const LP_DEFINITION_COMPONENT_TRANSFORM = "TransformDefinitionComponent";
-const LP_DEFINITION_COMPONENT_VFX = "VfxDefinitionComponent";
-const LP_NAME_TRANSFORM1 = "component_transform1";
-const LP_NAME_VFX_STOLEN = "entity_vfx_filthyStolenMod";
-const LP_NAME_VFX_ROOT = "entity_root_VfxDefinition";
+  // vfx names
+  static DEFINITION_COMPONENT_TRANSFORM = "TransformDefinitionComponent";
+  static DEFINITION_COMPONENT_VFX       = "VfxDefinitionComponent";
+  static NAME_TRANSFORM1                = "component_transform1";
+  static NAME_VFX_STOLEN                = "entity_vfx_filthyStolenMod";
+  static NAME_VFX_ROOT                  = "entity_root_VfxDefinition";
 
-// vfx params
-const LP_TYPE_ENTITY = "Entity";
-const LP_NAME_DROPLIGHT = "droplight";
-const LP_NAME_ENTITY_ROOT = "entity_root";
-const LP_ID_DROPLIGHT = 9999996974;
-const LP_ID_ENTITY_ROOT = 1079187010;
+  // vfx params
+  static TYPE_ENTITY      = "Entity";
+  static NAME_DROPLIGHT   = "droplight";
+  static NAME_ENTITY_ROOT = "entity_root";
+  static ID_DROPLIGHT     = 9999996974;
+  static ID_ENTITY_ROOT   = 1079187010;
 
-// vfx light pillar
-const LP_LIGHT_PILLAR_COMPONENT = {
-  particle: {
-    path: LP_PATH_HORADRIC_LIGHT,
-  },
-  entities: [
-    {
-      type: LP_TYPE_ENTITY,
-      name: LP_NAME_DROPLIGHT,
-      id: LP_ID_DROPLIGHT,
-      components: [
-        {
-          type: LP_DEFINITION_COMPONENT_TRANSFORM,
-          name: LP_NAME_TRANSFORM1,
-          position: { x: 0.0, y: 0.0, z: 0.0 },
-          orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
-          scale: { x: 1.0, y: 1.0, z: 1.0 },
-          inheritOnlyPosition: false
-        },
-        {
-          type: LP_DEFINITION_COMPONENT_VFX,
-          name: LP_NAME_VFX_STOLEN,
-          filename: LP_PATH_HORADRIC_LIGHT,
-          hardKillOnDestroy: false
-        }
-      ]
+  // vfx light pillar
+  static LIGHT_PILLAR_COMPONENT = {
+    particle: {
+      path: this.PATH_HORADRIC_LIGHT,
     },
-    {
-      type: LP_TYPE_ENTITY,
-      name: LP_NAME_ENTITY_ROOT,
-      id: LP_ID_ENTITY_ROOT,
-      components: [
-        {
-          type: LP_DEFINITION_COMPONENT_VFX,
-          name: LP_NAME_VFX_ROOT,
-          filename: LP_PATH_PALADIN_FANATICISM,
-          hardKillOnDestroy: false
-        }
-      ]
-    },
-    {
-      type: LP_TYPE_ENTITY,
-      name: LP_NAME_DROPLIGHT,
-      id: LP_ID_DROPLIGHT,
-      components: [
-        {
-          type: LP_DEFINITION_COMPONENT_TRANSFORM,
-          name: LP_NAME_TRANSFORM1,
-          position: { x: 0.0, y: 0.0, z: 0.0 },
-          orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
-          scale: { x: 1.0, y: 1.0, z: 1.0 },
-          inheritOnlyPosition: false
-        },
-        {
-          type: LP_DEFINITION_COMPONENT_VFX,
-          name: LP_NAME_VFX_STOLEN,
-          filename: LP_PATH_VALKYRIE_START,
-          hardKillOnDestroy: false
-        }
-      ]
-    }
-  ]
-};
+    entities: [
+      {
+        type: this.TYPE_ENTITY,
+        name: this.NAME_DROPLIGHT,
+        id: this.ID_DROPLIGHT,
+        components: [
+          {
+            type: this.DEFINITION_COMPONENT_TRANSFORM,
+            name: this.NAME_TRANSFORM1,
+            position: { x: 0.0, y: 0.0, z: 0.0 },
+            orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
+            scale: { x: 1.0, y: 1.0, z: 1.0 },
+            inheritOnlyPosition: false
+          },
+          {
+            type: this.DEFINITION_COMPONENT_VFX,
+            name: this.NAME_VFX_STOLEN,
+            filename: this.PATH_HORADRIC_LIGHT,
+            hardKillOnDestroy: false
+          }
+        ]
+      },
+      {
+        type: this.TYPE_ENTITY,
+        name: this.NAME_ENTITY_ROOT,
+        id: this.ID_ENTITY_ROOT,
+        components: [
+          {
+            type: this.DEFINITION_COMPONENT_VFX,
+            name: this.NAME_VFX_ROOT,
+            filename: this.PATH_PALADIN_FANATICISM,
+            hardKillOnDestroy: false
+          }
+        ]
+      },
+      {
+        type: this.TYPE_ENTITY,
+        name: this.NAME_DROPLIGHT,
+        id: this.ID_DROPLIGHT,
+        components: [
+          {
+            type: this.DEFINITION_COMPONENT_TRANSFORM,
+            name: this.NAME_TRANSFORM1,
+            position: { x: 0.0, y: 0.0, z: 0.0 },
+            orientation: { x: 0.0, y: 0.0, z: 0.0, w: 1.0 },
+            scale: { x: 1.0, y: 1.0, z: 1.0 },
+            inheritOnlyPosition: false
+          },
+          {
+            type: this.DEFINITION_COMPONENT_VFX,
+            name: this.NAME_VFX_STOLEN,
+            filename: this.PATH_VALKYRIE_START,
+            hardKillOnDestroy: false
+          }
+        ]
+      }
+    ]
+  };
+}
 
 
 //==============================//
 //   Parameters - Drop Sounds   //
 //==============================//
 
-const DS_PATH_MISC = FILE_MISC_PATH;
-const DS_FRAME_NONE = 0;
+class DropSoundConstants {
+  // sound names
+  static SOUND_NONE = "";
+  static SOUND_ITEM_RUNE = "item_rune";
+  static SOUND_PREFIX = "celf_"; // caedendi extended loot filter
 
-// todo
+  // channels
+  static CHANNEL_ITEMS_SD = "sfx/items_sd";
+  static CHANNEL_ITEMS_HD = "sfx/items_hd";
+  
+  // file names
+  static FILE_CURSOR = "cursor\\";
+  static FILE_OBJECT = "object\\";
+  static FILE_EXTENSION_FLAC = ".flac";
+  static FILE_NONE = `none${this.FILE_EXTENSION_FLAC}`;
 
-// sound names
-const DS_SOUND_ITEM_RUNE = "item_rune";
-
-const DS_SOUND_PREFIX = "celf_"; // caedendi extended loot filter
-const DS_SOUND_NONE = "";
-
-// channels
-const DS_CHANNEL_ITEMS_SD = "sfx/items_sd";
-const DS_CHANNEL_ITEMS_HD = "sfx/items_hd";
-
-// file names
-const DS_FILE_CURSOR = "cursor\\";
-const DS_FILE_OBJECT = "object\\";
-const DS_FILE_EXTENSION_FLAC = ".flac";
-const DS_FILE_NONE = `none${DS_FILE_EXTENSION_FLAC}`;
-
-const DS_SOUND_EFFECTS = {
-  hostile: {
-    sd: `${DS_FILE_CURSOR}hostile${DS_FILE_EXTENSION_FLAC}`,
-    hd: `${DS_FILE_CURSOR}cursor_hostile_1_hd${DS_FILE_EXTENSION_FLAC}`,
-  },
-  hf_place: {
-    sd: `${DS_FILE_OBJECT}hellforgeplace${DS_FILE_EXTENSION_FLAC}`,
-    hd: `${DS_FILE_OBJECT}object_hellforgeplace_hd${DS_FILE_EXTENSION_FLAC}`,
-  },
-  hf_smash: {
-    sd: `${DS_FILE_OBJECT}hellforgesmash${DS_FILE_EXTENSION_FLAC}`,
-    hd: `${DS_FILE_OBJECT}object_hellforgesmash_hd${DS_FILE_EXTENSION_FLAC}`,
-  },
-  cairn_success: {
-    sd: `${DS_FILE_OBJECT}cairnsuccess${DS_FILE_EXTENSION_FLAC}`,
-    hd: `${DS_FILE_OBJECT}object_cairnsuccess_hd${DS_FILE_EXTENSION_FLAC}`,
-  },
-  portal_open: {
-    sd: `${DS_FILE_OBJECT}portalopen${DS_FILE_EXTENSION_FLAC}`,
-    hd: `${DS_FILE_OBJECT}object_portalopen_hd${DS_FILE_EXTENSION_FLAC}`,
-  },
-  quest_done: {
-    sd: `${DS_FILE_CURSOR}questdone${DS_FILE_EXTENSION_FLAC}`,
-    hd: `${DS_FILE_CURSOR}cursor_questdone_1_hd${DS_FILE_EXTENSION_FLAC}`,
-  },
-  none: {
-    sd: DS_FILE_NONE,
-    hd: DS_FILE_NONE,
-  },
-  custom: {
-    sd: DS_FILE_NONE, // Put your custom drop sound here [CSTM-DSND]
-    hd: DS_FILE_NONE, // Put your custom drop sound here [CSTM-DSND]
-  },
-};
+  static SOUND_EFFECTS = {
+    hostile: {
+      sd: `${this.FILE_CURSOR}hostile${this.FILE_EXTENSION_FLAC}`,
+      hd: `${this.FILE_CURSOR}cursor_hostile_1_hd${this.FILE_EXTENSION_FLAC}`,
+    },
+    hf_place: {
+      sd: `${this.FILE_OBJECT}hellforgeplace${this.FILE_EXTENSION_FLAC}`,
+      hd: `${this.FILE_OBJECT}object_hellforgeplace_hd${this.FILE_EXTENSION_FLAC}`,
+    },
+    hf_smash: {
+      sd: `${this.FILE_OBJECT}hellforgesmash${this.FILE_EXTENSION_FLAC}`,
+      hd: `${this.FILE_OBJECT}object_hellforgesmash_hd${this.FILE_EXTENSION_FLAC}`,
+    },
+    cairn_success: {
+      sd: `${this.FILE_OBJECT}cairnsuccess${this.FILE_EXTENSION_FLAC}`,
+      hd: `${this.FILE_OBJECT}object_cairnsuccess_hd${this.FILE_EXTENSION_FLAC}`,
+    },
+    portal_open: {
+      sd: `${this.FILE_OBJECT}portalopen${this.FILE_EXTENSION_FLAC}`,
+      hd: `${this.FILE_OBJECT}object_portalopen_hd${this.FILE_EXTENSION_FLAC}`,
+    },
+    quest_done: {
+      sd: `${this.FILE_CURSOR}questdone${this.FILE_EXTENSION_FLAC}`,
+      hd: `${this.FILE_CURSOR}cursor_questdone_1_hd${this.FILE_EXTENSION_FLAC}`,
+    },
+    none: {
+      sd: this.FILE_NONE,
+      hd: this.FILE_NONE,
+    },
+    custom: {
+      sd: this.FILE_NONE, // Put your custom drop sound here [CSTM-DSND]
+      hd: this.FILE_NONE, // Put your custom drop sound here [CSTM-DSND]
+    },
+  };
+}
 
 
 //======================//
@@ -1811,7 +1809,7 @@ class LightPillarBuilder {
       }
 
       tier.runes.forEach((rune) => {
-        this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune.name.toLowerCase()}_rune`);
+        this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}rune\\`, `${rune.name.toLowerCase()}_rune`);
       });
     });
   }
@@ -1822,8 +1820,8 @@ class LightPillarBuilder {
       return;
     }
 
-    this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\`, "ring");
-    this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\`, "amulet");
+    this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}ring\\`, "ring");
+    this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}amulet\\`, "amulet");
   }
 
   // gems & jewels
@@ -1838,7 +1836,7 @@ class LightPillarBuilder {
     let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];
     gemQualities.forEach((quality) => {
       gemTypes.forEach((type) => {
-        this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
+        this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
       });
     });
   }
@@ -1863,11 +1861,11 @@ class LightPillarBuilder {
     }
 
     ["small", "medium", "large"].forEach((charm) => {
-      this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}charm\\`, `charm_${charm}`);
+      this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}charm\\`, `charm_${charm}`);
     });
-    // pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
+    // pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
     if (!config.ShouldAddLightPillarQuestItems) {
-      this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
+      this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
     }
   }
 
@@ -1883,22 +1881,22 @@ class LightPillarBuilder {
     if (config.ShouldAddLightPillarQuestItems) {
       toPush = toPush.concat([
         // act 1
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
-        [`${LP_PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
+        [`${LightPillarConstants.PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
         // act 2
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
-        [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
+        [`${LightPillarConstants.PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
         // act 3
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
-        [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
-        [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
-        [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
-        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
+        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
+        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
+        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
         // act 4
         // none
         // act 5
@@ -1911,17 +1909,17 @@ class LightPillarBuilder {
     if (config.ShouldAddLightPillarQuestWeapons) {
       toPush = toPush.concat([
         // act 1
-        [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
-        [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
         // act 2
-        [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
-        [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
         // act 3
-        [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
-        [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
-        [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
         // act 4
-        [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
         // act 5
         // none
       ]);
@@ -1940,7 +1938,7 @@ class LightPillarBuilder {
 
     let essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
     essences.forEach((essence) => {
-      this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, essence);
+      this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_QUEST, essence);
     });
   }
 
@@ -1950,7 +1948,7 @@ class LightPillarBuilder {
       return;
     }
 
-    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, "token_of_absolution");
+    this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_QUEST, "token_of_absolution");
   }
 
   // pandemonium keys
@@ -1959,7 +1957,7 @@ class LightPillarBuilder {
       return;
     }
 
-    let path = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
+    let path = `${LightPillarConstants.PATH_ITEMS_MISC}key\\mephisto_key`;
     var file = D2RMM.readJson(`${path}${FILE_EXTENSION_JSON}`);
     this.pushLightPillarToFile(file);
     for (var i = 1; i <= 3; i++) {
@@ -1974,13 +1972,13 @@ class LightPillarBuilder {
       return;
     }
 
-    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "horn");
+    this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "horn");
     if (config.ShouldAddLightPillarQuestItems) {
       return;
     }
 
-    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "brain");
-    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "eye");
+    this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "brain");
+    this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "eye");
   }
 
   // standard of heroes
@@ -1990,7 +1988,7 @@ class LightPillarBuilder {
       return;
     }
     
-    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "flag");
+    this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "flag");
   }
 
   pushLightPillarToPath(path, item) {
@@ -2001,8 +1999,8 @@ class LightPillarBuilder {
   }
 
   pushLightPillarToFile(file) {
-    file.dependencies.particles.push(LP_LIGHT_PILLAR_COMPONENT.particle);
-    file.entities = file.entities.concat(LP_LIGHT_PILLAR_COMPONENT.entities);
+    file.dependencies.particles.push(LightPillarConstants.LIGHT_PILLAR_COMPONENT.particle);
+    file.entities = file.entities.concat(LightPillarConstants.LIGHT_PILLAR_COMPONENT.entities);
   }
 
 };
@@ -2106,17 +2104,17 @@ class DropSoundBuilder {
       return;
     }
     
-    let newSoundName = this.createNewDropSound(soundsFile, newNameSuffix, DS_SOUND_EFFECTS[dropSound]);
+    let newSoundName = this.createNewDropSound(soundsFile, newNameSuffix, DropSoundConstants.SOUND_EFFECTS[dropSound]);
     this.pushNewDropSoundToItems(itemsFilePath, itemCodes, newSoundName);
   }
   
   // create SD and HD sound, redirect SD to HD
   createNewDropSound(soundsFile, soundNameSuffix, sfxFileNames) {
-    let soundNameSd = `${DS_SOUND_PREFIX}${soundNameSuffix}`;
+    let soundNameSd = `${DropSoundConstants.SOUND_PREFIX}${soundNameSuffix}`;
     let soundNameHd = `${soundNameSd}_hd`;
     
-    this.pushSound(soundsFile, soundNameSd, DS_SOUND_ITEM_RUNE, DS_CHANNEL_ITEMS_SD, sfxFileNames.sd, soundNameHd);
-    this.pushSound(soundsFile, soundNameHd, DS_SOUND_ITEM_RUNE, DS_CHANNEL_ITEMS_HD, sfxFileNames.hd, DS_SOUND_NONE);
+    this.pushSound(soundsFile, soundNameSd, DropSoundConstants.SOUND_ITEM_RUNE, DropSoundConstants.CHANNEL_ITEMS_SD, sfxFileNames.sd, soundNameHd);
+    this.pushSound(soundsFile, soundNameHd, DropSoundConstants.SOUND_ITEM_RUNE, DropSoundConstants.CHANNEL_ITEMS_HD, sfxFileNames.hd, DropSoundConstants.SOUND_NONE);
   
     return soundNameSd;
   }
