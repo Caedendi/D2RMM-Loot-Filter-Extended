@@ -499,7 +499,7 @@ const DS_SOUND_EFFECTS = {
 //   Global Functions   //
 //======================//
 
-function initIndexes(x, collections) {
+function initializeCollections(x, collections) {
   for (let i = 0; i < collections.length; i++) {
     x[collections[i]] = i;
   }
@@ -573,16 +573,21 @@ function generateBigTooltip(setting, name) {
 //   Custom Item Name Lists   //
 //============================//
 
-const ca = {};
 
+const ca = {};
 const customAffixes = {
   items: [],
 
   init() {
-    initIndexes(ca, [ COL_GOLD, COL_QUALITY, COL_GEMS ]);
-    this.items[ca[COL_GOLD]] = {};
-    this.items[ca[COL_QUALITY]] = {};
-    this.items[ca[COL_GEMS]] = {};
+    let collections = [ 
+      COL_GOLD, 
+      COL_QUALITY, 
+      COL_GEMS 
+    ];
+    initializeCollections(ca, collections);
+    collections.forEach(col => {
+      this.items[ca[col]] = {};
+    });
   },
 
   customizeGold(settingAmount, settingAffix) {
@@ -617,19 +622,19 @@ const customAffixes = {
         return;
       case "short": // Enable
       case "color":   // Enable, gray Inferior items
-        this.items[ca.quality]["Hiquality"] = superior;
-        this.items[ca.quality]["Damaged"] = inferior;
-        this.items[ca.quality]["Cracked"] = inferior;
-        this.items[ca.quality]["Low Quality"] = inferior;
-        this.items[ca.quality]["Crude"] = inferior;
+        this.items[ca[COL_QUALITY]]["Hiquality"] = superior;
+        this.items[ca[COL_QUALITY]]["Damaged"] = inferior;
+        this.items[ca[COL_QUALITY]]["Cracked"] = inferior;
+        this.items[ca[COL_QUALITY]]["Low Quality"] = inferior;
+        this.items[ca[COL_QUALITY]]["Crude"] = inferior;
         return;
       case "custom": // [CSTM-SPIF]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items[ca.quality]["Hiquality"] = `Superior`;
-        this.items[ca.quality]["Damaged"] = `Damaged`;
-        this.items[ca.quality]["Cracked"] = `Cracked`;
-        this.items[ca.quality]["Low Quality"] = `Low Quality`;
-        this.items[ca.quality]["Crude"] = `Crude`;
+        this.items[ca[COL_QUALITY]]["Hiquality"] = `Superior`;
+        this.items[ca[COL_QUALITY]]["Damaged"] = `Damaged`;
+        this.items[ca[COL_QUALITY]]["Cracked"] = `Cracked`;
+        this.items[ca[COL_QUALITY]]["Low Quality"] = `Low Quality`;
+        this.items[ca[COL_QUALITY]]["Crude"] = `Crude`;
         return;
     }
   },
@@ -642,10 +647,10 @@ const customAffixes = {
         return;
       case "all": // show all
         // `${GREEN}o${WHITE} Emerald`;
-        this.items[ca.gems]["gsw"] = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
-        this.items[ca.gems]["gsg"] = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
-        this.items[ca.gems]["gsr"] = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
-        this.items[ca.gems]["gsb"] = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
+        this.items[ca[COL_GEMS]].gsw = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
+        this.items[ca[COL_GEMS]].gsg = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
+        this.items[ca[COL_GEMS]].gsr = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
+        this.items[ca[COL_GEMS]].gsb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
         return;
       case "flawless": // hide chipped/flawed/regular gems
         this.hideGems();
@@ -655,19 +660,19 @@ const customAffixes = {
         return;
       case "custom": // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items[ca.gems]["gsw"] = `Diamond`; 
-        this.items[ca.gems]["gsg"] = `Emerald`; 
-        this.items[ca.gems]["gsr"] = `Ruby`;
-        this.items[ca.gems]["gsb"] = `Sapphire`;
+        this.items[ca[COL_GEMS]].gsw = `Diamond`; 
+        this.items[ca[COL_GEMS]].gsg = `Emerald`; 
+        this.items[ca[COL_GEMS]].gsr = `Ruby`;
+        this.items[ca[COL_GEMS]].gsb = `Sapphire`;
         return;
     }
   },
 
   hideGems() {
-    this.items["gsw"] = HIDDEN;
-    this.items["gsg"] = HIDDEN;
-    this.items["gsr"] = HIDDEN;
-    this.items["gsb"] = HIDDEN;
+    this.items[ca[COL_GEMS]].gsw = HIDDEN;
+    this.items[ca[COL_GEMS]].gsg = HIDDEN;
+    this.items[ca[COL_GEMS]].gsr = HIDDEN;
+    this.items[ca[COL_GEMS]].gsb = HIDDEN;
   },
 };
 
@@ -788,18 +793,29 @@ const customRunes = {
   },
 };
 
-const ci = {
-}
-
+const ci = {};
 const customItems = {
   items: [],
 
   init() {
-    let collections = [ COL_HEALPOTS, COL_HEALPOTS, COL_BUFFPOTS, COL_THROWPOTS, COL_SCROLLS, 
-      COL_AMMO, COL_KEYS, COL_GEMS, COL_JEWELS, COL_CHARMS, COL_QUEST, COL_ENDGAME, COL_WEPARM, ];
-    initIndexes(ci, collections);
+    let collections = [ 
+      COL_HEALPOTS, 
+      COL_HEALPOTS, 
+      COL_BUFFPOTS, 
+      COL_THROWPOTS, 
+      COL_SCROLLS, 
+      COL_AMMO, 
+      COL_KEYS, 
+      COL_GEMS, 
+      COL_JEWELS, 
+      COL_CHARMS, 
+      COL_QUEST, 
+      COL_ENDGAME, 
+      COL_WEPARM, 
+    ];
+    initializeCollections(ci, collections);
     collections.forEach(col => {
-      this.items[col] = {};
+      this.items[ca[col]] = {};
     });
   },
 
