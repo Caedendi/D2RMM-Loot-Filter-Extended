@@ -136,6 +136,7 @@ const COL_GOLD      = "gold";
 const EMPTY_STRING = '';
 const SINGLE_SPACE = ' ';
 const NEW_LINE = "\n";
+const NONE = "none";
 
 const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
 const HIGHLIGHT       = config.HighlightCharacter !== "custom" ? config.HighlightCharacter                 : '*'; // replace * with desired custom character [CSTM-HLCTR]
@@ -446,7 +447,7 @@ const DS_FRAME_NONE = 0;
 // sound names
 const DS_SOUND_ITEM_RUNE = "item_rune";
 
-const DS_SOUND_PREFIX = "celf_";
+const DS_SOUND_PREFIX = "celf_"; // caedendi extended loot filter
 const DS_SOUND_NONE = "";
 
 // channels
@@ -504,6 +505,12 @@ function initializeCollections(x, collections) {
     x[collections[i]] = i;
   }
 }
+
+// function initializeCollections2(x, collections) {
+//   for (let i = 0; i < collections.length; i++) {
+//     x[collections[i].name] = { name: i, bigTooltipSetting: "" };
+//   }
+// }
 
 /**
  * Generate an item name with a highlight pattern on the left side: `${RED}+HP1` or `${GRAY}o Arrows`.
@@ -574,21 +581,82 @@ function generateBigTooltip(setting, name) {
 //============================//
 
 
-const ca = {};
-const customAffixes = {
-  items: [],
+// abstract class
+class AbstractItemNamesBuilder {
+  constructor() {
+    if (new.target === CustomItemNamesBuilder) {
+      throw new TypeError("Cannot construct abstract CustomItemNamesBuilder instances directly");
+    }
+  }
 
-  init() {
-    let collections = [ 
-      COL_GOLD, 
-      COL_QUALITY, 
-      COL_GEMS 
-    ];
-    initializeCollections(ca, collections);
-    collections.forEach(col => {
-      this.items[ca[col]] = {};
+  applyCustomNames(path, customNames) {
+    if (customNames.length == 0) {
+      return;
+    }
+    
+    let file = D2RMM.readJson(path); // copy existing file
+    file.forEach((item) => { // overwrite provided entries with new names
+      if (item.Key in customNames) {
+        for (const key in item) {
+          if (key !== "id" && key !== "Key") {
+            item[key] = customNames[item.Key];
+          }
+        }
+      }
     });
-  },
+    D2RMM.writeJson(path, file); // overwrite existing file with new file
+  }
+}
+
+// const COL_CA = [
+//   { name: COL_GOLD,    bigTooltipSetting: NONE },
+//   { name: COL_QUALITY, bigTooltipSetting: NONE },
+//   { name: COL_GEMS,    bigTooltipSetting: config.BigTooltipGems },
+// ];
+
+// const ca = {};
+
+class CustomAffixesBuilder extends AbstractItemNamesBuilder {
+  items = {};
+  // items = [];
+  // index = {};
+
+  build() {
+    // this.init();
+    this.customizeGold(config.GoldAmount, config.GoldSuffix);
+    this.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes);
+    this.customizeGems(config.Gems);
+    
+    // this.createBigTooltips();
+
+    this.applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, customAffixes.items.flat());
+
+    // customAffixes.items.forEach(collection => {
+    //   applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, collection);
+    // });
+  }
+
+  // init() {
+  //   // creates a subcollection inside this.items for each item type.
+  //   // the reason we're doing it like this is because we want to use named (string) indexes ("gems" etc) for convenience instead
+  //   // of hardcoded numbers, but functions like .length and .forEach don't work with string indexes. This method circumvents that 
+  //   // by referencing a const string name that's actually an index number underwater.
+
+  //   // for (let i = 0; i < COL_CA.length; i++) {
+  //   //   items[COL_CA[i].name] = i;
+  //   // }
+
+
+  //   let collections = [
+  //     COL_GOLD,
+  //     COL_QUALITY,
+  //     COL_GEMS,
+  //   ];
+  //   initializeCollections2(ca, COL_CA);
+  //   ca.forEach(col => {
+  //     this.items[ca[col.name]] = {};
+  //   });
+  // }
 
   customizeGold(settingAmount, settingAffix) {
     let color = settingAmount === "wg" ? GOLD : settingAmount === "gw" ? WHITE : NO_COLOR;
@@ -596,21 +664,22 @@ const customAffixes = {
     switch (settingAffix) {
       case "none": // Gold displays as "1234 Gold".
         if (color !== NO_COLOR) {
-          this.items[ca[COL_GOLD]].gld = `${color}Gold`; 
+          this.items.gld = `${color}Gold`; 
         }
         return;
       case "g": // Gold displays as "1234 G".
-        this.items[ca[COL_GOLD]].gld = `${color}G`; 
+        // this.items[ca[COL_GOLD]].gld = `${color}G`; 
+        this.items.gld = `${color}G`; 
         return;
       case "hide": // Gold displays as "1234".
-        this.items[ca[COL_GOLD]].gld = HIDDEN;
+        this.items.gld = HIDDEN;
         return;
       case "custom": // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items[ca[COL_GOLD]].gld = `${PURPLE}Gold`;
+        this.items.gld = `${PURPLE}Gold`;
         return;
     }
-  },
+  }
   
   shortenSupInferiorPrefixes(setting) {
     var color = (setting === "color") ? GRAY : NO_COLOR;
@@ -622,22 +691,22 @@ const customAffixes = {
         return;
       case "short": // Enable
       case "color":   // Enable, gray Inferior items
-        this.items[ca[COL_QUALITY]]["Hiquality"] = superior;
-        this.items[ca[COL_QUALITY]]["Damaged"] = inferior;
-        this.items[ca[COL_QUALITY]]["Cracked"] = inferior;
-        this.items[ca[COL_QUALITY]]["Low Quality"] = inferior;
-        this.items[ca[COL_QUALITY]]["Crude"] = inferior;
+        this.items["Hiquality"]   = superior;
+        this.items["Damaged"]     = inferior;
+        this.items["Cracked"]     = inferior;
+        this.items["Low Quality"] = inferior;
+        this.items["Crude"]       = inferior;
         return;
       case "custom": // [CSTM-SPIF]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items[ca[COL_QUALITY]]["Hiquality"] = `Superior`;
-        this.items[ca[COL_QUALITY]]["Damaged"] = `Damaged`;
-        this.items[ca[COL_QUALITY]]["Cracked"] = `Cracked`;
-        this.items[ca[COL_QUALITY]]["Low Quality"] = `Low Quality`;
-        this.items[ca[COL_QUALITY]]["Crude"] = `Crude`;
+        this.items["Hiquality"]   = `Superior`;
+        this.items["Damaged"]     = `Damaged`;
+        this.items["Cracked"]     = `Cracked`;
+        this.items["Low Quality"] = `Low Quality`;
+        this.items["Crude"]       = `Crude`;
         return;
     }
-  },
+  }
 
   customizeGems(setting) {
     // These gem names also function as affixes, which is why they are located in the item-nameaffixes.json file.
@@ -647,10 +716,10 @@ const customAffixes = {
         return;
       case "all": // show all
         // `${GREEN}o${WHITE} Emerald`;
-        this.items[ca[COL_GEMS]].gsw = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
-        this.items[ca[COL_GEMS]].gsg = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
-        this.items[ca[COL_GEMS]].gsr = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
-        this.items[ca[COL_GEMS]].gsb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
+        this.items.gsw = generateSingleHighlight(WHITE,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Diamond");  // Diamond
+        this.items.gsg = generateSingleHighlight(GREEN,  GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Emerald");  // Emerald
+        this.items.gsr = generateSingleHighlight(RED,    GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Ruby");     // Ruby
+        this.items.gsb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Sapphire"); // Sapphire
         return;
       case "flawless": // hide chipped/flawed/regular gems
         this.hideGems();
@@ -660,24 +729,36 @@ const customAffixes = {
         return;
       case "custom": // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items[ca[COL_GEMS]].gsw = `Diamond`; 
-        this.items[ca[COL_GEMS]].gsg = `Emerald`; 
-        this.items[ca[COL_GEMS]].gsr = `Ruby`;
-        this.items[ca[COL_GEMS]].gsb = `Sapphire`;
+        this.items.gsw = `Diamond`; 
+        this.items.gsg = `Emerald`; 
+        this.items.gsr = `Ruby`;
+        this.items.gsb = `Sapphire`;
         return;
     }
-  },
+  }
 
   hideGems() {
-    this.items[ca[COL_GEMS]].gsw = HIDDEN;
-    this.items[ca[COL_GEMS]].gsg = HIDDEN;
-    this.items[ca[COL_GEMS]].gsr = HIDDEN;
-    this.items[ca[COL_GEMS]].gsb = HIDDEN;
-  },
+    this.items.gsw = HIDDEN;
+    this.items.gsg = HIDDEN;
+    this.items.gsr = HIDDEN;
+    this.items.gsb = HIDDEN;
+  }
+
+  // createBigTooltips() {
+  //   this.items.forEach(collection => {
+
+  //   });
+  // }
 };
 
-const customRunes = {
-  runes: {},
+class CustomRunesBuilder extends AbstractItemNamesBuilder {
+  runes = {};
+
+  build() {
+    this.customizeRunes(config.Runes);
+    // because of the four rune tiers, big tooltips are configured in the last step of generateRuneName().
+    this.applyCustomNames(FILE_ITEM_RUNES_PATH, customRunes.runes);
+  }
   
   customizeRunes(setting) {
     const RUNES_SETTINGS_AFFIX = ["nrs-hls", "nrs", "hls"];                // settings that keep the " Rune" affix
@@ -738,7 +819,7 @@ const customRunes = {
         this.runes.r33 = generateDoubleHighlight(RED, PATTERN_10, PADDING_5, ORANGE, "Zod Rune (33)"); // Zod
         return;
     }
-  },
+  }
 
   generateRuneNames(setting, settingsAffix, settingsNumbers, settingsHighlighting) {
     RUNE_TIERS.forEach((tier) => {
@@ -747,7 +828,7 @@ const customRunes = {
         this.runes[itemCode] = !tier.isVisible ? HIDDEN : this.generateRuneName(rune.name, rune.number, tier.level, tier.pattern, tier.padding, setting, settingsAffix, settingsNumbers, settingsHighlighting, tier.bigTooltipSetting);
       });
     });
-  },
+  }
 
   generateRuneName(name, number, tier, highlightPattern, padding, setting, settingsAffix, settingsNumbers, settingsHighlighting, settingBigTooltip) {
     const hasAffix = settingsAffix.includes(setting);
@@ -790,34 +871,57 @@ const customRunes = {
     let runeName = `${highlightColor1}${highlightPattern}${nameColor1}${padding}${name}${padding}${highlightColor2}${highlightPattern}${nameColor2}`;
 
     return settingBigTooltip !== "disable" ? generateBigTooltip(settingBigTooltip, runeName) : runeName;
-  },
+  }
 };
 
-const ci = {};
-const customItems = {
-  items: [],
+class CustomItemsBuilder extends AbstractItemNamesBuilder {
+  items = {};
 
-  init() {
-    let collections = [ 
-      COL_HEALPOTS, 
-      COL_HEALPOTS, 
-      COL_BUFFPOTS, 
-      COL_THROWPOTS, 
-      COL_SCROLLS, 
-      COL_AMMO, 
-      COL_KEYS, 
-      COL_GEMS, 
-      COL_JEWELS, 
-      COL_CHARMS, 
-      COL_QUEST, 
-      COL_ENDGAME, 
-      COL_WEPARM, 
-    ];
-    initializeCollections(ci, collections);
-    collections.forEach(col => {
-      this.items[ca[col]] = {};
-    });
-  },
+  build() {
+    // customItems.init();
+    this.customizeHealingPotions(config.HealingPotions);
+    this.customizeBuffPotions(config.BuffPotions);
+    this.customizeThrowingPotions(config.ThrowingPotions);
+    this.customizeScrollsAndTomes(config.ScrollsTomes);
+    this.customizeArrowsAndBolts(config.ArrowsBolts);
+    this.customizeKeys(config.Keys);
+    this.customizeJewels(config.Jewels);
+    this.customizeCharms(config.Charms);
+    this.customizeGems(config.Gems);
+    this.customizeQuestItems(config.Quest);
+    this.customizeEndgameItems(config.Endgame);
+    this.customizeWeaponsAndArmor(config.ShouldFilterWeapons, config.ShouldFilterArmor);
+
+    customItems.createBigTooltips();
+
+    this.applyCustomNames(FILE_ITEM_NAMES_PATH, customItems.items.flat());
+  }
+
+  // init() {
+  //   // creates a subcollection inside this.items for each item type.
+  //   // the reason we're doing it like this is because we want to use named (string) indexes ("gems" etc) for convenience instead
+  //   // of hardcoded numbers, but functions like .length and .forEach don't work with string indexes. This method circumvents that 
+  //   // by referencing a const string name that's actually an index number underwater.
+  //   let collections = {
+  //     name: COL_HEALPOTS, setting: 
+  //     COL_HEALPOTS, 
+  //     COL_BUFFPOTS, 
+  //     COL_THROWPOTS, 
+  //     COL_SCROLLS, 
+  //     COL_AMMO, 
+  //     COL_KEYS, 
+  //     COL_GEMS, 
+  //     COL_JEWELS, 
+  //     COL_CHARMS, 
+  //     COL_QUEST, 
+  //     COL_ENDGAME, 
+  //     COL_WEPARM, 
+  //   };
+  //   initializeCollections(ci, collections);
+  //   collections.forEach(col => {
+  //     this.items[ca[col]] = {};
+  //   });
+  // },
 
   customizeHealingPotions(setting) {
     const colorHealing = RED;
@@ -892,7 +996,7 @@ const customItems = {
         this.items.rvl = `${PURPLE}+${WHITE}RPF`; // Full Rejuvenation Potion
         return;
     }
-  },
+  }
 
   hideHealingPotions() {
     this.items.hp1 = HIDDEN; // Minor Healing Potion
@@ -909,7 +1013,7 @@ const customItems = {
     
     this.items.rvs = HIDDEN; // Rejuvenation Potion
     this.items.rvl = HIDDEN; // Full Rejuvenation Potion
-  },
+  }
 
   highlightLv123Potions(colorHealing, colorMana, colorName, pattern, padding) {
     this.items.hp1 = generateSingleHighlight(colorHealing, pattern, padding, colorName, "HP1"); // Minor Healing Potion
@@ -918,25 +1022,25 @@ const customItems = {
     this.items.mp1 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP1");    // Minor Mana Potion
     this.items.mp2 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP2");    // Light Mana Potion
     this.items.mp3 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP3");    // Mana Potion
-  },
+  }
 
   highlightLv4Potions(colorHealing, colorMana, colorName, pattern, padding) {
     this.items.hp4 = generateSingleHighlight(colorHealing, pattern, padding, colorName, "HP4"); // Greater Healing Potion
     this.items.mp4 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP4");    // Greater Mana Potion
-  },
+  }
 
   highlightLv5Potions(colorHealing, colorMana, colorName, pattern, padding) {
     this.items.hp5 = generateSingleHighlight(colorHealing, pattern, padding, colorName, "HP5"); // Super Healing Potion
     this.items.mp5 = generateSingleHighlight(colorMana, pattern, padding, colorName, "MP5");    // Super Mana Potion
-  },
+  }
 
   highlightSmallRejuvs(colorRejuv, colorName, pattern, padding) {
     this.items.rvs = generateSingleHighlight(colorRejuv, pattern, padding, colorName, "RPS");   // Rejuvenation Potion
-  },
+  }
 
   highlightFullRejuvs(colorRejuv, colorName, pattern, padding) {
     this.items.rvl = generateSingleHighlight(colorRejuv, pattern, padding, colorName, "RPF");   // Full Rejuvenation Potion
-  },
+  }
 
   customizeBuffPotions(setting) {
     const colorHighlight = GREEN;
@@ -964,7 +1068,7 @@ const customItems = {
         this.items.vps = "Stamina Potion";
         return;
     }
-  },
+  }
 
   customizeThrowingPotions(setting) {
     const colorGas = DARKGREEN;
@@ -1002,7 +1106,7 @@ const customItems = {
         this.items.ops = "Oil Potion";
         return;
     }
-  },
+  }
 
   customizeScrollsAndTomes(setting) {
     const colorScroll = GREEN;
@@ -1030,22 +1134,22 @@ const customItems = {
         this.items.ibk = "Tome of Identify";
         return;
     }
-  },
+  }
 
   hideScrolls() {
     this.items.tsc = HIDDEN; // Scroll of Town Portal
     this.items.isc = HIDDEN; // Scroll of Identify
-  },
+  }
 
   highlightScrolls(colorHighlight, colorName, pattern, padding) {
     this.items.tsc = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "TP"); // Scroll of Town Portal
     this.items.isc = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "ID"); // Scroll of Identify
-  },
+  }
 
   highlightTomes(colorHighlight, colorName, pattern, padding) {
     this.items.tbk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "TP Tome"); // Tome of Town Portal
     this.items.ibk = generateSingleHighlight(colorHighlight, pattern, padding, colorName, "ID Tome"); // Tome of Identify
-  },
+  }
 
   customizeArrowsAndBolts(setting) {
     const colorHighlight = GRAY;
@@ -1070,7 +1174,7 @@ const customItems = {
         this.items.cqv = "Bolts";
         return;
     }
-  },
+  }
 
   customizeKeys(setting) {
     switch (setting) {
@@ -1084,7 +1188,7 @@ const customItems = {
         this.items.key = "Key";
         return;
     }
-  },
+  }
   
 
   //==========//
@@ -1156,7 +1260,7 @@ const customItems = {
         this.items.skz = `Perfect Skull`;
         return;
     }
-  },
+  }
 
   hideChippedFlawedRegular() {
     this.items.gcv = HIDDEN;
@@ -1178,7 +1282,7 @@ const customItems = {
     // For some reason, the devs put these gems in another JSON file.
     this.items.gsy = HIDDEN;
     this.items.sku = HIDDEN;
-  },
+  }
 
   hideFlawless() {
     this.items.gzv = HIDDEN;
@@ -1188,7 +1292,7 @@ const customItems = {
     this.items.glb = HIDDEN;
     this.items.gly = HIDDEN;
     this.items.skl = HIDDEN;
-  },
+  }
 
   hidePerfect() {
     this.items.gpv = HIDDEN;
@@ -1198,7 +1302,7 @@ const customItems = {
     this.items.gpb = HIDDEN;
     this.items.gpy = HIDDEN;
     this.items.skz = HIDDEN;
-  },
+  }
 
   highlightChippedFlawedRegular() {
     this.items.gcv = generateSingleHighlight(PURPLE, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_CHIPPED); // Chipped Amethyst
@@ -1220,7 +1324,7 @@ const customItems = {
     // For some reason, the devs put these gems in another JSON file.
     this.items.gsy = generateSingleHighlight(YELLOW, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Topaz");    // Topaz
     this.items.sku = generateSingleHighlight(GRAY,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, "Skull");    // Skull
-  },
+  }
 
   highlightFlawless() {
     this.items.gzv = generateSingleHighlight(PURPLE, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWLESS); // Flawless Amethyst
@@ -1230,7 +1334,7 @@ const customItems = {
     this.items.glb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWLESS); // Flawless Sapphire
     this.items.gly = generateSingleHighlight(YELLOW, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWLESS); // Flawless Topaz
     this.items.skl = generateSingleHighlight(GRAY,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_FLAWLESS); // Flawless Skull
-  },
+  }
 
   highlightPerfect() {
     this.items.gpv = generateSingleHighlight(PURPLE, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_PERFECT); // Perfect Amethyst
@@ -1240,7 +1344,7 @@ const customItems = {
     this.items.gpb = generateSingleHighlight(BLUE,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_PERFECT); // Perfect Sapphire
     this.items.gpy = generateSingleHighlight(YELLOW, GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_PERFECT); // Perfect Topaz
     this.items.skz = generateSingleHighlight(GRAY,   GEM_HIGHLIGHT, GEM_PADDING, GEM_COLOR_NAME, GEM_PERFECT); // Perfect Skull
-  },
+  }
   
 
   //=============//
@@ -1259,7 +1363,7 @@ const customItems = {
         this.items["Rainbow Facet"] = `Rainbow Facet`;
         return;
     }
-  },
+  }
   
   customizeCharms(setting) {
     switch (setting) {
@@ -1292,19 +1396,19 @@ const customItems = {
         this.items["Rotting Fissure"]      = `Rotting Fissure`;
         return;
     }
-  },
+  }
 
   highlightUnidentifiedCharms() {
     this.items.cm1 = `Small ${RED}Charm${BLUE}`;
     this.items.cm2 = `Large ${RED}Charm${BLUE}`;
     this.items.cm3 = `Grand ${RED}Charm${BLUE}`;
-  },
+  }
 
   highlightUniqueCharms(){
     this.items["Annihilus"]       = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Annihilus${CHARMS_UNIQUE_SUFFIX}`;
     this.items["Hellfire Torch"]  = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Hellfire Torch${CHARMS_UNIQUE_SUFFIX}`;
     this.items["Gheed's Fortune"] = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Gheed's Fortune${CHARMS_UNIQUE_SUFFIX}`;
-  },
+  }
 
   highlightSunderCharms(){
     if (IS_ALTERNATE_HIGHLIGHT_SUNDER) {
@@ -1323,7 +1427,7 @@ const customItems = {
       this.items["Flame Rift"]           = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Flame Rift${CHARMS_UNIQUE_SUFFIX}`;
       this.items["Rotting Fissure"]      = `${ILVL_INDENT_FIX_CHARMS}${CHARMS_UNIQUE_PREFIX}Rotting Fissure${CHARMS_UNIQUE_SUFFIX}`;
     } 
-  },
+  }
   
   //=================//
   //   Quest Items   //
@@ -1377,7 +1481,7 @@ const customItems = {
         this.items["Hell Forge Hammer"]   = `Hell Forge Hammer`;   // Hell Forge Hammer
         return;
     }
-  },
+  }
 
   highlightQuestItems() {
     // for Book of Skill and Potion of Life, see [CSTM-QST2]
@@ -1439,11 +1543,11 @@ const customItems = {
       this.items.KhalimFlail          = indent + this.items.KhalimFlail;
       this.items["Hell Forge Hammer"] = indent + this.items["Hell Forge Hammer"];
     }
-  },
+  }
 
   highlightCube() {
     this.items.box = `${QUEST_PREFIX}Horadric Cube${QUEST_SUFFIX}`; // Horadric Cube
-  },
+  }
     
   //===================================================//
   //   Endgame: Pandemonium Event, Tokens & Essences   //
@@ -1479,37 +1583,41 @@ const customItems = {
         this.items.std = `Standard of Heroes`;
         return;
     }
-  },
+  }
 
   highlightEndgameItems() {
     this.highlightEssences(ESSENCE_PREFIX, ESSENCE_SUFFIX);
     this.highlightToken(TOKEN_PREFIX, TOKEN_SUFFIX);
     this.highlightKeys(KEY_PREFIX, KEY_SUFFIX);
     this.highlightOrgans(ORGAN_PREFIX, ORGAN_SUFFIX);
-  },
+  }
   
   highlightEssences(prefix, suffix) {
     this.items.tes = `${prefix}Twisted Essence of Suffering${suffix}`;     // Twisted Essence of Suffering
     this.items.ceh = `${prefix}Charged Essense of Hatred${suffix}`;        // Charged Essense of Hatred
     this.items.bet = `${prefix}Burning Essence of Terror${suffix}`;        // Burning Essence of Terror
     this.items.fed = `${prefix}Festering Essence of Destruction${suffix}`; // Festering Essence of Destruction
-  },
+  }
   
   highlightToken(prefix, suffix) {
     this.items.toa = `${prefix}Token of Absolution${suffix}`;              // Token of Absolution
-  },
+  }
   
   highlightKeys(prefix, suffix) {
     this.items.pk1 = `${prefix}Key of Terror${suffix}`;                    // Pandemonium Key 1 Key of Terror
     this.items.pk2 = `${prefix}Key of Hate${suffix}`;                      // Pandemonium Key 2 Key of Hate
     this.items.pk3 = `${prefix}Key of Destruction${suffix}`;               // Pandemonium Key 3 Key of Destruction
-  },
+  }
 
   highlightOrgans(prefix, suffix) {
     this.items.dhn = `${prefix}Diablo's Horn${suffix}`;                    // Diablo's Horn
     this.items.bey = `${prefix}Baal's Eye${suffix}`;                       // Baal's Eye
     this.items.mbr = `${prefix}Mephisto's Brain${suffix}`;                 // Mephisto's Brain
-  },
+  }
+    
+  //=====================//
+  //   Weapons & Armor   //
+  //=====================//
   
   customizeWeaponsAndArmor(shouldFilterWeapons, shouldFilterArmor) {
     // const WA_CLR_PATTERN = RED;
@@ -1536,11 +1644,20 @@ const customItems = {
       // this.items["ci3"] = `${RED}Diadem${BLUE}`; // Diadem, color name red
       // this.items["ci3"] = `${ILVL_INDENT_FIX_DOUBLE}${generateDoubleHighlight(WA_CLR_PATTERN, WA_PATTERN, WA_PADDING, WA_CLR_NAME, "Diadem")}${BLUE}`; // Diadem, highlight
     }
-  },
+  }
+
+  createBigTooltips() {
+
+  }
 };
 
-const customUi = {
-  items: {},
+class CustomUiBuilder extends AbstractItemNamesBuilder {
+  items = {};
+
+  build() {
+    this.customizeQuestItems(config.Quest);
+    this.applyCustomNames(FILE_UI_PATH, customUi.items);
+  }
 
   //=================//
   //   Quest Items   //
@@ -1561,11 +1678,16 @@ const customUi = {
         this.items.xyz = `Potion of Life`; // Potion of Life
         return;
     }
-  },
+  }
 };
 
-const customModifiers = {
-  items: {},
+class CustomModifiersBuilder extends AbstractItemNamesBuilder {
+  items = {};
+
+  build() {
+    this.customizeQuestItems(config.Quest);
+    this.applyCustomNames(FILE_ITEM_MODIFIERS_PATH, customModifiers.items);
+  }
 
   //=================//
   //   Quest Items   //
@@ -1586,658 +1708,633 @@ const customModifiers = {
         this.items.tr2 = `Scroll of Resistance`; // Scroll of Resistance
         return;
     }
-  },
+  }
 };
 
+class ItemLevelBuilder {
+  build() {
+    const fileWeapons = D2RMM.readTsv(FILE_WEAPONS_PATH);
+    const fileArmor = D2RMM.readTsv(FILE_ARMOR_PATH);
+    const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
 
-//===================//
-//   Light Pillars   //
-//===================//
-
-// runes
-function pushLightPillarsForRunes() {
-  if ( !config.ShouldAddLightPillarRunesLow && !config.ShouldAddLightPillarRunesLowMid 
-    && !config.ShouldAddLightPillarRunesMid && !config.ShouldAddLightPillarRunesHigh ) {
-    return;
-  }
-
-  RUNE_TIERS.forEach((tier) => {
-    if (!tier.hasLightPillar || (config.ShouldDisableLightPillarForHidden && !tier.isVisible)) {
-      return;
-    }
-
-    tier.runes.forEach((rune) => {
-      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune.name.toLowerCase()}_rune`);
+    fileWeapons.rows.forEach((row) => {
+      if (row.type === "tpot") { // exclude throwing potions
+        return;
+      }
+      row.ShowLevel = 1;
     });
-  });
-}
-
-// rings & amulets
-function pushLightPillarsForRingsAmulets() {
-  if (!config.ShouldAddLightPillarRingsAmulets) {
-    return;
-  }
-
-  pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\`, "ring");
-  pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\`, "amulet");
-}
-
-// gems & jewels
-function pushLightPillarsForGemsJewels() {
-  if ( !config.ShouldAddLightPillarGemsJewels 
-    || (config.ShouldDisableLightPillarForHidden && config.Gems == "hide")) {
-    return;
-  }
-
-  let gemQualities = getLightPillarGemQualities();
-
-  let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];
-  gemQualities.forEach((quality) => {
-    gemTypes.forEach((type) => {
-      pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
+    
+    fileArmor.rows.forEach((row) => {
+      row.ShowLevel = 1;
     });
-  });
-}
+    
+    fileMisc.rows.forEach((row) => {
+      // amulets, rings, small/large/grand charms, jewels
+      if (["amu", "rin", "cm1", "cm2", "cm3", "jew"].indexOf(row.code) !== -1) { 
+        row.ShowLevel = 1;
+        return;
+      }
+    });
 
-function getLightPillarGemQualities() {
-  let gemQualities = ["perfect_"];
-  if (config.Gems === "perfect" && config.ShouldDisableLightPillarForHidden) {
-    return gemQualities;
-  }
-  gemQualities.push("flawless_");
-  if (config.Gems === "flawless" && config.ShouldDisableLightPillarForHidden) {
-    return gemQualities;
-  }
-
-  return gemQualities.concat([EMPTY_STRING, "flawed_", "chipped_"]);
-}
-
-// charms
-function pushLightPillarsForCharms() {
-  if (!config.ShouldAddLightPillarCharms) {
-    return;
-  }
-
-  ["small", "medium", "large"].forEach((charm) => {
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}charm\\`, `charm_${charm}`);
-  });
-  // pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
-  if (!config.ShouldAddLightPillarQuestItems) {
-    pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
+    D2RMM.writeTsv(FILE_WEAPONS_PATH, fileWeapons);
+    D2RMM.writeTsv(FILE_ARMOR_PATH, fileArmor);
+    D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
   }
 }
 
-// quest items
-function pushLightPillarsForQuestItems() {
-  if (!config.ShouldAddLightPillarQuestItems && !config.ShouldAddLightPillarQuestWeapons) {
-    return;
+class ItemQualityBuilder {
+  build() {
+    const fileWeapons = D2RMM.readTsv(FILE_WEAPONS_PATH);
+    const fileArmor = D2RMM.readTsv(FILE_ARMOR_PATH);
+    const fileItemNames = D2RMM.readJson(FILE_ITEM_NAMES_PATH);
+
+    const fileWeaponsWithQuality = fileWeapons.rows.filter(row => row.ubercode && row.ultracode);
+    const fileArmorsWithQuality = fileArmor.rows.filter(row => row.ubercode && row.ultracode);
+
+    this.addEquipmentQuality(fileWeaponsWithQuality, fileItemNames, config.ItemQuality);
+    this.addEquipmentQuality(fileArmorsWithQuality, fileItemNames, config.ItemQuality);
+
+    D2RMM.writeJson(FILE_ITEM_NAMES_PATH, fileItemNames);
   }
 
-  let toPush = [];
-
-  // quest items
-  if (config.ShouldAddLightPillarQuestItems) {
-    toPush = toPush.concat([
-      // act 1
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
-      [`${LP_PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
-      // act 2
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
-      [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
-      // act 3
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
-      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
-      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
-      [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
-      [`${LP_PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
-      // act 4
-      // none
-      // act 5
-      // Malah's Potion       => see Potion of Life (scroll_of_self_resurrect)
-      // Scroll of Resistance => see Scroll of Inifuss (bark_scroll)
-    ]);
-  }
-
-  // quest weapons
-  if (config.ShouldAddLightPillarQuestWeapons) {
-    toPush = toPush.concat([
-      // act 1
-      [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
-      [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
-      // act 2
-      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
-      [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
-      // act 3
-      [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
-      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
-      [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
-      // act 4
-      [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
-      // act 5
-      // none
-    ]);
-  }
-
-  toPush.forEach((item) => {
-    pushLightPillarToPath(item[0], item[1]);
-  });
-}
-
-// essences
-function pushLightPillarsForEssences() {
-  if (!config.ShouldAddLightPillarEssences) {
-    return;
-  }
-
-  let essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
-  essences.forEach((essence) => {
-    pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, essence);
-  });
-}
-
-// token
-function pushLightPillarForToken() {
-  if (!config.ShouldAddLightPillarTokens) {
-    return;
-  }
-
-  pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, "token_of_absolution");
-}
-
-// pandemonium keys
-function pushLightPillarsForKeys() {
-  if (!config.ShouldAddLightPillarKeys) {
-    return;
-  }
-
-  let path = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
-  var file = D2RMM.readJson(`${path}${FILE_EXTENSION_JSON}`);
-  pushLightPillarToFile(file);
-  for (var i = 1; i <= 3; i++) {
-    let index = (i == 1) ? EMPTY_STRING : `${i}`;
-    D2RMM.writeJson(`${path}${index}${FILE_EXTENSION_JSON}`, file);
-  }
-}
-
-// pandemonium event (ubers) organs
-function pushLightPillarsForUberOrgans() {
-  if (!config.ShouldAddLightPillarOrgans) {
-    return;
-  }
-
-  pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "horn");
-  if (config.ShouldAddLightPillarQuestItems) {
-    return;
-  }
-
-  pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "brain");
-  pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "eye");
-}
-
-// standard of heroes
-function pushLightPillarForStandardOfHeroes() {
-  if ( !config.ShouldAddLightPillarStandardOfHeroes 
-    || (config.ShouldDisableLightPillarForHidden && config.Endgame === "hsh")) {
-    return;
-  }
   
-  pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "flag");
-}
+  addEquipmentQuality(equipment, itemNames, setting) {
+    equipment.forEach(item => {
+      var quality = (item.code === item.ultracode ? ITEM_QUALITY_ELITE : (item.code === item.ubercode ? ITEM_QUALITY_EXCEPTIONAL : ITEM_QUALITY_NORMAL));
 
-function pushLightPillarToPath(path, item) {
-  let filePath = `${path}${item}${FILE_EXTENSION_JSON}`;
-  let file = D2RMM.readJson(filePath);
-  pushLightPillarToFile(file);
-  D2RMM.writeJson(filePath, file);
-}
-
-function pushLightPillarToFile(file) {
-  file.dependencies.particles.push(LP_LIGHT_PILLAR_COMPONENT.particle);
-  file.entities = file.entities.concat(LP_LIGHT_PILLAR_COMPONENT.entities);
-}
-
-
-//=================//
-//   Drop Sounds   //
-//=================//
-
-function modifyDropSoundForRunes(soundsFile) {
-  RUNE_TIERS.forEach((tier) => {
-    if (config.ShouldDisableDropSoundForHidden && !tier.isVisible) {
-      return;
-    }
-
-    let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
-    modifyDropSoundForMiscItems(soundsFile, itemCodes, `rune_tier_${tier.level}`, tier.dropSound);
-  });
-}
-
-function modifyDropSoundForQuestItems(soundsFile) {
-  let itemCodesWeapons = [
-    "leg", // Wirt's Leg
-    "hdm", // Horadric Malus
-    "hst", // Horadric Staff
-    "msf", // Staff of Kings
-    "g33", // The Gidbinn
-    "qf1", // Khalim's Flail
-    "qf2", // Khalim's Will
-    "hfh", // Hell Forge Hammer
-  ];
-
-  let itemCodesMisc = [
-    "bks", // Scroll of Inifuss
-    "bkd", // Scroll of Inifuss (deciphered)
-    "tr1", // Horadric Scroll
-    "ass", // Book of Skill
-    // "box", // Horadric Cube [CSTM_DSBOX]
-    "vip", // Amulet of the Viper
-    "j34", // A Jade Figurine
-    "g34", // The Golden Bird
-    "xyz", // Potion of Life
-    "bbb", // Lam Esen's Tome
-    "qey", // Khalim's Eye
-    "qhr", // Khalim's Heart
-    "qbr", // Khalim's Brain
-    "mss", // Mephisto's Soulstone
-    "ice", // Malah's Potion
-    "tr2", // Scroll of Resistance
-  ];
-
-  let suffix = "quest";
-  modifyDropSoundForMiscItems(soundsFile, itemCodesMisc, suffix, config.DropSoundQuest);
-  modifyDropSoundForWeapons(soundsFile, itemCodesWeapons, suffix, config.DropSoundQuest);
-}
-
-function modifyDropSoundForEssences(soundsFile) {
-  modifyDropSoundForMiscItems(soundsFile, ["tes", "ceh", "bet", "fed"], "essence", config.DropSoundEssences);
-}
-
-function modifyDropSoundForTokens(soundsFile) {
-  modifyDropSoundForMiscItems(soundsFile, ["toa"], "token", config.DropSoundToken);
-}
-
-function modifyDropSoundForKeys(soundsFile) {
-  modifyDropSoundForMiscItems(soundsFile, ["pk1", "pk2", "pk3"], "key", config.DropSoundKeys);
-}
-
-function modifyDropSoundForOrgans(soundsFile) {
-  modifyDropSoundForMiscItems(soundsFile, ["eyz", "brz", "hrn"], "organ", config.DropSoundOrgans);
-}
-
-function modifyDropSoundForStandardOfHeroes(soundsFile) {
-  modifyDropSoundForMiscItems(soundsFile, ["std"], "flag", config.DropSoundStandard);
-}
-
-function modifyDropSoundForMiscItems(soundsFile, itemCodes, newNameSuffix, dropSound) {
-  modifyDropSoundForItems(FILE_MISC_PATH, soundsFile, itemCodes, newNameSuffix, dropSound);
-}
-
-function modifyDropSoundForWeapons(soundsFile, itemCodes, newNameSuffix, dropSound) {
-  modifyDropSoundForItems(FILE_WEAPONS_PATH, soundsFile, itemCodes, newNameSuffix, dropSound);
-}
-
-// master dropsound function:
-// - check if set dropSound is not default
-// - create a new SD and HD dropsound pair in sounds.txt with the right settings
-// - link the newly created dropsound to the right items
-function modifyDropSoundForItems(itemsFilePath, soundsFile, itemCodes, newNameSuffix, dropSound) {
-  if (dropSound === "default") {
-    return;
-  }
-  
-  let newSoundName = createNewDropSound(soundsFile, newNameSuffix, DS_SOUND_EFFECTS[dropSound]);
-  pushNewDropSoundToItems(itemsFilePath, itemCodes, newSoundName);
-}
-
-// create SD and HD sound, redirect SD to HD
-function createNewDropSound(soundsFile, soundNameSuffix, sfxFileNames) {
-  let soundNameSd = `${DS_SOUND_PREFIX}${soundNameSuffix}`;
-  let soundNameHd = `${soundNameSd}_hd`;
-  
-  pushSound(soundsFile, soundNameSd, DS_SOUND_ITEM_RUNE, DS_CHANNEL_ITEMS_SD, sfxFileNames.sd, soundNameHd);
-  pushSound(soundsFile, soundNameHd, DS_SOUND_ITEM_RUNE, DS_CHANNEL_ITEMS_HD, sfxFileNames.hd, DS_SOUND_NONE);
-
-  return soundNameSd;
-}
-
-// create new entry in sounds.txt
-function pushSound(soundsFile, soundName, template, sfxChannel, sfxFileName, sfxRedirect) {
-  let newSound = { ...(soundsFile.rows.find((sound) => sound.Sound === template)) }; // create deep copy
-
-  newSound.Sound = soundName;
-  newSound["*Index"] = soundsFile.rows.length;
-  newSound.Channel = sfxChannel;
-  newSound.FileName = sfxFileName;
-  newSound.Redirect = sfxRedirect;
-  newSound["Volume Min"] = 255;
-  newSound["Volume Max"] = 255;
-  newSound.Priority = 255;
-  newSound["Stop Inst"] = 0;
-  newSound["Defer Inst"] = 0;
-  newSound.Falloff = 4;
-  
-  soundsFile.rows.push(newSound);
-}
-
-// give items in filePath with corresponding itemCodes the newly created dropSound in sounds.txt
-function pushNewDropSoundToItems(itemsFilePath, itemCodes, dropSound) {
-  let file = D2RMM.readTsv(itemsFilePath);
-
-  file.rows.forEach((row) => {
-    if (itemCodes.indexOf(row.code) !== -1) {
-      row.dropsound = dropSound;
-      return;
-    }
-  });
-
-  D2RMM.writeTsv(itemsFilePath, file);
-}
-
-
-//========================================//
-//   How to apply the magic: item names   //
-//========================================//
-
-// Gold, Superior/Inferior affixes, Gems (exceptions)
-function applyCustomAffixes() {
-  if (config.GoldAmount === "none" && config.GoldSuffix === "none" && config.Gems === "none" && config.ShortSupInferiorPrefixes === "none") {
-    return;
-  }
-  
-  customAffixes.init();
-  customAffixes.customizeGold(config.GoldAmount, config.GoldSuffix);
-  customAffixes.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes);
-  customAffixes.customizeGems(config.Gems);
-
-  customAffixes.items.forEach(collection => {
-    applyCustomNames(FILE_ITEM_NAMEAFFIXES_PATH, collection);
-  });
-}
-
-// Runes
-function applyCustomRuneNames() {
-  if (config.Runes === "none" || config.Runes === "raf")
-    return;
-  
-  customRunes.customizeRunes(config.Runes);
-  applyCustomNames(FILE_ITEM_RUNES_PATH, customRunes.runes);
-}
-
-// Most item names
-function applyCustomItemNames() {
-  customItems.customizeHealingPotions(config.HealingPotions);
-  customItems.customizeBuffPotions(config.BuffPotions);
-  customItems.customizeThrowingPotions(config.ThrowingPotions);
-  customItems.customizeScrollsAndTomes(config.ScrollsTomes);
-  customItems.customizeArrowsAndBolts(config.ArrowsBolts);
-  customItems.customizeKeys(config.Keys);
-  customItems.customizeJewels(config.Jewels);
-  customItems.customizeCharms(config.Charms);
-  customItems.customizeGems(config.Gems);
-  customItems.customizeQuestItems(config.Quest);
-  customItems.customizeEndgameItems(config.Endgame);
-  customItems.customizeWeaponsAndArmor(config.ShouldFilterWeapons, config.ShouldFilterArmor);
-
-  applyCustomNames(FILE_ITEM_NAMES_PATH, customItems.items);
-}
-
-// Quest items (exceptions)
-function applyCustomUiNames() {
-  if (config.Quest === "none")
-    return;
-
-  customUi.customizeQuestItems(config.Quest);
-  applyCustomNames(FILE_UI_PATH, customUi.items);
-}
-
-function applyCustomModifiers() {
-  if (config.Quest === "none")
-    return;
-
-  customModifiers.customizeQuestItems(config.Quest);
-  applyCustomNames(FILE_ITEM_MODIFIERS_PATH, customModifiers.items);
-}
-
-function applyCustomNames(path, customNames) {
-  if (customNames.length == 0) {
-    return;
-  }
-  
-  let file = D2RMM.readJson(path); // copy existing file
-  file.forEach((item) => { // overwrite provided entries with new names
-    if (item.Key in customNames) {
-      for (const key in item) {
+      const index = itemNames.findIndex((x) => x.Key === item.code);
+      if (index < 0) {
+        return;
+      }
+      
+      for (const key in itemNames[index]) {
         if (key !== "id" && key !== "Key") {
-          item[key] = customNames[item.Key];
+          switch (setting) {
+            case "suf-par":
+              itemNames[index][key] = `${itemNames[index][key]} (${quality})`;
+              continue;
+            case "suf-bts":
+              itemNames[index][key] = `${itemNames[index][key]} [${quality}]`;
+              continue;
+            case "pre-par":
+              itemNames[index][key] = `(${quality}) ${itemNames[index][key]}`;
+              continue;
+            case "pre-bts":
+              itemNames[index][key] = `[${quality}] ${itemNames[index][key]}`;
+              continue;
+            case "custom":
+              itemNames[index][key] = `${itemNames[index][key]} (${quality})`; // to set custom quality indicator, see [CSTM-QLTY]
+              continue;
+          }
         }
       }
-    }
-  });
-  D2RMM.writeJson(path, file); // overwrite existing file with new file
+    })
+  }
 }
 
-
-//====================================================//
-//   How to apply the magic: item stats & modifiers   //
-//====================================================//
-
-// ilvl
-function applyItemLevel() {
-  if (!(config.ItemLevel === "show" || config.ItemLevel === "fix")) {
-    return;
+class LightPillarBuilder {
+  build() {
+    this.pushLightPillarsForRunes();
+    this.pushLightPillarsForRingsAmulets();
+    this.pushLightPillarsForGemsJewels();
+    this.pushLightPillarsForCharms();
+    this.pushLightPillarsForQuestItems();
+    this.pushLightPillarsForEssences();
+    this.pushLightPillarForToken();
+    this.pushLightPillarsForKeys();
+    this.pushLightPillarsForUberOrgans();
+    this.pushLightPillarForStandardOfHeroes();
   }
 
-  const fileWeapons = D2RMM.readTsv(FILE_WEAPONS_PATH);
-  const fileArmor = D2RMM.readTsv(FILE_ARMOR_PATH);
-  const fileMisc = D2RMM.readTsv(FILE_MISC_PATH);
-
-  fileWeapons.rows.forEach((row) => {
-    if (row.type === "tpot") { // exclude throwing potions
+  // runes
+  pushLightPillarsForRunes() {
+    if ( !config.ShouldAddLightPillarRunesLow && !config.ShouldAddLightPillarRunesLowMid 
+      && !config.ShouldAddLightPillarRunesMid && !config.ShouldAddLightPillarRunesHigh ) {
       return;
     }
-    row.ShowLevel = 1;
-  });
-  
-  fileArmor.rows.forEach((row) => {
-    row.ShowLevel = 1;
-  });
-  
-  fileMisc.rows.forEach((row) => {
-    // amulets, rings, small/large/grand charms, jewels
-    if (["amu", "rin", "cm1", "cm2", "cm3", "jew"].indexOf(row.code) !== -1) { 
-      row.ShowLevel = 1;
-      return;
-    }
-  });
 
-  D2RMM.writeTsv(FILE_WEAPONS_PATH, fileWeapons);
-  D2RMM.writeTsv(FILE_ARMOR_PATH, fileArmor);
-  D2RMM.writeTsv(FILE_MISC_PATH, fileMisc);
-}
+    RUNE_TIERS.forEach((tier) => {
+      if (!tier.hasLightPillar || (config.ShouldDisableLightPillarForHidden && !tier.isVisible)) {
+        return;
+      }
 
-// quality: normal/exceptional/elite
-function applyItemQuality() {
-  if (config.ItemQuality === "none") {
-    return;
+      tier.runes.forEach((rune) => {
+        this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}rune\\`, `${rune.name.toLowerCase()}_rune`);
+      });
+    });
   }
 
-  const fileWeapons = D2RMM.readTsv(FILE_WEAPONS_PATH);
-  const fileArmor = D2RMM.readTsv(FILE_ARMOR_PATH);
-  const fileItemNames = D2RMM.readJson(FILE_ITEM_NAMES_PATH);
+  // rings & amulets
+  pushLightPillarsForRingsAmulets() {
+    if (!config.ShouldAddLightPillarRingsAmulets) {
+      return;
+    }
 
-  const fileWeaponsWithQuality = fileWeapons.rows.filter(row => row.ubercode && row.ultracode);
-  const fileArmorsWithQuality = fileArmor.rows.filter(row => row.ubercode && row.ultracode);
+    this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}ring\\`, "ring");
+    this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}amulet\\`, "amulet");
+  }
 
-  addEquipmentQuality(fileWeaponsWithQuality, fileItemNames, config.ItemQuality);
-  addEquipmentQuality(fileArmorsWithQuality, fileItemNames, config.ItemQuality);
+  // gems & jewels
+  pushLightPillarsForGemsJewels() {
+    if ( !config.ShouldAddLightPillarGemsJewels 
+      || (config.ShouldDisableLightPillarForHidden && config.Gems == "hide")) {
+      return;
+    }
 
-  D2RMM.writeJson(FILE_ITEM_NAMES_PATH, fileItemNames);
-}
+    let gemQualities = this.getLightPillarGemQualities();
 
-function addEquipmentQuality(equipment, itemNames, setting) {
-  equipment.forEach(item => {
-    var quality = (item.code === item.ultracode ? ITEM_QUALITY_ELITE : (item.code === item.ubercode ? ITEM_QUALITY_EXCEPTIONAL : ITEM_QUALITY_NORMAL));
+    let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];
+    gemQualities.forEach((quality) => {
+      gemTypes.forEach((type) => {
+        this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
+      });
+    });
+  }
 
-    const index = itemNames.findIndex((x) => x.Key === item.code);
-    if (index < 0) {
+  getLightPillarGemQualities() {
+    let gemQualities = ["perfect_"];
+    if (config.Gems === "perfect" && config.ShouldDisableLightPillarForHidden) {
+      return gemQualities;
+    }
+    gemQualities.push("flawless_");
+    if (config.Gems === "flawless" && config.ShouldDisableLightPillarForHidden) {
+      return gemQualities;
+    }
+
+    return gemQualities.concat([EMPTY_STRING, "flawed_", "chipped_"]);
+  }
+
+  // charms
+  pushLightPillarsForCharms() {
+    if (!config.ShouldAddLightPillarCharms) {
+      return;
+    }
+
+    ["small", "medium", "large"].forEach((charm) => {
+      this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}charm\\`, `charm_${charm}`);
+    });
+    // pushLightPillarToPath(`${LP_PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
+    if (!config.ShouldAddLightPillarQuestItems) {
+      this.pushLightPillarToPath(`${LP_PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
+    }
+  }
+
+  // quest items
+  pushLightPillarsForQuestItems() {
+    if (!config.ShouldAddLightPillarQuestItems && !config.ShouldAddLightPillarQuestWeapons) {
+      return;
+    }
+
+    let toPush = [];
+
+    // quest items
+    if (config.ShouldAddLightPillarQuestItems) {
+      toPush = toPush.concat([
+        // act 1
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
+        [`${LP_PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
+        // act 2
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "book_of_skill"],                 // Book of Skill
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_horadric_quest_info"], // Horadric Scroll
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "horadric_cube"],                 // Horadric Cube
+        [`${LP_PATH_ITEMS_MISC}amulet\\`,   "viper_amulet"],                  // Amulet of the Viper
+        // act 3
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "jade_figurine"],                 // A Jade Figurine
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "gold_bird"],                     // The Golden Bird
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "lam_esens_tome"],                // Lam Esen's Tome
+        [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "eye"],                           // Khalim's Eye
+        [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "heart"],                         // Khalim's Heart
+        [`${LP_PATH_ITEMS_MISC_BODY_PART}`, "brain"],                         // Khalim's Brain
+        [`${LP_PATH_ITEMS_MISC_QUEST}`,     "mephisto_soul_stone"],           // Mephisto's Soulstone
+        // act 4
+        // none
+        // act 5
+        // Malah's Potion       => see Potion of Life (scroll_of_self_resurrect)
+        // Scroll of Resistance => see Scroll of Inifuss (bark_scroll)
+      ]);
+    }
+
+    // quest weapons
+    if (config.ShouldAddLightPillarQuestWeapons) {
+      toPush = toPush.concat([
+        // act 1
+        [`${LP_PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
+        [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
+        // act 2
+        [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "staff_of_the_kings"],            // Staff of Kings
+        [`${LP_PATH_ITEMS_WEAPON_STAFF}`,   "horadric_staff"],                // Horadric Staff
+        // act 3
+        [`${LP_PATH_ITEMS_WEAPON}knife\\`,  "gidbinn"],                       // The Gidbinn
+        [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "khalim_flail"],                  // Khalim's Flail
+        [`${LP_PATH_ITEMS_WEAPON_MACE}`,    "super_khalim_flail"],            // Khalim's Will
+        // act 4
+        [`${LP_PATH_ITEMS_WEAPON_HAMMER}`,  "hellforge_hammer"],              // Hell Forge Hammer
+        // act 5
+        // none
+      ]);
+    }
+
+    toPush.forEach((item) => {
+      this.pushLightPillarToPath(item[0], item[1]);
+    });
+  }
+
+  // essences
+  pushLightPillarsForEssences() {
+    if (!config.ShouldAddLightPillarEssences) {
+      return;
+    }
+
+    let essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
+    essences.forEach((essence) => {
+      this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, essence);
+    });
+  }
+
+  // token
+  pushLightPillarForToken() {
+    if (!config.ShouldAddLightPillarTokens) {
+      return;
+    }
+
+    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_QUEST, "token_of_absolution");
+  }
+
+  // pandemonium keys
+  pushLightPillarsForKeys() {
+    if (!config.ShouldAddLightPillarKeys) {
+      return;
+    }
+
+    let path = `${LP_PATH_ITEMS_MISC}key\\mephisto_key`;
+    var file = D2RMM.readJson(`${path}${FILE_EXTENSION_JSON}`);
+    this.pushLightPillarToFile(file);
+    for (var i = 1; i <= 3; i++) {
+      let index = (i == 1) ? EMPTY_STRING : `${i}`;
+      D2RMM.writeJson(`${path}${index}${FILE_EXTENSION_JSON}`, file);
+    }
+  }
+
+  // pandemonium event (ubers) organs
+  pushLightPillarsForUberOrgans() {
+    if (!config.ShouldAddLightPillarOrgans) {
+      return;
+    }
+
+    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "horn");
+    if (config.ShouldAddLightPillarQuestItems) {
+      return;
+    }
+
+    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "brain");
+    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "eye");
+  }
+
+  // standard of heroes
+  pushLightPillarForStandardOfHeroes() {
+    if ( !config.ShouldAddLightPillarStandardOfHeroes 
+      || (config.ShouldDisableLightPillarForHidden && config.Endgame === "hsh")) {
       return;
     }
     
-    for (const key in itemNames[index]) {
-      if (key !== "id" && key !== "Key") {
-        switch (setting) {
-          case "suf-par":
-            itemNames[index][key] = `${itemNames[index][key]} (${quality})`;
-            continue;
-          case "suf-bts":
-            itemNames[index][key] = `${itemNames[index][key]} [${quality}]`;
-            continue;
-          case "pre-par":
-            itemNames[index][key] = `(${quality}) ${itemNames[index][key]}`;
-            continue;
-          case "pre-bts":
-            itemNames[index][key] = `[${quality}] ${itemNames[index][key]}`;
-            continue;
-          case "custom":
-            itemNames[index][key] = `${itemNames[index][key]} (${quality})`; // to set custom quality indicator, see [CSTM-QLTY]
-            continue;
-        }
+    this.pushLightPillarToPath(LP_PATH_ITEMS_MISC_BODY_PART, "flag");
+  }
+
+  pushLightPillarToPath(path, item) {
+    let filePath = `${path}${item}${FILE_EXTENSION_JSON}`;
+    let file = D2RMM.readJson(filePath);
+    this.pushLightPillarToFile(file);
+    D2RMM.writeJson(filePath, file);
+  }
+
+  pushLightPillarToFile(file) {
+    file.dependencies.particles.push(LP_LIGHT_PILLAR_COMPONENT.particle);
+    file.entities = file.entities.concat(LP_LIGHT_PILLAR_COMPONENT.entities);
+  }
+
+};
+
+class DropSoundBuilder {
+  build() {
+    let soundsFile = D2RMM.readTsv(FILE_SOUNDS_PATH);
+
+    this.modifyDropSoundForRunes(soundsFile);
+    this.modifyDropSoundForQuestItems(soundsFile);
+    this.modifyDropSoundForEssences(soundsFile);
+    this.modifyDropSoundForTokens(soundsFile);
+    this.modifyDropSoundForKeys(soundsFile);
+    this.modifyDropSoundForOrgans(soundsFile);
+    this.modifyDropSoundForStandardOfHeroes(soundsFile);
+
+    D2RMM.writeTsv(FILE_SOUNDS_PATH, soundsFile);
+  }
+
+  modifyDropSoundForRunes(soundsFile) {
+    RUNE_TIERS.forEach((tier) => {
+      if (config.ShouldDisableDropSoundForHidden && !tier.isVisible) {
+        return;
       }
-    }
-  })
-}
-
-
-//===========================================//
-//   How to apply the magic: light pillars   //
-//===========================================//
-
-function applyLightPillars() {
-  if (!config.IsLightPillarsEnabled) {
-    return;
-  }
-
-  pushLightPillarsForRunes();
-  pushLightPillarsForRingsAmulets();
-  pushLightPillarsForGemsJewels();
-  pushLightPillarsForCharms();
-  pushLightPillarsForQuestItems();
-  pushLightPillarsForEssences();
-  pushLightPillarForToken();
-  pushLightPillarsForKeys();
-  pushLightPillarsForUberOrgans();
-  pushLightPillarForStandardOfHeroes();
-}
-
-
-//===========================================//
-//   How to apply the magic: drop sounds   //
-//===========================================//
-
-function applyDropSounds() {
-  if (!config.IsDropSoundsEnabled) {
-    return;
-  }
-
-  const soundsFile = D2RMM.readTsv(FILE_SOUNDS_PATH);
-
-  modifyDropSoundForRunes(soundsFile);
-  modifyDropSoundForQuestItems(soundsFile);
-  modifyDropSoundForEssences(soundsFile);
-  modifyDropSoundForTokens(soundsFile);
-  modifyDropSoundForKeys(soundsFile);
-  modifyDropSoundForOrgans(soundsFile);
-  modifyDropSoundForStandardOfHeroes(soundsFile);
-
-  D2RMM.writeTsv(FILE_SOUNDS_PATH, soundsFile);
-}
-
-
-//==================================================//
-//   How to apply the magic: _profilehd.json mods   //
-//==================================================//
-
-function applyProfileHdMods() {
-  let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
-
-  applyCustomGoldColor(profileHD, config.GoldAmount);
-  applyCustomEtherealColor(profileHD, config.EthItemsColor);
-  applyTooltipMods(profileHD, config.Tooltip, config.TooltipOpacity, config.TooltipSize);
   
-  D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
-}
-
-function applyCustomGoldColor(profileHD, setting) {
-  if (setting === "none" || setting === "wg") {
-    return;
+      let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
+      this.modifyDropSoundForMiscItems(soundsFile, itemCodes, `rune_tier_${tier.level}`, tier.dropSound);
+    });
   }
-
-  let goldColor = NO_COLOR;
-  switch (setting) {
-    case "none":
-    case "wg":
+  
+  modifyDropSoundForQuestItems(soundsFile) {
+    let itemCodesWeapons = [
+      "leg", // Wirt's Leg
+      "hdm", // Horadric Malus
+      "hst", // Horadric Staff
+      "msf", // Staff of Kings
+      "g33", // The Gidbinn
+      "qf1", // Khalim's Flail
+      "qf2", // Khalim's Will
+      "hfh", // Hell Forge Hammer
+    ];
+  
+    let itemCodesMisc = [
+      "bks", // Scroll of Inifuss
+      "bkd", // Scroll of Inifuss (deciphered)
+      "tr1", // Horadric Scroll
+      "ass", // Book of Skill
+      // "box", // Horadric Cube [CSTM_DSBOX]
+      "vip", // Amulet of the Viper
+      "j34", // A Jade Figurine
+      "g34", // The Golden Bird
+      "xyz", // Potion of Life
+      "bbb", // Lam Esen's Tome
+      "qey", // Khalim's Eye
+      "qhr", // Khalim's Heart
+      "qbr", // Khalim's Brain
+      "mss", // Mephisto's Soulstone
+      "ice", // Malah's Potion
+      "tr2", // Scroll of Resistance
+    ];
+  
+    let suffix = "quest";
+    this.modifyDropSoundForMiscItems(soundsFile, itemCodesMisc, suffix, config.DropSoundQuest);
+    this.modifyDropSoundForWeapons(soundsFile, itemCodesWeapons, suffix, config.DropSoundQuest);
+  }
+  
+  modifyDropSoundForEssences(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["tes", "ceh", "bet", "fed"], "essence", config.DropSoundEssences);
+  }
+  
+  modifyDropSoundForTokens(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["toa"], "token", config.DropSoundToken);
+  }
+  
+  modifyDropSoundForKeys(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["pk1", "pk2", "pk3"], "key", config.DropSoundKeys);
+  }
+  
+  modifyDropSoundForOrgans(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["eyz", "brz", "hrn"], "organ", config.DropSoundOrgans);
+  }
+  
+  modifyDropSoundForStandardOfHeroes(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["std"], "flag", config.DropSoundStandard);
+  }
+  
+  modifyDropSoundForMiscItems(soundsFile, itemCodes, newNameSuffix, dropSound) {
+    this.modifyDropSoundForItems(FILE_MISC_PATH, soundsFile, itemCodes, newNameSuffix, dropSound);
+  }
+  
+  modifyDropSoundForWeapons(soundsFile, itemCodes, newNameSuffix, dropSound) {
+    this.modifyDropSoundForItems(FILE_WEAPONS_PATH, soundsFile, itemCodes, newNameSuffix, dropSound);
+  }
+  
+  // master dropsound function:
+  // - check if set dropSound is not default
+  // - create a new SD and HD dropsound pair in sounds.txt with the right settings
+  // - link the newly created dropsound to the right items
+  modifyDropSoundForItems(itemsFilePath, soundsFile, itemCodes, newNameSuffix, dropSound) {
+    if (dropSound === "default") {
       return;
-    case "g":
-    case "gw":
-      goldColor = "$FontColorCurrencyGold";
-      break;
-    case "custom":
-      goldColor = "$FontColorLightTeal";
-      break;
+    }
+    
+    let newSoundName = this.createNewDropSound(soundsFile, newNameSuffix, DS_SOUND_EFFECTS[dropSound]);
+    this.pushNewDropSoundToItems(itemsFilePath, itemCodes, newSoundName);
   }
   
-  profileHD.TooltipStyle.GoldColor = goldColor;
-}
+  // create SD and HD sound, redirect SD to HD
+  createNewDropSound(soundsFile, soundNameSuffix, sfxFileNames) {
+    let soundNameSd = `${DS_SOUND_PREFIX}${soundNameSuffix}`;
+    let soundNameHd = `${soundNameSd}_hd`;
+    
+    this.pushSound(soundsFile, soundNameSd, DS_SOUND_ITEM_RUNE, DS_CHANNEL_ITEMS_SD, sfxFileNames.sd, soundNameHd);
+    this.pushSound(soundsFile, soundNameHd, DS_SOUND_ITEM_RUNE, DS_CHANNEL_ITEMS_HD, sfxFileNames.hd, DS_SOUND_NONE);
+  
+    return soundNameSd;
+  }
+  
+  // create new entry in sounds.txt
+  pushSound(soundsFile, soundName, template, sfxChannel, sfxFileName, sfxRedirect) {
+    let newSound = { ...(soundsFile.rows.find((sound) => sound.Sound === template)) }; // create deep copy
+  
+    newSound.Sound = soundName;
+    newSound["*Index"] = soundsFile.rows.length;
+    newSound.Channel = sfxChannel;
+    newSound.FileName = sfxFileName;
+    newSound.Redirect = sfxRedirect;
+    newSound["Volume Min"] = 255;
+    newSound["Volume Max"] = 255;
+    newSound.Priority = 255;
+    newSound["Stop Inst"] = 0;
+    newSound["Defer Inst"] = 0;
+    newSound.Falloff = 4;
+    
+    soundsFile.rows.push(newSound);
+  }
+  
+  // give items in filePath with corresponding itemCodes the newly created dropSound in sounds.txt
+  pushNewDropSoundToItems(itemsFilePath, itemCodes, dropSound) {
+    let file = D2RMM.readTsv(itemsFilePath);
+  
+    file.rows.forEach((row) => {
+      if (itemCodes.indexOf(row.code) !== -1) {
+        row.dropsound = dropSound;
+        return;
+      }
+    });
+  
+    D2RMM.writeTsv(itemsFilePath, file);
+  }  
+};
 
-function applyCustomEtherealColor(profileHD, setting) {
-  if (setting === "none") {
-    return;
+class ProfileHdModsBuilder {
+  build() {
+    let profileHD = D2RMM.readJson(FILE_PROFILE_HD_PATH);
+
+    this.applyCustomGoldColor(profileHD, config.GoldAmount);
+    this.applyCustomEtherealColor(profileHD, config.EthItemsColor);
+    this.applyTooltipMods(profileHD, config.Tooltip, config.TooltipOpacity, config.TooltipSize);
+    
+    D2RMM.writeJson(FILE_PROFILE_HD_PATH, profileHD);
   }
 
-  profileHD.TooltipStyle.EtherealColor = (setting !== "custom") ? PHD_COLORS[setting] : "$FontColorLightTeal"; // [CSTM-ETH] change $FontColorLightTeal into any color variable in _profilehd.json
-}
+  applyCustomGoldColor(profileHD, setting) {
+    if (setting === "none" || setting === "wg") {
+      return;
+    }
 
-function applyTooltipMods(profileHD, setting, opacity, tooltipSize) {
-  if (setting === "none") {
-    return;
+    let goldColor = NO_COLOR;
+    switch (setting) {
+      case "none":
+      case "wg":
+        return;
+      case "g":
+      case "gw":
+        goldColor = "$FontColorCurrencyGold";
+        break;
+      case "custom":
+        goldColor = "$FontColorLightTeal";
+        break;
+    }
+    
+    profileHD.TooltipStyle.GoldColor = goldColor;
   }
 
-  let bgColor = [0, 0, 0, opacity]; // [R, G, B, opacity]
-  switch (setting) {
-    case "all":
-      profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
-      profileHD.TooltipFontSize = tooltipSize;
-      break;
-    case "opacity":
-      profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
-      break;
-    case "size":
-      profileHD.TooltipFontSize = tooltipSize;
-      break;
+  applyCustomEtherealColor(profileHD, setting) {
+    if (setting === "none") {
+      return;
+    }
+
+    profileHD.TooltipStyle.EtherealColor = (setting !== "custom") ? PHD_COLORS[setting] : "$FontColorLightTeal"; // [CSTM-ETH] change $FontColorLightTeal into any color variable in _profilehd.json
+  }
+
+  applyTooltipMods(profileHD, setting, opacity, tooltipSize) {
+    if (setting === "none") {
+      return;
+    }
+
+    let bgColor = [0, 0, 0, opacity]; // [R, G, B, opacity]
+    switch (setting) {
+      case "all":
+        profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
+        profileHD.TooltipFontSize = tooltipSize;
+        break;
+      case "opacity":
+        profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
+        break;
+      case "size":
+        profileHD.TooltipFontSize = tooltipSize;
+        break;
+    }
   }
 }
 
+class LootFilterBuilder {
+  build() {
+    this.applyCustomAffixes();
+    this.applyCustomRuneNames();
+    this.applyCustomItemNames();
+    this.applyCustomUiNames();
+    this.applyCustomModifiers();
+    this.applyItemLevel();
+    this.applyItemQuality();
+    this.applyLightPillars();
+    this.applyDropSounds();
+    this.applyProfileHdMods();
+  }
 
-//========================//
-//   Applying the magic   //
-//========================//
+  // Gold, Superior/Inferior affixes, Gems (exceptions)
+  applyCustomAffixes() {
+    if (config.GoldAmount === "none" && config.GoldSuffix === "none" && config.Gems === "none" && config.ShortSupInferiorPrefixes === "none") {
+      return;
+    }
 
-function applyLootFilter() {
-  applyCustomAffixes();
-  applyCustomRuneNames();
-  applyCustomItemNames();
-  applyCustomUiNames();
-  applyCustomModifiers();
-  applyItemLevel();
-  applyItemQuality();
-  applyLightPillars();
-  applyDropSounds();
-  applyProfileHdMods();
+    let builder = new CustomAffixesBuilder();
+    builder.build();
+  }
+
+  // Runes
+  applyCustomRuneNames() {
+    if (config.Runes === "none" || config.Runes === "raf") {
+      return;
+    }
+
+    let builder = new CustomRunesBuilder();
+    builder.build();
+  }
+
+  // Most item names
+  applyCustomItemNames() {
+    let builder = new CustomItemsBuilder();
+    builder.build();
+  }
+
+  // Quest items (exceptions)
+  applyCustomUiNames() {
+    if (config.Quest === "none") {
+      return;
+    }
+
+    let builder = new CustomUiBuilder();
+    builder.build();
+  }
+
+  // Quest items (exceptions)
+  applyCustomModifiers() {
+    if (config.Quest === "none") {
+      return;
+    }
+
+    let builder = new CustomModifiersBuilder();
+    builder.build();
+  }
+
+
+  //====================================================//
+  //   How to apply the magic: item stats & modifiers   //
+  //====================================================//
+
+  // ilvl
+  applyItemLevel() {
+    if (!(config.ItemLevel === "show" || config.ItemLevel === "fix")) {
+      return;
+    }
+
+    let builder = ItemLevelBuilder();
+    builder.build();
+  }
+
+  // quality: normal/exceptional/elite
+  applyItemQuality() {
+    if (config.ItemQuality === "none") {
+      return;
+    }
+
+    let builder = new ItemQualityBuilder();
+    builder.build();
+  }
+
+
+  applyLightPillars() {
+    if (!config.IsLightPillarsEnabled) {
+      return;
+    }
+
+    let builder = new LightPillarBuilder();
+    builder.build();
+  }
+
+  applyDropSounds() {
+    if (!config.IsDropSoundsEnabled) {
+      return;
+    }
+
+    let builder = new DropSoundBuilder();
+    builder.build();
+  }
+
+  //_profilehd.json mods
+  applyProfileHdMods() {
+    let builder = new ProfileHdModsBuilder();
+    builder.build();
+  }
 }
 
-applyLootFilter();
+let lootFilterBuilder = new LootFilterBuilder();
+lootFilterBuilder.build();
