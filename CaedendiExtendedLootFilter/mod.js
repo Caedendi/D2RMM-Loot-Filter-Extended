@@ -12,6 +12,15 @@
 //   Constants   //
 //===============//
 
+class SettingsConstants {
+  disabled  = "none";
+  all       = "all";
+  highlight = "highlight";
+  custom    = "custom";
+
+  shouldFixIlvlIndent = config.ItemLevel === "fix";
+}
+
 class FileConstants {
   // extensions
   static FILE_EXTENSION_JSON = ".json";
@@ -143,8 +152,8 @@ const NEW_LINE = "\n";
 const NONE = "none";
 
 const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
-const HIGHLIGHT       = config.HighlightCharacter !== "custom" ? config.HighlightCharacter                 : '*'; // replace * with desired custom character [CSTM-HLCTR]
-const HIGHLIGHT_COLOR = config.HighlightColor     !== "custom" ? `${BaseColorConstants.CLR_PREFIX}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
+const HIGHLIGHT       = config.HighlightCharacter !== SettingsConstants.custom ? config.HighlightCharacter                 : '*'; // replace * with desired custom character [CSTM-HLCTR]
+const HIGHLIGHT_COLOR = config.HighlightColor     !== SettingsConstants.custom ? `${BaseColorConstants.CLR_PREFIX}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
 
 const NO_COLOR   = EMPTY_STRING;
 const NO_PATTERN = EMPTY_STRING;
@@ -166,12 +175,11 @@ const PATTERN_10   = HIGHLIGHT.repeat(10);
 const PATTERN_2x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}`;
 const PATTERN_3x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}${PADDING_2}${PATTERN_10}`;
 
-const SHOULD_FIX_ILVL_INDENT = config.ItemLevel === "fix";
 const ILVL_INDENT_FIX_SINGLE  = SINGLE_SPACE.repeat(4); // for single digit ilvl items
 const ILVL_INDENT_FIX_DOUBLE  = SINGLE_SPACE.repeat(6); // for double digit ilvl items
 const ILVL_INDENT_FIX_QUALITY = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
-const ILVL_INDENT_FIX_FACET   = SHOULD_FIX_ILVL_INDENT ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
-const ILVL_INDENT_FIX_CHARMS  = SHOULD_FIX_ILVL_INDENT ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
+const ILVL_INDENT_FIX_FACET   = SettingsConstants.shouldFixIlvlIndent ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
+const ILVL_INDENT_FIX_CHARMS  = SettingsConstants.shouldFixIlvlIndent ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
 const ILVL_INDENT_FIX_QUEST1  = ILVL_INDENT_FIX_SINGLE; // quest items with a single digit ilvl
 const ILVL_INDENT_FIX_QUEST2  = ILVL_INDENT_FIX_DOUBLE; // quest items with a double digit ilvl
 
@@ -232,7 +240,7 @@ class RuneConstants {
 
   static clrName      = ColorConstants.ORANGE;
   static clrHighlight = HIGHLIGHT_COLOR;
-  static colorAlternate = config.HighlightColorRunesAlternate !== "custom" ? `${BaseColorConstants.CLR_PREFIX}${config.HighlightColorRunesAlternate}` : ';'; // replace 1 with desired custom color character (see above) [CSTM-HLCRA]
+  static colorAlternate = config.HighlightColorRunesAlternate !== SettingsConstants.custom ? `${BaseColorConstants.CLR_PREFIX}${config.HighlightColorRunesAlternate}` : ';'; // replace 1 with desired custom color character (see above) [CSTM-HLCRA]
 
   // set the highlight patterns for each rune tier
   static patternLow    = NO_PATTERN;   // 
@@ -258,7 +266,7 @@ class RuneConstants {
   static tiersHighlightedNames   = [4];       // rune tiers where the rune name is in the highlight color instead of default
   static tiersAlternateColor     = [3, 4];    // rune tiers that use the alternate color if enabled
 
-  static isAlternateColor = ["all", "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
+  static isAlternateColor = [SettingsConstants.all, "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
 }
 
   
@@ -572,7 +580,7 @@ function generateBigTooltip(setting, name) {
   }
 
   // new lines work upside-down: adding \n will add a new line on top of the current one (instead of below like you would expect)
-  if (setting === "custom") { // [CSTM-BTT]
+  if (setting === SettingsConstants.custom) { // [CSTM-BTT]
     // ADD YOUR CUSTOM BIG TOOLTIP HERE
     return NEW_LINE + `${BigTooltipConstants.padding}${name}${BigTooltipConstants.padding}` + NEW_LINE;
   }
@@ -710,7 +718,7 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
     let color = settingAmount === "wg" ? ColorConstants.GOLD : settingAmount === "gw" ? ColorConstants.WHITE : NO_COLOR;
 
     switch (settingAffix) {
-      case "none": // Gold displays as "1234 Gold".
+      case SettingsConstants.disabled: // Gold displays as "1234 Gold".
         if (color !== NO_COLOR) {
           this.items.gld = `${color}Gold`; 
         }
@@ -722,7 +730,7 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
       case "hide": // Gold displays as "1234".
         this.items.gld = HIDDEN;
         return;
-      case "custom": // [CSTM-GLD]
+      case SettingsConstants.custom: // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.gld = `${ColorConstants.PURPLE}Gold`;
         return;
@@ -735,7 +743,7 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
     var inferior = `${color}${MINUS}`;
 
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
         return;
       case "short": // Enable
       case "color":   // Enable, gray Inferior items
@@ -745,7 +753,7 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
         this.items["Low Quality"] = inferior;
         this.items["Crude"]       = inferior;
         return;
-      case "custom": // [CSTM-SPIF]
+      case SettingsConstants.custom: // [CSTM-SPIF]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items["Hiquality"]   = `Superior`;
         this.items["Damaged"]     = `Damaged`;
@@ -760,9 +768,9 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
     // These gem names also function as affixes, which is why they are located in the item-nameaffixes.json file.
     // Enabling filtering for these gems could also change for example the Ruby-part in a "Ruby Jewel of Fervor".
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
         return;
-      case "all": // show all
+      case SettingsConstants.all: // show all
         // `${ColorConstants.GREEN}o${ColorConstants.WHITE} Emerald`;
         this.items.gsw = generateSingleHighlight(GemConstants.clrDiamond,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.diamond);  // Diamond
         this.items.gsg = generateSingleHighlight(GemConstants.clrEmerald,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.emerald);  // Emerald
@@ -775,7 +783,7 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
       case "perfect": // hide chipped/flawed/regular/flawless gems
         this.hideGems();
         return;
-      case "custom": // [CSTM-GEM2]
+      case SettingsConstants.custom: // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.gsw = `Diamond`; 
         this.items.gsg = `Emerald`; 
@@ -811,14 +819,14 @@ class CustomRunesBuilder extends AbstractItemNamesBuilder {
   
   customizeRunes(setting) {
     const RUNES_SETTINGS_AFFIX = ["nrs-hls", "nrs", "hls"];                // settings that keep the " Rune" affix
-    const RUNES_SETTINGS_NUMBER = ["all", "nrs-raf", "nrs-hls", "nrs"];    // settings that add rune numbers
-    const RUNES_SETTINGS_HIGHLIGHT = ["all", "nrs-hls", "hls-raf", "hls"]; // settings that add highlighting
+    const RUNES_SETTINGS_NUMBER = [SettingsConstants.all, "nrs-raf", "nrs-hls", "nrs"];    // settings that add rune numbers
+    const RUNES_SETTINGS_HIGHLIGHT = [SettingsConstants.all, "nrs-hls", "hls-raf", "hls"]; // settings that add highlighting
 
     switch (setting) {
-      case "none":    // should not be reached
+      case SettingsConstants.disabled:    // should not be reached
       case "raf":     // Remove affix
         return;
-      case "all":     // Add rune numbers + highlights + remove affix
+      case SettingsConstants.all:     // Add rune numbers + highlights + remove affix
       case "nrs-raf": // Add rune numbers + remove affix
       case "nrs-hls": // Add rune numbers + highlights
       case "hls-raf": // Add highlights + remove affix
@@ -826,7 +834,7 @@ class CustomRunesBuilder extends AbstractItemNamesBuilder {
       case "hls":     // Add highlights
         this.generateRuneNames(setting, RUNES_SETTINGS_AFFIX, RUNES_SETTINGS_NUMBER, RUNES_SETTINGS_HIGHLIGHT);
         return;
-      case "custom": // [CSTM-RUN]
+      case SettingsConstants.custom: // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE. NOTE: THIS BYPASSES BIG TOOLTIPS SETTINGS.
         let clrMsg       = ColorConstants.PURPLE;
         let clrRune      = ColorConstants.ORANGE;
@@ -948,14 +956,14 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   FACET_PADDING_2 = PADDING_3; // padding between name and FACET_ALTERNATE_PREFIX / FACET_ALTERNATE_SUFFIX
   FACET_ALTERNATE_PREFIX = `${ColorConstants.RED}${FACET_PATTERN}${FACET_PADDING_1}${ColorConstants.YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${ColorConstants.BLUE}${FACET_PATTERN}${FACET_PADDING_1}${ColorConstants.GREEN}${FACET_PATTERN}${FACET_COLOR_NAME}${FACET_PADDING_2}`;
   FACET_ALTERNATE_SUFFIX = `${FACET_PADDING_2}${ColorConstants.GREEN}${FACET_PATTERN}${FACET_PADDING_1}${ColorConstants.BLUE}${FACET_PATTERN}${FACET_PADDING_1}${ColorConstants.YELLOW}${FACET_PATTERN}${FACET_PADDING_1}${ColorConstants.RED}${FACET_PATTERN}${FACET_COLOR_NAME}`;
-  IS_ALTERNATE_HIGHLIGHT_FACET  = ["all", "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
+  IS_ALTERNATE_HIGHLIGHT_FACET  = [SettingsConstants.all, "fac-sun", "fac-run", "fac"].includes(config.AlternateColorSchemes);
   FACET_PREFIX = !this.IS_ALTERNATE_HIGHLIGHT_FACET ? UniqueConstants.prefix : FACET_ALTERNATE_PREFIX;
   FACET_SUFFIX = !this.IS_ALTERNATE_HIGHLIGHT_FACET ? UniqueConstants.suffix : FACET_ALTERNATE_SUFFIX;
 
   // charms
   CHARMS_UNIQUE_PREFIX = UniqueConstants.prefix;
   CHARMS_UNIQUE_SUFFIX = UniqueConstants.suffix;
-  IS_ALTERNATE_HIGHLIGHT_SUNDER = ["all", "fac-sun", "sun-run", "sun"].includes(config.AlternateColorSchemes);
+  IS_ALTERNATE_HIGHLIGHT_SUNDER = [SettingsConstants.all, "fac-sun", "sun-run", "sun"].includes(config.AlternateColorSchemes);
 
   // endgame
   ENDGAME_COLOR_NAME = ColorConstants.ORANGE;
@@ -1027,11 +1035,10 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const pattern = PLUS;
     const padding = NO_PADDING;
 
-    // apply above custom names, unless set to "none" or "custom"
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
         return;
-      case "all": // show all
+      case SettingsConstants.all: // show all
         this.highlightLv123Potions(clrHeal, clrMana, clrName, pattern, padding);
         this.highlightLv4Potions(  clrHeal, clrMana, clrName, pattern, padding);
         this.highlightLv5Potions(  clrHeal, clrMana, clrName, pattern, padding);
@@ -1074,7 +1081,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
       case "hide": // hide all healing potions
         this.hideHealingPotions();
         return;
-      case "custom": // [CSTM-HPT]
+      case SettingsConstants.custom: // [CSTM-HPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.hp1 = `${clrHeal}+${clrName}HP1`;    // Minor Healing Potion
         this.items.hp2 = `${clrHeal}+${clrName}HP2`;    // Light Healing Potion
@@ -1145,9 +1152,9 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const padding      = NO_PADDING;
 
     switch (setting) {
-      case "none": // no change
+      case SettingsConstants.disabled: // no change
         return;
-      case "all": // show all
+      case SettingsConstants.all: // show all
         this.items.yps = generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Antidote"); // Antidote Potion
         this.items.wms = generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Thawing");  // Thawing Potion
         this.items.vps = generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Stamina");  // Stamina Potion
@@ -1157,7 +1164,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
         this.items.wms = HIDDEN;
         this.items.vps = HIDDEN;
         return;
-      case "custom": // [CSTM-BPT]
+      case SettingsConstants.custom: // [CSTM-BPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.yps = "Antidote Potion";
         this.items.wms = "Thawing Potion";
@@ -1174,9 +1181,9 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const padding = PADDING_1;
 
     switch (setting) {
-      case "none": // no change
+      case SettingsConstants.disabled: // no change
         return;
-      case "all": // show all
+      case SettingsConstants.all: // show all
         this.items.gpl = generateSingleHighlight(clrGas, pattern, padding, clrName, "Gas 1"); // Strangling Gas Potion
         this.items.gpm = generateSingleHighlight(clrGas, pattern, padding, clrName, "Gas 2"); // Choking Gas Potion
         this.items.gps = generateSingleHighlight(clrGas, pattern, padding, clrName, "Gas 3"); // Rancid Gas Potion
@@ -1192,7 +1199,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
         this.items.opm = HIDDEN;
         this.items.ops = HIDDEN;
         return;
-      case "custom": // [CSTM-TPT]
+      case SettingsConstants.custom: // [CSTM-TPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.gpl = "Strangling Gas Potion";
         this.items.gpm = "Choking Gas Potion";
@@ -1212,9 +1219,9 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const padding = NO_PADDING;
 
     switch (setting) {
-      case "none": // no change
+      case SettingsConstants.disabled: // no change
         return;
-      case "all": // show all
+      case SettingsConstants.all: // show all
         this.highlightScrolls(clrScroll, clrName, pattern, padding);
         this.highlightTomes(clrTome, clrName, pattern, padding);
         return;
@@ -1222,7 +1229,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
         this.highlightTomes(clrTome, clrName, pattern, padding);
         this.hideScrolls();
         return;
-      case "custom": // [CSTM-SCR]
+      case SettingsConstants.custom: // [CSTM-SCR]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.tsc = "Scroll of Town Portal";
         this.items.isc = "Scroll of Identify";
@@ -1254,9 +1261,9 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const padding = PADDING_1;
 
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
         return;
-      case "highlight":
+      case SettingsConstants.all:
         this.items.aqv = generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Arrows");
         this.items.cqv = generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Bolts");
         return;
@@ -1264,7 +1271,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
         this.items.aqv = HIDDEN; // Arrow Quiver
         this.items.cqv = HIDDEN; // Crossbow Bolt Quiver
         return;
-      case "custom": // [CSTM-ARB]
+      case SettingsConstants.custom: // [CSTM-ARB]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.aqv = "Arrows";
         this.items.cqv = "Bolts";
@@ -1274,12 +1281,12 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
 
   customizeKeys(setting) {
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
         return;
       case "hide":
         this.items.key = HIDDEN;
         return;
-      case "custom": // [CSTM-KEY]
+      case SettingsConstants.custom: // [CSTM-KEY]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.key = "Key";
         return;
@@ -1292,9 +1299,9 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   //==========//
   customizeGems(setting) {
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
         return;
-      case "all": // show all
+      case SettingsConstants.all: // show all
         this.highlightChippedFlawedRegular();
         this.highlightFlawless();
         this.highlightPerfect();
@@ -1314,7 +1321,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
         this.hideFlawless();
         this.hidePerfect();
         return;
-      case "custom": // [CSTM-GEM1]
+      case SettingsConstants.custom: // [CSTM-GEM1]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         // chipped
         this.items.gcv = `Chipped Amethyst`;
@@ -1448,12 +1455,12 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   //=============//
   customizeJewels(setting) {
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
         return;
       case "facet":
         this.items["Rainbow Facet"] = `${ILVL_INDENT_FIX_FACET}${FACET_PREFIX}Rainbow Facet${FACET_SUFFIX}`;
         return;
-      case "custom": // [CSTM-JWL]
+      case SettingsConstants.custom: // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.jew = `Jewel`; // includes magic, rare and unique jewels
         this.items["Rainbow Facet"] = `Rainbow Facet`;
@@ -1463,9 +1470,9 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   
   customizeCharms(setting) {
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
         return;
-      case "all":
+      case SettingsConstants.all:
         this.highlightUnidentifiedCharms();
       	this.highlightUniqueCharms();
         this.highlightSunderCharms();
@@ -1477,7 +1484,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
       case "unid":
         this.highlightUnidentifiedCharms();
         return;
-      case "custom": // [CSTM-CHA]
+      case SettingsConstants.custom: // [CSTM-CHA]
         this.items.cm1                     = `Small Charm`;
         this.items.cm2                     = `Large Charm`;
         this.items.cm3                     = `Grand Charm`;
@@ -1530,16 +1537,16 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   //=================//
   customizeQuestItems(setting) {
     switch (setting) {
-      case "none": // no change
+      case SettingsConstants.disabled: // no change
         return;
-      case "all": // highlight all
+      case SettingsConstants.all: // highlight all
         this.highlightQuestItems();
         this.highlightCube();
         return;
       case "xhc": // exclude cube
         this.highlightQuestItems();
         return;
-      case "custom": // [CSTM-QST1]
+      case SettingsConstants.custom: // [CSTM-QST1]
         // Act 1
         this.items.leg = `Wirt's Leg`;           // Wirt's Leg
         this.items.hdm = `Horadric Malus`;       // Horadric Malus
@@ -1619,7 +1626,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     this.items.SuperKhalimFlail       = `${prefix}Khalim's Will${suffix}`;       // Khalim's Will
     this.items["Hell Forge Hammer"]   = `${prefix}Hell Forge Hammer${suffix}`;   // Hell Forge Hammer
 
-    if (SHOULD_FIX_ILVL_INDENT) {
+    if (SettingsConstants.shouldFixIlvlIndent) {
       // single digit ilvl
       let indent = ILVL_INDENT_FIX_QUEST1;
       this.items.hst                  = indent + this.items.hst;
@@ -1650,9 +1657,9 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   //===================================================//
   customizeEndgameItems(setting){
     switch(setting) {
-      case "none": // no change
+      case SettingsConstants.disabled: // no change
         return;
-      case "all": // highlight all
+      case SettingsConstants.all: // highlight all
         this.highlightEndgameItems();
         this.items.std = `${this.STANDARD_OF_HEROES_PREFIX}Standard of Heroes${this.STANDARD_OF_HEROES_SUFFIX}`; // Standard of Heroes
         return;
@@ -1663,7 +1670,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
         this.highlightEndgameItems();
         this.items.std = HIDDEN;
         return;
-      case "custom": // [CSTM-END]
+      case SettingsConstants.custom: // [CSTM-END]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.tes = `Twisted Essence of Suffering`;
         this.items.ceh = `Charged Essense of Hatred`;
@@ -1764,14 +1771,14 @@ class CustomUiBuilder extends AbstractItemNamesBuilder {
   customizeQuestItems(setting) {
     // Section specific to Book of Skill and Potion of Life, as these items are in a different file.
     switch (setting) {
-      case "none": // no change
+      case SettingsConstants.disabled: // no change
         return;
-      case "all": // highlight all
+      case SettingsConstants.all: // highlight all
       case "xhc": // exclude horadric cube
         this.items.ass = `${prefix}Book of Skill${suffix}`;  // Book of Skill
         this.items.xyz = `${prefix}Potion of Life${suffix}`; // Potion of Life
         return;
-      case "custom": // [CSTM-QST2]
+      case SettingsConstants.custom: // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.ass = `Book of Skill`;  // Book of Skill
         this.items.xyz = `Potion of Life`; // Potion of Life
@@ -1797,14 +1804,14 @@ class CustomModifiersBuilder extends AbstractItemNamesBuilder {
   customizeQuestItems(setting) {
     // Section specific to Malah's Potion and Scroll of Resistance, as these items are in a different file.
     switch (setting) {
-      case "none": // no change
+      case SettingsConstants.disabled: // no change
         return;
-      case "all": // highlight all
+      case SettingsConstants.all: // highlight all
       case "xhc": // exclude horadric cube
         this.items.ice = `${prefix}Malah's Potion${suffix}`;       // Malah's Potion
         this.items.tr2 = `${prefix}Scroll of Resistance${suffix}`; // Scroll of Resistance
         return;
-      case "custom": // [CSTM-QST2]
+      case SettingsConstants.custom: // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
         this.items.ice = `Malah's Potion`;       // Malah's Potion
         this.items.tr2 = `Scroll of Resistance`; // Scroll of Resistance
@@ -1845,9 +1852,9 @@ class ItemLevelBuilder {
 }
 
 class ItemQualityBuilder {
-  txtNormal      = config.ItemQuality !== "custom" ? 'n' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY];
-  txtExceptional = config.ItemQuality !== "custom" ? 'x' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-  txtElite       = config.ItemQuality !== "custom" ? 'e' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+  txtNormal      = config.ItemQuality !== SettingsConstants.custom ? 'n' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY];
+  txtExceptional = config.ItemQuality !== SettingsConstants.custom ? 'x' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+  txtElite       = config.ItemQuality !== SettingsConstants.custom ? 'e' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
 
   build() {
     const fileWeapons = D2RMM.readTsv(FileConstants.FILE_WEAPONS_PATH);
@@ -1887,7 +1894,7 @@ class ItemQualityBuilder {
             case "pre-bts":
               itemNames[index][key] = `[${quality}] ${itemNames[index][key]}`;
               continue;
-            case "custom":
+            case SettingsConstants.custom:
               itemNames[index][key] = `${itemNames[index][key]} (${quality})`; // to set custom quality indicator, see [CSTM-QLTY]
               continue;
           }
@@ -2295,20 +2302,20 @@ class ProfileHdModsBuilder {
   }
 
   applyCustomGoldColor(profileHD, setting) {
-    if (setting === "none" || setting === "wg") {
+    if (setting === SettingsConstants.disabled || setting === "wg") {
       return;
     }
 
     let goldColor = NO_COLOR;
     switch (setting) {
-      case "none":
+      case SettingsConstants.disabled:
       case "wg":
         return;
       case "g":
       case "gw":
         goldColor = FontColorConstants.currencyGold;
         break;
-      case "custom":
+      case SettingsConstants.custom:
         goldColor = FontColorConstants.lightTeal;
         break;
     }
@@ -2317,21 +2324,21 @@ class ProfileHdModsBuilder {
   }
 
   applyCustomEtherealColor(profileHD, setting) {
-    if (setting === "none") {
+    if (setting === SettingsConstants.disabled) {
       return;
     }
 
-    profileHD.TooltipStyle.EtherealColor = (setting !== "custom") ? this.colors[setting] : FontColorConstants.lightTeal; // [CSTM-ETH] change FontColorConstants.lightTeal into any color variable in _profilehd.json
+    profileHD.TooltipStyle.EtherealColor = (setting !== SettingsConstants.custom) ? this.colors[setting] : FontColorConstants.lightTeal; // [CSTM-ETH] change FontColorConstants.lightTeal into any color variable in _profilehd.json
   }
 
   applyTooltipMods(profileHD, setting, opacity, tooltipSize) {
-    if (setting === "none") {
+    if (setting === SettingsConstants.disabled) {
       return;
     }
 
     let bgColor = [0, 0, 0, opacity]; // [R, G, B, opacity]
     switch (setting) {
-      case "all":
+      case SettingsConstants.all:
         profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
         profileHD.TooltipFontSize = tooltipSize;
         break;
@@ -2363,7 +2370,7 @@ class LootFilterBuilder {
 
   // Gold, Superior/Inferior affixes, Gems (exceptions)
   applyCustomAffixes() {
-    if (config.GoldAmount === "none" && config.GoldSuffix === "none" && config.Gems === "none" && config.ShortSupInferiorPrefixes === "none") {
+    if (config.GoldAmount === SettingsConstants.disabled && config.GoldSuffix === SettingsConstants.disabled && config.Gems === SettingsConstants.disabled && config.ShortSupInferiorPrefixes === SettingsConstants.disabled) {
       return;
     }
 
@@ -2373,7 +2380,7 @@ class LootFilterBuilder {
 
   // Runes
   applyCustomRuneNames() {
-    if (config.Runes === "none" || config.Runes === "raf") {
+    if (config.Runes === SettingsConstants.disabled || config.Runes === "raf") {
       return;
     }
 
@@ -2389,7 +2396,7 @@ class LootFilterBuilder {
 
   // Quest items (exceptions)
   applyCustomUiNames() {
-    if (config.Quest === "none") {
+    if (config.Quest === SettingsConstants.disabled) {
       return;
     }
 
@@ -2399,7 +2406,7 @@ class LootFilterBuilder {
 
   // Quest items (exceptions)
   applyCustomModifiers() {
-    if (config.Quest === "none") {
+    if (config.Quest === SettingsConstants.disabled) {
       return;
     }
 
@@ -2419,7 +2426,7 @@ class LootFilterBuilder {
 
   // quality: normal/exceptional/elite
   applyItemQuality() {
-    if (config.ItemQuality === "none") {
+    if (config.ItemQuality === SettingsConstants.disabled) {
       return;
     }
 

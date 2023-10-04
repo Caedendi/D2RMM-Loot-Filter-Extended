@@ -156,7 +156,7 @@
       "defaultValue": "highlight",
       "options": [
         { "label": "Disable", "value": "none" },
-        { "label": "Enable", "value": "highlight" },
+        { "label": "Enable", "value": "all" },
         { "label": "Hide", "value": "hide" },
         { "label": "Custom", "value": "custom" }
       ]
