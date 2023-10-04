@@ -2,23 +2,95 @@
 ////===============================================////
 ////                                               ////
 ////   Caedendi's Extended Loot Filter for D2RMM   ////
-////                    v2.2.0                     ////
+////                    v3.0.0                     ////
 ////                                               ////
 ////===============================================////
 ////===============================================////
 
 
-//===============//
-//   Constants   //
-//===============//
+// //==============================//
+// //   Parameters - Collections   //
+// //==============================//
+
+// const COL_HEALPOTS  = "healingPotions";
+// const COL_BUFFPOTS  = "buffPotions";
+// const COL_THROWPOTS = "throwingPotions";
+// const COL_SCROLLS   = "scrollsTomes";
+// const COL_AMMO      = "arrowsBolts";
+// const COL_KEYS      = "keys";
+// const COL_GEMS      = "gems";
+// const COL_JEWELS    = "jewels";
+// const COL_CHARMS    = "charms";
+// const COL_QUEST     = "quest";
+// const COL_ENDGAME   = "endgame";
+// const COL_WEPARM    = "weaponsArmor";
+// const COL_QUALITY   = "quality";
+// const COL_GOLD      = "gold";
+
+
+// const COL_CA = [
+//   { name: COL_GOLD,    bigTooltipSetting: NONE },
+//   { name: COL_QUALITY, bigTooltipSetting: NONE },
+//   { name: COL_GEMS,    bigTooltipSetting: config.BigTooltipGems },
+// ];
+
+// const ca = {};
+
+
+//========================//
+//   Constants - Global   //
+//========================//
 
 class SettingsConstants {
-  disabled  = "none";
-  all       = "all";
-  custom    = "custom";
+  static disabled  = "none";
+  static all       = "all";
+  static custom    = "custom";
 
-  shouldFixIlvlIndent = config.ItemLevel === "fix";
+  static shouldFixIlvlIndent = config.ItemLevel === "fix";
 }
+
+// Naming
+const EMPTY_STRING = '';
+const SINGLE_SPACE = ' ';
+const NEW_LINE = "\n";
+const NONE = "none";
+
+const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
+const HIGHLIGHT       = config.HighlightCharacter !== SettingsConstants.custom ? config.HighlightCharacter                 : '*'; // replace * with desired custom character [CSTM-HLCTR]
+const HIGHLIGHT_COLOR = config.HighlightColor     !== SettingsConstants.custom ? `${BaseColorConstants.CLR_PREFIX}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
+
+const NO_COLOR   = EMPTY_STRING;
+const NO_PATTERN = EMPTY_STRING;
+const NO_PADDING = EMPTY_STRING;
+
+const SMALL_O = 'o';
+const PLUS    = '+';
+const MINUS   = '-';
+
+const PADDING_1 = SINGLE_SPACE;
+const PADDING_2 = SINGLE_SPACE.repeat(2);
+const PADDING_3 = SINGLE_SPACE.repeat(3);
+const PADDING_5 = SINGLE_SPACE.repeat(5);
+const PADDING_10 = SINGLE_SPACE.repeat(10);
+
+const PATTERN_2    = HIGHLIGHT.repeat(2);
+const PATTERN_5    = HIGHLIGHT.repeat(5);
+const PATTERN_10   = HIGHLIGHT.repeat(10);
+const PATTERN_2x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}`;
+const PATTERN_3x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}${PADDING_2}${PATTERN_10}`;
+
+const ILVL_INDENT_FIX_SINGLE  = SINGLE_SPACE.repeat(4); // for single digit ilvl items
+const ILVL_INDENT_FIX_DOUBLE  = SINGLE_SPACE.repeat(6); // for double digit ilvl items
+const ILVL_INDENT_FIX_QUALITY = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
+const ILVL_INDENT_FIX_FACET   = SettingsConstants.shouldFixIlvlIndent ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
+const ILVL_INDENT_FIX_CHARMS  = SettingsConstants.shouldFixIlvlIndent ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
+const ILVL_INDENT_FIX_QUEST1  = ILVL_INDENT_FIX_SINGLE; // quest items with a single digit ilvl
+const ILVL_INDENT_FIX_QUEST2  = ILVL_INDENT_FIX_DOUBLE; // quest items with a double digit ilvl
+
+
+//========================//
+//   Constants - Colors   //
+//========================//
 
 class FileConstants {
   // extensions
@@ -120,72 +192,9 @@ class FontColorConstants {
 }
 
 
-// //==============================//
-// //   Parameters - Collections   //
-// //==============================//
-
-// const COL_HEALPOTS  = "healingPotions";
-// const COL_BUFFPOTS  = "buffPotions";
-// const COL_THROWPOTS = "throwingPotions";
-// const COL_SCROLLS   = "scrollsTomes";
-// const COL_AMMO      = "arrowsBolts";
-// const COL_KEYS      = "keys";
-// const COL_GEMS      = "gems";
-// const COL_JEWELS    = "jewels";
-// const COL_CHARMS    = "charms";
-// const COL_QUEST     = "quest";
-// const COL_ENDGAME   = "endgame";
-// const COL_WEPARM    = "weaponsArmor";
-// const COL_QUALITY   = "quality";
-// const COL_GOLD      = "gold";
-
-
-//=========================//
-//   Parameters - Global   //
-//=========================//
-
-// Naming
-const EMPTY_STRING = '';
-const SINGLE_SPACE = ' ';
-const NEW_LINE = "\n";
-const NONE = "none";
-
-const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
-const HIGHLIGHT       = config.HighlightCharacter !== SettingsConstants.custom ? config.HighlightCharacter                 : '*'; // replace * with desired custom character [CSTM-HLCTR]
-const HIGHLIGHT_COLOR = config.HighlightColor     !== SettingsConstants.custom ? `${BaseColorConstants.CLR_PREFIX}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
-
-const NO_COLOR   = EMPTY_STRING;
-const NO_PATTERN = EMPTY_STRING;
-const NO_PADDING = EMPTY_STRING;
-
-const SMALL_O = 'o';
-const PLUS    = '+';
-const MINUS   = '-';
-
-const PADDING_1 = SINGLE_SPACE;
-const PADDING_2 = SINGLE_SPACE.repeat(2);
-const PADDING_3 = SINGLE_SPACE.repeat(3);
-const PADDING_5 = SINGLE_SPACE.repeat(5);
-const PADDING_10 = SINGLE_SPACE.repeat(10);
-
-const PATTERN_2    = HIGHLIGHT.repeat(2);
-const PATTERN_5    = HIGHLIGHT.repeat(5);
-const PATTERN_10   = HIGHLIGHT.repeat(10);
-const PATTERN_2x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}`;
-const PATTERN_3x10 = `${PATTERN_10}${PADDING_2}${PATTERN_10}${PADDING_2}${PATTERN_10}`;
-
-const ILVL_INDENT_FIX_SINGLE  = SINGLE_SPACE.repeat(4); // for single digit ilvl items
-const ILVL_INDENT_FIX_DOUBLE  = SINGLE_SPACE.repeat(6); // for double digit ilvl items
-const ILVL_INDENT_FIX_QUALITY = SINGLE_SPACE.repeat(6); // for double digit ilvl items when item quality is enabled
-const ILVL_INDENT_FIX_FACET   = SettingsConstants.shouldFixIlvlIndent ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
-const ILVL_INDENT_FIX_CHARMS  = SettingsConstants.shouldFixIlvlIndent ? ILVL_INDENT_FIX_DOUBLE : EMPTY_STRING;
-const ILVL_INDENT_FIX_QUEST1  = ILVL_INDENT_FIX_SINGLE; // quest items with a single digit ilvl
-const ILVL_INDENT_FIX_QUEST2  = ILVL_INDENT_FIX_DOUBLE; // quest items with a double digit ilvl
-
-
-//========================//
-//   Parameters - Runes   //
-//========================//
+//=======================//
+//   Constants - Items   //
+//=======================//
 
 class RuneConstants {
   // I consider the rune tiers to be:
@@ -268,11 +277,6 @@ class RuneConstants {
   static isAlternateColor = [SettingsConstants.all, "fac-run", "sun-run", "run"].includes(config.AlternateColorSchemes);
 }
 
-  
-//========================//
-//   Parameters - Items   //
-//========================//
-
 class UniqueConstants {
   static clrName = ColorConstants.GOLD;
   static clrHighlight = HIGHLIGHT_COLOR;
@@ -315,19 +319,14 @@ class QuestConstants {
 }
 
 
-//===============================//
-//   Parameters - Big Tooltips   //
-//===============================//
+//==========================//
+//   Constants - Features   //
+//==========================//
 
 class BigTooltipConstants {
   static padding = PADDING_5;
   static pickUpMsg = `${NEW_LINE}${ColorConstants.PURPLE}Pick Up`;
 }
-
-
-//================================//
-//   Parameters - Light Pillars   //
-//================================//
 
 class LightPillarConstants {
   // item paths
@@ -425,11 +424,6 @@ class LightPillarConstants {
   };
 }
 
-
-//==============================//
-//   Parameters - Drop Sounds   //
-//==============================//
-
 class DropSoundConstants {
   // sound names
   static SOUND_NONE = "";
@@ -483,9 +477,9 @@ class DropSoundConstants {
 }
 
 
-//======================//
-//   Global Functions   //
-//======================//
+//=============================//
+//   Global Helper Functions   //
+//=============================//
 
 /*
 class AwesomeArray extends Array {
@@ -541,7 +535,7 @@ class Helper {
   //     x[collections[i].name] = { name: i, bigTooltipSetting: "" };
   //   }
   // }
-  
+
   /**
    * Generate an item name with a highlight pattern on the left side: `${ColorConstants.RED}+HP1` or `${ColorConstants.GRAY}o Arrows`.
    * @param {*} patternColor The color of the highlight pattern.
@@ -607,11 +601,9 @@ class Helper {
 }
 
 
-
-//============================//
-//   Custom Item Name Lists   //
-//============================//
-
+//===============================================//
+//   Loot Filter Builders - Item Name Features   //
+//===============================================//
 
 // abstract class
 class AbstractItemNamesBuilder {
@@ -665,14 +657,6 @@ class AbstractItemNamesBuilder {
   }
 
 }
-
-// const COL_CA = [
-//   { name: COL_GOLD,    bigTooltipSetting: NONE },
-//   { name: COL_QUALITY, bigTooltipSetting: NONE },
-//   { name: COL_GEMS,    bigTooltipSetting: config.BigTooltipGems },
-// ];
-
-// const ca = {};
 
 class CustomAffixesBuilder extends AbstractItemNamesBuilder {
   items = [];
@@ -1822,6 +1806,11 @@ class CustomModifiersBuilder extends AbstractItemNamesBuilder {
   }
 };
 
+
+//===================================================//
+//   Loot Filter Builders - Non-Item Name Features   //
+//===================================================//
+
 class ItemLevelBuilder {
   build() {
     const fileWeapons = D2RMM.readTsv(FileConstants.FILE_WEAPONS_PATH);
@@ -2353,6 +2342,11 @@ class ProfileHdModsBuilder {
     }
   }
 }
+
+
+//===========================================//
+//   Loot Filter Builders - Master Builder   //
+//===========================================//
 
 class LootFilterBuilder {
   build() {
