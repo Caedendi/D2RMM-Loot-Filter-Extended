@@ -94,19 +94,21 @@ class ColorConstants {
   static PINK      = BaseColorConstants.CLR_VIOLET;
 }
 
-class FontConstants {
-  Beige         = '$FontColorBeige';
-  Black         = '$FontColorBlack';
-  DarkGreen     = '$FontColorDarkGreen';
-  Green         = '$FontColorGreen';
-  LightBlue     = '$FontColorLightBlue';
-  LightGray     = '$FontColorLightGray';
-  LightPurple   = '$FontColorLightPurple';
-  LightRed      = '$FontColorLightRed';
-  LightTeal     = '$FontColorLightTeal';
-  Red           = '$FontColorRed';
-  VeryLightGray = '$FontColorVeryLightGray';
-  White         = '$FontColorWhite';
+// _profilehd.json colors
+class FontColorConstants {
+  static beige         = "$FontColorBeige";
+  static black         = "$FontColorBlack";
+  static currencyGold  = "$FontColorCurrencyGold";
+  static darkGreen     = "$FontColorDarkGreen";
+  static green         = "$FontColorGreen";
+  static lightBlue     = "$FontColorLightBlue";
+  static lightGray     = "$FontColorLightGray";
+  static lightPurple   = "$FontColorLightPurple";
+  static lightRed      = "$FontColorLightRed";
+  static lightTeal     = "$FontColorLightTeal";
+  static red           = "$FontColorRed";
+  static veryLightGray = "$FontColorVeryLightGray";
+  static white         = "$FontColorWhite";
 }
 
 
@@ -2267,19 +2269,19 @@ class DropSoundBuilder {
 };
 
 class ProfileHdModsBuilder {
-  colors = { // _profilehd.json colors
-    Beige:         '$FontColorBeige',
-    Black:         '$FontColorBlack',
-    DarkGreen:     '$FontColorDarkGreen',
-    Green:         '$FontColorGreen',
-    LightBlue:     '$FontColorLightBlue',
-    LightGray:     '$FontColorLightGray',
-    LightPurple:   '$FontColorLightPurple',
-    LightRed:      '$FontColorLightRed',
-    LightTeal:     '$FontColorLightTeal',
-    Red:           '$FontColorRed',
-    VeryLightGray: '$FontColorVeryLightGray',
-    White:         '$FontColorWhite',
+  colors = {
+    Beige:         FontColorConstants.beige,
+    Black:         FontColorConstants.black,
+    DarkGreen:     FontColorConstants.darkGreen,
+    Green:         FontColorConstants.green,
+    LightBlue:     FontColorConstants.lightBlue,
+    LightGray:     FontColorConstants.lightGray,
+    LightPurple:   FontColorConstants.lightPurple,
+    LightRed:      FontColorConstants.lightRed,
+    LightTeal:     FontColorConstants.lightTeal,
+    Red:           FontColorConstants.red,
+    VeryLightGray: FontColorConstants.veryLightGray,
+    White:         FontColorConstants.white,
   }
 
   build() {
@@ -2304,10 +2306,10 @@ class ProfileHdModsBuilder {
         return;
       case "g":
       case "gw":
-        goldColor = "$FontColorCurrencyGold";
+        goldColor = FontColorConstants.currencyGold;
         break;
       case "custom":
-        goldColor = "$FontColorLightTeal";
+        goldColor = FontColorConstants.lightTeal;
         break;
     }
     
@@ -2319,7 +2321,7 @@ class ProfileHdModsBuilder {
       return;
     }
 
-    profileHD.TooltipStyle.EtherealColor = (setting !== "custom") ? this.colors[setting] : "$FontColorLightTeal"; // [CSTM-ETH] change $FontColorLightTeal into any color variable in _profilehd.json
+    profileHD.TooltipStyle.EtherealColor = (setting !== "custom") ? this.colors[setting] : FontColorConstants.lightTeal; // [CSTM-ETH] change FontColorConstants.lightTeal into any color variable in _profilehd.json
   }
 
   applyTooltipMods(profileHD, setting, opacity, tooltipSize) {
