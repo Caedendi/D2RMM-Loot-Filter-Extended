@@ -12,7 +12,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 - [Screenshots](#screenshots)
 - [Changelog](#changelog)
-  - [2.2.0](#220)
+  - [3.0.0 (work in progress)](#300-work-in-progress)
   - [2.1.1](#211)
   - [2.1.0](#210)
   - [2.0.1](#201)
@@ -64,21 +64,21 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ## Changelog
 
-### 3.0.0
+### 3.0.0 (work in progress)
 
-- Introducing Drop Sounds! Configure new sound effects for when select item types drop so you'll never miss one again!
+- Introducing Drop Sounds! Configure new sound effects for when select item types drop so you'll never miss a drop again!
 - For those running custom filter options: all colors have been renamed to more standardized names (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
-- Added multi-line tooltips! Enable for select items to increase the height of the tooltips of items on the ground. If you prefer to have a big transparent box, enable highlighting and set the highlight character to _space_
+- Added multi-line tooltips! Enable for select items to increase the height of the tooltips of items on the ground and optionally add a purple "Pick Up" message above the name. If you prefer to have a big transparent box instead of highlight characters, enable highlighting and set the highlight character to _space_
 - Added custom filter lists for weapons and armor that support _all_ base items! Search for _[CSTM-WEP]_ and _[CSTM-ARM]_ in the code and add whatever you like!
-- Added option to customize the tooltip color for Ethereal items when on the ground
+- Added option to customize the tooltip color for Ethereal items when on the ground (recommended: light teal)
 - Added option to disable _all_ Light Pillars
-- Added customization of the Gold amount color _(in addition to the already implemented suffix customization)_
-- Added customization of the highlight color (can now be set to colors other than tomato red)
-- Added customization of the alternate rune color scheme (can now be set to colors other than dark violet)
-- Added space as a highlight character option
-- Split runes into 4 tiers, each of which you can individually enable/disable visibility, Light Pillars and Drop Sounds for
+- Added customization of the Gold amount color _(in addition to the existing suffix customization)_
+- Added customization of the highlight color _(can now be set to colors other than tomato red)_
+- Added customization of the alternate rune color scheme _(can now be set to colors other than dark violet)_
+- Added _space_ as a highlight character option
+- Split runes into 4 tiers, each of which you can individually enable/disable visibility, Light Pillars, Drop Sounds and big tooltips for
 - Changed the Light Pillars setting for Quest Weapons from "exclude" to "include" 
-- Slightly changed some existing setting names and tooltips
+- Mod settings have been overhauled. Delete your config.json to start from scratch to prevent issues.
 
 ### 2.1.1
 
