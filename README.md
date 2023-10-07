@@ -402,7 +402,7 @@ See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Do
 - [x] Custom drop sounds
 - [x] Gold mods (gold amount coloring + variations)
 - [x] Ethereal tooltip customization
-- [x] Custom weapon/armor filter list (as suggested by [Stealan88](https://www.nexusmods.com/users/181188678))
+- [x] Custom weapon/armor filter list (as suggested by [Stealan88](https://www.nexusmods.com/diablo2resurrected/mods/361?tab=posts&jump_to_comment=128549685))
 
 
 ## Recommended Mods
