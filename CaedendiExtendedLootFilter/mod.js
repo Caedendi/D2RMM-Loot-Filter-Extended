@@ -215,10 +215,10 @@ class RuneConstants {
   static colorAlternate = config.RunesHighlightColorAlt !== SettingsConstants.custom ? `${BaseColorConstants.prefix}${config.RunesHighlightColorAlt}` : ';'; // replace 1 with desired custom color character (see above) [CSTM-HLCRA]
 
   // set the highlight patterns for each rune tier
-  static patternLow    = CharConstants.empty;   // 
-  static patternLowMid = PatternConstants.p5;    // *****
-  static patternMid    = PatternConstants.p10;   // **********
-  static patternHigh   = PatternConstants.p3x10; // ********** ********** **********
+  static patternLow     = CharConstants.empty;   // 
+  static patternLowMid  = PatternConstants.p5;    // *****
+  static patternMid     = PatternConstants.p10;   // **********
+  static patternHigh    = config.BigTooltipRunesHigh === SettingsConstants.disabled ? PatternConstants.p3x10 : PatternConstants.p2x10; // ********** ********** ********** or ********** ********** with big tooltips
 
   // set the amount of spaces between the rune name and the highlight patterns for each rune tier
   static paddingLow = PaddingConstants.none;
