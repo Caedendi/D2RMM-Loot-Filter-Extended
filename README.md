@@ -364,6 +364,12 @@ See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Do
   - [ ] highlight pattern + whitespace above/below
   - [ ] colored "Pick Up" text above item name
   - [ ] custom
+- [ ] Drop Sounds extras:
+  - [ ] LoD uniques: theme sounds 
+    - [ ] anni: todo
+    - [ ] torch: fireball/hell forge smash
+    - [ ] Gheed's: gold drop
+  - [ ] Sunder Charms: theme sounds (fireball, lightning, etc)
 
 
 ### Fix known bugs
