@@ -1,6 +1,7 @@
 # To Do
 
 ## Loot Filter
+- [ ] update settings overview
 - [ ] move all constants to classes
 - [x] subcollections
 - [ ] finish rewrite
