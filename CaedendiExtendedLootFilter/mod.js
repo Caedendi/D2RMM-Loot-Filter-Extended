@@ -55,8 +55,8 @@ class BaseColorConstants {
   static CLR_WHEAT             = `${this.CLR_PREFIX}M`;
 }
 
+// loot filter colors
 class ColorConstants {
-  // loot filter colors
   static WHITE     = BaseColorConstants.CLR_WHITE;
   static GRAY      = BaseColorConstants.CLR_GRAY_DIMMER;
   static BLACK     = BaseColorConstants.CLR_BLACK;
@@ -102,14 +102,15 @@ class SettingsConstants {
   static shouldFixIlvlIndent = config.ItemLevel === "fix";
 }
 
+// todo: move to constants class
 // Naming
 const EMPTY_STRING = '';
 const SINGLE_SPACE = ' ';
 const NEW_LINE = "\n";
 const NONE = "none";
 
-const HIDDEN = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
-const HIGHLIGHT       = config.HighlightCharacter !== SettingsConstants.custom ? config.HighlightCharacter                 : '*'; // replace * with desired custom character [CSTM-HLCTR]
+const HIDDEN          = EMPTY_STRING + SINGLE_SPACE.repeat(config.HiddenItemTooltipSize);
+const HIGHLIGHT       = config.HighlightCharacter !== SettingsConstants.custom ? config.HighlightCharacter                                  : '*'; // replace * with desired custom character [CSTM-HLCTR]
 const HIGHLIGHT_COLOR = config.HighlightColor     !== SettingsConstants.custom ? `${BaseColorConstants.CLR_PREFIX}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
 
 const NO_COLOR   = EMPTY_STRING;
@@ -1861,7 +1862,8 @@ class ItemLevelBuilder {
         CharmConstants.small, 
         "jew"
       ];
-      // todo: if row.code in jewelry
+      // todo:
+      // if (jewelry.includes(row.code)) { 
       if (jewelry.indexOf(row.code) !== -1) { 
         row.ShowLevel = 1;
         return;
@@ -1949,20 +1951,6 @@ class LightPillarBuilder {
     }
 
     RuneConstants.tiers.forEach((t) => {
-      // todo
-      let tier = { ...t };
-      tier.runes = [
-        { number: 26, name: "Vex"  }, 
-        { number: 27, name: "Ohm"  }, 
-        { number: 28, name: "Lo"   }, 
-        { number: 29, name: "Sur"  }, 
-        { number: 30, name: "Ber"  }, 
-        { number: 31, name: "Jah"  }, 
-        { number: 32, name: "Cham" }, 
-        { number: 33, name: "Zod"  }, 
-      ];
-
-
       if (!tier.hasLightPillar || (config.ShouldDisableLightPillarForHidden && !tier.isVisible)) {
         return;
       }
@@ -2280,7 +2268,7 @@ class DropSoundBuilder {
   
   // create new entry in sounds.txt
   pushSound(soundsFile, soundName, template, sfxChannel, sfxFileName, sfxRedirect) {
-    let newSound = { ...(soundsFile.rows.find((sound) => sound.Sound === template)) }; // create deep copy
+    let newSound = { ...(soundsFile.rows.find((sound) => sound.Sound === template)) }; // create deep copy of template
   
     newSound.Sound = soundName;
     newSound["*Index"] = soundsFile.rows.length;
@@ -2346,9 +2334,6 @@ class ProfileHdModsBuilder {
 
     let goldColor = NO_COLOR;
     switch (setting) {
-      case SettingsConstants.disabled:
-      case "wg":
-        return;
       case "g":
       case "gw":
         goldColor = FontColorConstants.currencyGold;
