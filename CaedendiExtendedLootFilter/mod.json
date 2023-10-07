@@ -65,7 +65,7 @@
       "defaultValue": "all",
       "options": [
         { "value": "none",   "label": "Disable" },
-        { "value": "all",    "label": "Enable (show all)" },
+        { "value": "all",    "label": "Enable" },
         { "value": "hide",   "label": "Hide" },
         { "value": "custom", "label": "Custom" }
       ]
@@ -78,7 +78,7 @@
       "defaultValue": "all",
       "options": [
         { "value": "none",   "label": "Disable" },
-        { "value": "all",    "label": "Enable (show all)" },
+        { "value": "all",    "label": "Enable" },
         { "value": "hide",   "label": "Hide" },
         { "value": "custom", "label": "Custom" }
       ]
@@ -91,7 +91,7 @@
       "defaultValue": "all",
       "options": [
         { "value": "none",   "label": "Disable" },
-        { "value": "all",    "label": "Enable (show all)" },
+        { "value": "all",    "label": "Enable" },
         { "value": "hide",   "label": "Hide Scrolls" },
         { "value": "custom", "label": "Custom" }
       ]
@@ -104,8 +104,8 @@
       "defaultValue": "all",
       "options": [
         { "value": "none",   "label": "Disable" },
-        { "value": "all",    "label": "Enable (show all)" },
-        { "value": "hide",   "label": "Hide Scrolls" },
+        { "value": "all",    "label": "Enable" },
+        { "value": "hide",   "label": "Hide" },
         { "value": "custom", "label": "Custom" }
       ]
     },
@@ -117,7 +117,7 @@
       "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
-        { "value": "hide",   "label": "Hide Scrolls" },
+        { "value": "hide",   "label": "Hide" },
         { "value": "custom", "label": "Custom" }
       ]
     },
@@ -235,7 +235,7 @@
       "type": "select",
       "name": "Jewels",
       "description": "Customize Jewels. Currently identified Facets only; I have not yet found a good way to customize unidentified/Magic/Rare Jewels. [CSTM-JWL]",
-      "defaultValue": "facet-rb",
+      "defaultValue": "facet",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "facet",  "label": "Highlight Facets" },
@@ -410,7 +410,7 @@
       "type": "select",
       "name": "Runes: Low",
       "description": " (El [1] - Dol [14], except Ral [8]).",
-      "defaultValue": "disable",
+      "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -474,7 +474,7 @@
       "type": "select",
       "name": "Gems",
       "description": "",
-      "defaultValue": "disabled",
+      "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -490,7 +490,7 @@
       "type": "select",
       "name": "Facets",
       "description": "",
-      "defaultValue": "huge",
+      "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -506,7 +506,7 @@
       "type": "select",
       "name": "Unique Charms",
       "description": "Anni, Torch, Gheed's and Sunder Charms.",
-      "defaultValue": "huge",
+      "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -522,7 +522,7 @@
       "type": "select",
       "name": "Quest Items",
       "description": " Quest Items on the ground.",
-      "defaultValue": "big",
+      "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -538,7 +538,7 @@
       "type": "select",
       "name": "Essences",
       "description": " on Essences on the ground.",
-      "defaultValue": "big",
+      "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -554,7 +554,7 @@
       "type": "select",
       "name": "Token of Absolution",
       "description": " on Tokens of Absolution on the ground.",
-      "defaultValue": "big",
+      "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -570,7 +570,7 @@
       "type": "select",
       "name": "Pandemonium Keys",
       "description": " Keys of Terror/Hate/Destruction on the ground.",
-      "defaultValue": "big",
+      "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -586,7 +586,7 @@
       "type": "select",
       "name": "Pandemonium Organs",
       "description": " Über Organs on the ground. ",
-      "defaultValue": "huge",
+      "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -602,7 +602,7 @@
       "type": "select",
       "name": "Standard of Heroes",
       "description": " when you kill the Übers.",
-      "defaultValue": "disabled",
+      "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
