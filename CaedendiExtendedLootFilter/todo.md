@@ -1,15 +1,15 @@
 # To Do
 
 ## Loot Filter
-- [ ] update settings overview
-- [ ] move all constants to classes
+- [x] move all constants to classes
 - [x] subcollections
-- [ ] finish rewrite
-- [ ] migrate to TypeScript
-  - [ ] unit tests
+- [x] finish rewrite
 - [ ] Big Tooltips
+- [ ] README: update settings overview
 - [ ] Simple Loot Filter feature parity
   - [ ] custom weapons/armor filter lists
+- [ ] migrate to TypeScript
+  - [ ] unit tests
 - [ ] other languages compatiblity
 
 ## item filtering
@@ -21,4 +21,5 @@
 
 ## Fix
 - [x] ilvl unique charms
-- [ ] high runes big tooltip: 3x10 => 2x10
+- [x] high runes big tooltip: 3x10 => 2x10
+- [ ] runes tier 4 alternate highlight color for pattern

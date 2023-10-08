@@ -12,6 +12,30 @@
 //   Constants   //
 //===============//
 
+class FileConstants {
+  // extensions
+  static FILE_EXTENSION_JSON = ".json";
+  static FILE_EXTENSION_TXT  = ".txt";
+  
+  // ui layouts
+  static FILE_PROFILE_HD_PATH = `global\\ui\\layouts\\_profilehd${this.FILE_EXTENSION_JSON}`;
+  
+  // localized jsons
+  static FILE_PATH_STRINGS          = "local\\lng\\strings\\";
+  static FILE_ITEM_MODIFIERS_PATH   = `${this.FILE_PATH_STRINGS}item-modifiers${this.FILE_EXTENSION_JSON}`;
+  static FILE_ITEM_NAMEAFFIXES_PATH = `${this.FILE_PATH_STRINGS}item-nameaffixes${this.FILE_EXTENSION_JSON}`;
+  static FILE_ITEM_NAMES_PATH       = `${this.FILE_PATH_STRINGS}item-names${this.FILE_EXTENSION_JSON}`;
+  static FILE_ITEM_RUNES_PATH       = `${this.FILE_PATH_STRINGS}item-runes${this.FILE_EXTENSION_JSON}`;
+  static FILE_UI_PATH               = `${this.FILE_PATH_STRINGS}ui${this.FILE_EXTENSION_JSON}`;
+  
+  // excel
+  static FILE_EXCEL        = "global\\excel\\"
+  static FILE_WEAPONS_PATH = `${this.FILE_EXCEL}weapons${this.FILE_EXTENSION_TXT}`;
+  static FILE_ARMOR_PATH   = `${this.FILE_EXCEL}armor${this.FILE_EXTENSION_TXT}`;
+  static FILE_MISC_PATH    = `${this.FILE_EXCEL}misc${this.FILE_EXTENSION_TXT}`;
+  static FILE_SOUNDS_PATH  = `${this.FILE_EXCEL}sounds${this.FILE_EXTENSION_TXT}`;
+}
+
 class CharConstants {
   static empty = '';
   static space = ' ';
@@ -64,6 +88,23 @@ class BaseColorConstants {
   static wheat           = `${this.prefix}M`;
 }
 
+class FontColorConstants {
+  // _profilehd.json colors
+  static beige         = "$FontColorBeige";
+  static black         = "$FontColorBlack";
+  static currencyGold  = "$FontColorCurrencyGold";
+  static darkGreen     = "$FontColorDarkGreen";
+  static green         = "$FontColorGreen";
+  static lightBlue     = "$FontColorLightBlue";
+  static lightGray     = "$FontColorLightGray";
+  static lightPurple   = "$FontColorLightPurple";
+  static lightRed      = "$FontColorLightRed";
+  static lightTeal     = "$FontColorLightTeal";
+  static red           = "$FontColorRed";
+  static veryLightGray = "$FontColorVeryLightGray";
+  static white         = "$FontColorWhite";
+}
+
 class ColorConstants {
   // loot filter colors
   static none      = CharConstants.empty;
@@ -82,27 +123,8 @@ class ColorConstants {
   static pink      = BaseColorConstants.violet;
 }
 
-class FontColorConstants {
-  // _profilehd.json colors
-  static beige         = "$FontColorBeige";
-  static black         = "$FontColorBlack";
-  static currencyGold  = "$FontColorCurrencyGold";
-  static darkGreen     = "$FontColorDarkGreen";
-  static green         = "$FontColorGreen";
-  static lightBlue     = "$FontColorLightBlue";
-  static lightGray     = "$FontColorLightGray";
-  static lightPurple   = "$FontColorLightPurple";
-  static lightRed      = "$FontColorLightRed";
-  static lightTeal     = "$FontColorLightTeal";
-  static red           = "$FontColorRed";
-  static veryLightGray = "$FontColorVeryLightGray";
-  static white         = "$FontColorWhite";
-}
-
 class SettingsConstants {
   static hidden             = CharConstants.empty + CharConstants.space.repeat(config.HiddenItemTooltipSize);
-  static highlightCharacter = config.HighlightCharacter !== this.custom ? config.HighlightCharacter                              : '*'; // replace * with desired custom character [CSTM-HLCTR]
-  static highlightColor     = config.HighlightColor     !== this.custom ? `${BaseColorConstants.prefix}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
   
   static shouldFixIlvlIndent      = config.ItemLevel === "fix";
   static iLvlIndentFixSingle      = CharConstants.space.repeat(4); // for single digit ilvl items
@@ -118,46 +140,37 @@ class SettingsConstants {
   static custom    = "custom";
 }
 
-class PaddingConstants {
-  static none = CharConstants.empty;
-  static p1   = CharConstants.space;
-  static p2   = CharConstants.space.repeat(2);
-  static p3   = CharConstants.space.repeat(3);
-  static p5   = CharConstants.space.repeat(5);
-  static p10  = CharConstants.space.repeat(10);
-}
+class HighlightConstants {
+  static character = config.HighlightCharacter !== this.custom ? config.HighlightCharacter                              : '*'; // replace * with desired custom character [CSTM-HLCTR]
+  static color     = config.HighlightColor     !== this.custom ? `${BaseColorConstants.prefix}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
 
-class PatternConstants {
-  static none  = CharConstants.empty;
-  static p2    = SettingsConstants.highlightCharacter.repeat(2);
-  static p5    = SettingsConstants.highlightCharacter.repeat(5);
-  static p10   = SettingsConstants.highlightCharacter.repeat(10);
-  static p2x10 = `${this.p10}${PaddingConstants.p2}${this.p10}`;
-  static p3x10 = `${this.p10}${PaddingConstants.p2}${this.p10}${PaddingConstants.p2}${this.p10}`;
-}
+  static paddingNone = CharConstants.empty;
+  static padding1    = CharConstants.space;
+  static padding2    = CharConstants.space.repeat(2);
+  static padding3    = CharConstants.space.repeat(3);
+  static padding5    = CharConstants.space.repeat(5);
+  static padding10   = CharConstants.space.repeat(10);
 
-class FileConstants {
-  // extensions
-  static FILE_EXTENSION_JSON = ".json";
-  static FILE_EXTENSION_TXT  = ".txt";
-  
-  // ui layouts
-  static FILE_PROFILE_HD_PATH = `global\\ui\\layouts\\_profilehd${this.FILE_EXTENSION_JSON}`;
-  
-  // localized jsons
-  static FILE_PATH_STRINGS          = "local\\lng\\strings\\";
-  static FILE_ITEM_MODIFIERS_PATH   = `${this.FILE_PATH_STRINGS}item-modifiers${this.FILE_EXTENSION_JSON}`;
-  static FILE_ITEM_NAMEAFFIXES_PATH = `${this.FILE_PATH_STRINGS}item-nameaffixes${this.FILE_EXTENSION_JSON}`;
-  static FILE_ITEM_NAMES_PATH       = `${this.FILE_PATH_STRINGS}item-names${this.FILE_EXTENSION_JSON}`;
-  static FILE_ITEM_RUNES_PATH       = `${this.FILE_PATH_STRINGS}item-runes${this.FILE_EXTENSION_JSON}`;
-  static FILE_UI_PATH               = `${this.FILE_PATH_STRINGS}ui${this.FILE_EXTENSION_JSON}`;
-  
-  // excel
-  static FILE_EXCEL        = "global\\excel\\"
-  static FILE_WEAPONS_PATH = `${this.FILE_EXCEL}weapons${this.FILE_EXTENSION_TXT}`;
-  static FILE_ARMOR_PATH   = `${this.FILE_EXCEL}armor${this.FILE_EXTENSION_TXT}`;
-  static FILE_MISC_PATH    = `${this.FILE_EXCEL}misc${this.FILE_EXTENSION_TXT}`;
-  static FILE_SOUNDS_PATH  = `${this.FILE_EXCEL}sounds${this.FILE_EXTENSION_TXT}`;
+  static patternNone = CharConstants.empty;
+  static pattern2    = this.character.repeat(2);
+  static pattern5    = this.character.repeat(5);
+  static pattern10   = this.character.repeat(10);
+  static pattern2x10 = `${this.pattern10}${this.padding2}${this.pattern10}`;
+  static pattern3x10 = `${this.pattern10}${this.padding2}${this.pattern10}${this.padding2}${this.pattern10}`;
+
+  static uniqueColorName = ColorConstants.gold;
+  static uniqueColorHighlight = this.color;
+  static uniquePattern = this.pattern10;
+  static uniquePadding = this.padding5;
+  static uniquePrefix = `${this.clrHighlight}${this.pattern}${this.clrName}${this.uniquePadding}`;
+  static uniqueSuffix = `${this.uniquePadding}${this.clrHighlight}${this.pattern}${this.clrName}`;
+
+  static questPrefix = this.uniquePrefix;
+  static questSuffix = this.uniqueSuffix;
+
+  static bttPadding = this.padding5;
+  static bttPickUpMsg = `${CharConstants.newLine}${ColorConstants.purple}Pick Up`;
+
 }
 
 class RuneConstants {
@@ -211,20 +224,20 @@ class RuneConstants {
   ];
 
   static clrName      = ColorConstants.orange;
-  static clrHighlight = SettingsConstants.highlightColor;
+  static clrHighlight = HighlightConstants.color;
   static colorAlternate = config.RunesHighlightColorAlt !== SettingsConstants.custom ? `${BaseColorConstants.prefix}${config.RunesHighlightColorAlt}` : ';'; // replace 1 with desired custom color character (see above) [CSTM-HLCRA]
 
   // set the highlight patterns for each rune tier
-  static patternLow     = CharConstants.empty;   // 
-  static patternLowMid  = PatternConstants.p5;    // *****
-  static patternMid     = PatternConstants.p10;   // **********
-  static patternHigh    = config.BigTooltipRunesHigh === SettingsConstants.disabled ? PatternConstants.p3x10 : PatternConstants.p2x10; // ********** ********** ********** or ********** ********** with big tooltips
+  static patternLow     = HighlightConstants.patternNone;   // 
+  static patternLowMid  = HighlightConstants.pattern5;    // *****
+  static patternMid     = HighlightConstants.pattern10;   // **********
+  static patternHigh    = config.BigTooltipRunesHigh === SettingsConstants.disabled ? HighlightConstants.pattern3x10 : HighlightConstants.pattern2x10; // ********** ********** ********** or ********** ********** with big tooltips
 
   // set the amount of spaces between the rune name and the highlight patterns for each rune tier
-  static paddingLow = PaddingConstants.none;
-  static paddingLowMid = PaddingConstants.p3;
-  static paddingMid = PaddingConstants.p5;
-  static paddingHigh = PaddingConstants.p5;
+  static paddingLow    = HighlightConstants.paddingNone;
+  static paddingLowMid = HighlightConstants.padding3;
+  static paddingMid    = HighlightConstants.padding5;
+  static paddingHigh   = HighlightConstants.padding5;
 
   static tiers = [
     { level: 1, runes: this.tierLow,    padding: this.paddingLow,    pattern: this.patternLow,    isVisible: config.ShouldShowRunesLow,    bigTooltipSetting: config.BigTooltipRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow,    dropSound: config.DropSoundRunesLow    },
@@ -241,37 +254,7 @@ class RuneConstants {
   static isAlternateColor = config.RunesHighlightColorAlt !== SettingsConstants.none;
 }
 
-class UniqueConstants {
-  static clrName = ColorConstants.gold;
-  static clrHighlight = SettingsConstants.highlightColor;
-  static pattern = PatternConstants.p10;
-  static padding = PaddingConstants.p5;
-  static prefix = `${this.clrHighlight}${this.pattern}${this.clrName}${this.padding}`;
-  static suffix = `${this.padding}${this.clrHighlight}${this.pattern}${this.clrName}`;
-}
-
 class JewelryConstants {
-  static ring = "rin";
-  static amulet = "amu";
-  static jewel = "jew";
-
-  static small = "cm1";
-  static large = "cm2";
-  static grand = "cm3";
-
-  static anni = "Annihilus";
-  static torch = "Hellfire Torch";
-  static gheeds = "Gheed's Fortune";
-
-  static sunderMagic = "Black Cleft";
-  static sunderPhys = "Bone Break";
-  static sunderCold = "Cold Rupture";
-  static sunderLite = "Crack of the Heavens";
-  static sunderFire = "Flame Rift";
-  static sunderPsn = "Rotting Fissure";
-}
-
-class GemConstants {
   static amethyst = "Amethyst";
   static diamond  = "Diamond";
   static emerald  = "Emerald";
@@ -295,17 +278,26 @@ class GemConstants {
   
   static clrName = ColorConstants.white;
   static highlight = CharConstants.o;
-  static padding = PaddingConstants.p1;
-}
+  static padding = HighlightConstants.padding1;
 
-class QuestConstants {
-  static prefix = UniqueConstants.prefix;
-  static suffix = UniqueConstants.suffix;
-}
+  static ring = "rin";
+  static amulet = "amu";
+  static jewel = "jew";
 
-class BigTooltipConstants {
-  static padding = PaddingConstants.p5;
-  static pickUpMsg = `${CharConstants.newLine}${ColorConstants.purple}Pick Up`;
+  static small = "cm1";
+  static large = "cm2";
+  static grand = "cm3";
+
+  static anni = "Annihilus";
+  static torch = "Hellfire Torch";
+  static gheeds = "Gheed's Fortune";
+
+  static sunderMagic = "Black Cleft";
+  static sunderPhys = "Bone Break";
+  static sunderCold = "Cold Rupture";
+  static sunderLite = "Crack of the Heavens";
+  static sunderFire = "Flame Rift";
+  static sunderPsn = "Rotting Fissure";
 }
 
 class LightPillarConstants {
@@ -456,9 +448,10 @@ class DropSoundConstants {
   };
 }
 
-/**
- * Global helper functions
- */
+//=============//
+//   Helpers   //
+//=============//
+
 class Helper {
   static upsert(array, id, value) {
     const i = array.findIndex(x => x.id === id);
@@ -477,7 +470,7 @@ class Helper {
     return array.flatMap(sub => sub.value);
   }
 
-  static createBigTooltips(collection, setting) {
+  static addBigTooltips(collection, setting) {
     collection.forEach(entry => entry.value = this.generateBigTooltip(setting, entry.value))   
   }
 
@@ -521,21 +514,21 @@ class Helper {
     // new lines work upside-down: adding \n will add a new line on top of the current one (instead of below like you would expect)
     if (setting === SettingsConstants.custom) { // [CSTM-BTT]
       // ADD YOUR CUSTOM BIG TOOLTIP HERE
-      return CharConstants.newLine + `${BigTooltipConstants.padding}${name}${BigTooltipConstants.padding}` + CharConstants.newLine;
+      return CharConstants.newLine + `${HighlightConstants.bttPadding}${name}${HighlightConstants.bttPadding}` + CharConstants.newLine;
     }
 
-    name = `${BigTooltipConstants.padding}${name}${BigTooltipConstants.padding}`;
+    name = `${HighlightConstants.bttPadding}${name}${HighlightConstants.bttPadding}`;
     if (setting === "2") {
       return name + CharConstants.newLine;
     }
     if (setting === "2pu") {
-      return name + BigTooltipConstants.pickUpMsg;
+      return name + HighlightConstants.bttPickUpMsg;
     }
     if (setting === "3") {
       return CharConstants.newLine + name + CharConstants.newLine;
     }
     if (setting === "4pu") {
-      return CharConstants.newLine + name + BigTooltipConstants.pickUpMsg + CharConstants.newLine;
+      return CharConstants.newLine + name + HighlightConstants.bttPickUpMsg + CharConstants.newLine;
     }
     if (setting === "5") {
       return CharConstants.newLine + CharConstants.newLine + name + CharConstants.newLine + CharConstants.newLine;
@@ -587,6 +580,7 @@ class AbstractItemNamesBuilder {
    * @param {*} customNames An array of { id: x, value: y } objects
    */
   applyCustomNamesNew(path, customNames) {
+    // todo: rename function
     if (customNames.length == 0) {
       return;
     }
@@ -608,8 +602,6 @@ class AbstractItemNamesBuilder {
 
 class CustomAffixesBuilder extends AbstractItemNamesBuilder {
   items = {};
-  // items = [];
-  // index = {};
 
   build() {
     // this.init();
@@ -617,37 +609,10 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
     this.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes);
     this.customizeGems(config.Gems);
     
-    // this.createBigTooltips();
+    // this.addBigTooltips();
 
     this.applyCustomNames(FileConstants.FILE_ITEM_NAMEAFFIXES_PATH, this.items);
-    // this.applyCustomNames(FileConstants.FILE_ITEM_NAMEAFFIXES_PATH, this.items.flat());
-
-    // customAffixes.items.forEach(collection => {
-    //   applyCustomNames(FileConstants.FILE_ITEM_NAMEAFFIXES_PATH, collection);
-    // });
   }
-
-  // init() {
-  //   // creates a subcollection inside this.items for each item type.
-  //   // the reason we're doing it like this is because we want to use named (string) indexes ("gems" etc) for convenience instead
-  //   // of hardcoded numbers, but functions like .length and .forEach don't work with string indexes. This method circumvents that 
-  //   // by referencing a const string name that's actually an index number underwater.
-
-  //   // for (let i = 0; i < COL_CA.length; i++) {
-  //   //   items[COL_CA[i].name] = i;
-  //   // }
-
-
-  //   let collections = [
-  //     COL_GOLD,
-  //     COL_QUALITY,
-  //     COL_GEMS,
-  //   ];
-  //   initializeCollections2(ca, COL_CA);
-  //   ca.forEach(col => {
-  //     this.items[ca[col.name]] = {};
-  //   });
-  // }
 
   customizeGold(settingAmount, settingAffix) {
     let color = settingAmount === "wg" ? ColorConstants.gold : settingAmount === "gw" ? ColorConstants.white : ColorConstants.none;
@@ -700,23 +665,26 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
   }
 
   customizeGems(setting) {
+    let gems = [
+      { id: "gsw", color: JewelryConstants.clrDiamond,  name: JewelryConstants.diamond  }, // Diamond
+      { id: "gsg", color: JewelryConstants.clrEmerald,  name: JewelryConstants.emerald  }, // Emerald
+      { id: "gsr", color: JewelryConstants.clrRuby,     name: JewelryConstants.ruby     }, // Ruby
+      { id: "gsb", color: JewelryConstants.clrSapphire, name: JewelryConstants.sapphire }, // Sapphire
+    ];
     // These gem names also function as affixes, which is why they are located in the item-nameaffixes.json file.
     // Enabling filtering for these gems could also change for example the Ruby-part in a "Ruby Jewel of Fervor".
+
     switch (setting) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
-        // `${ColorConstants.green}o${ColorConstants.white} Emerald`;
-        this.items.gsw = Helper.generateSingleHighlight(GemConstants.clrDiamond,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.diamond);  // Diamond
-        this.items.gsg = Helper.generateSingleHighlight(GemConstants.clrEmerald,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.emerald);  // Emerald
-        this.items.gsr = Helper.generateSingleHighlight(GemConstants.clrRuby,     GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.ruby);     // Ruby
-        this.items.gsb = Helper.generateSingleHighlight(GemConstants.clrSapphire, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.sapphire); // Sapphire
+        this.highlightGems(gems);
         return;
       case "flawless": // hide chipped/flawed/regular gems
-        this.hideGems();
+        this.hideGems(gems);
         return;
       case "perfect": // hide chipped/flawed/regular/flawless gems
-        this.hideGems();
+        this.hideGems(gems);
         return;
       case SettingsConstants.custom: // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -728,23 +696,23 @@ class CustomAffixesBuilder extends AbstractItemNamesBuilder {
     }
   }
 
-  hideGems() {
-    this.items.gsw = SettingsConstants.hidden;
-    this.items.gsg = SettingsConstants.hidden;
-    this.items.gsr = SettingsConstants.hidden;
-    this.items.gsb = SettingsConstants.hidden;
+  hideGems(gems) {
+    gems.forEach(gem => {
+      this.items[gem.id] = SettingsConstants.hidden;
+    });
   }
 
-  // createBigTooltips() {
-  //   this.items.forEach(collection => {
+  highlightGems(gems) {
+    gems.forEach(gem => {
+      this.items[gem.id] = Helper.generateSingleHighlight(gem.color, JewelryConstants.highlight, JewelryConstants.padding, JewelryConstants.clrName, gem.name);
+    });
+  }
 
-  //   });
-  // }
+  // todo: big tooltips gems
 };
 
 class CustomRunesBuilder extends AbstractItemNamesBuilder {
   runeCollections = [];
-  // runes = new AwesomeArray();
 
   init() {
     RuneConstants.tiers.forEach((tier) => {
@@ -755,7 +723,7 @@ class CustomRunesBuilder extends AbstractItemNamesBuilder {
   build() {
     this.init();
     this.customizeRunes(config.RunesHighlighting);
-    this.createBigTooltips();
+    this.addBigTooltips();
     this.applyCustomNamesNew(FileConstants.FILE_ITEM_RUNES_PATH, Helper.mergeSubcollections(this.runeCollections));
   }
   
@@ -765,15 +733,15 @@ class CustomRunesBuilder extends AbstractItemNamesBuilder {
     const hasSettingHighlighting = [SettingsConstants.all, "nrs-hls", "hls-raf", "hls"].includes(setting); // settings that add highlighting
 
     switch (setting) {
-      case SettingsConstants.disabled:    // should not be reached
-      case "raf":     // Remove affix
+      case SettingsConstants.disabled: // should not be reached
+      case "raf":                      // Remove affix
         return;
-      case SettingsConstants.all:     // Add rune numbers + highlights + remove affix
-      case "nrs-raf": // Add rune numbers + remove affix
-      case "nrs-hls": // Add rune numbers + highlights
-      case "hls-raf": // Add highlights + remove affix
-      case "nrs":     // Add rune numbers
-      case "hls":     // Add highlights
+      case SettingsConstants.all:      // Add rune numbers + highlights + remove affix
+      case "nrs-raf":                  // Add rune numbers + remove affix
+      case "nrs-hls":                  // Add rune numbers + highlights
+      case "hls-raf":                  // Add highlights + remove affix
+      case "nrs":                      // Add rune numbers
+      case "hls":                      // Add highlights
         this.generateRuneNames(setting, hasAffix, hasNumber, hasSettingHighlighting);
         return;
       case SettingsConstants.custom: // [CSTM-RUN]
@@ -818,11 +786,11 @@ class CustomRunesBuilder extends AbstractItemNamesBuilder {
         this.runes.r31 = `${clrHighlight}${highlight3}${clrRune}     Jah (31)     ${clrHighlight}${highlight3}${clrRune}`; // Jah
         // this.runes.r32 = `${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}`; // Cham
         this.runes.r32 = `\n\n${clrMsg}Pick Up\n${LTT_PADDING}${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}${LTT_PADDING}\n\n`; // Cham
-        this.runes.r32 = Helper.generateBigTooltip(config.BigTooltipRunesHigh, `${clrHighlight}${PatternConstants.p2x10}${clrRune}${PaddingConstants.p10}Cham (32)${PaddingConstants.p10}${clrHighlight}${PatternConstants.p2x10}${clrRune}`); // Cham
+        this.runes.r32 = Helper.generateBigTooltip(config.BigTooltipRunesHigh, `${clrHighlight}${HighlightConstants.pattern2x10}${clrRune}${HighlightConstants.padding10}Cham (32)${HighlightConstants.padding10}${clrHighlight}${HighlightConstants.pattern2x10}${clrRune}`); // Cham
         // this.runes.r32 = Helper.generateBigTooltip(`${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}`); // Cham
         // this.runes.r33 = `${clrHighlight}${highlight3}${clrRune}     Zod (33)     ${clrHighlight}${highlight3}${clrRune}`;  // Zod
-        // this.runes.r33 = `${RuneConstants.clrHighlight}${PatternConstants.p10}${PaddingConstants.p5}${RuneConstants.clrName}Zod (33)${PaddingConstants.p5}${RuneConstants.clrHighlight}${PatternConstants.p10}${RuneConstants.clrName}`;  // Zod
-        this.runes.r33 = Helper.generateDoubleHighlight(clrHighlight, PatternConstants.p10, PaddingConstants.p5, clrRune, "Zod Rune (33)"); // Zod
+        // this.runes.r33 = `${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${HighlightConstants.padding5}${RuneConstants.clrName}Zod (33)${HighlightConstants.padding5}${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${RuneConstants.clrName}`;  // Zod
+        this.runes.r33 = Helper.generateDoubleHighlight(clrHighlight, HighlightConstants.pattern10, HighlightConstants.padding5, clrRune, "Zod Rune (33)"); // Zod
         return;
     }
   }
@@ -880,10 +848,10 @@ class CustomRunesBuilder extends AbstractItemNamesBuilder {
     // return settingBigTooltip !== "disable" ? Helper.generateBigTooltip(settingBigTooltip, runeName) : runeName;
   }
 
-  createBigTooltips() {
+  addBigTooltips() {
     RuneConstants.tiers.forEach(tier => {
       let runeCollection = Helper.getSubcollectionById(this.runeCollections, tier.level);
-      Helper.createBigTooltips(runeCollection, tier.bigTooltipSetting);
+      Helper.addBigTooltips(runeCollection, tier.bigTooltipSetting);
     });
   }
 };
@@ -893,33 +861,33 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
 
   // facets
   FACET_COLOR_NAME = ColorConstants.gold;
-  FACET_PATTERN = PatternConstants.p5;
-  FACET_PADDING_1 = PaddingConstants.p1; // padding between individual patterns
-  FACET_PADDING_2 = PaddingConstants.p3; // padding between name and FACET_ALTERNATE_PREFIX / FACET_ALTERNATE_SUFFIX
+  FACET_PATTERN = HighlightConstants.pattern5;
+  FACET_PADDING_1 = HighlightConstants.padding1; // padding between individual patterns
+  FACET_PADDING_2 = HighlightConstants.padding3; // padding between name and FACET_ALTERNATE_PREFIX / FACET_ALTERNATE_SUFFIX
   FACET_ALTERNATE_PREFIX = `${ColorConstants.red}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.yellow}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.blue}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.green}${this.FACET_PATTERN}${this.FACET_COLOR_NAME}${this.FACET_PADDING_2}`;
   FACET_ALTERNATE_SUFFIX = `${this.FACET_PADDING_2}${ColorConstants.green}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.blue}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.yellow}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.red}${this.FACET_PATTERN}${this.FACET_COLOR_NAME}`;
-  FACET_PREFIX = config.IsFacetAltPattern ? this.FACET_ALTERNATE_PREFIX : UniqueConstants.prefix;
-  FACET_SUFFIX = config.IsFacetAltPattern ? this.FACET_ALTERNATE_SUFFIX : UniqueConstants.suffix;
+  FACET_PREFIX = config.IsFacetAltPattern ? this.FACET_ALTERNATE_PREFIX : HighlightConstants.uniquePrefix;
+  FACET_SUFFIX = config.IsFacetAltPattern ? this.FACET_ALTERNATE_SUFFIX : HighlightConstants.uniqueSuffix;
 
   // charms
-  CHARMS_UNIQUE_PREFIX = UniqueConstants.prefix;
-  CHARMS_UNIQUE_SUFFIX = UniqueConstants.suffix;
+  CHARMS_UNIQUE_PREFIX = HighlightConstants.uniquePrefix;
+  CHARMS_UNIQUE_SUFFIX = HighlightConstants.uniqueSuffix;
 
   // endgame
   ENDGAME_COLOR_NAME = ColorConstants.orange;
-  ENDGAME_COLOR_HIGHLIGHT = SettingsConstants.highlightColor;
+  ENDGAME_COLOR_HIGHLIGHT = HighlightConstants.color;
 
-  ESSENCE_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${PatternConstants.p5}${this.ENDGAME_COLOR_NAME}${PaddingConstants.p3}`;
-  ESSENCE_SUFFIX = `${PaddingConstants.p3}${this.ENDGAME_COLOR_HIGHLIGHT}${PatternConstants.p5}${this.ENDGAME_COLOR_NAME}`;
-  KEY_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${PatternConstants.p10}${this.ENDGAME_COLOR_NAME}${PaddingConstants.p5}`;
-  KEY_SUFFIX = `${PaddingConstants.p5}${this.ENDGAME_COLOR_HIGHLIGHT}${PatternConstants.p10}${this.ENDGAME_COLOR_NAME}`;
+  ESSENCE_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern5}${this.ENDGAME_COLOR_NAME}${HighlightConstants.padding3}`;
+  ESSENCE_SUFFIX = `${HighlightConstants.padding3}${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern5}${this.ENDGAME_COLOR_NAME}`;
+  KEY_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern10}${this.ENDGAME_COLOR_NAME}${HighlightConstants.padding5}`;
+  KEY_SUFFIX = `${HighlightConstants.padding5}${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern10}${this.ENDGAME_COLOR_NAME}`;
   TOKEN_PREFIX = this.KEY_PREFIX;
   TOKEN_SUFFIX = this.KEY_SUFFIX;
-  ORGAN_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${PatternConstants.p3x10}${this.ENDGAME_COLOR_NAME}${PaddingConstants.p5}`;
-  ORGAN_SUFFIX = `${PaddingConstants.p5}${this.ENDGAME_COLOR_HIGHLIGHT}${PatternConstants.p3x10}${this.ENDGAME_COLOR_NAME}`;
+  ORGAN_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern3x10}${this.ENDGAME_COLOR_NAME}${HighlightConstants.padding5}`;
+  ORGAN_SUFFIX = `${HighlightConstants.padding5}${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern3x10}${this.ENDGAME_COLOR_NAME}`;
 
-  STANDARD_OF_HEROES_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${PatternConstants.p5}${UniqueConstants.clrName}${PaddingConstants.p3}`;
-  STANDARD_OF_HEROES_SUFFIX = `${PaddingConstants.p3}${this.ENDGAME_COLOR_HIGHLIGHT}${PatternConstants.p5}${UniqueConstants.clrName}`;
+  STANDARD_OF_HEROES_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern5}${HighlightConstants.uniqueColorName}${HighlightConstants.padding3}`;
+  STANDARD_OF_HEROES_SUFFIX = `${HighlightConstants.padding3}${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern5}${HighlightConstants.uniqueColorName}`;
   
   build() {
     // this.init();
@@ -936,37 +904,11 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     this.customizeEndgameItems(config.Endgame);
     this.customizeWeaponsAndArmor(config.ShouldFilterWeapons, config.ShouldFilterArmor);
 
-    this.createBigTooltips();
+    this.addBigTooltips();
 
     this.applyCustomNames(FileConstants.FILE_ITEM_NAMES_PATH, this.items);
-    // this.applyCustomNames(FileConstants.FILE_ITEM_NAMES_PATH, this.items.flat());
+    // this.applyCustomNamesNew(FileConstants.FILE_ITEM_NAMES_PATH, Helper.mergeSubcollections(this.itemCollections));
   }
-
-  // init() {
-  //   // creates a subcollection inside this.items for each item type.
-  //   // the reason we're doing it like this is because we want to use named (string) indexes ("gems" etc) for convenience instead
-  //   // of hardcoded numbers, but functions like .length and .forEach don't work with string indexes. This method circumvents that 
-  //   // by referencing a const string name that's actually an index number underwater.
-  //   let collections = {
-  //     name: COL_HEALPOTS, setting: 
-  //     COL_HEALPOTS, 
-  //     COL_BUFFPOTS, 
-  //     COL_THROWPOTS, 
-  //     COL_SCROLLS, 
-  //     COL_AMMO, 
-  //     COL_KEYS, 
-  //     COL_GEMS, 
-  //     COL_JEWELS, 
-  //     COL_CHARMS, 
-  //     COL_QUEST, 
-  //     COL_ENDGAME, 
-  //     COL_WEPARM, 
-  //   };
-  //   initializeCollections(ci, collections);
-  //   collections.forEach(col => {
-  //     this.items[ca[col]] = {};
-  //   });
-  // },
 
   customizeHealingPotions(setting) {
     const clrHeal = ColorConstants.red;
@@ -974,7 +916,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const clrRej = ColorConstants.purple;
     const clrName = ColorConstants.white;
     const pattern = CharConstants.plus;
-    const padding = PaddingConstants.none;
+    const padding = HighlightConstants.paddingNone;
 
     switch (setting) {
       case SettingsConstants.disabled:
@@ -1090,7 +1032,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const clrHighlight = ColorConstants.green;
     const clrName      = ColorConstants.white;
     const pattern      = CharConstants.plus;
-    const padding      = PaddingConstants.none;
+    const padding      = HighlightConstants.paddingNone;
 
     switch (setting) {
       case SettingsConstants.disabled: // no change
@@ -1119,7 +1061,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const clrOil = ColorConstants.orange;
     const clrName = ColorConstants.white;
     const pattern = CharConstants.o;
-    const padding = PaddingConstants.p1;
+    const padding = HighlightConstants.padding1;
 
     switch (setting) {
       case SettingsConstants.disabled: // no change
@@ -1157,7 +1099,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const clrTome   = ColorConstants.darkGreen;
     const clrName   = ColorConstants.white;
     const pattern   = CharConstants.plus;
-    const padding   = PaddingConstants.none;
+    const padding   = HighlightConstants.paddingNone;
 
     switch (setting) {
       case SettingsConstants.disabled: // no change
@@ -1199,7 +1141,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     const clrHighlight = ColorConstants.gray;
     const clrName = ColorConstants.white;
     const pattern = CharConstants.o;
-    const padding = PaddingConstants.p1;
+    const padding = HighlightConstants.padding1;
 
     switch (setting) {
       case SettingsConstants.disabled:
@@ -1239,28 +1181,68 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   //   Gems   //
   //==========//
   customizeGems(setting) {
+    let chippedFlawedRegular = [
+      { id: "gcv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.chipped  }, // Chipped Amethyst
+      { id: "gcw", color: JewelryConstants.clrDiamond,  name: JewelryConstants.chipped  }, // Chipped Diamond
+      { id: "gcg", color: JewelryConstants.clrEmerald,  name: JewelryConstants.chipped  }, // Chipped Emerald
+      { id: "gcr", color: JewelryConstants.clrRuby,     name: JewelryConstants.chipped  }, // Chipped Ruby
+      { id: "gcb", color: JewelryConstants.clrSapphire, name: JewelryConstants.chipped  }, // Chipped Sapphire
+      { id: "gcy", color: JewelryConstants.clrTopaz,    name: JewelryConstants.chipped  }, // Chipped Topaz
+      { id: "skc", color: JewelryConstants.clrSkull,    name: JewelryConstants.chipped  }, // Chipped Skull
+      { id: "gfv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.flawed   }, // Flawed Amethyst
+      { id: "gfw", color: JewelryConstants.clrDiamond,  name: JewelryConstants.flawed   }, // Flawed Diamond
+      { id: "gfg", color: JewelryConstants.clrEmerald,  name: JewelryConstants.flawed   }, // Flawed Emerald
+      { id: "gfr", color: JewelryConstants.clrRuby,     name: JewelryConstants.flawed   }, // Flawed Ruby
+      { id: "gfb", color: JewelryConstants.clrSapphire, name: JewelryConstants.flawed   }, // Flawed Sapphire
+      { id: "gfy", color: JewelryConstants.clrTopaz,    name: JewelryConstants.flawed   }, // Flawed Topaz
+      { id: "skf", color: JewelryConstants.clrSkull,    name: JewelryConstants.flawed   }, // Flawed Skull
+      { id: "gsv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.amethyst }, // Amethyst
+      // For Ruby, Sapphire, Emerald and Diamond, see the "CustomAffixesBuilder" section.
+      // For some reason, the devs put these gems in another JSON file because they're also the names of some affixes.
+      { id: "gsy", color: JewelryConstants.clrTopaz,    name: JewelryConstants.topaz    }, // Topaz
+      { id: "sku", color: JewelryConstants.clrSkull,    name: JewelryConstants.skull    }, // Skull
+    ];
+    let flawless = [
+      { id: "gzv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.flawless }, // Flawless Amethyst
+      { id: "glw", color: JewelryConstants.clrDiamond,  name: JewelryConstants.flawless }, // Flawless Diamond
+      { id: "glg", color: JewelryConstants.clrEmerald,  name: JewelryConstants.flawless }, // Flawless Emerald
+      { id: "glr", color: JewelryConstants.clrRuby,     name: JewelryConstants.flawless }, // Flawless Ruby
+      { id: "glb", color: JewelryConstants.clrSapphire, name: JewelryConstants.flawless }, // Flawless Sapphire
+      { id: "gly", color: JewelryConstants.clrTopaz,    name: JewelryConstants.flawless }, // Flawless Topaz
+      { id: "skl", color: JewelryConstants.clrSkull,    name: JewelryConstants.flawless }, // Flawless Skull
+    ];
+    let perfect = [
+      { id: "gpv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.perfect }, // Perfect Amethyst
+      { id: "gpw", color: JewelryConstants.clrDiamond,  name: JewelryConstants.perfect }, // Perfect Diamond
+      { id: "gpg", color: JewelryConstants.clrEmerald,  name: JewelryConstants.perfect }, // Perfect Emerald
+      { id: "gpr", color: JewelryConstants.clrRuby,     name: JewelryConstants.perfect }, // Perfect Ruby
+      { id: "gpb", color: JewelryConstants.clrSapphire, name: JewelryConstants.perfect }, // Perfect Sapphire
+      { id: "gpy", color: JewelryConstants.clrTopaz,    name: JewelryConstants.perfect }, // Perfect Topaz
+      { id: "skz", color: JewelryConstants.clrSkull,    name: JewelryConstants.perfect }, // Perfect Skull
+    ];
+
     switch (setting) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
-        this.highlightChippedFlawedRegular();
-        this.highlightFlawless();
-        this.highlightPerfect();
+        this.highlightGems(chippedFlawedRegular);
+        this.highlightGems(flawless);
+        this.highlightGems(perfect);
         return;
       case "flawless": // hide chipped/flawed/regular gems
-        this.hideChippedFlawedRegular();
-        this.highlightFlawless();
-        this.highlightPerfect();
+        this.hideGems(chippedFlawedRegular);
+        this.highlightGems(flawless);
+        this.highlightGems(perfect);
         return;
       case "perfect": // hide chipped/flawed/regular/flawless gems
-        this.hideChippedFlawedRegular();
-        this.hideFlawless();
-        this.highlightPerfect();
+        this.hideGems(chippedFlawedRegular);
+        this.hideGems(flawless);
+        this.highlightGems(perfect);
         return;
       case "hide": // hide chipped/flawed/regular/flawless gems
-        this.hideChippedFlawedRegular();
-        this.hideFlawless();
-        this.hidePerfect();
+        this.hideGems(chippedFlawedRegular);
+        this.hideGems(flawless);
+        this.hideGems(perfect);
         return;
       case SettingsConstants.custom: // [CSTM-GEM1]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -1306,88 +1288,16 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     }
   }
 
-  hideChippedFlawedRegular() {
-    this.items.gcv = SettingsConstants.hidden;
-    this.items.gcw = SettingsConstants.hidden;
-    this.items.gcg = SettingsConstants.hidden;
-    this.items.gcr = SettingsConstants.hidden;
-    this.items.gcb = SettingsConstants.hidden;
-    this.items.gcy = SettingsConstants.hidden;
-    this.items.skc = SettingsConstants.hidden;
-    this.items.gfv = SettingsConstants.hidden;
-    this.items.gfw = SettingsConstants.hidden;
-    this.items.gfg = SettingsConstants.hidden;
-    this.items.gfr = SettingsConstants.hidden;
-    this.items.gfb = SettingsConstants.hidden;
-    this.items.gfy = SettingsConstants.hidden;
-    this.items.skf = SettingsConstants.hidden;
-    this.items.gsv = SettingsConstants.hidden;
-    // For Ruby, Sapphire, Emerald and Diamond, see the "Affixes" section above.
-    // For some reason, the devs put these gems in another JSON file.
-    this.items.gsy = SettingsConstants.hidden;
-    this.items.sku = SettingsConstants.hidden;
+  hideGems(gems) {
+    gems.forEach(gem => {
+      this.items[gem.id] = SettingsConstants.hidden;
+    });
   }
 
-  hideFlawless() {
-    this.items.gzv = SettingsConstants.hidden;
-    this.items.glw = SettingsConstants.hidden;
-    this.items.glg = SettingsConstants.hidden;
-    this.items.glr = SettingsConstants.hidden;
-    this.items.glb = SettingsConstants.hidden;
-    this.items.gly = SettingsConstants.hidden;
-    this.items.skl = SettingsConstants.hidden;
-  }
-
-  hidePerfect() {
-    this.items.gpv = SettingsConstants.hidden;
-    this.items.gpw = SettingsConstants.hidden;
-    this.items.gpg = SettingsConstants.hidden;
-    this.items.gpr = SettingsConstants.hidden;
-    this.items.gpb = SettingsConstants.hidden;
-    this.items.gpy = SettingsConstants.hidden;
-    this.items.skz = SettingsConstants.hidden;
-  }
-
-  highlightChippedFlawedRegular() {
-    this.items.gcv = Helper.generateSingleHighlight(GemConstants.clrAmethyst, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.chipped);  // Chipped Amethyst
-    this.items.gcw = Helper.generateSingleHighlight(GemConstants.clrDiamond,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.chipped);  // Chipped Diamond
-    this.items.gcg = Helper.generateSingleHighlight(GemConstants.clrEmerald,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.chipped);  // Chipped Emerald
-    this.items.gcr = Helper.generateSingleHighlight(GemConstants.clrRuby,     GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.chipped);  // Chipped Ruby
-    this.items.gcb = Helper.generateSingleHighlight(GemConstants.clrSapphire, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.chipped);  // Chipped Sapphire
-    this.items.gcy = Helper.generateSingleHighlight(GemConstants.clrTopaz,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.chipped);  // Chipped Topaz
-    this.items.skc = Helper.generateSingleHighlight(GemConstants.clrSkull,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.chipped);  // Chipped Skull
-    this.items.gfv = Helper.generateSingleHighlight(GemConstants.clrAmethyst, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawed);   // Flawed Amethyst
-    this.items.gfw = Helper.generateSingleHighlight(GemConstants.clrDiamond,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawed);   // Flawed Diamond
-    this.items.gfg = Helper.generateSingleHighlight(GemConstants.clrEmerald,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawed);   // Flawed Emerald
-    this.items.gfr = Helper.generateSingleHighlight(GemConstants.clrRuby,     GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawed);   // Flawed Ruby
-    this.items.gfb = Helper.generateSingleHighlight(GemConstants.clrSapphire, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawed);   // Flawed Sapphire
-    this.items.gfy = Helper.generateSingleHighlight(GemConstants.clrTopaz,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawed);   // Flawed Topaz
-    this.items.skf = Helper.generateSingleHighlight(GemConstants.clrSkull,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawed);   // Flawed Skull
-    this.items.gsv = Helper.generateSingleHighlight(GemConstants.clrAmethyst, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.amethyst); // Amethyst
-    // For Ruby, Sapphire, Emerald and Diamond, see the "CustomAffixesBuilder" section.
-    // For some reason, the devs put these gems in another JSON file because they're also the names of some affixes.
-    this.items.gsy = Helper.generateSingleHighlight(GemConstants.clrTopaz,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.topaz);    // Topaz
-    this.items.sku = Helper.generateSingleHighlight(GemConstants.clrSkull,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.skull);    // Skull
-  }
-
-  highlightFlawless() {
-    this.items.gzv = Helper.generateSingleHighlight(GemConstants.clrAmethyst, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawless); // Flawless Amethyst
-    this.items.glw = Helper.generateSingleHighlight(GemConstants.clrDiamond,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawless); // Flawless Diamond
-    this.items.glg = Helper.generateSingleHighlight(GemConstants.clrEmerald,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawless); // Flawless Emerald
-    this.items.glr = Helper.generateSingleHighlight(GemConstants.clrRuby,     GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawless); // Flawless Ruby
-    this.items.glb = Helper.generateSingleHighlight(GemConstants.clrSapphire, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawless); // Flawless Sapphire
-    this.items.gly = Helper.generateSingleHighlight(GemConstants.clrTopaz,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawless); // Flawless Topaz
-    this.items.skl = Helper.generateSingleHighlight(GemConstants.clrSkull,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.flawless); // Flawless Skull
-  }
-
-  highlightPerfect() {
-    this.items.gpv = Helper.generateSingleHighlight(GemConstants.clrAmethyst, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.perfect); // Perfect Amethyst
-    this.items.gpw = Helper.generateSingleHighlight(GemConstants.clrDiamond,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.perfect); // Perfect Diamond
-    this.items.gpg = Helper.generateSingleHighlight(GemConstants.clrEmerald,  GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.perfect); // Perfect Emerald
-    this.items.gpr = Helper.generateSingleHighlight(GemConstants.clrRuby,     GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.perfect); // Perfect Ruby
-    this.items.gpb = Helper.generateSingleHighlight(GemConstants.clrSapphire, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.perfect); // Perfect Sapphire
-    this.items.gpy = Helper.generateSingleHighlight(GemConstants.clrTopaz,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.perfect); // Perfect Topaz
-    this.items.skz = Helper.generateSingleHighlight(GemConstants.clrSkull,    GemConstants.highlight, GemConstants.padding, GemConstants.clrName, GemConstants.perfect); // Perfect Skull
+  highlightGems(gems) {
+    gems.forEach(gem => {
+      this.items[gem.id] = Helper.generateSingleHighlight(gem.color, JewelryConstants.highlight, JewelryConstants.padding, JewelryConstants.clrName, gem.name);
+    });
   }
   
 
@@ -1455,10 +1365,6 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     [ JewelryConstants.anni, JewelryConstants.torch, JewelryConstants.gheeds ].forEach(charm => {
       this.items[charm] = `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm}${this.CHARMS_UNIQUE_SUFFIX}`;
     });
-
-    // this.items["Annihilus"]       = `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}Annihilus${this.CHARMS_UNIQUE_SUFFIX}`;
-    // this.items["Hellfire Torch"]  = `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}Hellfire Torch${this.CHARMS_UNIQUE_SUFFIX}`;
-    // this.items["Gheed's Fortune"] = `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}Gheed's Fortune${this.CHARMS_UNIQUE_SUFFIX}`;
   }
 
   highlightSunderCharms(){
@@ -1473,38 +1379,16 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     
     if (config.IsSunderAltPattern) {
       sunderCharms.forEach(charm => {
-        this.items[charm.name] = SettingsConstants.iLvlIndentFixCharms + Helper.generateDoubleHighlight(charm.color, UniqueConstants.pattern, UniqueConstants.padding, UniqueConstants.clrName, charm.name);
+        this.items[charm.name] = SettingsConstants.iLvlIndentFixCharms + Helper.generateDoubleHighlight(charm.color, HighlightConstants.uniquePattern, HighlightConstants.uniquePadding , HighlightConstants.uniqueColorName, charm.name);
       });
-      
-      // this.items["Black Cleft"]          = this.generateSunderCharmAltHighlight(ColorConstants.gray,      "Black Cleft");
-      // this.items["Bone Break"]           = this.generateSunderCharmAltHighlight(ColorConstants.white,     "Bone Break");
-      // this.items["Cold Rupture"]         = this.generateSunderCharmAltHighlight(ColorConstants.lightBlue, "Cold Rupture");
-      // this.items["Crack of the Heavens"] = this.generateSunderCharmAltHighlight(ColorConstants.yellow,    "Crack of the Heavens");
-      // this.items["Flame Rift"]           = this.generateSunderCharmAltHighlight(ColorConstants.red,       "Flame Rift");
-      // this.items["Rotting Fissure"]      = this.generateSunderCharmAltHighlight(ColorConstants.green,     "Rotting Fissure");
     }
     else {
       sunderCharms.forEach(charm => {
         this.items[charm.name] = `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm.name}${this.CHARMS_UNIQUE_SUFFIX}`;
       });
-
-      // this.items["Black Cleft"]          = this.generateSunderCharmHighlight("Black Cleft");
-      // this.items["Bone Break"]           = this.generateSunderCharmHighlight("Bone Break");
-      // this.items["Cold Rupture"]         = this.generateSunderCharmHighlight("Cold Rupture");
-      // this.items["Crack of the Heavens"] = this.generateSunderCharmHighlight("Crack of the Heaven");
-      // this.items["Flame Rift"]           = this.generateSunderCharmHighlight("Flame Rift");
-      // this.items["Rotting Fissure"]      = this.generateSunderCharmHighlight("Rotting Fissure");
     } 
   }
 
-  // generateSunderCharmHighlight(name) {
-  //   return `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${name}${this.CHARMS_UNIQUE_SUFFIX}`;
-  // }
-
-  // generateSunderCharmAltHighlight(color, name) {
-  //   return SettingsConstants.iLvlIndentFixCharms + Helper.generateDoubleHighlight(color, UniqueConstants.pattern, UniqueConstants.padding, UniqueConstants.clrName, name);
-  // }
-  
   //=================//
   //   Quest Items   //
   //=================//
@@ -1561,68 +1445,115 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
 
   highlightQuestItems() {
     // for Book of Skill and Potion of Life, see [CSTM-QST2]
-    let prefix = QuestConstants.prefix;
-    let suffix = QuestConstants.suffix;
+    let prefix = HighlightConstants.questPrefix;
+    let suffix = HighlightConstants.questSuffix;
+    let indentNone   = CharConstants.empty;
+    let indentSingle = SettingsConstants.iLvlIndentFixQuestSingle;
+    let indentDouble = SettingsConstants.iLvlIndentFixQuestDouble;
 
-    // Act 1
-    this.items.leg = `${prefix}Wirt's Leg${suffix}`;           // Wirt's Leg
-    this.items.hdm = `${prefix}Horadric Malus${suffix}`;       // Horadric Malus
-    this.items.bks = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss
-    this.items.bkd = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss (deciphered)
-    // Act 2
-    this.items.tr1 = `${prefix}Horadric Scroll${suffix}`;      // Horadric Scroll
-    this.items.msf = `${prefix}Staff of Kings${suffix}`;       // Staff of Kings
-    this.items.vip = `${prefix}Amulet of the Viper${suffix}`;  // Amulet of the Viper
-    this.items.hst = `${prefix}Horadric Staff${suffix}`;       // Horadric Staff
-    // Act 3
-    this.items.j34 = `${prefix}A Jade Figurine${suffix}`;      // A Jade Figurine
-    this.items.g34 = `${prefix}The Golden Bird${suffix}`;      // The Golden Bird
-    this.items.bbb = `${prefix}Lam Esen's Tome${suffix}`;      // Lam Esen's Tome
-    this.items.g33 = `${prefix}The Gidbinn${suffix}`;          // The Gidbinn
-    this.items.qf1 = `${prefix}Khalim's Flail${suffix}`;       // Khalim's Flail
-    this.items.qf2 = `${prefix}Khalim's Will${suffix}`;        // Khalim's Will
-    this.items.qey = `${prefix}Khalim's Eye${suffix}`;         // Khalim's Eye
-    this.items.qhr = `${prefix}Khalim's Heart${suffix}`;       // Khalim's Heart
-    this.items.qbr = `${prefix}Khalim's Brain${suffix}`;       // Khalim's Brain
-    this.items.mss = `${prefix}Mephisto's Soulstone${suffix}`; // Mephisto's Soulstone
-    // Act 4
-    this.items.hfh = `${prefix}Hell Forge Hammer${suffix}`;    // Hell Forge Hammer
-    // Act 5
-    // See exceptions [CSTM-QST2]
- 
-    // Extra
-    this.items["Staff of Kings"]      = `${prefix}Staff of Kings${suffix}`;      // Staff of Kings
-    this.items["Amulet of the Viper"] = `${prefix}Amulet of the Viper${suffix}`; // Amulet of the Viper
-    this.items["Horadric Staff"]      = `${prefix}Horadric Staff${suffix}`;      // Horadric Staff
-    this.items.LamTome                = `${prefix}Lam Esen's Tome${suffix}`;     // Lam Esen's Tome
-    this.items.KhalimFlail            = `${prefix}Khalim's Flail${suffix}`;      // Khalim's Flail
-    this.items.SuperKhalimFlail       = `${prefix}Khalim's Will${suffix}`;       // Khalim's Will
-    this.items["Hell Forge Hammer"]   = `${prefix}Hell Forge Hammer${suffix}`;   // Hell Forge Hammer
+    let questItems = [
+      // Act 1
+      { id: "leg", name: "Wirt's Leg",           iLvlIndent: indentDouble }, // Wirt's Leg
+      { id: "hdm", name: "Horadric Malus",       iLvlIndent: indentDouble }, // Horadric Malus
+      { id: "bks", name: "Scroll of Inifuss",    iLvlIndent: indentNone   }, // Scroll of Inifuss
+      { id: "bkd", name: "Scroll of Inifuss",    iLvlIndent: indentNone   }, // Scroll of Inifuss (deciphered)
 
-    if (SettingsConstants.shouldFixIlvlIndent) {
-      // always single digit ilvl
-      let indent = SettingsConstants.iLvlIndentFixQuestSingle;
-      this.items.hst                  = indent + this.items.hst;
-      this.items.qf2                  = indent + this.items.qf2;
-      this.items["Horadric Staff"]    = indent + this.items["Horadric Staff"];
-      this.items.SuperKhalimFlail     = indent + this.items.SuperKhalimFlail;
+      // Act 2
+      { id: "tr1", name: "Horadric Scroll",      iLvlIndent: indentNone   }, // Horadric Scroll
+      { id: "msf", name: "Staff of Kings",       iLvlIndent: indentDouble }, // Staff of Kings
+      { id: "vip", name: "Amulet of the Viper",  iLvlIndent: indentNone   }, // Amulet of the Viper
+      { id: "hst", name: "Horadric Staff",       iLvlIndent: indentSingle }, // Horadric Staff
 
-      // double digit ilvl
-      indent = SettingsConstants.iLvlIndentFixQuestDouble;
-      this.items.leg                  = indent + this.items.leg;
-      this.items.hdm                  = indent + this.items.hdm;
-      this.items.msf                  = indent + this.items.msf;
-      this.items.g33                  = indent + this.items.g33;
-      this.items.qf1                  = indent + this.items.qf1;
-      this.items.hfh                  = indent + this.items.hfh;
-      this.items["Staff of Kings"]    = indent + this.items["Staff of Kings"];
-      this.items.KhalimFlail          = indent + this.items.KhalimFlail;
-      this.items["Hell Forge Hammer"] = indent + this.items["Hell Forge Hammer"];
-    }
+      // Act 3
+      { id: "j34", name: "A Jade Figurine",      iLvlIndent: indentNone   }, // A Jade Figurine
+      { id: "g34", name: "The Golden Bird",      iLvlIndent: indentNone   }, // The Golden Bird
+      { id: "bbb", name: "Lam Esen's Tome",      iLvlIndent: indentNone   }, // Lam Esen's Tome
+      { id: "g33", name: "The Gidbinn",          iLvlIndent: indentDouble }, // The Gidbinn
+      { id: "qf1", name: "Khalim's Flail",       iLvlIndent: indentDouble }, // Khalim's Flail
+      { id: "qf2", name: "Khalim's Will",        iLvlIndent: indentSingle }, // Khalim's Will
+      { id: "qey", name: "Khalim's Eye",         iLvlIndent: indentNone   }, // Khalim's Eye
+      { id: "qhr", name: "Khalim's Heart",       iLvlIndent: indentNone   }, // Khalim's Heart
+      { id: "qbr", name: "Khalim's Brain",       iLvlIndent: indentNone   }, // Khalim's Brain
+      { id: "mss", name: "Mephisto's Soulstone", iLvlIndent: indentNone   }, // Mephisto's Soulstone
+
+      // Act 4
+      { id: "hfh", name: "Hell Forge Hammer",    iLvlIndent: indentDouble }, // Mephisto's Soulstone
+
+      // Act 5
+      // See exceptions [CSTM-QST2]
+
+      // Extra
+      { id: "Staff of Kings",      name: "Staff of Kings",      iLvlIndent: indentDouble   }, // Staff of Kings
+      { id: "Amulet of the Viper", name: "Amulet of the Viper", iLvlIndent: indentNone   }, // Amulet of the Viper
+      { id: "Horadric Staff",      name: "Horadric Staff",      iLvlIndent: indentSingle   }, // Horadric Staff
+      { id: "LamTome",             name: "Lam Esen's Tome",     iLvlIndent: indentNone   }, // Lam Esen's Tome
+      { id: "KhalimFlail",         name: "Khalim's Flail",      iLvlIndent: indentDouble   }, // Khalim's Flail
+      { id: "SuperKhalimFlail",    name: "Khalim's Will",       iLvlIndent: indentSingle   }, // Khalim's Will
+      { id: "Hell Forge Hammer",   name: "Hell Forge Hammer",   iLvlIndent: indentDouble   }, // Hell Forge Hammer
+    ];
+
+    // // Act 1
+    // this.items.leg = `${prefix}Wirt's Leg${suffix}`;           // Wirt's Leg
+    // this.items.hdm = `${prefix}Horadric Malus${suffix}`;       // Horadric Malus
+    // this.items.bks = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss
+    // this.items.bkd = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss (deciphered)
+    // // Act 2
+    // this.items.tr1 = `${prefix}Horadric Scroll${suffix}`;      // Horadric Scroll
+    // this.items.msf = `${prefix}Staff of Kings${suffix}`;       // Staff of Kings
+    // this.items.vip = `${prefix}Amulet of the Viper${suffix}`;  // Amulet of the Viper
+    // this.items.hst = `${prefix}Horadric Staff${suffix}`;       // Horadric Staff
+    // // Act 3
+    // this.items.j34 = `${prefix}A Jade Figurine${suffix}`;      // A Jade Figurine
+    // this.items.g34 = `${prefix}The Golden Bird${suffix}`;      // The Golden Bird
+    // this.items.bbb = `${prefix}Lam Esen's Tome${suffix}`;      // Lam Esen's Tome
+    // this.items.g33 = `${prefix}The Gidbinn${suffix}`;          // The Gidbinn
+    // this.items.qf1 = `${prefix}Khalim's Flail${suffix}`;       // Khalim's Flail
+    // this.items.qf2 = `${prefix}Khalim's Will${suffix}`;        // Khalim's Will
+    // this.items.qey = `${prefix}Khalim's Eye${suffix}`;         // Khalim's Eye
+    // this.items.qhr = `${prefix}Khalim's Heart${suffix}`;       // Khalim's Heart
+    // this.items.qbr = `${prefix}Khalim's Brain${suffix}`;       // Khalim's Brain
+    // this.items.mss = `${prefix}Mephisto's Soulstone${suffix}`; // Mephisto's Soulstone
+    // // Act 4
+    // this.items.hfh = `${prefix}Hell Forge Hammer${suffix}`;    // Hell Forge Hammer
+    // // Act 5
+    // // See exceptions [CSTM-QST2]
+    // // Extra
+    // this.items["Staff of Kings"]      = `${prefix}Staff of Kings${suffix}`;      // Staff of Kings
+    // this.items["Amulet of the Viper"] = `${prefix}Amulet of the Viper${suffix}`; // Amulet of the Viper
+    // this.items["Horadric Staff"]      = `${prefix}Horadric Staff${suffix}`;      // Horadric Staff
+    // this.items.LamTome                = `${prefix}Lam Esen's Tome${suffix}`;     // Lam Esen's Tome
+    // this.items.KhalimFlail            = `${prefix}Khalim's Flail${suffix}`;      // Khalim's Flail
+    // this.items.SuperKhalimFlail       = `${prefix}Khalim's Will${suffix}`;       // Khalim's Will
+    // this.items["Hell Forge Hammer"]   = `${prefix}Hell Forge Hammer${suffix}`;   // Hell Forge Hammer
+
+    // if (SettingsConstants.shouldFixIlvlIndent) {
+    //   // always single digit ilvl
+    //   let indent = SettingsConstants.iLvlIndentFixQuestSingle;
+    //   this.items.hst                  = indent + this.items.hst;
+    //   this.items.qf2                  = indent + this.items.qf2;
+    //   this.items["Horadric Staff"]    = indent + this.items["Horadric Staff"];
+    //   this.items.SuperKhalimFlail     = indent + this.items.SuperKhalimFlail;
+
+    //   // double digit ilvl
+    //   indent = SettingsConstants.iLvlIndentFixQuestDouble;
+    //   this.items.leg                  = indent + this.items.leg;
+    //   this.items.hdm                  = indent + this.items.hdm;
+    //   this.items.msf                  = indent + this.items.msf;
+    //   this.items.g33                  = indent + this.items.g33;
+    //   this.items.qf1                  = indent + this.items.qf1;
+    //   this.items.hfh                  = indent + this.items.hfh;
+    //   this.items["Staff of Kings"]    = indent + this.items["Staff of Kings"];
+    //   this.items.KhalimFlail          = indent + this.items.KhalimFlail;
+    //   this.items["Hell Forge Hammer"] = indent + this.items["Hell Forge Hammer"];
+    // }
+
+    questItems.forEach(item => {
+      this.items[item.id] = item.iLvlIndent + `${prefix}${item.name}${suffix}`;
+    });
   }
 
   highlightCube() {
-    this.items.box = `${QuestConstants.prefix}Horadric Cube${QuestConstants.suffix}`; // Horadric Cube
+    this.items.box = `${HighlightConstants.questPrefix}Horadric Cube${HighlightConstants.questSuffix}`; // Horadric Cube
   }
     
   //===================================================//
@@ -1699,8 +1630,8 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   customizeWeaponsAndArmor(shouldFilterWeapons, shouldFilterArmor) {
     const WA_CLR_NAME    = ColorConstants.purple;
     const WA_CLR_PATTERN = ColorConstants.red;
-    const WA_PATTERN     = PatternConstants.p10;
-    const WA_PADDING     = PaddingConstants.p5;
+    const WA_PATTERN     = HighlightConstants.pattern10;
+    const WA_PADDING     = HighlightConstants.padding5;
 
     if (shouldFilterWeapons) {
       // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -1723,7 +1654,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     }
   }
 
-  createBigTooltips() {
+  addBigTooltips() {
 
   }
 };
@@ -1731,8 +1662,8 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
 class CustomUiBuilder extends AbstractItemNamesBuilder {
   items = [];
 
-  prefix = QuestConstants.prefix;
-  suffix = QuestConstants.suffix;
+  prefix = HighlightConstants.questPrefix;
+  suffix = HighlightConstants.questSuffix;
 
   build() {
     this.customizeQuestItems(config.Quest);
@@ -1764,8 +1695,8 @@ class CustomUiBuilder extends AbstractItemNamesBuilder {
 class CustomModifiersBuilder extends AbstractItemNamesBuilder {
   items = [];
 
-  prefix = QuestConstants.prefix;
-  suffix = QuestConstants.suffix;
+  prefix = HighlightConstants.questPrefix;
+  suffix = HighlightConstants.questSuffix;
 
   build() {
     this.customizeQuestItems(config.Quest);
@@ -2445,4 +2376,5 @@ class LootFilterBuilder {
   }
 }
 
-(new LootFilterBuilder()).build();
+let caedendiExtendedLootFilter = new LootFilterBuilder();
+caedendiExtendedLootFilter.build();
