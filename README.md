@@ -69,7 +69,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 - Introducing Drop Sounds! Configure new sound effects for when select item types drop so you'll never miss a drop again!
 - For those running custom filter options: all colors have been renamed to more standardized names (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
 - Added multi-line tooltips! Enable for select items to increase the height of the tooltips of items on the ground and optionally add a purple "Pick Up" message above the name. If you prefer to have a big transparent box instead of highlight characters, enable highlighting and set the highlight character to _space_
-- Added custom filter lists for weapons and armor that support _all_ base items! Search for _[CSTM-WEP]_ and _[CSTM-ARM]_ in the code and add whatever you like!
+- Added personal filter list for all items! Supports _all_ (base) items, sets and uniques in item-names.json. Search for _[CSTM-CFL]_ in the code and add whatever you'd like
 - Added option to customize the tooltip color for Ethereal items when on the ground (recommended: light teal)
 - Added option to disable _all_ Light Pillars
 - Added customization of the Gold amount color _(in addition to the existing suffix customization)_

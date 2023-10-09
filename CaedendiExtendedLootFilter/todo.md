@@ -14,6 +14,7 @@
 
 ## item filtering
 - [x] Helper.upsert()
+- [ ] option: if on custom filter list, exclude from big tooltips
 
 ## RuneConstants
 - [ ] create class Rune

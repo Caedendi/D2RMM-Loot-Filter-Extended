@@ -902,7 +902,7 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     this.customizeGems(config.Gems);
     this.customizeQuestItems(config.Quest);
     this.customizeEndgameItems(config.Endgame);
-    this.customizeWeaponsAndArmor(config.ShouldFilterWeapons, config.ShouldFilterArmor);
+    this.customizeCustomFilterList(config.shouldUseCustomFilterList);
 
     this.addBigTooltips();
 
@@ -1393,15 +1393,18 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   //   Quest Items   //
   //=================//
   customizeQuestItems(setting) {
+    let prefix = HighlightConstants.questPrefix;
+    let suffix = HighlightConstants.questSuffix;
+
     switch (setting) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
-        this.highlightQuestItems();
-        this.highlightCube();
+        this.highlightQuestItems(prefix, suffix);
+        this.highlightCube(prefix, suffix);
         return;
       case "xhc": // exclude cube
-        this.highlightQuestItems();
+        this.highlightQuestItems(prefix, suffix);
         return;
       case SettingsConstants.custom: // [CSTM-QST1]
         // Act 1
@@ -1443,10 +1446,8 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
     }
   }
 
-  highlightQuestItems() {
+  highlightQuestItems(prefix, suffix) {
     // for Book of Skill and Potion of Life, see [CSTM-QST2]
-    let prefix = HighlightConstants.questPrefix;
-    let suffix = HighlightConstants.questSuffix;
     let indentNone   = CharConstants.empty;
     let indentSingle = SettingsConstants.iLvlIndentFixQuestSingle;
     let indentDouble = SettingsConstants.iLvlIndentFixQuestDouble;
@@ -1483,77 +1484,22 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
       // See exceptions [CSTM-QST2]
 
       // Extra
-      { id: "Staff of Kings",      name: "Staff of Kings",      iLvlIndent: indentDouble   }, // Staff of Kings
+      { id: "Staff of Kings",      name: "Staff of Kings",      iLvlIndent: indentDouble }, // Staff of Kings
       { id: "Amulet of the Viper", name: "Amulet of the Viper", iLvlIndent: indentNone   }, // Amulet of the Viper
-      { id: "Horadric Staff",      name: "Horadric Staff",      iLvlIndent: indentSingle   }, // Horadric Staff
+      { id: "Horadric Staff",      name: "Horadric Staff",      iLvlIndent: indentSingle }, // Horadric Staff
       { id: "LamTome",             name: "Lam Esen's Tome",     iLvlIndent: indentNone   }, // Lam Esen's Tome
-      { id: "KhalimFlail",         name: "Khalim's Flail",      iLvlIndent: indentDouble   }, // Khalim's Flail
-      { id: "SuperKhalimFlail",    name: "Khalim's Will",       iLvlIndent: indentSingle   }, // Khalim's Will
-      { id: "Hell Forge Hammer",   name: "Hell Forge Hammer",   iLvlIndent: indentDouble   }, // Hell Forge Hammer
+      { id: "KhalimFlail",         name: "Khalim's Flail",      iLvlIndent: indentDouble }, // Khalim's Flail
+      { id: "SuperKhalimFlail",    name: "Khalim's Will",       iLvlIndent: indentSingle }, // Khalim's Will
+      { id: "Hell Forge Hammer",   name: "Hell Forge Hammer",   iLvlIndent: indentDouble }, // Hell Forge Hammer
     ];
-
-    // // Act 1
-    // this.items.leg = `${prefix}Wirt's Leg${suffix}`;           // Wirt's Leg
-    // this.items.hdm = `${prefix}Horadric Malus${suffix}`;       // Horadric Malus
-    // this.items.bks = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss
-    // this.items.bkd = `${prefix}Scroll of Inifuss${suffix}`;    // Scroll of Inifuss (deciphered)
-    // // Act 2
-    // this.items.tr1 = `${prefix}Horadric Scroll${suffix}`;      // Horadric Scroll
-    // this.items.msf = `${prefix}Staff of Kings${suffix}`;       // Staff of Kings
-    // this.items.vip = `${prefix}Amulet of the Viper${suffix}`;  // Amulet of the Viper
-    // this.items.hst = `${prefix}Horadric Staff${suffix}`;       // Horadric Staff
-    // // Act 3
-    // this.items.j34 = `${prefix}A Jade Figurine${suffix}`;      // A Jade Figurine
-    // this.items.g34 = `${prefix}The Golden Bird${suffix}`;      // The Golden Bird
-    // this.items.bbb = `${prefix}Lam Esen's Tome${suffix}`;      // Lam Esen's Tome
-    // this.items.g33 = `${prefix}The Gidbinn${suffix}`;          // The Gidbinn
-    // this.items.qf1 = `${prefix}Khalim's Flail${suffix}`;       // Khalim's Flail
-    // this.items.qf2 = `${prefix}Khalim's Will${suffix}`;        // Khalim's Will
-    // this.items.qey = `${prefix}Khalim's Eye${suffix}`;         // Khalim's Eye
-    // this.items.qhr = `${prefix}Khalim's Heart${suffix}`;       // Khalim's Heart
-    // this.items.qbr = `${prefix}Khalim's Brain${suffix}`;       // Khalim's Brain
-    // this.items.mss = `${prefix}Mephisto's Soulstone${suffix}`; // Mephisto's Soulstone
-    // // Act 4
-    // this.items.hfh = `${prefix}Hell Forge Hammer${suffix}`;    // Hell Forge Hammer
-    // // Act 5
-    // // See exceptions [CSTM-QST2]
-    // // Extra
-    // this.items["Staff of Kings"]      = `${prefix}Staff of Kings${suffix}`;      // Staff of Kings
-    // this.items["Amulet of the Viper"] = `${prefix}Amulet of the Viper${suffix}`; // Amulet of the Viper
-    // this.items["Horadric Staff"]      = `${prefix}Horadric Staff${suffix}`;      // Horadric Staff
-    // this.items.LamTome                = `${prefix}Lam Esen's Tome${suffix}`;     // Lam Esen's Tome
-    // this.items.KhalimFlail            = `${prefix}Khalim's Flail${suffix}`;      // Khalim's Flail
-    // this.items.SuperKhalimFlail       = `${prefix}Khalim's Will${suffix}`;       // Khalim's Will
-    // this.items["Hell Forge Hammer"]   = `${prefix}Hell Forge Hammer${suffix}`;   // Hell Forge Hammer
-
-    // if (SettingsConstants.shouldFixIlvlIndent) {
-    //   // always single digit ilvl
-    //   let indent = SettingsConstants.iLvlIndentFixQuestSingle;
-    //   this.items.hst                  = indent + this.items.hst;
-    //   this.items.qf2                  = indent + this.items.qf2;
-    //   this.items["Horadric Staff"]    = indent + this.items["Horadric Staff"];
-    //   this.items.SuperKhalimFlail     = indent + this.items.SuperKhalimFlail;
-
-    //   // double digit ilvl
-    //   indent = SettingsConstants.iLvlIndentFixQuestDouble;
-    //   this.items.leg                  = indent + this.items.leg;
-    //   this.items.hdm                  = indent + this.items.hdm;
-    //   this.items.msf                  = indent + this.items.msf;
-    //   this.items.g33                  = indent + this.items.g33;
-    //   this.items.qf1                  = indent + this.items.qf1;
-    //   this.items.hfh                  = indent + this.items.hfh;
-    //   this.items["Staff of Kings"]    = indent + this.items["Staff of Kings"];
-    //   this.items.KhalimFlail          = indent + this.items.KhalimFlail;
-    //   this.items["Hell Forge Hammer"] = indent + this.items["Hell Forge Hammer"];
-    // }
 
     questItems.forEach(item => {
       this.items[item.id] = item.iLvlIndent + `${prefix}${item.name}${suffix}`;
     });
   }
 
-  highlightCube() {
-    this.items.box = `${HighlightConstants.questPrefix}Horadric Cube${HighlightConstants.questSuffix}`; // Horadric Cube
+  highlightCube(prefix, suffix) {
+    this.items.box = `${prefix}Horadric Cube${suffix}`; // Horadric Cube
   }
     
   //===================================================//
@@ -1593,64 +1539,57 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
   }
 
   highlightEndgameItems() {
-    this.highlightEssences(this.ESSENCE_PREFIX, this.ESSENCE_SUFFIX);
-    this.highlightToken(   this.TOKEN_PREFIX,   this.TOKEN_SUFFIX);
-    this.highlightKeys(    this.KEY_PREFIX,     this.KEY_SUFFIX);
-    this.highlightOrgans(  this.ORGAN_PREFIX,   this.ORGAN_SUFFIX);
-  }
-  
-  highlightEssences(prefix, suffix) {
-    this.items.tes = `${prefix}Twisted Essence of Suffering${suffix}`;     // Twisted Essence of Suffering
-    this.items.ceh = `${prefix}Charged Essense of Hatred${suffix}`;        // Charged Essense of Hatred
-    this.items.bet = `${prefix}Burning Essence of Terror${suffix}`;        // Burning Essence of Terror
-    this.items.fed = `${prefix}Festering Essence of Destruction${suffix}`; // Festering Essence of Destruction
-  }
-  
-  highlightToken(prefix, suffix) {
-    this.items.toa = `${prefix}Token of Absolution${suffix}`;              // Token of Absolution
-  }
-  
-  highlightKeys(prefix, suffix) {
-    this.items.pk1 = `${prefix}Key of Terror${suffix}`;                    // Pandemonium Key 1 Key of Terror
-    this.items.pk2 = `${prefix}Key of Hate${suffix}`;                      // Pandemonium Key 2 Key of Hate
-    this.items.pk3 = `${prefix}Key of Destruction${suffix}`;               // Pandemonium Key 3 Key of Destruction
+    let endgameItems = [
+      { id: "tes", name: "Twisted Essence of Suffering",     prefix: this.ESSENCE_PREFIX, suffix: this.ESSENCE_SUFFIX }, // Twisted Essence of Suffering
+      { id: "ceh", name: "Charged Essense of Hatred",        prefix: this.ESSENCE_PREFIX, suffix: this.ESSENCE_SUFFIX }, // Charged Essense of Hatred
+      { id: "bet", name: "Burning Essence of Terror",        prefix: this.ESSENCE_PREFIX, suffix: this.ESSENCE_SUFFIX }, // Burning Essence of Terror
+      { id: "fed", name: "Festering Essence of Destruction", prefix: this.ESSENCE_PREFIX, suffix: this.ESSENCE_SUFFIX }, // Festering Essence of Destruction
+      { id: "toa", name: "Token of Absolution",              prefix: this.TOKEN_PREFIX,   suffix: this.TOKEN_SUFFIX   }, // Token of Absolution
+      { id: "pk1", name: "Key of Terror",                    prefix: this.KEY_PREFIX,     suffix: this.KEY_SUFFIX     }, // Pandemonium Key 1 Key of Terror
+      { id: "pk2", name: "Key of Hate",                      prefix: this.KEY_PREFIX,     suffix: this.KEY_SUFFIX     }, // Pandemonium Key 2 Key of Hate
+      { id: "pk3", name: "Key of Destruction",               prefix: this.KEY_PREFIX,     suffix: this.KEY_SUFFIX     }, // Pandemonium Key 3 Key of Destruction
+      { id: "dhn", name: "Diablo's Horn",                    prefix: this.ORGAN_PREFIX,   suffix: this.ORGAN_SUFFIX   }, // Diablo's Horn
+      { id: "bey", name: "Baal's Eye",                       prefix: this.ORGAN_PREFIX,   suffix: this.ORGAN_SUFFIX   }, // Baal's Eye
+      { id: "mbr", name: "Mephisto's Brain",                 prefix: this.ORGAN_PREFIX,   suffix: this.ORGAN_SUFFIX   }, // Mephisto's Brain
+    ];
+
+    endgameItems.forEach(item => {
+      this.items[item.id] = `${item.prefix}${item.name}${item.suffix}`;
+    });
   }
 
-  highlightOrgans(prefix, suffix) {
-    this.items.dhn = `${prefix}Diablo's Horn${suffix}`;                    // Diablo's Horn
-    this.items.bey = `${prefix}Baal's Eye${suffix}`;                       // Baal's Eye
-    this.items.mbr = `${prefix}Mephisto's Brain${suffix}`;                 // Mephisto's Brain
-  }
-    
-  //=====================//
-  //   Weapons & Armor   //
-  //=====================//
-  
-  // These lists change entries in item-names.json, so Set and Unique names like "Griffon's Eye" are also supported. Search the file for what Key to use. [CSTM-WEP] [CSTM-ARM]
-  customizeWeaponsAndArmor(shouldFilterWeapons, shouldFilterArmor) {
-    const WA_CLR_NAME    = ColorConstants.purple;
-    const WA_CLR_PATTERN = ColorConstants.red;
-    const WA_PATTERN     = HighlightConstants.pattern10;
-    const WA_PADDING     = HighlightConstants.padding5;
 
-    if (shouldFilterWeapons) {
+  //========================//
+  //   Custom Filter List   //
+  //========================//
+  
+  customizeCustomFilterList(shouldUseCustomFilterList) {
+    // This list changes entries in item-names.json, so it supports all base items (amulet, berserker axe), sets (Tal Rasha's Guardianship, Angelic Halo) and uniques (Griffon's Eye, The Stone of Jordan). 
+    // Search the file for what key to use.
+
+    const PFL_CLR_NAME    = ColorConstants.purple;
+    const PFL_CLR_PATTERN = ColorConstants.red;
+    const PFL_PATTERN     = HighlightConstants.pattern10;
+    const PFL_PADDING     = HighlightConstants.padding5;
+
+    if (shouldUseCustomFilterList) { // [CSTM-CFL]
       // ADD YOUR CUSTOM ITEM NAMES HERE
-
+      
       // examples
-      // this.items["jav"] = SettingsConstants.hidden;                          // Javelin, hide
-      // this.items["jav"] = `${ColorConstants.black}Javelin`;               // Javelin, color name black
-      // this.items["7gw"] = `${ColorConstants.black}Unearthed Wand${ColorConstants.blue}`; // Unearthed Wand, color name red
-      // this.items["7gw"] = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(WA_CLR_PATTERN, WA_PATTERN, WA_PADDING, WA_CLR_NAME, "Unearthed Wand")}${ColorConstants.blue}`; // Unearthed Wand, highlight
-    }
 
-    if (shouldFilterArmor) {
-      // ADD YOUR CUSTOM ITEM NAMES HERE
+      // this.items["jav"]           = "";                                                          // Javelin, hide
+      // this.items["jav"]           = SettingsConstants.hidden;                                    // Javelin, hide
+      // this.items["jav"]           = `${ColorConstants.black}Javelin`;                            // Javelin, color name black
+      // this.items["7gw"]           = `${ColorConstants.red}Unearthed Wand${ColorConstants.blue}`; // Unearthed Wand, color name red
+      // this.items["7gw"]           = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Unearthed Wand")}${ColorConstants.blue}`; // Unearthed Wand, highlight
+      // this.items["Death's Web"]   = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Death's Web")}`;                          // Unearthed Wand, highlight
 
-      // examples
-      // this.items["skp"] = SettingsConstants.hidden;                // Skull Cap, hide
-      // this.items["skp"] = `${ColorConstants.black}Skull Cap`;   // Skull Cap, color name black
-      // this.items["ci3"] = `${ColorConstants.red}Diadem${ColorConstants.blue}`; // Diadem, color name red
-      // this.items["ci3"] = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(WA_CLR_PATTERN, WA_PATTERN, WA_PADDING, WA_CLR_NAME, "Diadem")}${ColorConstants.blue}`; // Diadem, highlight
+      // this.items["skp"]           = "";                                                  // Skull Cap, hide
+      // this.items["skp"]           = SettingsConstants.hidden;                            // Skull Cap, hide
+      // this.items["skp"]           = `${ColorConstants.black}Skull Cap`;                  // Skull Cap, color name black
+      // this.items["ci3"]           = `${ColorConstants.red}Diadem${ColorConstants.blue}`; // Diadem, color name red
+      // this.items["ci3"]           = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Diadem")}${ColorConstants.blue}`; // Diadem, highlight
+      // this.items["Griffon's Eye"] = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Griffon's Eye")}`;                // Griffon's Eye, highlight
     }
   }
 
@@ -1662,9 +1601,6 @@ class CustomItemsBuilder extends AbstractItemNamesBuilder {
 class CustomUiBuilder extends AbstractItemNamesBuilder {
   items = [];
 
-  prefix = HighlightConstants.questPrefix;
-  suffix = HighlightConstants.questSuffix;
-
   build() {
     this.customizeQuestItems(config.Quest);
     this.applyCustomNames(FileConstants.FILE_UI_PATH, this.items);
@@ -1675,6 +1611,10 @@ class CustomUiBuilder extends AbstractItemNamesBuilder {
   //=================//
   customizeQuestItems(setting) {
     // Section specific to Book of Skill and Potion of Life, as these items are in a different file.
+
+    let prefix = HighlightConstants.questPrefix;
+    let suffix = HighlightConstants.questSuffix;
+    
     switch (setting) {
       case SettingsConstants.disabled: // no change
         return;
@@ -1695,9 +1635,6 @@ class CustomUiBuilder extends AbstractItemNamesBuilder {
 class CustomModifiersBuilder extends AbstractItemNamesBuilder {
   items = [];
 
-  prefix = HighlightConstants.questPrefix;
-  suffix = HighlightConstants.questSuffix;
-
   build() {
     this.customizeQuestItems(config.Quest);
     this.applyCustomNames(FileConstants.FILE_ITEM_MODIFIERS_PATH, this.items);
@@ -1708,6 +1645,10 @@ class CustomModifiersBuilder extends AbstractItemNamesBuilder {
   //=================//
   customizeQuestItems(setting) {
     // Section specific to Malah's Potion and Scroll of Resistance, as these items are in a different file.
+
+    let prefix = HighlightConstants.questPrefix;
+    let suffix = HighlightConstants.questSuffix;
+
     switch (setting) {
       case SettingsConstants.disabled: // no change
         return;
@@ -1757,8 +1698,7 @@ class ItemLevelBuilder {
         JewelryConstants.grand,
         JewelryConstants.jewel,
       ];
-      // todo:
-      // if (jewelry.includes(row.code)) { 
+      // todo: if (jewelry.includes(row.code)) { 
       if (jewelry.indexOf(row.code) !== -1) { 
         row.ShowLevel = 1;
         return;
@@ -1772,9 +1712,6 @@ class ItemLevelBuilder {
 }
 
 class ItemQualityBuilder {
-  txtNormal      = config.ItemQuality !== SettingsConstants.custom ? 'n' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-  txtExceptional = config.ItemQuality !== SettingsConstants.custom ? 'x' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-  txtElite       = config.ItemQuality !== SettingsConstants.custom ? 'e' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
 
   build() {
     const fileWeapons = D2RMM.readTsv(FileConstants.FILE_WEAPONS_PATH);
@@ -1791,8 +1728,12 @@ class ItemQualityBuilder {
   }
 
   addEquipmentQuality(equipment, itemNames, setting) {
+    let txtNormal      = config.ItemQuality !== SettingsConstants.custom ? 'n' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    let txtExceptional = config.ItemQuality !== SettingsConstants.custom ? 'x' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    let txtElite       = config.ItemQuality !== SettingsConstants.custom ? 'e' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    
     equipment.forEach(item => {
-      var quality = (item.code === item.ultracode ? this.txtElite : (item.code === item.ubercode ? this.txtExceptional : this.txtNormal));
+      var quality = (item.code === item.ultracode ? txtElite : (item.code === item.ubercode ? txtExceptional : txtNormal));
 
       const index = itemNames.findIndex((x) => x.Key === item.code);
       if (index < 0) {
@@ -1917,11 +1858,11 @@ class LightPillarBuilder {
       return;
     }
 
-    let toPush = [];
+    let questItems = [];
 
     // quest items
     if (config.ShouldAddLightPillarQuestItems) {
-      toPush = toPush.concat([
+      questItems = questItems.concat([
         // act 1
         [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`,     "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
         [`${LightPillarConstants.PATH_ITEMS_MISC}scroll\\`,   "deciphered_bark_scroll"],        // Scroll of Inifuss (deciphered)
@@ -1949,7 +1890,7 @@ class LightPillarBuilder {
 
     // quest weapons
     if (config.ShouldAddLightPillarQuestWeapons) {
-      toPush = toPush.concat([
+      questItems = questItems.concat([
         // act 1
         [`${LightPillarConstants.PATH_ITEMS_WEAPON}club\\`,   "wirts_leg"],                     // Wirt's Leg
         [`${LightPillarConstants.PATH_ITEMS_WEAPON_HAMMER}`,  "horadric_malus"],                // Horadric Malus
@@ -1967,7 +1908,7 @@ class LightPillarBuilder {
       ]);
     }
 
-    toPush.forEach((item) => {
+    questItems.forEach((item) => {
       this.pushLightPillarToPath(item[0], item[1]);
     });
   }
@@ -2044,7 +1985,6 @@ class LightPillarBuilder {
     file.dependencies.particles.push(LightPillarConstants.LIGHT_PILLAR_COMPONENT.particle);
     file.entities = file.entities.concat(LightPillarConstants.LIGHT_PILLAR_COMPONENT.entities);
   }
-
 };
 
 class DropSoundBuilder {
@@ -2165,17 +2105,17 @@ class DropSoundBuilder {
   pushSound(soundsFile, soundName, template, sfxChannel, sfxFileName, sfxRedirect) {
     let newSound = { ...(soundsFile.rows.find((sound) => sound.Sound === template)) }; // create deep copy of template
   
-    newSound.Sound = soundName;
+    newSound["Sound"] = soundName;
     newSound["*Index"] = soundsFile.rows.length;
-    newSound.Channel = sfxChannel;
-    newSound.FileName = sfxFileName;
-    newSound.Redirect = sfxRedirect;
+    newSound["Channel"] = sfxChannel;
+    newSound["FileName"] = sfxFileName;
+    newSound["Redirect"] = sfxRedirect;
     newSound["Volume Min"] = 255;
     newSound["Volume Max"] = 255;
-    newSound.Priority = 255;
+    newSound["Priority"] = 255;
     newSound["Stop Inst"] = 0;
     newSound["Defer Inst"] = 0;
-    newSound.Falloff = 4;
+    newSound["Falloff"] = 4;
     
     soundsFile.rows.push(newSound);
   }
@@ -2275,7 +2215,7 @@ class ProfileHdModsBuilder {
 //   Loot Filter Builders - Master Builder   //
 //===========================================//
 
-class LootFilterBuilder {
+class CaedendiExtendedLootFilterBuilder {
   build() {
     this.applyCustomAffixes();
     this.applyCustomRuneNames();
@@ -2376,5 +2316,5 @@ class LootFilterBuilder {
   }
 }
 
-let caedendiExtendedLootFilter = new LootFilterBuilder();
-caedendiExtendedLootFilter.build();
+let lootFilter = new CaedendiExtendedLootFilterBuilder();
+lootFilter.build();

@@ -304,23 +304,16 @@
       ]
     },
     {
-      "id": "WeaponsArmorSection",
+      "id": "CustomFilterSection",
       "type": "section",
-      "name": "Weapons & Armor",
+      "name": "Custom Filter List",
       "defaultExpanded": false
     },
     {
-      "id": "ShouldFilterWeapons",
+      "id": "shouldUseCustomFilterList",
       "type": "checkbox",
-      "name": "Use Custom Weapon Filter",
-      "description": "Use the personal filter list for weapons. Searches weapons.txt for the provided item codes and changes the base item names. Use at your own risk. [CSTM-WEP]",
-      "defaultValue": false
-    },
-    {
-      "id": "ShouldFilterArmor",
-      "type": "checkbox",
-      "name": "Use Custom Armor Filter",
-      "description": "Use the personal filter list for armor. Searches armor.txt for the provided item codes and changes the base item names. Use at your own risk. [CSTM-ARM]",
+      "name": "Use Custom Filter List",
+      "description": "Enable your personal filter list. [CSTM-CFL]",
       "defaultValue": false
     },
     {
@@ -922,9 +915,9 @@
       ]
     },
     {
-      "id": "MiscSection",
+      "id": "TooltipsSection",
       "type": "section",
-      "name": "Misc",
+      "name": "Tooltips",
       "defaultExpanded": false
     },
     {
@@ -996,12 +989,6 @@
       "defaultValue": 0,
       "minValue": 0,
       "maxValue": 25
-    },
-    {
-      "id": "TooltipModsSection",
-      "type": "section",
-      "name": "Tooltip Mods",
-      "defaultExpanded": false
     },
     {
       "id": "Tooltip",
