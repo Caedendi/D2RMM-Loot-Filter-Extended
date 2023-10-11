@@ -243,11 +243,6 @@ class RuneConstants {
   static paddingHigh   = HighlightConstants.padding5;
 
   static tiers = [
-    // todo: rename levels
-    // { level: "level_1", runes: this.tierLow,    padding: this.paddingLow,    pattern: this.patternLow,    isVisible: config.ShouldShowRunesLow,    bigTooltipSetting: config.BigTooltipRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow,    dropSound: config.DropSoundRunesLow    },
-    // { level: "level_2", runes: this.tierLowMid, padding: this.paddingLowMid, pattern: this.patternLowMid, isVisible: config.ShouldShowRunesLowMid, bigTooltipSetting: config.BigTooltipRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid, dropSound: config.DropSoundRunesLowMid },
-    // { level: "level_3", runes: this.tierMid,    padding: this.paddingMid,    pattern: this.patternMid,    isVisible: config.ShouldShowRunesMid,    bigTooltipSetting: config.BigTooltipRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid,    dropSound: config.DropSoundRunesMid    },
-    // { level: "level_4", runes: this.tierHigh,   padding: this.paddingHigh,   pattern: this.patternHigh,   isVisible: config.ShouldShowRunesHigh,   bigTooltipSetting: config.BigTooltipRunesHigh,   hasLightPillar: config.ShouldAddLightPillarRunesHigh,   dropSound: config.DropSoundRunesHigh   },
     { level: 1, runes: this.tierLow,    padding: this.paddingLow,    pattern: this.patternLow,    isVisible: config.ShouldShowRunesLow,    bigTooltipSetting: config.BigTooltipRunesLow,    hasLightPillar: config.ShouldAddLightPillarRunesLow,    dropSound: config.DropSoundRunesLow    },
     { level: 2, runes: this.tierLowMid, padding: this.paddingLowMid, pattern: this.patternLowMid, isVisible: config.ShouldShowRunesLowMid, bigTooltipSetting: config.BigTooltipRunesLowMid, hasLightPillar: config.ShouldAddLightPillarRunesLowMid, dropSound: config.DropSoundRunesLowMid },
     { level: 3, runes: this.tierMid,    padding: this.paddingMid,    pattern: this.patternMid,    isVisible: config.ShouldShowRunesMid,    bigTooltipSetting: config.BigTooltipRunesMid,    hasLightPillar: config.ShouldAddLightPillarRunesMid,    dropSound: config.DropSoundRunesMid    },
@@ -302,11 +297,66 @@ class JewelryConstants {
   static gheeds = "Gheed's Fortune";
 
   static sunderMagic = "Black Cleft";
-  static sunderPhys = "Bone Break";
-  static sunderCold = "Cold Rupture";
-  static sunderLite = "Crack of the Heavens";
-  static sunderFire = "Flame Rift";
-  static sunderPsn = "Rotting Fissure";
+  static sunderPhys  = "Bone Break";
+  static sunderCold  = "Cold Rupture";
+  static sunderLite  = "Crack of the Heavens";
+  static sunderFire  = "Flame Rift";
+  static sunderPsn   = "Rotting Fissure";
+
+  static uniqueLodCharms = [
+    this.anni,
+    this.torch,
+    this.gheeds,
+  ];
+
+  static sunderCharms = [
+    { name: this.sunderMagic, color: ColorConstants.gray }, 
+    { name: this.sunderPhys,  color: ColorConstants.white }, 
+    { name: this.sunderCold,  color: ColorConstants.lightBlue }, 
+    { name: this.sunderLite,  color: ColorConstants.yellow }, 
+    { name: this.sunderFire,  color: ColorConstants.red }, 
+    { name: this.sunderPsn,   color: ColorConstants.green }, 
+  ];
+}
+
+class EndgameConstants {
+  static clrName = ColorConstants.orange;
+  static clrHighlight = HighlightConstants.color;
+
+  static prefixEss = `${this.clrHighlight}${HighlightConstants.pattern5}${this.clrName}${HighlightConstants.padding3}`;
+  static prefixKey = `${this.clrHighlight}${HighlightConstants.pattern10}${this.clrName}${HighlightConstants.padding5}`;
+  static prefixOrg = `${this.clrHighlight}${HighlightConstants.pattern3x10}${this.clrName}${HighlightConstants.padding5}`;
+  static prefixSoh = `${this.clrHighlight}${HighlightConstants.pattern5}${HighlightConstants.uniqueColorName}${HighlightConstants.padding3}`;
+  static prefixTkn = this.prefixKey;
+  
+  static suffixEss = `${HighlightConstants.padding3}${this.clrHighlight}${HighlightConstants.pattern5}${this.clrName}`;
+  static suffixKey = `${HighlightConstants.padding5}${this.clrHighlight}${HighlightConstants.pattern10}${this.clrName}`;
+  static suffixOrg = `${HighlightConstants.padding5}${this.clrHighlight}${HighlightConstants.pattern3x10}${this.clrName}`;
+  static suffixSoh = `${HighlightConstants.padding3}${this.clrHighlight}${HighlightConstants.pattern5}${HighlightConstants.uniqueColorName}`;
+  static suffixTkn = this.suffixKey;
+
+  static essences = [
+    { id: "tes", name: "Twisted Essence of Suffering",     prefix: this.prefixEss, suffix: this.suffixEss }, // Twisted Essence of Suffering
+    { id: "ceh", name: "Charged Essense of Hatred",        prefix: this.prefixEss, suffix: this.suffixEss }, // Charged Essense of Hatred
+    { id: "bet", name: "Burning Essence of Terror",        prefix: this.prefixEss, suffix: this.suffixEss }, // Burning Essence of Terror
+    { id: "fed", name: "Festering Essence of Destruction", prefix: this.prefixEss, suffix: this.suffixEss }, // Festering Essence of Destruction
+  ];
+  
+  static keys = [
+    { id: "pk1", name: "Key of Terror",      prefix: this.prefixKey, suffix: this.suffixKey }, // Pandemonium Key 1: Key of Terror
+    { id: "pk2", name: "Key of Hate",        prefix: this.prefixKey, suffix: this.suffixKey }, // Pandemonium Key 2: Key of Hate
+    { id: "pk3", name: "Key of Destruction", prefix: this.prefixKey, suffix: this.suffixKey }, // Pandemonium Key 3: Key of Destruction
+  ];
+
+  static organs = [
+    { id: "dhn", name: "Diablo's Horn",    prefix: this.prefixOrg, suffix: this.suffixOrg }, // Diablo's Horn
+    { id: "bey", name: "Baal's Eye",       prefix: this.prefixOrg, suffix: this.suffixOrg }, // Baal's Eye
+    { id: "mbr", name: "Mephisto's Brain", prefix: this.prefixOrg, suffix: this.suffixOrg }, // Mephisto's Brain
+  ];
+
+  static token =    { id: "toa", name: "Token of Absolution", prefix: this.prefixTkn, suffix: this.suffixTkn }; // Token of Absolution
+
+  static standard = { id: "std", name: "Standard of Heroes",  prefix: this.prefixSoh, suffix: this.suffixSoh }; // Standard of Heroes
 }
 
 class LightPillarConstants {
@@ -475,7 +525,20 @@ class CollectionConstants {
 
 class Helper {
   static addBigTooltips(collection, setting) {
-    collection.forEach(entry => entry.value = this.generateBigTooltip(setting, entry.value))   
+    collection.forEach(entry => entry.value = this.generateBigTooltip(setting, entry.value));
+  }
+
+  static addBigTooltipsForIds(collection, ids, setting) {
+    ids.forEach(id => {
+      this.addBigTooltipForId(collection, id, setting);
+    })
+  }
+  
+  static addBigTooltipForId(collection, id, setting) {
+    const i = collection.findIndex(x => x.id === id);
+    if (i < 0) 
+      throw new Error(`Can't find item \"${id}\" in collection.`);
+    collection[i].value = this.generateBigTooltip(setting, collection[i].value);
   }
 
   /**
@@ -511,7 +574,7 @@ class Helper {
    * @returns A multi-line item name, which will show as a Big Tooltip when the item is on the ground.
    */
   static generateBigTooltip(setting, name) {
-    if (setting === SettingsConstants.disabled) {
+    if (setting === SettingsConstants.disabled || name === SettingsConstants.hidden) {
       return name;
     }
 
@@ -938,22 +1001,6 @@ class ItemNamesBuilder extends AbstractItemBuilder {
   // charms
   CHARMS_UNIQUE_PREFIX = HighlightConstants.uniquePrefix;
   CHARMS_UNIQUE_SUFFIX = HighlightConstants.uniqueSuffix;
-
-  // endgame
-  ENDGAME_COLOR_NAME = ColorConstants.orange;
-  ENDGAME_COLOR_HIGHLIGHT = HighlightConstants.color;
-
-  ESSENCE_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern5}${this.ENDGAME_COLOR_NAME}${HighlightConstants.padding3}`;
-  ESSENCE_SUFFIX = `${HighlightConstants.padding3}${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern5}${this.ENDGAME_COLOR_NAME}`;
-  KEY_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern10}${this.ENDGAME_COLOR_NAME}${HighlightConstants.padding5}`;
-  KEY_SUFFIX = `${HighlightConstants.padding5}${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern10}${this.ENDGAME_COLOR_NAME}`;
-  TOKEN_PREFIX = this.KEY_PREFIX;
-  TOKEN_SUFFIX = this.KEY_SUFFIX;
-  ORGAN_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern3x10}${this.ENDGAME_COLOR_NAME}${HighlightConstants.padding5}`;
-  ORGAN_SUFFIX = `${HighlightConstants.padding5}${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern3x10}${this.ENDGAME_COLOR_NAME}`;
-
-  STANDARD_OF_HEROES_PREFIX = `${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern5}${HighlightConstants.uniqueColorName}${HighlightConstants.padding3}`;
-  STANDARD_OF_HEROES_SUFFIX = `${HighlightConstants.padding3}${this.ENDGAME_COLOR_HIGHLIGHT}${HighlightConstants.pattern5}${HighlightConstants.uniqueColorName}`;
   
   build() {
     this.customizeHealingPotions(config.HealingPotions);
@@ -974,7 +1021,11 @@ class ItemNamesBuilder extends AbstractItemBuilder {
 
     this.applyCustomNames();
   }
+  
 
+  //==========//
+  //   Junk   //
+  //==========//
   customizeHealingPotions(setting) {
     let junkCol = this.getCollectionById(CollectionConstants.junk);
 
@@ -1465,23 +1516,14 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     });
   }
 
-  highlightSunderCharms(charmsCollection){
-    let sunderCharms = [ 
-      { name: JewelryConstants.sunderMagic, color: ColorConstants.gray }, 
-      { name: JewelryConstants.sunderPhys,  color: ColorConstants.white }, 
-      { name: JewelryConstants.sunderCold,  color: ColorConstants.lightBlue }, 
-      { name: JewelryConstants.sunderLite,  color: ColorConstants.yellow }, 
-      { name: JewelryConstants.sunderFire,  color: ColorConstants.red }, 
-      { name: JewelryConstants.sunderPsn,   color: ColorConstants.green }, 
-    ];
-    
+  highlightSunderCharms(charmsCollection){    
     if (config.IsSunderAltPattern) {
-      sunderCharms.forEach(charm => {
+      JewelryConstants.sunderCharms.forEach(charm => {
         this.upsert(charmsCollection, charm.name, SettingsConstants.iLvlIndentFixCharms + Helper.generateDoubleHighlight(charm.color, HighlightConstants.uniquePattern, HighlightConstants.uniquePadding , HighlightConstants.uniqueColorName, charm.name));
       });
     }
     else {
-      sunderCharms.forEach(charm => {
+      JewelryConstants.sunderCharms.forEach(charm => {
         this.upsert(charmsCollection, charm.name, `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm.name}${this.CHARMS_UNIQUE_SUFFIX}`);
       });
     } 
@@ -1615,14 +1657,14 @@ class ItemNamesBuilder extends AbstractItemBuilder {
         return;
       case SettingsConstants.all: // highlight all
         this.highlightEndgameItems(endgameCol);
-        this.upsert(endgameCol, "std", `${this.STANDARD_OF_HEROES_PREFIX}Standard of Heroes${this.STANDARD_OF_HEROES_SUFFIX}`); // Standard of Heroes
+        this.highlightStandardOfHeroes(endgameCol);
         return;
       case "xsh": // exclude Standard of Heroes from highlighting
         this.highlightEndgameItems(endgameCol);
         return;
       case "hsh": // hide Standard of Heroes
         this.highlightEndgameItems(endgameCol);
-        this.upsert(endgameCol, "std", SettingsConstants.hidden);
+        this.hideStandardOfHeroes(endgameCol);
         return;
       case SettingsConstants.custom: // [CSTM-END]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -1643,30 +1685,26 @@ class ItemNamesBuilder extends AbstractItemBuilder {
   }
 
   highlightEndgameItems(endgameCollection) {
-    let endgameItems = [
-      { id: "tes", name: "Twisted Essence of Suffering",     prefix: this.ESSENCE_PREFIX, suffix: this.ESSENCE_SUFFIX }, // Twisted Essence of Suffering
-      { id: "ceh", name: "Charged Essense of Hatred",        prefix: this.ESSENCE_PREFIX, suffix: this.ESSENCE_SUFFIX }, // Charged Essense of Hatred
-      { id: "bet", name: "Burning Essence of Terror",        prefix: this.ESSENCE_PREFIX, suffix: this.ESSENCE_SUFFIX }, // Burning Essence of Terror
-      { id: "fed", name: "Festering Essence of Destruction", prefix: this.ESSENCE_PREFIX, suffix: this.ESSENCE_SUFFIX }, // Festering Essence of Destruction
-      { id: "toa", name: "Token of Absolution",              prefix: this.TOKEN_PREFIX,   suffix: this.TOKEN_SUFFIX   }, // Token of Absolution
-      { id: "pk1", name: "Key of Terror",                    prefix: this.KEY_PREFIX,     suffix: this.KEY_SUFFIX     }, // Pandemonium Key 1 Key of Terror
-      { id: "pk2", name: "Key of Hate",                      prefix: this.KEY_PREFIX,     suffix: this.KEY_SUFFIX     }, // Pandemonium Key 2 Key of Hate
-      { id: "pk3", name: "Key of Destruction",               prefix: this.KEY_PREFIX,     suffix: this.KEY_SUFFIX     }, // Pandemonium Key 3 Key of Destruction
-      { id: "dhn", name: "Diablo's Horn",                    prefix: this.ORGAN_PREFIX,   suffix: this.ORGAN_SUFFIX   }, // Diablo's Horn
-      { id: "bey", name: "Baal's Eye",                       prefix: this.ORGAN_PREFIX,   suffix: this.ORGAN_SUFFIX   }, // Baal's Eye
-      { id: "mbr", name: "Mephisto's Brain",                 prefix: this.ORGAN_PREFIX,   suffix: this.ORGAN_SUFFIX   }, // Mephisto's Brain
-    ];
+    let endgameItems = [].concat(EndgameConstants.essences, EndgameConstants.keys, EndgameConstants.organs);
+    endgameItems.push(EndgameConstants.token);
 
     endgameItems.forEach(item => {
       this.upsert(endgameCollection, item.id, `${item.prefix}${item.name}${item.suffix}`);
     });
   }
 
+  highlightStandardOfHeroes(endgameCollection) {
+    this.upsert(endgameCollection, EndgameConstants.standard.id, `${EndgameConstants.standard.prefix}${EndgameConstants.standard.name}${EndgameConstants.standard.suffix}`);
+  }
+
+  hideStandardOfHeroes() {
+    this.upsert(endgameCollection, EndgameConstants.standard.id, SettingsConstants.hidden);
+  }
+
 
   //========================//
   //   Custom Filter List   //
   //========================//
-  
   customizeCustomFilterList(shouldUseCustomFilterList) {
     let cflCol = this.getCollectionById(CollectionConstants.customFilterList);
     // This list changes entries in item-names.json, so it supports all base items (amulet, berserker axe), sets (Tal Rasha's Guardianship, Angelic Halo) and uniques (Griffon's Eye, The Stone of Jordan). 
@@ -1698,6 +1736,11 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     }
   }
 
+
+  //==================//
+  //   Big Tooltips   //
+  //==================//
+
   addBigTooltips(settingGems, settingFacets, settingUniqueCharms, settingQuest, settingEssences, settingToken, settingKeys, settingOrgans, settingStandard) {
     if (!config.IsBigTooltipsEnabled) {
       return;
@@ -1711,15 +1754,17 @@ class ItemNamesBuilder extends AbstractItemBuilder {
 
     // facets
     if (settingFacets !== SettingsConstants.disabled) {
-      // todo: facets
       let jewelsCol = this.getCollectionById(CollectionConstants.jewels);
-      // Helper.addBigTooltips(jewelsCol, settingFacets);
+      Helper.addBigTooltipForId(jewelsCol, JewelryConstants.facet, settingFacets);
     }
 
     // unique charms
     if (settingUniqueCharms !== SettingsConstants.disabled) {
       let charmsCol = this.getCollectionById(CollectionConstants.charms);
-      // Helper.addBigTooltips(questCol, settingUniqueCharms);
+      let uniqueCharms = []
+        .concat(JewelryConstants.uniqueLodCharms)
+        .concat(JewelryConstants.sunderCharms.map(sunder => sunder.name));
+      Helper.addBigTooltipsForIds(charmsCol, uniqueCharms, settingUniqueCharms);
     }
 
     // quest items
@@ -1731,31 +1776,31 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     // essences
     if (settingEssences !== SettingsConstants.disabled) {
       let endgameCol = this.getCollectionById(CollectionConstants.quest);
-      Helper.addBigTooltips(questCol, settingEssences);
+      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.essences.map(ess => ess.id), settingEssences);
     }
 
     // tokens of absolution
     if (settingToken !== SettingsConstants.disabled) {
-      let questCol = this.getCollectionById(CollectionConstants.quest);
-      Helper.addBigTooltips(questCol, settingToken);
+      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      Helper.addBigTooltipForId(endgameCol, EndgameConstants.token.id, settingToken);
     }
 
     // pandemonium keys
     if (settingKeys !== SettingsConstants.disabled) {
-      let questCol = this.getCollectionById(CollectionConstants.quest);
-      Helper.addBigTooltips(questCol, settingKeys);
+      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.keys.map(key => key.id), settingKeys);
     }
 
     // pandemonium organs
     if (settingOrgans !== SettingsConstants.disabled) {
-      let questCol = this.getCollectionById(CollectionConstants.quest);
-      Helper.addBigTooltips(questCol, settingOrgans);
+      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.organs.map(org => org.id), settingOrgans);
     }
 
     // standard of heroes
     if (settingStandard !== SettingsConstants.disabled) {
-      let questCol = this.getCollectionById(CollectionConstants.quest);
-      Helper.addBigTooltips(questCol, settingStandard);
+      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      Helper.addBigTooltipForId(endgameCol, EndgameConstants.standard.id, settingStandard);
     }
   }
 };
