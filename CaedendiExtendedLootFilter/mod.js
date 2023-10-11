@@ -34,6 +34,9 @@ class FileConstants {
   static FILE_ARMOR_PATH   = `${this.FILE_EXCEL}armor${this.FILE_EXTENSION_TXT}`;
   static FILE_MISC_PATH    = `${this.FILE_EXCEL}misc${this.FILE_EXTENSION_TXT}`;
   static FILE_SOUNDS_PATH  = `${this.FILE_EXCEL}sounds${this.FILE_EXTENSION_TXT}`;
+
+  static id = "id";
+  static key = "Key";
 }
 
 class CharConstants {
@@ -288,6 +291,7 @@ class JewelryConstants {
   static ring = "rin";
   static amulet = "amu";
   static jewel = "jew";
+  static facet = "Rainbow Facet";
 
   static small = "cm1";
   static large = "cm2";
@@ -590,9 +594,9 @@ class AbstractItemBuilder {
     let file = D2RMM.readJson(this.target); // copy existing file
     file.forEach((item) => { // overwrite provided entries with new names
       var idList = customNames.map(x => x.id)
-      if (idList.includes(item.Key)) {
+      if (idList.includes(item[FileConstants.key])) { // todo: was item.Key, now replaced
         for (const key in item) {
-          if (key !== "id" && key !== "Key") {
+          if (key !== FileConstants.id && key !== FileConstants.key) {
             item[key] = customNames.find(x => x.id == [item.Key]).value;
           }
         }
@@ -870,10 +874,10 @@ class ItemNameAffixesBuilder extends AbstractItemBuilder {
         return;
       case SettingsConstants.custom: // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items.gsw = `Diamond`; 
-        this.items.gsg = `Emerald`; 
-        this.items.gsr = `Ruby`;
-        this.items.gsb = `Sapphire`;
+        this.upsert(gemsCol, gsw, `Diamond`);
+        this.upsert(gemsCol, gsg, `Emerald`);
+        this.upsert(gemsCol, gsr, `Ruby`);
+        this.upsert(gemsCol, gsb, `Sapphire`);
         return;
     }
   }
@@ -972,7 +976,7 @@ class ItemNamesBuilder extends AbstractItemBuilder {
   }
 
   customizeHealingPotions(setting) {
-    let potsCol = this.getCollectionById(CollectionConstants.junk);
+    let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     const clrHeal = ColorConstants.red;
     const clrMana = ColorConstants.blue;
@@ -985,64 +989,64 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
-        this.highlightLv123Potions(potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightLv4Potions(  potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightLv5Potions(  potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightSmallRejuvs( potsCol, clrRej,  clrName, pattern, padding);
-        this.highlightFullRejuvs(  potsCol, clrRej,  clrName, pattern, padding);
+        this.highlightLv123Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightLv4Potions(  junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightLv5Potions(  junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightSmallRejuvs( junkCol, clrRej,  clrName, pattern, padding);
+        this.highlightFullRejuvs(  junkCol, clrRej,  clrName, pattern, padding);
         return;
       case "hide3": // hide lvl 1-3 potions, show small/full rejuvs
-        this.hideHealingPotions(potsCol);
-        this.highlightLv4Potions( potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightLv5Potions( potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightSmallRejuvs(potsCol, clrRej,  clrName, pattern, padding);
-        this.highlightFullRejuvs( potsCol, clrRej,  clrName, pattern, padding);
+        this.hideHealingPotions(  junkCol);
+        this.highlightLv4Potions( junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightLv5Potions( junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightSmallRejuvs(junkCol, clrRej,  clrName, pattern, padding);
+        this.highlightFullRejuvs( junkCol, clrRej,  clrName, pattern, padding);
         return;
       case "hide4": // hide lvl 1-4 potions, show small/full rejuvs
-        this.hideHealingPotions(potsCol);
-        this.highlightLv5Potions( potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightSmallRejuvs(potsCol, clrRej,  clrName, pattern, padding);
-        this.highlightFullRejuvs( potsCol, clrRej,  clrName, pattern, padding);
+        this.hideHealingPotions(  junkCol);
+        this.highlightLv5Potions( junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightSmallRejuvs(junkCol, clrRej,  clrName, pattern, padding);
+        this.highlightFullRejuvs( junkCol, clrRej,  clrName, pattern, padding);
         return;
       case "hide3sr": // hide lvl 1-3 potions and small rejuvs, show full rejuvs
-        this.hideHealingPotions(potsCol);
-        this.highlightLv4Potions(potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightLv5Potions(potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightFullRejuvs(potsCol, clrRej,  clrName, pattern, padding);
+        this.hideHealingPotions( junkCol);
+        this.highlightLv4Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightLv5Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightFullRejuvs(junkCol, clrRej,  clrName, pattern, padding);
         return;
       case "hide4sr": // hide lvl 1-4 potions and small rejuvs, show full rejuvs
-        this.hideHealingPotions(potsCol);
-        this.highlightLv5Potions(potsCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightFullRejuvs(potsCol, clrRej,  clrName, pattern, padding);
+        this.hideHealingPotions( junkCol);
+        this.highlightLv5Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
+        this.highlightFullRejuvs(junkCol, clrRej,  clrName, pattern, padding);
         return;
       case "sfr": // hide all healing/mana potions, show only small/full rejuvs
-        this.hideHealingPotions(potsCol);
-        this.highlightSmallRejuvs(potsCol, clrRej, clrName, pattern, padding);
-        this.highlightFullRejuvs( potsCol, clrRej,  clrName, pattern, padding);
+        this.hideHealingPotions(  junkCol);
+        this.highlightSmallRejuvs(junkCol, clrRej, clrName, pattern, padding);
+        this.highlightFullRejuvs( junkCol, clrRej,  clrName, pattern, padding);
         return;
       case "fr": // hide all healing/mana potions and small rejuvs, show only full rejuvs
-        this.hideHealingPotions(potsCol);
-        this.highlightFullRejuvs(potsCol, clrRej,  clrName, pattern, padding);
+        this.hideHealingPotions( junkCol);
+        this.highlightFullRejuvs(junkCol, clrRej,  clrName, pattern, padding);
         return;
       case "hide": // hide all healing potions
-        this.hideHealingPotions(potsCol);
+        this.hideHealingPotions(junkCol);
         return;
       case SettingsConstants.custom: // [CSTM-HPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        potsCol["hp1"] = `${clrHeal}+${clrName}HP1`; // Minor Healing Potion
-        potsCol["hp2"] = `${clrHeal}+${clrName}HP2`; // Light Healing Potion
-        potsCol["hp3"] = `${clrHeal}+${clrName}HP3`; // Healing Potion
-        potsCol["hp4"] = `${clrHeal}+${clrName}HP4`; // Greater Healing Potion
-        potsCol["hp5"] = `${clrHeal}+${clrName}HP5`; // Super Healing Potion
+        this.upsert(junkCol, "hp1", `${clrHeal}+${clrName}HP1`); // Minor Healing Potion
+        this.upsert(junkCol, "hp2", `${clrHeal}+${clrName}HP2`); // Light Healing Potion
+        this.upsert(junkCol, "hp3", `${clrHeal}+${clrName}HP3`); // Healing Potion
+        this.upsert(junkCol, "hp4", `${clrHeal}+${clrName}HP4`); // Greater Healing Potion
+        this.upsert(junkCol, "hp5", `${clrHeal}+${clrName}HP5`); // Super Healing Potion
         
-        potsCol["mp1"] = `${clrMana}+${clrName}MP1`; // Minor Mana Potion
-        potsCol["mp2"] = `${clrMana}+${clrName}MP2`; // Light Mana Potion
-        potsCol["mp3"] = `${clrMana}+${clrName}MP3`; // Mana Potion
-        potsCol["mp4"] = `${clrMana}+${clrName}MP4`; // Greater Mana Potion
-        potsCol["mp5"] = `${clrMana}+${clrName}MP5`; // Super Mana Potion
+        this.upsert(junkCol, "mp1", `${clrMana}+${clrName}MP1`); // Minor Mana Potion
+        this.upsert(junkCol, "mp2", `${clrMana}+${clrName}MP2`); // Light Mana Potion
+        this.upsert(junkCol, "mp3", `${clrMana}+${clrName}MP3`); // Mana Potion
+        this.upsert(junkCol, "mp4", `${clrMana}+${clrName}MP4`); // Greater Mana Potion
+        this.upsert(junkCol, "mp5", `${clrMana}+${clrName}MP5`); // Super Mana Potion
         
-        potsCol["rvs"] = `${clrRej}+${clrName}RPS`;  // Rejuvenation Potion
-        potsCol["rvl"] = `${clrRej}+${clrName}RPF`;  // Full Rejuvenation Potion
+        this.upsert(junkCol, "rvs", `${clrRej}+${clrName}RPS`);  // Rejuvenation Potion
+        this.upsert(junkCol, "rvl", `${clrRej}+${clrName}RPF`);  // Full Rejuvenation Potion
         return;
     }
   }
@@ -1053,7 +1057,7 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       "mp1", "mp2", "mp3", "mp4", "mp5",
       "rvs", "rvl",
     ].forEach(pot => {
-      potionsCollection[pot] = SettingsConstants.hidden;
+      this.upsert(potionsCollection, pot, SettingsConstants.hidden);
     });
   }
 
@@ -1066,7 +1070,7 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       { id: "mp2", name: "MP2", clr: clrMana },
       { id: "mp3", name: "MP3", clr: clrMana },
     ].forEach(pot => {
-      potionsCollection[pot.id] = Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name);
+      this.upsert(potionsCollection, pot.id, Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name));
     });
   }
 
@@ -1075,7 +1079,7 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       { id: "hp4", name: "HP4", clr: clrHeal },
       { id: "mp4", name: "MP4", clr: clrMana },
     ].forEach(pot => {
-      potionsCollection[pot.id] = Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name);
+      this.upsert(potionsCollection, pot.id, Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name));
     });
   }
 
@@ -1084,20 +1088,20 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       { id: "hp5", name: "HP5", clr: clrHeal },
       { id: "mp5", name: "MP5", clr: clrMana },
     ].forEach(pot => {
-      potionsCollection[pot.id] = Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name);
+      this.upsert(potionsCollection, pot.id, Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name));
     });
   }
 
   highlightSmallRejuvs(potionsCollection, clrRej, clrName, pattern, padding) {
-    potionsCollection["rvs"] = Helper.generateSingleHighlight(clrRej, pattern, padding, clrName, "RPS");
+    this.upsert(potionsCollection, "rvs", Helper.generateSingleHighlight(clrRej, pattern, padding, clrName, "RPS"));
   }
 
   highlightFullRejuvs(potionsCollection, clrRej, clrName, pattern, padding) {
-    potionsCollection["rvl"] = Helper.generateSingleHighlight(clrRej, pattern, padding, clrName, "RPF");
+    this.upsert(potionsCollection, "rvl", Helper.generateSingleHighlight(clrRej, pattern, padding, clrName, "RPF"));
   }
 
   customizeBuffPotions(setting) {
-    let potsCol = this.getCollectionById(CollectionConstants.junk);
+    let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     let pots = [
       { id: "yps", name: "Antidote" }, // Antidote Potion
@@ -1115,25 +1119,25 @@ class ItemNamesBuilder extends AbstractItemBuilder {
         return;
       case SettingsConstants.all: // show all
         pots.forEach(pot => {
-          potsCol[pot.id] = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, pot.name);
+          this.upsert(junkCol, pot.id, Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, pot.name));
         });
         return;
       case "hide": // hide all
         pots.forEach(pot => {
-          potsCol[pot.id] = SettingsConstants.hidden;
+          this.upsert(junkCol, pot.id, SettingsConstants.hidden);
         });
         return;
       case SettingsConstants.custom: // [CSTM-BPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        potsCol["yps"] = "Antidote Potion";
-        potsCol["wms"] = "Thawing Potion";
-        potsCol["vps"] = "Stamina Potion";
+        this.upsert(junkCol, "yps", "Antidote Potion");
+        this.upsert(junkCol, "wms", "Thawing Potion");
+        this.upsert(junkCol, "vps", "Stamina Potion");
         return;
     }
   }
 
   customizeThrowingPotions(setting) {
-    let potsCol = this.getCollectionById(CollectionConstants.junk);
+    let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     const clrGas = ColorConstants.darkGreen;
     const clrOil = ColorConstants.orange;
@@ -1155,28 +1159,28 @@ class ItemNamesBuilder extends AbstractItemBuilder {
         return;
       case SettingsConstants.all: // show all
         pots.forEach(pot => {
-          potsCol[pot.id] = Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name);
+          this.upsert(junkCol, pot.id, Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name));
         });
         return;
       case "hide": // hide all
         pots.forEach(pot => {
-          potsCol[pot.id] = SettingsConstants.hidden;
+          this.upsert(junkCol, pot.id, SettingsConstants.hidden);
         });
         return;
       case SettingsConstants.custom: // [CSTM-TPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        potsCol["gpl"] = "Strangling Gas Potion";
-        potsCol["gpm"] = "Choking Gas Potion";
-        potsCol["gps"] = "Rancid Gas Potion";
-        potsCol["opl"] = "Fulminating Potion";
-        potsCol["opm"] = "Exploding Potion";
-        potsCol["ops"] = "Oil Potion";
+        this.upsert(junkCol, "gpl", "Strangling Gas Potion");
+        this.upsert(junkCol, "gpm", "Choking Gas Potion");
+        this.upsert(junkCol, "gps", "Rancid Gas Potion");
+        this.upsert(junkCol, "opl", "Fulminating Potion");
+        this.upsert(junkCol, "opm", "Exploding Potion");
+        this.upsert(junkCol, "ops", "Oil Potion");
         return;
     }
   }
 
   customizeScrollsAndTomes(setting) {
-    let paperCol = this.getCollectionById(CollectionConstants.junk);
+    let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     const clrScroll = ColorConstants.green;
     const clrTome   = ColorConstants.darkGreen;
@@ -1188,41 +1192,40 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // show all
-        this.highlightScrolls(paperCol, clrScroll, clrName, pattern, padding);
-        this.highlightTomes(  paperCol, clrTome,   clrName, pattern, padding);
+        this.highlightScrolls(junkCol, clrScroll, clrName, pattern, padding);
+        this.highlightTomes(  junkCol, clrTome,   clrName, pattern, padding);
         return;
       case "hide": // hide scrolls, show books
-        this.highlightTomes(paperCol, clrTome, clrName, pattern, padding);
-        this.hideScrolls(paperCol);
+        this.highlightTomes(junkCol, clrTome, clrName, pattern, padding);
+        this.hideScrolls(junkCol);
         return;
       case SettingsConstants.custom: // [CSTM-SCR]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.items.tsc = "Scroll of Town Portal";
-        this.items.isc = "Scroll of Identify";
-        this.items.tbk = "Tome of Town Portal";
-        this.items.ibk = "Tome of Identify";
+        this.upsert(junkCol, "tsc", "Scroll of Town Portal");
+        this.upsert(junkCol, "isc", "Scroll of Identify");
+        this.upsert(junkCol, "tbk", "Tome of Town Portal");
+        this.upsert(junkCol, "ibk", "Tome of Identify");
         return;
     }
   }
 
   hideScrolls(paperCollection) {
-    paperCollection[tsc] = SettingsConstants.hidden; // Scroll of Town Portal
-    paperCollection[isc] = SettingsConstants.hidden; // Scroll of Identify
+    this.upsert(paperCollection, "tsc", SettingsConstants.hidden); // Scroll of Town Portal
+    this.upsert(paperCollection, "isc", SettingsConstants.hidden); // Scroll of Identify
   }
 
   highlightScrolls(paperCollection, clrHighlight, clrName, pattern, padding) {
-    paperCollection[tsc] = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "TP"); // Scroll of Town Portal
-    paperCollection[isc] = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "ID"); // Scroll of Identify
+    this.upsert(paperCollection, "tsc", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "TP")); // Scroll of Town Portal
+    this.upsert(paperCollection, "isc", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "ID")); // Scroll of Identify
   }
 
   highlightTomes(paperCollection, clrHighlight, clrName, pattern, padding) {
-    paperCollection["tbk"] = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "TP Tome"); // Tome of Town Portal
-    paperCollection["ibk"] = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "ID Tome"); // Tome of Identify
+    this.upsert(paperCollection, "tbk", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "TP Tome")); // Tome of Town Portal
+    this.upsert(paperCollection, "ibk", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "ID Tome")); // Tome of Identify
   }
 
   customizeArrowsAndBolts(setting) {
-    // let projectilesCol = this.getCollectionById(CollectionConstants.arrowsBolts);
-    let projectilesCol = this.getCollectionById(CollectionConstants.junk);
+    let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     const clrHighlight = ColorConstants.gray;
     const clrName = ColorConstants.white;
@@ -1233,33 +1236,33 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
-        projectilesCol["aqv"] = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Arrows");
-        projectilesCol["cqv"] = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Bolts");
+        this.upsert(junkCol, "aqv", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Arrows"));
+        this.upsert(junkCol, "cqv", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Bolts"));
         return;
       case "hide":
-        projectilesCol["aqv"] = SettingsConstants.hidden; // Arrow Quiver
-        projectilesCol["cqv"] = SettingsConstants.hidden; // Crossbow Bolt Quiver
+        this.upsert(junkCol, "aqv", SettingsConstants.hidden); // Arrow Quiver
+        this.upsert(junkCol, "cqv", SettingsConstants.hidden); // Crossbow Bolt Quiver
         return;
       case SettingsConstants.custom: // [CSTM-ARB]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        projectilesCol["aqv"] = "Arrows";
-        projectilesCol["cqv"] = "Bolts";
+        this.upsert(junkCol, "aqv", "Arrows");
+        this.upsert(junkCol, "cqv", "Bolts");
         return;
     }
   }
 
   customizeKeys(setting) {
-    let keysCol = this.getCollectionById(CollectionConstants.junk);
+    let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     switch (setting) {
       case SettingsConstants.disabled:
         return;
       case "hide":
-        keysCol["key"] = SettingsConstants.hidden;
+        this.upsert(junkCol, "key", SettingsConstants.hidden);
         return;
       case SettingsConstants.custom: // [CSTM-KEY]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        keysCol["key"] = "Key";
+        this.upsert(junkCol, "key", "Key");
         return;
     }
   }
@@ -1401,15 +1404,15 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       case SettingsConstants.disabled:
         return;
       case "facet":
-        jewelsCol["Rainbow Facet"] = `${SettingsConstants.iLvlIndentFixFacets}${this.FACET_PREFIX}Rainbow Facet${this.FACET_SUFFIX}`;
+        this.upsert(jewelsCol, JewelryConstants.facet, `${SettingsConstants.iLvlIndentFixFacets}${this.FACET_PREFIX}Rainbow Facet${this.FACET_SUFFIX}`);
         return;
       case "facet-rb":
-        jewelsCol["Rainbow Facet"] = `${SettingsConstants.iLvlIndentFixFacets}${this.FACET_ALTERNATE_PREFIX}Rainbow Facet${this.FACET_ALTERNATE_SUFFIX}`;
+        this.upsert(jewelsCol, JewelryConstants.facet, `${SettingsConstants.iLvlIndentFixFacets}${this.FACET_ALTERNATE_PREFIX}Rainbow Facet${this.FACET_ALTERNATE_SUFFIX}`);
         return;
       case SettingsConstants.custom: // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        jewelsCol["jew"] = `${ColorConstants.red}Jewel${ColorConstants.blue}`; // includes magic, rare and unique jewels
-        jewelsCol["Rainbow Facet"] = `Rainbow Facet`;
+        this.upsert(jewelsCol, JewelryConstants.jewel,  `${ColorConstants.red}Jewel${ColorConstants.blue}`); // includes magic, rare and unique jewels
+        this.upsert(jewelsCol, JewelryConstants.facet, `Rainbow Facet`);
         return;
     }
   }
@@ -1433,31 +1436,32 @@ class ItemNamesBuilder extends AbstractItemBuilder {
         this.highlightUnidentifiedCharms(charmsCol);
         return;
       case SettingsConstants.custom: // [CSTM-CHA]
-        charmsCol[JewelryConstants.small]       = `Small Charm`;
-        charmsCol[JewelryConstants.large]       = `Large Charm`;
-        charmsCol[JewelryConstants.grand]       = `Grand Charm`;
-        charmsCol[JewelryConstants.anni]        = `Annihilus`;
-        charmsCol[JewelryConstants.torch]       = `Hellfire Torch`;
-        charmsCol[JewelryConstants.gheeds]      = `Gheed's Fortune`;
-        charmsCol[JewelryConstants.sunderMagic] = `Black Cleft`;
-        charmsCol[JewelryConstants.sunderPhys]  = `Bone Break`;
-        charmsCol[JewelryConstants.sunderCold]  = `Cold Rupture`;
-        charmsCol[JewelryConstants.sunderLite]  = `Crack of the Heavens`;
-        charmsCol[JewelryConstants.sunderFire]  = `Flame Rift`;
-        charmsCol[JewelryConstants.sunderPsn]   = `Rotting Fissure`;
+        this.upsert(charmsCol, JewelryConstants.small,       `Small Charm`         );
+        this.upsert(charmsCol, JewelryConstants.large,       `Large Charm`         );
+        this.upsert(charmsCol, JewelryConstants.grand,       `Grand Charm`         );
+        this.upsert(charmsCol, JewelryConstants.anni,        `Annihilus`           );
+        this.upsert(charmsCol, JewelryConstants.torch,       `Hellfire Torch`      );
+        this.upsert(charmsCol, JewelryConstants.gheeds,      `Gheed's Fortune`     );
+        this.upsert(charmsCol, JewelryConstants.sunderMagic, `Black Cleft`         );
+        this.upsert(charmsCol, JewelryConstants.sunderPhys,  `Bone Break`          );
+        this.upsert(charmsCol, JewelryConstants.sunderCold,  `Cold Rupture`        );
+        this.upsert(charmsCol, JewelryConstants.sunderLite,  `Crack of the Heavens`);
+        this.upsert(charmsCol, JewelryConstants.sunderFire,  `Flame Rift`          );
+        this.upsert(charmsCol, JewelryConstants.sunderPsn,   `Rotting Fissure`     );
         return;
     }
   }
 
   highlightUnidentifiedCharms(charmsCollection) {
-    charmsCollection[JewelryConstants.small] = `Small ${ColorConstants.red}Charm${ColorConstants.blue}`;
-    charmsCollection[JewelryConstants.large] = `Large ${ColorConstants.red}Charm${ColorConstants.blue}`;
-    charmsCollection[JewelryConstants.grand] = `Grand ${ColorConstants.red}Charm${ColorConstants.blue}`;
+    let suffix = "Charm";
+    this.upsert(charmsCollection, JewelryConstants.small, `Small ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, JewelryConstants.large, `Large ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, JewelryConstants.grand, `Grand ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
   }
 
   highlightUniqueCharms(charmsCollection){
     [ JewelryConstants.anni, JewelryConstants.torch, JewelryConstants.gheeds ].forEach(charm => {
-      charmsCollection[charm] = `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm}${this.CHARMS_UNIQUE_SUFFIX}`;
+      this.upsert(charmsCollection, charm, `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm}${this.CHARMS_UNIQUE_SUFFIX}`);
     });
   }
 
@@ -1473,12 +1477,12 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     
     if (config.IsSunderAltPattern) {
       sunderCharms.forEach(charm => {
-        charmsCollection[charm.name] = SettingsConstants.iLvlIndentFixCharms + Helper.generateDoubleHighlight(charm.color, HighlightConstants.uniquePattern, HighlightConstants.uniquePadding , HighlightConstants.uniqueColorName, charm.name);
+        this.upsert(charmsCollection, charm.name, SettingsConstants.iLvlIndentFixCharms + Helper.generateDoubleHighlight(charm.color, HighlightConstants.uniquePattern, HighlightConstants.uniquePadding , HighlightConstants.uniqueColorName, charm.name));
       });
     }
     else {
       sunderCharms.forEach(charm => {
-        charmsCollection[charm.name] = `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm.name}${this.CHARMS_UNIQUE_SUFFIX}`;
+        this.upsert(charmsCollection, charm.name, `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm.name}${this.CHARMS_UNIQUE_SUFFIX}`);
       });
     } 
   }
@@ -1503,41 +1507,43 @@ class ItemNamesBuilder extends AbstractItemBuilder {
         this.highlightQuestItems(questCol, prefix, suffix);
         return;
       case SettingsConstants.custom: // [CSTM-QST1]
+        // todo: refactor
+
         // Act 1
-        questCol["leg"] = `Wirt's Leg`;           // Wirt's Leg
-        questCol["hdm"] = `Horadric Malus`;       // Horadric Malus
-        questCol["bks"] = `Scroll of Inifuss`;    // Scroll of Inifuss
-        questCol["bkd"] = `Scroll of Inifuss`;    // Scroll of Inifuss (deciphered)
+        this.upsert(questCol, "leg", `Wirt's Leg`          ); // Wirt's Leg
+        this.upsert(questCol, "hdm", `Horadric Malus`      ); // Horadric Malus
+        this.upsert(questCol, "bks", `Scroll of Inifuss`   ); // Scroll of Inifuss
+        this.upsert(questCol, "bkd", `Scroll of Inifuss`   ); // Scroll of Inifuss (deciphered)
         // Act 2
-        questCol["tr1"] = `Horadric Scroll`;      // Horadric Scroll
-        questCol["box"] = `Horadric Cube`;        // Horadric Cube
-        questCol["msf"] = `Staff of Kings`;       // Staff of Kings
-        questCol["vip"] = `Amulet of the Viper`;  // Amulet of the Viper
-        questCol["hst"] = `Horadric Staff`;       // Horadric Staff
+        this.upsert(questCol, "tr1", `Horadric Scroll`     ); // Horadric Scroll
+        this.upsert(questCol, "box", `Horadric Cube`       ); // Horadric Cube
+        this.upsert(questCol, "msf", `Staff of Kings`      ); // Staff of Kings
+        this.upsert(questCol, "vip", `Amulet of the Viper` ); // Amulet of the Viper
+        this.upsert(questCol, "hst", `Horadric Staff`      ); // Horadric Staff
         // Act 3
-        questCol["j34"] = `A Jade Figurine`;      // A Jade Figurine
-        questCol["g34"] = `The Golden Bird`;      // The Golden Bird
-        questCol["bbb"] = `Lam Esen's Tome`;      // Lam Esen's Tome
-        questCol["g33"] = `The Gidbinn`;          // The Gidbinn
-        questCol["qf1"] = `Khalim's Flail`;       // Khalim's Flail
-        questCol["qf2"] = `Khalim's Will`;        // Khalim's Will
-        questCol["qey"] = `Khalim's Eye`;         // Khalim's Eye
-        questCol["qhr"] = `Khalim's Heart`;       // Khalim's Heart
-        questCol["qbr"] = `Khalim's Brain`;       // Khalim's Brain
-        questCol["mss"] = `Mephisto's Soulstone`; // Mephisto's Soulstone
+        this.upsert(questCol, "j34", `A Jade Figurine`     ); // A Jade Figurine
+        this.upsert(questCol, "g34", `The Golden Bird`     ); // The Golden Bird
+        this.upsert(questCol, "bbb", `Lam Esen's Tome`     ); // Lam Esen's Tome
+        this.upsert(questCol, "g33", `The Gidbinn`         ); // The Gidbinn
+        this.upsert(questCol, "qf1", `Khalim's Flail`      ); // Khalim's Flail
+        this.upsert(questCol, "qf2", `Khalim's Will`       ); // Khalim's Will
+        this.upsert(questCol, "qey", `Khalim's Eye`        ); // Khalim's Eye
+        this.upsert(questCol, "qhr", `Khalim's Heart`      ); // Khalim's Heart
+        this.upsert(questCol, "qbr", `Khalim's Brain`      ); // Khalim's Brain
+        this.upsert(questCol, "mss", `Mephisto's Soulstone`); // Mephisto's Soulstone
         // Act 4
-        questCol["hfh"] = `Hell Forge Hammer`;    // Hell Forge Hammer
+        this.upsert(questCol, "hfh", `Hell Forge Hammer`   ); // Hell Forge Hammer
         // Act 5
         // See exceptions [CSTM-QST2]
 
         // Extra
-        questCol["Staff of Kings"]      = `Staff of Kings`;      // Staff of Kings
-        questCol["Amulet of the Viper"] = `Amulet of the Viper`; // Amulet of the Viper
-        questCol["Horadric Staff"]      = `Horadric Staff`;      // Horadric Staff
-        questCol["LamTome"]             = `Lam Esen's Tome`;     // Lam Esen's Tome
-        questCol["KhalimFlail"]         = `Khalim's Flail`;      // Khalim's Flail
-        questCol["SuperKhalimFlail"]    = `Khalim's Will`;       // Khalim's Will
-        questCol["Hell Forge Hammer"]   = `Hell Forge Hammer`;   // Hell Forge Hammer
+        this.upsert(questCol, "Staff of Kings",      `Staff of Kings`     ); // Staff of Kings
+        this.upsert(questCol, "Amulet of the Viper", `Amulet of the Viper`); // Amulet of the Viper
+        this.upsert(questCol, "Horadric Staff",      `Horadric Staff`     ); // Horadric Staff
+        this.upsert(questCol, "LamTome",             `Lam Esen's Tome`    ); // Lam Esen's Tome
+        this.upsert(questCol, "KhalimFlail",         `Khalim's Flail`     ); // Khalim's Flail
+        this.upsert(questCol, "SuperKhalimFlail",    `Khalim's Will`      ); // Khalim's Will
+        this.upsert(questCol, "Hell Forge Hammer",   `Hell Forge Hammer`  ); // Hell Forge Hammer
         return;
     }
   }
@@ -1550,28 +1556,28 @@ class ItemNamesBuilder extends AbstractItemBuilder {
 
     let questItems = [
       // Act 1
-      { id: "leg", name: "Wirt's Leg",           iLvlIndent: indentDouble }, // Wirt's Leg
-      { id: "hdm", name: "Horadric Malus",       iLvlIndent: indentDouble }, // Horadric Malus
-      { id: "bks", name: "Scroll of Inifuss",    iLvlIndent: indentNone   }, // Scroll of Inifuss
-      { id: "bkd", name: "Scroll of Inifuss",    iLvlIndent: indentNone   }, // Scroll of Inifuss (deciphered)
+      { id: "leg", name: "Wirt's Leg",           iLvlIndent: indentDouble },
+      { id: "hdm", name: "Horadric Malus",       iLvlIndent: indentDouble },
+      { id: "bks", name: "Scroll of Inifuss",    iLvlIndent: indentNone   },
+      { id: "bkd", name: "Scroll of Inifuss",    iLvlIndent: indentNone   },
 
       // Act 2
-      { id: "tr1", name: "Horadric Scroll",      iLvlIndent: indentNone   }, // Horadric Scroll
-      { id: "msf", name: "Staff of Kings",       iLvlIndent: indentDouble }, // Staff of Kings
-      { id: "vip", name: "Amulet of the Viper",  iLvlIndent: indentNone   }, // Amulet of the Viper
-      { id: "hst", name: "Horadric Staff",       iLvlIndent: indentSingle }, // Horadric Staff
+      { id: "tr1", name: "Horadric Scroll",      iLvlIndent: indentNone   },
+      { id: "msf", name: "Staff of Kings",       iLvlIndent: indentDouble },
+      { id: "vip", name: "Amulet of the Viper",  iLvlIndent: indentNone   },
+      { id: "hst", name: "Horadric Staff",       iLvlIndent: indentSingle },
 
       // Act 3
-      { id: "j34", name: "A Jade Figurine",      iLvlIndent: indentNone   }, // A Jade Figurine
-      { id: "g34", name: "The Golden Bird",      iLvlIndent: indentNone   }, // The Golden Bird
-      { id: "bbb", name: "Lam Esen's Tome",      iLvlIndent: indentNone   }, // Lam Esen's Tome
-      { id: "g33", name: "The Gidbinn",          iLvlIndent: indentDouble }, // The Gidbinn
-      { id: "qf1", name: "Khalim's Flail",       iLvlIndent: indentDouble }, // Khalim's Flail
-      { id: "qf2", name: "Khalim's Will",        iLvlIndent: indentSingle }, // Khalim's Will
-      { id: "qey", name: "Khalim's Eye",         iLvlIndent: indentNone   }, // Khalim's Eye
-      { id: "qhr", name: "Khalim's Heart",       iLvlIndent: indentNone   }, // Khalim's Heart
-      { id: "qbr", name: "Khalim's Brain",       iLvlIndent: indentNone   }, // Khalim's Brain
-      { id: "mss", name: "Mephisto's Soulstone", iLvlIndent: indentNone   }, // Mephisto's Soulstone
+      { id: "j34", name: "A Jade Figurine",      iLvlIndent: indentNone   },
+      { id: "g34", name: "The Golden Bird",      iLvlIndent: indentNone   },
+      { id: "bbb", name: "Lam Esen's Tome",      iLvlIndent: indentNone   },
+      { id: "g33", name: "The Gidbinn",          iLvlIndent: indentDouble },
+      { id: "qf1", name: "Khalim's Flail",       iLvlIndent: indentDouble },
+      { id: "qf2", name: "Khalim's Will",        iLvlIndent: indentSingle },
+      { id: "qey", name: "Khalim's Eye",         iLvlIndent: indentNone   },
+      { id: "qhr", name: "Khalim's Heart",       iLvlIndent: indentNone   },
+      { id: "qbr", name: "Khalim's Brain",       iLvlIndent: indentNone   },
+      { id: "mss", name: "Mephisto's Soulstone", iLvlIndent: indentNone   },
 
       // Act 4
       { id: "hfh", name: "Hell Forge Hammer",    iLvlIndent: indentDouble }, // Mephisto's Soulstone
@@ -1580,22 +1586,22 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       // See exceptions [CSTM-QST2]
 
       // Extra
-      { id: "Staff of Kings",      name: "Staff of Kings",      iLvlIndent: indentDouble }, // Staff of Kings
-      { id: "Amulet of the Viper", name: "Amulet of the Viper", iLvlIndent: indentNone   }, // Amulet of the Viper
-      { id: "Horadric Staff",      name: "Horadric Staff",      iLvlIndent: indentSingle }, // Horadric Staff
-      { id: "LamTome",             name: "Lam Esen's Tome",     iLvlIndent: indentNone   }, // Lam Esen's Tome
-      { id: "KhalimFlail",         name: "Khalim's Flail",      iLvlIndent: indentDouble }, // Khalim's Flail
-      { id: "SuperKhalimFlail",    name: "Khalim's Will",       iLvlIndent: indentSingle }, // Khalim's Will
-      { id: "Hell Forge Hammer",   name: "Hell Forge Hammer",   iLvlIndent: indentDouble }, // Hell Forge Hammer
+      { id: "Staff of Kings",      name: "Staff of Kings",      iLvlIndent: indentDouble },
+      { id: "Amulet of the Viper", name: "Amulet of the Viper", iLvlIndent: indentNone   },
+      { id: "Horadric Staff",      name: "Horadric Staff",      iLvlIndent: indentSingle },
+      { id: "LamTome",             name: "Lam Esen's Tome",     iLvlIndent: indentNone   },
+      { id: "KhalimFlail",         name: "Khalim's Flail",      iLvlIndent: indentDouble },
+      { id: "SuperKhalimFlail",    name: "Khalim's Will",       iLvlIndent: indentSingle },
+      { id: "Hell Forge Hammer",   name: "Hell Forge Hammer",   iLvlIndent: indentDouble },
     ];
 
     questItems.forEach(item => {
-      questCollection[item.id] = item.iLvlIndent + `${prefix}${item.name}${suffix}`;
+      this.upsert(questCollection, item.id, item.iLvlIndent + `${prefix}${item.name}${suffix}`);
     });
   }
 
   highlightCube(questCollection, prefix, suffix) {
-    questCollection["box"] = `${prefix}Horadric Cube${suffix}`; // Horadric Cube
+    this.upsert(questCollection, "box", `${prefix}Horadric Cube${suffix}`); // Horadric Cube
   }
     
   //===================================================//
@@ -1609,29 +1615,29 @@ class ItemNamesBuilder extends AbstractItemBuilder {
         return;
       case SettingsConstants.all: // highlight all
         this.highlightEndgameItems(endgameCol);
-        endgameCol["std"] = `${this.STANDARD_OF_HEROES_PREFIX}Standard of Heroes${this.STANDARD_OF_HEROES_SUFFIX}`; // Standard of Heroes
+        this.upsert(endgameCol, "std", `${this.STANDARD_OF_HEROES_PREFIX}Standard of Heroes${this.STANDARD_OF_HEROES_SUFFIX}`); // Standard of Heroes
         return;
       case "xsh": // exclude Standard of Heroes from highlighting
         this.highlightEndgameItems(endgameCol);
         return;
       case "hsh": // hide Standard of Heroes
         this.highlightEndgameItems(endgameCol);
-        endgameCol["std"] = SettingsConstants.hidden;
+        this.upsert(endgameCol, "std", SettingsConstants.hidden);
         return;
       case SettingsConstants.custom: // [CSTM-END]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        endgameCol["tes"] = `Twisted Essence of Suffering`;
-        endgameCol["ceh"] = `Charged Essense of Hatred`;
-        endgameCol["bet"] = `Burning Essence of Terror`;
-        endgameCol["fed"] = `Festering Essence of Destruction`;
-        endgameCol["toa"] = `Token of Absolution`;
-        endgameCol["pk1"] = `Key of Terror`;
-        endgameCol["pk2"] = `Key of Hate`;
-        endgameCol["pk3"] = `Key of Destruction`;
-        endgameCol["dhn"] = `Diablo's Horn`;
-        endgameCol["bey"] = `Baal's Eye`;
-        endgameCol["mbr"] = `Mephisto's Brain`;
-        endgameCol["std"] = `Standard of Heroes`;
+        this.upsert(endgameCol, "tes", `Twisted Essence of Suffering`);
+        this.upsert(endgameCol, "ceh", `Charged Essense of Hatred`);
+        this.upsert(endgameCol, "bet", `Burning Essence of Terror`);
+        this.upsert(endgameCol, "fed", `Festering Essence of Destruction`);
+        this.upsert(endgameCol, "toa", `Token of Absolution`);
+        this.upsert(endgameCol, "pk1", `Key of Terror`);
+        this.upsert(endgameCol, "pk2", `Key of Hate`);
+        this.upsert(endgameCol, "pk3", `Key of Destruction`);
+        this.upsert(endgameCol, "dhn", `Diablo's Horn`);
+        this.upsert(endgameCol, "bey", `Baal's Eye`);
+        this.upsert(endgameCol, "mbr", `Mephisto's Brain`);
+        this.upsert(endgameCol, "std", `Standard of Heroes`);
         return;
     }
   }
@@ -1652,7 +1658,7 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     ];
 
     endgameItems.forEach(item => {
-      endgameCollection[item.id] = `${item.prefix}${item.name}${item.suffix}`;
+      this.upsert(endgameCollection, item.id, `${item.prefix}${item.name}${item.suffix}`);
     });
   }
 
@@ -1676,19 +1682,19 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       
       // examples
 
-      // cflCol["jav"]           = "";                                                          // Javelin, hide
-      // cflCol["jav"]           = SettingsConstants.hidden;                                    // Javelin, hide
-      // cflCol["jav"]           = `${ColorConstants.black}Javelin`;                            // Javelin, color name black
-      // cflCol["7gw"]           = `${ColorConstants.red}Unearthed Wand${ColorConstants.blue}`; // Unearthed Wand, color name red
-      // cflCol["7gw"]           = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Unearthed Wand")}${ColorConstants.blue}`; // Unearthed Wand, highlight
-      // cflCol["Death's Web"]   = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Death's Web")}`;                          // Unearthed Wand, highlight
+      // this.upsert(cflCol,           "jav", "");                                                          // Javelin, hide
+      // this.upsert(cflCol,           "jav", SettingsConstants.hidden);                                    // Javelin, hide
+      // this.upsert(cflCol,           "jav", `${ColorConstants.black}Javelin`);                            // Javelin, color name black
+      // this.upsert(cflCol,           "7gw", `${ColorConstants.red}Unearthed Wand${ColorConstants.blue}`); // Unearthed Wand, color name red
+      // this.upsert(cflCol,           "7gw", `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Unearthed Wand")}${ColorConstants.blue}`); // Unearthed Wand, highlight
+      // this.upsert(cflCol,   "Death's Web", `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Death's Web"                         )}`); // Unearthed Wand, highlight
 
-      // cflCol["skp"]           = "";                                                  // Skull Cap, hide
-      // cflCol["skp"]           = SettingsConstants.hidden;                            // Skull Cap, hide
-      // cflCol["skp"]           = `${ColorConstants.black}Skull Cap`;                  // Skull Cap, color name black
-      // cflCol["ci3"]           = `${ColorConstants.red}Diadem${ColorConstants.blue}`; // Diadem, color name red
-      // cflCol["ci3"]           = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Diadem")}${ColorConstants.blue}`; // Diadem, highlight
-      // cflCol["Griffon's Eye"] = `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Griffon's Eye")}`;                // Griffon's Eye, highlight
+      // this.upsert(cflCol,           "skp", "");                                                  // Skull Cap, hide
+      // this.upsert(cflCol,           "skp", SettingsConstants.hidden);                            // Skull Cap, hide
+      // this.upsert(cflCol,           "skp", `${ColorConstants.black}Skull Cap`);                  // Skull Cap, color name black
+      // this.upsert(cflCol,           "ci3", `${ColorConstants.red}Diadem${ColorConstants.blue}`); // Diadem, color name red
+      // this.upsert(cflCol,           "ci3", `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Diadem")}${ColorConstants.blue}`); // Diadem, highlight
+      // this.upsert(cflCol, "Griffon's Eye", `${SettingsConstants.iLvlIndentFixDouble}${Helper.generateDoubleHighlight(PFL_CLR_PATTERN, PFL_PATTERN, PFL_PADDING, PFL_CLR_NAME, "Griffon's Eye"               )}`); // Griffon's Eye, highlight
     }
   }
 
@@ -1819,7 +1825,7 @@ class UiBuilder extends AbstractItemBuilder {
 class ItemModifiersBuilder extends AbstractItemBuilder {
   constructor() {
     super(FileConstants.FILE_UI_PATH);
-
+    
     [
       CollectionConstants.quest,
     ].forEach(id => {
@@ -1929,6 +1935,7 @@ class ItemLevelBuilder {
 }
 
 class ItemQualityBuilder {
+  // todo: refactor if possible
   build() {
     if (config.ItemQuality === SettingsConstants.disabled) {
       return;
@@ -1948,9 +1955,9 @@ class ItemQualityBuilder {
   }
 
   addEquipmentQuality(equipment, itemNames, setting) {
-    let txtNormal      = config.ItemQuality !== SettingsConstants.custom ? 'n' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-    let txtExceptional = config.ItemQuality !== SettingsConstants.custom ? 'x' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-    let txtElite       = config.ItemQuality !== SettingsConstants.custom ? 'e' : "custom"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    let txtNormal      = config.ItemQuality !== SettingsConstants.custom ? 'n' : SettingsConstants.custom; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    let txtExceptional = config.ItemQuality !== SettingsConstants.custom ? 'x' : SettingsConstants.custom; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    let txtElite       = config.ItemQuality !== SettingsConstants.custom ? 'e' : SettingsConstants.custom; // replace custom with desired custom quality indicator. [CSTM-QLTY]
     
     equipment.forEach(item => {
       var quality = (item.code === item.ultracode ? txtElite : (item.code === item.ubercode ? txtExceptional : txtNormal));
@@ -1961,7 +1968,7 @@ class ItemQualityBuilder {
       }
       
       for (const key in itemNames[index]) {
-        if (key !== "id" && key !== "Key") {
+        if (key !== FileConstants.id && key !== FileConstants.key) {
           switch (setting) {
             case "suf-par":
               itemNames[index][key] = `${itemNames[index][key]} (${quality})`;
