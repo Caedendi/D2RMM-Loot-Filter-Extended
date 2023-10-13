@@ -127,8 +127,10 @@ class ColorConstants {
 }
 
 class SettingsConstants {
+  // tooltip
   static hidden             = CharConstants.empty + CharConstants.space.repeat(config.HiddenItemTooltipSize);
   
+  // ilvl
   static shouldFixIlvlIndent      = config.ItemLevel === "fix";
   static iLvlIndentFixSingle      = CharConstants.space.repeat(4); // for single digit ilvl items
   static iLvlIndentFixDouble      = CharConstants.space.repeat(6); // for double digit ilvl items
@@ -137,7 +139,9 @@ class SettingsConstants {
   static iLvlIndentFixCharms      = this.shouldFixIlvlIndent ? this.iLvlIndentFixDouble : CharConstants.empty;
   static iLvlIndentFixQuestSingle = this.iLvlIndentFixSingle; // quest items with a single digit ilvl
   static iLvlIndentFixQuestDouble = this.iLvlIndentFixDouble; // quest items with a double digit ilvl
+  static shouldExcludeIlvlForBigTooltips = config.ItemLevel === "btt" || config.ItemLevel === "fix-btt";
   
+  // common config settings
   static disabled  = "none";
   static all       = "all";
   static custom    = "custom";
@@ -165,15 +169,14 @@ class HighlightConstants {
   static uniqueColorHighlight = this.color;
   static uniquePattern = this.pattern10;
   static uniquePadding = this.padding5;
-  static uniquePrefix = `${this.clrHighlight}${this.pattern}${this.clrName}${this.uniquePadding}`;
-  static uniqueSuffix = `${this.uniquePadding}${this.clrHighlight}${this.pattern}${this.clrName}`;
+  static uniquePrefix = `${this.uniqueColorHighlight}${this.uniquePattern}${this.uniqueColorName}${this.uniquePadding}`;
+  static uniqueSuffix = `${this.uniquePadding}${this.uniqueColorHighlight}${this.uniquePattern}${this.uniqueColorName}`;
 
   static questPrefix = this.uniquePrefix;
   static questSuffix = this.uniqueSuffix;
 
   static bttPadding = this.padding5;
   static bttPickUpMsg = `${CharConstants.newLine}${ColorConstants.purple}Pick Up`;
-
 }
 
 class RuneConstants {
@@ -283,14 +286,23 @@ class JewelryConstants {
   static highlight = CharConstants.o;
   static padding = HighlightConstants.padding1;
 
+  static facetClrName = ColorConstants.gold;
+  static facetPattern = HighlightConstants.pattern5;
+  static facetPadding1 = HighlightConstants.padding1; // padding between individual patterns
+  static facetPadding2 = HighlightConstants.padding3; // padding between name and facetPrefixAlt / facetSuffixAlt
+  static facetPrefixAlt = `${ColorConstants.red}${this.facetPattern}${this.facetPadding1}${ColorConstants.yellow}${this.facetPattern}${this.facetPadding1}${ColorConstants.blue}${this.facetPattern}${this.facetPadding1}${ColorConstants.green}${this.facetPattern}${this.facetClrName}${this.facetPadding2}`;
+  static facetSuffixAlt = `${this.facetPadding2}${ColorConstants.green}${this.facetPattern}${this.facetPadding1}${ColorConstants.blue}${this.facetPattern}${this.facetPadding1}${ColorConstants.yellow}${this.facetPattern}${this.facetPadding1}${ColorConstants.red}${this.facetPattern}${this.facetClrName}`;
+  static facetPrefix = config.IsFacetAltPattern ? this.facetPrefixAlt : HighlightConstants.uniquePrefix;
+  static facetSuffix = config.IsFacetAltPattern ? this.facetSuffixAlt : HighlightConstants.uniqueSuffix;
+
   static ring = "rin";
   static amulet = "amu";
   static jewel = "jew";
   static facet = "Rainbow Facet";
 
-  static small = "cm1";
-  static large = "cm2";
-  static grand = "cm3";
+  static charmSmall = "cm1";
+  static charmLarge = "cm2";
+  static charmGrand = "cm3";
 
   static anni = "Annihilus";
   static torch = "Hellfire Torch";
@@ -302,6 +314,21 @@ class JewelryConstants {
   static sunderLite  = "Crack of the Heavens";
   static sunderFire  = "Flame Rift";
   static sunderPsn   = "Rotting Fissure";
+
+  static iLvlJewelry = [
+    this.ring,
+    this.amulet,
+    this.jewel,
+    this.charmSmall,
+    this.charmLarge,
+    this.charmGrand,
+  ];
+
+  static charms = [ 
+    this.charmSmall,
+    this.charmLarge,
+    this.charmGrand,
+  ];
 
   static uniqueLodCharms = [
     this.anni,
@@ -317,6 +344,9 @@ class JewelryConstants {
     { name: this.sunderFire,  color: ColorConstants.red }, 
     { name: this.sunderPsn,   color: ColorConstants.green }, 
   ];
+
+  static charmsUniquePrefix = HighlightConstants.uniquePrefix;
+  static charmsUniqueSuffix = HighlightConstants.uniqueSuffix;
 }
 
 class EndgameConstants {
@@ -517,6 +547,9 @@ class CollectionConstants {
   static quest            = "QuestItems";
   static endgame          = "EndgameItems";
   static customFilterList = "CustomFilterList";
+  static weapons          = "Weapons";
+  static armor            = "Armor";
+  static misc             = "Misc";
 }
 
 //=============//
@@ -985,22 +1018,6 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       this.initCollection(id);
     });
   }
-
-  // todo: clean up these constants
-
-  // facets
-  FACET_COLOR_NAME = ColorConstants.gold;
-  FACET_PATTERN = HighlightConstants.pattern5;
-  FACET_PADDING_1 = HighlightConstants.padding1; // padding between individual patterns
-  FACET_PADDING_2 = HighlightConstants.padding3; // padding between name and FACET_ALTERNATE_PREFIX / FACET_ALTERNATE_SUFFIX
-  FACET_ALTERNATE_PREFIX = `${ColorConstants.red}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.yellow}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.blue}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.green}${this.FACET_PATTERN}${this.FACET_COLOR_NAME}${this.FACET_PADDING_2}`;
-  FACET_ALTERNATE_SUFFIX = `${this.FACET_PADDING_2}${ColorConstants.green}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.blue}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.yellow}${this.FACET_PATTERN}${this.FACET_PADDING_1}${ColorConstants.red}${this.FACET_PATTERN}${this.FACET_COLOR_NAME}`;
-  FACET_PREFIX = config.IsFacetAltPattern ? this.FACET_ALTERNATE_PREFIX : HighlightConstants.uniquePrefix;
-  FACET_SUFFIX = config.IsFacetAltPattern ? this.FACET_ALTERNATE_SUFFIX : HighlightConstants.uniqueSuffix;
-
-  // charms
-  CHARMS_UNIQUE_PREFIX = HighlightConstants.uniquePrefix;
-  CHARMS_UNIQUE_SUFFIX = HighlightConstants.uniqueSuffix;
   
   build() {
     this.customizeHealingPotions(config.HealingPotions);
@@ -1455,15 +1472,13 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       case SettingsConstants.disabled:
         return;
       case "facet":
-        this.upsert(jewelsCol, JewelryConstants.facet, `${SettingsConstants.iLvlIndentFixFacets}${this.FACET_PREFIX}Rainbow Facet${this.FACET_SUFFIX}`);
-        return;
       case "facet-rb":
-        this.upsert(jewelsCol, JewelryConstants.facet, `${SettingsConstants.iLvlIndentFixFacets}${this.FACET_ALTERNATE_PREFIX}Rainbow Facet${this.FACET_ALTERNATE_SUFFIX}`);
+        this.upsert(jewelsCol, JewelryConstants.facet, `${SettingsConstants.iLvlIndentFixFacets}${JewelryConstants.facetPrefix}${JewelryConstants.facet}${JewelryConstants.facetSuffix}`);
         return;
       case SettingsConstants.custom: // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.upsert(jewelsCol, JewelryConstants.jewel,  `${ColorConstants.red}Jewel${ColorConstants.blue}`); // includes magic, rare and unique jewels
-        this.upsert(jewelsCol, JewelryConstants.facet, `Rainbow Facet`);
+        this.upsert(jewelsCol, JewelryConstants.jewel, `${ColorConstants.red}Jewel${ColorConstants.blue}`); // includes (unidentified) magic, rare and unique jewels
+        this.upsert(jewelsCol, JewelryConstants.facet, `Rainbow Facet`); // identified facets
         return;
     }
   }
@@ -1487,9 +1502,9 @@ class ItemNamesBuilder extends AbstractItemBuilder {
         this.highlightUnidentifiedCharms(charmsCol);
         return;
       case SettingsConstants.custom: // [CSTM-CHA]
-        this.upsert(charmsCol, JewelryConstants.small,       `Small Charm`         );
-        this.upsert(charmsCol, JewelryConstants.large,       `Large Charm`         );
-        this.upsert(charmsCol, JewelryConstants.grand,       `Grand Charm`         );
+        this.upsert(charmsCol, JewelryConstants.charmSmall,  `Small Charm`         );
+        this.upsert(charmsCol, JewelryConstants.charmLarge,  `Large Charm`         );
+        this.upsert(charmsCol, JewelryConstants.charmGrand,  `Grand Charm`         );
         this.upsert(charmsCol, JewelryConstants.anni,        `Annihilus`           );
         this.upsert(charmsCol, JewelryConstants.torch,       `Hellfire Torch`      );
         this.upsert(charmsCol, JewelryConstants.gheeds,      `Gheed's Fortune`     );
@@ -1505,14 +1520,14 @@ class ItemNamesBuilder extends AbstractItemBuilder {
 
   highlightUnidentifiedCharms(charmsCollection) {
     let suffix = "Charm";
-    this.upsert(charmsCollection, JewelryConstants.small, `Small ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
-    this.upsert(charmsCollection, JewelryConstants.large, `Large ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
-    this.upsert(charmsCollection, JewelryConstants.grand, `Grand ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, JewelryConstants.charmSmall, `Small ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, JewelryConstants.charmLarge, `Large ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, JewelryConstants.charmGrand, `Grand ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
   }
 
   highlightUniqueCharms(charmsCollection){
     [ JewelryConstants.anni, JewelryConstants.torch, JewelryConstants.gheeds ].forEach(charm => {
-      this.upsert(charmsCollection, charm, `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm}${this.CHARMS_UNIQUE_SUFFIX}`);
+      this.upsert(charmsCollection, charm, `${SettingsConstants.iLvlIndentFixCharms}${JewelryConstants.charmsUniquePrefix}${charm}${JewelryConstants.charmsUniqueSuffix}`);
     });
   }
 
@@ -1524,7 +1539,7 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     }
     else {
       JewelryConstants.sunderCharms.forEach(charm => {
-        this.upsert(charmsCollection, charm.name, `${SettingsConstants.iLvlIndentFixCharms}${this.CHARMS_UNIQUE_PREFIX}${charm.name}${this.CHARMS_UNIQUE_SUFFIX}`);
+        this.upsert(charmsCollection, charm.name, `${SettingsConstants.iLvlIndentFixCharms}${JewelryConstants.charmsUniquePrefix}${charm.name}${JewelryConstants.charmsUniqueSuffix}`);
       });
     } 
   }
@@ -1622,7 +1637,7 @@ class ItemNamesBuilder extends AbstractItemBuilder {
       { id: "mss", name: "Mephisto's Soulstone", iLvlIndent: indentNone   },
 
       // Act 4
-      { id: "hfh", name: "Hell Forge Hammer",    iLvlIndent: indentDouble }, // Mephisto's Soulstone
+      { id: "hfh", name: "Hell Forge Hammer",    iLvlIndent: indentDouble },
 
       // Act 5
       // See exceptions [CSTM-QST2]
@@ -1775,31 +1790,31 @@ class ItemNamesBuilder extends AbstractItemBuilder {
 
     // essences
     if (settingEssences !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
       Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.essences.map(ess => ess.id), settingEssences);
     }
 
     // tokens of absolution
     if (settingToken !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
       Helper.addBigTooltipForId(endgameCol, EndgameConstants.token.id, settingToken);
     }
 
     // pandemonium keys
     if (settingKeys !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
       Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.keys.map(key => key.id), settingKeys);
     }
 
     // pandemonium organs
     if (settingOrgans !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
       Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.organs.map(org => org.id), settingOrgans);
     }
 
     // standard of heroes
     if (settingStandard !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.quest);
+      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
       Helper.addBigTooltipForId(endgameCol, EndgameConstants.standard.id, settingStandard);
     }
   }
@@ -1935,46 +1950,105 @@ class ItemModifiersBuilder extends AbstractItemBuilder {
 //   Loot Filter Builders - Non-Item Name Features   //
 //===================================================//
 
-class ItemLevelBuilder {
+class ItemLevelBuilder extends AbstractItemBuilder {
+  constructor() {
+    super(CharConstants.empty);
+
+    [
+      CollectionConstants.weapons,
+      // CollectionConstants.armor,
+      CollectionConstants.misc,
+    ].forEach(id => {
+      this.initCollection(id);
+    });
+  }
+
   build() {
-    if ( !(config.ItemLevel === "show" || config.ItemLevel === "fix") ) {
+    if ( !(config.ItemLevel === "show" || config.ItemLevel === "btt" || config.ItemLevel === "fix"  || config.ItemLevel === "fix-btt") ) {
       return;
     }
 
-    const fileWeapons = D2RMM.readTsv(FileConstants.FILE_WEAPONS_PATH);
-    const fileArmor = D2RMM.readTsv(FileConstants.FILE_ARMOR_PATH);
-    const fileMisc = D2RMM.readTsv(FileConstants.FILE_MISC_PATH);
+    // contrary to all other builders, these 3 collections are used for items that we do _not_ want to show their iLvl
+    let weaponsCol = this.getCollectionById(CollectionConstants.weapons);
+    // let armorCol   = this.getCollectionById(CollectionConstants.armor);
+    let miscCol    = this.getCollectionById(CollectionConstants.misc);
+    this.addExclusions(weaponsCol, miscCol);
 
+    this.enableForWeapons(weaponsCol);
+    this.enableForArmor();
+    this.enableForMiscItems(miscCol);
+  }
+
+  addExclusions(weaponsCol, miscCol) {
+    this.upsert(weaponsCol, "tpot", CharConstants.empty); // always exclude throwing potions
+
+    if (!config.shouldExcludeIlvlForBigTooltips) {
+      return;
+    }
+
+    if (config.BigTooltipFacets) {
+      this.upsert(miscCol, JewelryConstants.jewel, CharConstants.empty);
+    }
+
+    if (config.BigTooltipUniqueCharms) {
+      JewelryConstants.charms.forEach(charm => {
+        this.upsert(miscCol, charm, CharConstants.empty);
+      });
+    }
+    
+    if (config.BigTooltipQuestItems) {
+      // this.upsert(miscCol, "vip", CharConstants.empty); // amulet of the viper // todo: check if this has ilvl and correct here + in quest item naming
+      [
+        "leg", // Wirt's Leg
+        "hdm", // Horadric Malus
+        "msf", // Staff of Kings
+        "hst", // Horadric Staff
+        "g33", // The Gidbinn
+        "qf1", // Khalim's Flail
+        "qf2", // Khalim's Will
+        "hfh", // Hell Forge Hammer
+      ].forEach(questWeapon => {
+        this.upsert(weaponsCol, questWeapon, CharConstants.empty);
+      });
+    }
+
+    return;
+  }
+
+  enableForWeapons(exclusions) {
+    this.enableForWeaponsArmor(FileConstants.FILE_WEAPONS_PATH, exclusions);
+  }
+
+  enableForArmor() {
+    this.enableForWeaponsArmor(FileConstants.FILE_ARMOR_PATH, []);
+  }
+
+  enableForWeaponsArmor(path, exclusions) {
+    const fileWeapons = D2RMM.readTsv(path);
+    
     fileWeapons.rows.forEach((row) => {
-      if (row.type === "tpot") { // exclude throwing potions
+      if (exclusions.includes(row.type)) {
         return;
       }
       row.ShowLevel = 1;
     });
+
+    D2RMM.writeTsv(path, fileWeapons);
+  }
+
+  enableForMiscItems(exclusions) {
+    const fileMisc = D2RMM.readTsv(FileConstants.FILE_MISC_PATH);
     
-    fileArmor.rows.forEach((row) => {
-      row.ShowLevel = 1;
+    let misc = JewelryConstants.iLvlJewelry.filter(item => { 
+      !exclusions.includes(item);
     });
-    
+
     fileMisc.rows.forEach((row) => {
-      // amulets, rings, small/large/grand charms, jewels
-      let jewelry = [
-        JewelryConstants.ring,
-        JewelryConstants.amulet,
-        JewelryConstants.small,
-        JewelryConstants.large,
-        JewelryConstants.grand,
-        JewelryConstants.jewel,
-      ];
-      // todo: if (jewelry.includes(row.code)) { 
-      if (jewelry.indexOf(row.code) !== -1) { 
+      if (misc.includes(row.code)) { 
         row.ShowLevel = 1;
-        return;
       }
     });
 
-    D2RMM.writeTsv(FileConstants.FILE_WEAPONS_PATH, fileWeapons);
-    D2RMM.writeTsv(FileConstants.FILE_ARMOR_PATH, fileArmor);
     D2RMM.writeTsv(FileConstants.FILE_MISC_PATH, fileMisc);
   }
 }

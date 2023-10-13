@@ -327,12 +327,21 @@
       "type": "select",
       "name": "Show Item Level",
       "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix.",
-      "defaultValue": "fix",
+      "defaultValue": "fix-btt",
       "options": [
-        { "value": "none", "label": "Disable" },
-        { "value": "fix",  "label": "Enable, fix indentation" },
-        { "value": "show", "label": "Enable" }
+        { "value": "none",     "label": "Disable" },
+        { "value": "show",     "label": "Enable" },
+        { "value": "btt",      "label": "Enable, exclude Big Tooltip items" },
+        { "value": "fix",      "label": "Enable, fix indentation" },
+        { "value": "fix-btt",  "label": "Enable, fix indentation, exclude Big Tooltip items" }
       ]
+    },
+    {
+      "id": "ShouldDisableIlvlForBigTooltips",
+      "type": "checkbox",
+      "name": "Show Item Level: Disable for Items with Big Tooltips",
+      "description": "Disable iLvl for Jewels, Charms and/or Quest Items when Big Tooltips for Facets, Unique Charms and/or Quest Items are enabled.",
+      "defaultValue": true
     },
     {
       "id": "ItemQuality",
@@ -402,7 +411,7 @@
       "id": "BigTooltipRunesLow",
       "type": "select",
       "name": "Runes: Low",
-      "description": " (El [1] - Dol [14], except Ral [8]).",
+      "description": "Enable Big Tooltips for Low Runes (El [1] - Dol [14], except Ral [8]).",
       "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -418,7 +427,7 @@
       "id": "BigTooltipRunesLowMid",
       "type": "select",
       "name": "Runes: Low-Mid",
-      "description": " (Hel [15] - Fal [19] and Ral [8]).",
+      "description": "Enable Big Tooltips for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
       "defaultValue": "2",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -434,7 +443,7 @@
       "id": "BigTooltipRunesMid",
       "type": "select",
       "name": "Runes: Mid",
-      "description": " (Lem [20] - Gul [25]).",
+      "description": "Enable Big Tooltips for Mid Runes (Lem [20] - Gul [25]).",
       "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -450,7 +459,7 @@
       "id": "BigTooltipRunesHigh",
       "type": "select",
       "name": "Runes: High",
-      "description": " (Vex [26] - Zod [33]).",
+      "description": "Enable Big Tooltips for High Runes (Vex [26] - Zod [33]).",
       "defaultValue": "4pu",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -466,7 +475,7 @@
       "id": "BigTooltipGems",
       "type": "select",
       "name": "Gems",
-      "description": "",
+      "description": "Enable Big Tooltips for Gems.",
       "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -482,7 +491,7 @@
       "id": "BigTooltipFacets",
       "type": "select",
       "name": "Facets",
-      "description": "",
+      "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels.",
       "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -498,7 +507,7 @@
       "id": "BigTooltipUniqueCharms",
       "type": "select",
       "name": "Unique Charms",
-      "description": "Anni, Torch, Gheed's and Sunder Charms.",
+      "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms.",
       "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -514,7 +523,7 @@
       "id": "BigTooltipQuestItems",
       "type": "select",
       "name": "Quest Items",
-      "description": " Quest Items on the ground.",
+      "description": "Enable Big Tooltips for Quest Items.",
       "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
