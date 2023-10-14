@@ -160,6 +160,7 @@ class HighlightConstants {
 
   static patternNone = CharConstants.empty;
   static pattern2    = this.character.repeat(2);
+  static pattern4    = this.character.repeat(4);
   static pattern5    = this.character.repeat(5);
   static pattern10   = this.character.repeat(10);
   static pattern2x10 = `${this.pattern10}${this.padding2}${this.pattern10}`;
@@ -176,7 +177,7 @@ class HighlightConstants {
   static questSuffix = this.uniqueSuffix;
 
   static bttPadding = this.padding5;
-  static bttPickUpMsg = `${CharConstants.newLine}${ColorConstants.purple}Pick Up`;
+  static bttPickUpMsg = `${ColorConstants.purple}Pick Up`;
 }
 
 class RuneConstants {
@@ -287,7 +288,7 @@ class JewelryConstants {
   static padding = HighlightConstants.padding1;
 
   static facetClrName = ColorConstants.gold;
-  static facetPattern = HighlightConstants.pattern5;
+  static facetPattern = HighlightConstants.pattern4;
   static facetPadding1 = HighlightConstants.padding1; // padding between individual patterns
   static facetPadding2 = HighlightConstants.padding3; // padding between name and facetPrefixAlt / facetSuffixAlt
   static facetPrefixAlt = `${ColorConstants.red}${this.facetPattern}${this.facetPadding1}${ColorConstants.yellow}${this.facetPattern}${this.facetPadding1}${ColorConstants.blue}${this.facetPattern}${this.facetPadding1}${ColorConstants.green}${this.facetPattern}${this.facetClrName}${this.facetPadding2}`;
@@ -347,6 +348,8 @@ class JewelryConstants {
 
   static charmsUniquePrefix = HighlightConstants.uniquePrefix;
   static charmsUniqueSuffix = HighlightConstants.uniqueSuffix;
+
+  static indentPickUpMsg = (config.Gems === "all" || config.Gems === "flawless" || config.Gems === "perfect") ? CharConstants.space.repeat(2) : CharConstants.empty; // indent for the pick up message if gem highlighting is enabled.
 }
 
 class EndgameConstants {
@@ -557,8 +560,8 @@ class CollectionConstants {
 //=============//
 
 class Helper {
-  static addBigTooltips(collection, setting) {
-    collection.forEach(entry => entry.value = this.generateBigTooltip(setting, entry.value));
+  static addBigTooltips(collection, setting, indentPickUpMsg = CharConstants.empty) {
+    collection.forEach(entry => entry.value = this.generateBigTooltip(setting, entry.value, indentPickUpMsg));
   }
 
   static addBigTooltipsForIds(collection, ids, setting) {
@@ -606,7 +609,7 @@ class Helper {
    * @param {*} name The item name (after other filtering and highlighting has been applied). Nothing in this line will be changed.
    * @returns A multi-line item name, which will show as a Big Tooltip when the item is on the ground.
    */
-  static generateBigTooltip(setting, name) {
+  static generateBigTooltip(setting, name, indentPickUpMsg = CharConstants.empty) {
     if (setting === SettingsConstants.disabled || name === SettingsConstants.hidden) {
       return name;
     }
@@ -622,13 +625,13 @@ class Helper {
       return name + CharConstants.newLine;
     }
     if (setting === "2pu") {
-      return name + HighlightConstants.bttPickUpMsg;
+      return name + CharConstants.newLine + indentPickUpMsg + HighlightConstants.bttPickUpMsg;
     }
     if (setting === "3") {
       return CharConstants.newLine + name + CharConstants.newLine;
     }
     if (setting === "4pu") {
-      return CharConstants.newLine + name + HighlightConstants.bttPickUpMsg + CharConstants.newLine;
+      return CharConstants.newLine + name + CharConstants.newLine + indentPickUpMsg + HighlightConstants.bttPickUpMsg + CharConstants.newLine;
     }
     if (setting === "5") {
       return CharConstants.newLine + CharConstants.newLine + name + CharConstants.newLine + CharConstants.newLine;
@@ -737,12 +740,12 @@ class ItemRunesBuilder extends AbstractItemBuilder {
       case "hls-raf":                  // Add highlights + remove affix
       case "nrs":                      // Add rune numbers
       case "hls":                      // Add highlights
-        this.generateRuneNames(setting, hasAffix, hasNumber, hasSettingHighlighting);
+        this.generateRuneNames(hasAffix, hasNumber, hasSettingHighlighting);
         return;
       case SettingsConstants.custom: // [CSTM-RUN]
         // ADD YOUR CUSTOM ITEM NAMES HERE. NOTE: THIS BYPASSES BIG TOOLTIPS SETTINGS.
 
-        // todo: correct
+        // todo: is broken, correct
 
         let clrMsg       = ColorConstants.purple;
         let clrRune      = ColorConstants.orange;
@@ -793,20 +796,19 @@ class ItemRunesBuilder extends AbstractItemBuilder {
     }
   }
 
-  generateRuneNames(setting, hasAffix, hasNumber, hasSettingHighlighting) {
+  generateRuneNames(hasAffix, hasNumber, hasSettingHighlighting) {
     RuneConstants.tiers.forEach((tier) => {
-      let tierCollection = this.getCollectionById(tier.level); // get this.collections[tier.level]
+      let tierCollection = this.getCollectionById(tier.level);
 
       tier.runes.forEach((rune) => {
         let itemCode = rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`;
-        let runeName = !tier.isVisible ? SettingsConstants.hidden : this.generateRuneName(rune.name, rune.number, tier.level, tier.pattern, tier.padding, setting, hasAffix, hasNumber, hasSettingHighlighting);
+        let runeName = !tier.isVisible ? SettingsConstants.hidden : this.generateRuneName(rune.name, rune.number, tier.level, tier.pattern, tier.padding, hasAffix, hasNumber, hasSettingHighlighting);
         this.upsert(tierCollection, itemCode, runeName); // chuck generated code/name combination into this.collections => [current tier] => [current rune]
-        // tierCollection[itemCode] = runeName; // chuck generated code/name combination into this.collections => [current tier] => [current rune]
       });
     });
   }
 
-  generateRuneName(name, number, tier, highlightPattern, padding, setting, hasAffix, hasNumber, hasSettingHighlighting) {
+  generateRuneName(name, number, tier, highlightPattern, padding, hasAffix, hasNumber, hasSettingHighlighting) {
     const hasHighlighting       = hasSettingHighlighting && RuneConstants.tiersHighlighted.includes(tier);
     const hasHighlightedNumber  = hasSettingHighlighting && RuneConstants.tiersHighlightedNumbers.includes(tier);
     const hasHighlightedName    = hasSettingHighlighting && RuneConstants.tiersHighlightedNames.includes(tier);
@@ -1653,7 +1655,8 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     ];
 
     questItems.forEach(item => {
-      this.upsert(questCollection, item.id, item.iLvlIndent + `${prefix}${item.name}${suffix}`);
+      let indent = SettingsConstants.shouldExcludeIlvlForBigTooltips ? CharConstants.empty : item.iLvlIndent;
+      this.upsert(questCollection, item.id, `${indent}${prefix}${item.name}${suffix}`);
     });
   }
 
@@ -1764,7 +1767,7 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     // gems
     if (settingGems !== SettingsConstants.disabled) {
       let gemsCol = this.getCollectionById(CollectionConstants.gems);
-      Helper.addBigTooltips(gemsCol, settingGems);
+      Helper.addBigTooltips(gemsCol, settingGems, JewelryConstants.indentPickUpMsg);
     }
 
     // facets
@@ -1974,29 +1977,29 @@ class ItemLevelBuilder extends AbstractItemBuilder {
     let miscCol    = this.getCollectionById(CollectionConstants.misc);
     this.addExclusions(weaponsCol, miscCol);
 
-    this.enableForWeapons(weaponsCol);
+    this.enableForWeapons(weaponsCol.map(item => item.id));
     this.enableForArmor();
-    this.enableForMiscItems(miscCol);
+    this.enableForMiscItems(miscCol.map(item => item.id));
   }
 
   addExclusions(weaponsCol, miscCol) {
     this.upsert(weaponsCol, "tpot", CharConstants.empty); // always exclude throwing potions
 
-    if (!config.shouldExcludeIlvlForBigTooltips) {
+    if (!SettingsConstants.shouldExcludeIlvlForBigTooltips) {
       return;
     }
 
-    if (config.BigTooltipFacets) {
+    if (config.BigTooltipFacets !== SettingsConstants.disabled) {
       this.upsert(miscCol, JewelryConstants.jewel, CharConstants.empty);
     }
 
-    if (config.BigTooltipUniqueCharms) {
+    if (config.BigTooltipUniqueCharms !== SettingsConstants.disabled) {
       JewelryConstants.charms.forEach(charm => {
         this.upsert(miscCol, charm, CharConstants.empty);
       });
     }
     
-    if (config.BigTooltipQuestItems) {
+    if (config.BigTooltipQuestItems !== SettingsConstants.disabled) {
       // this.upsert(miscCol, "vip", CharConstants.empty); // amulet of the viper // todo: check if this has ilvl and correct here + in quest item naming
       [
         "leg", // Wirt's Leg
@@ -2010,9 +2013,9 @@ class ItemLevelBuilder extends AbstractItemBuilder {
       ].forEach(questWeapon => {
         this.upsert(weaponsCol, questWeapon, CharConstants.empty);
       });
-    }
 
-    return;
+      this.upsert(weaponsCol, "leg", CharConstants.empty);
+    }
   }
 
   enableForWeapons(exclusions) {
@@ -2026,8 +2029,9 @@ class ItemLevelBuilder extends AbstractItemBuilder {
   enableForWeaponsArmor(path, exclusions) {
     const fileWeapons = D2RMM.readTsv(path);
     
+    // in these files, all entries need ShowLevel to be set to 1, except those in the exclusions list.
     fileWeapons.rows.forEach((row) => {
-      if (exclusions.includes(row.type)) {
+      if (exclusions.includes(row.code) || exclusions.includes(row.type)) {
         return;
       }
       row.ShowLevel = 1;
@@ -2039,10 +2043,9 @@ class ItemLevelBuilder extends AbstractItemBuilder {
   enableForMiscItems(exclusions) {
     const fileMisc = D2RMM.readTsv(FileConstants.FILE_MISC_PATH);
     
-    let misc = JewelryConstants.iLvlJewelry.filter(item => { 
-      !exclusions.includes(item);
-    });
-
+    // in this file, we only want the entries matching JewelryConstants.iLvlJewelry to have their ShowLevel be set 1.
+    // matching JewelryConstants.iLvlJewelry against the exclusions list makes the target list even smaller.
+    let misc = JewelryConstants.iLvlJewelry.filter(item => !exclusions.includes(item));
     fileMisc.rows.forEach((row) => {
       if (misc.includes(row.code)) { 
         row.ShowLevel = 1;

@@ -337,13 +337,6 @@
       ]
     },
     {
-      "id": "ShouldDisableIlvlForBigTooltips",
-      "type": "checkbox",
-      "name": "Show Item Level: Disable for Items with Big Tooltips",
-      "description": "Disable iLvl for Jewels, Charms and/or Quest Items when Big Tooltips for Facets, Unique Charms and/or Quest Items are enabled.",
-      "defaultValue": true
-    },
-    {
       "id": "ItemQuality",
       "type": "select",
       "name": "Show Item Quality ",
@@ -405,7 +398,7 @@
       "type": "checkbox",
       "name": "Enable",
       "description": "Enable Big Tooltips on the item types toggled below. Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space]. Note: ",
-      "defaultValue": false
+      "defaultValue": true
     },
     {
       "id": "BigTooltipRunesLow",
@@ -460,7 +453,7 @@
       "type": "select",
       "name": "Runes: High",
       "description": "Enable Big Tooltips for High Runes (Vex [26] - Zod [33]).",
-      "defaultValue": "4pu",
+      "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -491,8 +484,8 @@
       "id": "BigTooltipFacets",
       "type": "select",
       "name": "Facets",
-      "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels.",
-      "defaultValue": "3",
+      "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels. Recommended: Disable or Two Lines + Pick Up.",
+      "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -507,8 +500,8 @@
       "id": "BigTooltipUniqueCharms",
       "type": "select",
       "name": "Unique Charms",
-      "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms.",
-      "defaultValue": "3",
+      "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
+      "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -539,7 +532,7 @@
       "id": "BigTooltipEssences",
       "type": "select",
       "name": "Essences",
-      "description": " on Essences on the ground.",
+      "description": "Enable Big Tooltips for Essences.",
       "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -556,7 +549,7 @@
       "type": "select",
       "name": "Token of Absolution",
       "description": " on Tokens of Absolution on the ground.",
-      "defaultValue": "none",
+      "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -571,7 +564,7 @@
       "id": "BigTooltipKeys",
       "type": "select",
       "name": "Pandemonium Keys",
-      "description": " Keys of Terror/Hate/Destruction on the ground.",
+      "description": "Enable Big Tooltips for Keys of Terror/Hate/Destruction.",
       "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -587,7 +580,7 @@
       "id": "BigTooltipOrgans",
       "type": "select",
       "name": "Pandemonium Organs",
-      "description": " Über Organs on the ground. ",
+      "description": "Enable Big Tooltips for Über Organs. ",
       "defaultValue": "3",
       "options": [
         { "value": "none",   "label": "Disable" },
@@ -603,7 +596,7 @@
       "id": "BigTooltipStandardOfHeroes",
       "type": "select",
       "name": "Standard of Heroes",
-      "description": " when you kill the Übers.",
+      "description": "Enable Big Tooltips for the Standard of Heroes.",
       "defaultValue": "none",
       "options": [
         { "value": "none",   "label": "Disable" },
