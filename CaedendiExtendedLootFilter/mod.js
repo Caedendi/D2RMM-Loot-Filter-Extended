@@ -131,7 +131,7 @@ class SettingsConstants {
   static hidden             = CharConstants.empty + CharConstants.space.repeat(config.HiddenItemTooltipSize);
   
   // ilvl
-  static shouldFixIlvlIndent      = config.ItemLevel === "fix";
+  static shouldFixIlvlIndent      = config.ItemLevel === "fix" || config.ItemLevel === "fix-btt";
   static iLvlIndentFixSingle      = CharConstants.space.repeat(4); // for single digit ilvl items
   static iLvlIndentFixDouble      = CharConstants.space.repeat(6); // for double digit ilvl items
   static iLvlIndentFixQuality     = CharConstants.space.repeat(6); // for double digit ilvl items when item quality is enabled // todo: check if needed
@@ -139,7 +139,7 @@ class SettingsConstants {
   static iLvlIndentFixCharms      = this.shouldFixIlvlIndent ? this.iLvlIndentFixDouble : CharConstants.empty;
   static iLvlIndentFixQuestSingle = this.iLvlIndentFixSingle; // quest items with a single digit ilvl
   static iLvlIndentFixQuestDouble = this.iLvlIndentFixDouble; // quest items with a double digit ilvl
-  static shouldExcludeIlvlForBigTooltips = config.ItemLevel === "btt" || config.ItemLevel === "fix-btt";
+  static shouldExcludeIlvlForBigTooltips = config.IsBigTooltipsEnabled && (config.ItemLevel === "btt" || config.ItemLevel === "fix-btt");
   
   // common config settings
   static disabled  = "none";
@@ -160,6 +160,7 @@ class HighlightConstants {
 
   static patternNone = CharConstants.empty;
   static pattern2    = this.character.repeat(2);
+  static pattern3    = this.character.repeat(3);
   static pattern4    = this.character.repeat(4);
   static pattern5    = this.character.repeat(5);
   static pattern10   = this.character.repeat(10);
@@ -287,14 +288,14 @@ class JewelryConstants {
   static highlight = CharConstants.o;
   static padding = HighlightConstants.padding1;
 
-  static facetClrName = ColorConstants.gold;
-  static facetPattern = HighlightConstants.pattern4;
-  static facetPadding1 = HighlightConstants.padding1; // padding between individual patterns
-  static facetPadding2 = HighlightConstants.padding3; // padding between name and facetPrefixAlt / facetSuffixAlt
-  static facetPrefixAlt = `${ColorConstants.red}${this.facetPattern}${this.facetPadding1}${ColorConstants.yellow}${this.facetPattern}${this.facetPadding1}${ColorConstants.blue}${this.facetPattern}${this.facetPadding1}${ColorConstants.green}${this.facetPattern}${this.facetClrName}${this.facetPadding2}`;
-  static facetSuffixAlt = `${this.facetPadding2}${ColorConstants.green}${this.facetPattern}${this.facetPadding1}${ColorConstants.blue}${this.facetPattern}${this.facetPadding1}${ColorConstants.yellow}${this.facetPattern}${this.facetPadding1}${ColorConstants.red}${this.facetPattern}${this.facetClrName}`;
-  static facetPrefix = config.IsFacetAltPattern ? this.facetPrefixAlt : HighlightConstants.uniquePrefix;
-  static facetSuffix = config.IsFacetAltPattern ? this.facetSuffixAlt : HighlightConstants.uniqueSuffix;
+  static facetAltClrName = ColorConstants.gold;
+  static facetAltPattern = (config.IsBigTooltipsEnabled && (config.BigTooltipFacets === "2pu" || config.BigTooltipFacets === "4pu")) ? HighlightConstants.pattern3 : HighlightConstants.pattern5;
+  static facetAltPadding1 = HighlightConstants.padding1; // padding between individual patterns
+  static facetAltPadding2 = HighlightConstants.padding3; // padding between name and facetAltPrefix / facetAltSuffix
+  static facetAltPrefix = `${ColorConstants.red}${this.facetAltPattern}${this.facetAltPadding1}${ColorConstants.yellow}${this.facetAltPattern}${this.facetAltPadding1}${ColorConstants.blue}${this.facetAltPattern}${this.facetAltPadding1}${ColorConstants.green}${this.facetAltPattern}${this.facetAltClrName}${this.facetAltPadding2}`;
+  static facetAltSuffix = `${this.facetAltPadding2}${ColorConstants.green}${this.facetAltPattern}${this.facetAltPadding1}${ColorConstants.blue}${this.facetAltPattern}${this.facetAltPadding1}${ColorConstants.yellow}${this.facetAltPattern}${this.facetAltPadding1}${ColorConstants.red}${this.facetAltPattern}${this.facetAltClrName}`;
+  static facetPrefix = config.IsFacetAltPattern ? this.facetAltPrefix : HighlightConstants.uniquePrefix;
+  static facetSuffix = config.IsFacetAltPattern ? this.facetAltSuffix : HighlightConstants.uniqueSuffix;
 
   static ring = "rin";
   static amulet = "amu";
@@ -1985,7 +1986,7 @@ class ItemLevelBuilder extends AbstractItemBuilder {
   addExclusions(weaponsCol, miscCol) {
     this.upsert(weaponsCol, "tpot", CharConstants.empty); // always exclude throwing potions
 
-    if (!SettingsConstants.shouldExcludeIlvlForBigTooltips) {
+    if (!config.IsBigTooltipsEnabled || !SettingsConstants.shouldExcludeIlvlForBigTooltips) {
       return;
     }
 
@@ -2013,8 +2014,6 @@ class ItemLevelBuilder extends AbstractItemBuilder {
       ].forEach(questWeapon => {
         this.upsert(weaponsCol, questWeapon, CharConstants.empty);
       });
-
-      this.upsert(weaponsCol, "leg", CharConstants.empty);
     }
   }
 
