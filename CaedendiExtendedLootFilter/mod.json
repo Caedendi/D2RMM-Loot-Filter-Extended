@@ -1,9 +1,9 @@
 {
-  "name": "Caedendi's Extended Loot Filter 3 (pre-release)",
+  "name": "Caedendi's Extended Loot Filter 3",
   "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
   "author": "Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
-  "version": "3.0.0 pre-release",
+  "version": "3.0.0",
   "config": [
     {
       "id": "JunkSection",
