@@ -1302,22 +1302,34 @@ class ItemNamesBuilder extends AbstractItemBuilder {
     const clrName = ColorConstants.white;
     const pattern = CharConstants.o;
     const padding = HighlightConstants.padding1;
+    const aqv = "aqv";
+    const cqv = "cqv"
+    const arrowsName = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Arrows"); 
+    const boltsName = Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Bolts");
 
     switch (setting) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
-        this.upsert(junkCol, "aqv", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Arrows"));
-        this.upsert(junkCol, "cqv", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "Bolts"));
+        this.upsert(junkCol, aqv, arrowsName);
+        this.upsert(junkCol, cqv, boltsName);
+        return;
+      case "arw":
+        this.upsert(junkCol, aqv, arrowsName);
+        this.upsert(junkCol, cqv, SettingsConstants.hidden);
+        return;
+      case "blt":
+        this.upsert(junkCol, aqv, SettingsConstants.hidden);
+        this.upsert(junkCol, cqv, boltsName);
         return;
       case "hide":
-        this.upsert(junkCol, "aqv", SettingsConstants.hidden); // Arrow Quiver
-        this.upsert(junkCol, "cqv", SettingsConstants.hidden); // Crossbow Bolt Quiver
+        this.upsert(junkCol, aqv, SettingsConstants.hidden); // Arrow Quiver
+        this.upsert(junkCol, cqv, SettingsConstants.hidden); // Crossbow Bolt Quiver
         return;
       case SettingsConstants.custom: // [CSTM-ARB]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.upsert(junkCol, "aqv", "Arrows");
-        this.upsert(junkCol, "cqv", "Bolts");
+        this.upsert(junkCol, aqv, "Arrows");
+        this.upsert(junkCol, cqv, "Bolts");
         return;
     }
   }

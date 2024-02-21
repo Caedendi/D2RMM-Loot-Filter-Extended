@@ -105,6 +105,8 @@
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "all",    "label": "Enable" },
+        { "value": "arw",    "label": "Enable Arrows, hide Bolts" },
+        { "value": "blt",    "label": "Enable Bolts, hide Arrows" },
         { "value": "hide",   "label": "Hide" },
         { "value": "custom", "label": "Custom" }
       ]
