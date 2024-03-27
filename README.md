@@ -422,21 +422,6 @@ Visit [this GitHub page](https://github.com/Caedendi/D2RMM-Mod-Lists#todo) for t
 A list of the other mods I created can be found [there](https://github.com/Caedendi/D2RMM-Mod-Lists#todo) too, as well as directly on [my Nexus Mods page](https://www.nexusmods.com/diablo2resurrected/users/179695179?tab=user+files).
 
 
-## Recommended Mods
-
-In addition to this, I recommend you also use the following D2RMM mods:
-
-| Mod                                                                                 |                                    Creator                                    | Notes                                                                                              |
-|-------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------|
-|                           |                                           | So you don't accidentally get yourself banned.                                                     |
-| [Skip Videos](https://www.nexusmods.com/diablo2resurrected/mods/179)                | [Caedendi](https://www.nexusmods.com/diablo2resurrected/users/179695179) (me) | Disable launch intro videos and cinematic cutscenes when transitioning between acts.               |
-| [Improved Potion Visibility](https://www.nexusmods.com/diablo2resurrected/mods/384) |   [MetalTxus](https://www.nexusmods.com/diablo2resurrected/users/18894694)    | Changes healing/mana potion sprites so it's easier to distinguish different potion levels.         |
-| [UI Fixes](https://www.nexusmods.com/diablo2resurrected/mods/387)                   |   [MetalTxus](https://www.nexusmods.com/diablo2resurrected/users/18894694)    | Fixes the placement of a few item grids.                                                           |
-| [Towns QoL Changes](https://www.nexusmods.com/diablo2resurrected/mods/310)          |  [night0wl117](https://www.nexusmods.com/diablo2resurrected/users/33697975)   | Move town starting points, TP locations and Cain's position in Act 5.                              |
-| [Town Cast](https://www.nexusmods.com/diablo2resurrected/mods/183)                  |                      [olegbl](https://github.com/olegbl)                      | Teleport and buff in town. _(BREAKING: allows teleporting past Jerhyn during the Act 2 questline)_ |
-| [Settings Font Fix](https://www.nexusmods.com/diablo2resurrected/mods/200)          |                      [olegbl](https://github.com/olegbl)                      | In case any mod touches __profilehd_ and screws up the font size in the settings menu.             |
-
-
 ## Credits
 
 This loot filter mod is based on code from existing mods and inspired by existing styles. I have added code optimizations, a shit-ton of toggles, expanded some features and gave it my own personal flair and preference. <br>
