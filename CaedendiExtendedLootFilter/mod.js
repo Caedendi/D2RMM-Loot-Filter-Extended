@@ -92,20 +92,22 @@ class BaseColorConstants {
 }
 
 class FontColorConstants {
-  // _profilehd.json colors
-  static beige         = "$FontColorBeige";
-  static black         = "$FontColorBlack";
-  static currencyGold  = "$FontColorCurrencyGold";
-  static darkGreen     = "$FontColorDarkGreen";
-  static green         = "$FontColorGreen";
-  static lightBlue     = "$FontColorLightBlue";
-  static lightGray     = "$FontColorLightGray";
-  static lightPurple   = "$FontColorLightPurple";
-  static lightRed      = "$FontColorLightRed";
-  static lightTeal     = "$FontColorLightTeal";
-  static red           = "$FontColorRed";
-  static veryLightGray = "$FontColorVeryLightGray";
-  static white         = "$FontColorWhite";
+  // font color variables set in _profilehd.json, _profilelv.json
+  static prefix        = "$FontColor";
+
+  static beige         = `${this.prefix}Beige`;
+  static black         = `${this.prefix}Black`;
+  static currencyGold  = `${this.prefix}CurrencyGold`;
+  static darkGreen     = `${this.prefix}DarkGreen`;
+  static green         = `${this.prefix}Green`;
+  static lightBlue     = `${this.prefix}LightBlue`;
+  static lightGray     = `${this.prefix}LightGray`;
+  static lightPurple   = `${this.prefix}LightPurple`;
+  static lightRed      = `${this.prefix}LightRed`;
+  static lightTeal     = `${this.prefix}LightTeal`;
+  static red           = `${this.prefix}Red`;
+  static veryLightGray = `${this.prefix}VeryLightGray`;
+  static white         = `${this.prefix}White`;
 }
 
 class ColorConstants {
@@ -681,14 +683,12 @@ class AbstractItemBuilder {
   }
   
   /**
-   * Update all entries in this.target matching the IDs in customNames to new values.
-   * @param {*} customNames An array of { id: x, value: y } objects
+   * Update all entries in this.target matching the IDs in this.collections to their new values.
    */
   applyCustomNames() {
     let customNames = this.mergeCollections();
     if (customNames.length == 0) {
       throw new Error(`Could not find any subcollections.`);
-      return;
     }
     
     let file = D2RMM.readJson(this.target); // copy existing file
@@ -2054,7 +2054,7 @@ class ItemLevelBuilder extends AbstractItemBuilder {
   enableForMiscItems(exclusions) {
     const fileMisc = D2RMM.readTsv(FileConstants.FILE_MISC_PATH);
     
-    // in this file, we only want the entries matching JewelryConstants.iLvlJewelry to have their ShowLevel be set 1.
+    // in this file, we only want the entries matching JewelryConstants.iLvlJewelry to have their ShowLevel be set to 1.
     // matching JewelryConstants.iLvlJewelry against the exclusions list makes the target list even smaller.
     let misc = JewelryConstants.iLvlJewelry.filter(item => !exclusions.includes(item));
     fileMisc.rows.forEach((row) => {
@@ -2088,9 +2088,9 @@ class ItemQualityBuilder {
   }
 
   addEquipmentQuality(equipment, itemNames, setting) {
-    let txtNormal      = config.ItemQuality !== SettingsConstants.custom ? 'n' : SettingsConstants.custom; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-    let txtExceptional = config.ItemQuality !== SettingsConstants.custom ? 'x' : SettingsConstants.custom; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-    let txtElite       = config.ItemQuality !== SettingsConstants.custom ? 'e' : SettingsConstants.custom; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    let txtNormal      = config.ItemQuality !== SettingsConstants.custom ? 'n' : "custom n"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    let txtExceptional = config.ItemQuality !== SettingsConstants.custom ? 'x' : "custom x"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
+    let txtElite       = config.ItemQuality !== SettingsConstants.custom ? 'e' : "custom e"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
     
     equipment.forEach(item => {
       var quality = (item.code === item.ultracode ? txtElite : (item.code === item.ubercode ? txtExceptional : txtNormal));
