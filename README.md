@@ -8,6 +8,7 @@ Hide junk, clean up tooltips to remove clutter and emphasize important items in 
 Recommended for those who prefer toggling presets to reach their desired functionality. <br>
 If you'd rather have a compact list to act as a template for your own naming schemes, see the Simple version at the bottom of the page.
 
+
 ## Table of Contents
 
 - [Screenshots](#screenshots)
@@ -67,7 +68,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 ### 3.0.0 (work in progress)
 
 - Introducing Drop Sounds! Configure new sound effects for when select item types drop so you'll never miss a drop again!
-- For those running custom filter options: all colors have been renamed to more standardized names (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
+- For those running custom filter options: all colors have been renamed to the standardized name they most closely resemble (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
 - Added multi-line tooltips! Enable for select items to increase the height of the tooltips of items on the ground and optionally add a purple "Pick Up" message above the name. If you prefer to have a big transparent box instead of highlight characters, enable highlighting and set the highlight character to _space_
 - Added personal filter list for all items! Supports _all_ (base) items, sets and uniques in item-names.json. Search for _[CSTM-CFL]_ in the code and add whatever you'd like
 - Added option to customize the tooltip color for Ethereal items when on the ground (recommended: light teal)
@@ -357,6 +358,12 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for an overview of all the colors in the game that I know of and their RGB decimal codes.
 
 
+## Known Issues
+
+### Enabling Show Item Level online messes up socketed items
+Do not enable Show Item Level if you are playing online. It does not work (all items display as ilvl 1) and the amount of sockets in items will be incorrectly displayed. This is not an issue for offline single player.
+
+
 ## Roadmap
 
 - [ ] Multi-line tooltips:
@@ -370,6 +377,9 @@ See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Do
     - [ ] torch: fireball/hell forge smash
     - [ ] Gheed's: gold drop
   - [ ] Sunder Charms: theme sounds (fireball, lightning, etc)
+- [ ] ProfileHD mods
+  - [ ] Also apply to ProfileLV and controller ProfileHD
+  - [ ] Remove Ethereal Color as it's already provided by olegbl's Custom Item Colors mod
 
 
 ### Fix known bugs
@@ -407,26 +417,24 @@ See [here](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Do
 
 ## Recommended Mods
 
+Visit [this GitHub page](https://github.com/Caedendi/D2RMM-Mod-Lists#todo) for the list of D2RMM mods that I use, you might like some of 'em! 
+
+A list of the other mods I created can be found [there](https://github.com/Caedendi/D2RMM-Mod-Lists#todo) too, as well as directly on [my Nexus Mods page](https://www.nexusmods.com/diablo2resurrected/users/179695179?tab=user+files).
+
+
+## Recommended Mods
+
 In addition to this, I recommend you also use the following D2RMM mods:
 
 | Mod                                                                                 |                                    Creator                                    | Notes                                                                                              |
 |-------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------:|----------------------------------------------------------------------------------------------------|
-| [Disable Battle.net](https://github.com/olegbl/d2rmm.mods)                          |                      [olegbl](https://github.com/olegbl)                      | So you don't accidentally get yourself banned.                                                     |
+|                           |                                           | So you don't accidentally get yourself banned.                                                     |
 | [Skip Videos](https://www.nexusmods.com/diablo2resurrected/mods/179)                | [Caedendi](https://www.nexusmods.com/diablo2resurrected/users/179695179) (me) | Disable launch intro videos and cinematic cutscenes when transitioning between acts.               |
 | [Improved Potion Visibility](https://www.nexusmods.com/diablo2resurrected/mods/384) |   [MetalTxus](https://www.nexusmods.com/diablo2resurrected/users/18894694)    | Changes healing/mana potion sprites so it's easier to distinguish different potion levels.         |
 | [UI Fixes](https://www.nexusmods.com/diablo2resurrected/mods/387)                   |   [MetalTxus](https://www.nexusmods.com/diablo2resurrected/users/18894694)    | Fixes the placement of a few item grids.                                                           |
 | [Towns QoL Changes](https://www.nexusmods.com/diablo2resurrected/mods/310)          |  [night0wl117](https://www.nexusmods.com/diablo2resurrected/users/33697975)   | Move town starting points, TP locations and Cain's position in Act 5.                              |
 | [Town Cast](https://www.nexusmods.com/diablo2resurrected/mods/183)                  |                      [olegbl](https://github.com/olegbl)                      | Teleport and buff in town. _(BREAKING: allows teleporting past Jerhyn during the Act 2 questline)_ |
 | [Settings Font Fix](https://www.nexusmods.com/diablo2resurrected/mods/200)          |                      [olegbl](https://github.com/olegbl)                      | In case any mod touches __profilehd_ and screws up the font size in the settings menu.             |
-
-
-## License/Permissions
-
-This code is licensed under GPL. 
-
-You are free to use and distribute all code in this mod, as long as you ask for permission (and permission is given), it stays open source, free of charge and all due credit is given. 
-
-If you are trying to profit off this mod in any way, then you're a dick and forbidden from using this code.
 
 
 ## Credits
@@ -456,12 +464,10 @@ Many thanks to:
 - [Cbraqz](https://www.nexusmods.com/diablo2resurrected/users/3106975)'s [D2R Simple Loot Filter](https://www.nexusmods.com/diablo2resurrected/mods/54) mod for giving me an idea on how to fix highlighting charms without removing rarity coloring
 
 
-## My Mods + Source
+## License/Permissions
 
-### Diablo II: Resurrected ###
+This code is licensed under GPL. 
 
-| Nexus Mods Page                                                                                    | Source                                                           |
-|:---------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------|
-| [Caedendi's Extended Loot Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/361) | [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended) |
-| [Caedendi's Simple Loot Filter for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/360)   | [GitHub](https://github.com/Caedendi/D2RMM-Loot-Filter-Simple)   |
-| [Skip Videos for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/397)                     | [GitHub](https://github.com/Caedendi/D2RMM-Skip-Videos)          |
+You are free to use and distribute all code in this mod, as long as you ask for permission (and permission is given), it stays open source, free of charge and all due credit is given. 
+
+If you are trying to profit off this mod in any way, then you're a dick and forbidden from using this code.
