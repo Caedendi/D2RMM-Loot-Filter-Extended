@@ -327,8 +327,8 @@
     {
       "id": "ItemLevel",
       "type": "select",
-      "name": "Show Item Level",
-      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix.",
+      "name": "Show Item Level (don't use online!)",
+      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix. Disable this if you play online: it does not work (all items show as ilvl 1) and items with sockets will display incorrectly.",
       "defaultValue": "fix-btt",
       "options": [
         { "value": "none",     "label": "Disable" },
