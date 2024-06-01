@@ -495,7 +495,7 @@ class DropSoundConstants {
   // sound names
   static SOUND_NONE = "";
   static SOUND_ITEM_RUNE = "item_rune";
-  static SOUND_PREFIX = "celf_"; // caedendi extended loot filter
+  static SOUND_PREFIX = "celf_"; // caedendi's extended loot filter
 
   // channels
   static CHANNEL_ITEMS_SD = "sfx/items_sd";
@@ -2473,17 +2473,17 @@ class DropSoundBuilder {
   pushSound(soundsFile, soundName, template, sfxChannel, sfxFileName, sfxRedirect) {
     let newSound = { ...(soundsFile.rows.find((sound) => sound.Sound === template)) }; // create deep copy of template
   
-    newSound["Sound"] = soundName;
-    newSound["*Index"] = soundsFile.rows.length;
-    newSound["Channel"] = sfxChannel;
-    newSound["FileName"] = sfxFileName;
-    newSound["Redirect"] = sfxRedirect;
+    newSound["Sound"]      = soundName;
+    newSound["*Index"]     = soundsFile.rows.length;
+    newSound["Channel"]    = sfxChannel;
+    newSound["FileName"]   = sfxFileName;
+    newSound["Redirect"]   = sfxRedirect;
     newSound["Volume Min"] = 255;
     newSound["Volume Max"] = 255;
-    newSound["Priority"] = 255;
-    newSound["Stop Inst"] = 0;
+    newSound["Priority"]   = 255;
+    newSound["Stop Inst"]  = 0;
     newSound["Defer Inst"] = 0;
-    newSound["Falloff"] = 4;
+    newSound["Falloff"]    = 4;
     
     soundsFile.rows.push(newSound);
   }
@@ -2500,7 +2500,7 @@ class DropSoundBuilder {
     });
   
     D2RMM.writeTsv(itemsFilePath, file);
-  }  
+  }
 };
 
 class ProfileHdModsBuilder {

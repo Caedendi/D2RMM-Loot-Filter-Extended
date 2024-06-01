@@ -10,7 +10,7 @@
   - [ ] custom weapons/armor filter lists
 - [ ] migrate to TypeScript
   - [ ] unit tests
-- [ ] other languages compatiblity
+- [ ] other display languages compatiblity
 
 ## item filtering
 - [x] Helper.upsert()
@@ -29,7 +29,8 @@
     - [x] unique charms
     - [x] facets + [2pu = highlight 4x] + [4pu = highlight 3x]
       - [x] check if BigTooltips enabled
-      - [ ] zelfd voor andere eerdere settings
+      - [ ] same for other earlier settings
   - [ ] add recommended settings to description
+- [ ] _profilelv.json and controller compatibility
 - [ ] search all // todo
 - [ ] 
