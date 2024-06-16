@@ -235,7 +235,7 @@ class RuneConstants {
 
   static clrName      = ColorConstants.orange;
   static clrHighlight = HighlightConstants.color;
-  static colorAlternate = config.RunesHighlightColorAlt !== SettingsConstants.custom ? `${BaseColorConstants.prefix}${config.RunesHighlightColorAlt}` : ';'; // replace 1 with desired custom color character (see above) [CSTM-HLCRA]
+  static colorAlternate = config.RunesHighlightColorAlt !== SettingsConstants.custom ? `${BaseColorConstants.prefix}${config.RunesHighlightColorAlt}` : ';'; // replace ; with desired custom color character (see above) [CSTM-HLCRA]
 
   // set the highlight patterns for each rune tier
   static patternLow     = HighlightConstants.patternNone;   // 
@@ -2585,6 +2585,11 @@ class ProfileHdModsBuilder {
 
 class CaedendiExtendedLootFilterBuilder {
   build() {
+    if (D2RMM.getVersion == null || D2RMM.getVersion() < 1.6) {
+      D2RMM.error("Requires D2RMM version 1.6.0 or higher.");
+      return;
+    }
+
     (new ItemNameAffixesBuilder()).build(); // Gold, Superior/Inferior affixes, Gems (exceptions)
     (new       ItemRunesBuilder()).build(); // Runes
     (new       ItemNamesBuilder()).build(); // Most items
