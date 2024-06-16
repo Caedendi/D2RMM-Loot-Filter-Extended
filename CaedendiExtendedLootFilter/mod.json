@@ -1,54 +1,42 @@
 {
-  "name": "Caedendi's Extended Loot Filter",
+  "name": "Caedendi's Extended Loot Filter 3",
   "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
   "author": "Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "config": [
-    {
-      "id": "GoldRunesSection",
-      "type": "section",
-      "name": "Gold & Runes",
-      "defaultExpanded": false
-    },
-    {
-      "id": "Gold",
-      "type": "select",
-      "name": "Gold",
-      "description": "Customize the \"Gold\" affix for gold drops. [CSTM-GLD]",
-      "defaultValue": "goldg",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Gold text", "value": "gold" },
-        { "label": "Gold G", "value": "goldg" },
-        { "label": "White G", "value": "whiteg" },
-        { "label": "Hide suffix", "value": "hide" },
-        { "label": "Custom", "value": "custom" }
-      ]
-    }, 
-    {
-      "id": "Runes",
-      "type": "select",
-      "name": "Runes",
-      "description": "Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel, Io and up). [CSTM-RUN]",
-      "defaultValue": "all",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Add Rune numbers, add highlights, remove affix", "value": "all" },
-        { "label": "Add Rune numbers, add highlights", "value": "nrs-hls" },
-        { "label": "Add Rune numbers, remove affix", "value": "nrs-raf" },
-        { "label": "Add highlights, remove affix", "value": "hls-raf" },
-        { "label": "Add Rune numbers", "value": "nrs" },
-        { "label": "Add highlights", "value": "hls" },
-        { "label": "Remove affix", "value": "raf" },
-        { "label": "Custom", "value": "custom" }
-      ]
-    },
     {
       "id": "JunkSection",
       "type": "section",
       "name": "Junk",
       "defaultExpanded": false
+    },
+    {
+      "id": "GoldAmount",
+      "type": "select",
+      "name": "Gold: Color",
+      "description": "Customize the color of the tooltip for gold drops. [CSTM-GLD]",
+      "defaultValue": "wg",
+      "options": [
+        { "value": "none",   "label": "Default" },
+        { "value": "g",      "label": "All gold" },
+        { "value": "wg",     "label": "White amount, gold suffix" },
+        { "value": "gw",     "label": "Gold amount, white suffix" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    }, 
+    {
+      "id": "GoldSuffix",
+      "type": "select",
+      "name": "Gold: Suffix",
+      "description": "Customize the \"Gold\" suffix for gold drops. [CSTM-GLD]",
+      "defaultValue": "g",
+      "options": [
+        { "value": "none",   "label": "Default" },
+        { "value": "g",      "label": "G" },
+        { "value": "hide",   "label": "Hide suffix" },
+        { "value": "custom", "label": "Custom" }
+      ]
     },
     {
       "id": "HealingPotions",
@@ -57,16 +45,16 @@
       "description": "Customize Healing, Mana and Rejuvenation Potions. [CSTM-HPT]",
       "defaultValue": "all",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable (show all)", "value": "all" },
-        { "label": "Hide lvl 1-3 Healing/Mana Potions", "value": "hide3" },
-        { "label": "Hide lvl 1-4 Healing/Mana Potions", "value": "hide4" },
-        { "label": "Hide lvl 1-3 Healing/Mana & Small Rejuvenation Potions", "value": "hide3sr" },
-        { "label": "Hide lvl 1-4 Healing/Mana & Small Rejuvenation Potions", "value": "hide4sr" },
-        { "label": "Show only Rejuvenation Potions", "value": "sfr" },
-        { "label": "Show only Full Rejuvenation Potions", "value": "fr" },
-        { "label": "Hide all", "value": "hide" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",    "label": "Disable" },
+        { "value": "all",     "label": "Enable (show all)" },
+        { "value": "hide3",   "label": "Hide lvl 1-3 Healing/Mana Potions" },
+        { "value": "hide4",   "label": "Hide lvl 1-4 Healing/Mana Potions" },
+        { "value": "hide3sr", "label": "Hide lvl 1-3 Healing/Mana & Small Rejuvenation Potions" },
+        { "value": "hide4sr", "label": "Hide lvl 1-4 Healing/Mana & Small Rejuvenation Potions" },
+        { "value": "sfr",     "label": "Show only Rejuvenation Potions" },
+        { "value": "fr",      "label": "Show only Full Rejuvenation Potions" },
+        { "value": "hide",    "label": "Hide all" },
+        { "value": "custom",  "label": "Custom" }
       ]
     },
     {
@@ -76,10 +64,10 @@
       "description": "Customize Antidote, Thawing and Stamina Potions. [CSTM-BPT]",
       "defaultValue": "all",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable (show all)", "value": "all" },
-        { "label": "Hide", "value": "hide" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "all",    "label": "Enable" },
+        { "value": "hide",   "label": "Hide" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
@@ -89,10 +77,10 @@
       "description": "Customize Strangling/Choking/Rancid Gas and Fulminating/Exploding/Oil Potions. [CSTM-TPT]",
       "defaultValue": "all",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable (show all)", "value": "all" },
-        { "label": "Hide", "value": "hide" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "all",    "label": "Enable" },
+        { "value": "hide",   "label": "Hide" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
@@ -102,10 +90,10 @@
       "description": "Customize ID/TP Scrolls and Tomes. [CSTM-SCR]",
       "defaultValue": "all",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable (show all)", "value": "all" },
-        { "label": "Hide Scrolls", "value": "hide" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "all",    "label": "Enable" },
+        { "value": "hide",   "label": "Hide Scrolls" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
@@ -113,25 +101,114 @@
       "type": "select",
       "name": "Arrows & Bolts",
       "description": "Customize Arrows & Bolts. [CSTM-ARB]",
-      "defaultValue": "highlight",
+      "defaultValue": "all",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable", "value": "highlight" },
-        { "label": "Hide", "value": "hide" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "all",    "label": "Enable" },
+        { "value": "arw",    "label": "Enable Arrows, hide Bolts" },
+        { "value": "blt",    "label": "Enable Bolts, hide Arrows" },
+        { "value": "hide",   "label": "Hide" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
       "id": "Keys",
       "type": "select",
       "name": "Keys",
-      "description": "Customize regular keys for opening locked chests. For Uber keys, see Endgame. [CSTM-KEY]",
+      "description": "Customize regular keys for opening locked chests. For Über keys, see Endgame. [CSTM-KEY]",
       "defaultValue": "none",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Hide", "value": "hide" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "hide",   "label": "Hide" },
+        { "value": "custom", "label": "Custom" }
       ]
+    },
+    {
+      "id": "RunesSection",
+      "type": "section",
+      "name": "Runes",
+      "defaultExpanded": false
+    },
+    {
+      "id": "RunesHighlighting",
+      "type": "select",
+      "name": "Highlighting",
+      "description": "Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel and up). [CSTM-RUN]",
+      "defaultValue": "all",
+      "options": [
+        { "value": "none",    "label": "Disable" },
+        { "value": "all" ,    "label": "Add highlights, add Rune numbers, remove affix" },
+        { "value": "nrs-hls", "label": "Add highlights, add Rune numbers" },
+        { "value": "hls-raf", "label": "Add highlights, remove affix" },
+        { "value": "nrs-raf", "label": "Add Rune numbers, remove affix" },
+        { "value": "nrs",     "label": "Add Rune numbers" },
+        { "value": "hls",     "label": "Add highlights" },
+        { "value": "raf",     "label": "Remove affix" },
+        { "value": "custom",  "label": "Custom" }
+      ]
+    },
+    {
+      "id": "RunesHighlightColorAlt",
+      "type": "select",
+      "name": "Second Highlight Color",
+      "description": "Used for Mid and High Runes for even more emphasis. [CSTM-HLCRA]",
+      "defaultValue": ";",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "0",      "label": "White" },
+        { "value": "=",      "label": "White Smoke" },
+        { "value": "I",      "label": "Dim Gray" },
+        { "value": "5",      "label": "Dimmer Gray" },
+        { "value": "6",      "label": "Black" },
+        { "value": "U",      "label": "Red" },
+        { "value": "1",      "label": "Tomato" },
+        { "value": "S",      "label": "Crimson" },
+        { "value": "2",      "label": "Lime" },
+        { "value": "C",      "label": "Lime 2" },
+        { "value": "<",      "label": "Lime Green" },
+        { "value": "A",      "label": "Green" },
+        { "value": "N",      "label": "Deep Sky Blue" },
+        { "value": "T",      "label": "Light Sky Blue" },
+        { "value": "P",      "label": "Medium Slate Blue" },
+        { "value": "3",      "label": "Corn Flower Blue" },
+        { "value": "9",      "label": "Yellow" },
+        { "value": "R",      "label": "Light Yellow" },
+        { "value": "8",      "label": "Orange" },
+        { "value": "O",      "label": "Violet" },
+        { "value": ";",      "label": "Dark Violet" },
+        { "value": "4",      "label": "Tan" },
+        { "value": "7",      "label": "Tan 2" },
+        { "value": "M",      "label": "Wheat" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "ShouldShowRunesLow",
+      "type": "checkbox",
+      "name": "Show Low",
+      "description": "Show Low Runes (El [1] - Dol [14], except Ral [8]).",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldShowRunesLowMid",
+      "type": "checkbox",
+      "name": "Show Low-Mid",
+      "description": "Show Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldShowRunesMid",
+      "type": "checkbox",
+      "name": "Show Mid",
+      "description": "Show Mid Runes (Lem [20] - Gul [25]).",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldShowRunesHigh",
+      "type": "checkbox",
+      "name": "Show High",
+      "description": "Show High Runes (Vex [26] - Zod [33]).",
+      "defaultValue": true
     },
     {
       "id": "JewelrySection",
@@ -146,12 +223,13 @@
       "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
       "defaultValue": "all",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "all" },
-        { "label": "Highlight, show only Flawless and Perfect Gems", "value": "flawless" },
-        { "label": "Highlight, show only Perfect Gems", "value": "perfect" },
-        { "label": "Hide all", "value": "hide" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",     "label": "Disable" },
+        { "value": "all",      "label": "Highlight" },
+        { "value": "flawless", "label": "Highlight, show only Flawless and Perfect Gems" },
+        { "value": "perfect",  "label": "Highlight, show only Perfect Gems" },
+        { "value": "hide",     "label": "Hide all" },
+        { "value": "custom",   "label": "Custom" }
+
       ]
     },
     {
@@ -161,9 +239,9 @@
       "description": "Customize Jewels. Currently identified Facets only; I have not yet found a good way to customize unidentified/Magic/Rare Jewels. [CSTM-JWL]",
       "defaultValue": "facet",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight Facets", "value": "facet" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "facet",  "label": "Highlight Facets" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
@@ -173,12 +251,26 @@
       "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
       "defaultValue": "all",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "all" },
-        { "label": "Highlight Unique Charms only", "value": "uniq" },
-        { "label": "Highlight non-Unique Charms only", "value": "unid" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "all",    "label": "Highlight" },
+        { "value": "uniq",   "label": "Highlight Unique Charms only" },
+        { "value": "unid",   "label": "Highlight non-Unique Charms only" },
+        { "value": "custom", "label": "Custom" }
       ]
+    },
+    {
+      "id": "IsFacetAltPattern",
+      "type": "checkbox",
+      "name": "Alternate pattern: Facets",
+      "description": "Use the alternate rainbow-colored pattern for Facets.",
+      "defaultValue": true
+    },
+    {
+      "id": "IsSunderAltPattern",
+      "type": "checkbox",
+      "name": "Alternate pattern: Sunder Charms",
+      "description": "Use the alternate immunity-colored pattern for Sunder Charms.",
+      "defaultValue": true
     },
     {
       "id": "QuestEndgame",
@@ -193,10 +285,10 @@
       "description": "Highlight Quest Items. Exclude the Horadric Cube to fix messing up the Cube window's title and some NPC dialog where it is mentioned. [CSTM-QST1] and [CSTM-QST2]",
       "defaultValue": "xhc",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "all" },
-        { "label": "Highlight, exclude Cube", "value": "xhc" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "all",    "label": "Highlight" },
+        { "value": "xhc",    "label": "Highlight, exclude Cube" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
@@ -206,12 +298,25 @@
       "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. For Annihilus and Hellfire Torch, see Charms. [CSTM-END]",
       "defaultValue": "all",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Highlight", "value": "all" },
-        { "label": "Highlight, exclude Standard of Heroes", "value": "xsh" },
-        { "label": "Highlight, hide Standard of Heroes", "value": "hsh" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "all",    "label": "Highlight" },
+        { "value": "xsh",    "label": "Highlight, exclude Standard of Heroes" },
+        { "value": "hsh",    "label": "Highlight, hide Standard of Heroes" },
+        { "value": "custom", "label": "Custom" }
       ]
+    },
+    {
+      "id": "CustomFilterSection",
+      "type": "section",
+      "name": "Custom Filter List",
+      "defaultExpanded": false
+    },
+    {
+      "id": "shouldUseCustomFilterList",
+      "type": "checkbox",
+      "name": "Use Custom Filter List",
+      "description": "Enable your personal filter list. [CSTM-CFL]",
+      "defaultValue": false
     },
     {
       "id": "ItemStatsModifiersSection",
@@ -222,13 +327,30 @@
     {
       "id": "ItemLevel",
       "type": "select",
-      "name": "Item Level",
-      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix.",
-      "defaultValue": "fix",
+      "name": "Show Item Level (don't use online!)",
+      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix. Disable this if you play online: it does not work (all items show as ilvl 1) and items with sockets will display incorrectly.",
+      "defaultValue": "fix-btt",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable, fix indentation", "value": "fix" },
-        { "label": "Enable", "value": "show" }
+        { "value": "none",     "label": "Disable" },
+        { "value": "show",     "label": "Enable" },
+        { "value": "btt",      "label": "Enable, exclude Big Tooltip items" },
+        { "value": "fix",      "label": "Enable, fix indentation" },
+        { "value": "fix-btt",  "label": "Enable, fix indentation, exclude Big Tooltip items" }
+      ]
+    },
+    {
+      "id": "ItemQuality",
+      "type": "select",
+      "name": "Show Item Quality ",
+      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix indentation if Item Level is enabled. [CSTM-QLTY]",
+      "defaultValue": "none",
+      "options": [
+        { "value": "none",    "label": "Disable" },
+        { "value": "suf-par", "label": "Suffix, parentheses" },
+        { "value": "suf-bts", "label": "Suffix, square brackets" },
+        { "value": "pre-par", "label": "Prefix, parentheses" },
+        { "value": "pre-bts", "label": "Prefix, square brackets" },
+        { "value": "custom",  "label": "Custom" }
       ]
     },
     {
@@ -238,25 +360,254 @@
       "description": "Shorten the Superior/Damaged/Cracked/Crude/Low Quality modifiers on weapons and armor to + (plus) and - (minus/dash). Optionally color Inferior items gray. Works the same as mod Short Quality Prefixes by Jobus. [CSTM-SPIF]",
       "defaultValue": "short",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Enable", "value": "short" },
-        { "label": "Enable, gray Inferior items", "value": "color" },
-        { "label": "Custom", "value": "custom" }
+        { "value": "none",   "label": "Disable" },
+        { "value": "short",  "label": "Enable" },
+        { "value": "color",  "label": "Enable, gray Inferior items" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
-      "id": "ItemQuality",
+      "id": "EthItemsColor",
       "type": "select",
-      "name": "Item Quality",
-      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix if enabled. [CSTM-QLTY]",
+      "name": "Ethereal Items Tooltip Color",
+      "description": "Customize the color of Ethereal items to better discern them from socketed items. Recommended: Light Teal. [CSTM-ETH]",
       "defaultValue": "none",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Suffix, parentheses", "value": "suf-par" },
-        { "label": "Suffix, square brackets", "value": "suf-bts" },
-        { "label": "Prefix, parentheses", "value": "pre-par" },
-        { "label": "Prefix, square brackets", "value": "pre-bts" },
-        { "label": "Custom", "value": "custom" }
+        { "label": "Disable",         "value": "none" },
+        { "label": "Beige",           "value": "Beige" },
+        { "label": "Black",           "value": "Black" },
+        { "label": "Dark Green",      "value": "DarkGreen" },
+        { "label": "Green",           "value": "Green" },
+        { "label": "Light Blue",      "value": "LightBlue" },
+        { "label": "Light Gray",      "value": "LightGray" },
+        { "label": "Light Purple",    "value": "LightPurple" },
+        { "label": "Light Red",       "value": "LightRed" },
+        { "label": "Light Teal",      "value": "LightTeal" },
+        { "label": "Red",             "value": "Red" },
+        { "label": "Very Light Gray", "value": "Very Light Gray" },
+        { "label": "White",           "value": "White" },
+        { "label": "Custom",          "value": "custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipsSection",
+      "type": "section",
+      "name": "Big Tooltips",
+      "defaultExpanded": false
+    },
+    {
+      "id": "IsBigTooltipsEnabled",
+      "type": "checkbox",
+      "name": "Enable",
+      "description": "Enable Big Tooltips on the item types toggled below. Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space]. Note: ",
+      "defaultValue": true
+    },
+    {
+      "id": "BigTooltipRunesLow",
+      "type": "select",
+      "name": "Runes: Low",
+      "description": "Enable Big Tooltips for Low Runes (El [1] - Dol [14], except Ral [8]).",
+      "defaultValue": "none",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipRunesLowMid",
+      "type": "select",
+      "name": "Runes: Low-Mid",
+      "description": "Enable Big Tooltips for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
+      "defaultValue": "2",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipRunesMid",
+      "type": "select",
+      "name": "Runes: Mid",
+      "description": "Enable Big Tooltips for Mid Runes (Lem [20] - Gul [25]).",
+      "defaultValue": "3",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipRunesHigh",
+      "type": "select",
+      "name": "Runes: High",
+      "description": "Enable Big Tooltips for High Runes (Vex [26] - Zod [33]).",
+      "defaultValue": "3",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipGems",
+      "type": "select",
+      "name": "Gems",
+      "description": "Enable Big Tooltips for Gems.",
+      "defaultValue": "none",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipFacets",
+      "type": "select",
+      "name": "Facets",
+      "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels. Recommended: Disable or Two Lines + Pick Up.",
+      "defaultValue": "none",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipUniqueCharms",
+      "type": "select",
+      "name": "Unique Charms",
+      "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
+      "defaultValue": "none",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipQuestItems",
+      "type": "select",
+      "name": "Quest Items",
+      "description": "Enable Big Tooltips for Quest Items.",
+      "defaultValue": "3",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipEssences",
+      "type": "select",
+      "name": "Essences",
+      "description": "Enable Big Tooltips for Essences.",
+      "defaultValue": "none",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipTokens",
+      "type": "select",
+      "name": "Token of Absolution",
+      "description": " on Tokens of Absolution on the ground.",
+      "defaultValue": "3",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipKeys",
+      "type": "select",
+      "name": "Pandemonium Keys",
+      "description": "Enable Big Tooltips for Keys of Terror/Hate/Destruction.",
+      "defaultValue": "3",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipOrgans",
+      "type": "select",
+      "name": "Pandemonium Organs",
+      "description": "Enable Big Tooltips for Über Organs. ",
+      "defaultValue": "3",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "BigTooltipStandardOfHeroes",
+      "type": "select",
+      "name": "Standard of Heroes",
+      "description": "Enable Big Tooltips for the Standard of Heroes.",
+      "defaultValue": "none",
+      "options": [
+        { "value": "none",   "label": "Disable" },
+        { "value": "2",      "label": "Two Lines" },
+        { "value": "2pu",    "label": "Two Lines + Pick Up" },
+        { "value": "3",      "label": "Three Lines" },
+        { "value": "4pu",    "label": "Four Lines + Pick Up" },
+        { "value": "5",      "label": "Five Lines" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
@@ -266,10 +617,45 @@
       "defaultExpanded": false
     },
     {
-      "id": "ShouldAddLightPillarRunes",
+      "id": "IsLightPillarsEnabled",
       "type": "checkbox",
-      "name": "Runes",
-      "description": "Shine a Light Pillar on Runes on the ground.",
+      "name": "Enable",
+      "description": "Enable shining Light Pillars on the item types toggled below.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldDisableLightPillarForHidden",
+      "type": "checkbox",
+      "name": "Disable for Hidden Items",
+      "description": "Do not shine Light Pillars on items set to hidden. NOTE: Does not work with custom settings.",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarRunesLow",
+      "type": "checkbox",
+      "name": "Runes: Low",
+      "description": "Shine a Light Pillar on Low Runes on the ground (El [1] - Dol [14], except Ral [8]).",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarRunesLowMid",
+      "type": "checkbox",
+      "name": "Runes: Low-Mid",
+      "description": "Shine a Light Pillar on Low-Mid Runes on the ground (Hel [15] - Fal [19] and Ral [8]).",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarRunesMid",
+      "type": "checkbox",
+      "name": "Runes: Mid",
+      "description": "Shine a Light Pillar on Mid Runes on the ground (Lem [20] - Gul [25]).",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldAddLightPillarRunesHigh",
+      "type": "checkbox",
+      "name": "Runes: High",
+      "description": "Shine a Light Pillar on High Runes on the ground (Vex [26] - Zod [33]).",
       "defaultValue": true
     },
     {
@@ -294,18 +680,18 @@
       "defaultValue": true
     },
     {
-      "id": "ShouldAddLightPillarQuest",
+      "id": "ShouldAddLightPillarQuestItems",
       "type": "checkbox",
-      "name": "Quest Items",
+      "name": "Quest: Items",
       "description": "Shine a Light Pillar on Quest Items on the ground. Khalim's Eye and Brain share graphics with Baal's Eye and Mephisto's Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
       "defaultValue": true
     },
     {
-      "id": "ShouldExcludeLightPillarQuestWeapons",
+      "id": "ShouldAddLightPillarQuestWeapons",
       "type": "checkbox",
-      "name": "Quest Items: exclude weapons",
-      "description": "Exclude Light Pillars on Quest Weapons on the ground. Equipping a Quest Weapon with Light Pillars enabled will also shine a Light Pillar on your character's weapon. Enable this if for instance you want to use Khalim's Will on a low level character.",
-      "defaultValue": false
+      "name": "Quest: Weapons",
+      "description": "Shine a Light Pillar on Quest Weapons on the ground. Equipping a Quest Weapon with this enabled will also shine a Light Pillar on your character's weapon. Disable this if for instance you want to use Khalim's Will on a low level character.",
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarEssences",
@@ -324,78 +710,279 @@
     {
       "id": "ShouldAddLightPillarKeys",
       "type": "checkbox",
-      "name": "Keys",
+      "name": "Pandemonium Keys",
       "description": "Shine a Light Pillar on Keys of Terror/Hate/Destruction on the ground.",
       "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarOrgans",
       "type": "checkbox",
-      "name": "Organs",
-      "description": "Shine a Light Pillar on Uber Organs on the ground. Baal's Eye and Mephisto's Brain share graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
+      "name": "Pandemonium Organs",
+      "description": "Shine a Light Pillar on Über Organs on the ground. Baal's Eye and Mephisto's Brain share graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
       "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarStandardOfHeroes",
       "type": "checkbox",
       "name": "Standard of Heroes",
-      "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported, this will still shine a Light Pillar when you kill the Übers.",
+      "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported (some monsters carry torches), this will still shine a Light Pillar when you kill the Übers.",
       "defaultValue": true
     },
     {
-      "id": "ShouldDisableLightPillarForHidden",
-      "type": "checkbox",
-      "name": "Disable for Hidden Items",
-      "description": "Do not shine Light Pillars on items set to hidden. NOTE: Does not work with custom settings.",
-      "defaultValue": true
-    },
-    {
-      "id": "MiscSection",
+      "id": "DropSoundSection",
       "type": "section",
-      "name": "Misc",
+      "name": "Drop Sounds",
       "defaultExpanded": false
     },
     {
-      "id": "AlternateColorSchemes",
+      "id": "IsDropSoundsEnabled",
+      "type": "checkbox",
+      "name": "Enable",
+      "description": "Enable custom drop sounds on the item types toggled below. [CSTM-DSND]",
+      "defaultValue": true
+    },
+    {
+      "id": "ShouldDisableDropSoundForHidden",
+      "type": "checkbox",
+      "name": "Disable for Hidden Items",
+      "description": "Do not modify drop sounds on items set to hidden. NOTE: Does not work with custom settings.",
+      "defaultValue": true
+    },
+    {
+      "id": "DropSoundRunesLow",
       "type": "select",
-      "name": "Alternate Color Schemes",
-      "description": "Use alternate color schemes for certain item types.\n\nFacets: rainbow-colored highlights.\n\nSunder Charms: highlight colors match their elements.\n\nRunes: change name color from the default orange to purple for Lem and higher runes. Highlights remain red and the name will not color (partly) red for these runes.",
-      "defaultValue": "fac-sun",
+      "name": "Runes: Low",
+      "description": "Select a custom drop sound for Low Runes (El [1] - Dol [14], except Ral [8]).",
+      "defaultValue": "default",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Facets, Sunder Charms, Runes", "value": "all" },
-        { "label": "Facets, Sunder Charms", "value": "fac-sun" },
-        { "label": "Facets, Runes", "value": "fac-run" },
-        { "label": "Sunder Charms, Runes", "value": "sun-run" },
-        { "label": "Facets", "value": "fac" },
-        { "label": "Sunder Charms", "value": "sun" },
-        { "label": "Runes", "value": "run" }
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
       ]
+    },
+    {
+      "id": "DropSoundRunesLowMid",
+      "type": "select",
+      "name": "Runes: Low-Mid",
+      "description": "Select a custom drop sound for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
+      "defaultValue": "default",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "DropSoundRunesMid",
+      "type": "select",
+      "name": "Runes: Mid",
+      "description": "Select a custom drop sound for Mid Runes (Lem [20] - Gul [25]).",
+      "defaultValue": "hf_place",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "DropSoundRunesHigh",
+      "type": "select",
+      "name": "Runes: High",
+      "description": "Select a custom drop sound for High Runes (Vex [26] - Zod [33]).",
+      "defaultValue": "hf_place",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "DropSoundQuest",
+      "type": "select",
+      "name": "Quest Items",
+      "description": "Select a custom drop sound for Quest Items. The Horadric Cube is disabled by default since it already has a unique sound effect. To enable, search [CSTM_DSBOX] and uncomment the line.",
+      "defaultValue": "hf_smash",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "DropSoundEssences",
+      "type": "select",
+      "name": "Essences",
+      "description": "Select a custom drop sound for Essences.",
+      "defaultValue": "default",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "DropSoundToken",
+      "type": "select",
+      "name": "Token of Absolution",
+      "description": "Select a custom drop sound for Tokens of Absolution.",
+      "defaultValue": "default",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "DropSoundKeys",
+      "type": "select",
+      "name": "Pandemonium Keys",
+      "description": "Select a custom drop sound for Über Keys.",
+      "defaultValue": "hf_smash",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "DropSoundOrgans",
+      "type": "select",
+      "name": "Pandemonium Organs",
+      "description": "Select a custom drop sound for Über Organs.",
+      "defaultValue": "hf_smash",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "DropSoundStandard",
+      "type": "select",
+      "name": "Standard of Heroes",
+      "description": "Select a custom drop sound for the Standard of Heroes.",
+      "defaultValue": "quest_done",
+      "options": [
+        { "value": "default",       "label": "Default" },
+        { "value": "hostile",       "label": "Hostile (PVP)" },
+        { "value": "hf_place",      "label": "Hell Forge Place" },
+        { "value": "hf_smash",      "label": "Hell Forge Smash" },
+        { "value": "cairn_success", "label": "Cairn Stones Success" },
+        { "value": "portal_open",   "label": "Town Portal Open" },
+        { "value": "quest_done",    "label": "Quest Done" },
+        { "value": "custom",        "label": "Custom" }
+      ]
+    },
+    {
+      "id": "TooltipsSection",
+      "type": "section",
+      "name": "Tooltips",
+      "defaultExpanded": false
     },
     {
       "id": "HighlightCharacter",
       "type": "select",
-      "name": "Highlight character",
-      "description": "Character used to highlight select items. [CSTM-HLC]",
+      "name": "Highlight Character",
+      "description": "Character used to highlight select items. [CSTM-HLCTR]",
       "defaultValue": "*",
       "options": [
-        { "label": "* (asterisk)", "value": "*" },
-        { "label": "= (equals)", "value": "=" },
-        { "label": "+ (plus)", "value": "+" },
-        { "label": "- (hyphen/dash/minus)", "value": "-" },
-        { "label": "x (small letter x)", "value": "x" },
-        { "label": "X (capital letter x)", "value": "X" },
-        { "label": "o (small letter o)", "value": "o" },
-        { "label": "O (capital letter o)", "value": "O" },
-        { "label": "0 (zero)", "value": "0" },
-        { "label": "~ (tilde)", "value": "~" },
-        { "label": "! (exclamation mark)", "value": "!" },
-        { "label": "@ (at)", "value": "@" },
-        { "label": "# (number/pound/hash)", "value": "#" },
-        { "label": "$ (dollar)", "value": "$" },
-        { "label": "% (percent)", "value": "%" },
-        { "label": "& (ampersand)", "value": "&" },
-        { "label": "Custom", "value": "custom" }
+        { "value": " ",      "label": "  (space)" },
+        { "value": "*",      "label": "* (asterisk)" },
+        { "value": "=",      "label": "= (equals)" },
+        { "value": "+",      "label": "+ (plus)" },
+        { "value": "-",      "label": "- (minus/dash/hyphen)" },
+        { "value": "x",      "label": "x (small letter x)" },
+        { "value": "X",      "label": "X (capital letter x)" },
+        { "value": "o",      "label": "o (small letter o)" },
+        { "value": "O",      "label": "O (capital letter o)" },
+        { "value": "0",      "label": "0 (zero)" },
+        { "value": "~",      "label": "~ (tilde)" },
+        { "value": "!",      "label": "! (exclamation mark)" },
+        { "value": "@",      "label": "@ (at)" },
+        { "value": "#",      "label": "# (number/pound/hash)" },
+        { "value": "$",      "label": "$ (dollar)" },
+        { "value": "%",      "label": "% (percent)" },
+        { "value": "&",      "label": "& (ampersand)" },
+        { "value": "custom", "label": "Custom" }
+      ]
+    },
+    {
+      "id": "HighlightColor",
+      "type": "select",
+      "name": "Highlight Color",
+      "description": "Color used for the highlight character for items that have highlight patterns. [CSTM-HLCLR]",
+      "defaultValue": "1",
+      "options": [
+        { "value": "0",      "label": "White" },
+        { "value": "=",      "label": "White Smoke" },
+        { "value": "I",      "label": "Dim Gray" },
+        { "value": "5",      "label": "Dimmer Gray" },
+        { "value": "6",      "label": "Black" },
+        { "value": "U",      "label": "Red" },
+        { "value": "1",      "label": "Tomato" },
+        { "value": "S",      "label": "Crimson" },
+        { "value": "2",      "label": "Lime" },
+        { "value": "C",      "label": "Lime 2" },
+        { "value": "<",      "label": "Lime Green" },
+        { "value": "A",      "label": "Green" },
+        { "value": "N",      "label": "Deep Sky Blue" },
+        { "value": "T",      "label": "Light Sky Blue" },
+        { "value": "P",      "label": "Medium Slate Blue" },
+        { "value": "3",      "label": "Corn Flower Blue" },
+        { "value": "9",      "label": "Yellow" },
+        { "value": "R",      "label": "Light Yellow" },
+        { "value": "8",      "label": "Orange" },
+        { "value": "O",      "label": "Violet" },
+        { "value": ";",      "label": "Dark Violet" },
+        { "value": "4",      "label": "Tan" },
+        { "value": "7",      "label": "Tan 2" },
+        { "value": "M",      "label": "Wheat" },
+        { "value": "custom", "label": "Custom" }
       ]
     },
     {
@@ -408,22 +995,16 @@
       "maxValue": 25
     },
     {
-      "id": "TooltipModsSection",
-      "type": "section",
-      "name": "Tooltip Mods",
-      "defaultExpanded": false
-    },
-    {
       "id": "Tooltip",
       "type": "select",
       "name": "Tooltip mods",
       "description": "Modifies the size and background opacity of the tooltip for items on the ground and in the inventory.",
       "defaultValue": "none",
       "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Opacity & Size", "value": "all" },
-        { "label": "Opacity", "value": "opacity" },
-        { "label": "Size", "value": "size" }
+        { "value": "none",    "label": "Disable" },
+        { "value": "all",     "label": "Opacity & Size" },
+        { "value": "opacity", "label": "Opacity" },
+        { "value": "size",    "label": "Size" }
       ]
     },
     {
@@ -431,7 +1012,7 @@
       "type": "number",
       "minValue": 0,
       "maxValue": 1,
-      "name": "Tooltip: opacity",
+      "name": "Tooltip mods: opacity",
       "description": "Set the tooltip background opacity (unmodded = 0.6).",
       "defaultValue": 0.75
     },
@@ -440,7 +1021,7 @@
       "type": "number",
       "minValue": 20,
       "maxValue": 50,
-      "name": "Tooltip: font size",
+      "name": "Tooltip mods: font size",
       "description": "Set the tooltip font size (unmodded = 36).",
       "defaultValue": 33
     }
