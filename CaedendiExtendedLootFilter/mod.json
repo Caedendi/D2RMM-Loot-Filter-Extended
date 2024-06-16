@@ -1,9 +1,9 @@
 {
-  "name": "Caedendi's Extended Loot Filter 3 [dev]",
+  "name": "Caedendi's Extended Loot Filter 3",
   "description": "A fully customizable loot filter with lots of presets to remove clutter and highlight the good stuff.",
   "author": "Caedendi",
   "website": "https://www.nexusmods.com/diablo2resurrected/mods/361",
-  "version": "3.1.0-alpha",
+  "version": "3.0.0",
   "config": [
     {
       "id": "JunkSection",
@@ -328,7 +328,7 @@
       "id": "ItemLevel",
       "type": "select",
       "name": "Show Item Level (don't use online!)",
-      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix. Disable this if you play online: it does not work (all items show as ilvl 1) and items with more than 3 sockets will display incorrectly.",
+      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix. Disable this if you play online: it does not work (all items show as ilvl 1) and items with sockets will display incorrectly.",
       "defaultValue": "fix-btt",
       "options": [
         { "value": "none",     "label": "Disable" },
@@ -408,7 +408,6 @@
       "name": "Runes: Low",
       "description": "Enable Big Tooltips for Low Runes (El [1] - Dol [14], except Ral [8]).",
       "defaultValue": "none",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -425,7 +424,6 @@
       "name": "Runes: Low-Mid",
       "description": "Enable Big Tooltips for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
       "defaultValue": "2",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -442,7 +440,6 @@
       "name": "Runes: Mid",
       "description": "Enable Big Tooltips for Mid Runes (Lem [20] - Gul [25]).",
       "defaultValue": "3",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -459,7 +456,6 @@
       "name": "Runes: High",
       "description": "Enable Big Tooltips for High Runes (Vex [26] - Zod [33]).",
       "defaultValue": "3",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -476,7 +472,6 @@
       "name": "Gems",
       "description": "Enable Big Tooltips for Gems.",
       "defaultValue": "none",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -493,7 +488,6 @@
       "name": "Facets",
       "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels. Recommended: Disable or Two Lines + Pick Up.",
       "defaultValue": "none",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -510,7 +504,6 @@
       "name": "Unique Charms",
       "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
       "defaultValue": "none",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -527,7 +520,6 @@
       "name": "Quest Items",
       "description": "Enable Big Tooltips for Quest Items.",
       "defaultValue": "3",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -544,7 +536,6 @@
       "name": "Essences",
       "description": "Enable Big Tooltips for Essences.",
       "defaultValue": "none",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -561,7 +552,6 @@
       "name": "Token of Absolution",
       "description": " on Tokens of Absolution on the ground.",
       "defaultValue": "3",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -578,7 +568,6 @@
       "name": "Pandemonium Keys",
       "description": "Enable Big Tooltips for Keys of Terror/Hate/Destruction.",
       "defaultValue": "3",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -595,7 +584,6 @@
       "name": "Pandemonium Organs",
       "description": "Enable Big Tooltips for Über Organs. ",
       "defaultValue": "3",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -612,7 +600,6 @@
       "name": "Standard of Heroes",
       "description": "Enable Big Tooltips for the Standard of Heroes.",
       "defaultValue": "none",
-      "visible": ["value", "IsBigTooltipsEnabled"],
       "options": [
         { "value": "none",   "label": "Disable" },
         { "value": "2",      "label": "Two Lines" },
@@ -641,120 +628,105 @@
       "type": "checkbox",
       "name": "Disable for Hidden Items",
       "description": "Do not shine Light Pillars on items set to hidden. NOTE: Does not work with custom settings.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRunesLow",
       "type": "checkbox",
       "name": "Runes: Low",
       "description": "Shine a Light Pillar on Low Runes on the ground (El [1] - Dol [14], except Ral [8]).",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRunesLowMid",
       "type": "checkbox",
       "name": "Runes: Low-Mid",
       "description": "Shine a Light Pillar on Low-Mid Runes on the ground (Hel [15] - Fal [19] and Ral [8]).",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRunesMid",
       "type": "checkbox",
       "name": "Runes: Mid",
       "description": "Shine a Light Pillar on Mid Runes on the ground (Lem [20] - Gul [25]).",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRunesHigh",
       "type": "checkbox",
       "name": "Runes: High",
       "description": "Shine a Light Pillar on High Runes on the ground (Vex [26] - Zod [33]).",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarRingsAmulets",
       "type": "checkbox",
       "name": "Rings & Amulets",
       "description": "Shine a Light Pillar on Rings and Amulets on the ground.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarGemsJewels",
       "type": "checkbox",
       "name": "Gems & Jewels",
       "description": "Shine a Light Pillar on Gems and Jewels on the ground. Since these item types share some of the same graphics, they can not be set separately.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarCharms",
       "type": "checkbox",
       "name": "Charms",
       "description": "Shine a Light Pillar on Charms on the ground. Annihilus shares its graphics with Mephisto's Soulstone, so enabling either Charms or Quest Items results in Light Pillars for both. Unfortunately Hellfire Torch is not supported because some monsters carry Torches. I can't enable Light Pillars for Torches without turning certain monster groups into a dance party.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarQuestItems",
       "type": "checkbox",
       "name": "Quest: Items",
       "description": "Shine a Light Pillar on Quest Items on the ground. Khalim's Eye and Brain share graphics with Baal's Eye and Mephisto's Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarQuestWeapons",
       "type": "checkbox",
       "name": "Quest: Weapons",
       "description": "Shine a Light Pillar on Quest Weapons on the ground. Equipping a Quest Weapon with this enabled will also shine a Light Pillar on your character's weapon. Disable this if for instance you want to use Khalim's Will on a low level character.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarEssences",
       "type": "checkbox",
       "name": "Essences",
       "description": "Shine a Light Pillar on Essences on the ground.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarTokens",
       "type": "checkbox",
       "name": "Token of Absolution",
       "description": "Shine a Light Pillar on Tokens of Absolution on the ground.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarKeys",
       "type": "checkbox",
       "name": "Pandemonium Keys",
       "description": "Shine a Light Pillar on Keys of Terror/Hate/Destruction on the ground.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarOrgans",
       "type": "checkbox",
       "name": "Pandemonium Organs",
       "description": "Shine a Light Pillar on Über Organs on the ground. Baal's Eye and Mephisto's Brain share graphics with Khalim's Eye and Brain, so enabling either Quest Items or Organs results in Light Pillars for all four of them.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "ShouldAddLightPillarStandardOfHeroes",
       "type": "checkbox",
       "name": "Standard of Heroes",
       "description": "Shine a Light Pillar on the Standard of Heroes. Since Hellfire Torch is unsupported (some monsters carry torches), this will still shine a Light Pillar when you kill the Übers.",
-      "defaultValue": true,
-      "visible": ["value", "IsLightPillarsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "DropSoundSection",
@@ -774,8 +746,7 @@
       "type": "checkbox",
       "name": "Disable for Hidden Items",
       "description": "Do not modify drop sounds on items set to hidden. NOTE: Does not work with custom settings.",
-      "defaultValue": true,
-      "visible": ["value", "IsDropSoundsEnabled"]
+      "defaultValue": true
     },
     {
       "id": "DropSoundRunesLow",
@@ -783,7 +754,6 @@
       "name": "Runes: Low",
       "description": "Select a custom drop sound for Low Runes (El [1] - Dol [14], except Ral [8]).",
       "defaultValue": "default",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -801,7 +771,6 @@
       "name": "Runes: Low-Mid",
       "description": "Select a custom drop sound for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
       "defaultValue": "default",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -819,7 +788,6 @@
       "name": "Runes: Mid",
       "description": "Select a custom drop sound for Mid Runes (Lem [20] - Gul [25]).",
       "defaultValue": "hf_place",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -837,7 +805,6 @@
       "name": "Runes: High",
       "description": "Select a custom drop sound for High Runes (Vex [26] - Zod [33]).",
       "defaultValue": "hf_place",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -855,7 +822,6 @@
       "name": "Quest Items",
       "description": "Select a custom drop sound for Quest Items. The Horadric Cube is disabled by default since it already has a unique sound effect. To enable, search [CSTM_DSBOX] and uncomment the line.",
       "defaultValue": "hf_smash",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -873,7 +839,6 @@
       "name": "Essences",
       "description": "Select a custom drop sound for Essences.",
       "defaultValue": "default",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -891,7 +856,6 @@
       "name": "Token of Absolution",
       "description": "Select a custom drop sound for Tokens of Absolution.",
       "defaultValue": "default",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -909,7 +873,6 @@
       "name": "Pandemonium Keys",
       "description": "Select a custom drop sound for Über Keys.",
       "defaultValue": "hf_smash",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -927,7 +890,6 @@
       "name": "Pandemonium Organs",
       "description": "Select a custom drop sound for Über Organs.",
       "defaultValue": "hf_smash",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -945,7 +907,6 @@
       "name": "Standard of Heroes",
       "description": "Select a custom drop sound for the Standard of Heroes.",
       "defaultValue": "quest_done",
-      "visible": ["value", "IsDropSoundsEnabled"],
       "options": [
         { "value": "default",       "label": "Default" },
         { "value": "hostile",       "label": "Hostile (PVP)" },
@@ -1053,8 +1014,7 @@
       "maxValue": 1,
       "name": "Tooltip mods: opacity",
       "description": "Set the tooltip background opacity (unmodded = 0.6).",
-      "defaultValue": 0.75,
-      "visible": ["or", ["eq", ["value", "Tooltip"], "all"], ["eq", ["value", "Tooltip"], "opacity"]]
+      "defaultValue": 0.75
     },
     {
       "id": "TooltipSize",
@@ -1063,8 +1023,7 @@
       "maxValue": 50,
       "name": "Tooltip mods: font size",
       "description": "Set the tooltip font size (unmodded = 36).",
-      "defaultValue": 33,
-      "visible": ["or", ["eq", ["value", "Tooltip"], "all"], ["eq", ["value", "Tooltip"], "size"]]
+      "defaultValue": 33
     }
   ]
 }
