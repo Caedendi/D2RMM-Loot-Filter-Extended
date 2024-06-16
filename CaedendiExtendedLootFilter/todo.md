@@ -8,9 +8,8 @@
 - [ ] README: update settings overview
 - [ ] Simple Loot Filter feature parity
   - [ ] custom weapons/armor filter lists
-- [ ] migrate to TypeScript
-  - [ ] unit tests
-- [ ] other display languages compatiblity
+- [ ] TypeScript re-write
+- [ ] TypeScript unit tests
 
 ## item filtering
 - [x] Helper.upsert()
