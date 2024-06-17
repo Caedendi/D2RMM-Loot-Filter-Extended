@@ -1,10 +1,10 @@
-import { ColorConstants } from "../Constants/ColorConstants.ts";
-import { FileConstants } from "../Constants/FileConstants.ts";
-import { HighlightConstants } from "../Constants/HighlightConstants.ts";
-import { RuneConstants } from "../Constants/RuneConstants.ts";
-import { SettingsConstants } from "../Constants/SettingsConstants.ts";
-import { Helper } from "../helper.ts";
-import { AbstractItemBuilder } from "./AbstractItemBuilder.ts";
+import { ColorConstants } from "../Constants/ColorConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { HighlightConstants } from "../Constants/HighlightConstants";
+import { RuneConstants } from "../Constants/RuneConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { Helper } from "../helper";
+import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 export class ItemRunesBuilder extends AbstractItemBuilder {
   constructor() {

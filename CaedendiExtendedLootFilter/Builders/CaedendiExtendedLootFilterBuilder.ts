@@ -1,13 +1,13 @@
-import * as DropSoundBuilder from "./DropSoundBuilder";
-import * as ItemLevelBuilder from "./ItemLevelBuilder";
-import * as ItemModifiersBuilder from "./ItemModifiersBuilder";
-import * as ItemNameAffixesBuilder from "./ItemNameAffixesBuilder";
-import * as ItemNamesBuilder from "./ItemNamesBuilder";
-import * as ItemQualityBuilder from "./ItemQualityBuilder";
-import * as ItemRunesBuilder from "./ItemRunesBuilder";
-import * as LightPillarBuilder from "./LightPillarBuilder";
-import * as ProfileHdModsBuilder from "./ProfileHdModsBuilder";
-import * as UiBuilder from "./UiBuilder";
+import { DropSoundBuilder } from "./DropSoundBuilder";
+import { ItemLevelBuilder } from "./ItemLevelBuilder";
+import { ItemModifiersBuilder } from "./ItemModifiersBuilder";
+import { ItemNameAffixesBuilder } from "./ItemNameAffixesBuilder";
+import { ItemNamesBuilder } from "./ItemNamesBuilder";
+import { ItemQualityBuilder } from "./ItemQualityBuilder";
+import { ItemRunesBuilder } from "./ItemRunesBuilder";
+import { LightPillarBuilder } from "./LightPillarBuilder";
+import { ProfileHdModsBuilder } from "./ProfileHdModsBuilder";
+import { UiBuilder } from "./UiBuilder";
 
 /**
  * Master Builder
@@ -19,15 +19,15 @@ export class CaedendiExtendedLootFilterBuilder {
       return;
     }
 
-    (new ItemNameAffixesBuilder.ItemNameAffixesBuilder()).build(); // Gold, Superior/Inferior affixes, Gems (exceptions)
-    (new       ItemRunesBuilder.ItemRunesBuilder()).build(); // Runes
-    (new       ItemNamesBuilder.ItemNamesBuilder()).build(); // Most items
-    (new              UiBuilder.UiBuilder()).build(); // Quest items (exceptions)
-    (new   ItemModifiersBuilder.ItemModifiersBuilder()).build(); // Quest items (exceptions)
-    (new       ItemLevelBuilder.ItemLevelBuilder()).build(); // iLvl
-    (new     ItemQualityBuilder.ItemQualityBuilder()).build(); // Quality (normal/exceptional/elite)
-    (new     LightPillarBuilder.LightPillarBuilder()).build(); // Light Pillars
-    (new       DropSoundBuilder.DropSoundBuilder()).build(); // Drop Sounds
-    (new   ProfileHdModsBuilder.ProfileHdModsBuilder()).build(); // _profilehd.json stuff
+    (new ItemNameAffixesBuilder()).build(); // Gold, Superior/Inferior affixes, Gems (exceptions)
+    (new       ItemRunesBuilder()).build(); // Runes
+    (new       ItemNamesBuilder()).build(); // Most items
+    (new              UiBuilder()).build(); // Quest items (exceptions)
+    (new   ItemModifiersBuilder()).build(); // Quest items (exceptions)
+    (new       ItemLevelBuilder()).build(); // iLvl
+    (new     ItemQualityBuilder()).build(); // Quality (normal/exceptional/elite)
+    (new     LightPillarBuilder()).build(); // Light Pillars
+    (new       DropSoundBuilder()).build(); // Drop Sounds
+    (new   ProfileHdModsBuilder()).build(); // _profilehd.json stuff
   }
 }

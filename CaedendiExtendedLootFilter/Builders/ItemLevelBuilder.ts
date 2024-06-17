@@ -1,9 +1,9 @@
-import { CharConstants } from "../Constants/CharConstants.ts";
-import { CollectionConstants } from "../Constants/CollectionConstants.ts";
-import { FileConstants } from "../Constants/FileConstants.ts";
-import { JewelryConstants } from "../Constants/JewelryConstants.ts";
-import { SettingsConstants } from "../Constants/SettingsConstants.ts";
-import { AbstractItemBuilder } from "./AbstractItemBuilder.ts";
+import { CharConstants } from "../Constants/CharConstants";
+import { CollectionConstants } from "../Constants/CollectionConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { JewelryConstants } from "../Constants/JewelryConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 
 export class ItemLevelBuilder extends AbstractItemBuilder {

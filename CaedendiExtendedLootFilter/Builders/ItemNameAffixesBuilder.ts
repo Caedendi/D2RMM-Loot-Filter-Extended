@@ -1,11 +1,11 @@
-import { CharConstants } from "../Constants/CharConstants.ts";
-import { CollectionConstants } from "../Constants/CollectionConstants.ts";
-import { ColorConstants } from "../Constants/ColorConstants.ts";
-import { FileConstants } from "../Constants/FileConstants.ts";
-import { JewelryConstants } from "../Constants/JewelryConstants.ts";
-import { SettingsConstants } from "../Constants/SettingsConstants.ts";
-import { Helper } from "../helper.ts";
-import { AbstractItemBuilder } from "./AbstractItemBuilder.ts";
+import { CharConstants } from "../Constants/CharConstants";
+import { CollectionConstants } from "../Constants/CollectionConstants";
+import { ColorConstants } from "../Constants/ColorConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { JewelryConstants } from "../Constants/JewelryConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { Helper } from "../helper";
+import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 export class ItemNameAffixesBuilder extends AbstractItemBuilder {
   constructor() {

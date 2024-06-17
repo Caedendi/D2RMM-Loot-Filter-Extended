@@ -1,7 +1,7 @@
-import { ColorConstants } from "../Constants/ColorConstants.ts";
-import { FileConstants } from "../Constants/FileConstants.ts";
-import { FontColorConstants } from "../Constants/FontColorConstants.ts";
-import { SettingsConstants } from "../Constants/SettingsConstants.ts";
+import { ColorConstants } from "../Constants/ColorConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { FontColorConstants } from "../Constants/FontColorConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
 
 
 export class ProfileHdModsBuilder {

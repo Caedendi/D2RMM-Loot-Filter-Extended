@@ -7,7 +7,7 @@
 ////===============================================////
 ////===============================================////
 
-import { CaedendiExtendedLootFilterBuilder } from "./Builders/CaedendiExtendedLootFilterBuilder.ts"
+import { CaedendiExtendedLootFilterBuilder } from "./Builders/CaedendiExtendedLootFilterBuilder"
 
 let mod = new CaedendiExtendedLootFilterBuilder();
 mod.build();

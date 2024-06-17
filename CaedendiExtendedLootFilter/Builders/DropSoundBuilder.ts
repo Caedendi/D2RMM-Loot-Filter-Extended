@@ -1,6 +1,6 @@
-import { DropSoundConstants } from "../Constants/DropSoundConstants.ts";
-import { FileConstants } from "../Constants/FileConstants.ts";
-import { RuneConstants } from "../Constants/RuneConstants.ts";
+import { DropSoundConstants } from "../Constants/DropSoundConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { RuneConstants } from "../Constants/RuneConstants";
 
 
 export class DropSoundBuilder {
