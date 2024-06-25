@@ -1,5 +1,5 @@
-import { FileConstants } from "../Constants/FileConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
+import { FileConstants } from "./FileConstants";
+import { SettingsConstants } from "./SettingsConstants";
 
 export class ItemQualityBuilder {
   // todo: refactor if possible

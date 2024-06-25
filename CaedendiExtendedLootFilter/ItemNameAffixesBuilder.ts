@@ -1,10 +1,10 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { CollectionConstants } from "../Constants/CollectionConstants";
-import { ColorConstants } from "../Constants/ColorConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { JewelryConstants } from "../Constants/JewelryConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Helper } from "../helper";
+import { CharConstants } from "./CharConstants";
+import { CollectionConstants } from "./CollectionConstants";
+import { ColorConstants } from "./ColorConstants";
+import { FileConstants } from "./FileConstants";
+import { JewelryConstants } from "./JewelryConstants";
+import { SettingsConstants } from "./SettingsConstants";
+import { Helper } from "./Helper";
 import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 export class ItemNameAffixesBuilder extends AbstractItemBuilder {

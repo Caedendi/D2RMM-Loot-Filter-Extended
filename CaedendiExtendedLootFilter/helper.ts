@@ -1,6 +1,6 @@
-import { CharConstants } from "./Constants/CharConstants";
-import { SettingsConstants } from "./Constants/SettingsConstants";
-import { HighlightConstants } from "./Constants/HighlightConstants";
+import { CharConstants } from "./CharConstants";
+import { SettingsConstants } from "./SettingsConstants";
+import { HighlightConstants } from "./HighlightConstants";
 
 export class Helper {
   static addBigTooltips(collection, setting, indentPickUpMsg = CharConstants.empty) {

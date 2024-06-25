@@ -1,13 +1,13 @@
-import { DropSoundBuilder } from "./DropSoundBuilder";
+import { DropSoundBuilder } from "./Builders/DropSoundBuilder";
 import { ItemLevelBuilder } from "./ItemLevelBuilder";
-import { ItemModifiersBuilder } from "./ItemModifiersBuilder";
-import { ItemNameAffixesBuilder } from "./ItemNameAffixesBuilder";
-import { ItemNamesBuilder } from "./ItemNamesBuilder";
-import { ItemQualityBuilder } from "./ItemQualityBuilder";
-import { ItemRunesBuilder } from "./ItemRunesBuilder";
-import { LightPillarBuilder } from "./LightPillarBuilder";
-import { ProfileHdModsBuilder } from "./ProfileHdModsBuilder";
-import { UiBuilder } from "./UiBuilder";
+import { ItemModifiersBuilder } from "../ItemModifiersBuilder";
+import { ItemNameAffixesBuilder } from "../ItemNameAffixesBuilder";
+import { ItemNamesBuilder } from "../ItemNamesBuilder";
+import { ItemQualityBuilder } from "../ItemQualityBuilder";
+import { ItemRunesBuilder } from "../ItemRunesBuilder";
+import { LightPillarBuilder } from "../LightPillarBuilder";
+import { ProfileHdModsBuilder } from "../ProfileHdModsBuilder";
+import { UiBuilder } from "../UiBuilder";
 
 /**
  * Master Builder

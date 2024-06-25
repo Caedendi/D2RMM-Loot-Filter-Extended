@@ -1,6 +1,6 @@
-import { CharConstants } from "./CharConstants.ts";
-import { ColorConstants } from "./ColorConstants.ts";
-import { HighlightConstants } from "./HighlightConstants.ts";
+import { CharConstants } from "./CharConstants";
+import { ColorConstants } from "./ColorConstants";
+import { HighlightConstants } from "./HighlightConstants";
 
 export class JewelryConstants {
   static amethyst = "Amethyst";

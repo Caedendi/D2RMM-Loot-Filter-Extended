@@ -1,9 +1,9 @@
-import { ColorConstants } from "../Constants/ColorConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { HighlightConstants } from "../Constants/HighlightConstants";
-import { RuneConstants } from "../Constants/RuneConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Helper } from "../helper";
+import { ColorConstants } from "./ColorConstants";
+import { FileConstants } from "./FileConstants";
+import { HighlightConstants } from "./HighlightConstants";
+import { RuneConstants } from "./RuneConstants";
+import { SettingsConstants } from "./SettingsConstants";
+import { Helper } from "./Helper";
 import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 export class ItemRunesBuilder extends AbstractItemBuilder {

@@ -1,8 +1,8 @@
-import { CollectionConstants } from "../Constants/CollectionConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { HighlightConstants } from "../Constants/HighlightConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Helper } from "../helper";
+import { CollectionConstants } from "./CollectionConstants";
+import { FileConstants } from "./FileConstants";
+import { HighlightConstants } from "./HighlightConstants";
+import { SettingsConstants } from "./SettingsConstants";
+import { Helper } from "./Helper";
 import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 

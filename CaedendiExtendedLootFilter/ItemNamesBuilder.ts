@@ -1,12 +1,12 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { CollectionConstants } from "../Constants/CollectionConstants";
-import { ColorConstants } from "../Constants/ColorConstants";
-import { EndgameConstants } from "../Constants/EndgameConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { HighlightConstants } from "../Constants/HighlightConstants";
-import { JewelryConstants } from "../Constants/JewelryConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Helper } from "../helper";
+import { CharConstants } from "./CharConstants";
+import { CollectionConstants } from "./CollectionConstants";
+import { ColorConstants } from "./ColorConstants";
+import { EndgameConstants } from "./EndgameConstants";
+import { FileConstants } from "./FileConstants";
+import { HighlightConstants } from "./HighlightConstants";
+import { JewelryConstants } from "./JewelryConstants";
+import { SettingsConstants } from "./SettingsConstants";
+import { Helper } from "./Helper";
 import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 export class ItemNamesBuilder extends AbstractItemBuilder {

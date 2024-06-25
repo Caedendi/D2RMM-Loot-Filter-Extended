@@ -1,5 +1,5 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { FileConstants } from "../Constants/FileConstants";
+import { CharConstants } from "./CharConstants";
+import { FileConstants } from "./FileConstants";
 
 export class AbstractItemBuilder {
   collections = [];

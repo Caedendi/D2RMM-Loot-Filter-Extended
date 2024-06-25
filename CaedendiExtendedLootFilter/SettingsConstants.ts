@@ -1,4 +1,4 @@
-import { CharConstants } from "./CharConstants.ts";
+import { CharConstants } from "./CharConstants";
 
 export class SettingsConstants {
   // tooltip

@@ -1,6 +1,6 @@
-import { BaseColorConstants } from "./BaseColorConstants.ts";
-import { CharConstants } from "./CharConstants.ts";
-import { ColorConstants } from "./ColorConstants.ts";
+import { BaseColorConstants } from "./BaseColorConstants";
+import { CharConstants } from "./CharConstants";
+import { ColorConstants } from "./ColorConstants";
 
 export class HighlightConstants {
   static character = config.HighlightCharacter !== this.custom ? config.HighlightCharacter                              : '*'; // replace * with desired custom character [CSTM-HLCTR]

@@ -1,5 +1,5 @@
-import { BaseColorConstants } from "./BaseColorConstants.ts";
-import { CharConstants } from "./CharConstants.ts";
+import { BaseColorConstants } from "./BaseColorConstants";
+import { CharConstants } from "./CharConstants";
 
 export class ColorConstants {
   // loot filter colors
