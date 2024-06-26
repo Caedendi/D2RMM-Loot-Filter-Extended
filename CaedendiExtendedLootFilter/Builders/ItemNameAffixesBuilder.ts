@@ -1,10 +1,12 @@
-import { CharConstants } from "./CharConstants";
-import { CollectionConstants } from "./CollectionConstants";
-import { ColorConstants } from "./ColorConstants";
-import { FileConstants } from "./FileConstants";
-import { JewelryConstants } from "./JewelryConstants";
-import { SettingsConstants } from "./SettingsConstants";
-import { Helper } from "./Helper";
+import { ModConfigSingleValue } from "../../../types";
+import { CharConstants } from "../Constants/CharConstants";
+import { CollectionConstants } from "../Constants/CollectionConstants";
+import { ColorConstants } from "../Constants/ColorConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { GemConstants } from "../Constants/GemConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { Helper } from "../Helper";
+import { Gem } from "../Models/Gem";
 import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 export class ItemNameAffixesBuilder extends AbstractItemBuilder {
@@ -28,14 +30,14 @@ export class ItemNameAffixesBuilder extends AbstractItemBuilder {
       return;
     }
 
-    this.customizeGold(config.GoldAmount, config.GoldSuffix);
-    this.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes);
-    this.customizeGems(config.Gems);
-    this.addBigTooltips(config.BigTooltipGems);
+    this.customizeGold(config.GoldAmount as string, config.GoldSuffix as string);
+    this.shortenSupInferiorPrefixes(config.ShortSupInferiorPrefixes as string);
+    this.customizeGems(config.Gems as string);
+    this.addBigTooltips(config.BigTooltipGems as string);
     this.applyCustomNames();
   }
 
-  customizeGold(settingAmount, settingAffix) {
+  customizeGold(settingAmount:ModConfigSingleValue, settingAffix:ModConfigSingleValue) {
     let goldCol = this.getCollectionById(CollectionConstants.gold);
     let color = settingAmount === "wg" ? ColorConstants.gold : settingAmount === "gw" ? ColorConstants.white : ColorConstants.none;
     let gld = "gld";
@@ -59,7 +61,7 @@ export class ItemNameAffixesBuilder extends AbstractItemBuilder {
     }
   }
 
-  shortenSupInferiorPrefixes(setting) {
+  shortenSupInferiorPrefixes(setting:ModConfigSingleValue) {
     let supInfCol = this.getCollectionById(CollectionConstants.supInf);
     var color = (setting === "color") ? ColorConstants.gray : ColorConstants.none;
     var superior = `${CharConstants.plus}`;
@@ -93,14 +95,14 @@ export class ItemNameAffixesBuilder extends AbstractItemBuilder {
     }
   }
 
-  customizeGems(setting) {
+  customizeGems(setting:ModConfigSingleValue) {
     let gemsCol = this.getCollectionById(CollectionConstants.gems);
 
     let gems = [
-      { id: "gsw", color: JewelryConstants.clrDiamond, name: JewelryConstants.diamond }, // Diamond
-      { id: "gsg", color: JewelryConstants.clrEmerald, name: JewelryConstants.emerald }, // Emerald
-      { id: "gsr", color: JewelryConstants.clrRuby, name: JewelryConstants.ruby }, // Ruby
-      { id: "gsb", color: JewelryConstants.clrSapphire, name: JewelryConstants.sapphire }, // Sapphire
+      new Gem("gsw", GemConstants.clrDiamond,  GemConstants.diamond),   // Diamond
+      new Gem("gsg", GemConstants.clrEmerald,  GemConstants.emerald),   // Emerald
+      new Gem("gsr", GemConstants.clrRuby,     GemConstants.ruby),      // Ruby
+      new Gem("gsb", GemConstants.clrSapphire, GemConstants.sapphire), // Sapphire
     ];
     // These gem names also function as affixes, which is why they are located in the item-nameaffixes.json file.
     // Enabling filtering for these gems could also change for example the Ruby-part in a "Ruby Jewel of Fervor".
@@ -118,27 +120,27 @@ export class ItemNameAffixesBuilder extends AbstractItemBuilder {
         return;
       case SettingsConstants.custom: // [CSTM-GEM2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.upsert(gemsCol, gsw, `Diamond`);
-        this.upsert(gemsCol, gsg, `Emerald`);
-        this.upsert(gemsCol, gsr, `Ruby`);
-        this.upsert(gemsCol, gsb, `Sapphire`);
+        this.upsert(gemsCol, "gsw", `Diamond`);
+        this.upsert(gemsCol, "gsg", `Emerald`);
+        this.upsert(gemsCol, "gsr", `Ruby`);
+        this.upsert(gemsCol, "gsb", `Sapphire`);
         return;
     }
   }
 
-  hideGems(gemsCollection, gems) {
+  hideGems(gemsCollection:{id:string, value:string}[], gems: Gem[]) {
     gems.forEach(gem => {
       this.upsert(gemsCollection, gem.id, SettingsConstants.hidden);
     });
   }
 
-  highlightGems(gemsCollection, gems) {
+  highlightGems(gemsCollection: {id: string, value: string}[], gems: Gem[]) {
     gems.forEach(gem => {
-      this.upsert(gemsCollection, gem.id, Helper.generateSingleHighlight(gem.color, JewelryConstants.highlight, JewelryConstants.padding, JewelryConstants.clrName, gem.name));
+      this.upsert(gemsCollection, gem.id, Helper.generateSingleHighlight(gem.color, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, gem.name));
     });
   }
 
-  addBigTooltips(settingGems) {
+  addBigTooltips(settingGems: string) {
     if (!config.IsBigTooltipsEnabled) {
       return;
     }

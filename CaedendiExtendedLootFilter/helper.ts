@@ -1,19 +1,20 @@
-import { CharConstants } from "./CharConstants";
-import { SettingsConstants } from "./SettingsConstants";
-import { HighlightConstants } from "./HighlightConstants";
+import { CharConstants } from "./Constants/CharConstants";
+import { SettingsConstants } from "./Constants/SettingsConstants";
+import { HighlightConstants } from "./Constants/HighlightConstants";
+import { D2Color } from "./Models/D2Color";
 
 export class Helper {
-  static addBigTooltips(collection, setting, indentPickUpMsg = CharConstants.empty) {
-    collection.forEach(entry => entry.value = this.generateBigTooltip(setting, entry.value, indentPickUpMsg));
+  public static addBigTooltips(collection: {id: string, value: string}[], setting: string, indentPickUpMsg: string = CharConstants.empty) {
+    collection.forEach(entry => entry.value = Helper.generateBigTooltip(setting, entry.value, indentPickUpMsg));
   }
 
-  static addBigTooltipsForIds(collection, ids, setting) {
+  public static addBigTooltipsForIds(collection: {id: string, value: string}[], ids: string[], setting: string) {
     ids.forEach(id => {
       this.addBigTooltipForId(collection, id, setting);
     })
   }
   
-  static addBigTooltipForId(collection, id, setting) {
+  public static addBigTooltipForId(collection: {id: string, value: string}[], id: string, setting: string) {
     const i = collection.findIndex(x => x.id === id);
     if (i < 0) 
       throw new Error(`Can't find item \"${id}\" in collection.`);
@@ -29,8 +30,8 @@ export class Helper {
    * @param {*} itemName The name of the item.
    * @returns A complete item name with a colored highlight pattern on the left side.
    */
-  static generateSingleHighlight(patternColor, pattern, padding, itemColor, itemName) {
-    return `${patternColor}${pattern}${itemColor}${padding}${itemName}`;
+  public static generateSingleHighlight(patternColor: D2Color, pattern: string, padding: string, itemColor: D2Color, itemName: string) {
+    return `${patternColor.getCode()}${pattern}${itemColor.getCode()}${padding}${itemName}`;
   }
 
   /**
@@ -42,8 +43,8 @@ export class Helper {
    * @param {*} itemName The name of the item.
    * @returns A complete item name with colored highlight patterns on both sides.
    */
-  static generateDoubleHighlight(patternColor, pattern, padding, itemColor, itemName) {
-    return `${patternColor}${pattern}${itemColor}${padding}${itemName}${padding}${patternColor}${pattern}${itemColor}`;
+  public static generateDoubleHighlight(patternColor: D2Color, pattern: string, padding: string, itemColor: D2Color, itemName: string) {
+    return `${patternColor.getCode()}${pattern}${itemColor.getCode()}${padding}${itemName}${padding}${patternColor.getCode()}${pattern}${itemColor.getCode()}`;
   }
 
   /**
@@ -52,7 +53,7 @@ export class Helper {
    * @param {*} name The item name (after other filtering and highlighting has been applied). Nothing in this line will be changed.
    * @returns A multi-line item name, which will show as a Big Tooltip when the item is on the ground.
    */
-  static generateBigTooltip(setting, name, indentPickUpMsg = CharConstants.empty) {
+  protected static generateBigTooltip(setting: string, name: string, indentPickUpMsg: string = CharConstants.empty) {
     if (setting === SettingsConstants.disabled || name === SettingsConstants.hidden) {
       return name;
     }
@@ -80,6 +81,6 @@ export class Helper {
       return CharConstants.newLine + CharConstants.newLine + name + CharConstants.newLine + CharConstants.newLine;
     }
 
-    return "undefined";
+    throw new Error(`Big Tooltip setting is undefined for ${name}.`);
   }
 }

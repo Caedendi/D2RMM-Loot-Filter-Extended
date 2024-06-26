@@ -1,9 +1,9 @@
-import { ColorConstants } from "./ColorConstants";
-import { FileConstants } from "./FileConstants";
-import { HighlightConstants } from "./HighlightConstants";
-import { RuneConstants } from "./RuneConstants";
-import { SettingsConstants } from "./SettingsConstants";
-import { Helper } from "./Helper";
+import { ColorConstants } from "../Constants/ColorConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { HighlightConstants } from "../Constants/HighlightConstants";
+import { RuneConstants } from "../Constants/RuneConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { Helper } from "../Helper";
 import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 export class ItemRunesBuilder extends AbstractItemBuilder {
@@ -11,7 +11,7 @@ export class ItemRunesBuilder extends AbstractItemBuilder {
     super(FileConstants.FILE_ITEM_RUNES_PATH);
 
     RuneConstants.tiers.forEach(tier => {
-      this.initCollection(tier.level);
+      this.initCollection(tier.tier.toString());
     });
   }
 
@@ -54,6 +54,8 @@ export class ItemRunesBuilder extends AbstractItemBuilder {
         let highlight2 = "*****";
         let highlight3 = "**********";
 
+        // TODO: fix
+        /*
         this.runes.r01 = `${clrRune}El (1)`; // El
         this.runes.r02 = `${clrRune}Eld (2)`; // Eld
         this.runes.r03 = `${clrRune}Tir (3)`; // Tir
@@ -96,17 +98,19 @@ export class ItemRunesBuilder extends AbstractItemBuilder {
         // this.runes.r33 = `${clrHighlight}${highlight3}${clrRune}     Zod (33)     ${clrHighlight}${highlight3}${clrRune}`;  // Zod
         // this.runes.r33 = `${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${HighlightConstants.padding5}${RuneConstants.clrName}Zod (33)${HighlightConstants.padding5}${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${RuneConstants.clrName}`;  // Zod
         this.runes.r33 = Helper.generateDoubleHighlight(clrHighlight, HighlightConstants.pattern10, HighlightConstants.padding5, clrRune, "Zod Rune (33)"); // Zod
+        */
+       
         return;
     }
   }
 
   generateRuneNames(hasAffix: boolean, hasNumber: boolean, hasSettingHighlighting: boolean) {
     RuneConstants.tiers.forEach((tier) => {
-      let tierCollection = this.getCollectionById(tier.level);
+      let tierCollection = this.getCollectionById(tier.tier.toString());
 
       tier.runes.forEach((rune) => {
         let itemCode = rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`;
-        let runeName = !tier.isVisible ? SettingsConstants.hidden : this.generateRuneName(rune.name, rune.number, tier.level, tier.pattern, tier.padding, hasAffix, hasNumber, hasSettingHighlighting);
+        let runeName = !tier.isVisible ? SettingsConstants.hidden : this.generateRuneName(rune.name, rune.number, tier.tier, tier.pattern, tier.padding, hasAffix, hasNumber, hasSettingHighlighting);
         this.upsert(tierCollection, itemCode, runeName); // chuck generated code/name combination into this.collections => [current tier] => [current rune]
       });
     });
@@ -158,7 +162,7 @@ export class ItemRunesBuilder extends AbstractItemBuilder {
     }
 
     RuneConstants.tiers.forEach(tier => {
-      let tierCollection = this.getCollectionById(tier.level);
+      let tierCollection = this.getCollectionById(tier.tier.toString());
       Helper.addBigTooltips(tierCollection, tier.bigTooltipSetting);
     });
   }

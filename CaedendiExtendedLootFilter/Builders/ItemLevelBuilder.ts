@@ -1,9 +1,9 @@
-import { CharConstants } from "../CharConstants";
-import { CollectionConstants } from "../CollectionConstants";
-import { FileConstants } from "../FileConstants";
-import { JewelryConstants } from "../JewelryConstants";
-import { SettingsConstants } from "../SettingsConstants";
-import { AbstractItemBuilder } from "../AbstractItemBuilder";
+import { CharConstants } from "../Constants/CharConstants";
+import { CollectionConstants } from "../Constants/CollectionConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { JewelryConstants } from "../Constants/JewelryConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
 
 export class ItemLevelBuilder extends AbstractItemBuilder {
@@ -35,7 +35,7 @@ export class ItemLevelBuilder extends AbstractItemBuilder {
     this.enableForMiscItems(miscCol.map(item => item.id));
   }
 
-  addExclusions(weaponsCol, miscCol) {
+  addExclusions(weaponsCol: {id: string, value: string}[], miscCol: {id: string, value: string}[]) {
     this.upsert(weaponsCol, "tpot", CharConstants.empty); // always exclude throwing potions
 
     if (!config.IsBigTooltipsEnabled || !SettingsConstants.shouldExcludeIlvlForBigTooltips) {
@@ -43,11 +43,11 @@ export class ItemLevelBuilder extends AbstractItemBuilder {
     }
 
     if (config.BigTooltipFacets !== SettingsConstants.disabled) {
-      this.upsert(miscCol, JewelryConstants.jewel, CharConstants.empty);
+      this.upsert(miscCol, JewelryConstants.jewelId, CharConstants.empty);
     }
 
     if (config.BigTooltipUniqueCharms !== SettingsConstants.disabled) {
-      JewelryConstants.charms.forEach(charm => {
+      JewelryConstants.charmIds.forEach(charm => {
         this.upsert(miscCol, charm, CharConstants.empty);
       });
     }
@@ -69,7 +69,7 @@ export class ItemLevelBuilder extends AbstractItemBuilder {
     }
   }
 
-  enableForWeapons(exclusions) {
+  enableForWeapons(exclusions :string[]) {
     this.enableForWeaponsArmor(FileConstants.FILE_WEAPONS_PATH, exclusions);
   }
 
@@ -77,7 +77,7 @@ export class ItemLevelBuilder extends AbstractItemBuilder {
     this.enableForWeaponsArmor(FileConstants.FILE_ARMOR_PATH, []);
   }
 
-  enableForWeaponsArmor(path, exclusions) {
+  enableForWeaponsArmor(path: string, exclusions: string[]) {
     const fileWeapons = D2RMM.readTsv(path);
 
     // in these files, all entries need ShowLevel to be set to 1, except those in the exclusions list.
@@ -85,13 +85,13 @@ export class ItemLevelBuilder extends AbstractItemBuilder {
       if (exclusions.includes(row.code) || exclusions.includes(row.type)) {
         return;
       }
-      row.ShowLevel = 1;
+      row.ShowLevel = "1";
     });
 
     D2RMM.writeTsv(path, fileWeapons);
   }
 
-  enableForMiscItems(exclusions) {
+  enableForMiscItems(exclusions: string[]) {
     const fileMisc = D2RMM.readTsv(FileConstants.FILE_MISC_PATH);
 
     // in this file, we only want the entries matching JewelryConstants.iLvlJewelry to have their ShowLevel be set to 1.
@@ -99,7 +99,7 @@ export class ItemLevelBuilder extends AbstractItemBuilder {
     let misc = JewelryConstants.iLvlJewelry.filter(item => !exclusions.includes(item));
     fileMisc.rows.forEach((row) => {
       if (misc.includes(row.code)) {
-        row.ShowLevel = 1;
+        row.ShowLevel = "1";
       }
     });
 

@@ -1,7 +1,8 @@
-import { ColorConstants } from "./ColorConstants";
-import { FileConstants } from "./FileConstants";
-import { FontColorConstants } from "./FontColorConstants";
-import { SettingsConstants } from "./SettingsConstants";
+import { JSONData } from "../../../types";
+import { ColorConstants } from "../Constants/ColorConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { FontColorConstants } from "../Constants/FontColorConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
 
 
 export class ProfileHdModsBuilder {
@@ -21,17 +22,17 @@ export class ProfileHdModsBuilder {
   };
 
   build() {
-    let path = FileConstants.FILE_PROFILE_HD_PATH;
+    let path = FileConstants.FILE_PROFILE_HD_PATH; // TODO: low vision and controller modes
     let profileHD = D2RMM.readJson(path);
 
-    this.applyCustomGoldColor(profileHD, config.GoldAmount);
-    this.applyCustomEtherealColor(profileHD, config.EthItemsColor);
-    this.applyTooltipMods(profileHD, config.Tooltip, config.TooltipOpacity, config.TooltipSize);
+    this.applyCustomGoldColor(profileHD, config.GoldAmount as string);
+    this.applyCustomEtherealColor(profileHD, config.EthItemsColor as string);
+    this.applyTooltipMods(profileHD, config.Tooltip as string, config.TooltipOpacity as number, config.TooltipSize as number);
 
     D2RMM.writeJson(path, profileHD);
   }
 
-  applyCustomGoldColor(profileHD, setting) {
+  applyCustomGoldColor(profileHD:JSONData, setting:string) {
     if (setting === SettingsConstants.disabled || setting === "wg") {
       return;
     }
@@ -50,7 +51,7 @@ export class ProfileHdModsBuilder {
     profileHD.TooltipStyle.GoldColor = goldColor;
   }
 
-  applyCustomEtherealColor(profileHD, setting) {
+  applyCustomEtherealColor(profileHD:JSONData, setting:string) {
     if (setting === SettingsConstants.disabled) {
       return;
     }
@@ -58,7 +59,7 @@ export class ProfileHdModsBuilder {
     profileHD.TooltipStyle.EtherealColor = (setting !== SettingsConstants.custom) ? this.ethColors[setting] : FontColorConstants.lightTeal; // [CSTM-ETH] change FontColorConstants.lightTeal into any color variable in _profilehd.json
   }
 
-  applyTooltipMods(profileHD, setting, opacity, tooltipSize) {
+  applyTooltipMods(profileHD:JSONData, setting:string, opacity:number, tooltipSize:number) {
     if (setting === SettingsConstants.disabled) {
       return;
     }

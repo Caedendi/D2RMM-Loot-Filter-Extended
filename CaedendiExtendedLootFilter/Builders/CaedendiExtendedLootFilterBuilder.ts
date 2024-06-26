@@ -1,27 +1,37 @@
-import { DropSoundBuilder } from "./Builders/DropSoundBuilder";
+import { DropSoundBuilder } from "./DropSoundBuilder";
+import { ICaedendiExtendedLootFilterBuilder } from "./Interfaces/ICaedendiExtendedLootFilterBuilder";
 import { ItemLevelBuilder } from "./ItemLevelBuilder";
-import { ItemModifiersBuilder } from "../ItemModifiersBuilder";
-import { ItemNameAffixesBuilder } from "../ItemNameAffixesBuilder";
-import { ItemNamesBuilder } from "../ItemNamesBuilder";
-import { ItemQualityBuilder } from "../ItemQualityBuilder";
-import { ItemRunesBuilder } from "../ItemRunesBuilder";
-import { LightPillarBuilder } from "../LightPillarBuilder";
-import { ProfileHdModsBuilder } from "../ProfileHdModsBuilder";
-import { UiBuilder } from "../UiBuilder";
+import { ItemModifiersBuilder } from "./ItemModifiersBuilder";
+import { ItemNameAffixesBuilder } from "./ItemNameAffixesBuilder";
+import { IItemNamesBuilder } from "./ItemNamesBuilders/Interfaces/IItemNamesBuilder";
+import { ItemNamesBuilder } from "./ItemNamesBuilders/ItemNamesBuilder";
+import { ItemQualityBuilder } from "./ItemQualityBuilder";
+import { ItemRunesBuilder } from "./ItemRunesBuilder";
+import { LightPillarBuilder } from "./LightPillarBuilder";
+import { ProfileHdModsBuilder } from "./ProfileHdModsBuilder";
+import { UiBuilder } from "./UiBuilder";
 
 /**
  * Master Builder
  */
-export class CaedendiExtendedLootFilterBuilder {
+export class CaedendiExtendedLootFilterBuilder implements ICaedendiExtendedLootFilterBuilder {
+  itemNamesBuilder: IItemNamesBuilder;
+  
+  constructor() {
+    this.itemNamesBuilder = new ItemNamesBuilder();
+  }
+
   build() {
-    if (D2RMM.getVersion == null || D2RMM.getVersion() < 1.6) {
-      D2RMM.error("Requires D2RMM version 1.6.0 or higher.");
-      return;
+    if (D2RMM.getVersion == null || D2RMM.getVersion() < 1.7) { // TODO: use new version checker in D2RMM 1.7.0
+      throw new Error("Requires D2RMM version 1.7.0 or higher.");
     }
 
     (new ItemNameAffixesBuilder()).build(); // Gold, Superior/Inferior affixes, Gems (exceptions)
     (new       ItemRunesBuilder()).build(); // Runes
-    (new       ItemNamesBuilder()).build(); // Most items
+
+    // (new       ItemNamesBuilder()).build(); // Most items
+    this.itemNamesBuilder.build();
+
     (new              UiBuilder()).build(); // Quest items (exceptions)
     (new   ItemModifiersBuilder()).build(); // Quest items (exceptions)
     (new       ItemLevelBuilder()).build(); // iLvl

@@ -1,15 +1,23 @@
-import { CharConstants } from "./CharConstants";
-import { CollectionConstants } from "./CollectionConstants";
-import { ColorConstants } from "./ColorConstants";
-import { EndgameConstants } from "./EndgameConstants";
-import { FileConstants } from "./FileConstants";
-import { HighlightConstants } from "./HighlightConstants";
-import { JewelryConstants } from "./JewelryConstants";
-import { SettingsConstants } from "./SettingsConstants";
-import { Helper } from "./Helper";
-import { AbstractItemBuilder } from "./AbstractItemBuilder";
+import { ModConfigValue } from "../../../../types";
+import { CharConstants } from "../../Constants/CharConstants";
+import { CollectionConstants } from "../../Constants/CollectionConstants";
+import { ColorConstants } from "../../Constants/ColorConstants";
+import { EndgameConstants } from "../../Constants/EndgameConstants";
+import { FacetConstants } from "../../Constants/FacetConstants";
+import { FileConstants } from "../../Constants/FileConstants";
+import { GemConstants } from "../../Constants/GemConstants";
+import { HighlightConstants } from "../../Constants/HighlightConstants";
+import { JewelryConstants } from "../../Constants/JewelryConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { Helper } from "../../Helper";
+import { D2Color } from "../../Models/D2Color";
+import { AbstractItemBuilder } from "../AbstractItemBuilder";
+import { IHealingPotionsBuilder } from "./Interfaces/IHealingPotionsBuilder";
+import { IItemNamesBuilder } from "./Interfaces/IItemNamesBuilder";
 
-export class ItemNamesBuilder extends AbstractItemBuilder {
+export class ItemNamesBuilder extends AbstractItemBuilder implements IItemNamesBuilder {
+  protected healingPotionsBuilder: IHealingPotionsBuilder;
+
   constructor() {
     super(FileConstants.FILE_ITEM_NAMES_PATH);
 
@@ -26,156 +34,50 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     });
   }
 
-  build() {
-    this.customizeHealingPotions(config.HealingPotions);
-    this.customizeBuffPotions(config.BuffPotions);
-    this.customizeThrowingPotions(config.ThrowingPotions);
-    this.customizeScrollsAndTomes(config.ScrollsTomes);
-    this.customizeArrowsAndBolts(config.ArrowsBolts);
-    this.customizeKeys(config.Keys);
-    this.customizeJewels(config.Jewels);
-    this.customizeCharms(config.Charms);
-    this.customizeGems(config.Gems);
-    this.customizeQuestItems(config.Quest);
-    this.customizeEndgameItems(config.Endgame);
-    this.customizeCustomFilterList(config.shouldUseCustomFilterList);
+   public build(): void {
+    this.validateConfigs(config);
 
-    this.addBigTooltips(config.BigTooltipGems, config.BigTooltipFacets, config.BigTooltipUniqueCharms, config.BigTooltipQuestItems,
-      config.BigTooltipEssences, config.BigTooltipTokens, config.BigTooltipKeys, config.BigTooltipOrgans, config.BigTooltipStandardOfHeroes);
+    this.healingPotionsBuilder.build();
+
+    // this.customizeHealingPotions(config.HealingPotions as string);
+    this.customizeBuffPotions(config.BuffPotions as string);
+    this.customizeThrowingPotions(config.ThrowingPotions as string);
+    this.customizeScrollsAndTomes(config.ScrollsTomes as string);
+    this.customizeArrowsAndBolts(config.ArrowsBolts as string);
+    this.customizeKeys(config.Keys as string);
+    this.customizeJewels(config.Jewels as string);
+    this.customizeCharms(config.Charms as string);
+    this.customizeGems(config.Gems as string);
+    this.customizeQuestItems(config.Quest as string);
+    this.customizeEndgameItems(config.Endgame as string);
+    this.customizeCustomFilterList(config.shouldUseCustomFilterList as boolean);
+
+    this.addBigTooltips(
+      config.BigTooltipGems.toString(),
+      config.BigTooltipFacets.toString(),
+      config.BigTooltipUniqueCharms.toString(),
+      config.BigTooltipQuestItems.toString(),
+      config.BigTooltipEssences.toString(),
+      config.BigTooltipTokens.toString(),
+      config.BigTooltipKeys.toString(),
+      config.BigTooltipOrgans.toString(),
+      config.BigTooltipStandardOfHeroes.toString()
+    );
 
     this.applyCustomNames();
+  }
+
+  protected validateConfigs(config: ModConfigValue): void {
+    // todo
   }
 
 
   //==========//
   //   Junk   //
   //==========//
-  customizeHealingPotions(setting) {
-    let junkCol = this.getCollectionById(CollectionConstants.junk);
+  // healing potions
 
-    const clrHeal = ColorConstants.red;
-    const clrMana = ColorConstants.blue;
-    const clrRej = ColorConstants.purple;
-    const clrName = ColorConstants.white;
-    const pattern = CharConstants.plus;
-    const padding = HighlightConstants.paddingNone;
-
-    switch (setting) {
-      case SettingsConstants.disabled:
-        return;
-      case SettingsConstants.all: // show all
-        this.highlightLv123Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightLv4Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightLv5Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightSmallRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        this.highlightFullRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        return;
-      case "hide3": // hide lvl 1-3 potions, show small/full rejuvs
-        this.hideHealingPotions(junkCol);
-        this.highlightLv4Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightLv5Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightSmallRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        this.highlightFullRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        return;
-      case "hide4": // hide lvl 1-4 potions, show small/full rejuvs
-        this.hideHealingPotions(junkCol);
-        this.highlightLv5Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightSmallRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        this.highlightFullRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        return;
-      case "hide3sr": // hide lvl 1-3 potions and small rejuvs, show full rejuvs
-        this.hideHealingPotions(junkCol);
-        this.highlightLv4Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightLv5Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightFullRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        return;
-      case "hide4sr": // hide lvl 1-4 potions and small rejuvs, show full rejuvs
-        this.hideHealingPotions(junkCol);
-        this.highlightLv5Potions(junkCol, clrHeal, clrMana, clrName, pattern, padding);
-        this.highlightFullRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        return;
-      case "sfr": // hide all healing/mana potions, show only small/full rejuvs
-        this.hideHealingPotions(junkCol);
-        this.highlightSmallRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        this.highlightFullRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        return;
-      case "fr": // hide all healing/mana potions and small rejuvs, show only full rejuvs
-        this.hideHealingPotions(junkCol);
-        this.highlightFullRejuvs(junkCol, clrRej, clrName, pattern, padding);
-        return;
-      case "hide": // hide all healing potions
-        this.hideHealingPotions(junkCol);
-        return;
-      case SettingsConstants.custom: // [CSTM-HPT]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.upsert(junkCol, "hp1", `${clrHeal}+${clrName}HP1`); // Minor Healing Potion
-        this.upsert(junkCol, "hp2", `${clrHeal}+${clrName}HP2`); // Light Healing Potion
-        this.upsert(junkCol, "hp3", `${clrHeal}+${clrName}HP3`); // Healing Potion
-        this.upsert(junkCol, "hp4", `${clrHeal}+${clrName}HP4`); // Greater Healing Potion
-        this.upsert(junkCol, "hp5", `${clrHeal}+${clrName}HP5`); // Super Healing Potion
-
-        this.upsert(junkCol, "mp1", `${clrMana}+${clrName}MP1`); // Minor Mana Potion
-        this.upsert(junkCol, "mp2", `${clrMana}+${clrName}MP2`); // Light Mana Potion
-        this.upsert(junkCol, "mp3", `${clrMana}+${clrName}MP3`); // Mana Potion
-        this.upsert(junkCol, "mp4", `${clrMana}+${clrName}MP4`); // Greater Mana Potion
-        this.upsert(junkCol, "mp5", `${clrMana}+${clrName}MP5`); // Super Mana Potion
-
-        this.upsert(junkCol, "rvs", `${clrRej}+${clrName}RPS`); // Rejuvenation Potion
-        this.upsert(junkCol, "rvl", `${clrRej}+${clrName}RPF`); // Full Rejuvenation Potion
-        return;
-    }
-  }
-
-  hideHealingPotions(potionsCollection) {
-    [
-      "hp1", "hp2", "hp3", "hp4", "hp5",
-      "mp1", "mp2", "mp3", "mp4", "mp5",
-      "rvs", "rvl",
-    ].forEach(pot => {
-      this.upsert(potionsCollection, pot, SettingsConstants.hidden);
-    });
-  }
-
-  highlightLv123Potions(potionsCollection, clrHeal, clrMana, clrName, pattern, padding) {
-    [
-      { id: "hp1", name: "HP1", clr: clrHeal },
-      { id: "hp2", name: "HP2", clr: clrHeal },
-      { id: "hp3", name: "HP3", clr: clrHeal },
-      { id: "mp1", name: "MP1", clr: clrMana },
-      { id: "mp2", name: "MP2", clr: clrMana },
-      { id: "mp3", name: "MP3", clr: clrMana },
-    ].forEach(pot => {
-      this.upsert(potionsCollection, pot.id, Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name));
-    });
-  }
-
-  highlightLv4Potions(potionsCollection, clrHeal, clrMana, clrName, pattern, padding) {
-    [
-      { id: "hp4", name: "HP4", clr: clrHeal },
-      { id: "mp4", name: "MP4", clr: clrMana },
-    ].forEach(pot => {
-      this.upsert(potionsCollection, pot.id, Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name));
-    });
-  }
-
-  highlightLv5Potions(potionsCollection, clrHeal, clrMana, clrName, pattern, padding) {
-    [
-      { id: "hp5", name: "HP5", clr: clrHeal },
-      { id: "mp5", name: "MP5", clr: clrMana },
-    ].forEach(pot => {
-      this.upsert(potionsCollection, pot.id, Helper.generateSingleHighlight(pot.clr, pattern, padding, clrName, pot.name));
-    });
-  }
-
-  highlightSmallRejuvs(potionsCollection, clrRej, clrName, pattern, padding) {
-    this.upsert(potionsCollection, "rvs", Helper.generateSingleHighlight(clrRej, pattern, padding, clrName, "RPS"));
-  }
-
-  highlightFullRejuvs(potionsCollection, clrRej, clrName, pattern, padding) {
-    this.upsert(potionsCollection, "rvl", Helper.generateSingleHighlight(clrRej, pattern, padding, clrName, "RPF"));
-  }
-
-  customizeBuffPotions(setting) {
+  protected customizeBuffPotions(setting: string): void {
     let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     let pots = [
@@ -211,7 +113,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     }
   }
 
-  customizeThrowingPotions(setting) {
+  protected customizeThrowingPotions(setting: string): void {
     let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     const clrGas = ColorConstants.darkGreen;
@@ -254,7 +156,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     }
   }
 
-  customizeScrollsAndTomes(setting) {
+  protected customizeScrollsAndTomes(setting: string): void {
     let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     const clrScroll = ColorConstants.green;
@@ -284,22 +186,22 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     }
   }
 
-  hideScrolls(paperCollection) {
+  protected hideScrolls(paperCollection): void {
     this.upsert(paperCollection, "tsc", SettingsConstants.hidden); // Scroll of Town Portal
     this.upsert(paperCollection, "isc", SettingsConstants.hidden); // Scroll of Identify
   }
 
-  highlightScrolls(paperCollection, clrHighlight, clrName, pattern, padding) {
+  protected highlightScrolls(paperCollection, clrHighlight: D2Color, clrName: D2Color, pattern: string, padding: string): void {
     this.upsert(paperCollection, "tsc", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "TP")); // Scroll of Town Portal
     this.upsert(paperCollection, "isc", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "ID")); // Scroll of Identify
   }
 
-  highlightTomes(paperCollection, clrHighlight, clrName, pattern, padding) {
+  protected highlightTomes(paperCollection, clrHighlight: D2Color, clrName: D2Color, pattern: string, padding: string): void {
     this.upsert(paperCollection, "tbk", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "TP Tome")); // Tome of Town Portal
     this.upsert(paperCollection, "ibk", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "ID Tome")); // Tome of Identify
   }
 
-  customizeArrowsAndBolts(setting) {
+  protected customizeArrowsAndBolts(setting: string): void {
     let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     const clrHighlight = ColorConstants.gray;
@@ -338,7 +240,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     }
   }
 
-  customizeKeys(setting) {
+  protected customizeKeys(setting: string): void {
     let junkCol = this.getCollectionById(CollectionConstants.junk);
 
     switch (setting) {
@@ -358,49 +260,49 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
   //==========//
   //   Gems   //
   //==========//
-  customizeGems(setting) {
+  protected customizeGems(setting: string): void {
     let gemsCol = this.getCollectionById(CollectionConstants.gems);
 
     let chippedFlawedRegular = [
-      { id: "gcv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.chipped }, // Chipped Amethyst
-      { id: "gcw", color: JewelryConstants.clrDiamond, name: JewelryConstants.chipped }, // Chipped Diamond
-      { id: "gcg", color: JewelryConstants.clrEmerald, name: JewelryConstants.chipped }, // Chipped Emerald
-      { id: "gcr", color: JewelryConstants.clrRuby, name: JewelryConstants.chipped }, // Chipped Ruby
-      { id: "gcb", color: JewelryConstants.clrSapphire, name: JewelryConstants.chipped }, // Chipped Sapphire
-      { id: "gcy", color: JewelryConstants.clrTopaz, name: JewelryConstants.chipped }, // Chipped Topaz
-      { id: "skc", color: JewelryConstants.clrSkull, name: JewelryConstants.chipped }, // Chipped Skull
-      { id: "gfv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.flawed }, // Flawed Amethyst
-      { id: "gfw", color: JewelryConstants.clrDiamond, name: JewelryConstants.flawed }, // Flawed Diamond
-      { id: "gfg", color: JewelryConstants.clrEmerald, name: JewelryConstants.flawed }, // Flawed Emerald
-      { id: "gfr", color: JewelryConstants.clrRuby, name: JewelryConstants.flawed }, // Flawed Ruby
-      { id: "gfb", color: JewelryConstants.clrSapphire, name: JewelryConstants.flawed }, // Flawed Sapphire
-      { id: "gfy", color: JewelryConstants.clrTopaz, name: JewelryConstants.flawed }, // Flawed Topaz
-      { id: "skf", color: JewelryConstants.clrSkull, name: JewelryConstants.flawed }, // Flawed Skull
-      { id: "gsv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.amethyst }, // Amethyst
+      { id: "gcv", color: GemConstants.clrAmethyst, name: GemConstants.chipped }, // Chipped Amethyst
+      { id: "gcw", color: GemConstants.clrDiamond, name: GemConstants.chipped }, // Chipped Diamond
+      { id: "gcg", color: GemConstants.clrEmerald, name: GemConstants.chipped }, // Chipped Emerald
+      { id: "gcr", color: GemConstants.clrRuby, name: GemConstants.chipped }, // Chipped Ruby
+      { id: "gcb", color: GemConstants.clrSapphire, name: GemConstants.chipped }, // Chipped Sapphire
+      { id: "gcy", color: GemConstants.clrTopaz, name: GemConstants.chipped }, // Chipped Topaz
+      { id: "skc", color: GemConstants.clrSkull, name: GemConstants.chipped }, // Chipped Skull
+      { id: "gfv", color: GemConstants.clrAmethyst, name: GemConstants.flawed }, // Flawed Amethyst
+      { id: "gfw", color: GemConstants.clrDiamond, name: GemConstants.flawed }, // Flawed Diamond
+      { id: "gfg", color: GemConstants.clrEmerald, name: GemConstants.flawed }, // Flawed Emerald
+      { id: "gfr", color: GemConstants.clrRuby, name: GemConstants.flawed }, // Flawed Ruby
+      { id: "gfb", color: GemConstants.clrSapphire, name: GemConstants.flawed }, // Flawed Sapphire
+      { id: "gfy", color: GemConstants.clrTopaz, name: GemConstants.flawed }, // Flawed Topaz
+      { id: "skf", color: GemConstants.clrSkull, name: GemConstants.flawed }, // Flawed Skull
+      { id: "gsv", color: GemConstants.clrAmethyst, name: GemConstants.amethyst }, // Amethyst
 
 
       // For Ruby, Sapphire, Emerald and Diamond, see the "ItemNameAffixesBuilder" section.
       // For some reason, the devs put these gems in another JSON file because they're also the names of some affixes.
-      { id: "gsy", color: JewelryConstants.clrTopaz, name: JewelryConstants.topaz }, // Topaz
-      { id: "sku", color: JewelryConstants.clrSkull, name: JewelryConstants.skull }, // Skull
+      { id: "gsy", color: GemConstants.clrTopaz, name: GemConstants.topaz }, // Topaz
+      { id: "sku", color: GemConstants.clrSkull, name: GemConstants.skull }, // Skull
     ];
     let flawless = [
-      { id: "gzv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.flawless }, // Flawless Amethyst
-      { id: "glw", color: JewelryConstants.clrDiamond, name: JewelryConstants.flawless }, // Flawless Diamond
-      { id: "glg", color: JewelryConstants.clrEmerald, name: JewelryConstants.flawless }, // Flawless Emerald
-      { id: "glr", color: JewelryConstants.clrRuby, name: JewelryConstants.flawless }, // Flawless Ruby
-      { id: "glb", color: JewelryConstants.clrSapphire, name: JewelryConstants.flawless }, // Flawless Sapphire
-      { id: "gly", color: JewelryConstants.clrTopaz, name: JewelryConstants.flawless }, // Flawless Topaz
-      { id: "skl", color: JewelryConstants.clrSkull, name: JewelryConstants.flawless }, // Flawless Skull
+      { id: "gzv", color: GemConstants.clrAmethyst, name: GemConstants.flawless }, // Flawless Amethyst
+      { id: "glw", color: GemConstants.clrDiamond, name: GemConstants.flawless }, // Flawless Diamond
+      { id: "glg", color: GemConstants.clrEmerald, name: GemConstants.flawless }, // Flawless Emerald
+      { id: "glr", color: GemConstants.clrRuby, name: GemConstants.flawless }, // Flawless Ruby
+      { id: "glb", color: GemConstants.clrSapphire, name: GemConstants.flawless }, // Flawless Sapphire
+      { id: "gly", color: GemConstants.clrTopaz, name: GemConstants.flawless }, // Flawless Topaz
+      { id: "skl", color: GemConstants.clrSkull, name: GemConstants.flawless }, // Flawless Skull
     ];
     let perfect = [
-      { id: "gpv", color: JewelryConstants.clrAmethyst, name: JewelryConstants.perfect }, // Perfect Amethyst
-      { id: "gpw", color: JewelryConstants.clrDiamond, name: JewelryConstants.perfect }, // Perfect Diamond
-      { id: "gpg", color: JewelryConstants.clrEmerald, name: JewelryConstants.perfect }, // Perfect Emerald
-      { id: "gpr", color: JewelryConstants.clrRuby, name: JewelryConstants.perfect }, // Perfect Ruby
-      { id: "gpb", color: JewelryConstants.clrSapphire, name: JewelryConstants.perfect }, // Perfect Sapphire
-      { id: "gpy", color: JewelryConstants.clrTopaz, name: JewelryConstants.perfect }, // Perfect Topaz
-      { id: "skz", color: JewelryConstants.clrSkull, name: JewelryConstants.perfect }, // Perfect Skull
+      { id: "gpv", color: GemConstants.clrAmethyst, name: GemConstants.perfect }, // Perfect Amethyst
+      { id: "gpw", color: GemConstants.clrDiamond, name: GemConstants.perfect }, // Perfect Diamond
+      { id: "gpg", color: GemConstants.clrEmerald, name: GemConstants.perfect }, // Perfect Emerald
+      { id: "gpr", color: GemConstants.clrRuby, name: GemConstants.perfect }, // Perfect Ruby
+      { id: "gpb", color: GemConstants.clrSapphire, name: GemConstants.perfect }, // Perfect Sapphire
+      { id: "gpy", color: GemConstants.clrTopaz, name: GemConstants.perfect }, // Perfect Topaz
+      { id: "skz", color: GemConstants.clrSkull, name: GemConstants.perfect }, // Perfect Skull
     ];
 
     switch (setting) {
@@ -470,15 +372,15 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     }
   }
 
-  hideGems(gemsCollection, gems) {
+  protected hideGems(gemsCollection, gems): void {
     gems.forEach(gem => {
       this.upsert(gemsCollection, gem.id, SettingsConstants.hidden);
     });
   }
 
-  highlightGems(gemsCollection, gems) {
+  protected highlightGems(gemsCollection, gems): void {
     gems.forEach(gem => {
-      this.upsert(gemsCollection, gem.id, Helper.generateSingleHighlight(gem.color, JewelryConstants.highlight, JewelryConstants.padding, JewelryConstants.clrName, gem.name));
+      this.upsert(gemsCollection, gem.id, Helper.generateSingleHighlight(gem.color, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, gem.name));
     });
   }
 
@@ -486,7 +388,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
   //=============//
   //   Jewelry   //
   //=============//
-  customizeJewels(setting) {
+  protected customizeJewels(setting: string): void {
     let jewelsCol = this.getCollectionById(CollectionConstants.jewels);
 
     switch (setting) {
@@ -494,17 +396,17 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
         return;
       case "facet":
       case "facet-rb":
-        this.upsert(jewelsCol, JewelryConstants.facet, `${SettingsConstants.iLvlIndentFixFacets}${JewelryConstants.facetPrefix}${JewelryConstants.facet}${JewelryConstants.facetSuffix}`);
+        this.upsert(jewelsCol, FacetConstants.facetId, `${SettingsConstants.iLvlIndentFixFacets}${FacetConstants.prefix}${FacetConstants.facetName}${FacetConstants.suffix}`);
         return;
       case SettingsConstants.custom: // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.upsert(jewelsCol, JewelryConstants.jewel, `${ColorConstants.red}Jewel${ColorConstants.blue}`); // includes (unidentified) magic, rare and unique jewels
-        this.upsert(jewelsCol, JewelryConstants.facet, `Rainbow Facet`); // identified facets
+        this.upsert(jewelsCol, JewelryConstants.jewelId, `${ColorConstants.red}Jewel${ColorConstants.blue}`); // includes (unidentified) magic, rare and unique jewels
+        this.upsert(jewelsCol, FacetConstants.facetId, `Rainbow Facet`); // identified facets
         return;
     }
   }
 
-  customizeCharms(setting) {
+  protected customizeCharms(setting: string): void {
     let charmsCol = this.getCollectionById(CollectionConstants.charms);
 
     switch (setting) {
@@ -523,44 +425,46 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
         this.highlightUnidentifiedCharms(charmsCol);
         return;
       case SettingsConstants.custom: // [CSTM-CHA]
-        this.upsert(charmsCol, JewelryConstants.charmSmall, `Small Charm`);
-        this.upsert(charmsCol, JewelryConstants.charmLarge, `Large Charm`);
-        this.upsert(charmsCol, JewelryConstants.charmGrand, `Grand Charm`);
-        this.upsert(charmsCol, JewelryConstants.anni, `Annihilus`);
-        this.upsert(charmsCol, JewelryConstants.torch, `Hellfire Torch`);
-        this.upsert(charmsCol, JewelryConstants.gheeds, `Gheed's Fortune`);
-        this.upsert(charmsCol, JewelryConstants.sunderMagic, `Black Cleft`);
-        this.upsert(charmsCol, JewelryConstants.sunderPhys, `Bone Break`);
-        this.upsert(charmsCol, JewelryConstants.sunderCold, `Cold Rupture`);
-        this.upsert(charmsCol, JewelryConstants.sunderLite, `Crack of the Heavens`);
-        this.upsert(charmsCol, JewelryConstants.sunderFire, `Flame Rift`);
-        this.upsert(charmsCol, JewelryConstants.sunderPsn, `Rotting Fissure`);
+        this.upsert(charmsCol, JewelryConstants.charmSmallId, `Small Charm`);
+        this.upsert(charmsCol, JewelryConstants.charmLargeId, `Large Charm`);
+        this.upsert(charmsCol, JewelryConstants.charmGrandId, `Grand Charm`);
+        this.upsert(charmsCol, JewelryConstants.anniId, `Annihilus`);
+        this.upsert(charmsCol, JewelryConstants.torchId, `Hellfire Torch`);
+        this.upsert(charmsCol, JewelryConstants.gheedsId, `Gheed's Fortune`);
+        this.upsert(charmsCol, JewelryConstants.sunderMagiId, `Black Cleft`);
+        this.upsert(charmsCol, JewelryConstants.sunderPhysId, `Bone Break`);
+        this.upsert(charmsCol, JewelryConstants.sunderColdId, `Cold Rupture`);
+        this.upsert(charmsCol, JewelryConstants.sunderLiteId, `Crack of the Heavens`);
+        this.upsert(charmsCol, JewelryConstants.sunderFireId, `Flame Rift`);
+        this.upsert(charmsCol, JewelryConstants.sunderPoisId, `Rotting Fissure`);
         return;
     }
   }
 
-  highlightUnidentifiedCharms(charmsCollection) {
+  protected highlightUnidentifiedCharms(charmsCollection): void {
     let suffix = "Charm";
-    this.upsert(charmsCollection, JewelryConstants.charmSmall, `Small ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
-    this.upsert(charmsCollection, JewelryConstants.charmLarge, `Large ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
-    this.upsert(charmsCollection, JewelryConstants.charmGrand, `Grand ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, JewelryConstants.charmSmallId, `Small ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, JewelryConstants.charmLargeId, `Large ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, JewelryConstants.charmGrandId, `Grand ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
   }
 
-  highlightUniqueCharms(charmsCollection) {
-    [JewelryConstants.anni, JewelryConstants.torch, JewelryConstants.gheeds].forEach(charm => {
+  protected highlightUniqueCharms(charmsCollection): void {
+    [JewelryConstants.anniId, JewelryConstants.torchId, JewelryConstants.gheedsId].forEach(charm => {
       this.upsert(charmsCollection, charm, `${SettingsConstants.iLvlIndentFixCharms}${JewelryConstants.charmsUniquePrefix}${charm}${JewelryConstants.charmsUniqueSuffix}`);
     });
   }
 
-  highlightSunderCharms(charmsCollection) {
+  protected highlightSunderCharms(charmsCollection): void {
     if (config.IsSunderAltPattern) {
-      JewelryConstants.sunderCharms.forEach(charm => {
-        this.upsert(charmsCollection, charm.name, SettingsConstants.iLvlIndentFixCharms + Helper.generateDoubleHighlight(charm.color, HighlightConstants.uniquePattern, HighlightConstants.uniquePadding, HighlightConstants.uniqueColorName, charm.name));
+      JewelryConstants.sunderCharms.forEach(sunder => {
+        let sunderAltPatternName = Helper.generateDoubleHighlight(sunder.getColor(), HighlightConstants.uniquePattern, HighlightConstants.uniquePadding, HighlightConstants.uniqueColorName, sunder.getName());
+        this.upsert(charmsCollection, sunder.getId(), `${SettingsConstants.iLvlIndentFixCharms}${sunderAltPatternName}`);
       });
     }
     else {
-      JewelryConstants.sunderCharms.forEach(charm => {
-        this.upsert(charmsCollection, charm.name, `${SettingsConstants.iLvlIndentFixCharms}${JewelryConstants.charmsUniquePrefix}${charm.name}${JewelryConstants.charmsUniqueSuffix}`);
+      JewelryConstants.sunderCharms.forEach(sunder => {
+        let sunderName = `${SettingsConstants.iLvlIndentFixCharms}${JewelryConstants.charmsUniquePrefix}${sunder.getName()}${JewelryConstants.charmsUniqueSuffix}`;
+        this.upsert(charmsCollection, sunder.getId(), sunderName);
       });
     }
   }
@@ -568,7 +472,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
   //=================//
   //   Quest Items   //
   //=================//
-  customizeQuestItems(setting) {
+  protected customizeQuestItems(setting: string): void {
     let questCol = this.getCollectionById(CollectionConstants.quest);
 
     let prefix = HighlightConstants.questPrefix;
@@ -631,7 +535,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     }
   }
 
-  highlightQuestItems(questCollection, prefix, suffix) {
+  protected highlightQuestItems(questCollection, prefix, suffix): void {
     // for Book of Skill and Potion of Life, see [CSTM-QST2]
     let indentNone = CharConstants.empty;
     let indentSingle = SettingsConstants.iLvlIndentFixQuestSingle;
@@ -683,14 +587,14 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     });
   }
 
-  highlightCube(questCollection, prefix, suffix) {
+  protected highlightCube(questCollection, prefix, suffix): void {
     this.upsert(questCollection, "box", `${prefix}Horadric Cube${suffix}`); // Horadric Cube
   }
 
   //===================================================//
   //   Endgame: Pandemonium Event, Tokens & Essences   //
   //===================================================//
-  customizeEndgameItems(setting) {
+  protected customizeEndgameItems(setting: string): void {
     let endgameCol = this.getCollectionById(CollectionConstants.endgame);
 
     switch (setting) {
@@ -725,7 +629,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     }
   }
 
-  highlightEndgameItems(endgameCollection) {
+  protected highlightEndgameItems(endgameCollection): void {
     let endgameItems = [].concat(EndgameConstants.essences, EndgameConstants.keys, EndgameConstants.organs);
     endgameItems.push(EndgameConstants.token);
 
@@ -734,11 +638,11 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     });
   }
 
-  highlightStandardOfHeroes(endgameCollection) {
+  protected highlightStandardOfHeroes(endgameCollection): void {
     this.upsert(endgameCollection, EndgameConstants.standard.id, `${EndgameConstants.standard.prefix}${EndgameConstants.standard.name}${EndgameConstants.standard.suffix}`);
   }
 
-  hideStandardOfHeroes(endgameCollection) {
+  protected hideStandardOfHeroes(endgameCollection): void {
     this.upsert(endgameCollection, EndgameConstants.standard.id, SettingsConstants.hidden);
   }
 
@@ -746,7 +650,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
   //========================//
   //   Custom Filter List   //
   //========================//
-  customizeCustomFilterList(shouldUseCustomFilterList) {
+  protected customizeCustomFilterList(shouldUseCustomFilterList): void {
     let cflCol = this.getCollectionById(CollectionConstants.customFilterList);
     // This list changes entries in item-names.json, so it supports all base items (amulet, berserker axe), sets (Tal Rasha's Guardianship, Angelic Halo) and uniques (Griffon's Eye, The Stone of Jordan). 
     // Search the file for what key to use.
@@ -777,7 +681,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
   //==================//
   //   Big Tooltips   //
   //==================//
-  addBigTooltips(settingGems, settingFacets, settingUniqueCharms, settingQuest, settingEssences, settingToken, settingKeys, settingOrgans, settingStandard) {
+  protected addBigTooltips(settingGems: string, settingFacets: string, settingUniqueCharms: string, settingQuest: string, settingEssences: string, settingToken: string, settingKeys: string, settingOrgans: string, settingStandard: string): void {
     if (!config.IsBigTooltipsEnabled) {
       return;
     }
@@ -791,15 +695,15 @@ export class ItemNamesBuilder extends AbstractItemBuilder {
     // facets
     if (settingFacets !== SettingsConstants.disabled) {
       let jewelsCol = this.getCollectionById(CollectionConstants.jewels);
-      Helper.addBigTooltipForId(jewelsCol, JewelryConstants.facet, settingFacets);
+      Helper.addBigTooltipForId(jewelsCol, FacetConstants.facetId, settingFacets);
     }
 
     // unique charms
     if (settingUniqueCharms !== SettingsConstants.disabled) {
       let charmsCol = this.getCollectionById(CollectionConstants.charms);
       let uniqueCharms = []
-        .concat(JewelryConstants.uniqueLodCharms)
-        .concat(JewelryConstants.sunderCharms.map(sunder => sunder.name));
+        .concat(JewelryConstants.uniqueLodCharmIds)
+        .concat(JewelryConstants.sunderCharms.map(sunder => sunder.getId()));
       Helper.addBigTooltipsForIds(charmsCol, uniqueCharms, settingUniqueCharms);
     }
 

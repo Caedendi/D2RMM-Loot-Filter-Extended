@@ -1,11 +1,12 @@
-import { CollectionConstants } from "./CollectionConstants";
-import { FileConstants } from "./FileConstants";
-import { HighlightConstants } from "./HighlightConstants";
-import { SettingsConstants } from "./SettingsConstants";
-import { Helper } from "./Helper";
+import { CollectionConstants } from "../Constants/CollectionConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { HighlightConstants } from "../Constants/HighlightConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { Helper } from "../Helper";
 import { AbstractItemBuilder } from "./AbstractItemBuilder";
 
-export class UiBuilder extends AbstractItemBuilder {
+
+export class ItemModifiersBuilder extends AbstractItemBuilder {
   constructor() {
     super(FileConstants.FILE_UI_PATH);
 
@@ -21,20 +22,20 @@ export class UiBuilder extends AbstractItemBuilder {
       return;
     }
 
-    this.customizeQuestItems(config.Quest);
-    this.addBigTooltips(config.BigTooltipQuestItems);
+    this.customizeQuestItems(config.Quest as string);
+    this.addBigTooltips(config.BigTooltipQuestItems as string);
     this.applyCustomNames();
   }
 
   //=================//
   //   Quest Items   //
   //=================//
-  // Section specific to Book of Skill and Potion of Life, as these items are in a different file.
-  customizeQuestItems(setting: string) {
+  // Section specific to Malah's Potion and Scroll of Resistance, as these items are in a different file.
+  customizeQuestItems(setting:string) {
     let questCol = this.getCollectionById(CollectionConstants.quest);
 
-    let ass = "ass";
-    let xyz = "xyz";
+    let ice = "ice";
+    let tr2 = "tr2";
 
     let prefix = HighlightConstants.questPrefix;
     let suffix = HighlightConstants.questSuffix;
@@ -44,22 +45,23 @@ export class UiBuilder extends AbstractItemBuilder {
         return;
       case SettingsConstants.all: // highlight all
       case "xhc": // exclude horadric cube
-        this.upsert(questCol, ass, `${prefix}Book of Skill${suffix}`); // Book of Skill
-        this.upsert(questCol, xyz, `${prefix}Potion of Life${suffix}`); // Potion of Life
+        this.upsert(questCol, ice, `${prefix}Malah's Potion${suffix}`); // Malah's Potion
+        this.upsert(questCol, tr2, `${prefix}Scroll of Resistance${suffix}`); // Scroll of Resistance
         return;
       case SettingsConstants.custom: // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.upsert(questCol, ass, `Book of Skill`); // Book of Skill
-        this.upsert(questCol, xyz, `Potion of Life`); // Potion of Life
+        this.upsert(questCol, ice, `Malah's Potion`); // Malah's Potion
+        this.upsert(questCol, tr2, `Scroll of Resistance`); // Scroll of Resistance
         return;
     }
   }
 
-  addBigTooltips(settingQuest: string) {
+  addBigTooltips(settingQuest:string) {
     if (!config.IsBigTooltipsEnabled) {
       return;
     }
 
+    // todo
     if (settingQuest !== SettingsConstants.disabled) {
       let questCol = this.getCollectionById(CollectionConstants.quest);
       Helper.addBigTooltips(questCol, settingQuest);
