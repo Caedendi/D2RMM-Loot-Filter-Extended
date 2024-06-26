@@ -1,7 +1,7 @@
 import { TSVData } from "../../../types";
 import { DropSoundConstants } from "../Constants/DropSoundConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { RuneConstants } from "../Constants/RuneConstants";
+import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
 
 

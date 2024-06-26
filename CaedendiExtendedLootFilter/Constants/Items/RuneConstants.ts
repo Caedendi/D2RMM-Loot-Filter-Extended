@@ -1,9 +1,8 @@
-import { Rune } from "../Models/Rune";
-import { RuneTier } from "../Models/RuneTier";
-import { BaseColorConstants } from "./BaseColorConstants";
-import { ColorConstants } from "./ColorConstants";
+import { Rune } from "../../Models/Rune";
+import { RuneTier } from "../../Models/RuneTier";
+import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
-import { SettingsConstants } from "./SettingsConstants";
+import { SettingsConstants } from "../SettingsConstants";
 
 /** I consider the rune tiers to be:
  * - low:      1-15 (El-Hel)
@@ -13,7 +12,7 @@ import { SettingsConstants } from "./SettingsConstants";
  * 
  * I have however moved Ral (8), Hel (15) and Lem (20) a tier up because of their usefulness.
  */
-export class RuneConstants {
+export abstract class RuneConstants {
   static tierLow: Rune[] = [
     new Rune(1, "El"),
     new Rune(2, "Eld"),
@@ -58,19 +57,21 @@ export class RuneConstants {
 
   static clrName = ColorConstants.orange;
   static clrHighlight = HighlightConstants.color;
-  static colorAlternate = config.RunesHighlightColorAlt !== SettingsConstants.custom ? `${BaseColorConstants.prefix}${config.RunesHighlightColorAlt}` : ';'; // replace ; with desired custom color character (see above) [CSTM-HLCRA]
+  static colorAlternate = config.RunesHighlightColorAlt.toString() !== SettingsConstants.custom ? ColorConstants.getColorByCode(config.RunesHighlightColorAlt.toString()) : ColorConstants.purple; // replace ColorConstants.purple with desired custom color [CSTM-HLCRA]
 
   // set the highlight patterns for each rune tier
   static patternLow = HighlightConstants.patternNone; // 
   static patternLowMid = HighlightConstants.pattern5; // *****
-  static patternMid = HighlightConstants.pattern10; // **********
-  static patternHigh = config.BigTooltipRunesHigh === SettingsConstants.disabled ? HighlightConstants.pattern3x10 : HighlightConstants.pattern2x10; // ********** ********** ********** or ********** ********** with big tooltips
+  static patternMid = HighlightConstants.pattern10;   // **********
+  static patternHigh = config.BigTooltipRunesHigh === SettingsConstants.disabled 
+    ? HighlightConstants.pattern3x10  // ********** ********** **********, or
+    : HighlightConstants.pattern2x10; // ********** ********** (with big tooltips)
 
   // set the amount of spaces between the rune name and the highlight patterns for each rune tier
-  static paddingLow = HighlightConstants.paddingNone;
+  static paddingLow    = HighlightConstants.paddingNone;
   static paddingLowMid = HighlightConstants.padding3;
-  static paddingMid = HighlightConstants.padding5;
-  static paddingHigh = HighlightConstants.padding5;
+  static paddingMid    = HighlightConstants.padding5;
+  static paddingHigh   = HighlightConstants.padding5;
 
   static tiers = [
     new RuneTier(1, this.tierLow,    this.paddingLow,    this.patternLow,    config.ShouldShowRunesLow    as boolean, config.BigTooltipRunesLow    as string, config.ShouldAddLightPillarRunesLow    as boolean, config.DropSoundRunesLow    as string),
@@ -79,10 +80,10 @@ export class RuneConstants {
     new RuneTier(4, this.tierHigh,   this.paddingHigh,   this.patternHigh,   config.ShouldShowRunesHigh   as boolean, config.BigTooltipRunesHigh   as string, config.ShouldAddLightPillarRunesHigh   as boolean, config.DropSoundRunesHigh   as string),
   ];
 
-  static tiersHighlighted = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
-  static tiersHighlightedNumbers = [3, 4]; // rune tiers where the added numbers (33) are in the highlight color instead of default
-  static tiersHighlightedNames = [4]; // rune tiers where the rune name is in the highlight color instead of default
-  static tiersAlternateColor = [3, 4]; // rune tiers that use the alternate color if enabled
+  static tiersHighlighted        = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
+  static tiersHighlightedNumbers = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default
+  static tiersHighlightedNames   = [4];       // rune tiers where the rune name is in the highlight color instead of default
+  static tiersAlternateColor     = [3, 4];    // rune tiers that use the alternate color if enabled
 
   static isAlternateColor = config.RunesHighlightColorAlt !== SettingsConstants.disabled;
 }

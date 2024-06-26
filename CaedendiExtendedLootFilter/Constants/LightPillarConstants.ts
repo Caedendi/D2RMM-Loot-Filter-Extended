@@ -1,4 +1,4 @@
-export class LightPillarConstants {
+export abstract class LightPillarConstants {
   // item paths
   static PATH_ITEMS = "hd\\items\\";
   static PATH_ITEMS_MISC = `${this.PATH_ITEMS}misc\\`;

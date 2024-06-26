@@ -1,12 +1,13 @@
 import { CharConstants } from "../Constants/CharConstants";
-import { CollectionConstants } from "../Constants/CollectionConstants";
+import { CollectionConstants } from "../Constants/Items/CollectionConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { JewelryConstants } from "../Constants/JewelryConstants";
+import { JewelryConstants } from "../Constants/Items/JewelryConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { AbstractItemBuilder } from "./AbstractItemBuilder";
+import { ItemBuilder } from "./ItemBuilder";
+import { CharmConstants } from "../Constants/Items/CharmConstants";
 
 
-export class ItemLevelBuilder extends AbstractItemBuilder {
+export class ItemLevelBuilder extends ItemBuilder {
   constructor() {
     super(CharConstants.empty);
 
@@ -47,7 +48,7 @@ export class ItemLevelBuilder extends AbstractItemBuilder {
     }
 
     if (config.BigTooltipUniqueCharms !== SettingsConstants.disabled) {
-      JewelryConstants.charmIds.forEach(charm => {
+      CharmConstants.charmIds.forEach(charm => {
         this.upsert(miscCol, charm, CharConstants.empty);
       });
     }

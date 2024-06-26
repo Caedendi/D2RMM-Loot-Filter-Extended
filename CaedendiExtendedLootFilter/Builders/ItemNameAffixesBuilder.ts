@@ -1,15 +1,15 @@
 import { ModConfigSingleValue } from "../../../types";
 import { CharConstants } from "../Constants/CharConstants";
-import { CollectionConstants } from "../Constants/CollectionConstants";
-import { ColorConstants } from "../Constants/ColorConstants";
+import { CollectionConstants } from "../Constants/Items/CollectionConstants";
+import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { GemConstants } from "../Constants/GemConstants";
+import { GemConstants } from "../Constants/Items/GemConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
 import { Gem } from "../Models/Gem";
-import { AbstractItemBuilder } from "./AbstractItemBuilder";
+import { ItemBuilder } from "./ItemBuilder";
 
-export class ItemNameAffixesBuilder extends AbstractItemBuilder {
+export class ItemNameAffixesBuilder extends ItemBuilder {
   constructor() {
     super(FileConstants.FILE_ITEM_NAMEAFFIXES_PATH);
 
@@ -105,7 +105,7 @@ export class ItemNameAffixesBuilder extends AbstractItemBuilder {
       new Gem("gsb", GemConstants.clrSapphire, GemConstants.sapphire), // Sapphire
     ];
     // These gem names also function as affixes, which is why they are located in the item-nameaffixes.json file.
-    // Enabling filtering for these gems could also change for example the Ruby-part in a "Ruby Jewel of Fervor".
+    // Enabling filtering for these gems could also change for example the "Ruby"-part in a "Ruby Jewel of Fervor".
     switch (setting) {
       case SettingsConstants.disabled:
         return;

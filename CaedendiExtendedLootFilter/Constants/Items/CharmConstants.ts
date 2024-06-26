@@ -1,13 +1,8 @@
-import { SunderCharm } from "../Models/SunderCharm";
-import { CharConstants } from "./CharConstants";
-import { ColorConstants } from "./ColorConstants";
+import { SunderCharm } from "../../Models/SunderCharm";
+import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
-export class JewelryConstants {
-  static ringId = "rin";
-  static amuletId = "amu";
-  static jewelId = "jew";
-
+export abstract class CharmConstants {
   static charmSmallId = "cm1";
   static charmLargeId = "cm2";
   static charmGrandId = "cm3";
@@ -34,15 +29,6 @@ export class JewelryConstants {
   static sunderFireName = this.sunderFireId;
   static sunderPoisName = this.sunderPoisId;
 
-  static iLvlJewelry = [
-    this.ringId,
-    this.amuletId,
-    this.jewelId,
-    this.charmSmallId,
-    this.charmLargeId,
-    this.charmGrandId,
-  ];
-
   static charmIds = [
     this.charmSmallId,
     this.charmLargeId,
@@ -66,6 +52,4 @@ export class JewelryConstants {
 
   static charmsUniquePrefix = HighlightConstants.uniquePrefix;
   static charmsUniqueSuffix = HighlightConstants.uniqueSuffix;
-
-  static indentPickUpMsg = (config.Gems === "all" || config.Gems === "flawless" || config.Gems === "perfect") ? CharConstants.space.repeat(2) : CharConstants.empty; // indent for the pick up message if gem highlighting is enabled.
 }

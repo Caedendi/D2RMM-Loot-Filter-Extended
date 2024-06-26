@@ -1,12 +1,12 @@
-import { ColorConstants } from "../Constants/ColorConstants";
+import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { HighlightConstants } from "../Constants/HighlightConstants";
-import { RuneConstants } from "../Constants/RuneConstants";
+import { HighlightConstants } from "../Constants/Items/HighlightConstants";
+import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
-import { AbstractItemBuilder } from "./AbstractItemBuilder";
+import { ItemBuilder } from "./ItemBuilder";
 
-export class ItemRunesBuilder extends AbstractItemBuilder {
+export class ItemRunesBuilder extends ItemBuilder {
   constructor() {
     super(FileConstants.FILE_ITEM_RUNES_PATH);
 

@@ -1,14 +1,18 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { CollectionConstants } from "../../Constants/CollectionConstants";
-import { ColorConstants } from "../../Constants/ColorConstants";
+import { CollectionConstants } from "../../Constants/Items/CollectionConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { FileConstants } from "../../Constants/FileConstants";
-import { HighlightConstants } from "../../Constants/HighlightConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { Helper } from "../../Helper";
-import { AbstractItemBuilder } from "../AbstractItemBuilder";
+import { ItemBuilder } from "../ItemBuilder";
 import { IHealingPotionsBuilder } from "./Interfaces/IHealingPotionsBuilder";
+import { D2Color } from "../../Models/D2Color";
+import { ItemCollection } from "../../Models/ItemCollection";
 
-export class HealingPotionsBuilder extends AbstractItemBuilder implements IHealingPotionsBuilder {
+export class HealingPotionsBuilder extends ItemBuilder implements IHealingPotionsBuilder {
+  public potionCollection: ItemCollection;
+
   constructor() {
     super(FileConstants.FILE_ITEM_NAMES_PATH);
 
@@ -102,9 +106,11 @@ export class HealingPotionsBuilder extends AbstractItemBuilder implements IHeali
         this.upsert(junkCol, "rvl", `${clrRej}+${clrName}RPF`); // Full Rejuvenation Potion
         return;
     }
+
+    // TODO: add big tooltips
   }
 
-public hideHealingPotions(potionsCollection: { id: string, value: string }[]): void {
+public hideHealingPotions(potionsCollection: ItemCollection): void {
     [
       "hp1", "hp2", "hp3", "hp4", "hp5",
       "mp1", "mp2", "mp3", "mp4", "mp5",
@@ -114,7 +120,7 @@ public hideHealingPotions(potionsCollection: { id: string, value: string }[]): v
     });
   }
 
-public highlightLv123Potions(potionsCollection: { id: string, value: string }[], clrHeal: string, clrMana: string, clrName: string, pattern: string, padding: string): void {
+public highlightLv123Potions(potionsCollection: ItemCollection, clrHeal: D2Color, clrMana: D2Color, clrName: D2Color, pattern: string, padding: string): void {
     [
       { id: "hp1", name: "HP1", clr: clrHeal },
       { id: "hp2", name: "HP2", clr: clrHeal },
@@ -127,7 +133,7 @@ public highlightLv123Potions(potionsCollection: { id: string, value: string }[],
     });
   }
 
-public highlightLv4Potions(potionsCollection, clrHeal: string, clrMana: string, clrName: string, pattern: string, padding: string): void {
+public highlightLv4Potions(potionsCollection: ItemCollection, clrHeal: D2Color, clrMana: D2Color, clrName: D2Color, pattern: string, padding: string): void {
     [
       { id: "hp4", name: "HP4", clr: clrHeal },
       { id: "mp4", name: "MP4", clr: clrMana },
@@ -136,7 +142,7 @@ public highlightLv4Potions(potionsCollection, clrHeal: string, clrMana: string, 
     });
   }
 
-public highlightLv5Potions(potionsCollection, clrHeal: string, clrMana: string, clrName: string, pattern: string, padding: string): void {
+public highlightLv5Potions(potionsCollection: ItemCollection, clrHeal: D2Color, clrMana: D2Color, clrName: D2Color, pattern: string, padding: string): void {
     [
       { id: "hp5", name: "HP5", clr: clrHeal },
       { id: "mp5", name: "MP5", clr: clrMana },
@@ -145,11 +151,11 @@ public highlightLv5Potions(potionsCollection, clrHeal: string, clrMana: string, 
     });
   }
 
-public highlightSmallRejuvs(potionsCollection, clrRej: string, clrName: string, pattern: string, padding: string): void {
+public highlightSmallRejuvs(potionsCollection: ItemCollection, clrRej: D2Color, clrName: D2Color, pattern: string, padding: string): void {
     this.upsert(potionsCollection, "rvs", Helper.generateSingleHighlight(clrRej, pattern, padding, clrName, "RPS"));
   }
 
-public highlightFullRejuvs(potionsCollection, clrRej: string, clrName: string, pattern: string, padding: string): void {
+public highlightFullRejuvs(potionsCollection: ItemCollection, clrRej: D2Color, clrName: D2Color, pattern: string, padding: string): void {
     this.upsert(potionsCollection, "rvl", Helper.generateSingleHighlight(clrRej, pattern, padding, clrName, "RPF"));
   }
 }

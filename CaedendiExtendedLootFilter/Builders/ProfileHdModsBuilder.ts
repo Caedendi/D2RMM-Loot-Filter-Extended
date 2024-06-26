@@ -1,7 +1,7 @@
 import { JSONData } from "../../../types";
-import { ColorConstants } from "../Constants/ColorConstants";
+import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { FontColorConstants } from "../Constants/FontColorConstants";
+import { FontColorConstants } from "../Constants/Colors/FontColorConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 
 

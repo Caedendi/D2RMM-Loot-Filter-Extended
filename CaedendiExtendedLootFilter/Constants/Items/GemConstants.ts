@@ -1,5 +1,5 @@
-import { CharConstants } from "./CharConstants";
-import { ColorConstants } from "./ColorConstants";
+import { CharConstants } from "../CharConstants";
+import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
 export class GemConstants {
@@ -27,4 +27,6 @@ export class GemConstants {
   static clrName = ColorConstants.white;
   static highlight = CharConstants.o;
   static padding = HighlightConstants.padding1;
+
+  static indentPickUpMsg = (config.Gems === "all" || config.Gems === "flawless" || config.Gems === "perfect") ? CharConstants.space.repeat(2) : CharConstants.empty; // indent for the pick up message if gem highlighting is enabled.
 }

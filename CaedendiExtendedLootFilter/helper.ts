@@ -1,6 +1,6 @@
 import { CharConstants } from "./Constants/CharConstants";
 import { SettingsConstants } from "./Constants/SettingsConstants";
-import { HighlightConstants } from "./Constants/HighlightConstants";
+import { HighlightConstants } from "./Constants/Items/HighlightConstants";
 import { D2Color } from "./Models/D2Color";
 
 export class Helper {

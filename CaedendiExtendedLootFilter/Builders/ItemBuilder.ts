@@ -2,12 +2,13 @@ import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
 
-export abstract class AbstractItemBuilder implements IItemBuilder {
+export abstract class ItemBuilder implements IItemBuilder {
   collections = [];
   target = CharConstants.empty;
 
+  // TODO: refactor
   constructor(target: string) {
-    if (new.target === AbstractItemBuilder) {
+    if (new.target === ItemBuilder) {
       throw new TypeError("Cannot construct abstract AbstractItemBuilder instances directly.");
     }
 
@@ -16,7 +17,7 @@ export abstract class AbstractItemBuilder implements IItemBuilder {
 
   public abstract build(): void;
 
-  // public upsert(array:{id:string, value:string}[], id:string, value:string): void {
+  // public upsert(array: {id: string, value: string}[], id: string, value: string): void {
   public upsert<T>(array: {id: string, value: T}[], id: string, value: T): void { 
     const i = array.findIndex(x => x.id === id);
     if (i > -1) array[i] = { id: id, value: value };
@@ -71,6 +72,7 @@ export abstract class AbstractItemBuilder implements IItemBuilder {
     //     }
     //   }
     // });
+    
     D2RMM.writeJson(this.target, file); // overwrite existing file with new file
   }
 }

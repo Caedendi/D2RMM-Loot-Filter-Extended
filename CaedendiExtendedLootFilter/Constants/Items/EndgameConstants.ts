@@ -1,4 +1,4 @@
-import { ColorConstants } from "./ColorConstants";
+import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
 export class EndgameConstants {

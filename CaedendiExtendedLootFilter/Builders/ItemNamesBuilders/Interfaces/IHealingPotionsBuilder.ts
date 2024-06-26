@@ -1,11 +1,13 @@
+import { D2Color } from "../../../Models/D2Color";
+import { ItemCollection } from "../../../Models/ItemCollection";
 import { IItemBuilder } from "../../Interfaces/IItemBuilder";
 
 export interface IHealingPotionsBuilder extends IItemBuilder {
   build(): void;
-  hideHealingPotions(potionsCollection: { id: string, value: string }[]): void;
-  highlightLv123Potions(potionsCollection: { id: string, value: string }[], clrHeal: string, clrMana: string, clrName: string, pattern: string, padding: string): void;
-  highlightLv4Potions(potionsCollection, clrHeal: string, clrMana: string, clrName: string, pattern: string, padding: string): void;
-  highlightLv5Potions(potionsCollection, clrHeal: string, clrMana: string, clrName: string, pattern: string, padding: string): void;
-  highlightSmallRejuvs(potionsCollection, clrRej: string, clrName: string, pattern: string, padding: string): void;
-  highlightFullRejuvs(potionsCollection, clrRej: string, clrName: string, pattern: string, padding: string): void;
+  hideHealingPotions(   potionsCollection: ItemCollection): void;
+  highlightLv123Potions(potionsCollection: ItemCollection, clrHeal: D2Color, clrMana: D2Color, clrName: D2Color, pattern: string, padding: string): void;
+  highlightLv4Potions(  potionsCollection: ItemCollection, clrHeal: D2Color, clrMana: D2Color, clrName: D2Color, pattern: string, padding: string): void;
+  highlightLv5Potions(  potionsCollection: ItemCollection, clrHeal: D2Color, clrMana: D2Color, clrName: D2Color, pattern: string, padding: string): void;
+  highlightSmallRejuvs( potionsCollection: ItemCollection,  clrRej: D2Color, clrName: D2Color, pattern:  string, padding: string): void;
+  highlightFullRejuvs(  potionsCollection: ItemCollection,  clrRej: D2Color, clrName: D2Color, pattern:  string, padding: string): void;
 }

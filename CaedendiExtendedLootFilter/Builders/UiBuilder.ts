@@ -1,12 +1,12 @@
 import { ModConfigSingleValue } from "../../../types";
-import { CollectionConstants } from "../Constants/CollectionConstants";
+import { CollectionConstants } from "../Constants/Items/CollectionConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { HighlightConstants } from "../Constants/HighlightConstants";
+import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
-import { AbstractItemBuilder } from "./AbstractItemBuilder";
+import { ItemBuilder } from "./ItemBuilder";
 
-export class UiBuilder extends AbstractItemBuilder {
+export class UiBuilder extends ItemBuilder {
   constructor() {
     super(FileConstants.FILE_UI_PATH);
 

@@ -1,7 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { LightPillarConstants } from "../Constants/LightPillarConstants";
-import { RuneConstants } from "../Constants/RuneConstants";
+import { RuneConstants } from "../Constants/Items/RuneConstants";
 
 export class LightPillarBuilder {
   build() {

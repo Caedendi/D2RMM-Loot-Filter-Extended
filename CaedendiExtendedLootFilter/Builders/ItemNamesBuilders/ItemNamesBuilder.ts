@@ -1,21 +1,30 @@
 import { ModConfigValue } from "../../../../types";
 import { CharConstants } from "../../Constants/CharConstants";
-import { CollectionConstants } from "../../Constants/CollectionConstants";
-import { ColorConstants } from "../../Constants/ColorConstants";
-import { EndgameConstants } from "../../Constants/EndgameConstants";
-import { FacetConstants } from "../../Constants/FacetConstants";
+import { CollectionConstants } from "../../Constants/Items/CollectionConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { EndgameConstants } from "../../Constants/Items/EndgameConstants";
+import { FacetConstants } from "../../Constants/Items/FacetConstants";
 import { FileConstants } from "../../Constants/FileConstants";
-import { GemConstants } from "../../Constants/GemConstants";
-import { HighlightConstants } from "../../Constants/HighlightConstants";
-import { JewelryConstants } from "../../Constants/JewelryConstants";
+import { GemConstants } from "../../Constants/Items/GemConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { JewelryConstants } from "../../Constants/Items/JewelryConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { Helper } from "../../Helper";
 import { D2Color } from "../../Models/D2Color";
-import { AbstractItemBuilder } from "../AbstractItemBuilder";
+import { ItemBuilder } from "../ItemBuilder";
 import { IHealingPotionsBuilder } from "./Interfaces/IHealingPotionsBuilder";
 import { IItemNamesBuilder } from "./Interfaces/IItemNamesBuilder";
+import { CharmConstants } from "../../Constants/Items/CharmConstants";
 
-export class ItemNamesBuilder extends AbstractItemBuilder implements IItemNamesBuilder {
+// TODO:
+// new design:
+// - ItemNamesBuilder => ItemNamesCompiler / writer
+// - individual builders, each with their own collection
+// - ItemNamesCompiler holds all individual builders
+// - creates a complete collection out of all individual builders' collections
+// - uses target to write to file in one go
+
+export class ItemNamesBuilder extends ItemBuilder implements IItemNamesBuilder {
   protected healingPotionsBuilder: IHealingPotionsBuilder;
 
   constructor() {
@@ -52,6 +61,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder implements IItemNamesB
     this.customizeEndgameItems(config.Endgame as string);
     this.customizeCustomFilterList(config.shouldUseCustomFilterList as boolean);
 
+    // TODO: refactor. add each type to its respective builder
     this.addBigTooltips(
       config.BigTooltipGems.toString(),
       config.BigTooltipFacets.toString(),
@@ -425,45 +435,45 @@ export class ItemNamesBuilder extends AbstractItemBuilder implements IItemNamesB
         this.highlightUnidentifiedCharms(charmsCol);
         return;
       case SettingsConstants.custom: // [CSTM-CHA]
-        this.upsert(charmsCol, JewelryConstants.charmSmallId, `Small Charm`);
-        this.upsert(charmsCol, JewelryConstants.charmLargeId, `Large Charm`);
-        this.upsert(charmsCol, JewelryConstants.charmGrandId, `Grand Charm`);
-        this.upsert(charmsCol, JewelryConstants.anniId, `Annihilus`);
-        this.upsert(charmsCol, JewelryConstants.torchId, `Hellfire Torch`);
-        this.upsert(charmsCol, JewelryConstants.gheedsId, `Gheed's Fortune`);
-        this.upsert(charmsCol, JewelryConstants.sunderMagiId, `Black Cleft`);
-        this.upsert(charmsCol, JewelryConstants.sunderPhysId, `Bone Break`);
-        this.upsert(charmsCol, JewelryConstants.sunderColdId, `Cold Rupture`);
-        this.upsert(charmsCol, JewelryConstants.sunderLiteId, `Crack of the Heavens`);
-        this.upsert(charmsCol, JewelryConstants.sunderFireId, `Flame Rift`);
-        this.upsert(charmsCol, JewelryConstants.sunderPoisId, `Rotting Fissure`);
+        this.upsert(charmsCol, CharmConstants.charmSmallId, `Small Charm`);
+        this.upsert(charmsCol, CharmConstants.charmLargeId, `Large Charm`);
+        this.upsert(charmsCol, CharmConstants.charmGrandId, `Grand Charm`);
+        this.upsert(charmsCol, CharmConstants.anniId,       `Annihilus`);
+        this.upsert(charmsCol, CharmConstants.torchId,      `Hellfire Torch`);
+        this.upsert(charmsCol, CharmConstants.gheedsId,     `Gheed's Fortune`);
+        this.upsert(charmsCol, CharmConstants.sunderMagiId, `Black Cleft`);
+        this.upsert(charmsCol, CharmConstants.sunderPhysId, `Bone Break`);
+        this.upsert(charmsCol, CharmConstants.sunderColdId, `Cold Rupture`);
+        this.upsert(charmsCol, CharmConstants.sunderLiteId, `Crack of the Heavens`);
+        this.upsert(charmsCol, CharmConstants.sunderFireId, `Flame Rift`);
+        this.upsert(charmsCol, CharmConstants.sunderPoisId, `Rotting Fissure`);
         return;
     }
   }
 
   protected highlightUnidentifiedCharms(charmsCollection): void {
     let suffix = "Charm";
-    this.upsert(charmsCollection, JewelryConstants.charmSmallId, `Small ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
-    this.upsert(charmsCollection, JewelryConstants.charmLargeId, `Large ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
-    this.upsert(charmsCollection, JewelryConstants.charmGrandId, `Grand ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, CharmConstants.charmSmallId, `Small ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, CharmConstants.charmLargeId, `Large ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.upsert(charmsCollection, CharmConstants.charmGrandId, `Grand ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
   }
 
   protected highlightUniqueCharms(charmsCollection): void {
-    [JewelryConstants.anniId, JewelryConstants.torchId, JewelryConstants.gheedsId].forEach(charm => {
-      this.upsert(charmsCollection, charm, `${SettingsConstants.iLvlIndentFixCharms}${JewelryConstants.charmsUniquePrefix}${charm}${JewelryConstants.charmsUniqueSuffix}`);
+    [CharmConstants.anniId, CharmConstants.torchId, CharmConstants.gheedsId].forEach(charm => {
+      this.upsert(charmsCollection, charm, `${SettingsConstants.iLvlIndentFixCharms}${CharmConstants.charmsUniquePrefix}${charm}${CharmConstants.charmsUniqueSuffix}`);
     });
   }
 
   protected highlightSunderCharms(charmsCollection): void {
     if (config.IsSunderAltPattern) {
-      JewelryConstants.sunderCharms.forEach(sunder => {
+      CharmConstants.sunderCharms.forEach(sunder => {
         let sunderAltPatternName = Helper.generateDoubleHighlight(sunder.getColor(), HighlightConstants.uniquePattern, HighlightConstants.uniquePadding, HighlightConstants.uniqueColorName, sunder.getName());
         this.upsert(charmsCollection, sunder.getId(), `${SettingsConstants.iLvlIndentFixCharms}${sunderAltPatternName}`);
       });
     }
     else {
-      JewelryConstants.sunderCharms.forEach(sunder => {
-        let sunderName = `${SettingsConstants.iLvlIndentFixCharms}${JewelryConstants.charmsUniquePrefix}${sunder.getName()}${JewelryConstants.charmsUniqueSuffix}`;
+      CharmConstants.sunderCharms.forEach(sunder => {
+        let sunderName = `${SettingsConstants.iLvlIndentFixCharms}${CharmConstants.charmsUniquePrefix}${sunder.getName()}${CharmConstants.charmsUniqueSuffix}`;
         this.upsert(charmsCollection, sunder.getId(), sunderName);
       });
     }
@@ -517,9 +527,6 @@ export class ItemNamesBuilder extends AbstractItemBuilder implements IItemNamesB
 
         // Act 4
         this.upsert(questCol, "hfh", `Hell Forge Hammer`); // Hell Forge Hammer
-
-
-
 
         // Act 5
         // See exceptions [CSTM-QST2]
@@ -689,7 +696,7 @@ export class ItemNamesBuilder extends AbstractItemBuilder implements IItemNamesB
     // gems
     if (settingGems !== SettingsConstants.disabled) {
       let gemsCol = this.getCollectionById(CollectionConstants.gems);
-      Helper.addBigTooltips(gemsCol, settingGems, JewelryConstants.indentPickUpMsg);
+      Helper.addBigTooltips(gemsCol, settingGems, GemConstants.indentPickUpMsg);
     }
 
     // facets
@@ -702,8 +709,8 @@ export class ItemNamesBuilder extends AbstractItemBuilder implements IItemNamesB
     if (settingUniqueCharms !== SettingsConstants.disabled) {
       let charmsCol = this.getCollectionById(CollectionConstants.charms);
       let uniqueCharms = []
-        .concat(JewelryConstants.uniqueLodCharmIds)
-        .concat(JewelryConstants.sunderCharms.map(sunder => sunder.getId()));
+        .concat(CharmConstants.uniqueLodCharmIds)
+        .concat(CharmConstants.sunderCharms.map(sunder => sunder.getId()));
       Helper.addBigTooltipsForIds(charmsCol, uniqueCharms, settingUniqueCharms);
     }
 

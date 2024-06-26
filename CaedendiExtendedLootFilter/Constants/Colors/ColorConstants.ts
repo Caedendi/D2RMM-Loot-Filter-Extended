@@ -1,5 +1,6 @@
-import { D2Color } from "../Models/D2Color";
+import { D2Color } from "../../Models/D2Color";
 
+// TODO: make all constants abstract?
 export abstract class ColorConstants {
   public static prefix = "ÿc";
 
@@ -58,4 +59,8 @@ export abstract class ColorConstants {
   public static gold:      D2Color = this.baseColors.tan;
   public static purple:    D2Color = this.baseColors.darkViolet;
   public static pink:      D2Color = this.baseColors.violet;
+
+  public static getColorByCode(code: string): D2Color {
+    return Object.values(this.baseColors).find(x => x.getCode() === code);
+  }
 }

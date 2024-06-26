@@ -21,7 +21,7 @@ export class CaedendiExtendedLootFilterBuilder implements ICaedendiExtendedLootF
     this.itemNamesBuilder = new ItemNamesBuilder();
   }
 
-  build() {
+  public build(): void {
     if (D2RMM.getVersion == null || D2RMM.getVersion() < 1.7) { // TODO: use new version checker in D2RMM 1.7.0
       throw new Error("Requires D2RMM version 1.7.0 or higher.");
     }

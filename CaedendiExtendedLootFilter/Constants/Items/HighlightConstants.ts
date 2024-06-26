@@ -1,10 +1,11 @@
-import { BaseColorConstants } from "./BaseColorConstants";
-import { CharConstants } from "./CharConstants";
-import { ColorConstants } from "./ColorConstants";
+import { D2Color } from "../../Models/D2Color";
+import { CharConstants } from "../CharConstants";
+import { ColorConstants } from "../Colors/ColorConstants";
+import { SettingsConstants } from "../SettingsConstants";
 
 export class HighlightConstants {
-  static character = config.HighlightCharacter !== this.custom ? config.HighlightCharacter                              : '*'; // replace * with desired custom character [CSTM-HLCTR]
-  static color     = config.HighlightColor     !== this.custom ? `${BaseColorConstants.prefix}${config.HighlightColor}` : '1'; // replace 1 with desired custom color character (see above) [CSTM-HLCLR]
+  static character: string  = config.HighlightCharacter !== SettingsConstants.custom ? config.HighlightCharacter.toString() : '*';                                           // replace * with desired custom character [CSTM-HLCTR]
+  static color:     D2Color = config.HighlightColor     !== SettingsConstants.custom ? ColorConstants.getColorByCode(config.HighlightColor.toString()) : ColorConstants.red; // replace ColorConstants.red with desired custom color [CSTM-HLCLR]
 
   static paddingNone = CharConstants.empty;
   static padding1    = CharConstants.space;
@@ -26,12 +27,12 @@ export class HighlightConstants {
   static uniqueColorHighlight = this.color;
   static uniquePattern = this.pattern10;
   static uniquePadding = this.padding5;
-  static uniquePrefix = `${this.uniqueColorHighlight}${this.uniquePattern}${this.uniqueColorName}${this.uniquePadding}`;
-  static uniqueSuffix = `${this.uniquePadding}${this.uniqueColorHighlight}${this.uniquePattern}${this.uniqueColorName}`;
+  static uniquePrefix = `${this.uniqueColorHighlight.getCode()}${this.uniquePattern}${this.uniqueColorName.getCode()}${this.uniquePadding}`;
+  static uniqueSuffix = `${this.uniquePadding}${this.uniqueColorHighlight.getCode()}${this.uniquePattern}${this.uniqueColorName.getCode()}`;
 
   static questPrefix = this.uniquePrefix;
   static questSuffix = this.uniqueSuffix;
 
   static bttPadding = this.padding5;
-  static bttPickUpMsg = `${ColorConstants.purple}Pick Up`;
+  static bttPickUpMsg = `${ColorConstants.purple.getCode()}Pick Up`;
 }

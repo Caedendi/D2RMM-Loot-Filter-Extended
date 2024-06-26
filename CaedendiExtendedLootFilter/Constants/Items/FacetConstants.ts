@@ -1,7 +1,7 @@
-import { ColorConstants } from "./ColorConstants";
+import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
-export class FacetConstants {
+export abstract class FacetConstants {
   public static facetId = "Rainbow Facet";
   public static facetName = this.facetId;
   public static prefix = config.IsFacetAltPattern ? this.createAltPrefix() : HighlightConstants.uniquePrefix;

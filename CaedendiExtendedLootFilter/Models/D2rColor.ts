@@ -1,12 +1,13 @@
-import { FontColorConstants } from "../Constants/FontColorConstants";
+import { FontColorConstants } from "../Constants/Colors/FontColorConstants";
 
+// TODO: refactor
 export class D2rColor {
   protected name: string;
   protected code: string;
 
-  constructor(name: string, code: string) {
+  constructor(name: string) {
     this.name = name;
-    this.code = code;
+    this.code = name;
   }
 
   public getName(): string {
