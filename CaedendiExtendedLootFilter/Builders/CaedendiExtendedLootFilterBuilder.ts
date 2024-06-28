@@ -3,8 +3,8 @@ import { ICaedendiExtendedLootFilterBuilder } from "./Interfaces/ICaedendiExtend
 import { ItemLevelBuilder } from "./ItemLevelBuilder";
 import { ItemModifiersBuilder } from "./ItemModifiersBuilder";
 import { ItemNameAffixesBuilder } from "./ItemNameAffixesBuilder";
-import { IItemNamesBuilder } from "./ItemNamesBuilders/Interfaces/IItemNamesBuilder";
-import { ItemNamesBuilder } from "./ItemNamesBuilders/ItemNamesBuilder";
+import { IItemNamesBuilder } from "../Writers/Interfaces/IItemNamesBuilder";
+import { ItemNamesWriter } from "../Writers/ItemNamesBuilder";
 import { ItemQualityBuilder } from "./ItemQualityBuilder";
 import { ItemRunesBuilder } from "./ItemRunesBuilder";
 import { LightPillarBuilder } from "./LightPillarBuilder";
@@ -18,7 +18,7 @@ export class CaedendiExtendedLootFilterBuilder implements ICaedendiExtendedLootF
   itemNamesBuilder: IItemNamesBuilder;
   
   constructor() {
-    this.itemNamesBuilder = new ItemNamesBuilder();
+    this.itemNamesBuilder = new ItemNamesWriter();
   }
 
   public build(): void {

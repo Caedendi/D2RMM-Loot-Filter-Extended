@@ -5,12 +5,12 @@ import { FileConstants } from "../../Constants/FileConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { Helper } from "../../Helper";
-import { ItemBuilder } from "../ItemBuilder";
 import { IHealingPotionsBuilder } from "./Interfaces/IHealingPotionsBuilder";
 import { D2Color } from "../../Models/D2Color";
 import { ItemCollection } from "../../Models/ItemCollection";
+import { BaseBuilder } from "./BaseBuilder";
 
-export class HealingPotionsBuilder extends ItemBuilder implements IHealingPotionsBuilder {
+export class HealingPotionsBuilder extends BaseBuilder implements IHealingPotionsBuilder {
   public potionCollection: ItemCollection;
 
   constructor() {

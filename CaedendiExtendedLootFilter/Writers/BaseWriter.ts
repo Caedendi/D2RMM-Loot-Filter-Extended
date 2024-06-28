@@ -1,38 +1,20 @@
 import { CharConstants } from "../Constants/CharConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { IItemBuilder } from "./Interfaces/IItemBuilder";
+import { IBaseWriter } from "./Interfaces/IBaseWriter";
 
-export abstract class ItemBuilder implements IItemBuilder {
-  collections = [];
-  target = CharConstants.empty;
+export abstract class BaseWriter implements IBaseWriter {
+  protected target: string = CharConstants.empty;
 
   // TODO: refactor
   constructor(target: string) {
-    if (new.target === ItemBuilder) {
-      throw new TypeError("Cannot construct abstract AbstractItemBuilder instances directly.");
+    if (new.target === BaseWriter) {
+      throw new TypeError("Cannot construct abstract BaseWriter instances directly.");
     }
 
     this.target = target;
   }
 
-  public abstract build(): void;
-
-  // public upsert(array: {id: string, value: string}[], id: string, value: string): void {
-  public upsert<T>(array: {id: string, value: T}[], id: string, value: T): void { 
-    const i = array.findIndex(x => x.id === id);
-    if (i > -1) array[i] = { id: id, value: value };
-    else array.push({ id: id, value: value });
-  }
-
   public initCollection(id: string): void {
     this.upsert(this.collections, id, []);
-  }
-
-  public getCollectionById(id: string): {id: string, value: string}[] {
-    const i = this.collections.findIndex(x => x.id === id);
-    if (i < 0)
-      throw new Error(`Can't find subcollection \"${id}\" in this.collections.`);
-    return this.collections[i].value;
   }
 
   public mergeCollections(): {id: string, value: string}[] {

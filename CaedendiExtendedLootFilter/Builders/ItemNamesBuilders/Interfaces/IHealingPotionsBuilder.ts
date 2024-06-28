@@ -1,8 +1,8 @@
 import { D2Color } from "../../../Models/D2Color";
 import { ItemCollection } from "../../../Models/ItemCollection";
-import { IItemBuilder } from "../../Interfaces/IItemBuilder";
+import { IBaseBuilder } from "./IBaseBuilder";
 
-export interface IHealingPotionsBuilder extends IItemBuilder {
+export interface IHealingPotionsBuilder extends IBaseBuilder {
   build(): void;
   hideHealingPotions(   potionsCollection: ItemCollection): void;
   highlightLv123Potions(potionsCollection: ItemCollection, clrHeal: D2Color, clrMana: D2Color, clrName: D2Color, pattern: string, padding: string): void;

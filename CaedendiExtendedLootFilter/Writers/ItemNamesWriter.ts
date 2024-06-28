@@ -1,20 +1,19 @@
-import { ModConfigValue } from "../../../../types";
-import { CharConstants } from "../../Constants/CharConstants";
-import { CollectionConstants } from "../../Constants/Items/CollectionConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { EndgameConstants } from "../../Constants/Items/EndgameConstants";
-import { FacetConstants } from "../../Constants/Items/FacetConstants";
-import { FileConstants } from "../../Constants/FileConstants";
-import { GemConstants } from "../../Constants/Items/GemConstants";
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { JewelryConstants } from "../../Constants/Items/JewelryConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { Helper } from "../../Helper";
-import { D2Color } from "../../Models/D2Color";
-import { ItemBuilder } from "../ItemBuilder";
-import { IHealingPotionsBuilder } from "./Interfaces/IHealingPotionsBuilder";
-import { IItemNamesBuilder } from "./Interfaces/IItemNamesBuilder";
-import { CharmConstants } from "../../Constants/Items/CharmConstants";
+import { ModConfigValue } from "../../../types";
+import { CharConstants } from "../Constants/CharConstants";
+import { CollectionConstants } from "../Constants/Items/CollectionConstants";
+import { ColorConstants } from "../Constants/Colors/ColorConstants";
+import { EndgameConstants } from "../Constants/Items/EndgameConstants";
+import { FacetConstants } from "../Constants/Items/FacetConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { GemConstants } from "../Constants/Items/GemConstants";
+import { HighlightConstants } from "../Constants/Items/HighlightConstants";
+import { JewelryConstants } from "../Constants/Items/JewelryConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { Helper } from "../Helper";
+import { D2Color } from "../Models/D2Color";
+import { IHealingPotionsBuilder } from "../Builders/ItemNamesBuilders/Interfaces/IHealingPotionsBuilder";
+import { CharmConstants } from "../Constants/Items/CharmConstants";
+import { BaseWriter } from "./BaseWriter";
 
 // TODO:
 // new design:
@@ -24,7 +23,7 @@ import { CharmConstants } from "../../Constants/Items/CharmConstants";
 // - creates a complete collection out of all individual builders' collections
 // - uses target to write to file in one go
 
-export class ItemNamesBuilder extends ItemBuilder implements IItemNamesBuilder {
+export class ItemNamesWriter extends BaseWriter implements ItemNamesWriter {
   protected healingPotionsBuilder: IHealingPotionsBuilder;
 
   constructor() {

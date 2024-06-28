@@ -4,9 +4,9 @@ import { FileConstants } from "../Constants/FileConstants";
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
-import { ItemBuilder } from "./ItemBuilder";
+import { BaseBuilder } from "./ItemNamesBuilders/BaseBuilder";
 
-export class UiBuilder extends ItemBuilder {
+export class UiBuilder extends BaseBuilder {
   constructor() {
     super(FileConstants.FILE_UI_PATH);
 

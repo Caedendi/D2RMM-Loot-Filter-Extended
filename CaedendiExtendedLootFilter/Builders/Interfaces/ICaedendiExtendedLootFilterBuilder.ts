@@ -1,4 +1,4 @@
-import { IItemNamesBuilder } from "../ItemNamesBuilders/Interfaces/IItemNamesBuilder";
+import { IItemNamesBuilder } from "../../Writers/Interfaces/IItemNamesBuilder";
 
 export interface ICaedendiExtendedLootFilterBuilder {
   itemNamesBuilder: IItemNamesBuilder;
