@@ -1,10 +1,11 @@
+import { D2rmmVersion } from "../Models/D2rmmVersion";
+import { IWriter } from "../Writers/Interfaces/IWriter";
+import { ItemNamesWriter } from "../Writers/ItemNamesWriter";
 import { DropSoundBuilder } from "./DropSoundBuilder";
-import { ICaedendiExtendedLootFilterBuilder } from "./Interfaces/ICaedendiExtendedLootFilterBuilder";
+import { ICaedendiExtendedLootFilter } from "./Interfaces/ICaedendiExtendedLootFilterBuilder";
 import { ItemLevelBuilder } from "./ItemLevelBuilder";
 import { ItemModifiersBuilder } from "./ItemModifiersBuilder";
 import { ItemNameAffixesBuilder } from "./ItemNameAffixesBuilder";
-import { IItemNamesBuilder } from "../Writers/Interfaces/IItemNamesBuilder";
-import { ItemNamesWriter } from "../Writers/ItemNamesBuilder";
 import { ItemQualityBuilder } from "./ItemQualityBuilder";
 import { ItemRunesBuilder } from "./ItemRunesBuilder";
 import { LightPillarBuilder } from "./LightPillarBuilder";
@@ -14,24 +15,27 @@ import { UiBuilder } from "./UiBuilder";
 /**
  * Master Builder
  */
-export class CaedendiExtendedLootFilterBuilder implements ICaedendiExtendedLootFilterBuilder {
-  itemNamesBuilder: IItemNamesBuilder;
+export class CaedendiExtendedLootFilterBuilder implements ICaedendiExtendedLootFilter {
+  public readonly requiredD2rmmVersion: D2rmmVersion = new D2rmmVersion(1, 7, 0);
+  public readonly itemNamesWriter: IWriter;
   
   constructor() {
-    this.itemNamesBuilder = new ItemNamesWriter();
+    this.checkVersion();
+    
+    // initialize writers
+    this.itemNamesWriter = new ItemNamesWriter();
   }
-
+  
+  /**
+   * 
+   */
   public build(): void {
-    if (D2RMM.getVersion == null || D2RMM.getVersion() < 1.7) { // TODO: use new version checker in D2RMM 1.7.0
-      throw new Error("Requires D2RMM version 1.7.0 or higher.");
-    }
-
     (new ItemNameAffixesBuilder()).build(); // Gold, Superior/Inferior affixes, Gems (exceptions)
     (new       ItemRunesBuilder()).build(); // Runes
-
+    
     // (new       ItemNamesBuilder()).build(); // Most items
-    this.itemNamesBuilder.build();
-
+    this.itemNamesWriter.run();
+    
     (new              UiBuilder()).build(); // Quest items (exceptions)
     (new   ItemModifiersBuilder()).build(); // Quest items (exceptions)
     (new       ItemLevelBuilder()).build(); // iLvl
@@ -39,5 +43,17 @@ export class CaedendiExtendedLootFilterBuilder implements ICaedendiExtendedLootF
     (new     LightPillarBuilder()).build(); // Light Pillars
     (new       DropSoundBuilder()).build(); // Drop Sounds
     (new   ProfileHdModsBuilder()).build(); // _profilehd.json stuff
+  }
+  
+  protected checkVersion() {
+    var v = D2RMM.getFullVersion();
+    if (v == null) {
+      throw new Error(this.requiredD2rmmVersion.getErrorMessage());
+    }
+    
+    let currentD2rmmVersion = D2rmmVersion.fromArray(v);
+    if (!currentD2rmmVersion.isOrExceeds(this.requiredD2rmmVersion)) {
+      throw new Error(this.requiredD2rmmVersion.getErrorMessage());
+    }
   }
 }

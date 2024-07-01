@@ -1,7 +1,7 @@
-import { IItemNamesBuilder } from "../../Writers/Interfaces/IItemNamesBuilder";
+import { IWriter } from "../../Writers/Interfaces/IWriter"
 
-export interface ICaedendiExtendedLootFilterBuilder {
-  itemNamesBuilder: IItemNamesBuilder;
+export interface ICaedendiExtendedLootFilter {
+  itemNamesWriter: IWriter;
 
   build(): void;
 }

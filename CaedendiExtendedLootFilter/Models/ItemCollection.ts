@@ -13,4 +13,15 @@ export class ItemCollection {
     else 
       this.entries.push({ id: id, value: value });
   }
+
+  public concat(collection: ItemCollection): ItemCollection {
+    let merged = { ...this };
+    merged.entries = this.entries.concat(collection.entries);
+
+    return merged;
+  }
+
+  public getEntries(): {id: string, value: string}[] {
+    return this.entries;
+  }
 }

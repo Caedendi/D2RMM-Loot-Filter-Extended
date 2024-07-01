@@ -13,7 +13,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 - [Screenshots](#screenshots)
 - [Changelog](#changelog)
-  - [3.0.0 (work in progress)](#300-work-in-progress)
+  - [3.0.0](#300)
   - [2.1.1](#211)
   - [2.1.0](#210)
   - [2.0.1](#201)
@@ -65,7 +65,14 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 ## Changelog
 
-### 3.0.0 (work in progress)
+### 4.0.0
+
+- Proud to present the first TypeScript mod for D2RMM!
+- Huge refactor because of the move to TypeScript
+- Fixed various small not previously known bugs related to missing/unreachable variables that weren't picked up because JavaScript
+- 
+
+### 3.0.0
 
 - Introducing Drop Sounds! Configure new sound effects for when select item types drop so you'll never miss a drop again!
 - For those running custom filter options: all colors have been renamed to the standardized name they most closely resemble (see [/docs/colors.md](https://github.com/Caedendi/D2RMM-Loot-Filter-Extended/blob/master/Docs/colors.md) for details)
@@ -377,9 +384,18 @@ Do not enable Show Item Level if you are playing online. It does not work (all i
     - [ ] torch: fireball/hell forge smash
     - [ ] Gheed's: gold drop
   - [ ] Sunder Charms: theme sounds (fireball, lightning, etc)
+- [ ] Drop Sounds rework: port over functionality from [Bad Luck Modpack](https://www.inven.co.kr/board/diablo2/5842/5159) ([example](https://www.youtube.com/watch?v=TiKZQ-IIW6g))
 - [ ] ProfileHD mods
   - [ ] Also apply to ProfileLV and controller ProfileHD
   - [ ] Remove Ethereal Color as it's already provided by olegbl's Custom Item Colors mod
+- [ ] Check for D2RMM version
+- [ ] Check for installed mods:
+  - [ ] Settings Font Fix (olegbl)
+  - [ ] Custom Item Colors (olegbl)
+  - [ ] Pseudo Loot Filter (alexci)
+  - [ ] Expanded Stash?
+- [ ] Implement latest D2RMM features
+- [ ] Rework custom filter list
 
 
 ### Fix known bugs

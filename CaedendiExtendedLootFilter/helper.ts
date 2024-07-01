@@ -4,6 +4,15 @@ import { HighlightConstants } from "./Constants/Items/HighlightConstants";
 import { D2Color } from "./Models/D2Color";
 
 export class Helper {
+  public static isWholeNumber(number: number): boolean {
+    return number % 1 > 0;
+  }
+  
+  // TODO: remove?
+  public static isInRange(number: number, min: number, max: number) {
+    return number >= min && number <= max;
+  }
+
   public static addBigTooltips(collection: {id: string, value: string}[], setting: string, indentPickUpMsg: string = CharConstants.empty) {
     collection.forEach(entry => entry.value = Helper.generateBigTooltip(setting, entry.value, indentPickUpMsg));
   }
