@@ -67,7 +67,7 @@ export abstract class BaseWriter implements IWriter {
 
     let file = D2RMM.readJson(this.target); // copy existing file
     var idList = entries.map(entry => entry.id);
-    Object.entries(file).forEach((item) => {
+    Object.entries(file).forEach(item => {
       if (idList.includes(item[FileConstants.key])) { // todo: was item.Key, now replaced
         for (const key in item) {
           if (key !== FileConstants.id && key !== FileConstants.key) {

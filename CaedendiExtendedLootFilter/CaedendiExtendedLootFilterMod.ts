@@ -1,21 +1,20 @@
-import { D2rmmVersion } from "../Models/D2rmmVersion";
-import { IWriter } from "../Writers/Interfaces/IWriter";
-import { ItemNamesWriter } from "../Writers/ItemNamesWriter";
-import { DropSoundBuilder } from "./DropSoundBuilder";
-import { ICaedendiExtendedLootFilter } from "./Interfaces/ICaedendiExtendedLootFilterBuilder";
-import { ItemLevelBuilder } from "./ItemLevelBuilder";
-import { ItemModifiersBuilder } from "./ItemModifiersBuilder";
-import { ItemNameAffixesBuilder } from "./ItemNameAffixesBuilder";
-import { ItemQualityBuilder } from "./ItemQualityBuilder";
-import { ItemRunesBuilder } from "./ItemRunesBuilder";
-import { LightPillarBuilder } from "./LightPillarBuilder";
-import { ProfileHdModsBuilder } from "./ProfileHdModsBuilder";
-import { UiBuilder } from "./UiBuilder";
+import { D2rmmVersion } from "./Models/D2rmmVersion";
+import { IWriter } from "./Writers/Interfaces/IWriter";
+import { ItemNamesWriter } from "./Writers/ItemNamesWriter";
+import { DropSoundBuilder } from "./Builders/DropSoundBuilder";
+import { ItemLevelBuilder } from "./Builders/ItemLevelBuilder";
+import { ItemModifiersBuilder } from "./Builders/ItemModifiersBuilder";
+import { ItemNameAffixesBuilder } from "./Builders/ItemNameAffixesBuilder";
+import { ItemQualityBuilder } from "./Builders/ItemQualityBuilder";
+import { ItemRunesBuilder } from "./Builders/ItemRunesBuilder";
+import { LightPillarBuilder } from "./Builders/LightPillarBuilder";
+import { ProfileHdModsBuilder } from "./Builders/ProfileHdModsBuilder";
+import { UiBuilder } from "./Builders/UiBuilder";
 
 /**
  * Master Builder
  */
-export class CaedendiExtendedLootFilterBuilder implements ICaedendiExtendedLootFilter {
+export class CaedendiExtendedLootFilterMod {
   public readonly requiredD2rmmVersion: D2rmmVersion = new D2rmmVersion(1, 7, 0);
   public readonly itemNamesWriter: IWriter;
   
@@ -23,11 +22,12 @@ export class CaedendiExtendedLootFilterBuilder implements ICaedendiExtendedLootF
     this.checkVersion();
     
     // initialize writers
-    this.itemNamesWriter = new ItemNamesWriter();
+    this.itemNamesWriter = new ItemNamesWriter()
+    // todo
   }
   
   /**
-   * 
+   * Builds the mod by running all writers.
    */
   public build(): void {
     (new ItemNameAffixesBuilder()).build(); // Gold, Superior/Inferior affixes, Gems (exceptions)

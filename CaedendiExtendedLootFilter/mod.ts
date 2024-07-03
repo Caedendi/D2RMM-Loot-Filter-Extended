@@ -7,6 +7,6 @@
 ////===============================================////
 ////===============================================////
 
-import { CaedendiExtendedLootFilterBuilder } from "./Builders/CaedendiExtendedLootFilterBuilder"
+import { CaedendiExtendedLootFilterMod } from "./CaedendiExtendedLootFilterMod"
 
-new CaedendiExtendedLootFilterBuilder().build();
+new CaedendiExtendedLootFilterMod().build();

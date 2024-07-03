@@ -12,8 +12,6 @@ export class CustomFilterListBuilder extends BaseBuilder implements IBuilder {
       return;
     }
 
-    CustomFilterList.create().forEach(item => {
-      this.collection.upsert(item.getKey(), item.getName());
-    });
+    this.collection.upsertArray(CustomFilterList.create().getEntries());
   }
 }

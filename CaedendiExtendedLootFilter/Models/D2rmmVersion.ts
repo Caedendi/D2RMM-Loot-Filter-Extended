@@ -13,8 +13,8 @@ export class D2rmmVersion {
 
   public static fromArray(version: [number, number, number]) {
     version.forEach(v => {
-      // if (v < 0 || v % 1 > 0 { // if lower than 0 or not a whole number // TODO: check
-      if (v < 0 || !Helper.isWholeNumber(v)) {
+      if (v < 0 || v % 1 > 0) { // must be whole number, 0 or higher
+      // if (v < 0 || !this.isWholeNumber(v)) {
         throw new Error(`Invalid D2RMM version numbers submitted: ${version}`);
       }
     });
@@ -37,4 +37,13 @@ export class D2rmmVersion {
   public getErrorMessage(): string {
     return `Requires D2RMM version ${this.toString()} or higher.`;
   }
+
+  // TODO: remove?
+  // private static isWholeNumber(number: number): boolean {
+  //   return number % 1 > 0;
+  // }
+  
+  // private static isInRange(number: number, min: number, max: number) {
+  //   return number >= min && number <= max;
+  // }
 }

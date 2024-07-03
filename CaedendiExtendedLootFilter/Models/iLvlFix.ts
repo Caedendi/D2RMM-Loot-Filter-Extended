@@ -5,6 +5,6 @@
  */
 export enum iLvlFix {
   None = 0,
-  SingleDigit = 1,
-  DoubleDigits = 2,
+  Single = 1,
+  Double = 2,
 }

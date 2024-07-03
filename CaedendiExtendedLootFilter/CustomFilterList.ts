@@ -1,11 +1,8 @@
-import { ColorConstants as Color } from "./Constants/Colors/ColorConstants";
-import { HighlightConstants as Highlighting } from "./Constants/Items/HighlightConstants";
-import { SettingsConstants as Setting } from "./Constants/SettingsConstants";
-import { CustomFilterListEntry } from "./Models/CustomFilterListEntry";
+import { ItemCollection } from "./Models/ItemCollection";
 import { iLvlFix } from "./Models/iLvlFix";
 
 export abstract class CustomFilterList {
-  public static create(): CustomFilterListEntry[] {
+  public static create(): ItemCollection {
     // let griffons1 = `My custom item name in a variable`;
 
     let list: [string, string, iLvlFix?][] = [
@@ -30,7 +27,7 @@ export abstract class CustomFilterList {
       //   Set this to either:
       //   - None if not applicable or to disable
       //   - Single if it _always_ has a single digit iLvl (1 to 9, like Khalim's Will)
-      //   - Double if it can have a double digit iLvl (10-99, like most equipment)
+      //   - Double if it can have a double digit iLvl (10-99, like most items)
       //
       // See "D2RMM mod settings => Tooltips => Highlight Character" for a list of safe to use highlight characters.
       // Characters like ¤ (which were used in legacy loot filters) are not fully compatible with D2R, they increase the
@@ -48,7 +45,7 @@ export abstract class CustomFilterList {
       [ "ci3", `${Color.red}Diadem${Color.blue}` ],
 
       // named key with manual highlighting
-      [ "Griffon's Eye", `${Color.red}**********${Color.purple}     "Death's Web"     ${Color.red}**********${Color.purple}`, iLvlFix.DoubleDigits ],
+      [ "Griffon's Eye", `${Color.red}**********${Color.purple}     "Griffon's Eye"     ${Color.red}**********${Color.purple}`, iLvlFix.DoubleDigits ],
       
       // name with generated highlighting
       [ "Griffon's Eye", Helper.generateDoubleHighlight(Color.red, Highlighting.pattern10, Highlighting.padding5, Color.purple, "Griffon's Eye"), iLvlFix.DoubleDigits ],
@@ -60,20 +57,6 @@ remove this line (2/2) */
       
     ];
 
-    return this.fromArray(list);
-  }
-
-  // TODO: test
-  protected static fromArray(array: [string, string, iLvlFix?][]): CustomFilterListEntry[] {
-    return array.map<CustomFilterListEntry>(x => new CustomFilterListEntry(x[0], x[1], x[2]));
-
-    /*
-    let result: CustomFilterListEntry[] = [];
-    array.forEach(entry => {
-      result.push(new CustomFilterListEntry(entry[0], entry[1], entry[2]));
-    });
-
-    return result;
-    */
+    return ItemCollection.fromArray(CustomFilterList.name, list);
   }
 }

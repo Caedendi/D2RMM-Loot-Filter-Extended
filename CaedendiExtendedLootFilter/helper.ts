@@ -2,32 +2,11 @@ import { CharConstants } from "./Constants/CharConstants";
 import { SettingsConstants } from "./Constants/SettingsConstants";
 import { HighlightConstants } from "./Constants/Items/HighlightConstants";
 import { D2Color } from "./Models/D2Color";
+import { iLvlFix } from "./Models/iLvlFix";
 
 export class Helper {
-  public static isWholeNumber(number: number): boolean {
-    return number % 1 > 0;
-  }
-  
-  // TODO: remove?
-  public static isInRange(number: number, min: number, max: number) {
-    return number >= min && number <= max;
-  }
-
-  public static addBigTooltips(collection: {id: string, value: string}[], setting: string, indentPickUpMsg: string = CharConstants.empty) {
-    collection.forEach(entry => entry.value = Helper.generateBigTooltip(setting, entry.value, indentPickUpMsg));
-  }
-
-  public static addBigTooltipsForIds(collection: {id: string, value: string}[], ids: string[], setting: string) {
-    ids.forEach(id => {
-      this.addBigTooltipForId(collection, id, setting);
-    })
-  }
-  
-  public static addBigTooltipForId(collection: {id: string, value: string}[], id: string, setting: string) {
-    const i = collection.findIndex(x => x.id === id);
-    if (i < 0) 
-      throw new Error(`Can't find item \"${id}\" in collection.`);
-    collection[i].value = this.generateBigTooltip(setting, collection[i].value);
+  public static isDefined(param: any): boolean {
+    return (param != null && param != undefined);
   }
 
   /**
@@ -54,6 +33,38 @@ export class Helper {
    */
   public static generateDoubleHighlight(patternColor: D2Color, pattern: string, padding: string, itemColor: D2Color, itemName: string) {
     return `${patternColor.getCode()}${pattern}${itemColor.getCode()}${padding}${itemName}${padding}${patternColor.getCode()}${pattern}${itemColor.getCode()}`;
+  }
+
+  public static getiLvlIndent(fix?: iLvlFix): string {
+    if (!this.isDefined(fix) || !SettingsConstants.shouldFixIlvlIndent || fix === iLvlFix.None) {
+      return CharConstants.empty;
+    }
+
+    if (fix == iLvlFix.Single) {
+      return SettingsConstants.iLvlIndentFixSingle
+    }
+    if (fix == iLvlFix.Double) {
+      return SettingsConstants.iLvlIndentFixDouble;
+    }
+
+    throw new Error("Helper.getiLvlIndent() received undefined iLvlFix value.");
+  }
+
+  public static addBigTooltips(collection: {id: string, value: string}[], setting: string, indentPickUpMsg: string = CharConstants.empty) {
+    collection.forEach(entry => entry.value = Helper.generateBigTooltip(setting, entry.value, indentPickUpMsg));
+  }
+
+  public static addBigTooltipsForIds(collection: {id: string, value: string}[], ids: string[], setting: string) {
+    ids.forEach(id => {
+      this.addBigTooltipForId(collection, id, setting);
+    })
+  }
+  
+  public static addBigTooltipForId(collection: {id: string, value: string}[], id: string, setting: string) {
+    const i = collection.findIndex(x => x.id === id);
+    if (i < 0) 
+      throw new Error(`Can't find item \"${id}\" in collection.`);
+    collection[i].value = this.generateBigTooltip(setting, collection[i].value);
   }
 
   /**
