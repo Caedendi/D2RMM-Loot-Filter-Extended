@@ -1,5 +1,8 @@
 import { EndgameConstants } from "../../Constants/Items/EndgameConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
+import { ItemEntry } from "../../Models/ItemEntry";
+import { iLvlFix } from "../../Models/iLvlFix";
 import { BaseBuilder } from "./BaseBuilder";
 import { IBuilder } from "./Interfaces/IBuilder";
 
@@ -27,19 +30,24 @@ export class EndgameItemsBuilder extends BaseBuilder implements IBuilder {
         this.hideStandardOfHeroes();
         return;
       case SettingsConstants.custom: // [CSTM-END]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.collection.upsert("tes", `Twisted Essence of Suffering`);
-        this.collection.upsert("ceh", `Charged Essense of Hatred`);
-        this.collection.upsert("bet", `Burning Essence of Terror`);
-        this.collection.upsert("fed", `Festering Essence of Destruction`);
-        this.collection.upsert("toa", `Token of Absolution`);
-        this.collection.upsert("pk1", `Key of Terror`);
-        this.collection.upsert("pk2", `Key of Hate`);
-        this.collection.upsert("pk3", `Key of Destruction`);
-        this.collection.upsert("dhn", `Diablo's Horn`);
-        this.collection.upsert("bey", `Baal's Eye`);
-        this.collection.upsert("mbr", `Mephisto's Brain`);
-        this.collection.upsert("std", `Standard of Heroes`);
+        let customList: [string, string, iLvlFix?][] = [
+          // ADD YOUR CUSTOM ITEM NAMES HERE
+
+          [ "tes", `Twisted Essence of Suffering` ],
+          [ "ceh", `Charged Essense of Hatred` ],
+          [ "bet", `Burning Essence of Terror` ],
+          [ "fed", `Festering Essence of Destruction` ],
+          [ "toa", `Token of Absolution` ],
+          [ "pk1", `Key of Terror` ],
+          [ "pk2", `Key of Hate` ],
+          [ "pk3", `Key of Destruction` ],
+          [ "dhn", `Diablo's Horn` ],
+          [ "bey", `Baal's Eye` ],
+          [ "mbr", `Mephisto's Brain` ],
+          [ "std", `Standard of Heroes` ],
+        ];
+
+        this.collection.upsertArray(ItemEntry.createArray(customList));
         return;
     }
   }
@@ -47,7 +55,7 @@ export class EndgameItemsBuilder extends BaseBuilder implements IBuilder {
   protected highlightEndgameItems(): void {
     let endgameItems = [].concat(EndgameConstants.essences, EndgameConstants.keys, EndgameConstants.organs);
     endgameItems.push(EndgameConstants.token);
-
+    
     endgameItems.forEach(item => {
       this.collection.upsert(item.id, `${item.prefix}${item.name}${item.suffix}`);
     });

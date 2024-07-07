@@ -60,7 +60,9 @@ export abstract class ColorConstants {
   public static purple:    D2Color = this.baseColors.darkViolet;
   public static pink:      D2Color = this.baseColors.violet;
 
+  public static magic: D2Color = this.blue;
+
   public static getColorByCode(code: string): D2Color {
-    return Object.values(this.baseColors).find(x => x.getCode() === code);
+    return Object.values(this.baseColors).find(x => x.toString() === code);
   }
 }

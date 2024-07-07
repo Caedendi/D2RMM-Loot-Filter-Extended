@@ -1,7 +1,7 @@
-import { CharConstants } from "../../Constants/CharConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { Helper } from "../../Helper";
+import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
+import { ItemEntry } from "../../Models/ItemEntry";
 import { iLvlFix } from "../../Models/iLvlFix";
 import { BaseBuilder } from "./BaseBuilder";
 import { IBuilder } from "./Interfaces/IBuilder";
@@ -26,105 +26,105 @@ export class QuestItemsBuilder extends BaseBuilder implements IBuilder {
         this.highlightQuestItems();
         return;
       case SettingsConstants.custom: // [CSTM-QST1]
-        let custom: { id: string, value: string }[] = [
+        let customList: [string, string, iLvlFix?][] = [
+          // ADD YOUR CUSTOM ITEM NAMES HERE
+
+          // See UiBuilder.ts for Book of Skill and Potion of Life, and 
+          // see ItemModifiersBuilder.ts for Malah's Potion and Scroll of Resistance [CSTM-QST2]
+          
           // Act 1
-          { id: "leg", value: `Wirt's Leg` }, // Wirt's Leg
-          { id: "hdm", value: `Horadric Malus` }, // Horadric Malus
-          { id: "bks", value: `Scroll of Inifuss` }, // Scroll of Inifuss
-          { id: "bkd", value: `Scroll of Inifuss` }, // Scroll of Inifuss (deciphered)
+          [ "leg", `Wirt's Leg` ], // Wirt's Leg
+          [ "hdm", `Horadric Malus` ], // Horadric Malus
+          [ "bks", `Scroll of Inifuss` ], // Scroll of Inifuss
+          [ "bkd", `Scroll of Inifuss` ], // Scroll of Inifuss (deciphered)
           
           // Act 2
-          { id: "tr1", value: `Horadric Scroll` }, // Horadric Scroll
-          { id: "box", value: `Horadric Cube` }, // Horadric Cube
-          { id: "msf", value: `Staff of Kings` }, // Staff of Kings
-          { id: "vip", value: `Amulet of the Viper` }, // Amulet of the Viper
-          { id: "hst", value: `Horadric Staff` }, // Horadric Staff
+          [ "tr1", `Horadric Scroll` ], // Horadric Scroll
+          [ "box", `Horadric Cube` ], // Horadric Cube
+          [ "msf", `Staff of Kings` ], // Staff of Kings
+          [ "vip", `Amulet of the Viper` ], // Amulet of the Viper
+          [ "hst", `Horadric Staff` ], // Horadric Staff
 
           // Act 3
-          { id: "j34", value: `A Jade Figurine` }, // A Jade Figurine
-          { id: "g34", value: `The Golden Bird` }, // The Golden Bird
-          { id: "bbb", value: `Lam Esen's Tome` }, // Lam Esen's Tome
-          { id: "g33", value: `The Gidbinn` }, // The Gidbinn
-          { id: "qf1", value: `Khalim's Flail` }, // Khalim's Flail
-          { id: "qf2", value: `Khalim's Will` }, // Khalim's Will
-          { id: "qey", value: `Khalim's Eye` }, // Khalim's Eye
-          { id: "qhr", value: `Khalim's Heart` }, // Khalim's Heart
-          { id: "qbr", value: `Khalim's Brain` }, // Khalim's Brain
-          { id: "mss", value: `Mephisto's Soulstone` }, // Mephisto's Soulstone
+          [ "j34", `A Jade Figurine` ], // A Jade Figurine
+          [ "g34", `The Golden Bird` ], // The Golden Bird
+          [ "bbb", `Lam Esen's Tome` ], // Lam Esen's Tome
+          [ "g33", `The Gidbinn` ], // The Gidbinn
+          [ "qf1", `Khalim's Flail` ], // Khalim's Flail
+          [ "qf2", `Khalim's Will` ], // Khalim's Will
+          [ "qey", `Khalim's Eye` ], // Khalim's Eye
+          [ "qhr", `Khalim's Heart` ], // Khalim's Heart
+          [ "qbr", `Khalim's Brain` ], // Khalim's Brain
+          [ "mss", `Mephisto's Soulstone` ], // Mephisto's Soulstone
           
           // Act 4
-          { id: "hfh", value: `Hell Forge Hammer` }, // Hell Forge Hammer
+          [ "hfh", `Hell Forge Hammer` ], // Hell Forge Hammer
           
           // Act 5
-          // See exceptions [CSTM-QST2]
+          // See exceptions mentioned above [CSTM-QST2]
+          
           // Extra
-          { id: "Staff of Kings",      value: `Staff of Kings` }, // Staff of Kings
-          { id: "Amulet of the Viper", value: `Amulet of the Viper` }, // Amulet of the Viper
-          { id: "Horadric Staff",      value: `Horadric Staff` }, // Horadric Staff
-          { id: "LamTome",             value: `Lam Esen's Tome` }, // Lam Esen's Tome
-          { id: "KhalimFlail",         value: `Khalim's Flail` }, // Khalim's Flail
-          { id: "SuperKhalimFlail",    value: `Khalim's Will` }, // Khalim's Will
-          { id: "Hell Forge Hammer",   value: `Hell Forge Hammer` }, // Hell Forge Hammer
+          [ "Staff of Kings",      `Staff of Kings` ], // Staff of Kings
+          [ "Amulet of the Viper", `Amulet of the Viper` ], // Amulet of the Viper
+          [ "Horadric Staff",      `Horadric Staff` ], // Horadric Staff
+          [ "LamTome",             `Lam Esen's Tome` ], // Lam Esen's Tome
+          [ "KhalimFlail",         `Khalim's Flail` ], // Khalim's Flail
+          [ "SuperKhalimFlail",    `Khalim's Will` ], // Khalim's Will
+          [ "Hell Forge Hammer",   `Hell Forge Hammer` ], // Hell Forge Hammer
         ];
 
-        this.collection.upsertArray(custom);
-        
+        this.collection.upsertArray(ItemEntry.createArray(customList));
         return;
     }
   }
 
   protected highlightQuestItems(): void {
-    // for Book of Skill and Potion of Life, see [CSTM-QST2]
-
-    let questItems = [
+    let questItems: DoubleHighlightItemEntry[] = [
       // Act 1
-      [ id: "leg", name: "Wirt's Leg",        iLvlIndent: iLvlFix.Double ],
-      [ id: "hdm", name: "Horadric Malus",    iLvlIndent: iLvlFix.Double ],
-      [ id: "bks", name: "Scroll of Inifuss", iLvlIndent: iLvlFix.None ],
-      [ id: "bkd", name: "Scroll of Inifuss", iLvlIndent: iLvlFix.None ], // deciphered
+      new DoubleHighlightItemEntry("leg", "Wirt's Leg", iLvlFix.Double),
+      new DoubleHighlightItemEntry("hdm", "Horadric Malus", iLvlFix.Double),
+      new DoubleHighlightItemEntry("bks", "Scroll of Inifuss"),
+      new DoubleHighlightItemEntry("bkd", "Scroll of Inifuss"), // deciphered
 
       // Act 2
-      { id: "tr1", name: "Horadric Scroll",     iLvlIndent: iLvlFix.None },
-      { id: "msf", name: "Staff of Kings",      iLvlIndent: iLvlFix.Double },
-      { id: "vip", name: "Amulet of the Viper", iLvlIndent: iLvlFix.None },
-      { id: "hst", name: "Horadric Staff",      iLvlIndent: iLvlFix.Single },
+      new DoubleHighlightItemEntry("tr1", "Horadric Scroll"),
+      new DoubleHighlightItemEntry("msf", "Staff of Kings", iLvlFix.Double),
+      new DoubleHighlightItemEntry("vip", "Amulet of the Viper"),
+      new DoubleHighlightItemEntry("hst", "Horadric Staff", iLvlFix.Single),
 
       // Act 3
-      { id: "j34", name: "A Jade Figurine",      iLvlIndent: iLvlFix.None },
-      { id: "g34", name: "The Golden Bird",      iLvlIndent: iLvlFix.None },
-      { id: "bbb", name: "Lam Esen's Tome",      iLvlIndent: iLvlFix.None },
-      { id: "g33", name: "The Gidbinn",          iLvlIndent: iLvlFix.Double },
-      { id: "qf1", name: "Khalim's Flail",       iLvlIndent: iLvlFix.Double },
-      { id: "qf2", name: "Khalim's Will",        iLvlIndent: iLvlFix.Single },
-      { id: "qey", name: "Khalim's Eye",         iLvlIndent: iLvlFix.None },
-      { id: "qhr", name: "Khalim's Heart",       iLvlIndent: iLvlFix.None },
-      { id: "qbr", name: "Khalim's Brain",       iLvlIndent: iLvlFix.None },
-      { id: "mss", name: "Mephisto's Soulstone", iLvlIndent: iLvlFix.None },
+      new DoubleHighlightItemEntry("j34", "A Jade Figurine"),
+      new DoubleHighlightItemEntry("g34", "The Golden Bird"),
+      new DoubleHighlightItemEntry("bbb", "Lam Esen's Tome"),
+      new DoubleHighlightItemEntry("g33", "The Gidbinn", iLvlFix.Double),
+      new DoubleHighlightItemEntry("qf1", "Khalim's Flail", iLvlFix.Double),
+      new DoubleHighlightItemEntry("qf2", "Khalim's Will", iLvlFix.Single),
+      new DoubleHighlightItemEntry("qey", "Khalim's Eye"),
+      new DoubleHighlightItemEntry("qhr", "Khalim's Heart"),
+      new DoubleHighlightItemEntry("qbr", "Khalim's Brain"),
+      new DoubleHighlightItemEntry("mss", "Mephisto's Soulstone"),
 
       // Act 4
-      { id: "hfh", name: "Hell Forge Hammer", iLvlIndent: iLvlFix.Double },
+      new DoubleHighlightItemEntry("hfh", "Hell Forge Hammer", iLvlFix.Double),
 
       // Act 5
-      // See exceptions [CSTM-QST2]
+      // See exceptions mentioned above [CSTM-QST2]
+
       // Extra
-      { id: "Staff of Kings",      name: "Staff of Kings",      iLvlIndent: iLvlFix.Double },
-      { id: "Amulet of the Viper", name: "Amulet of the Viper", iLvlIndent: iLvlFix.None },
-      { id: "Horadric Staff",      name: "Horadric Staff",      iLvlIndent: iLvlFix.Single },
-      { id: "LamTome",             name: "Lam Esen's Tome",     iLvlIndent: iLvlFix.None },
-      { id: "KhalimFlail",         name: "Khalim's Flail",      iLvlIndent: iLvlFix.Double },
-      { id: "SuperKhalimFlail",    name: "Khalim's Will",       iLvlIndent: iLvlFix.Single },
-      { id: "Hell Forge Hammer",   name: "Hell Forge Hammer",   iLvlIndent: iLvlFix.Double },
+      new DoubleHighlightItemEntry("Staff of Kings",      "Staff of Kings", iLvlFix.Double),
+      new DoubleHighlightItemEntry("Amulet of the Viper", "Amulet of the Viper"),
+      new DoubleHighlightItemEntry("Horadric Staff",      "Horadric Staff", iLvlFix.Single),
+      new DoubleHighlightItemEntry("LamTome",             "Lam Esen's Tome"),
+      new DoubleHighlightItemEntry("KhalimFlail",         "Khalim's Flail", iLvlFix.Double),
+      new DoubleHighlightItemEntry("SuperKhalimFlail",    "Khalim's Will", iLvlFix.Single),
+      new DoubleHighlightItemEntry("Hell Forge Hammer",   "Hell Forge Hammer", iLvlFix.Double),
     ];
 
-    this.collection.upsertArray(questItems); //
-
-    questItems.forEach(item => {
-      let indent = SettingsConstants.shouldExcludeIlvlForBigTooltips ? CharConstants.empty : Helper.getiLvlIndent(item.iLvlIndent);
-      this.collection.upsert(item.id, `${indent}${this.prefix}${item.name}${this.suffix}`);
-    });
+    questItems.forEach(item => item.setPrefixSuffix(this.prefix, this.suffix));
+    this.collection.upsertArray(questItems);
   }
 
   protected highlightCube(): void {
-    this.collection.upsert("box", `${this.prefix}Horadric Cube${this.suffix}`); // Horadric Cube
+    this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
   }
 }

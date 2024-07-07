@@ -9,7 +9,7 @@ export class D2Color {
     this.name = name;
   }
 
-  public getCode(): string {
+  public toString(): string {
     return `${ColorConstants.prefix}${this.code}`;
   }
 

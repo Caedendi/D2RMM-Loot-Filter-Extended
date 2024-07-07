@@ -1,7 +1,9 @@
 import { ItemCollection } from "./Models/ItemCollection";
+import { ItemEntry } from "./Models/ItemEntry";
 import { iLvlFix } from "./Models/iLvlFix";
 
 export abstract class CustomFilterList {
+  protected static readonly collectionId: string = CustomFilterList.name;
   public static create(): ItemCollection {
     // let griffons1 = `My custom item name in a variable`;
 
@@ -57,6 +59,6 @@ remove this line (2/2) */
       
     ];
 
-    return ItemCollection.fromArray(CustomFilterList.name, list);
+    return new ItemCollection(this.collectionId, ItemEntry.createArray(list));
   }
 }

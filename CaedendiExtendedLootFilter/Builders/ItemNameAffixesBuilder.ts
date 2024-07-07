@@ -130,13 +130,13 @@ export class ItemNameAffixesBuilder extends ItemBuilder {
 
   hideGems(gemsCollection:{id:string, value:string}[], gems: Gem[]) {
     gems.forEach(gem => {
-      this.upsert(gemsCollection, gem.id, SettingsConstants.hidden);
+      this.upsert(gemsCollection, gem.key, SettingsConstants.hidden);
     });
   }
 
   highlightGems(gemsCollection: {id: string, value: string}[], gems: Gem[]) {
     gems.forEach(gem => {
-      this.upsert(gemsCollection, gem.id, Helper.generateSingleHighlight(gem.color, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, gem.name));
+      this.upsert(gemsCollection, gem.key, Helper.generateSingleHighlight(gem.color, GemConstants.highlight, GemConstants.padding, GemConstants.clrName, gem.name));
     });
   }
 

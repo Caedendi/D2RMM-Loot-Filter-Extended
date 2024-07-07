@@ -1,6 +1,6 @@
+import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
 import { ItemEntry } from "./ItemEntry";
-import { iLvlFix } from "./iLvlFix";
 
 export class ItemCollection {
   protected id: string;
@@ -14,10 +14,6 @@ export class ItemCollection {
     }
   }
 
-  public static fromArray(id: string, array: [string, string, iLvlFix?][]): ItemCollection {
-    return new ItemCollection(id, (array.map<ItemEntry>(x => new ItemEntry(x[0], x[1], x[2]))));
-  }
-
   public upsert(key: string, value: string): void {
     const i = this.entries.findIndex(x => x.getKey() === key);
     if (i > -1) 
@@ -26,17 +22,28 @@ export class ItemCollection {
       this.entries.push(new ItemEntry(key, value));
   }
 
+  public upsertEntry(entry: ItemEntry): void {
+    this.upsert(entry.getKey(), entry.generateDisplayName());
+  }
+
+  public upsertHidden(key: string): void {
+    this.upsert(key, SettingsConstants.hidden);
+  }
+
   public upsertArray(array: ItemEntry[]): void {
     array.forEach(entry => {
-      this.upsert(entry.getKey(), entry.getName());
+      this.upsert(entry.getKey(), entry.generateDisplayName());
     });
   }
 
-  public concat(collection: ItemCollection): ItemCollection {
-    let merged = { ...this };
-    merged.entries = this.entries.concat(collection.entries);
+  public upsertArrayHidden(keys: string[]): void {
+    keys.forEach(key => {
+      this.upsert(key, SettingsConstants.hidden);
+    });
+  }
 
-    return merged;
+  public upsertCollection(collection: ItemCollection): void {
+    this.upsertArray(collection.getEntries());
   }
 
   public getEntries(): ItemEntry[] {

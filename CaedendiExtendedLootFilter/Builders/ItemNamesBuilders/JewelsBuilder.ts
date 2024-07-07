@@ -20,7 +20,7 @@ export class JewelsBuilder extends BaseBuilder implements IBuilder {
         return;
       case SettingsConstants.custom: // [CSTM-JWL]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.collection.upsert(JewelryConstants.jewelId, `${ColorConstants.red}Jewel${ColorConstants.blue}`); // includes (unidentified) magic, rare and unique jewels
+        this.collection.upsert(JewelryConstants.jewelId, `${ColorConstants.red}Jewel${ColorConstants.magic}`); // includes (unidentified) magic, rare and unique jewels
         this.collection.upsert(FacetConstants.facetId, `Rainbow Facet`); // identified facets
         return;
     }

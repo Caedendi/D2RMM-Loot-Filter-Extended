@@ -27,12 +27,12 @@ export class HighlightConstants {
   static uniqueColorHighlight = this.color;
   static uniquePattern = this.pattern10;
   static uniquePadding = this.padding5;
-  static uniquePrefix = `${this.uniqueColorHighlight.getCode()}${this.uniquePattern}${this.uniqueColorName.getCode()}${this.uniquePadding}`;
-  static uniqueSuffix = `${this.uniquePadding}${this.uniqueColorHighlight.getCode()}${this.uniquePattern}${this.uniqueColorName.getCode()}`;
+  static uniquePrefix = `${this.uniqueColorHighlight.toString()}${this.uniquePattern}${this.uniqueColorName.toString()}${this.uniquePadding}`;
+  static uniqueSuffix = `${this.uniquePadding}${this.uniqueColorHighlight.toString()}${this.uniquePattern}${this.uniqueColorName.toString()}`;
 
   static questPrefix = this.uniquePrefix;
   static questSuffix = this.uniqueSuffix;
 
   static bttPadding = this.padding5;
-  static bttPickUpMsg = `${ColorConstants.purple.getCode()}Pick Up`;
+  static bttPickUpMsg = `${ColorConstants.purple.toString()}Pick Up`;
 }

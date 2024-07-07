@@ -19,7 +19,7 @@ export class Helper {
    * @returns A complete item name with a colored highlight pattern on the left side.
    */
   public static generateSingleHighlight(patternColor: D2Color, pattern: string, padding: string, itemColor: D2Color, itemName: string) {
-    return `${patternColor.getCode()}${pattern}${itemColor.getCode()}${padding}${itemName}`;
+    return `${patternColor.toString()}${pattern}${itemColor.toString()}${padding}${itemName}`;
   }
 
   /**
@@ -32,7 +32,7 @@ export class Helper {
    * @returns A complete item name with colored highlight patterns on both sides.
    */
   public static generateDoubleHighlight(patternColor: D2Color, pattern: string, padding: string, itemColor: D2Color, itemName: string) {
-    return `${patternColor.getCode()}${pattern}${itemColor.getCode()}${padding}${itemName}${padding}${patternColor.getCode()}${pattern}${itemColor.getCode()}`;
+    return `${patternColor.toString()}${pattern}${itemColor.toString()}${padding}${itemName}${padding}${patternColor.toString()}${pattern}${itemColor.toString()}`;
   }
 
   public static getiLvlIndent(fix?: iLvlFix): string {
@@ -41,7 +41,7 @@ export class Helper {
     }
 
     if (fix == iLvlFix.Single) {
-      return SettingsConstants.iLvlIndentFixSingle
+      return SettingsConstants.iLvlIndentFixSingle;
     }
     if (fix == iLvlFix.Double) {
       return SettingsConstants.iLvlIndentFixDouble;

@@ -1,5 +1,3 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
 import { iLvlFix } from "./iLvlFix";
 
@@ -8,20 +6,33 @@ import { iLvlFix } from "./iLvlFix";
  */
 export class ItemEntry {
   protected readonly key: string;
-  protected readonly name: string;
-  protected readonly ilvlFix: iLvlFix;
+  protected name: string;
 
-  constructor(key: string, name: string, ilvlFix?: iLvlFix) {
+  constructor(key: string, name: string) {
     this.key = key;
     this.name = name;
-    this.ilvlFix = ilvlFix ?? iLvlFix.None;
+  }
+
+  public generateDisplayName(): string {
+    return this.name;
+  }
+
+  public static createArray(array: [string, string, iLvlFix?][]): ItemEntry[] {
+    return array.map<ItemEntry>(x => {
+      let indent = Helper.getiLvlIndent(x[2]);
+      return new ItemEntry(x[0], `${indent}${x[1]}`);
+    });
   }
 
   public getKey(): string {
     return this.key;
   }
 
-  public getName(shouldFixIndent?: boolean): string {
-    return `${Helper.getiLvlIndent(this.ilvlFix)}${this.name}`;
+  public getName(): string {
+    return this.name;
+  }
+
+  public setName(name: string) {
+    this.name = name;
   }
 }

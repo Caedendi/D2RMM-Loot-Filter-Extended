@@ -28,6 +28,7 @@ export class CharmsBuilder extends BaseBuilder implements IBuilder {
         this.highlightUnidentifiedCharms();
         return;
       case SettingsConstants.custom: // [CSTM-CHA]
+        // TODO: refactor
         this.collection.upsert(CharmConstants.charmSmallId, `Small Charm`);
         this.collection.upsert(CharmConstants.charmLargeId, `Large Charm`);
         this.collection.upsert(CharmConstants.charmGrandId, `Grand Charm`);
@@ -46,9 +47,9 @@ export class CharmsBuilder extends BaseBuilder implements IBuilder {
 
   protected highlightUnidentifiedCharms(): void {
     let suffix = "Charm";
-    this.collection.upsert(CharmConstants.charmSmallId, `Small ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
-    this.collection.upsert(CharmConstants.charmLargeId, `Large ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
-    this.collection.upsert(CharmConstants.charmGrandId, `Grand ${ColorConstants.red}${suffix}${ColorConstants.blue}`);
+    this.collection.upsert(CharmConstants.charmSmallId, `Small ${ColorConstants.red}${suffix}${ColorConstants.magic}`);
+    this.collection.upsert(CharmConstants.charmLargeId, `Large ${ColorConstants.red}${suffix}${ColorConstants.magic}`);
+    this.collection.upsert(CharmConstants.charmGrandId, `Grand ${ColorConstants.red}${suffix}${ColorConstants.magic}`);
   }
 
   protected highlightUniqueCharms(): void {
@@ -71,5 +72,4 @@ export class CharmsBuilder extends BaseBuilder implements IBuilder {
       });
     }
   }
-
 }

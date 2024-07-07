@@ -50,7 +50,7 @@ export abstract class BaseWriter implements IWriter {
     let id = this.constructor.name.replace("Writer", "Collection");
     let result = new ItemCollection(id);
     this.builders.forEach(builder => {
-      result = result.concat(builder.getCollection());
+      result.upsertCollection(builder.getCollection());
     });
 
     return result;
