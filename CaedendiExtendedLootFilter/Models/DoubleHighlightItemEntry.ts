@@ -21,6 +21,10 @@ export class DoubleHighlightItemEntry extends ItemEntry {
     this.ilvlFix = ilvlFix ?? iLvlFix.None;
   }
 
+  public static fromItemEntry(entry: ItemEntry, ilvlFix?: iLvlFix, prefix?: string, suffix?: string): DoubleHighlightItemEntry {
+    return new DoubleHighlightItemEntry(entry.getKey(), entry.getName(), ilvlFix, prefix, suffix);
+  }
+
   public generateDisplayName(): string {
     let indent = this.shouldFixiLvlIndent ? Helper.getiLvlIndent(this.ilvlFix) : "";
     return `${indent}${this.prefix}${this.name}${this.suffix}`;

@@ -1,13 +1,13 @@
-import { CharConstants } from "../../Constants/CharConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { Helper } from "../../Helper";
-import { D2Color } from "../../Models/D2Color";
-import { BaseBuilder } from "./BaseBuilder";
-import { IBuilder } from "./Interfaces/IBuilder";
+import { CharConstants } from "../../../Constants/CharConstants";
+import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
+import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
+import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { D2Color } from "../../../Models/D2Color";
+import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
+import { ItemBuilderBase } from "./ItemBuilderBase";
+import { IItemBuilder } from "../Interfaces/IItemBuilder";
 
-export class ScrollsAndTomesBuilder extends BaseBuilder implements IBuilder {
+export class ScrollsAndTomesBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly clrScroll: D2Color = ColorConstants.green;
   protected readonly clrTome:   D2Color = ColorConstants.darkGreen;
   protected readonly clrName:   D2Color = ColorConstants.white;
@@ -46,12 +46,12 @@ export class ScrollsAndTomesBuilder extends BaseBuilder implements IBuilder {
   }
 
   protected highlightScrolls(clrHighlight: D2Color, clrName: D2Color, pattern: string, padding: string): void {
-    this.collection.upsert("tsc", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "TP")); // Scroll of Town Portal
-    this.collection.upsert("isc", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "ID")); // Scroll of Identify
+    this.collection.upsertEntry(new SingleHighlightItemEntry("tsc", "TP", pattern, clrHighlight, padding, clrName)); // Scroll of Town Portal
+    this.collection.upsertEntry(new SingleHighlightItemEntry("isc", "ID", padding, clrHighlight, padding, clrName)); // Scroll of Identify
   }
 
   protected highlightTomes(clrHighlight: D2Color, clrName: D2Color, pattern: string, padding: string): void {
-    this.collection.upsert("tbk", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "TP Tome")); // Tome of Town Portal
-    this.collection.upsert("ibk", Helper.generateSingleHighlight(clrHighlight, pattern, padding, clrName, "ID Tome")); // Tome of Identify
+    this.collection.upsertEntry(new SingleHighlightItemEntry("tbk", "TP Tome", pattern, clrHighlight, padding, clrName)); // Tome of Town Portal
+    this.collection.upsertEntry(new SingleHighlightItemEntry("ibk", "ID Tome", pattern, clrHighlight, padding, clrName)); // Tome of Identify
   }
 }

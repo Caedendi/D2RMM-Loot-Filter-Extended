@@ -7,6 +7,8 @@ import { iLvlFix } from "./iLvlFix";
 export class ItemEntry {
   protected readonly key: string;
   protected name: string;
+  protected bigTooltipPrefix: string;
+  protected bigTooltipSuffix: string;
 
   constructor(key: string, name: string) {
     this.key = key;

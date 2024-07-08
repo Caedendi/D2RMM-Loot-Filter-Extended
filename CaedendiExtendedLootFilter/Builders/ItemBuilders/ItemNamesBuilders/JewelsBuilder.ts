@@ -1,11 +1,11 @@
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { FacetConstants } from "../../Constants/Items/FacetConstants";
-import { JewelryConstants } from "../../Constants/Items/JewelryConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { BaseBuilder } from "./BaseBuilder";
-import { IBuilder } from "./Interfaces/IBuilder";
+import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
+import { FacetConstants } from "../../../Constants/Items/FacetConstants";
+import { JewelryConstants } from "../../../Constants/Items/JewelryConstants";
+import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { ItemBuilderBase } from "./ItemBuilderBase";
+import { IItemBuilder } from "../Interfaces/IItemBuilder";
 
-export class JewelsBuilder extends BaseBuilder implements IBuilder {
+export class JewelsBuilder extends ItemBuilderBase implements IItemBuilder {
   constructor() {
     super();
   }

@@ -1,12 +1,12 @@
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../Models/ItemEntry";
-import { iLvlFix } from "../../Models/iLvlFix";
-import { BaseBuilder } from "./BaseBuilder";
-import { IBuilder } from "./Interfaces/IBuilder";
+import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
+import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
+import { ItemEntry } from "../../../Models/ItemEntry";
+import { iLvlFix } from "../../../Models/iLvlFix";
+import { ItemBuilderBase } from "./ItemBuilderBase";
+import { IItemBuilder } from "../Interfaces/IItemBuilder";
 
-export class QuestItemsBuilder extends BaseBuilder implements IBuilder {
+export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly prefix = HighlightConstants.questPrefix;
   protected readonly suffix = HighlightConstants.questSuffix;
 
@@ -73,7 +73,7 @@ export class QuestItemsBuilder extends BaseBuilder implements IBuilder {
           [ "Hell Forge Hammer",   `Hell Forge Hammer` ], // Hell Forge Hammer
         ];
 
-        this.collection.upsertArray(ItemEntry.createArray(customList));
+        this.collection.upsertEntries(ItemEntry.createArray(customList));
         return;
     }
   }
@@ -121,10 +121,10 @@ export class QuestItemsBuilder extends BaseBuilder implements IBuilder {
     ];
 
     questItems.forEach(item => item.setPrefixSuffix(this.prefix, this.suffix));
-    this.collection.upsertArray(questItems);
+    this.collection.upsertEntries(questItems);
   }
 
   protected highlightCube(): void {
-    this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
+    this.collection.upsertEntry(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
   }
 }

@@ -1,13 +1,13 @@
-import { CharConstants } from "../../Constants/CharConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { D2Color } from "../../Models/D2Color";
-import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
-import { BaseBuilder } from "./BaseBuilder";
-import { IBuilder } from "./Interfaces/IBuilder";
+import { CharConstants } from "../../../Constants/CharConstants";
+import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
+import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
+import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { D2Color } from "../../../Models/D2Color";
+import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
+import { ItemBuilderBase } from "./ItemBuilderBase";
+import { IItemBuilder } from "../Interfaces/IItemBuilder";
 
-export class JunkBuilder extends BaseBuilder implements IBuilder {
+export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
   constructor() {
     super();
   }
@@ -31,10 +31,10 @@ export class JunkBuilder extends BaseBuilder implements IBuilder {
         return;
       case SettingsConstants.all: // show all
         let entries = SingleHighlightItemEntry.createSingleColorArray(buffPots, CharConstants.plus, ColorConstants.green, HighlightConstants.paddingNone, ColorConstants.white);
-        this.collection.upsertArray(entries);
+        this.collection.upsertEntries(entries);
         return;
       case "hide": // hide all
-        this.collection.upsertArrayHidden(buffPots.map(pot => pot.key));
+        this.collection.upsertMultipleHidden(buffPots.map(pot => pot.key));
         return;
       case SettingsConstants.custom: // [CSTM-BPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -68,10 +68,10 @@ export class JunkBuilder extends BaseBuilder implements IBuilder {
         return;
       case SettingsConstants.all: // show all
         let entries = SingleHighlightItemEntry.createMultiColorArray(throwingPots, highlight, padding, clrName);
-        this.collection.upsertArray(entries);
+        this.collection.upsertEntries(entries);
         return;
       case "hide": // hide all
-        this.collection.upsertArrayHidden(throwingPots.map(pot => pot.key));
+        this.collection.upsertMultipleHidden(throwingPots.map(pot => pot.key));
         return;
       case SettingsConstants.custom: // [CSTM-TPT]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -101,7 +101,7 @@ export class JunkBuilder extends BaseBuilder implements IBuilder {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
-        this.collection.upsertArray([arrows, bolts]);
+        this.collection.upsertEntries([arrows, bolts]);
         return;
       case "arw":
         this.collection.upsertEntry(arrows);
@@ -112,7 +112,7 @@ export class JunkBuilder extends BaseBuilder implements IBuilder {
         this.collection.upsertHidden(aqv);
         return;
       case "hide":
-        this.collection.upsertArrayHidden([aqv, cqv]);
+        this.collection.upsertMultipleHidden([aqv, cqv]);
         return;
       case SettingsConstants.custom: // [CSTM-ARB]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -129,7 +129,7 @@ export class JunkBuilder extends BaseBuilder implements IBuilder {
       case SettingsConstants.disabled:
         return;
       case "hide":
-        this.collection.upsert("key", SettingsConstants.hidden);
+        this.collection.upsertHidden("key");
         return;
       case SettingsConstants.custom: // [CSTM-KEY]
         // ADD YOUR CUSTOM ITEM NAMES HERE

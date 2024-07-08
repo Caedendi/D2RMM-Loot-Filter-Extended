@@ -1,11 +1,12 @@
-import { GemConstants } from "../../Constants/Items/GemConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { Gem } from "../../Models/Gem";
-import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
-import { BaseBuilder } from "./BaseBuilder";
-import { IBuilder } from "./Interfaces/IBuilder";
+import { GemConstants } from "../../../Constants/Items/GemConstants";
+import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { Gem } from "../../../Models/Gem";
+import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
+import { ItemBuilderBase } from "./ItemBuilderBase";
+import { IItemBuilder } from "../Interfaces/IItemBuilder";
+import { Helper } from "../../../Helper";
 
-export class GemsBuilder extends BaseBuilder implements IBuilder {
+export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly chippedFlawedRegular: Gem[] = [
     new Gem("gcv", GemConstants.clrAmethyst, GemConstants.chipped ), // Chipped Amethyst
     new Gem("gcw", GemConstants.clrDiamond,  GemConstants.chipped ), // Chipped Diamond
@@ -79,53 +80,64 @@ export class GemsBuilder extends BaseBuilder implements IBuilder {
 
         // TODO: refactor
         
+        /*
+        
         // chipped
-        this.collection.upsert("gcv", `Chipped Amethyst`);
-        this.collection.upsert("gcw", `Chipped Diamond`);
-        this.collection.upsert("gcg", `Chipped Emerald`);
-        this.collection.upsert("gcr", `Chipped Ruby`);
-        this.collection.upsert("gcb", `Chipped Sapphire`);
-        this.collection.upsert("gcy", `Chipped Topaz`);
-        this.collection.upsert("skc", `Chipped Skull`);
+        this.collection.upsertEntry("gcv", `Chipped Amethyst`);
+        this.collection.upsertEntry("gcw", `Chipped Diamond`);
+        this.collection.upsertEntry("gcg", `Chipped Emerald`);
+        this.collection.upsertEntry("gcr", `Chipped Ruby`);
+        this.collection.upsertEntry("gcb", `Chipped Sapphire`);
+        this.collection.upsertEntry("gcy", `Chipped Topaz`);
+        this.collection.upsertEntry("skc", `Chipped Skull`);
         // flawed
-        this.collection.upsert("gfv", `Flawed Amethyst`);
-        this.collection.upsert("gfw", `Flawed Diamond`);
-        this.collection.upsert("gfg", `Flawed Emerald`);
-        this.collection.upsert("gfr", `Flawed Ruby`);
-        this.collection.upsert("gfb", `Flawed Sapphire`);
-        this.collection.upsert("gfy", `Flawed Topaz`);
-        this.collection.upsert("skf", `Flawed Skull`);
+        this.collection.upsertEntry("gfv", `Flawed Amethyst`);
+        this.collection.upsertEntry("gfw", `Flawed Diamond`);
+        this.collection.upsertEntry("gfg", `Flawed Emerald`);
+        this.collection.upsertEntry("gfr", `Flawed Ruby`);
+        this.collection.upsertEntry("gfb", `Flawed Sapphire`);
+        this.collection.upsertEntry("gfy", `Flawed Topaz`);
+        this.collection.upsertEntry("skf", `Flawed Skull`);
         // regular
-        this.collection.upsert("gsv", `Amethyst`);
+        this.collection.upsertEntry("gsv", `Amethyst`);
         // For Ruby, Sapphire, Emerald and Diamond, see [CSTM-GEM2] in the "Affixes" section above.
         // For some reason, the devs put these gems in another JSON file because they're also the names of some affixes.
-        this.collection.upsert("gsy", `Topaz`);
-        this.collection.upsert("sku", `Skull`);
+        this.collection.upsertEntry("gsy", `Topaz`);
+        this.collection.upsertEntry("sku", `Skull`);
         // flawless
-        this.collection.upsert("gzv", `Flawless Amethyst`);
-        this.collection.upsert("glw", `Flawless Diamond`);
-        this.collection.upsert("glg", `Flawless Emerald`);
-        this.collection.upsert("glr", `Flawless Ruby`);
-        this.collection.upsert("glb", `Flawless Sapphire`);
-        this.collection.upsert("gly", `Flawless Topaz`);
-        this.collection.upsert("skl", `Flawless Skull`);
+        this.collection.upsertEntry("gzv", `Flawless Amethyst`);
+        this.collection.upsertEntry("glw", `Flawless Diamond`);
+        this.collection.upsertEntry("glg", `Flawless Emerald`);
+        this.collection.upsertEntry("glr", `Flawless Ruby`);
+        this.collection.upsertEntry("glb", `Flawless Sapphire`);
+        this.collection.upsertEntry("gly", `Flawless Topaz`);
+        this.collection.upsertEntry("skl", `Flawless Skull`);
         //perfect
-        this.collection.upsert("gpv", `Perfect Amethyst`);
-        this.collection.upsert("gpw", `Perfect Diamond`);
-        this.collection.upsert("gpg", `Perfect Emerald`);
-        this.collection.upsert("gpr", `Perfect Ruby`);
-        this.collection.upsert("gpb", `Perfect Sapphire`);
-        this.collection.upsert("gpy", `Perfect Topaz`);
-        this.collection.upsert("skz", `Perfect Skull`);
+        this.collection.upsertEntry("gpv", `Perfect Amethyst`);
+        this.collection.upsertEntry("gpw", `Perfect Diamond`);
+        this.collection.upsertEntry("gpg", `Perfect Emerald`);
+        this.collection.upsertEntry("gpr", `Perfect Ruby`);
+        this.collection.upsertEntry("gpb", `Perfect Sapphire`);
+        this.collection.upsertEntry("gpy", `Perfect Topaz`);
+        this.collection.upsertEntry("skz", `Perfect Skull`);
+
+        */
+
         return;
     }
   }
 
   protected hideGems(gems: Gem[]): void {
-    this.collection.upsertArrayHidden(gems.map(gem => gem.getKey()));
+    this.collection.upsertMultipleHidden(gems.map(gem => gem.getKey()));
   }
 
   protected highlightGems(gems: Gem[]): void {
-    this.collection.upsertArray(SingleHighlightItemEntry.fromGems(gems));
+    this.collection.upsertEntries(SingleHighlightItemEntry.fromGems(gems));
+  }
+
+  protected addBigTooltips() {
+    if (config.BigTooltipGems.toString() !== SettingsConstants.disabled) {
+      Helper.addBigTooltips(this.collection, settingGems, GemConstants.indentPickUpMsg);
+    }
   }
 }

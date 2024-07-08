@@ -1,20 +1,22 @@
-import { CollectionConstants } from "../Constants/Items/CollectionConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Helper } from "../Helper";
-import { ItemBuilder } from "./ItemBuilder";
+import { CollectionConstants } from "../../Constants/Items/CollectionConstants";
+import { FileConstants } from "../../Constants/FileConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { Helper } from "../../Helper";
+import { ItemBuilderBase } from "./ItemNamesBuilders/ItemBuilderBase";
+import { IItemBuilder } from "./Interfaces/IItemBuilder";
 
 
-export class ItemModifiersBuilder extends ItemBuilder {
+export class ItemModifiersBuilder extends ItemBuilderBase implements IItemBuilder {
   constructor() {
-    super(FileConstants.FILE_UI_PATH);
+    // super(FileConstants.FILE_UI_PATH);
+    super();
 
-    [
-      CollectionConstants.quest,
-    ].forEach(id => {
-      this.initCollection(id);
-    });
+    // [
+    //   CollectionConstants.quest,
+    // ].forEach(id => {
+    //   this.initCollection(id);
+    // });
   }
 
   build() {

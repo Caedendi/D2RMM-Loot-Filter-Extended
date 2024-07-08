@@ -1,4 +1,4 @@
-import { IBuilder } from "../Builders/ItemNamesBuilders/Interfaces/IBuilder";
+import { IItemBuilder } from "../Builders/ItemBuilders/Interfaces/IItemBuilder";
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { ItemCollection } from "../Models/ItemCollection";
@@ -12,7 +12,7 @@ import { IWriter } from "./Interfaces/IWriter";
  */
 export abstract class BaseWriter implements IWriter {
   protected target: string = CharConstants.empty;
-  protected builders: IBuilder[] = [];
+  protected builders: IItemBuilder[] = [];
 
   constructor(target: string) {
     this.target = target;

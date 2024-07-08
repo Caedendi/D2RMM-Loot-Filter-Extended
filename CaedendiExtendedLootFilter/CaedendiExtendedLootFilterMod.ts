@@ -3,13 +3,13 @@ import { IWriter } from "./Writers/Interfaces/IWriter";
 import { ItemNamesWriter } from "./Writers/ItemNamesWriter";
 import { DropSoundBuilder } from "./Builders/DropSoundBuilder";
 import { ItemLevelBuilder } from "./Builders/ItemLevelBuilder";
-import { ItemModifiersBuilder } from "./Builders/ItemModifiersBuilder";
-import { ItemNameAffixesBuilder } from "./Builders/ItemNameAffixesBuilder";
+import { ItemModifiersBuilder } from "./Builders/ItemBuilders/ItemModifiersBuilder";
+import { ItemNameAffixesBuilder } from "./Builders/ItemBuilders/ItemNameAffixesBuilder";
 import { ItemQualityBuilder } from "./Builders/ItemQualityBuilder";
-import { ItemRunesBuilder } from "./Builders/ItemRunesBuilder";
+import { ItemRunesBuilder } from "./Builders/ItemBuilders/ItemRunesBuilder";
 import { LightPillarBuilder } from "./Builders/LightPillarBuilder";
 import { ProfileHdModsBuilder } from "./Builders/ProfileHdModsBuilder";
-import { UiBuilder } from "./Builders/UiBuilder";
+import { UiBuilder } from "./Builders/ItemBuilders/UiBuilder";
 
 /**
  * Master Builder

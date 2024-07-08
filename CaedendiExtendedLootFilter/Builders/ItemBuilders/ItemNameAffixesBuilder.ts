@@ -1,12 +1,12 @@
-import { ModConfigSingleValue } from "../../../types";
-import { CharConstants } from "../Constants/CharConstants";
-import { CollectionConstants } from "../Constants/Items/CollectionConstants";
-import { ColorConstants } from "../Constants/Colors/ColorConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { GemConstants } from "../Constants/Items/GemConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Helper } from "../Helper";
-import { Gem } from "../Models/Gem";
+import { ModConfigSingleValue } from "../../../../types";
+import { CharConstants } from "../../Constants/CharConstants";
+import { CollectionConstants } from "../../Constants/Items/CollectionConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { FileConstants } from "../../Constants/FileConstants";
+import { GemConstants } from "../../Constants/Items/GemConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { Helper } from "../../Helper";
+import { Gem } from "../../Models/Gem";
 import { ItemBuilder } from "./ItemBuilder";
 
 export class ItemNameAffixesBuilder extends ItemBuilder {

@@ -1,12 +1,12 @@
-import { CharmsBuilder } from "../Builders/ItemNamesBuilders/CharmsBuilder";
-import { CustomFilterListBuilder } from "../Builders/ItemNamesBuilders/CustomFilterListBuilder";
-import { EndgameItemsBuilder } from "../Builders/ItemNamesBuilders/EndgameItemsBuilder";
-import { GemsBuilder } from "../Builders/ItemNamesBuilders/GemsBuilder";
-import { HealingPotionsBuilder } from "../Builders/ItemNamesBuilders/HealingPotionsBuilder";
-import { JewelsBuilder } from "../Builders/ItemNamesBuilders/JewelsBuilder";
-import { JunkBuilder } from "../Builders/ItemNamesBuilders/JunkBuilder";
-import { QuestItemsBuilder } from "../Builders/ItemNamesBuilders/QuestItemsBuilder";
-import { ScrollsAndTomesBuilder } from "../Builders/ItemNamesBuilders/ScrollsAndTomesBuilder";
+import { CharmsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CharmsBuilder";
+import { CustomFilterListBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomFilterListBuilder";
+import { EndgameItemsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/EndgameItemsBuilder";
+import { GemsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/GemsBuilder";
+import { HealingPotionsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/HealingPotionsBuilder";
+import { JewelsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/JewelsBuilder";
+import { JunkBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/JunkBuilder";
+import { QuestItemsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/QuestItemsBuilder";
+import { ScrollsAndTomesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/ScrollsAndTomesBuilder";
 import { FileConstants } from "../Constants/FileConstants";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
 import { CollectionConstants } from "../Constants/Items/CollectionConstants";
@@ -56,12 +56,6 @@ export class ItemNamesWriter extends BaseWriter implements IWriter {
       return;
     }
 
-    // gems
-    if (settingGems !== SettingsConstants.disabled) {
-      let gemsCol = this.getCollectionById(CollectionConstants.gems);
-      Helper.addBigTooltips(gemsCol, settingGems, GemConstants.indentPickUpMsg);
-    }
-
     // facets
     if (settingFacets !== SettingsConstants.disabled) {
       let jewelsCol = this.getCollectionById(CollectionConstants.jewels);
@@ -81,36 +75,6 @@ export class ItemNamesWriter extends BaseWriter implements IWriter {
     if (settingQuest !== SettingsConstants.disabled) {
       let questCol = this.getCollectionById(CollectionConstants.quest);
       Helper.addBigTooltips(questCol, settingQuest);
-    }
-
-    // essences
-    if (settingEssences !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.essences.map(ess => ess.id), settingEssences);
-    }
-
-    // tokens of absolution
-    if (settingToken !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipForId(endgameCol, EndgameConstants.token.id, settingToken);
-    }
-
-    // pandemonium keys
-    if (settingKeys !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.keys.map(key => key.id), settingKeys);
-    }
-
-    // pandemonium organs
-    if (settingOrgans !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.organs.map(org => org.id), settingOrgans);
-    }
-
-    // standard of heroes
-    if (settingStandard !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipForId(endgameCol, EndgameConstants.standard.id, settingStandard);
     }
   }
 }

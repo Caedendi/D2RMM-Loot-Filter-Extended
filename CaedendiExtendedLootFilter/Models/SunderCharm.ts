@@ -1,3 +1,4 @@
+import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { D2Color } from "./D2Color";
 
 export class SunderCharm {
@@ -21,5 +22,13 @@ export class SunderCharm {
 
   public getColor(): D2Color {
     return this.color;
+  }
+
+  public getAltPatternPrefix(): string {
+    return `${this.color}${HighlightConstants.uniquePattern}${HighlightConstants.uniqueColorName}${HighlightConstants.uniquePadding}`;
+  }
+
+  public getAltPatternSuffix(): string {
+    return `${HighlightConstants.uniquePadding}${this.color}${HighlightConstants.uniquePattern}${HighlightConstants.uniqueColorName}`;
   }
 }

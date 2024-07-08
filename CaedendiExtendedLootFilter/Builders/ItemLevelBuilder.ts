@@ -9,15 +9,16 @@ import { CharmConstants } from "../Constants/Items/CharmConstants";
 
 export class ItemLevelBuilder extends ItemBuilder {
   constructor() {
-    super(CharConstants.empty);
+    // super(CharConstants.empty);
+    super();
 
     [
-      CollectionConstants.weapons,
-      // CollectionConstants.armor,
-      CollectionConstants.misc,
-    ].forEach(id => {
-      this.initCollection(id);
-    });
+    //   CollectionConstants.weapons,
+    //   // CollectionConstants.armor,
+    //   CollectionConstants.misc,
+    // ].forEach(id => {
+    //   this.initCollection(id);
+    // });
   }
 
   build() {

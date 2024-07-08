@@ -1,18 +1,20 @@
-import { ColorConstants } from "../Constants/Colors/ColorConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { RuneConstants } from "../Constants/Items/RuneConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Helper } from "../Helper";
-import { ItemBuilder } from "./ItemBuilder";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { FileConstants } from "../../Constants/FileConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { RuneConstants } from "../../Constants/Items/RuneConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { Helper } from "../../Helper";
+import { IItemBuilder } from "./Interfaces/IItemBuilder";
+import { ItemBuilderBase } from "./ItemNamesBuilders/ItemBuilderBase";
 
-export class ItemRunesBuilder extends ItemBuilder {
+export class ItemRunesBuilder extends ItemBuilderBase implements IItemBuilder {
   constructor() {
-    super(FileConstants.FILE_ITEM_RUNES_PATH);
+    // super(FileConstants.FILE_ITEM_RUNES_PATH);
+    super();
 
-    RuneConstants.tiers.forEach(tier => {
-      this.initCollection(tier.tier.toString());
-    });
+    // RuneConstants.tiers.forEach(tier => {
+    //   this.initCollection(tier.tier.toString());
+    // });
   }
 
   build() {

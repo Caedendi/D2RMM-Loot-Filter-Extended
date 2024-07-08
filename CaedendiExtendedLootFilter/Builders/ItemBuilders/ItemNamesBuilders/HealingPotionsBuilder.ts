@@ -1,14 +1,14 @@
-import { CharConstants } from "../../Constants/CharConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { Helper } from "../../Helper";
-import { D2Color } from "../../Models/D2Color";
-import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
-import { BaseBuilder } from "./BaseBuilder";
-import { IBuilder } from "./Interfaces/IBuilder";
+import { CharConstants } from "../../../Constants/CharConstants";
+import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
+import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
+import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { Helper } from "../../../Helper";
+import { D2Color } from "../../../Models/D2Color";
+import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
+import { ItemBuilderBase } from "./ItemBuilderBase";
+import { IItemBuilder } from "../Interfaces/IItemBuilder";
 
-export class HealingPotionsBuilder extends BaseBuilder implements IBuilder {
+export class HealingPotionsBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly clrHeal = ColorConstants.red;
   protected readonly clrMana = ColorConstants.blue;
   protected readonly clrRej  = ColorConstants.purple;
@@ -90,7 +90,7 @@ export class HealingPotionsBuilder extends BaseBuilder implements IBuilder {
   }
 
   protected hideHealingPotions(): void {
-    this.collection.upsertArrayHidden([
+    this.collection.upsertMultipleHidden([
       "hp1", "hp2", "hp3", "hp4", "hp5",
       "mp1", "mp2", "mp3", "mp4", "mp5",
       "rvs", "rvl",

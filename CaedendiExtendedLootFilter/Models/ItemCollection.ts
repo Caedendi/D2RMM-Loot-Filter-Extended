@@ -26,24 +26,20 @@ export class ItemCollection {
     this.upsert(entry.getKey(), entry.generateDisplayName());
   }
 
-  public upsertHidden(key: string): void {
-    this.upsert(key, SettingsConstants.hidden);
-  }
-
-  public upsertArray(array: ItemEntry[]): void {
+  public upsertEntries(array: ItemEntry[]): void {
     array.forEach(entry => {
       this.upsert(entry.getKey(), entry.generateDisplayName());
     });
   }
 
-  public upsertArrayHidden(keys: string[]): void {
+  public upsertHidden(key: string): void {
+    this.upsert(key, SettingsConstants.hidden);
+  }
+
+  public upsertMultipleHidden(keys: string[]): void {
     keys.forEach(key => {
       this.upsert(key, SettingsConstants.hidden);
     });
-  }
-
-  public upsertCollection(collection: ItemCollection): void {
-    this.upsertArray(collection.getEntries());
   }
 
   public getEntries(): ItemEntry[] {

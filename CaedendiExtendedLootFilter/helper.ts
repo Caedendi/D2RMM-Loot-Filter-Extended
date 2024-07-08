@@ -5,6 +5,8 @@ import { D2Color } from "./Models/D2Color";
 import { iLvlFix } from "./Models/iLvlFix";
 
 export class Helper {
+  protected static newLine: string = CharConstants.newLine;
+
   public static isDefined(param: any): boolean {
     return (param != null && param != undefined);
   }
@@ -81,24 +83,24 @@ export class Helper {
     // new lines work upside-down: adding \n will add a new line on top of the current one (instead of below like you would expect)
     if (setting === SettingsConstants.custom) { // [CSTM-BTT]
       // ADD YOUR CUSTOM BIG TOOLTIP HERE
-      return CharConstants.newLine + `${HighlightConstants.bttPadding}${name}${HighlightConstants.bttPadding}` + CharConstants.newLine;
+      return this.newLine + `${HighlightConstants.bttPadding}${name}${HighlightConstants.bttPadding}` + this.newLine;
     }
 
     name = `${HighlightConstants.bttPadding}${name}${HighlightConstants.bttPadding}`;
     if (setting === "2") {
-      return name + CharConstants.newLine;
+      return name + this.newLine;
     }
     if (setting === "2pu") {
-      return name + CharConstants.newLine + indentPickUpMsg + HighlightConstants.bttPickUpMsg;
+      return name + this.newLine + indentPickUpMsg + HighlightConstants.bttPickUpMsg;
     }
     if (setting === "3") {
-      return CharConstants.newLine + name + CharConstants.newLine;
+      return this.newLine + name + this.newLine;
     }
     if (setting === "4pu") {
-      return CharConstants.newLine + name + CharConstants.newLine + indentPickUpMsg + HighlightConstants.bttPickUpMsg + CharConstants.newLine;
+      return this.newLine + name + this.newLine + indentPickUpMsg + HighlightConstants.bttPickUpMsg + this.newLine;
     }
     if (setting === "5") {
-      return CharConstants.newLine + CharConstants.newLine + name + CharConstants.newLine + CharConstants.newLine;
+      return this.newLine + this.newLine + name + this.newLine + this.newLine;
     }
 
     throw new Error(`Big Tooltip setting is undefined for ${name}.`);
