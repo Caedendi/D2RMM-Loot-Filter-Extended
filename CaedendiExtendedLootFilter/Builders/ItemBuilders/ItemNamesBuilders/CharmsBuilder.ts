@@ -6,6 +6,7 @@ import { iLvlFix } from "../../../Models/iLvlFix";
 import { SunderCharm } from "../../../Models/SunderCharm";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
+import { ItemEntry } from "../../../Models/ItemEntry";
 
 export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
   constructor() {
@@ -54,7 +55,7 @@ export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
       [ CharmConstants.charmLargeId, "Large" ],
       [ CharmConstants.charmGrandId, "Grand" ],
     ].forEach(([key, size]) => {
-      this.collection.upsert(key, `${size} ${ColorConstants.red}${suffix}${ColorConstants.magic}`);
+      this.collection.upsert(new ItemEntry(key, `${size} ${ColorConstants.red}${suffix}${ColorConstants.magic}`));
     });
   }
 
@@ -64,7 +65,7 @@ export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
       CharmConstants.torchId, 
       CharmConstants.gheedsId
     ].forEach(charm => {
-      this.collection.upsertEntry(new DoubleHighlightItemEntry(charm, charm, iLvlFix.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix));
+      this.collection.upsert(new DoubleHighlightItemEntry(charm, charm, iLvlFix.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix));
     });
   }
 
@@ -76,13 +77,13 @@ export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
   }
 
   private highlightSunderCharmsDefault(sunders: SunderCharm[]): void {
-    sunders.forEach(sunder => this.collection.upsertEntry(
+    sunders.forEach(sunder => this.collection.upsert(
       new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlFix.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix)
     ));
   }
 
   private highlightSunderCharmsAlt(sunders: SunderCharm[]): void {
-    sunders.forEach(sunder => this.collection.upsertEntry(
+    sunders.forEach(sunder => this.collection.upsert(
       new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlFix.Double, sunder.getAltPatternPrefix(), sunder.getAltPatternSuffix())
     ));
   }

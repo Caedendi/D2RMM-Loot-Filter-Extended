@@ -359,77 +359,79 @@
       ]
     },
     {
-      "id": "ItemStatsModifiersSection",
+      "id": "StatsModifiersSection",
       "type": "section",
-      "name": "Item Stats & Modifiers",
-      "defaultExpanded": false
-    },
-    {
-      "id": "ItemLevel",
-      "type": "select",
-      "name": "Show Item Level (DON'T USE ONLINE!)",
-      "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix. Disable this if you play online: it does not work (all items show as ilvl 1) and items with more than 3 sockets will be bugged.",
-      "defaultValue": "fix-btt",
-      "options": [
-        { "value": "none", "label": "Disable" },
-        { "value": "show", "label": "Enable" },
-        { "value": "btt", "label": "Enable, exclude Big Tooltip items" },
-        { "value": "fix", "label": "Enable, fix indentation" },
+      "name": "Stats & Modifiers",
+      "defaultExpanded": false,
+      "children": [
         {
-          "value": "fix-btt",
-          "label": "Enable, fix indentation, exclude Big Tooltip items"
+          "id": "ItemLevel",
+          "type": "select",
+          "name": "Show Item Level (DON'T USE ONLINE!)",
+          "description": "Show the iLvl on weapons, armor, rings, amulets, charms and jewels as a suffix. Disable this if you play online: it does not work (all items show as ilvl 1) and items with more than 3 sockets will be bugged.",
+          "defaultValue": "fix-btt",
+          "options": [
+            { "value": "none", "label": "Disable" },
+            { "value": "show", "label": "Enable" },
+            { "value": "btt", "label": "Enable, exclude Big Tooltip items" },
+            { "value": "fix", "label": "Enable, fix indentation" },
+            {
+              "value": "fix-btt",
+              "label": "Enable, fix indentation, exclude Big Tooltip items"
+            }
+          ]
+        },
+        {
+          "id": "ItemQuality",
+          "type": "select",
+          "name": "Show Item Quality ",
+          "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix indentation if Item Level is enabled. [CSTM-QLTY]",
+          "defaultValue": "none",
+          "options": [
+            { "value": "none", "label": "Disable" },
+            { "value": "suf-par", "label": "Suffix, parentheses" },
+            { "value": "suf-bts", "label": "Suffix, square brackets" },
+            { "value": "pre-par", "label": "Prefix, parentheses" },
+            { "value": "pre-bts", "label": "Prefix, square brackets" },
+            { "value": "custom", "label": "Custom" }
+          ]
+        },
+        {
+          "id": "ShortSupInferiorPrefixes",
+          "type": "select",
+          "name": "Short Superior/Inferior Prefixes",
+          "description": "Shorten the Superior/Damaged/Cracked/Crude/Low Quality modifiers on weapons and armor to + (plus) and - (minus/dash). Optionally color Inferior items gray. Works the same as mod Short Quality Prefixes by Jobus. [CSTM-SPIF]",
+          "defaultValue": "short",
+          "options": [
+            { "value": "none", "label": "Disable" },
+            { "value": "short", "label": "Enable" },
+            { "value": "color", "label": "Enable, gray Inferior items" },
+            { "value": "custom", "label": "Custom" }
+          ]
+        },
+        {
+          "id": "EthItemsColor",
+          "type": "select",
+          "name": "Ethereal Items Tooltip Color",
+          "description": "Customize the color of Ethereal items to better discern them from socketed items. Recommended: Light Teal. [CSTM-ETH]",
+          "defaultValue": "none",
+          "options": [
+            { "label": "Disable", "value": "none" },
+            { "label": "Beige", "value": "Beige" },
+            { "label": "Black", "value": "Black" },
+            { "label": "Dark Green", "value": "DarkGreen" },
+            { "label": "Green", "value": "Green" },
+            { "label": "Light Blue", "value": "LightBlue" },
+            { "label": "Light Gray", "value": "LightGray" },
+            { "label": "Light Purple", "value": "LightPurple" },
+            { "label": "Light Red", "value": "LightRed" },
+            { "label": "Light Teal", "value": "LightTeal" },
+            { "label": "Red", "value": "Red" },
+            { "label": "Very Light Gray", "value": "Very Light Gray" },
+            { "label": "White", "value": "White" },
+            { "label": "Custom", "value": "custom" }
+          ]
         }
-      ]
-    },
-    {
-      "id": "ItemQuality",
-      "type": "select",
-      "name": "Show Item Quality ",
-      "description": "Show the item quality (normal/exceptional/elite) on weapons and armor as either a prefix or a suffix. Recommended to use suffix to match the Item Level suffix indentation if Item Level is enabled. [CSTM-QLTY]",
-      "defaultValue": "none",
-      "options": [
-        { "value": "none", "label": "Disable" },
-        { "value": "suf-par", "label": "Suffix, parentheses" },
-        { "value": "suf-bts", "label": "Suffix, square brackets" },
-        { "value": "pre-par", "label": "Prefix, parentheses" },
-        { "value": "pre-bts", "label": "Prefix, square brackets" },
-        { "value": "custom", "label": "Custom" }
-      ]
-    },
-    {
-      "id": "ShortSupInferiorPrefixes",
-      "type": "select",
-      "name": "Short Superior/Inferior Prefixes",
-      "description": "Shorten the Superior/Damaged/Cracked/Crude/Low Quality modifiers on weapons and armor to + (plus) and - (minus/dash). Optionally color Inferior items gray. Works the same as mod Short Quality Prefixes by Jobus. [CSTM-SPIF]",
-      "defaultValue": "short",
-      "options": [
-        { "value": "none", "label": "Disable" },
-        { "value": "short", "label": "Enable" },
-        { "value": "color", "label": "Enable, gray Inferior items" },
-        { "value": "custom", "label": "Custom" }
-      ]
-    },
-    {
-      "id": "EthItemsColor",
-      "type": "select",
-      "name": "Ethereal Items Tooltip Color",
-      "description": "Customize the color of Ethereal items to better discern them from socketed items. Recommended: Light Teal. [CSTM-ETH]",
-      "defaultValue": "none",
-      "options": [
-        { "label": "Disable", "value": "none" },
-        { "label": "Beige", "value": "Beige" },
-        { "label": "Black", "value": "Black" },
-        { "label": "Dark Green", "value": "DarkGreen" },
-        { "label": "Green", "value": "Green" },
-        { "label": "Light Blue", "value": "LightBlue" },
-        { "label": "Light Gray", "value": "LightGray" },
-        { "label": "Light Purple", "value": "LightPurple" },
-        { "label": "Light Red", "value": "LightRed" },
-        { "label": "Light Teal", "value": "LightTeal" },
-        { "label": "Red", "value": "Red" },
-        { "label": "Very Light Gray", "value": "Very Light Gray" },
-        { "label": "White", "value": "White" },
-        { "label": "Custom", "value": "custom" }
       ]
     },
     {
@@ -458,12 +460,12 @@
               "defaultValue": "none",
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -474,12 +476,12 @@
               "defaultValue": "2",
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -490,12 +492,12 @@
               "defaultValue": "3",
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -506,12 +508,12 @@
               "defaultValue": "3",
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             }
           ]
@@ -531,12 +533,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -548,12 +550,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -565,12 +567,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             }
           ]
@@ -590,12 +592,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -607,12 +609,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -624,12 +626,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -641,12 +643,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -658,12 +660,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             },
             {
@@ -675,12 +677,12 @@
               "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "2", "label": "Two Lines" },
-                { "value": "2pu", "label": "Two Lines + Pick Up" },
+                { "value": "1", "label": "Two Lines" },
+                { "value": "2", "label": "Two Lines + Pick Up" },
                 { "value": "3", "label": "Three Lines" },
-                { "value": "4pu", "label": "Four Lines + Pick Up" },
+                { "value": "4", "label": "Four Lines + Pick Up" },
                 { "value": "5", "label": "Five Lines" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "6", "label": "Custom" }
               ]
             }
           ]
@@ -1059,117 +1061,119 @@
       "id": "TooltipsSection",
       "type": "section",
       "name": "Tooltips",
-      "defaultExpanded": false
-    },
-    {
-      "id": "HighlightCharacter",
-      "type": "select",
-      "name": "Highlight Character",
-      "description": "Character used to highlight select items. [CSTM-HLCTR]",
-      "defaultValue": "*",
-      "options": [
-        { "value": " ", "label": "  (space)" },
-        { "value": "*", "label": "* (asterisk)" },
-        { "value": "=", "label": "= (equals)" },
-        { "value": "+", "label": "+ (plus)" },
-        { "value": "-", "label": "- (minus/dash/hyphen)" },
-        { "value": "x", "label": "x (small letter x)" },
-        { "value": "X", "label": "X (capital letter x)" },
-        { "value": "o", "label": "o (small letter o)" },
-        { "value": "O", "label": "O (capital letter o)" },
-        { "value": "0", "label": "0 (zero)" },
-        { "value": "~", "label": "~ (tilde)" },
-        { "value": "!", "label": "! (exclamation mark)" },
-        { "value": "@", "label": "@ (at)" },
-        { "value": "#", "label": "# (number/pound/hash)" },
-        { "value": "$", "label": "$ (dollar)" },
-        { "value": "%", "label": "% (percent)" },
-        { "value": "&", "label": "& (ampersand)" },
-        { "value": "custom", "label": "Custom" }
-      ]
-    },
-    {
-      "id": "HighlightColor",
-      "type": "select",
-      "name": "Highlight Color",
-      "description": "Color used for the highlight character for items that have highlight patterns. [CSTM-HLCLR]",
-      "defaultValue": "1",
-      "options": [
-        { "value": "0", "label": "White" },
-        { "value": "=", "label": "White Smoke" },
-        { "value": "I", "label": "Dim Gray" },
-        { "value": "5", "label": "Dimmer Gray" },
-        { "value": "6", "label": "Black" },
-        { "value": "U", "label": "Red" },
-        { "value": "1", "label": "Tomato" },
-        { "value": "S", "label": "Crimson" },
-        { "value": "2", "label": "Lime" },
-        { "value": "C", "label": "Lime 2" },
-        { "value": "<", "label": "Lime Green" },
-        { "value": "A", "label": "Green" },
-        { "value": "N", "label": "Deep Sky Blue" },
-        { "value": "T", "label": "Light Sky Blue" },
-        { "value": "P", "label": "Medium Slate Blue" },
-        { "value": "3", "label": "Corn Flower Blue" },
-        { "value": "9", "label": "Yellow" },
-        { "value": "R", "label": "Light Yellow" },
-        { "value": "8", "label": "Orange" },
-        { "value": "O", "label": "Violet" },
-        { "value": ";", "label": "Dark Violet" },
-        { "value": "4", "label": "Tan" },
-        { "value": "7", "label": "Tan 2" },
-        { "value": "M", "label": "Wheat" },
-        { "value": "custom", "label": "Custom" }
-      ]
-    },
-    {
-      "id": "HiddenItemTooltipSize",
-      "type": "number",
-      "name": "Tooltip width for hidden items",
-      "description": "Set how many spaces wide the tooltip is for hidden items (0-25).",
-      "defaultValue": 0,
-      "minValue": 0,
-      "maxValue": 25
-    },
-    {
-      "id": "Tooltip",
-      "type": "select",
-      "name": "Tooltip mods",
-      "description": "Modifies the size and background opacity of the tooltip for items on the ground and in the inventory.",
-      "defaultValue": "none",
-      "options": [
-        { "value": "none", "label": "Disable" },
-        { "value": "all", "label": "Opacity & Size" },
-        { "value": "opacity", "label": "Opacity" },
-        { "value": "size", "label": "Size" }
-      ]
-    },
-    {
-      "id": "TooltipOpacity",
-      "type": "number",
-      "minValue": 0,
-      "maxValue": 1,
-      "name": "Tooltip mods: opacity",
-      "description": "Set the tooltip background opacity (unmodded = 0.6).",
-      "defaultValue": 0.75,
-      "visible": [
-        "or",
-        ["eq", ["value", "Tooltip"], "all"],
-        ["eq", ["value", "Tooltip"], "opacity"]
-      ]
-    },
-    {
-      "id": "TooltipSize",
-      "type": "number",
-      "minValue": 20,
-      "maxValue": 50,
-      "name": "Tooltip mods: font size",
-      "description": "Set the tooltip font size (unmodded = 36).",
-      "defaultValue": 33,
-      "visible": [
-        "or",
-        ["eq", ["value", "Tooltip"], "all"],
-        ["eq", ["value", "Tooltip"], "size"]
+      "defaultExpanded": false,
+      "children": [
+        {
+          "id": "HighlightCharacter",
+          "type": "select",
+          "name": "Highlight Character",
+          "description": "Character used to highlight select items. [CSTM-HLCTR]",
+          "defaultValue": "*",
+          "options": [
+            { "value": " ", "label": "  (space)" },
+            { "value": "*", "label": "* (asterisk)" },
+            { "value": "=", "label": "= (equals)" },
+            { "value": "+", "label": "+ (plus)" },
+            { "value": "-", "label": "- (minus/dash/hyphen)" },
+            { "value": "x", "label": "x (small letter x)" },
+            { "value": "X", "label": "X (capital letter x)" },
+            { "value": "o", "label": "o (small letter o)" },
+            { "value": "O", "label": "O (capital letter o)" },
+            { "value": "0", "label": "0 (zero)" },
+            { "value": "~", "label": "~ (tilde)" },
+            { "value": "!", "label": "! (exclamation mark)" },
+            { "value": "@", "label": "@ (at)" },
+            { "value": "#", "label": "# (number/pound/hash)" },
+            { "value": "$", "label": "$ (dollar)" },
+            { "value": "%", "label": "% (percent)" },
+            { "value": "&", "label": "& (ampersand)" },
+            { "value": "custom", "label": "Custom" }
+          ]
+        },
+        {
+          "id": "HighlightColor",
+          "type": "select",
+          "name": "Highlight Color",
+          "description": "Color used for the highlight character for items that have highlight patterns. [CSTM-HLCLR]",
+          "defaultValue": "1",
+          "options": [
+            { "value": "0", "label": "White" },
+            { "value": "=", "label": "White Smoke" },
+            { "value": "I", "label": "Dim Gray" },
+            { "value": "5", "label": "Dimmer Gray" },
+            { "value": "6", "label": "Black" },
+            { "value": "U", "label": "Red" },
+            { "value": "1", "label": "Tomato" },
+            { "value": "S", "label": "Crimson" },
+            { "value": "2", "label": "Lime" },
+            { "value": "C", "label": "Lime 2" },
+            { "value": "<", "label": "Lime Green" },
+            { "value": "A", "label": "Green" },
+            { "value": "N", "label": "Deep Sky Blue" },
+            { "value": "T", "label": "Light Sky Blue" },
+            { "value": "P", "label": "Medium Slate Blue" },
+            { "value": "3", "label": "Corn Flower Blue" },
+            { "value": "9", "label": "Yellow" },
+            { "value": "R", "label": "Light Yellow" },
+            { "value": "8", "label": "Orange" },
+            { "value": "O", "label": "Violet" },
+            { "value": ";", "label": "Dark Violet" },
+            { "value": "4", "label": "Tan" },
+            { "value": "7", "label": "Tan 2" },
+            { "value": "M", "label": "Wheat" },
+            { "value": "custom", "label": "Custom" }
+          ]
+        },
+        {
+          "id": "HiddenItemTooltipSize",
+          "type": "number",
+          "name": "Tooltip width for hidden items",
+          "description": "Set how many spaces wide the tooltip is for hidden items (0-25).",
+          "defaultValue": 0,
+          "minValue": 0,
+          "maxValue": 25
+        },
+        {
+          "id": "Tooltip",
+          "type": "select",
+          "name": "Tooltip mods",
+          "description": "Modifies the size and background opacity of the tooltip for items on the ground and in the inventory.",
+          "defaultValue": "none",
+          "options": [
+            { "value": "none", "label": "Disable" },
+            { "value": "all", "label": "Opacity & Size" },
+            { "value": "opacity", "label": "Opacity" },
+            { "value": "size", "label": "Size" }
+          ]
+        },
+        {
+          "id": "TooltipOpacity",
+          "type": "number",
+          "minValue": 0,
+          "maxValue": 1,
+          "name": "Tooltip mods: opacity",
+          "description": "Set the tooltip background opacity (unmodded = 0.6).",
+          "defaultValue": 0.75,
+          "visible": [
+            "or",
+            ["eq", ["value", "Tooltip"], "all"],
+            ["eq", ["value", "Tooltip"], "opacity"]
+          ]
+        },
+        {
+          "id": "TooltipSize",
+          "type": "number",
+          "minValue": 20,
+          "maxValue": 50,
+          "name": "Tooltip mods: font size",
+          "description": "Set the tooltip font size (unmodded = 36).",
+          "defaultValue": 33,
+          "visible": [
+            "or",
+            ["eq", ["value", "Tooltip"], "all"],
+            ["eq", ["value", "Tooltip"], "size"]
+          ]
+        }
       ]
     }
   ]

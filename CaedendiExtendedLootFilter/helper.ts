@@ -3,6 +3,8 @@ import { SettingsConstants } from "./Constants/SettingsConstants";
 import { HighlightConstants } from "./Constants/Items/HighlightConstants";
 import { D2Color } from "./Models/D2Color";
 import { iLvlFix } from "./Models/iLvlFix";
+import { ItemCollection } from "./Models/ItemCollection";
+import { ItemEntry } from "./Models/ItemEntry";
 
 export class Helper {
   protected static newLine: string = CharConstants.newLine;
@@ -54,22 +56,23 @@ export class Helper {
     throw new Error("Helper.getiLvlIndent() received undefined iLvlFix value.");
   }
 
-  public static addBigTooltips(collection: {id: string, value: string}[], setting: string, indentPickUpMsg: string = CharConstants.empty) {
-    collection.forEach(entry => entry.value = Helper.generateBigTooltip(setting, entry.value, indentPickUpMsg));
+  public static addBigTooltips(collection: ItemCollection, setting: string, indentPickUpMsg: string = CharConstants.empty) {
+    collection.getEntries().forEach(entry => entry.setName(Helper.generateBigTooltip(setting, entry.getName(), indentPickUpMsg)));
   }
 
-  public static addBigTooltipsForIds(collection: {id: string, value: string}[], ids: string[], setting: string) {
+  public static addBigTooltipsForIds(collection: ItemCollection, ids: string[], setting: string) {
     ids.forEach(id => {
       this.addBigTooltipForId(collection, id, setting);
     })
   }
   
-  public static addBigTooltipForId(collection: {id: string, value: string}[], id: string, setting: string) {
-    const i = collection.findIndex(x => x.id === id);
+  public static addBigTooltipForId(collection: ItemCollection, key: string, setting: string) {
+    const i = collection.getEntries().findIndex(x => x.getKey() === key);
     if (i < 0) 
-      throw new Error(`Can't find item \"${id}\" in collection.`);
+      throw new Error(`Can't find item \"${key}\" in collection.`);
     collection[i].value = this.generateBigTooltip(setting, collection[i].value);
   }
+
 
   /**
    * 

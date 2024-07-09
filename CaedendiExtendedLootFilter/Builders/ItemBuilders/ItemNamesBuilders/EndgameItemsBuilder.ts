@@ -11,23 +11,24 @@ import { Helper } from "../../../Helper";
  * Endgame: Pandemonium Event, Tokens & Essences
  */
 export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder {
+  protected readonly filterSetting:      string = config.Endgame as string;
+  protected readonly bttEssencesSetting: string = config.BigTooltipEssences as string;
+  protected readonly bttSettingTokens:   string = config.BigTooltipEssences as string;
+  protected readonly bttSettingKeys:     string = config.BigTooltipEssences as string;
+  protected readonly bttSettingOrgans:   string = config.BigTooltipEssences as string;
+  protected readonly bttSettingStandard: string = config.BigTooltipEssences as string;
+
   constructor() {
     super();
   }
 
   public build(): void {
-    this.applyFilter(config.Endgame as string);
-    this.addBigTooltips(
-      config.BigTooltipEssences as string,
-      config.BigTooltipTokens as string,
-      config.BigTooltipKeys as string,
-      config.BigTooltipOrgans as string,
-      config.BigTooltipStandardOfHeroes as string
-    );
+    this.applyFilter();
+    this.addBigTooltips();
   }
 
-  protected applyFilter(setting: string): void {
-    switch (setting) {
+  protected applyFilter(): void {
+    switch (this.filterSetting) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
@@ -59,7 +60,7 @@ export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder
           [ "std", `Standard of Heroes` ],
         ];
 
-        this.collection.upsertEntries(ItemEntry.createArray(customList));
+        this.collection.upsertMultiple(ItemEntry.createArray(customList));
         return;
     }
   }
@@ -72,11 +73,11 @@ export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder
     this.pushEntries(entries, EndgameConstants.organs,   EndgameConstants.prefixOrg, EndgameConstants.suffixOrg);
     entries.push(EndgameConstants.token);
 
-    this.collection.upsertEntries(entries);
+    this.collection.upsertMultiple(entries);
   }
 
   protected highlightStandardOfHeroes(): void {
-    this.collection.upsertEntry(EndgameConstants.standard);
+    this.collection.upsert(EndgameConstants.standard);
   }
 
   protected hideStandardOfHeroes(): void {
@@ -87,35 +88,35 @@ export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder
     toPush.forEach(entry => array.push(DoubleHighlightItemEntry.fromItemEntry(entry, iLvlFix.None, prefix, suffix)));
   }
 
-  protected addBigTooltips(settingEssences: string, settingToken: string, settingKeys: string, settingOrgans: string, settingStandard: string): void {
+  protected addBigTooltips(): void {
     // essences
-    if (settingEssences !== SettingsConstants.disabled) {
+    if (this.bttEssencesSetting !== SettingsConstants.disabled) {
       let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.essences.map(ess => ess.getKey()), settingEssences);
+      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.essences.map(ess => ess.getKey()), this.bttEssencesSetting);
     }
 
     // token of absolution
-    if (settingToken !== SettingsConstants.disabled) {
+    if (this.bttSettingTokens !== SettingsConstants.disabled) {
       let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipForId(endgameCol, EndgameConstants.token.id, settingToken);
+      Helper.addBigTooltipForId(endgameCol, EndgameConstants.token.id, this.bttSettingTokens);
     }
 
     // pandemonium keys
-    if (settingKeys !== SettingsConstants.disabled) {
+    if (this.bttSettingKeys !== SettingsConstants.disabled) {
       let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.keys.map(key => key.getKey()), settingKeys);
+      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.keys.map(key => key.getKey()), this.bttSettingKeys);
     }
 
     // pandemonium organs
-    if (settingOrgans !== SettingsConstants.disabled) {
+    if (this.bttSettingOrgans !== SettingsConstants.disabled) {
       let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.organs.map(org => org.id), settingOrgans);
+      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.organs.map(org => org.id), this.bttSettingOrgans);
     }
 
     // standard of heroes
-    if (settingStandard !== SettingsConstants.disabled) {
+    if (this.bttSettingStandard !== SettingsConstants.disabled) {
       let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipForId(endgameCol, EndgameConstants.standard.id, settingStandard);
+      Helper.addBigTooltipForId(endgameCol, EndgameConstants.standard.id, this.bttSettingStandard);
     }
   }
 }

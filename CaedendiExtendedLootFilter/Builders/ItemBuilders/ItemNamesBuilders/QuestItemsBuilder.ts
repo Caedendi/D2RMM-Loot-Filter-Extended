@@ -73,7 +73,7 @@ export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
           [ "Hell Forge Hammer",   `Hell Forge Hammer` ], // Hell Forge Hammer
         ];
 
-        this.collection.upsertEntries(ItemEntry.createArray(customList));
+        this.collection.upsertMultiple(ItemEntry.createArray(customList));
         return;
     }
   }
@@ -121,10 +121,10 @@ export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
     ];
 
     questItems.forEach(item => item.setPrefixSuffix(this.prefix, this.suffix));
-    this.collection.upsertEntries(questItems);
+    this.collection.upsertMultiple(questItems);
   }
 
   protected highlightCube(): void {
-    this.collection.upsertEntry(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
+    this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
   }
 }

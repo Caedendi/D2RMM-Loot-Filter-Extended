@@ -31,7 +31,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
         return;
       case SettingsConstants.all: // show all
         let entries = SingleHighlightItemEntry.createSingleColorArray(buffPots, CharConstants.plus, ColorConstants.green, HighlightConstants.paddingNone, ColorConstants.white);
-        this.collection.upsertEntries(entries);
+        this.collection.upsertMultiple(entries);
         return;
       case "hide": // hide all
         this.collection.upsertMultipleHidden(buffPots.map(pot => pot.key));
@@ -40,9 +40,9 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
         // ADD YOUR CUSTOM ITEM NAMES HERE
 
         // TODO: refactor
-        this.collection.upsert("yps", "Antidote Potion");
-        this.collection.upsert("wms", "Thawing Potion");
-        this.collection.upsert("vps", "Stamina Potion");
+        // this.collection.upsertOLD("yps", "Antidote Potion");
+        // this.collection.upsertOLD("wms", "Thawing Potion");
+        // this.collection.upsertOLD("vps", "Stamina Potion");
         return;
     }
   }
@@ -68,7 +68,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
         return;
       case SettingsConstants.all: // show all
         let entries = SingleHighlightItemEntry.createMultiColorArray(throwingPots, highlight, padding, clrName);
-        this.collection.upsertEntries(entries);
+        this.collection.upsertMultiple(entries);
         return;
       case "hide": // hide all
         this.collection.upsertMultipleHidden(throwingPots.map(pot => pot.key));
@@ -77,12 +77,12 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
         // ADD YOUR CUSTOM ITEM NAMES HERE
 
         // TODO: refactor
-        this.collection.upsert("gpl", "Strangling Gas Potion");
-        this.collection.upsert("gpm", "Choking Gas Potion");
-        this.collection.upsert("gps", "Rancid Gas Potion");
-        this.collection.upsert("opl", "Fulminating Potion");
-        this.collection.upsert("opm", "Exploding Potion");
-        this.collection.upsert("ops", "Oil Potion");
+        // this.collection.upsertOLD("gpl", "Strangling Gas Potion");
+        // this.collection.upsertOLD("gpm", "Choking Gas Potion");
+        // this.collection.upsertOLD("gps", "Rancid Gas Potion");
+        // this.collection.upsertOLD("opl", "Fulminating Potion");
+        // this.collection.upsertOLD("opm", "Exploding Potion");
+        // this.collection.upsertOLD("ops", "Oil Potion");
         return;
     }
   }
@@ -101,14 +101,14 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
-        this.collection.upsertEntries([arrows, bolts]);
+        this.collection.upsertMultiple([arrows, bolts]);
         return;
       case "arw":
-        this.collection.upsertEntry(arrows);
+        this.collection.upsert(arrows);
         this.collection.upsertHidden(cqv);
         return;
       case "blt":
-        this.collection.upsertEntry(bolts);
+        this.collection.upsert(bolts);
         this.collection.upsertHidden(aqv);
         return;
       case "hide":
@@ -118,8 +118,8 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
         // ADD YOUR CUSTOM ITEM NAMES HERE
 
         // TODO: refactor
-        this.collection.upsert(aqv, "Arrows");
-        this.collection.upsert(cqv, "Bolts");
+        // this.collection.upsertOLD(aqv, "Arrows");
+        // this.collection.upsertOLD(cqv, "Bolts");
         return;
     }
   }
@@ -133,7 +133,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
         return;
       case SettingsConstants.custom: // [CSTM-KEY]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.collection.upsert("key", "Key");
+        // this.collection.upsertOLD("key", "Key");
         return;
     }
   }

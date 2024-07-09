@@ -12,6 +12,6 @@ export class CustomFilterListBuilder extends ItemBuilderBase implements IItemBui
       return;
     }
 
-    this.collection.upsertEntries(CustomFilterList.create().getEntries());
+    this.collection.upsertMultiple(CustomFilterList.create().getEntries());
   }
 }

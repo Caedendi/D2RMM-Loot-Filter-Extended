@@ -71,20 +71,20 @@ export class HealingPotionsBuilder extends ItemBuilderBase implements IItemBuild
         // ADD YOUR CUSTOM ITEM NAMES HERE
 
         // TODO: refactor
-        this.collection.upsert("hp1", `${this.clrHeal}+${this.clrName}HP1`); // Minor Healing Potion
-        this.collection.upsert("hp2", `${this.clrHeal}+${this.clrName}HP2`); // Light Healing Potion
-        this.collection.upsert("hp3", `${this.clrHeal}+${this.clrName}HP3`); // Healing Potion
-        this.collection.upsert("hp4", `${this.clrHeal}+${this.clrName}HP4`); // Greater Healing Potion
-        this.collection.upsert("hp5", `${this.clrHeal}+${this.clrName}HP5`); // Super Healing Potion
+        // this.collection.upsertOLD("hp1", `${this.clrHeal}+${this.clrName}HP1`); // Minor Healing Potion
+        // this.collection.upsertOLD("hp2", `${this.clrHeal}+${this.clrName}HP2`); // Light Healing Potion
+        // this.collection.upsertOLD("hp3", `${this.clrHeal}+${this.clrName}HP3`); // Healing Potion
+        // this.collection.upsertOLD("hp4", `${this.clrHeal}+${this.clrName}HP4`); // Greater Healing Potion
+        // this.collection.upsertOLD("hp5", `${this.clrHeal}+${this.clrName}HP5`); // Super Healing Potion
 
-        this.collection.upsert("mp1", `${this.clrMana}+${this.clrName}MP1`); // Minor Mana Potion
-        this.collection.upsert("mp2", `${this.clrMana}+${this.clrName}MP2`); // Light Mana Potion
-        this.collection.upsert("mp3", `${this.clrMana}+${this.clrName}MP3`); // Mana Potion
-        this.collection.upsert("mp4", `${this.clrMana}+${this.clrName}MP4`); // Greater Mana Potion
-        this.collection.upsert("mp5", `${this.clrMana}+${this.clrName}MP5`); // Super Mana Potion
+        // this.collection.upsertOLD("mp1", `${this.clrMana}+${this.clrName}MP1`); // Minor Mana Potion
+        // this.collection.upsertOLD("mp2", `${this.clrMana}+${this.clrName}MP2`); // Light Mana Potion
+        // this.collection.upsertOLD("mp3", `${this.clrMana}+${this.clrName}MP3`); // Mana Potion
+        // this.collection.upsertOLD("mp4", `${this.clrMana}+${this.clrName}MP4`); // Greater Mana Potion
+        // this.collection.upsertOLD("mp5", `${this.clrMana}+${this.clrName}MP5`); // Super Mana Potion
 
-        this.collection.upsert("rvs", `${this.clrRej}+${this.clrName}RPS`); // Rejuvenation Potion
-        this.collection.upsert("rvl", `${this.clrRej}+${this.clrName}RPF`); // Full Rejuvenation Potion
+        // this.collection.upsertOLD("rvs", `${this.clrRej}+${this.clrName}RPS`); // Rejuvenation Potion
+        // this.collection.upsertOLD("rvl", `${this.clrRej}+${this.clrName}RPF`); // Full Rejuvenation Potion
         return;
     }
   }
@@ -132,11 +132,11 @@ export class HealingPotionsBuilder extends ItemBuilderBase implements IItemBuild
 
   protected upsertPotions(potions: {key: string, name: string, color: D2Color}[]): void {
     potions.forEach(pot => {
-      this.collection.upsertEntry(new SingleHighlightItemEntry(pot.key, pot.name, this.pattern, pot.color, this.padding, this.clrName));
+      this.collection.upsert(new SingleHighlightItemEntry(pot.key, pot.name, this.pattern, pot.color, this.padding, this.clrName));
     });
   }
 
   protected upsertPotion(key: string, name: string, color: D2Color): void {
-    this.collection.upsertEntry(new SingleHighlightItemEntry(key, name, this.pattern, color, this.padding, this.clrName));
+    this.collection.upsert(new SingleHighlightItemEntry(key, name, this.pattern, color, this.padding, this.clrName));
   }
 }

@@ -1,3 +1,4 @@
+import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
 import { ItemEntry } from "./ItemEntry";
 import { iLvlFix } from "./iLvlFix";
@@ -27,7 +28,7 @@ export class DoubleHighlightItemEntry extends ItemEntry {
 
   public generateDisplayName(): string {
     let indent = this.shouldFixiLvlIndent ? Helper.getiLvlIndent(this.ilvlFix) : "";
-    return `${indent}${this.prefix}${this.name}${this.suffix}`;
+    return this.isVisible ? `${indent}${this.prefix}${this.name}${this.suffix}` : SettingsConstants.hidden;
   }
 
   public static createArray(array: [string, string, iLvlFix?, string?, string?][]): ItemEntry[] {

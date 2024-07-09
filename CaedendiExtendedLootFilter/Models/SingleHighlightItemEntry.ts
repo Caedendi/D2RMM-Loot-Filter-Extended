@@ -1,4 +1,5 @@
 import { GemConstants } from "../Constants/Items/GemConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
 import { D2Color } from "./D2Color";
 import { Gem } from "./Gem";
 import { ItemEntry } from "./ItemEntry";
@@ -25,7 +26,7 @@ export class SingleHighlightItemEntry extends ItemEntry {
   }
 
   public generateDisplayName(): string {
-    return `${this.highlightColor}${this.highlight}${this.padding}${this.nameColor}${this.name}`;
+    return this.isVisible ? `${this.highlightColor}${this.highlight}${this.padding}${this.nameColor}${this.name}` : SettingsConstants.hidden;
   }
 
   public static createSingleColorArray(

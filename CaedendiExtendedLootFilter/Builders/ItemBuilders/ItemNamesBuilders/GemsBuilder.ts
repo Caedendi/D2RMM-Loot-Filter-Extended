@@ -5,6 +5,7 @@ import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEnt
 import { ItemBuilderBase } from "./ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
 import { Helper } from "../../../Helper";
+import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 
 export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly chippedFlawedRegular: Gem[] = [
@@ -53,7 +54,7 @@ export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
 
   public build(): void {
     this.applyFilter();
-    this.addBigTooltips(config.BigTooltipGems as string);
+    this.addBigTooltips(config.BigTooltipGems as number as BigTooltipSetting);
   }
 
   protected applyFilter(): void {
@@ -137,12 +138,13 @@ export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
   }
 
   protected highlightGems(gems: Gem[]): void {
-    this.collection.upsertEntries(SingleHighlightItemEntry.fromGems(gems));
+    this.collection.upsertMultiple(SingleHighlightItemEntry.fromGems(gems));
   }
 
-  protected addBigTooltips(setting: string) {
-    if (config.BigTooltipGems.toString() !== SettingsConstants.disabled) {
-      Helper.addBigTooltips(this.collection, setting, GemConstants.indentPickUpMsg);
+  protected addBigTooltips(setting: BigTooltipSetting) {
+    this.collection.getEntries().forEach(entry => {
+      entry.addBigTooltip(setting, GemConstants.indentPickUpMsg); // TODO: 
+    });
     }
   }
 }

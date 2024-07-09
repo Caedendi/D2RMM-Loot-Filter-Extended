@@ -1,4 +1,3 @@
-import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
 import { ItemEntry } from "./ItemEntry";
 
@@ -14,35 +13,39 @@ export class ItemCollection {
     }
   }
 
-  public upsert(key: string, value: string): void {
-    const i = this.entries.findIndex(x => x.getKey() === key);
+  public getEntries(): ItemEntry[] {
+    return this.entries;
+  }
+
+  public upsert(entry: ItemEntry): void {
+    const i = this.findIndex(entry.getKey());
     if (i > -1) 
-      this.entries[i] = new ItemEntry(key, value);
+      this.entries[i] = entry;
     else 
-      this.entries.push(new ItemEntry(key, value));
+      this.entries.push(entry);
   }
 
-  public upsertEntry(entry: ItemEntry): void {
-    this.upsert(entry.getKey(), entry.generateDisplayName());
-  }
-
-  public upsertEntries(array: ItemEntry[]): void {
+  public upsertMultiple(array: ItemEntry[]): void {
     array.forEach(entry => {
-      this.upsert(entry.getKey(), entry.generateDisplayName());
+      this.upsert(entry);
     });
   }
 
   public upsertHidden(key: string): void {
-    this.upsert(key, SettingsConstants.hidden);
+    const i = this.findIndex(key);
+    if (i > -1) 
+      this.entries[i].setIsVisible(false);
+    else 
+      this.entries.push(ItemEntry.createHidden(key));
   }
 
   public upsertMultipleHidden(keys: string[]): void {
     keys.forEach(key => {
-      this.upsert(key, SettingsConstants.hidden);
+      this.upsertHidden(key);
     });
   }
 
-  public getEntries(): ItemEntry[] {
-    return this.entries;
+  private findIndex(key: string): number {
+    return this.entries.findIndex(entry => entry.getKey() === key);
   }
 }

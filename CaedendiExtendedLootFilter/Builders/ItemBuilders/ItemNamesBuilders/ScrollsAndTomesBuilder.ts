@@ -32,26 +32,28 @@ export class ScrollsAndTomesBuilder extends ItemBuilderBase implements IItemBuil
         return;
       case SettingsConstants.custom: // [CSTM-SCR]
         // ADD YOUR CUSTOM ITEM NAMES HERE
-        this.collection.upsert("tsc", "Scroll of Town Portal");
-        this.collection.upsert("isc", "Scroll of Identify");
-        this.collection.upsert("tbk", "Tome of Town Portal");
-        this.collection.upsert("ibk", "Tome of Identify");
+
+        // TODO: refactor
+        // this.collection.upsertOLD("tsc", "Scroll of Town Portal");
+        // this.collection.upsertOLD("isc", "Scroll of Identify");
+        // this.collection.upsertOLD("tbk", "Tome of Town Portal");
+        // this.collection.upsertOLD("ibk", "Tome of Identify");
         return;
     }
   }
 
   protected hideScrolls(): void {
-    this.collection.upsert("tsc", SettingsConstants.hidden); // Scroll of Town Portal
-    this.collection.upsert("isc", SettingsConstants.hidden); // Scroll of Identify
+    this.collection.upsertHidden("tsc"); // Scroll of Town Portal
+    this.collection.upsertHidden("isc"); // Scroll of Identify
   }
 
   protected highlightScrolls(clrHighlight: D2Color, clrName: D2Color, pattern: string, padding: string): void {
-    this.collection.upsertEntry(new SingleHighlightItemEntry("tsc", "TP", pattern, clrHighlight, padding, clrName)); // Scroll of Town Portal
-    this.collection.upsertEntry(new SingleHighlightItemEntry("isc", "ID", padding, clrHighlight, padding, clrName)); // Scroll of Identify
+    this.collection.upsert(new SingleHighlightItemEntry("tsc", "TP", pattern, clrHighlight, padding, clrName)); // Scroll of Town Portal
+    this.collection.upsert(new SingleHighlightItemEntry("isc", "ID", padding, clrHighlight, padding, clrName)); // Scroll of Identify
   }
 
   protected highlightTomes(clrHighlight: D2Color, clrName: D2Color, pattern: string, padding: string): void {
-    this.collection.upsertEntry(new SingleHighlightItemEntry("tbk", "TP Tome", pattern, clrHighlight, padding, clrName)); // Tome of Town Portal
-    this.collection.upsertEntry(new SingleHighlightItemEntry("ibk", "ID Tome", pattern, clrHighlight, padding, clrName)); // Tome of Identify
+    this.collection.upsert(new SingleHighlightItemEntry("tbk", "TP Tome", pattern, clrHighlight, padding, clrName)); // Tome of Town Portal
+    this.collection.upsert(new SingleHighlightItemEntry("ibk", "ID Tome", pattern, clrHighlight, padding, clrName)); // Tome of Identify
   }
 }
