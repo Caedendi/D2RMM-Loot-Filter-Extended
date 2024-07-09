@@ -2,10 +2,13 @@ import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { LightPillarConstants } from "../Constants/LightPillarConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
 
 export class LightPillarBuilder {
+  protected readonly globalSetting = config.LightPillarsGlobal as string;
+
   build() {
-    if (!config.IsLightPillarsEnabled) {
+    if (this.globalSetting === SettingsConstants.disabled) {
       return;
     }
 
@@ -23,13 +26,8 @@ export class LightPillarBuilder {
 
   // runes
   pushLightPillarsForRunes() {
-    if (!config.ShouldAddLightPillarRunesLow && !config.ShouldAddLightPillarRunesLowMid
-      && !config.ShouldAddLightPillarRunesMid && !config.ShouldAddLightPillarRunesHigh) {
-      return;
-    }
-
-    RuneConstants.tiers.forEach((tier) => {
-      if (!tier.hasLightPillar || (config.ShouldDisableLightPillarForHidden && !tier.isVisible)) {
+    RuneConstants.tiers.forEach(tier => {
+      if (!tier.hasLightPillar || (this.globalSetting === SettingsConstants.hide && !tier.isVisible)) {
         return;
       }
 
@@ -41,18 +39,16 @@ export class LightPillarBuilder {
 
   // rings & amulets
   pushLightPillarsForRingsAmulets() {
-    if (!config.ShouldAddLightPillarRingsAmulets) {
-      return;
-    }
-
-    this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}ring\\`, "ring");
-    this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}amulet\\`, "amulet");
+    if (config.ShouldAddLightPillarRings)
+      this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}ring\\`, "ring");
+    if (config.ShouldAddLightPillarAmulets)
+      this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}amulet\\`, "amulet");
   }
 
   // gems & jewels
   pushLightPillarsForGemsJewels() {
     if (!config.ShouldAddLightPillarGemsJewels
-      || (config.ShouldDisableLightPillarForHidden && config.Gems == "hide")) {
+      || (this.globalSetting === SettingsConstants.hide && config.Gems == "hide")) {
       return;
     }
 
@@ -68,11 +64,11 @@ export class LightPillarBuilder {
 
   getLightPillarGemQualities() {
     let gemQualities = ["perfect_"];
-    if (config.Gems === "perfect" && config.ShouldDisableLightPillarForHidden) {
+    if (config.Gems === "perfect" && this.globalSetting === SettingsConstants.hide) {
       return gemQualities;
     }
     gemQualities.push("flawless_");
-    if (config.Gems === "flawless" && config.ShouldDisableLightPillarForHidden) {
+    if (config.Gems === "flawless" && this.globalSetting === SettingsConstants.hide) {
       return gemQualities;
     }
 
@@ -214,7 +210,7 @@ export class LightPillarBuilder {
   // standard of heroes
   pushLightPillarForStandardOfHeroes() {
     if (!config.ShouldAddLightPillarStandardOfHeroes
-      || (config.ShouldDisableLightPillarForHidden && config.Endgame === "hsh")) {
+      || (this.globalSetting === SettingsConstants.hide && config.Endgame === "hsh")) {
       return;
     }
 

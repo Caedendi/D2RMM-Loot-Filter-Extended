@@ -2,12 +2,15 @@ import { TSVData } from "../../../types";
 import { DropSoundConstants } from "../Constants/DropSoundConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
 
 
 export class DropSoundBuilder {
+  protected readonly globalSetting = config.DropSoundsGlobal as string;
+
   build() {
-    if (!config.IsDropSoundsEnabled) {
+    if (this.globalSetting === SettingsConstants.disabled) {
       return;
     }
 
@@ -26,7 +29,7 @@ export class DropSoundBuilder {
 
   modifyDropSoundForRunes(soundsFile:TSVData) {
     RuneConstants.tiers.forEach((tier) => {
-      if (config.ShouldDisableDropSoundForHidden && !tier.isVisible) {
+      if (this.globalSetting === SettingsConstants.hide && !tier.isVisible) {
         return;
       }
 

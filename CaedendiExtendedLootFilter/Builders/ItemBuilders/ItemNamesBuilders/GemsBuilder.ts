@@ -52,6 +52,11 @@ export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
   }
 
   public build(): void {
+    this.applyFilter();
+    this.addBigTooltips(config.BigTooltipGems as string);
+  }
+
+  protected applyFilter(): void {
     switch (config.Gems as string) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;
@@ -135,9 +140,9 @@ export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
     this.collection.upsertEntries(SingleHighlightItemEntry.fromGems(gems));
   }
 
-  protected addBigTooltips() {
+  protected addBigTooltips(setting: string) {
     if (config.BigTooltipGems.toString() !== SettingsConstants.disabled) {
-      Helper.addBigTooltips(this.collection, settingGems, GemConstants.indentPickUpMsg);
+      Helper.addBigTooltips(this.collection, setting, GemConstants.indentPickUpMsg);
     }
   }
 }

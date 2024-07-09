@@ -373,6 +373,12 @@ Do not enable Show Item Level if you are playing online. It does not work (all i
 
 ## Roadmap
 
+### 4.0.0
+- [ ] Big Tooltips:
+  - [ ] option for individual gem qualities if enabled (atm all visible gems have big tooltips)
+- [ ] 
+
+### 3.0.0
 - [ ] Multi-line tooltips:
   - [ ] whitespace only
   - [ ] highlight pattern + whitespace above/below
