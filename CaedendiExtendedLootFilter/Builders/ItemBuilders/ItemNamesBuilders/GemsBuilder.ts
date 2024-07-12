@@ -1,11 +1,10 @@
 import { GemConstants } from "../../../Constants/Items/GemConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { Gem } from "../../../Models/Gem";
 import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
-import { ItemBuilderBase } from "./ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
-import { Helper } from "../../../Helper";
-import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
+import { ItemBuilderBase } from "./ItemBuilderBase";
 
 export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly chippedFlawedRegular: Gem[] = [
@@ -54,7 +53,7 @@ export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
 
   public build(): void {
     this.applyFilter();
-    this.addBigTooltips(config.BigTooltipGems as number as BigTooltipSetting);
+    this.addBigTooltips();
   }
 
   protected applyFilter(): void {
@@ -141,10 +140,7 @@ export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
     this.collection.upsertMultiple(SingleHighlightItemEntry.fromGems(gems));
   }
 
-  protected addBigTooltips(setting: BigTooltipSetting) {
-    this.collection.getEntries().forEach(entry => {
-      entry.addBigTooltip(setting, GemConstants.indentPickUpMsg); // TODO: 
-    });
-    }
+  protected addBigTooltips() {
+    this.collection.addBigTooltipToAllEntries(config.BigTooltipGems as number as BigTooltipSetting);
   }
 }

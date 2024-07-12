@@ -451,6 +451,7 @@
           "type": "section",
           "name": "Runes",
           "defaultExpanded": false,
+          "visible": ["value", "IsBigTooltipsEnabled"],
           "children": [
             {
               "id": "BigTooltipRunesLow",
@@ -458,6 +459,7 @@
               "name": "Low Runes",
               "description": "Enable Big Tooltips for Low Runes (El [1] - Dol [14], except Ral [8]).",
               "defaultValue": "none",
+              "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
                 { "value": "1", "label": "Two Lines" },
@@ -474,6 +476,7 @@
               "name": "Low-Mid Runes",
               "description": "Enable Big Tooltips for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
               "defaultValue": "2",
+              "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
                 { "value": "1", "label": "Two Lines" },
@@ -490,6 +493,7 @@
               "name": "Mid Runes",
               "description": "Enable Big Tooltips for Mid Runes (Lem [20] - Gul [25]).",
               "defaultValue": "3",
+              "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
                 { "value": "1", "label": "Two Lines" },
@@ -506,6 +510,7 @@
               "name": "High Runes",
               "description": "Enable Big Tooltips for High Runes (Vex [26] - Zod [33]).",
               "defaultValue": "3",
+              "visible": ["value", "IsBigTooltipsEnabled"],
               "options": [
                 { "value": "none", "label": "Disable" },
                 { "value": "1", "label": "Two Lines" },
@@ -523,6 +528,7 @@
           "type": "section",
           "name": "Jewelry",
           "defaultExpanded": false,
+          "visible": ["value", "IsBigTooltipsEnabled"],
           "children": [
             {
               "id": "BigTooltipGems",
@@ -582,6 +588,7 @@
           "type": "section",
           "name": "Quest & Endgame Items",
           "defaultExpanded": false,
+          "visible": ["value", "IsBigTooltipsEnabled"],
           "children": [
             {
               "id": "BigTooltipQuestItems",
@@ -870,7 +877,7 @@
               "name": "Low Runes",
               "description": "Select a custom drop sound for Low Runes (El [1] - Dol [14], except Ral [8]).",
               "defaultValue": "default",
-              "visible": ["value", "IsDropSoundsEnabled"],
+              "visible": ["value", "DropSoundsGlobal"],
               "options": [
                 { "value": "default", "label": "Default" },
                 { "value": "hostile", "label": "Hostile (PVP)" },

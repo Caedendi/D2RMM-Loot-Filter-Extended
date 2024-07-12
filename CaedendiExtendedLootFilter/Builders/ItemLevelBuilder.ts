@@ -3,10 +3,9 @@ import { CollectionConstants } from "../Constants/Items/CollectionConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { JewelryConstants } from "../Constants/Items/JewelryConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { ItemBuilder } from "./ItemBuilder";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
 
-
+//  extends ItemBuilderBase implements IItemBuilder
 export class ItemLevelBuilder extends ItemBuilder {
   constructor() {
     // super(CharConstants.empty);

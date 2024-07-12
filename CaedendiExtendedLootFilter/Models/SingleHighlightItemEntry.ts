@@ -1,4 +1,6 @@
+import { CharConstants } from "../Constants/CharConstants"; 
 import { GemConstants } from "../Constants/Items/GemConstants";
+import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { D2Color } from "./D2Color";
 import { Gem } from "./Gem";
@@ -26,7 +28,16 @@ export class SingleHighlightItemEntry extends ItemEntry {
   }
 
   public generateDisplayName(): string {
-    return this.isVisible ? `${this.highlightColor}${this.highlight}${this.padding}${this.nameColor}${this.name}` : SettingsConstants.hidden;
+    if (!this.isVisible)
+      return SettingsConstants.hidden;
+
+    let displayName = `${this.highlightColor}${this.highlight}${this.padding}${this.nameColor}${this.name}`;
+
+    if (!this.hasBigTooltip)
+      return displayName;
+
+    // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
+    return `${this.bigTooltipSuffix}${HighlightConstants.bttPadding}${displayName}${HighlightConstants.bttPadding}${this.bigTooltipPrefix}`;
   }
 
   public static createSingleColorArray(
@@ -71,5 +82,18 @@ export class SingleHighlightItemEntry extends ItemEntry {
       GemConstants.padding,
       GemConstants.clrName
     ));
+  }
+
+  protected createTwosLinePickUpBigTooltipPrefix(): string {
+    return `${this.newLine}${this.createPickUpIndent()}${HighlightConstants.bttPickUpMsg}`;
+  }
+
+  protected createFourLinesPickUpBigTooltipPrefix(): string {
+    return `${this.newLine}${this.createPickUpIndent()}${HighlightConstants.bttPickUpMsg}${this.newLine}`;
+  }
+
+  // TODO: refactor to be generic and not use GemConstants
+  private createPickUpIndent() {
+    return `${this.highlight}${this.padding}`.length == 2 ? GemConstants.indentPickUpMsg : CharConstants.empty;
   }
 }

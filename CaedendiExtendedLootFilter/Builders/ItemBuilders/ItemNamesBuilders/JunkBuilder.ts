@@ -13,13 +13,17 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
   }
 
   public build(): void {
-    this.buildBuffPotions();
-    this.buildThrowingPotions();
-    this.buildAmmo();
-    this.buildKeys();
+    this.applyFilter();
   }
 
-  public buildBuffPotions(): void {
+  protected applyFilter(): void {
+    this.applyBuffPotions();
+    this.applyThrowingPotions();
+    this.applyAmmo();
+    this.applyKeys();
+  }
+
+  protected applyBuffPotions(): void {
     let buffPots: {key: string, name: string}[] = [
       { key: "yps", name: "Antidote" }, // Antidote Potion
       { key: "wms", name: "Thawing" },  // Thawing Potion
@@ -47,7 +51,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
     }
   }
 
-  public buildThrowingPotions(): void {
+  protected applyThrowingPotions(): void {
     let clrGas = ColorConstants.darkGreen;
     let clrOil = ColorConstants.orange;
     let clrName = ColorConstants.white;
@@ -87,7 +91,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
     }
   }
 
-  public buildAmmo(): void {
+  protected applyAmmo(): void {
     let clrHighlight: D2Color = ColorConstants.gray;
     let clrName:      D2Color = ColorConstants.white;
     let highlight:    string  = CharConstants.o;
@@ -124,7 +128,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
     }
   }
 
-  public buildKeys(): void {
+  protected applyKeys(): void {
     switch (config.Keys as string) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;

@@ -5,6 +5,7 @@ import { ItemEntry } from "../../../Models/ItemEntry";
 import { iLvlFix } from "../../../Models/iLvlFix";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
+import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 
 export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly prefix = HighlightConstants.questPrefix;
@@ -15,7 +16,12 @@ export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
   }
 
   public build(): void {
-    switch (config.Quest as string) {
+    this.applyFilter(config.Quest as string);
+    this.addBigTooltips(config.BigTooltipQuestItems as number as BigTooltipSetting);
+  }
+
+  protected applyFilter(setting: string): void {
+    switch (setting) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
@@ -120,11 +126,15 @@ export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
       new DoubleHighlightItemEntry("Hell Forge Hammer",   "Hell Forge Hammer", iLvlFix.Double),
     ];
 
-    questItems.forEach(item => item.setPrefixSuffix(this.prefix, this.suffix));
+    questItems.forEach(item => item.setPrefixSuffix(this.prefix, this.suffix)); // TODO: remove/refactor?
     this.collection.upsertMultiple(questItems);
   }
 
   protected highlightCube(): void {
     this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
+  }
+
+  protected addBigTooltips(setting: BigTooltipSetting): void {
+    this.collection.addBigTooltipToAllEntries(setting);
   }
 }

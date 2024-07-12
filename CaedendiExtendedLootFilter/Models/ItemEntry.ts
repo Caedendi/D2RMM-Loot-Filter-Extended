@@ -10,8 +10,9 @@ export class ItemEntry {
   protected name: string;
   protected isVisible: boolean = true;
   protected bigTooltipSetting: BigTooltipSetting = BigTooltipSetting.Disabled;
-  protected bigTooltipPrefix: string = CharConstants.empty;
-  protected bigTooltipSuffix: string = CharConstants.empty;
+  protected bigTooltipPrefix:  string = CharConstants.empty;
+  protected bigTooltipSuffix:  string = CharConstants.empty;
+  protected bigTooltipPadding: string = HighlightConstants.bttPadding
 
   protected readonly newLine: string = CharConstants.newLine;
 
@@ -43,51 +44,51 @@ export class ItemEntry {
       return this.name;
 
     // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
-    return `${this.bigTooltipSuffix}${HighlightConstants.bttPadding}${this.name}${HighlightConstants.bttPadding}${this.bigTooltipPrefix}`;
+    return `${this.bigTooltipSuffix}${this.bigTooltipPadding}${this.name}${this.bigTooltipPadding}${this.bigTooltipPrefix}`;
   }
 
-  // protected addBigTooltip(setting: BigTooltipSetting, pickUpIndent?: string): { prefix: string, suffix: string } {
-  public addBigTooltip(setting: BigTooltipSetting, pickUpIndent?: string): void {
-    if (setting == BigTooltipSetting.Disabled)
-      return;
-
+  public addBigTooltip(setting: BigTooltipSetting): void {
     this.bigTooltipSetting = setting;
 
-    let prefix = CharConstants.empty;
-    let suffix = CharConstants.empty;
-
-    // switch (this.bigTooltipSetting) {
-    switch (setting) {
+     switch (setting) {
       // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
+      case BigTooltipSetting.Disabled:
+        break;
       case BigTooltipSetting.TwoLines:
-        prefix = `${this.newLine}`;
+        this.bigTooltipPrefix = `${this.newLine}`;
         break;
       case BigTooltipSetting.TwoLinesPickUp:
-        prefix = `${this.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}`;
+        this.bigTooltipPrefix = this.createTwosLinePickUpBigTooltipPrefix();
+        // prefix = `${this.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}`;
         break;
       case BigTooltipSetting.ThreeLines:
-        prefix = `${this.newLine}`;
-        suffix = `${this.newLine}`;
+        this.bigTooltipPrefix = `${this.newLine}`;
+        this.bigTooltipSuffix = `${this.newLine}`;
         break;
       case BigTooltipSetting.FourLinesPickUp:
-        prefix = `${this.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}${this.newLine}`;
-        suffix = `${this.newLine}`;
+        this.bigTooltipPrefix = this.createFourLinesPickUpBigTooltipPrefix();
+        // prefix = `${this.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}${this.newLine}`;
+        this.bigTooltipSuffix = `${this.newLine}`;
         break;
       case BigTooltipSetting.FiveLines:
-        prefix = `${this.newLine}${this.newLine}`;
-        suffix = `${this.newLine}${this.newLine}`;
+        this.bigTooltipPrefix = `${this.newLine}${this.newLine}`;
+        this.bigTooltipSuffix = `${this.newLine}${this.newLine}`;
         break;
       case BigTooltipSetting.Custom: // [CSTM-BTT]
-        prefix = `${this.newLine}`; // ADD YOUR CUSTOM BIG TOOLTIP HERE
-        suffix = `${this.newLine}`; // ADD YOUR CUSTOM BIG TOOLTIP HERE
+        this.bigTooltipPrefix = `${this.newLine}`; // ADD YOUR CUSTOM BIG TOOLTIP HERE
+        this.bigTooltipSuffix = `${this.newLine}`; // ADD YOUR CUSTOM BIG TOOLTIP HERE
         break;
       default:
         throw new Error("Invalid Big Tooltip setting in ItemEntry.addBigTooltip().");
     }
+  }
 
-    this.bigTooltipPrefix = prefix;
-    this.bigTooltipSuffix = suffix;
-    // return { prefix, suffix };
+  protected createTwosLinePickUpBigTooltipPrefix(): string {
+    return `${this.newLine}${HighlightConstants.bttPickUpMsg}`;
+  }
+
+  protected createFourLinesPickUpBigTooltipPrefix(): string {
+    return `${this.newLine}${HighlightConstants.bttPickUpMsg}${this.newLine}`;
   }
 
   public getKey(): string {

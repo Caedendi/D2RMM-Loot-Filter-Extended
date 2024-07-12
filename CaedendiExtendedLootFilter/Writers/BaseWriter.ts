@@ -1,6 +1,7 @@
 import { IItemBuilder } from "../Builders/ItemBuilders/Interfaces/IItemBuilder";
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
+import { Helper } from "../Helper";
 import { ItemCollection } from "../Models/ItemCollection";
 import { IWriter } from "./Interfaces/IWriter";
 
@@ -22,15 +23,14 @@ export abstract class BaseWriter implements IWriter {
   /**
    * Initializes the list of builders for the target file.
    */
-  public abstract initializeBuilders(): void;
+  protected abstract initializeBuilders(): void;
 
   /**
    * Builds all builders, merges their collections into one and writes these entries to the target file.
    */
   public run(): void {
     this.buildAll();
-    let mergedCollection = this.createMergedCollection();
-    this.writeCustomNames(mergedCollection);
+    this.writeCustomNames(this.createMergedCollection());
   }
 
   /**
@@ -47,13 +47,12 @@ export abstract class BaseWriter implements IWriter {
    * @returns A single {@link ItemCollection} containing all entries in {@property builders} asd
    */
   protected createMergedCollection(): ItemCollection {
-    let id = this.constructor.name.replace("Writer", "Collection");
-    let result = new ItemCollection(id);
+    let mergedCollection = new ItemCollection((this.constructor.name.replace("Writer", "Collection")));
     this.builders.forEach(builder => {
-      result.upsertCollection(builder.getCollection());
+      mergedCollection.upsertCollection(builder.getCollection());
     });
 
-    return result;
+    return mergedCollection;
   }
 
   /**
@@ -61,17 +60,17 @@ export abstract class BaseWriter implements IWriter {
    */
   protected writeCustomNames(customNames: ItemCollection): void {
     let entries = customNames.getEntries();
-    if (entries == undefined || entries == null || entries.length == 0) {
+    if (!Helper.isDefined(entries) || entries.length == 0) {
       return;
     }
 
     let file = D2RMM.readJson(this.target); // copy existing file
-    var idList = entries.map(entry => entry.id);
+    var keys = entries.map(entry => entry.getKey());
     Object.entries(file).forEach(item => {
-      if (idList.includes(item[FileConstants.key])) { // todo: was item.Key, now replaced
+      if (keys.includes(item[FileConstants.key])) { // todo: was item.Key, now replaced
         for (const key in item) {
           if (key !== FileConstants.id && key !== FileConstants.key) {
-            item[key] = entries.find(x => x.id === item[FileConstants.key])?.value ?? "";
+            item[key] = entries.find(entry => entry.getKey() === item[FileConstants.key])?.generateDisplayName() ?? "";
           }
         }
       }

@@ -21,6 +21,10 @@ export class HealingPotionsBuilder extends ItemBuilderBase implements IItemBuild
   }
 
   public build(): void {
+    this.applyFilter();
+  }
+
+  protected applyFilter(): void {
     switch (config.HealingPotions as string) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;

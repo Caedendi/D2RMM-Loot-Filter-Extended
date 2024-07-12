@@ -4,6 +4,8 @@ import { iLvlFix } from "./Models/iLvlFix";
 
 export abstract class CustomFilterList {
   protected static readonly collectionId: string = CustomFilterList.name;
+
+  // todo: rename for ItemNamesBuilder
   public static create(): ItemCollection {
     // let griffons1 = `My custom item name in a variable`;
 
@@ -61,4 +63,10 @@ remove this line (2/2) */
 
     return new ItemCollection(this.collectionId, ItemEntry.createArray(list));
   }
+
+  // TODO: add for RuneBuilder
+  // TODO: add for ItemNameAffixesBuilder
+  // TODO: add for UiBuilder
+  // TODO: add for ItemModifiersBuilder
+  // TODO: rest
 }

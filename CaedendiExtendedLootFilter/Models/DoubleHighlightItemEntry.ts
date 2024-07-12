@@ -4,22 +4,22 @@ import { ItemEntry } from "./ItemEntry";
 import { iLvlFix } from "./iLvlFix";
 
 export class DoubleHighlightItemEntry extends ItemEntry {
-  protected prefix: string;
-  protected suffix: string;
   protected readonly ilvlFix: iLvlFix;
-  protected readonly shouldFixiLvlIndent: boolean = false;
+  protected highlightPrefix: string;
+  protected highlightSuffix: string;
+  protected readonly shouldFixiLvlIndent: boolean = false; // TODO: fix use
 
   constructor(
     key: string,
     name: string,
     ilvlFix?: iLvlFix,
-    prefix?: string,
-    suffix?: string
+    highlightPrefix?: string,
+    highlightSuffix?: string
   ) {
     super(key, name);
-    this.prefix = prefix ?? "";
-    this.suffix = suffix ?? "";
     this.ilvlFix = ilvlFix ?? iLvlFix.None;
+    this.highlightPrefix = highlightPrefix ?? "";
+    this.highlightSuffix = highlightSuffix ?? "";
   }
 
   public static fromItemEntry(entry: ItemEntry, ilvlFix?: iLvlFix, prefix?: string, suffix?: string): DoubleHighlightItemEntry {
@@ -27,8 +27,17 @@ export class DoubleHighlightItemEntry extends ItemEntry {
   }
 
   public generateDisplayName(): string {
+    if (!this.isVisible)
+      return SettingsConstants.hidden;
+
     let indent = this.shouldFixiLvlIndent ? Helper.getiLvlIndent(this.ilvlFix) : "";
-    return this.isVisible ? `${indent}${this.prefix}${this.name}${this.suffix}` : SettingsConstants.hidden;
+    let displayName = `${indent}${this.highlightPrefix}${this.name}${this.highlightSuffix}`;
+    
+    if (!this.hasBigTooltip)
+      return displayName;
+
+    // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
+    return `${this.bigTooltipSuffix}${this.bigTooltipPadding}${displayName}${this.bigTooltipPadding}${this.bigTooltipPrefix}`;
   }
 
   public static createArray(array: [string, string, iLvlFix?, string?, string?][]): ItemEntry[] {
@@ -36,15 +45,15 @@ export class DoubleHighlightItemEntry extends ItemEntry {
   }
 
   public setPrefix(prefix: string): void {
-    this.prefix = prefix;
+    this.highlightPrefix = prefix;
   }
 
   public setSuffix(prefix: string): void {
-    this.prefix = prefix;
+    this.highlightPrefix = prefix;
   }
 
   public setPrefixSuffix(prefix: string, suffix: string): void {
-    this.prefix = prefix;
-    this.suffix = suffix;
+    this.highlightPrefix = prefix;
+    this.highlightSuffix = suffix;
   }
 }

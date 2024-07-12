@@ -28,5 +28,6 @@ export class GemConstants {
   static highlight = CharConstants.o;
   static padding = HighlightConstants.padding1;
 
+  // TODO: refactor
   static indentPickUpMsg = (config.Gems === "all" || config.Gems === "flawless" || config.Gems === "perfect") ? CharConstants.space.repeat(2) : CharConstants.empty; // indent for the pick up message if gem highlighting is enabled.
 }

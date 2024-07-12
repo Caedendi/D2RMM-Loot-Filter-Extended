@@ -1,22 +1,22 @@
 import { EndgameConstants } from "../../../Constants/Items/EndgameConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
 import { ItemEntry } from "../../../Models/ItemEntry";
 import { iLvlFix } from "../../../Models/iLvlFix";
-import { ItemBuilderBase } from "./ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
-import { Helper } from "../../../Helper";
+import { ItemBuilderBase } from "./ItemBuilderBase";
 
 /**
- * Endgame: Pandemonium Event, Tokens & Essences
+ * Endgame: Pandemonium Event Items, Essences & Tokens of Absolution
  */
 export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly filterSetting:      string = config.Endgame as string;
-  protected readonly bttEssencesSetting: string = config.BigTooltipEssences as string;
-  protected readonly bttSettingTokens:   string = config.BigTooltipEssences as string;
-  protected readonly bttSettingKeys:     string = config.BigTooltipEssences as string;
-  protected readonly bttSettingOrgans:   string = config.BigTooltipEssences as string;
-  protected readonly bttSettingStandard: string = config.BigTooltipEssences as string;
+  protected readonly bttEssencesSetting: BigTooltipSetting = config.BigTooltipEssences as BigTooltipSetting;
+  protected readonly bttSettingTokens:   BigTooltipSetting = config.BigTooltipEssences as BigTooltipSetting;
+  protected readonly bttSettingKeys:     BigTooltipSetting = config.BigTooltipEssences as BigTooltipSetting;
+  protected readonly bttSettingOrgans:   BigTooltipSetting = config.BigTooltipEssences as BigTooltipSetting;
+  protected readonly bttSettingStandard: BigTooltipSetting = config.BigTooltipEssences as BigTooltipSetting;
 
   constructor() {
     super();
@@ -84,39 +84,32 @@ export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder
     this.collection.upsertHidden(EndgameConstants.standard.getKey());
   }
 
-  private pushEntries(array: DoubleHighlightItemEntry[], toPush: ItemEntry[], prefix: string, suffix: string): void {
-    toPush.forEach(entry => array.push(DoubleHighlightItemEntry.fromItemEntry(entry, iLvlFix.None, prefix, suffix)));
+  private pushEntries(target: DoubleHighlightItemEntry[], entries: ItemEntry[], prefix: string, suffix: string): void {
+    entries.forEach(entry => target.push(DoubleHighlightItemEntry.fromItemEntry(entry, iLvlFix.None, prefix, suffix)));
   }
 
+  //
+  // SETTING as number as BigTooltipSetting ??
+  //
   protected addBigTooltips(): void {
     // essences
-    if (this.bttEssencesSetting !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.essences.map(ess => ess.getKey()), this.bttEssencesSetting);
-    }
+    if (this.bttEssencesSetting != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToEntries(EndgameConstants.essences.map(essence => essence.getKey()), this.bttEssencesSetting);
 
     // token of absolution
-    if (this.bttSettingTokens !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipForId(endgameCol, EndgameConstants.token.id, this.bttSettingTokens);
-    }
+    if (this.bttSettingTokens != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToEntry(EndgameConstants.token.getKey(), this.bttSettingTokens);
 
     // pandemonium keys
-    if (this.bttSettingKeys !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.keys.map(key => key.getKey()), this.bttSettingKeys);
-    }
+    if (this.bttSettingKeys != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToEntries(EndgameConstants.keys.map(key => key.getKey()), this.bttSettingKeys);
 
     // pandemonium organs
-    if (this.bttSettingOrgans !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipsForIds(endgameCol, EndgameConstants.organs.map(org => org.id), this.bttSettingOrgans);
-    }
+    if (this.bttSettingOrgans != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToEntries(EndgameConstants.organs.map(organ => organ.getKey()), this.bttSettingOrgans);
 
     // standard of heroes
-    if (this.bttSettingStandard !== SettingsConstants.disabled) {
-      let endgameCol = this.getCollectionById(CollectionConstants.endgame);
-      Helper.addBigTooltipForId(endgameCol, EndgameConstants.standard.id, this.bttSettingStandard);
-    }
+    if (this.bttSettingStandard != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToEntry(EndgameConstants.standard.getKey(), this.bttSettingStandard);
   }
 }

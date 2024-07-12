@@ -7,13 +7,18 @@ import { IItemBuilder } from "../Interfaces/IItemBuilder";
 import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
 import { iLvlFix } from "../../../Models/iLvlFix";
 import { ItemEntry } from "../../../Models/ItemEntry";
+import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 
 export class JewelsBuilder extends ItemBuilderBase implements IItemBuilder {
   constructor() {
     super();
   }
-
   public build(): void {
+    this.applyFilter();
+    this.addBigTooltips();
+  }
+
+  protected applyFilter(): void {
     switch (config.Jewels as string) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;
@@ -30,5 +35,9 @@ export class JewelsBuilder extends ItemBuilderBase implements IItemBuilder {
         this.collection.upsert(new ItemEntry(FacetConstants.facetId, `Rainbow Facet`)); // identified facets
         return;
     }
+  }
+
+  protected addBigTooltips() {
+    this.collection.addBigTooltipToEntry(FacetConstants.facetId, config.BigTooltipFacets as number as BigTooltipSetting);
   }
 }

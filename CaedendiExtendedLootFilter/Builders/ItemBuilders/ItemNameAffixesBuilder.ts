@@ -7,7 +7,6 @@ import { GemConstants } from "../../Constants/Items/GemConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { Helper } from "../../Helper";
 import { Gem } from "../../Models/Gem";
-import { ItemBuilder } from "./ItemBuilder";
 
 export class ItemNameAffixesBuilder extends ItemBuilder {
   constructor() {

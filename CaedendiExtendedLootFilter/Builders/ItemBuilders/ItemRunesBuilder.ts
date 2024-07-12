@@ -1,6 +1,4 @@
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { FileConstants } from "../../Constants/FileConstants";
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { Helper } from "../../Helper";
@@ -29,6 +27,11 @@ export class ItemRunesBuilder extends ItemBuilderBase implements IItemBuilder {
   }
 
   customizeRunes(setting) {
+
+    //
+    // TODO: change setting droplist to toggles
+    //
+
     const hasAffix = ["nrs-hls", "nrs", "hls"].includes(setting); // settings that keep the " Rune" affix
     const hasNumber = [SettingsConstants.all, "nrs-raf", "nrs-hls", "nrs"].includes(setting); // settings that add rune numbers
     const hasSettingHighlighting = [SettingsConstants.all, "nrs-hls", "hls-raf", "hls"].includes(setting); // settings that add highlighting
@@ -48,6 +51,10 @@ export class ItemRunesBuilder extends ItemBuilderBase implements IItemBuilder {
       case SettingsConstants.custom: // [CSTM-RUN]
 
         // ADD YOUR CUSTOM ITEM NAMES HERE. NOTE: THIS BYPASSES BIG TOOLTIPS SETTINGS.
+
+        // TODO: add to custom filter list
+
+        
         // todo: is broken, correct
         let clrMsg = ColorConstants.purple;
         let clrRune = ColorConstants.orange;

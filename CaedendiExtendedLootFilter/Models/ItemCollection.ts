@@ -1,4 +1,5 @@
 import { Helper } from "../Helper";
+import { BigTooltipSetting } from "./BigTooltipSetting";
 import { ItemEntry } from "./ItemEntry";
 
 export class ItemCollection {
@@ -45,7 +46,32 @@ export class ItemCollection {
     });
   }
 
+  public upsertCollection(collection: ItemCollection): void {
+    this.upsertMultiple(collection.entries);
+  }
+
   private findIndex(key: string): number {
     return this.entries.findIndex(entry => entry.getKey() === key);
+  }
+
+  public addBigTooltipToAllEntries(setting: BigTooltipSetting) {
+    this.entries.forEach(entry => entry.addBigTooltip(setting)); // entry.setName(Helper.generateBigTooltip(setting, entry.getName(), indentPickUpMsg)));
+  }
+
+  public addBigTooltipToEntries(keys: string[], setting: BigTooltipSetting) {
+    keys.forEach(key => this.addBigTooltipToEntry(key, setting));
+  }
+  
+  public addBigTooltipToEntry(key: string, setting: BigTooltipSetting) {
+    let index = this.findIndex(key);
+    if (index < 0) 
+      throw new Error(`Can't find item entry with key "${key}" in collection "${this.id}".`);
+
+    this.entries[index].addBigTooltip(setting);
+
+    // const i = collection.getEntries().findIndex(x => x.getKey() === key);
+    // if (i < 0) 
+    //   throw new Error(`Can't find item \"${key}\" in collection.`);
+    // collection[i].value = this.generateBigTooltip(setting, collection[i].value);
   }
 }

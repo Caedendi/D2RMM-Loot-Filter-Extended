@@ -7,6 +7,7 @@ import { SunderCharm } from "../../../Models/SunderCharm";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
 import { ItemEntry } from "../../../Models/ItemEntry";
+import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 
 export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
   constructor() {
@@ -14,6 +15,11 @@ export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
   }
 
   public build(): void {
+    this.applyFilter();
+    this.addBigTooltips();
+  }
+
+  protected applyFilter(): void {
     switch (config.Charms as string) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;
@@ -86,5 +92,13 @@ export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
     sunders.forEach(sunder => this.collection.upsert(
       new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlFix.Double, sunder.getAltPatternPrefix(), sunder.getAltPatternSuffix())
     ));
+  }
+
+  protected addBigTooltips(): void {
+    let uniqueCharms = []
+    .concat(CharmConstants.uniqueLodCharmIds)
+    .concat(CharmConstants.sunderCharms.map(sunder => sunder.getId()));
+
+    this.collection.addBigTooltipToEntries(uniqueCharms, config.BigTooltipUniqueCharms as number as BigTooltipSetting);
   }
 }

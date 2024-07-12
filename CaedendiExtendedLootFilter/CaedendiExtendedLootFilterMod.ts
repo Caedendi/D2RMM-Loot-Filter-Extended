@@ -16,20 +16,34 @@ import { UiBuilder } from "./Builders/ItemBuilders/UiBuilder";
  */
 export class CaedendiExtendedLootFilterMod {
   public readonly requiredD2rmmVersion: D2rmmVersion = new D2rmmVersion(1, 7, 0);
-  public readonly itemNamesWriter: IWriter;
+  protected writers: IWriter[];
   
-  constructor() {
+  public build(): void {
     this.checkVersion();
+    this.initializeWriters();
+    this.runWriters();
+  }
+  
+  protected checkVersion() {
+    let fullVersion = D2RMM.getFullVersion();
+    if (fullVersion == null) {
+      throw new Error(this.requiredD2rmmVersion.getErrorMessage());
+    }
     
-    // initialize writers
-    this.itemNamesWriter = new ItemNamesWriter()
-    // todo
+    let currentD2rmmVersion = D2rmmVersion.fromArray(fullVersion);
+    if (!currentD2rmmVersion.isOrExceeds(this.requiredD2rmmVersion)) {
+      throw new Error(this.requiredD2rmmVersion.getErrorMessage());
+    }
+  }
+
+  protected initializeWriters(): void {
+    this.writers.push(new ItemNamesWriter());
   }
   
   /**
    * Builds the mod by running all writers.
    */
-  public build(): void {
+  protected runWriters(): void {
     (new ItemNameAffixesBuilder()).build(); // Gold, Superior/Inferior affixes, Gems (exceptions)
     (new       ItemRunesBuilder()).build(); // Runes
     
@@ -43,17 +57,5 @@ export class CaedendiExtendedLootFilterMod {
     (new     LightPillarBuilder()).build(); // Light Pillars
     (new       DropSoundBuilder()).build(); // Drop Sounds
     (new   ProfileHdModsBuilder()).build(); // _profilehd.json stuff
-  }
-  
-  protected checkVersion() {
-    var v = D2RMM.getFullVersion();
-    if (v == null) {
-      throw new Error(this.requiredD2rmmVersion.getErrorMessage());
-    }
-    
-    let currentD2rmmVersion = D2rmmVersion.fromArray(v);
-    if (!currentD2rmmVersion.isOrExceeds(this.requiredD2rmmVersion)) {
-      throw new Error(this.requiredD2rmmVersion.getErrorMessage());
-    }
   }
 }

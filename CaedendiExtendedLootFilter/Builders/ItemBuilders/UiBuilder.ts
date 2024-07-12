@@ -1,39 +1,28 @@
-import { ModConfigSingleValue } from "../../../../types";
 import { CollectionConstants } from "../../Constants/Items/CollectionConstants";
-import { FileConstants } from "../../Constants/FileConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { Helper } from "../../Helper";
+import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
+import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
+import { iLvlFix } from "../../Models/iLvlFix";
 import { ItemBuilderBase } from "./ItemNamesBuilders/ItemBuilderBase";
 
 export class UiBuilder extends ItemBuilderBase {
   constructor() {
-    super(FileConstants.FILE_UI_PATH);
-
-    [
-      CollectionConstants.quest,
-    ].forEach(id => {
-      this.initCollection(id);
-    });
+    super();
   }
 
-  build() {
+  public build(): void {
     if (config.Quest === SettingsConstants.disabled) {
       return;
     }
 
-    this.customizeQuestItems(config.Quest);
-    this.addBigTooltips(config.BigTooltipQuestItems);
-    this.applyCustomNames();
+    this.applyFilter(config.Quest as string);
+    this.addBigTooltips(config.BigTooltipQuestItems as number as BigTooltipSetting);
   }
 
-  //=================//
-  //   Quest Items   //
-  //=================//
   // Section specific to Book of Skill and Potion of Life, as these items are in a different file.
-  customizeQuestItems(setting:ModConfigSingleValue) {
-    let questCol = this.getCollectionById(CollectionConstants.quest);
-
+  protected applyFilter(setting: string) {
     let ass = "ass";
     let xyz = "xyz";
 
@@ -45,25 +34,34 @@ export class UiBuilder extends ItemBuilderBase {
         return;
       case SettingsConstants.all: // highlight all
       case "xhc": // exclude horadric cube
-        this.upsert(questCol, ass, `${prefix}Book of Skill${suffix}`); // Book of Skill
-        this.upsert(questCol, xyz, `${prefix}Potion of Life${suffix}`); // Potion of Life
+        this.collection.upsert(new DoubleHighlightItemEntry(ass, "Book of Skill", iLvlFix.None, prefix, suffix));
+        this.collection.upsert(new DoubleHighlightItemEntry(xyz, "Potion of Life", iLvlFix.None, prefix, suffix));
         return;
       case SettingsConstants.custom: // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
+
+        // TODO: refactor
+
+        /*
         this.upsert(questCol, ass, `Book of Skill`); // Book of Skill
         this.upsert(questCol, xyz, `Potion of Life`); // Potion of Life
+        */
         return;
     }
   }
 
-  addBigTooltips(settingQuest: ModConfigSingleValue) {
+  protected addBigTooltips(setting: BigTooltipSetting): void {
+    this.collection.addBigTooltipToAllEntries(setting);
+  }
+
+  protected addBigTooltips(setting: BigTooltipSetting) {
     if (!config.IsBigTooltipsEnabled) {
       return;
     }
 
-    if (settingQuest !== SettingsConstants.disabled) {
+    if (setting !== SettingsConstants.disabled) {
       let questCol = this.getCollectionById(CollectionConstants.quest);
-      Helper.addBigTooltips(questCol, settingQuest.toString());
+      Helper.addBigTooltips(questCol, setting.toString());
     }
   }
 }

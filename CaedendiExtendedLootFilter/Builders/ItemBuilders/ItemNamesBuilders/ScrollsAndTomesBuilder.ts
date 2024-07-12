@@ -19,6 +19,10 @@ export class ScrollsAndTomesBuilder extends ItemBuilderBase implements IItemBuil
   }
 
   public build(): void {
+    this.applyFilter();
+  }
+
+  protected applyFilter(): void {
     switch (config.ScrollsTomes as string) { // todo: validate setting as string
       case SettingsConstants.disabled: // no change
         return;

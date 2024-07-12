@@ -16,4 +16,8 @@ export class D2Color {
   public getName(): string {
     return this.name;
   }
+
+  public getCode(): string {
+    return this.code;
+  }
 }
