@@ -2,13 +2,14 @@ import { CharConstants } from "../../../Constants/CharConstants";
 import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { Helper } from "../../../Helper";
 import { D2Color } from "../../../Models/D2Color";
 import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
-import { ItemBuilderBase } from "./ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
+import { ItemBuilderBase } from "../ItemBuilderBase";
 
 export class HealingPotionsBuilder extends ItemBuilderBase implements IItemBuilder {
+  protected readonly filterSetting: string = config.HealingPotions as string;
+
   protected readonly clrHeal = ColorConstants.red;
   protected readonly clrMana = ColorConstants.blue;
   protected readonly clrRej  = ColorConstants.purple;
@@ -20,12 +21,8 @@ export class HealingPotionsBuilder extends ItemBuilderBase implements IItemBuild
     super();
   }
 
-  public build(): void {
-    this.applyFilter();
-  }
-
-  protected applyFilter(): void {
-    switch (config.HealingPotions as string) { // todo: validate setting as string
+  public applyFilter(): void {
+    switch (this.filterSetting) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all

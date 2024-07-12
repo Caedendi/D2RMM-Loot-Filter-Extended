@@ -8,10 +8,10 @@ import { JunkBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/JunkBuil
 import { QuestItemsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/QuestItemsBuilder";
 import { ScrollsAndTomesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/ScrollsAndTomesBuilder";
 import { FileConstants } from "../Constants/FileConstants";
-import { BaseWriter } from "./BaseWriter";
+import { BaseItemWriter } from "./BaseItemWriter";
 import { IWriter } from "./Interfaces/IWriter";
 
-export class ItemNamesWriter extends BaseWriter implements IWriter {
+export class ItemNamesWriter extends BaseItemWriter implements IWriter {
   constructor() {
     super(FileConstants.FILE_ITEM_NAMES_PATH);
   }

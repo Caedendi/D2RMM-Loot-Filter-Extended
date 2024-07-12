@@ -1,26 +1,24 @@
 import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
 import { CharmConstants } from "../../../Constants/Items/CharmConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
 import { iLvlFix } from "../../../Models/iLvlFix";
-import { SunderCharm } from "../../../Models/SunderCharm";
-import { ItemBuilderBase } from "./ItemBuilderBase";
-import { IItemBuilder } from "../Interfaces/IItemBuilder";
 import { ItemEntry } from "../../../Models/ItemEntry";
-import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
+import { SunderCharm } from "../../../Models/SunderCharm";
+import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
+import { ItemBuilderBase } from "../ItemBuilderBase";
 
-export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
+export class CharmsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
+  protected readonly filterSetting: string = config.Charms as string;
+  protected readonly bigTooltipUniquesSetting: BigTooltipSetting = config.BigTooltipUniqueCharms as number as BigTooltipSetting;
+
   constructor() {
     super();
   }
 
-  public build(): void {
-    this.applyFilter();
-    this.addBigTooltips();
-  }
-
-  protected applyFilter(): void {
-    switch (config.Charms as string) { // todo: validate setting as string
+  public applyFilter(): void {
+    switch (this.filterSetting) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
@@ -94,11 +92,11 @@ export class CharmsBuilder extends ItemBuilderBase implements IItemBuilder {
     ));
   }
 
-  protected addBigTooltips(): void {
+  public addBigTooltipsToGems(): void {
     let uniqueCharms = []
     .concat(CharmConstants.uniqueLodCharmIds)
     .concat(CharmConstants.sunderCharms.map(sunder => sunder.getId()));
 
-    this.collection.addBigTooltipToEntries(uniqueCharms, config.BigTooltipUniqueCharms as number as BigTooltipSetting);
+    this.collection.addBigTooltipToEntries(uniqueCharms, this.bigTooltipUniquesSetting as number as BigTooltipSetting);
   }
 }

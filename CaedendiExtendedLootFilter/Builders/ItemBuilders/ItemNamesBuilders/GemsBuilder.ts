@@ -3,82 +3,40 @@ import { SettingsConstants } from "../../../Constants/SettingsConstants";
 import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { Gem } from "../../../Models/Gem";
 import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
-import { IItemBuilder } from "../Interfaces/IItemBuilder";
-import { ItemBuilderBase } from "./ItemBuilderBase";
+import { BigTooltipItemBuilderBase } from "../BigTooltipItemBuilderBase";
+import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
 
-export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
-  protected readonly chippedFlawedRegular: Gem[] = [
-    new Gem("gcv", GemConstants.clrAmethyst, GemConstants.chipped ), // Chipped Amethyst
-    new Gem("gcw", GemConstants.clrDiamond,  GemConstants.chipped ), // Chipped Diamond
-    new Gem("gcg", GemConstants.clrEmerald,  GemConstants.chipped ), // Chipped Emerald
-    new Gem("gcr", GemConstants.clrRuby,     GemConstants.chipped ), // Chipped Ruby
-    new Gem("gcb", GemConstants.clrSapphire, GemConstants.chipped ), // Chipped Sapphire
-    new Gem("gcy", GemConstants.clrTopaz,    GemConstants.chipped ), // Chipped Topaz
-    new Gem("skc", GemConstants.clrSkull,    GemConstants.chipped ), // Chipped Skull
-    new Gem("gfv", GemConstants.clrAmethyst, GemConstants.flawed  ), // Flawed Amethyst
-    new Gem("gfw", GemConstants.clrDiamond,  GemConstants.flawed  ), // Flawed Diamond
-    new Gem("gfg", GemConstants.clrEmerald,  GemConstants.flawed  ), // Flawed Emerald
-    new Gem("gfr", GemConstants.clrRuby,     GemConstants.flawed  ), // Flawed Ruby
-    new Gem("gfb", GemConstants.clrSapphire, GemConstants.flawed  ), // Flawed Sapphire
-    new Gem("gfy", GemConstants.clrTopaz,    GemConstants.flawed  ), // Flawed Topaz
-    new Gem("skf", GemConstants.clrSkull,    GemConstants.flawed  ), // Flawed Skull
-    new Gem("gsv", GemConstants.clrAmethyst, GemConstants.amethyst), // Amethyst
-    // For Ruby, Sapphire, Emerald and Diamond, see the "ItemNameAffixesBuilder" section.
-    // For some reason, the devs put these gems in another JSON file because they're also the names of some affixes.
-    new Gem("gsy", GemConstants.clrTopaz, GemConstants.topaz), // Topaz
-    new Gem("sku", GemConstants.clrSkull, GemConstants.skull), // Skull
-  ];
-  protected readonly flawless: Gem[] = [
-    new Gem("gzv", GemConstants.clrAmethyst, GemConstants.flawless), // Flawless Amethyst
-    new Gem("glw", GemConstants.clrDiamond,  GemConstants.flawless), // Flawless Diamond
-    new Gem("glg", GemConstants.clrEmerald,  GemConstants.flawless), // Flawless Emerald
-    new Gem("glr", GemConstants.clrRuby,     GemConstants.flawless), // Flawless Ruby
-    new Gem("glb", GemConstants.clrSapphire, GemConstants.flawless), // Flawless Sapphire
-    new Gem("gly", GemConstants.clrTopaz,    GemConstants.flawless), // Flawless Topaz
-    new Gem("skl", GemConstants.clrSkull,    GemConstants.flawless), // Flawless Skull
-  ];
-  protected readonly perfect: Gem[] = [
-    new Gem("gpv", GemConstants.clrAmethyst, GemConstants.perfect),  // Perfect Amethyst
-    new Gem("gpw", GemConstants.clrDiamond,  GemConstants.perfect),  // Perfect Diamond
-    new Gem("gpg", GemConstants.clrEmerald,  GemConstants.perfect),  // Perfect Emerald
-    new Gem("gpr", GemConstants.clrRuby,     GemConstants.perfect),  // Perfect Ruby
-    new Gem("gpb", GemConstants.clrSapphire, GemConstants.perfect),  // Perfect Sapphire
-    new Gem("gpy", GemConstants.clrTopaz,    GemConstants.perfect),  // Perfect Topaz
-    new Gem("skz", GemConstants.clrSkull,    GemConstants.perfect),  // Perfect Skull
-  ];
+export class GemsBuilder extends BigTooltipItemBuilderBase implements IBigTooltipItemBuilder {
+  protected readonly filterSetting: string = config.Gems as string;
+  protected readonly bigTooltipSetting: BigTooltipSetting = config.BigTooltipGems as number as BigTooltipSetting;
 
   constructor() {
     super();
   }
 
-  public build(): void {
-    this.applyFilter();
-    this.addBigTooltips();
-  }
-
-  protected applyFilter(): void {
-    switch (config.Gems as string) { // todo: validate setting as string
+  public applyFilter(): void {
+    switch (this.filterSetting) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
-        this.highlightGems(this.chippedFlawedRegular);
-        this.highlightGems(this.flawless);
-        this.highlightGems(this.perfect);
+        this.highlightGems(GemConstants.chippedFlawedRegularGems);
+        this.highlightGems(GemConstants.flawlessGems);
+        this.highlightGems(GemConstants.perfectGems);
         return;
       case "flawless": // hide chipped/flawed/regular gems
-        this.hideGems(this.chippedFlawedRegular);
-        this.highlightGems(this.flawless);
-        this.highlightGems(this.perfect);
+        this.hideGems(GemConstants.chippedFlawedRegularGems);
+        this.highlightGems(GemConstants.flawlessGems);
+        this.highlightGems(GemConstants.perfectGems);
         return;
       case "perfect": // hide chipped/flawed/regular/flawless gems
-        this.hideGems(this.chippedFlawedRegular);
-        this.hideGems(this.flawless);
-        this.highlightGems(this.perfect);
+        this.hideGems(GemConstants.chippedFlawedRegularGems);
+        this.hideGems(GemConstants.flawlessGems);
+        this.highlightGems(GemConstants.perfectGems);
         return;
       case "hide": // hide chipped/flawed/regular/flawless gems
-        this.hideGems(this.chippedFlawedRegular);
-        this.hideGems(this.flawless);
-        this.hideGems(this.perfect);
+        this.hideGems(GemConstants.chippedFlawedRegularGems);
+        this.hideGems(GemConstants.flawlessGems);
+        this.hideGems(GemConstants.perfectGems);
         return;
       case SettingsConstants.custom: // [CSTM-GEM1]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -140,7 +98,7 @@ export class GemsBuilder extends ItemBuilderBase implements IItemBuilder {
     this.collection.upsertMultiple(SingleHighlightItemEntry.fromGems(gems));
   }
 
-  protected addBigTooltips() {
-    this.collection.addBigTooltipToAllEntries(config.BigTooltipGems as number as BigTooltipSetting);
+  public addBigTooltipsToGems() {
+    this.collection.addBigTooltipToAllEntries(this.bigTooltipSetting);
   }
 }

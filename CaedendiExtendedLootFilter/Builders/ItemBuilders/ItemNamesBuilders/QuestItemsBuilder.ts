@@ -1,13 +1,15 @@
 import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
+import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
 import { ItemEntry } from "../../../Models/ItemEntry";
 import { iLvlFix } from "../../../Models/iLvlFix";
-import { ItemBuilderBase } from "./ItemBuilderBase";
-import { IItemBuilder } from "../Interfaces/IItemBuilder";
-import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
+import { BigTooltipItemBuilderBase } from "../BigTooltipItemBuilderBase";
+import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
 
-export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
+export class QuestItemsBuilder extends BigTooltipItemBuilderBase implements IBigTooltipItemBuilder {
+  protected readonly filterSetting: string = config.Quest as string;
+  protected readonly bigTooltipSetting: BigTooltipSetting = config.BigTooltipSetting as number as BigTooltipSetting;
   protected readonly prefix = HighlightConstants.questPrefix;
   protected readonly suffix = HighlightConstants.questSuffix;
 
@@ -15,13 +17,8 @@ export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
     super();
   }
 
-  public build(): void {
-    this.applyFilter(config.Quest as string);
-    this.addBigTooltips(config.BigTooltipQuestItems as number as BigTooltipSetting);
-  }
-
-  protected applyFilter(setting: string): void {
-    switch (setting) {
+  public applyFilter(): void {
+    switch (this.filterSetting) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
@@ -134,7 +131,7 @@ export class QuestItemsBuilder extends ItemBuilderBase implements IItemBuilder {
     this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
   }
 
-  protected addBigTooltips(setting: BigTooltipSetting): void {
-    this.collection.addBigTooltipToAllEntries(setting);
+  public addBigTooltipsToGems(): void {
+    this.collection.addBigTooltipToAllEntries(this.bigTooltipSetting);
   }
 }

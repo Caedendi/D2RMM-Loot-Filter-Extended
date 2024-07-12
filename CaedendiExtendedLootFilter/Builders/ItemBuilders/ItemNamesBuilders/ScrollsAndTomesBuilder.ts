@@ -4,10 +4,12 @@ import { HighlightConstants } from "../../../Constants/Items/HighlightConstants"
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
 import { D2Color } from "../../../Models/D2Color";
 import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
-import { ItemBuilderBase } from "./ItemBuilderBase";
+import { ItemBuilderBase } from "../ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
 
 export class ScrollsAndTomesBuilder extends ItemBuilderBase implements IItemBuilder {
+  protected readonly filterSetting: string = config.ScrollsTomes as string;
+  
   protected readonly clrScroll: D2Color = ColorConstants.green;
   protected readonly clrTome:   D2Color = ColorConstants.darkGreen;
   protected readonly clrName:   D2Color = ColorConstants.white;
@@ -18,12 +20,8 @@ export class ScrollsAndTomesBuilder extends ItemBuilderBase implements IItemBuil
     super();
   }
 
-  public build(): void {
-    this.applyFilter();
-  }
-
-  protected applyFilter(): void {
-    switch (config.ScrollsTomes as string) { // todo: validate setting as string
+  public applyFilter(): void {
+    switch (this.filterSetting) { // todo: validate setting as string
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // show all

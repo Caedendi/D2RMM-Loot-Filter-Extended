@@ -2,6 +2,7 @@ import { IItemBuilder } from "../Builders/ItemBuilders/Interfaces/IItemBuilder";
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { Helper } from "../Helper";
+import { IBigTooltipItemBuilder } from "../Builders/ItemBuilders/Interfaces/IBigTooltipItemBuilder";
 import { ItemCollection } from "../Models/ItemCollection";
 import { IWriter } from "./Interfaces/IWriter";
 
@@ -11,9 +12,11 @@ import { IWriter } from "./Interfaces/IWriter";
  * @property {string} target The path to the target .json file.
  * @property {IBaseBuilder[]} builders A collection of builders.
  */
-export abstract class BaseWriter implements IWriter {
+export abstract class BaseItemWriter implements IWriter {
   protected target: string = CharConstants.empty;
   protected builders: IItemBuilder[] = [];
+
+  protected readonly isBigTooltipsEnabled: boolean = config.IsBigTooltipsEnabled as boolean;
 
   constructor(target: string) {
     this.target = target;
@@ -29,17 +32,36 @@ export abstract class BaseWriter implements IWriter {
    * Builds all builders, merges their collections into one and writes these entries to the target file.
    */
   public run(): void {
-    this.buildAll();
+    this.applyFilters();
+    this.addBigTooltips();
+
     this.writeCustomNames(this.createMergedCollection());
   }
 
   /**
    * 
    */
-  protected buildAll(): void {
+  protected applyFilters(): void {
     this.builders.forEach(builder => {
-      builder.build();
+      builder.applyFilter();
     });
+  }
+
+  /**
+   * Runs the IBigTooltipItemBuilder.addBigTooltips() function on all builders of type IBigTooltipItemBuilder.
+   */
+  protected addBigTooltips(): void {
+    if (!this.isBigTooltipsEnabled)
+      return;
+
+    this.builders.forEach(builder => {
+      if (this.isIBigTooltipItemBuilder(builder)) 
+        builder.addBigTooltipsToGems();
+    });
+  }
+
+  protected isIBigTooltipItemBuilder(builder: IItemBuilder): builder is IBigTooltipItemBuilder {
+    return (builder as IBigTooltipItemBuilder).addBigTooltipsToGems !== undefined;
   }
 
   /**

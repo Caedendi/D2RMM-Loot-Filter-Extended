@@ -10,6 +10,8 @@ import { ItemRunesBuilder } from "./Builders/ItemBuilders/ItemRunesBuilder";
 import { LightPillarBuilder } from "./Builders/LightPillarBuilder";
 import { ProfileHdModsBuilder } from "./Builders/ProfileHdModsBuilder";
 import { UiBuilder } from "./Builders/ItemBuilders/UiBuilder";
+import { UiWriter } from "./Writers/UiWriter";
+import { ItemModifiersWriter } from "./Writers/ItemModifiersWriter";
 
 /**
  * Master Builder
@@ -37,25 +39,25 @@ export class CaedendiExtendedLootFilterMod {
   }
 
   protected initializeWriters(): void {
-    this.writers.push(new ItemNamesWriter());
+    this.writers.push(new ItemNamesWriter()); // Most items
+    this.writers.push(new UiWriter()); // Quest items (exceptions)
+    this.writers.push(new ItemModifiersWriter()); // Quest items (exceptions)
+    this.writers.push(new ItemNameAffixesBuilder()); // Gold, Superior/Inferior affixes, Gems (exceptions)
+    
+    /*
+    (new       ItemRunesBuilder()).applyFilter(); // Runes
+    (new       ItemLevelBuilder()).build(); // iLvl
+    (new     ItemQualityBuilder()).build(); // Quality (normal/exceptional/elite)
+    (new     LightPillarBuilder()).build(); // Light Pillars
+    (new       DropSoundBuilder()).build(); // Drop Sounds
+    (new   ProfileHdModsBuilder()).build(); // _profilehd.json stuff
+    */
   }
   
   /**
    * Builds the mod by running all writers.
    */
   protected runWriters(): void {
-    (new ItemNameAffixesBuilder()).build(); // Gold, Superior/Inferior affixes, Gems (exceptions)
-    (new       ItemRunesBuilder()).build(); // Runes
-    
-    // (new       ItemNamesBuilder()).build(); // Most items
-    this.itemNamesWriter.run();
-    
-    (new              UiBuilder()).build(); // Quest items (exceptions)
-    (new   ItemModifiersBuilder()).build(); // Quest items (exceptions)
-    (new       ItemLevelBuilder()).build(); // iLvl
-    (new     ItemQualityBuilder()).build(); // Quality (normal/exceptional/elite)
-    (new     LightPillarBuilder()).build(); // Light Pillars
-    (new       DropSoundBuilder()).build(); // Drop Sounds
-    (new   ProfileHdModsBuilder()).build(); // _profilehd.json stuff
+    this.writers.forEach(writer => writer.run());
   }
 }

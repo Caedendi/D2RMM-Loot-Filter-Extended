@@ -5,7 +5,7 @@ import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEnt
 import { ItemEntry } from "../../../Models/ItemEntry";
 import { iLvlFix } from "../../../Models/iLvlFix";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
-import { ItemBuilderBase } from "./ItemBuilderBase";
+import { ItemBuilderBase } from "../ItemBuilderBase";
 
 /**
  * Endgame: Pandemonium Event Items, Essences & Tokens of Absolution
@@ -22,12 +22,7 @@ export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder
     super();
   }
 
-  public build(): void {
-    this.applyFilter();
-    this.addBigTooltips();
-  }
-
-  protected applyFilter(): void {
+  public applyFilter(): void {
     switch (this.filterSetting) {
       case SettingsConstants.disabled: // no change
         return;
@@ -91,7 +86,7 @@ export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder
   //
   // SETTING as number as BigTooltipSetting ??
   //
-  protected addBigTooltips(): void {
+  public addBigTooltips(): void {
     // essences
     if (this.bttEssencesSetting != BigTooltipSetting.Disabled)
       this.collection.addBigTooltipToEntries(EndgameConstants.essences.map(essence => essence.getKey()), this.bttEssencesSetting);

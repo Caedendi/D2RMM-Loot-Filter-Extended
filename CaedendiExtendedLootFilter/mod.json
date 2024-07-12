@@ -18,7 +18,7 @@
           "defaultExpanded": false,
           "children": [
             {
-              "id": "GoldAmount",
+              "id": "GoldTooltipColor",
               "type": "select",
               "name": "Gold: Color",
               "description": "Customize the color of the tooltip for gold drops. [CSTM-GLD]",

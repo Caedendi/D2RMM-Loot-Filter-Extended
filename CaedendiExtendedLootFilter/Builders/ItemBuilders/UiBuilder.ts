@@ -1,35 +1,27 @@
-import { CollectionConstants } from "../../Constants/Items/CollectionConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { Helper } from "../../Helper";
 import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
 import { iLvlFix } from "../../Models/iLvlFix";
-import { ItemBuilderBase } from "./ItemNamesBuilders/ItemBuilderBase";
+import { ItemBuilderBase } from "./ItemBuilderBase";
 
 export class UiBuilder extends ItemBuilderBase {
+  protected readonly filterSetting:      string = config.Quest as string;
+  protected readonly bigTooltipsSetting: BigTooltipSetting = config.BigTooltipQuestItems as number as BigTooltipSetting;
+
   constructor() {
     super();
   }
 
-  public build(): void {
-    if (config.Quest === SettingsConstants.disabled) {
-      return;
-    }
-
-    this.applyFilter(config.Quest as string);
-    this.addBigTooltips(config.BigTooltipQuestItems as number as BigTooltipSetting);
-  }
-
   // Section specific to Book of Skill and Potion of Life, as these items are in a different file.
-  protected applyFilter(setting: string) {
+  public applyFilter() {
     let ass = "ass";
     let xyz = "xyz";
 
     let prefix = HighlightConstants.questPrefix;
     let suffix = HighlightConstants.questSuffix;
 
-    switch (setting) {
+    switch (this.filterSetting) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
@@ -50,18 +42,8 @@ export class UiBuilder extends ItemBuilderBase {
     }
   }
 
-  protected addBigTooltips(setting: BigTooltipSetting): void {
-    this.collection.addBigTooltipToAllEntries(setting);
-  }
-
-  protected addBigTooltips(setting: BigTooltipSetting) {
-    if (!config.IsBigTooltipsEnabled) {
-      return;
-    }
-
-    if (setting !== SettingsConstants.disabled) {
-      let questCol = this.getCollectionById(CollectionConstants.quest);
-      Helper.addBigTooltips(questCol, setting.toString());
-    }
+  public addBigTooltips(): void {
+    if (this.bigTooltipsSetting != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToAllEntries(this.bigTooltipsSetting);
   }
 }

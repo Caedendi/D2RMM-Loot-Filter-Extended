@@ -1,16 +1,16 @@
+import { ItemModifiersBuilder } from "../Builders/ItemBuilders/ItemModifiersBuilder";
 import { CustomFilterListBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomFilterListBuilder";
-import { UiBuilder } from "../Builders/ItemBuilders/UiBuilder";
 import { FileConstants } from "../Constants/FileConstants";
 import { BaseItemWriter } from "./BaseItemWriter";
 import { IWriter } from "./Interfaces/IWriter";
 
-export class UiWriter extends BaseItemWriter implements IWriter {
+export class ItemModifiersWriter extends BaseItemWriter implements IWriter {
   constructor() {
-    super(FileConstants.FILE_UI_PATH);
+    super(FileConstants.FILE_ITEM_MODIFIERS_PATH);
   }
 
   protected initializeBuilders(): void {
-    this.builders.push(new UiBuilder());
+    this.builders.push(new ItemModifiersBuilder());
     // this.builders.push(new CustomFilterListBuilder()); // TODO: custom filter list for this writer
   }
 }

@@ -3,7 +3,7 @@ import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { Helper } from "../../Helper";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
-import { ItemBuilderBase } from "./ItemNamesBuilders/ItemBuilderBase";
+import { ItemBuilderBase } from "./ItemBuilderBase";
 
 export class ItemRunesBuilder extends ItemBuilderBase implements IItemBuilder {
   constructor() {
@@ -15,7 +15,7 @@ export class ItemRunesBuilder extends ItemBuilderBase implements IItemBuilder {
     // });
   }
 
-  build() {
+  applyFilter() {
     if ( config.RunesHighlighting === SettingsConstants.disabled
       || config.RunesHighlighting === "raf") {
       return;

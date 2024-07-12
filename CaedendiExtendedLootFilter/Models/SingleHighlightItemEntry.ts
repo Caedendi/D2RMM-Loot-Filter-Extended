@@ -61,27 +61,13 @@ export class SingleHighlightItemEntry extends ItemEntry {
       new SingleHighlightItemEntry(entry.key, entry.name, highlight, entry.color, padding, nameColor));
   }
 
-  // TODO: remove?
   public static fromGem(gem: Gem): SingleHighlightItemEntry {
     return new SingleHighlightItemEntry(
-      gem.getKey(),
-      gem.getName(),
-      GemConstants.highlight,
-      gem.getColor(),
-      GemConstants.padding,
-      GemConstants.clrName
-    );
+      gem.getKey(), gem.getName(), GemConstants.highlight, gem.getColor(), GemConstants.padding, GemConstants.clrName);
   }
 
   public static fromGems(gems: Gem[]): SingleHighlightItemEntry[] {
-    return gems.map<SingleHighlightItemEntry>(gem => new SingleHighlightItemEntry(
-      gem.getKey(),
-      gem.getName(),
-      GemConstants.highlight,
-      gem.getColor(),
-      GemConstants.padding,
-      GemConstants.clrName
-    ));
+    return gems.map<SingleHighlightItemEntry>(gem => this.fromGem(gem));
   }
 
   protected createTwosLinePickUpBigTooltipPrefix(): string {

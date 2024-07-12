@@ -1,3 +1,4 @@
+import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 
 export class D2Color {
@@ -10,6 +11,9 @@ export class D2Color {
   }
 
   public toString(): string {
+    if (this.code === CharConstants.empty)
+      return CharConstants.empty;
+    
     return `${ColorConstants.prefix}${this.code}`;
   }
 
