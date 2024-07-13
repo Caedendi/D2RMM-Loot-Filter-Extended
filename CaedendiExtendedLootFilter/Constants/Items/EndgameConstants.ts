@@ -1,6 +1,6 @@
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { iLvlFix } from "../../Models/iLvlFix";
 import { ItemEntry } from "../../Models/ItemEntry";
+import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 

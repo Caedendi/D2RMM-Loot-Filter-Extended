@@ -1,11 +1,12 @@
 import { D2Color } from "../../Models/D2Color";
+import { Settings } from "../../Settings/Settings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { SettingsConstants } from "../SettingsConstants";
 
 export class HighlightConstants {
-  static character: string  = config.HighlightCharacter !== SettingsConstants.custom ? config.HighlightCharacter.toString() : '*';                                           // replace * with desired custom character [CSTM-HLCTR]
-  static color:     D2Color = config.HighlightColor     !== SettingsConstants.custom ? ColorConstants.getColorByCode(config.HighlightColor.toString()) : ColorConstants.red; // replace ColorConstants.red with desired custom color [CSTM-HLCLR]
+  static character: string  = Settings.tooltips.highlightCharacter !== SettingsConstants.custom ? Settings.tooltips.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
+  static color:     D2Color = Settings.tooltips.highlightColor;
 
   static paddingNone = CharConstants.empty;
   static padding1    = CharConstants.space;

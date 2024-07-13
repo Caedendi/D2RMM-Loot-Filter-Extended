@@ -191,7 +191,7 @@
               "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": ";",
               "options": [
-                { "value": "none", "label": "Disable" },
+                { "value":  "", "label": "Disable" },
                 { "value": "0", "label": "White" },
                 { "value": "=", "label": "White Smoke" },
                 { "value": "I", "label": "Dim Gray" },
@@ -215,8 +215,7 @@
                 { "value": ";", "label": "Dark Violet" },
                 { "value": "4", "label": "Tan" },
                 { "value": "7", "label": "Tan 2" },
-                { "value": "M", "label": "Wheat" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "M", "label": "Wheat" }
               ]
             },
             {
@@ -1110,9 +1109,10 @@
           "id": "HighlightColor",
           "type": "select",
           "name": "Highlight Color",
-          "description": "Color used for the highlight character for items that have highlight patterns. [CSTM-HLCLR]",
+          "description": "Color used for the highlight character for items that have highlight patterns.",
           "defaultValue": "1",
           "options": [
+            { "value":  "", "label": "None" },
             { "value": "0", "label": "White" },
             { "value": "=", "label": "White Smoke" },
             { "value": "I", "label": "Dim Gray" },
@@ -1136,8 +1136,7 @@
             { "value": ";", "label": "Dark Violet" },
             { "value": "4", "label": "Tan" },
             { "value": "7", "label": "Tan 2" },
-            { "value": "M", "label": "Wheat" },
-            { "value": "custom", "label": "Custom" }
+            { "value": "M", "label": "Wheat" }
           ]
         },
         {

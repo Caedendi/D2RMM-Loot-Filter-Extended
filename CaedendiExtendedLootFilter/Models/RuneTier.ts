@@ -1,5 +1,4 @@
 import { RuneConstants } from "../Constants/Items/RuneConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
 import { BigTooltipSetting } from "../Settings/BigTooltipsSettings";
 import { Settings } from "../Settings/Settings";
 import { Rune } from "./Rune";
@@ -66,8 +65,8 @@ export class RuneTier {
     return this.pattern;
   }
 
-  public getIsVisible(): boolean {
-    return this.isVisible;
+  public isHidden(): boolean {
+    return !this.isVisible;
   }
 
   public getBigTooltipSetting(): BigTooltipSetting {

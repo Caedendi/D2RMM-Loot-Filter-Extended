@@ -7,7 +7,6 @@ export class DropSoundConstants {
   static SOUND_ITEM_RUNE = "item_rune";
   static SOUND_PREFIX = "celf_"; // caedendi's extended loot filter
 
-
   // channels
   static CHANNEL_ITEMS_SD = "sfx/items_sd";
   static CHANNEL_ITEMS_HD = "sfx/items_hd";

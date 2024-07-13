@@ -1,4 +1,7 @@
+import { CharConstants } from "../Constants/CharConstants";
+import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
+import { D2Color } from "../Models/D2Color";
 import { BigTooltipSetting } from "./BigTooltipsSettings";
 
 export abstract class Settings {
@@ -18,8 +21,8 @@ export abstract class Settings {
       shouldAddHighlights:     config.ShouldAddRuneHighlights as boolean,
       shouldAddNumber:         config.ShouldAddRuneNumbers    as boolean,
       shouldHideAffix:         config.ShouldHideRuneAffix     as boolean,
-      altHighlightColor:       config.RunesHighlightColorAlt  as string,
-      shouldUseAltColor:       config.RunesHighlightColorAlt !== SettingsConstants.disabled,
+      altHighlightColor:       ColorConstants.getColorByCode(config.RunesHighlightColorAlt as string),
+      shouldUseAltColor:       config.RunesHighlightColorAlt !== CharConstants.empty,
       isLowRunesVisible:       config.ShouldShowRunesLow      as boolean,
       isLowMidRunesVisible:    config.ShouldShowRunesLowMid   as boolean,
       isMidRunesVisible:       config.ShouldShowRunesMid      as boolean,
@@ -41,7 +44,7 @@ export abstract class Settings {
     itemLevelSetting:     config.ItemLevel           as string,
     itemQualitySetting:   config.ItemQuality         as string,
     shortSupInfSetting:   config.ShortSupInfPrefixes as string,
-    ethItemsColorSetting: config.EthItemsColor       as string,
+    ethItemsColorSetting: config.EthItemsColor       as string, // TODO: refactor to D2rColor
   };
 
   public static bigTooltips = {
@@ -112,7 +115,7 @@ export abstract class Settings {
 
   public static tooltips = {
     highlightCharacter: config.HighlightCharacter    as string,
-    highlightColor:     config.HighlightColor        as string,
+    highlightColor:     ColorConstants.getColorByCode(config.HighlightColor as string),
     hiddenSize:         config.HiddenItemTooltipSize as number,
     tooltipModsSetting: config.Tooltip               as string,
     tooltipOpacity:     config.TooltipOpacity        as number,

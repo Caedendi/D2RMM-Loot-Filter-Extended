@@ -1,6 +1,8 @@
 import { Gem } from "../../Models/Gem";
+import { Settings } from "../../Settings/Settings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
+import { SettingsConstants } from "../SettingsConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
 // todo: public protected
@@ -30,8 +32,14 @@ export class GemConstants {
   static highlight = CharConstants.o;
   static padding = HighlightConstants.padding1;
 
-  // TODO: refactor
-  static indentPickUpMsg = (config.Gems === "all" || config.Gems === "flawless" || config.Gems === "perfect") ? CharConstants.space.repeat(2) : CharConstants.empty; // indent for the pick up message if gem highlighting is enabled.
+  // indent for the pick up message if gem highlighting is enabled.
+  public static getPickUpMessageIndent(): string {
+    let setting = Settings.filter.jewelry.gems;
+    if (setting === SettingsConstants.all || setting === "flawless" || setting === "perfect")
+      return CharConstants.getSpaces(2);
+
+    return CharConstants.empty;
+  }
 
   public static chippedFlawedRegularGems: Gem[] = [
     new Gem("gcv", this.clrAmethyst, this.chipped ), // Chipped Amethyst
@@ -50,8 +58,8 @@ export class GemConstants {
     new Gem("skf", this.clrSkull,    this.flawed  ), // Flawed Skull
     new Gem("gsv", this.clrAmethyst, this.amethyst), // Amethyst
     // For Ruby, Sapphire, Emerald and Diamond, see "gemExceptions" below.
-    new Gem("gsy", this.clrTopaz, this.topaz), // Topaz
-    new Gem("sku", this.clrSkull, this.skull), // Skull
+    new Gem("gsy", this.clrTopaz,    this.topaz), // Topaz
+    new Gem("sku", this.clrSkull,    this.skull), // Skull
   ];
 
   public static flawlessGems: Gem[] = [
@@ -74,13 +82,11 @@ export class GemConstants {
     new Gem("skz", this.clrSkull,    this.perfect),  // Perfect Skull
   ];
 
-  // Since these names are also used as affixes, the devs for some reason decided these item names could be borrowed from another JSON file.
-  
-  
   /**
-   * These gem names also function as affixes, which is why they are located in item-nameaffixes.json instead of item-names.json.
+   * These gem names also function as affixes that are located in item-nameaffixes.json. The devs for some reason 
+   * decided it would be a good idea to borrow them from there instead of having their own entry in item-names.json.
    * 
-   * Enabling filtering for these gems could also change for example the "Ruby"-part in a "Ruby Jewel of Fervor".
+   * Note: Enabling filtering for these gems will also change for example the "Ruby"-part in a "Ruby Jewel of Fervor".
    */
   public static gemExceptions: Gem[] = [
     new Gem("gsw", GemConstants.clrDiamond,  GemConstants.diamond),  // Diamond

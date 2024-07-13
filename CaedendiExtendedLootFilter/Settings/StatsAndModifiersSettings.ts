@@ -14,3 +14,14 @@ export abstract class StatsAndModifiersSettings {
   public static iLvlIndentFixQuestSingle: string = this.iLvlIndentFixSingle; // quest items with a single digit ilvl
   public static iLvlIndentFixQuestDouble: string = this.iLvlIndentFixDouble; // quest items with a double digit ilvl
 }
+
+/**
+ * Represents the amount of digits the iLvl has when shown in the item name.
+ * 
+ * Use None if the item has no iLvl, Single if it _always_ has a single digit iLvl (1 to 9, like Khalim's Will) and Double if it can have a two digits iLvl (10-99, like most items).
+ */
+export enum iLvlFix {
+  None = 0,
+  Single = 1,
+  Double = 2,
+}

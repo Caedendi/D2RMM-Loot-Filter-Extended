@@ -1,5 +1,5 @@
 import { Helper } from "../Helper";
-import { BigTooltipSetting } from "./BigTooltipSetting";
+import { BigTooltipSetting } from "../Settings/BigTooltipsSettings";
 import { ItemEntry } from "./ItemEntry";
 
 export class ItemCollection {

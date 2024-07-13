@@ -1,9 +1,9 @@
 import { Rune } from "../../Models/Rune";
 import { RuneTier } from "../../Models/RuneTier";
+import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
+import { Settings } from "../../Settings/Settings";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
-import { SettingsConstants } from "../SettingsConstants";
-import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
 
 /** I consider the rune tiers to be:
  * - low:      1-15 (El-Hel)
@@ -56,17 +56,14 @@ export abstract class RuneConstants {
     new Rune(33, "Zod"),
   ];
 
-  public static clrName = ColorConstants.orange;
-  public static clrHighlight = HighlightConstants.color;
-  public static colorAlternate = config.RunesHighlightColorAlt.toString() !== SettingsConstants.custom 
-  ? ColorConstants.getColorByCode(config.RunesHighlightColorAlt as string) 
-  : ColorConstants.purple; // replace ColorConstants.purple with desired custom color [CSTM-HLCRA]
+  public static clrName        = ColorConstants.orange;
+  public static clrHighlight   = HighlightConstants.color;
 
   // set the highlight patterns for each rune tier
   private static patternLow = HighlightConstants.patternNone; // 
   private static patternLowMid = HighlightConstants.pattern5; // *****
   private static patternMid = HighlightConstants.pattern10;   // **********
-  private static patternHigh = config.BigTooltipRunesHigh === SettingsConstants.disabled 
+  private static patternHigh = Settings.bigTooltips.runes.highRunesSetting == BigTooltipSetting.Disabled
     ? HighlightConstants.pattern3x10  // ********** ********** **********, or
     : HighlightConstants.pattern2x10; // ********** ********** (with big tooltips)
 
@@ -77,10 +74,10 @@ export abstract class RuneConstants {
   private static paddingHigh   = HighlightConstants.padding5;
 
   public static tiers = [
-    new RuneTier(1, this.tierLow,    this.paddingLow,    this.patternLow,    config.ShouldShowRunesLow    as boolean, config.BigTooltipRunesLow    as number as BigTooltipSetting, config.ShouldAddLightPillarRunesLow    as boolean, config.DropSoundRunesLow    as string),
-    new RuneTier(2, this.tierLowMid, this.paddingLowMid, this.patternLowMid, config.ShouldShowRunesLowMid as boolean, config.BigTooltipRunesLowMid as number as BigTooltipSetting, config.ShouldAddLightPillarRunesLowMid as boolean, config.DropSoundRunesLowMid as string),
-    new RuneTier(3, this.tierMid,    this.paddingMid,    this.patternMid,    config.ShouldShowRunesMid    as boolean, config.BigTooltipRunesMid    as number as BigTooltipSetting, config.ShouldAddLightPillarRunesMid    as boolean, config.DropSoundRunesMid    as string),
-    new RuneTier(4, this.tierHigh,   this.paddingHigh,   this.patternHigh,   config.ShouldShowRunesHigh   as boolean, config.BigTooltipRunesHigh   as number as BigTooltipSetting, config.ShouldAddLightPillarRunesHigh   as boolean, config.DropSoundRunesHigh   as string),
+    new RuneTier(1, this.tierLow,    this.paddingLow,    this.patternLow,    Settings.filter.runes.isLowRunesVisible,    Settings.bigTooltips.runes.lowRunesSetting,    Settings.lightPillars.runes.isLowRunesEnabled,    Settings.dropSounds.runes.low),
+    new RuneTier(2, this.tierLowMid, this.paddingLowMid, this.patternLowMid, Settings.filter.runes.isLowMidRunesVisible, Settings.bigTooltips.runes.lowMidRunesSetting, Settings.lightPillars.runes.isLowMidRunesEnabled, Settings.dropSounds.runes.lowMid),
+    new RuneTier(3, this.tierMid,    this.paddingMid,    this.patternMid,    Settings.filter.runes.isMidRunesVisible,    Settings.bigTooltips.runes.midRunesSetting,    Settings.lightPillars.runes.isMidRunesEnabled,    Settings.dropSounds.runes.mid),
+    new RuneTier(4, this.tierHigh,   this.paddingHigh,   this.patternHigh,   Settings.filter.runes.isHighRunesVisible,   Settings.bigTooltips.runes.highRunesSetting,   Settings.lightPillars.runes.isHighRunesEnabled,   Settings.dropSounds.runes.high),
   ];
 
   public static tiersWithHighlights         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)

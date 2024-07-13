@@ -1,11 +1,13 @@
+import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
+import { Settings } from "../../Settings/Settings";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
 export abstract class FacetConstants {
   public static facetId = "Rainbow Facet";
   public static facetName = this.facetId;
-  public static prefix = config.IsFacetAltPattern ? this.createAltPrefix() : HighlightConstants.uniquePrefix;
-  public static suffix = config.IsFacetAltPattern ? this.createAltSuffix() : HighlightConstants.uniqueSuffix;
+  public static prefix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createAltPrefix() : HighlightConstants.uniquePrefix;
+  public static suffix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createAltSuffix() : HighlightConstants.uniqueSuffix;
   
   protected static altClrName  = ColorConstants.gold;
   protected static altPattern  = this.hasPickUpMessage() ? HighlightConstants.pattern3 : HighlightConstants.pattern5;
@@ -19,7 +21,11 @@ export abstract class FacetConstants {
   ];
   
   protected static hasPickUpMessage(): boolean {
-    return config.IsBigTooltipsEnabled && (config.BigTooltipFacets === "2pu" || config.BigTooltipFacets === "4pu");
+    if (!Settings.bigTooltips.isEnabled)
+      return false;
+
+    return Settings.bigTooltips.jewelry.facetsSetting == BigTooltipSetting.TwoLinesPickUp 
+        || Settings.bigTooltips.jewelry.facetsSetting == BigTooltipSetting.FourLinesPickUp;
   }
   
   // protected static altPrefix = `${ColorConstants.red}${this.altPattern}${this.altPadding1}${ColorConstants.yellow}${this.altPattern}${this.altPadding1}${ColorConstants.blue}${this.altPattern}${this.altPadding1}${ColorConstants.green}${this.altPattern}${this.altClrName}${this.altPadding2}`;

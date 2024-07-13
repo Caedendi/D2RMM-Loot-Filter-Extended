@@ -80,6 +80,6 @@ export class SingleHighlightItemEntry extends ItemEntry {
 
   // TODO: refactor to be generic and not use GemConstants
   private createPickUpIndent() {
-    return `${this.highlight}${this.padding}`.length == 2 ? GemConstants.indentPickUpMsg : CharConstants.empty;
+    return `${this.highlight}${this.padding}`.length == 2 ? GemConstants.getPickUpMessageIndent() : CharConstants.empty;
   }
 }

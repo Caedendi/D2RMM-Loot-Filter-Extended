@@ -1,8 +1,8 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { Helper } from "../Helper";
+import { iLvlFix } from "../Settings/StatsAndModifiersSettings";
 import { TooltipSettings } from "../Settings/TooltipSettings";
 import { ItemEntry } from "./ItemEntry";
-import { iLvlFix } from "./iLvlFix";
 
 export class DoubleHighlightItemEntry extends ItemEntry {
   protected readonly ilvlFix: iLvlFix;

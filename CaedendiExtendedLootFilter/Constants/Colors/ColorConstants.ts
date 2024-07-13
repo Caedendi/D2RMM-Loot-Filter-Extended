@@ -1,6 +1,5 @@
 import { D2Color } from "../../Models/D2Color";
 
-// TODO: make all constants abstract?
 export abstract class ColorConstants {
   public static prefix = "ÿc";
 

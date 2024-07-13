@@ -3,9 +3,11 @@ import { FileConstants } from "../Constants/FileConstants";
 import { LightPillarConstants } from "../Constants/LightPillarConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
+import { Settings } from "../Settings/Settings";
 
 export class LightPillarBuilder {
-  protected readonly globalSetting = config.LightPillarsGlobal as string;
+  protected readonly globalSetting = Settings.lightPillars.globalSetting;
+  protected readonly gemsFilterSetting = Settings.filter.jewelry.gems;
 
   build() {
     if (this.globalSetting === SettingsConstants.disabled) {
@@ -27,12 +29,12 @@ export class LightPillarBuilder {
   // runes
   pushLightPillarsForRunes() {
     RuneConstants.tiers.forEach(tier => {
-      if (!tier.hasLightPillar || (this.globalSetting === SettingsConstants.hide && !tier.isVisible)) {
+      if (!tier.getHasLightPillar() || (this.globalSetting === SettingsConstants.hide && tier.isHidden())) {
         return;
       }
 
-      tier.runes.forEach((rune) => {
-        this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}rune\\`, `${rune.name.toLowerCase()}_rune`);
+      tier.getRunes().forEach((rune) => {
+        this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}rune\\`, `${rune.getName().toLowerCase()}_rune`);
       });
     });
   }
@@ -48,7 +50,7 @@ export class LightPillarBuilder {
   // gems & jewels
   pushLightPillarsForGemsJewels() {
     if (!config.ShouldAddLightPillarGemsJewels
-      || (this.globalSetting === SettingsConstants.hide && config.Gems == "hide")) {
+      || (this.globalSetting === SettingsConstants.hide && this.gemsFilterSetting == SettingsConstants.hide)) {
       return;
     }
 
@@ -64,11 +66,11 @@ export class LightPillarBuilder {
 
   getLightPillarGemQualities() {
     let gemQualities = ["perfect_"];
-    if (config.Gems === "perfect" && this.globalSetting === SettingsConstants.hide) {
+    if (this.gemsFilterSetting === "perfect" && this.globalSetting === SettingsConstants.hide) {
       return gemQualities;
     }
     gemQualities.push("flawless_");
-    if (config.Gems === "flawless" && this.globalSetting === SettingsConstants.hide) {
+    if (this.gemsFilterSetting === "flawless" && this.globalSetting === SettingsConstants.hide) {
       return gemQualities;
     }
 
