@@ -131,7 +131,7 @@ export class QuestItemsBuilder extends BigTooltipItemBuilderBase implements IBig
     this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
   }
 
-  public addBigTooltipsToGems(): void {
+  public addBigTooltips(): void {
     this.collection.addBigTooltipToAllEntries(this.bigTooltipSetting);
   }
 }

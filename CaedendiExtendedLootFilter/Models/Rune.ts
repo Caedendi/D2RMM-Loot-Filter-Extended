@@ -9,4 +9,8 @@ export class Rune {
     this.number = number;
     this.name = name;
   }
+
+  public getKey(): string {
+    return this.number < 10 ? `r0${this.number}` : `r${this.number}`;
+  }
 }

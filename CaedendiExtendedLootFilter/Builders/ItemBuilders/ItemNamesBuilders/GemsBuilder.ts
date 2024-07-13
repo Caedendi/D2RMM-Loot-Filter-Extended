@@ -98,7 +98,7 @@ export class GemsBuilder extends BigTooltipItemBuilderBase implements IBigToolti
     this.collection.upsertMultiple(SingleHighlightItemEntry.fromGems(gems));
   }
 
-  public addBigTooltipsToGems() {
+  public addBigTooltips() {
     this.collection.addBigTooltipToAllEntries(this.bigTooltipSetting);
   }
 }

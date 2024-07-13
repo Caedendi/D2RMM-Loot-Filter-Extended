@@ -1,3 +1,4 @@
+import { CharConstants } from "../Constants/CharConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
 import { ItemEntry } from "./ItemEntry";
@@ -18,8 +19,8 @@ export class DoubleHighlightItemEntry extends ItemEntry {
   ) {
     super(key, name);
     this.ilvlFix = ilvlFix ?? iLvlFix.None;
-    this.highlightPrefix = highlightPrefix ?? "";
-    this.highlightSuffix = highlightSuffix ?? "";
+    this.highlightPrefix = highlightPrefix ?? CharConstants.empty;
+    this.highlightSuffix = highlightSuffix ?? CharConstants.empty;
   }
 
   public static fromItemEntry(entry: ItemEntry, ilvlFix?: iLvlFix, prefix?: string, suffix?: string): DoubleHighlightItemEntry {
@@ -30,7 +31,7 @@ export class DoubleHighlightItemEntry extends ItemEntry {
     if (!this.isVisible)
       return SettingsConstants.hidden;
 
-    let indent = this.shouldFixiLvlIndent ? Helper.getiLvlIndent(this.ilvlFix) : "";
+    let indent = this.shouldFixiLvlIndent ? Helper.getiLvlIndent(this.ilvlFix) : CharConstants.empty;
     let displayName = `${indent}${this.highlightPrefix}${this.name}${this.highlightSuffix}`;
     
     if (!this.hasBigTooltip)

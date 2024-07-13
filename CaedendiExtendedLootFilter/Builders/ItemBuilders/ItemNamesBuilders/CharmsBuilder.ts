@@ -92,7 +92,7 @@ export class CharmsBuilder extends ItemBuilderBase implements IBigTooltipItemBui
     ));
   }
 
-  public addBigTooltipsToGems(): void {
+  public addBigTooltips(): void {
     let uniqueCharms = []
     .concat(CharmConstants.uniqueLodCharmIds)
     .concat(CharmConstants.sunderCharms.map(sunder => sunder.getId()));

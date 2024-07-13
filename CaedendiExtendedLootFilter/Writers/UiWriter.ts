@@ -1,4 +1,4 @@
-import { CustomFilterListBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomFilterListBuilder";
+import { CustomItemNamesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomItemNamesBuilder";
 import { UiBuilder } from "../Builders/ItemBuilders/UiBuilder";
 import { FileConstants } from "../Constants/FileConstants";
 import { BaseItemWriter } from "./BaseItemWriter";

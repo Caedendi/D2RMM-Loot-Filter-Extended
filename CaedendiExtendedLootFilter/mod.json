@@ -18,7 +18,7 @@
           "defaultExpanded": false,
           "children": [
             {
-              "id": "GoldTooltipColor",
+              "id": "GoldTooltipColors",
               "type": "select",
               "name": "Gold: Color",
               "description": "Customize the color of the tooltip for gold drops. [CSTM-GLD]",
@@ -153,10 +153,31 @@
           "defaultExpanded": false,
           "children": [
             {
+              "id": "ShouldAddRuneHighlights",
+              "type": "checkbox",
+              "name": "Add Highlights",
+              "description": "Highlight the better Runes (Ral, Hel and up).",
+              "defaultValue": true
+            },
+            {
+              "id": "ShouldAddRuneNumbers",
+              "type": "checkbox",
+              "name": "Add Rune Numbers",
+              "description": "Adds the rune number to the item name.",
+              "defaultValue": true
+            },
+            {
+              "id": "ShouldHideRuneAffix",
+              "type": "checkbox",
+              "name": "Hide affix",
+              "description": "Shortens the item name by removing the \" Rune\" affix.",
+              "defaultValue": true
+            },
+            {
               "id": "RunesHighlighting",
               "type": "select",
               "name": "Highlighting",
-              "description": "Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel and up). [CSTM-RUN]",
+              "description": "DEPRECATED: Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel and up). [CSTM-RUN]",
               "defaultValue": "all",
               "options": [
                 { "value": "none", "label": "Disable" },
@@ -182,7 +203,7 @@
             {
               "id": "RunesHighlightColorAlt",
               "type": "select",
-              "name": "Second Highlight Color",
+              "name": "Alternate Highlight Color",
               "description": "Used for Mid and High Runes for even more emphasis. [CSTM-HLCRA]",
               "defaultValue": ";",
               "options": [

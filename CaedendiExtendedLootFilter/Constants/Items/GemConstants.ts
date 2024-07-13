@@ -78,7 +78,7 @@ export class GemConstants {
   
   
   /**
-   * These gem names also function as affixes, which is why they are located in item-nameaffixes.json instead of itemnames.json.
+   * These gem names also function as affixes, which is why they are located in item-nameaffixes.json instead of item-names.json.
    * 
    * Enabling filtering for these gems could also change for example the "Ruby"-part in a "Ruby Jewel of Fervor".
    */

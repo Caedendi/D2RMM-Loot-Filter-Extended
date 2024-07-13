@@ -1,8 +1,8 @@
+import { IBigTooltipItemBuilder } from "../Builders/ItemBuilders/Interfaces/IBigTooltipItemBuilder";
 import { IItemBuilder } from "../Builders/ItemBuilders/Interfaces/IItemBuilder";
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { Helper } from "../Helper";
-import { IBigTooltipItemBuilder } from "../Builders/ItemBuilders/Interfaces/IBigTooltipItemBuilder";
 import { ItemCollection } from "../Models/ItemCollection";
 import { IWriter } from "./Interfaces/IWriter";
 
@@ -34,7 +34,6 @@ export abstract class BaseItemWriter implements IWriter {
   public run(): void {
     this.applyFilters();
     this.addBigTooltips();
-
     this.writeCustomNames(this.createMergedCollection());
   }
 
@@ -56,12 +55,12 @@ export abstract class BaseItemWriter implements IWriter {
 
     this.builders.forEach(builder => {
       if (this.isIBigTooltipItemBuilder(builder)) 
-        builder.addBigTooltipsToGems();
+        builder.addBigTooltips();
     });
   }
 
   protected isIBigTooltipItemBuilder(builder: IItemBuilder): builder is IBigTooltipItemBuilder {
-    return (builder as IBigTooltipItemBuilder).addBigTooltipsToGems !== undefined;
+    return (builder as IBigTooltipItemBuilder).addBigTooltips !== undefined;
   }
 
   /**
@@ -69,7 +68,7 @@ export abstract class BaseItemWriter implements IWriter {
    * @returns A single {@link ItemCollection} containing all entries in {@property builders} asd
    */
   protected createMergedCollection(): ItemCollection {
-    let mergedCollection = new ItemCollection((this.constructor.name.replace("Writer", "Collection")));
+    let mergedCollection = new ItemCollection();
     this.builders.forEach(builder => {
       mergedCollection.upsertCollection(builder.getCollection());
     });

@@ -36,7 +36,7 @@ export class JewelsBuilder extends BigTooltipItemBuilderBase implements IBigTool
     }
   }
 
-  public addBigTooltipsToGems() {
+  public addBigTooltips() {
     this.collection.addBigTooltipToEntry(FacetConstants.facetId, this.bigTooltipSetting);
   }
 }

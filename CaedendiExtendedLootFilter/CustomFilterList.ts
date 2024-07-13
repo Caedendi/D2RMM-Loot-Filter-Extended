@@ -3,10 +3,9 @@ import { ItemEntry } from "./Models/ItemEntry";
 import { iLvlFix } from "./Models/iLvlFix";
 
 export abstract class CustomFilterList {
-  protected static readonly collectionId: string = CustomFilterList.name;
-
-  // todo: rename for ItemNamesBuilder
-  public static create(): ItemCollection {
+  
+  // Custom Filter List for item-names.json
+  public static createForItemNamesJson(): ItemCollection {
     // let griffons1 = `My custom item name in a variable`;
 
     let list: [string, string, iLvlFix?][] = [
@@ -61,12 +60,42 @@ remove this line (2/2) */
       
     ];
 
-    return new ItemCollection(this.collectionId, ItemEntry.createArray(list));
+    return new ItemCollection(ItemEntry.createArray(list));
   }
 
-  // TODO: add for RuneBuilder
-  // TODO: add for ItemNameAffixesBuilder
-  // TODO: add for UiBuilder
-  // TODO: add for ItemModifiersBuilder
-  // TODO: rest
+  // Custom Filter List for item-runes.json
+  public static createForItemRunesJson(): ItemCollection {
+    let list: [string, string][] = [
+      // [ "key", "value" ],
+    ];
+
+    return new ItemCollection(ItemEntry.createArray(list));
+  }
+
+  // Custom Filter List for item-nameaffixes.json
+  public static createForItemNameAffixesJson(): ItemCollection {
+    let list: [string, string][] = [
+      // [ "key", "value" ],
+    ];
+
+    return new ItemCollection(ItemEntry.createArray(list));
+  }
+
+  // Custom Filter List for item-modifiers.json
+  public static createForItemModifiersJson(): ItemCollection {
+    let list: [string, string][] = [
+      // [ "key", "value" ],
+    ];
+
+    return new ItemCollection(ItemEntry.createArray(list));
+  }
+
+  // Custom Filter List for ui.json
+  public static createForUiJson(): ItemCollection {
+    let list: [string, string][] = [
+      // [ "key", "value" ],
+    ];
+
+    return new ItemCollection(ItemEntry.createArray(list));
+  }
 }

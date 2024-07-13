@@ -1,5 +1,5 @@
 import { CharmsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CharmsBuilder";
-import { CustomFilterListBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomFilterListBuilder";
+import { CustomItemNamesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomItemNamesBuilder";
 import { EndgameItemsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/EndgameItemsBuilder";
 import { GemsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/GemsBuilder";
 import { HealingPotionsBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/HealingPotionsBuilder";
@@ -25,6 +25,6 @@ export class ItemNamesWriter extends BaseItemWriter implements IWriter {
     this.builders.push(new CharmsBuilder());
     this.builders.push(new QuestItemsBuilder());
     this.builders.push(new EndgameItemsBuilder());
-    this.builders.push(new CustomFilterListBuilder());
+    this.builders.push(new CustomItemNamesBuilder());
   }
 }

@@ -82,10 +82,8 @@ export abstract class RuneConstants {
     new RuneTier(4, this.tierHigh,   this.paddingHigh,   this.patternHigh,   config.ShouldShowRunesHigh   as boolean, config.BigTooltipRunesHigh   as string, config.ShouldAddLightPillarRunesHigh   as boolean, config.DropSoundRunesHigh   as string),
   ];
 
-  public static tiersHighlighted        = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
-  public static tiersHighlightedNumbers = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default
-  public static tiersHighlightedNames   = [4];       // rune tiers where the rune name is in the highlight color instead of default
-  public static tiersAlternateColor     = [3, 4];    // rune tiers that use the alternate color if enabled
-
-  public static isAlternateColor = config.RunesHighlightColorAlt !== SettingsConstants.disabled;
+  public static tiersWithHighlights         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
+  public static tiersWithHighlightedNumbers = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default
+  public static tiersWithHighlightedNames   = [4];       // rune tiers where the rune name is in the highlight color instead of default
+  public static tiersWithAlternateColor     = [3, 4];    // rune tiers that use the alternate color if enabled
 }

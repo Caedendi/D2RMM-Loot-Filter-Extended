@@ -3,12 +3,9 @@ import { BigTooltipSetting } from "./BigTooltipSetting";
 import { ItemEntry } from "./ItemEntry";
 
 export class ItemCollection {
-  protected id: string;
   protected entries: ItemEntry[] = [];
 
-  constructor(id: string, entries?: ItemEntry[]) {
-    this.id = id;
-
+  constructor(entries?: ItemEntry[]) {
     if (Helper.isDefined(entries)) {
       this.entries = entries!;
     }

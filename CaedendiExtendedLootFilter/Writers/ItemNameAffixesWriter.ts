@@ -1,5 +1,5 @@
 import { ItemNameAffixesBuilder } from "../Builders/ItemBuilders/ItemNameAffixesBuilder";
-import { CustomFilterListBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomFilterListBuilder";
+import { CustomItemNamesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomItemNamesBuilder";
 import { FileConstants } from "../Constants/FileConstants";
 import { BaseItemWriter } from "./BaseItemWriter";
 import { IWriter } from "./Interfaces/IWriter";

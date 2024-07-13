@@ -1,17 +1,10 @@
 import { D2rmmVersion } from "./Models/D2rmmVersion";
 import { IWriter } from "./Writers/Interfaces/IWriter";
-import { ItemNamesWriter } from "./Writers/ItemNamesWriter";
-import { DropSoundBuilder } from "./Builders/DropSoundBuilder";
-import { ItemLevelBuilder } from "./Builders/ItemLevelBuilder";
-import { ItemModifiersBuilder } from "./Builders/ItemBuilders/ItemModifiersBuilder";
-import { ItemNameAffixesBuilder } from "./Builders/ItemBuilders/ItemNameAffixesBuilder";
-import { ItemQualityBuilder } from "./Builders/ItemQualityBuilder";
-import { ItemRunesBuilder } from "./Builders/ItemBuilders/ItemRunesBuilder";
-import { LightPillarBuilder } from "./Builders/LightPillarBuilder";
-import { ProfileHdModsBuilder } from "./Builders/ProfileHdModsBuilder";
-import { UiBuilder } from "./Builders/ItemBuilders/UiBuilder";
-import { UiWriter } from "./Writers/UiWriter";
 import { ItemModifiersWriter } from "./Writers/ItemModifiersWriter";
+import { ItemNameAffixesWriter } from "./Writers/ItemNameAffixesWriter";
+import { ItemNamesWriter } from "./Writers/ItemNamesWriter";
+import { ItemRunesWriter } from "./Writers/ItemRunesWriter";
+import { UiWriter } from "./Writers/UiWriter";
 
 /**
  * Master Builder
@@ -42,10 +35,10 @@ export class CaedendiExtendedLootFilterMod {
     this.writers.push(new ItemNamesWriter()); // Most items
     this.writers.push(new UiWriter()); // Quest items (exceptions)
     this.writers.push(new ItemModifiersWriter()); // Quest items (exceptions)
-    this.writers.push(new ItemNameAffixesBuilder()); // Gold, Superior/Inferior affixes, Gems (exceptions)
+    this.writers.push(new ItemNameAffixesWriter()); // Gold, Superior/Inferior affixes, Gems (exceptions)
+    this.writers.push(new ItemRunesWriter()); // Runes
     
     /*
-    (new       ItemRunesBuilder()).applyFilter(); // Runes
     (new       ItemLevelBuilder()).build(); // iLvl
     (new     ItemQualityBuilder()).build(); // Quality (normal/exceptional/elite)
     (new     LightPillarBuilder()).build(); // Light Pillars

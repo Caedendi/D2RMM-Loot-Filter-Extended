@@ -1,16 +1,16 @@
-import { ItemModifiersBuilder } from "../Builders/ItemBuilders/ItemModifiersBuilder";
 import { CustomItemNamesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomItemNamesBuilder";
+import { ItemRunesBuilder } from "../Builders/ItemBuilders/ItemRunesBuilder";
 import { FileConstants } from "../Constants/FileConstants";
 import { BaseItemWriter } from "./BaseItemWriter";
 import { IWriter } from "./Interfaces/IWriter";
 
-export class ItemModifiersWriter extends BaseItemWriter implements IWriter {
+export class ItemRunesWriter extends BaseItemWriter implements IWriter {
   constructor() {
-    super(FileConstants.FILE_ITEM_MODIFIERS_PATH);
+    super(FileConstants.FILE_ITEM_RUNES_PATH);
   }
 
   protected initializeBuilders(): void {
-    this.builders.push(new ItemModifiersBuilder());
+    this.builders.push(new ItemRunesBuilder());
     // this.builders.push(new CustomFilterListBuilder()); // TODO: custom filter list for this writer
   }
 }

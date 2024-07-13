@@ -2,8 +2,7 @@ import { CustomFilterList } from "../../../CustomFilterList";
 import { ItemBuilderBase } from "../ItemBuilderBase";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
 
-// TODO: refactor to ItemNamesBuilder method so other builders/writers can also implement custom filter lists
-export class CustomFilterListBuilder extends ItemBuilderBase implements IItemBuilder {
+export class CustomItemNamesBuilder extends ItemBuilderBase implements IItemBuilder {
   protected readonly shouldUseFilter: boolean = config.shouldUseCustomFilterList as boolean;
 
   constructor() {
@@ -15,6 +14,6 @@ export class CustomFilterListBuilder extends ItemBuilderBase implements IItemBui
       return;
     }
 
-    this.collection.upsertMultiple(CustomFilterList.create().getEntries());
+    this.collection.upsertCollection(CustomFilterList.createForItemNamesJson());
   }
 }
