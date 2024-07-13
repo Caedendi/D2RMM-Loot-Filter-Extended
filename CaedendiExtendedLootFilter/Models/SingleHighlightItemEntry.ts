@@ -1,7 +1,7 @@
-import { CharConstants } from "../Constants/CharConstants"; 
+import { CharConstants } from "../Constants/CharConstants";
 import { GemConstants } from "../Constants/Items/GemConstants";
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
+import { TooltipSettings } from "../Settings/TooltipSettings";
 import { D2Color } from "./D2Color";
 import { Gem } from "./Gem";
 import { ItemEntry } from "./ItemEntry";
@@ -29,7 +29,7 @@ export class SingleHighlightItemEntry extends ItemEntry {
 
   public generateDisplayName(): string {
     if (!this.isVisible)
-      return SettingsConstants.hidden;
+      return TooltipSettings.hidden;
 
     let displayName = `${this.highlightColor}${this.highlight}${this.padding}${this.nameColor}${this.name}`;
 

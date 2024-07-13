@@ -1,5 +1,4 @@
 import { CustomItemRunesBuilder } from "../Builders/ItemBuilders/CustomItemRunesBuilder";
-import { CustomItemNamesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomItemNamesBuilder";
 import { ItemRunesBuilder } from "../Builders/ItemBuilders/ItemRunesBuilder";
 import { FileConstants } from "../Constants/FileConstants";
 import { BaseItemWriter } from "./BaseItemWriter";

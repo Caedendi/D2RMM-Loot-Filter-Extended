@@ -4,20 +4,17 @@ import { FileConstants } from "../Constants/FileConstants";
 import { JewelryConstants } from "../Constants/Items/JewelryConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
+import { BigTooltipsSettings } from "../Settings/BigTooltipsSettings";
+import { Settings } from "../Settings/Settings";
 
 //  extends ItemBuilderBase implements IItemBuilder
 export class ItemLevelBuilder extends ItemBuilder {
-  constructor() {
-    // super(CharConstants.empty);
-    super();
+  protected readonly isBigTooltipsEnabled: boolean = Settings.bigTooltips.isEnabled;
+  protected readonly weaponsExclusions: string[] = this.createWeaponsExclusions();
+  protected readonly miscExclusions: string[] = this.createMiscExclusions();
 
-    [
-    //   CollectionConstants.weapons,
-    //   // CollectionConstants.armor,
-    //   CollectionConstants.misc,
-    // ].forEach(id => {
-    //   this.initCollection(id);
-    // });
+  constructor() {
+    super();
   }
 
   build() {
@@ -36,10 +33,25 @@ export class ItemLevelBuilder extends ItemBuilder {
     this.enableForMiscItems(miscCol.map(item => item.id));
   }
 
+  private createWeaponsExclusions(): string[] {
+    let list: string[] = [];
+    list.push("tpot");
+
+    if (!this.isBigTooltipsEnabled || !BigTooltipsSettings.shouldExcludeIlvl)
+      return;
+
+    return list;
+  }
+
+  private createMiscExclusions(): string[] {
+    
+    return [];
+  }
+
   addExclusions(weaponsCol: {id: string, value: string}[], miscCol: {id: string, value: string}[]) {
     this.upsert(weaponsCol, "tpot", CharConstants.empty); // always exclude throwing potions
 
-    if (!config.IsBigTooltipsEnabled || !SettingsConstants.shouldExcludeIlvlForBigTooltips) {
+    if (!config.IsBigTooltipsEnabled || !BigTooltipsSettings.shouldExcludeIlvl) {
       return;
     }
 

@@ -1,6 +1,5 @@
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
 import { D2Color } from "../../Models/D2Color";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
@@ -8,6 +7,7 @@ import { iLvlFix } from "../../Models/iLvlFix";
 import { ItemEntry } from "../../Models/ItemEntry";
 import { Rune } from "../../Models/Rune";
 import { RuneTier } from "../../Models/RuneTier";
+import { Settings } from "../../Settings/Settings";
 import { BigTooltipItemBuilderBase } from "./BigTooltipItemBuilderBase";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
 
@@ -51,7 +51,7 @@ export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItem
   }
 
   private addRuneAffixToDisplayName(displayName: string): void {
-    if (SettingsConstants.runes.shouldHideAffix)
+    if (Settings.runes.shouldHideAffix)
       return;
 
     displayName = `${displayName} Rune`;
@@ -62,14 +62,14 @@ export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItem
       nameColor2 = ColorConstants.none;
     }
     if (isHighlightedTier
-      && ((SettingsConstants.runes.shouldAddNumber && highlightColor2 === numberColor) 
-         || (!SettingsConstants.runes.shouldAddNumber && highlightColor2 === nameColor1))) {
+      && ((Settings.runes.shouldAddNumber && highlightColor2 === numberColor) 
+         || (!Settings.runes.shouldAddNumber && highlightColor2 === nameColor1))) {
       highlightColor2 = ColorConstants.none;
     }
   }
 
   private addRuneNumberToDisplayName(displayName: string, nameColor1: D2Color, numberColor: D2Color, number: number): void {
-    if (!SettingsConstants.runes.shouldAddNumber)
+    if (!Settings.runes.shouldAddNumber)
       return;
 
     if (numberColor === nameColor1)

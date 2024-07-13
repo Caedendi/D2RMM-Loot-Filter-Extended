@@ -3,7 +3,7 @@ import { RuneTier } from "../../Models/RuneTier";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 import { SettingsConstants } from "../SettingsConstants";
-import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
+import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
 
 /** I consider the rune tiers to be:
  * - low:      1-15 (El-Hel)

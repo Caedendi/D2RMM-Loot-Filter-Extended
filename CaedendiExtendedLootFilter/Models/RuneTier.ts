@@ -1,6 +1,7 @@
 import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { BigTooltipSetting } from "./BigTooltipSetting";
+import { BigTooltipSetting } from "../Settings/BigTooltipsSettings";
+import { Settings } from "../Settings/Settings";
 import { Rune } from "./Rune";
 
 export class RuneTier {
@@ -34,19 +35,19 @@ export class RuneTier {
   }
     
   public isHighlightedTier(): boolean {
-    return SettingsConstants.runes.shouldAddHighlights && RuneConstants.tiersWithHighlights.includes(this.tier);
+    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlights.includes(this.tier);
   }
 
   public isTierWithHighlightedNumber(): boolean {
-    return SettingsConstants.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNumbers.includes(this.tier);
+    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNumbers.includes(this.tier);
   }
 
   public isTierWithHighlightedName(): boolean {
-    return SettingsConstants.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNames.includes(this.tier);;
+    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNames.includes(this.tier);;
   }
 
   public isTierWithAlternateColor(): boolean {
-    return SettingsConstants.runes.shouldUseAlternateColor && RuneConstants.tiersWithAlternateColor.includes(this.tier);
+    return Settings.filter.runes.shouldUseAltColor && RuneConstants.tiersWithAlternateColor.includes(this.tier);
   }
 
   public getTier(): number {

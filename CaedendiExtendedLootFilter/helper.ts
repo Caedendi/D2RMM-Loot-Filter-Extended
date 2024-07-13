@@ -96,7 +96,7 @@ export class Helper {
   //  * @returns A multi-line item name, which will show as a Big Tooltip when the item is on the ground.
   //  */
   // protected static generateBigTooltip(setting: string, name: string, indentPickUpMsg: string = CharConstants.empty) {
-  //   if (setting === SettingsConstants.disabled || name === SettingsConstants.hidden) {
+  //   if (setting === SettingsConstants.disabled || name === TooltipSettings.hidden) {
   //     return name;
   //   }
 

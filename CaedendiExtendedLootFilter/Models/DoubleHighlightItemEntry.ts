@@ -1,6 +1,6 @@
 import { CharConstants } from "../Constants/CharConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
+import { TooltipSettings } from "../Settings/TooltipSettings";
 import { ItemEntry } from "./ItemEntry";
 import { iLvlFix } from "./iLvlFix";
 
@@ -29,7 +29,7 @@ export class DoubleHighlightItemEntry extends ItemEntry {
 
   public generateDisplayName(): string {
     if (!this.isVisible)
-      return SettingsConstants.hidden;
+      return TooltipSettings.hidden;
 
     let indent = this.shouldFixiLvlIndent ? Helper.getiLvlIndent(this.ilvlFix) : CharConstants.empty;
     let displayName = `${indent}${this.highlightPrefix}${this.name}${this.highlightSuffix}`;

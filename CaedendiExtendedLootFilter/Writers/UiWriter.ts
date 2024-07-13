@@ -1,4 +1,4 @@
-import { CustomItemNamesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomItemNamesBuilder";
+import { CustomUiBuilder } from "../Builders/ItemBuilders/CustomUiBuilder";
 import { UiBuilder } from "../Builders/ItemBuilders/UiBuilder";
 import { FileConstants } from "../Constants/FileConstants";
 import { BaseItemWriter } from "./BaseItemWriter";
@@ -11,6 +11,6 @@ export class UiWriter extends BaseItemWriter implements IWriter {
 
   protected initializeBuilders(): void {
     this.builders.push(new UiBuilder());
-    // this.builders.push(new CustomFilterListBuilder()); // TODO: custom filter list for this writer
+    this.builders.push(new CustomUiBuilder());
   }
 }

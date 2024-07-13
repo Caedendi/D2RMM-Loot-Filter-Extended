@@ -1,7 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Helper } from "../Helper";
+import { TooltipSettings } from "../Settings/TooltipSettings";
 import { BigTooltipSetting } from "./BigTooltipSetting";
 import { iLvlFix } from "./iLvlFix";
 
@@ -9,7 +9,7 @@ export class ItemEntry {
   protected readonly key: string;
   protected name: string;
   protected isVisible: boolean = true;
-  protected bigTooltipSetting: BigTooltipSetting = BigTooltipSetting.Disabled;
+  protected bigTooltipSetting: BigTooltipSetting = BigTooltipSetting.Disabled; // TODO: remove?
   protected bigTooltipPrefix:  string = CharConstants.empty;
   protected bigTooltipSuffix:  string = CharConstants.empty;
   protected bigTooltipPadding: string = HighlightConstants.bttPadding
@@ -38,7 +38,7 @@ export class ItemEntry {
 
   public generateDisplayName(): string {
     if (!this.isVisible)
-      return SettingsConstants.hidden;
+      return TooltipSettings.hidden;
 
     if (!this.hasBigTooltip)
       return this.name;
@@ -48,7 +48,7 @@ export class ItemEntry {
   }
 
   public addBigTooltip(setting: BigTooltipSetting): void {
-    this.bigTooltipSetting = setting;
+    this.bigTooltipSetting = setting; // TODO: remove?
 
      switch (setting) {
       // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
@@ -111,6 +111,7 @@ export class ItemEntry {
     return !this.isVisible;
   }
 
+  // TODO: remove?
   public getBigTooltipSetting(): BigTooltipSetting {
     return this.bigTooltipSetting;
   }

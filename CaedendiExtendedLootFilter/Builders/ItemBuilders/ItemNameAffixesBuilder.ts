@@ -7,6 +7,7 @@ import { D2Color } from "../../Models/D2Color";
 import { Gem } from "../../Models/Gem";
 import { ItemEntry } from "../../Models/ItemEntry";
 import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
+import { TooltipSettings } from "../../Settings/TooltipSettings";
 import { BigTooltipItemBuilderBase } from "./BigTooltipItemBuilderBase";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
 
@@ -48,7 +49,7 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
         this.collection.upsert(new ItemEntry(gld, `${color}G`));
         return;
       case "hide": // Gold displays as "1234".
-        this.collection.upsert(new ItemEntry(gld, SettingsConstants.hidden));
+        this.collection.upsert(new ItemEntry(gld, TooltipSettings.hidden));
         return;
       case SettingsConstants.custom: // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
