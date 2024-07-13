@@ -174,33 +174,6 @@
               "defaultValue": true
             },
             {
-              "id": "RunesHighlighting",
-              "type": "select",
-              "name": "Highlighting",
-              "description": "DEPRECATED: Customize Runes. Remove the \"Rune\" affix, add rune numbers and highlight the better Runes (Ral, Hel and up). [CSTM-RUN]",
-              "defaultValue": "all",
-              "options": [
-                { "value": "none", "label": "Disable" },
-                {
-                  "value": "all",
-                  "label": "Add highlights, add Rune numbers, remove affix"
-                },
-                {
-                  "value": "nrs-hls",
-                  "label": "Add highlights, add Rune numbers"
-                },
-                { "value": "hls-raf", "label": "Add highlights, remove affix" },
-                {
-                  "value": "nrs-raf",
-                  "label": "Add Rune numbers, remove affix"
-                },
-                { "value": "nrs", "label": "Add Rune numbers" },
-                { "value": "hls", "label": "Add highlights" },
-                { "value": "raf", "label": "Remove affix" },
-                { "value": "custom", "label": "Custom" }
-              ]
-            },
-            {
               "id": "RunesHighlightColorAlt",
               "type": "select",
               "name": "Alternate Highlight Color",

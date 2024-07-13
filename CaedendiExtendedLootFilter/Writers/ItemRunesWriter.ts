@@ -1,3 +1,4 @@
+import { CustomItemRunesBuilder } from "../Builders/ItemBuilders/CustomItemRunesBuilder";
 import { CustomItemNamesBuilder } from "../Builders/ItemBuilders/ItemNamesBuilders/CustomItemNamesBuilder";
 import { ItemRunesBuilder } from "../Builders/ItemBuilders/ItemRunesBuilder";
 import { FileConstants } from "../Constants/FileConstants";
@@ -11,6 +12,6 @@ export class ItemRunesWriter extends BaseItemWriter implements IWriter {
 
   protected initializeBuilders(): void {
     this.builders.push(new ItemRunesBuilder());
-    // this.builders.push(new CustomFilterListBuilder()); // TODO: custom filter list for this writer
+    this.builders.push(new CustomItemRunesBuilder());
   }
 }

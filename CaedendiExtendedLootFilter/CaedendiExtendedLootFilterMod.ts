@@ -33,10 +33,10 @@ export class CaedendiExtendedLootFilterMod {
 
   protected initializeWriters(): void {
     this.writers.push(new ItemNamesWriter()); // Most items
-    this.writers.push(new UiWriter()); // Quest items (exceptions)
-    this.writers.push(new ItemModifiersWriter()); // Quest items (exceptions)
     this.writers.push(new ItemNameAffixesWriter()); // Gold, Superior/Inferior affixes, Gems (exceptions)
     this.writers.push(new ItemRunesWriter()); // Runes
+    this.writers.push(new UiWriter()); // Quest items (exceptions)
+    this.writers.push(new ItemModifiersWriter()); // Quest items (exceptions)
     
     /*
     (new       ItemLevelBuilder()).build(); // iLvl
