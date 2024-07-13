@@ -1,6 +1,6 @@
 export class Rune {
-  number: number;
-  name: string;
+  protected readonly number: number;
+  protected readonly name: string;
 
   constructor(
     number: number,
@@ -12,5 +12,13 @@ export class Rune {
 
   public getKey(): string {
     return this.number < 10 ? `r0${this.number}` : `r${this.number}`;
+  }
+
+  public getNumber(): number {
+    return this.number;
+  }
+
+  public getName(): string {
+    return this.name;
   }
 }

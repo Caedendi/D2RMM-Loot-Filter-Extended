@@ -3,6 +3,7 @@ import { RuneTier } from "../../Models/RuneTier";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 import { SettingsConstants } from "../SettingsConstants";
+import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
 
 /** I consider the rune tiers to be:
  * - low:      1-15 (El-Hel)
@@ -76,10 +77,10 @@ export abstract class RuneConstants {
   private static paddingHigh   = HighlightConstants.padding5;
 
   public static tiers = [
-    new RuneTier(1, this.tierLow,    this.paddingLow,    this.patternLow,    config.ShouldShowRunesLow    as boolean, config.BigTooltipRunesLow    as string, config.ShouldAddLightPillarRunesLow    as boolean, config.DropSoundRunesLow    as string),
-    new RuneTier(2, this.tierLowMid, this.paddingLowMid, this.patternLowMid, config.ShouldShowRunesLowMid as boolean, config.BigTooltipRunesLowMid as string, config.ShouldAddLightPillarRunesLowMid as boolean, config.DropSoundRunesLowMid as string),
-    new RuneTier(3, this.tierMid,    this.paddingMid,    this.patternMid,    config.ShouldShowRunesMid    as boolean, config.BigTooltipRunesMid    as string, config.ShouldAddLightPillarRunesMid    as boolean, config.DropSoundRunesMid    as string),
-    new RuneTier(4, this.tierHigh,   this.paddingHigh,   this.patternHigh,   config.ShouldShowRunesHigh   as boolean, config.BigTooltipRunesHigh   as string, config.ShouldAddLightPillarRunesHigh   as boolean, config.DropSoundRunesHigh   as string),
+    new RuneTier(1, this.tierLow,    this.paddingLow,    this.patternLow,    config.ShouldShowRunesLow    as boolean, config.BigTooltipRunesLow    as number as BigTooltipSetting, config.ShouldAddLightPillarRunesLow    as boolean, config.DropSoundRunesLow    as string),
+    new RuneTier(2, this.tierLowMid, this.paddingLowMid, this.patternLowMid, config.ShouldShowRunesLowMid as boolean, config.BigTooltipRunesLowMid as number as BigTooltipSetting, config.ShouldAddLightPillarRunesLowMid as boolean, config.DropSoundRunesLowMid as string),
+    new RuneTier(3, this.tierMid,    this.paddingMid,    this.patternMid,    config.ShouldShowRunesMid    as boolean, config.BigTooltipRunesMid    as number as BigTooltipSetting, config.ShouldAddLightPillarRunesMid    as boolean, config.DropSoundRunesMid    as string),
+    new RuneTier(4, this.tierHigh,   this.paddingHigh,   this.patternHigh,   config.ShouldShowRunesHigh   as boolean, config.BigTooltipRunesHigh   as number as BigTooltipSetting, config.ShouldAddLightPillarRunesHigh   as boolean, config.DropSoundRunesHigh   as string),
   ];
 
   public static tiersWithHighlights         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)

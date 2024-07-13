@@ -25,4 +25,12 @@ export abstract class SettingsConstants {
   public static iLvlIndentFixQuestSingle: string = this.iLvlIndentFixSingle; // quest items with a single digit ilvl
   public static iLvlIndentFixQuestDouble: string = this.iLvlIndentFixDouble; // quest items with a double digit ilvl
   public static shouldExcludeIlvlForBigTooltips: boolean = this.isBigTooltipsSettingEnabled && (this.itemLevelSetting === "btt" || this.itemLevelSetting === "fix-btt");
+
+  // Runes Settings
+  public static runes = {
+    shouldHideAffix: config.ShouldHideRuneAffix as boolean,
+    shouldAddNumber: config.ShouldAddRuneNumbers as boolean,
+    shouldAddHighlights: config.ShouldAddRuneHighlights as boolean,
+    shouldUseAlternateColor: config.RunesHighlightColorAlt !== SettingsConstants.disabled,
+  };
 }

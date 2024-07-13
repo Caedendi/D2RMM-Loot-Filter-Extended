@@ -103,12 +103,12 @@ export class ItemEntry {
     this.name = name;
   }
 
-  public getIsVisible(): boolean {
-    return this.isVisible;
-  }
-
   public setIsVisible(isVisible: boolean): void {
     this.isVisible = isVisible;
+  }
+
+  public isHidden(): boolean {
+    return !this.isVisible;
   }
 
   public getBigTooltipSetting(): BigTooltipSetting {

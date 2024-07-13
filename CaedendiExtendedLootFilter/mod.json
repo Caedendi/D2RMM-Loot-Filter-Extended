@@ -153,10 +153,18 @@
           "defaultExpanded": false,
           "children": [
             {
+              "id": "IsRunesSectionEnabled",
+              "type": "checkbox",
+              "name": "Enable Section",
+              "description": "Global toggle for Runes section.",
+              "defaultValue": true
+            },
+            {
               "id": "ShouldAddRuneHighlights",
               "type": "checkbox",
               "name": "Add Highlights",
               "description": "Highlight the better Runes (Ral, Hel and up).",
+              "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": true
             },
             {
@@ -164,6 +172,7 @@
               "type": "checkbox",
               "name": "Add Rune Numbers",
               "description": "Adds the rune number to the item name.",
+              "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": true
             },
             {
@@ -171,6 +180,7 @@
               "type": "checkbox",
               "name": "Hide affix",
               "description": "Shortens the item name by removing the \" Rune\" affix.",
+              "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": true
             },
             {
@@ -178,6 +188,7 @@
               "type": "select",
               "name": "Alternate Highlight Color",
               "description": "Used for Mid and High Runes for even more emphasis. [CSTM-HLCRA]",
+              "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": ";",
               "options": [
                 { "value": "none", "label": "Disable" },
@@ -213,6 +224,7 @@
               "type": "checkbox",
               "name": "Show Low",
               "description": "Show Low Runes (El [1] - Dol [14], except Ral [8]).",
+              "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": true
             },
             {
@@ -220,6 +232,7 @@
               "type": "checkbox",
               "name": "Show Low-Mid",
               "description": "Show Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
+              "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": true
             },
             {
@@ -227,6 +240,7 @@
               "type": "checkbox",
               "name": "Show Mid",
               "description": "Show Mid Runes (Lem [20] - Gul [25]).",
+              "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": true
             },
             {
@@ -234,6 +248,7 @@
               "type": "checkbox",
               "name": "Show High",
               "description": "Show High Runes (Vex [26] - Zod [33]).",
+              "visible": ["value", "IsRunesSectionEnabled"],
               "defaultValue": true
             }
           ]

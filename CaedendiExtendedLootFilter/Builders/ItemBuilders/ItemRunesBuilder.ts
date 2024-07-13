@@ -1,17 +1,18 @@
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
+import { D2Color } from "../../Models/D2Color";
+import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
+import { iLvlFix } from "../../Models/iLvlFix";
 import { ItemEntry } from "../../Models/ItemEntry";
+import { Rune } from "../../Models/Rune";
+import { RuneTier } from "../../Models/RuneTier";
+import { BigTooltipItemBuilderBase } from "./BigTooltipItemBuilderBase";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
-import { ItemBuilderBase } from "./ItemBuilderBase";
 
-export class ItemRunesBuilder extends ItemBuilderBase implements IItemBuilder {
+export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItemBuilder {
   protected readonly highlightingSetting: string = config.RunesHighlighting as string;
-  protected readonly shouldUseAlternateColor = config.RunesHighlightColorAlt !== SettingsConstants.disabled;
-  
-  protected readonly shouldHideAffix:     boolean = config.ShouldHideRuneAffix     as boolean;
-  protected readonly shouldAddNumber:     boolean = config.ShouldAddRuneNumbers    as boolean;
-  protected readonly shouldAddHighlights: boolean = config.ShouldAddRuneHighlights as boolean;
   
   constructor() {
     super();
@@ -19,79 +20,98 @@ export class ItemRunesBuilder extends ItemBuilderBase implements IItemBuilder {
 
   public applyFilter(): void {
     RuneConstants.tiers.forEach((tier) => {
-      if (!tier.isVisible) {
-        this.collection.upsertMultipleHidden(tier.runes.map<string>(rune => rune.getKey()));
+      let runes = tier.getRunes();
+
+      if (!tier.getIsVisible()) {
+        this.collection.upsertMultipleHidden(runes.map<string>(rune => rune.getKey()));
         return;
       }
 
-      tier.runes.forEach((rune) => {
-        // TODO: create DoubleHighlightItemEntry.fromRune();
-        this.collection.upsert(new ItemEntry(rune.getKey(), (this.generateRuneName(rune.name, rune.number, tier.tier, tier.pattern, tier.padding)))); 
-      });
+      runes.forEach((rune) => this.collection.upsert(this.createRuneEntry(rune, tier)));
     });
   }
 
-  // TODO: try to refactor using DoubleHighlightItemEntry
-  protected generateRuneName(name: string, number: number, tier: number, highlightPattern: string, padding: string) {
-    const hasHighlighting       = this.isHighlightedTier(tier);
-    const hasHighlightedNumber  = this.isTierWithHighlightedNumber(tier);
-    const hasHighlightedName    = this.isTierWithHighlightedName(tier);
-    const hasAlternateNameColor = this.isTierWithAlternateColor(tier);
-
-    var highlightColor1 = hasHighlighting ? RuneConstants.clrHighlight : ColorConstants.none;
+  protected createRuneEntry(rune: Rune, tier: RuneTier): DoubleHighlightItemEntry {
+    var highlightColor1 = tier.isHighlightedTier() ? RuneConstants.clrHighlight : ColorConstants.none;
     var highlightColor2 = highlightColor1;
-    var nameColor1 = !hasAlternateNameColor ? (hasHighlightedName ? RuneConstants.clrHighlight : RuneConstants.clrName) : RuneConstants.colorAlternate;
+    var nameColor1 = !tier.isTierWithAlternateColor() ? (tier.isTierWithHighlightedName() ? RuneConstants.clrHighlight : RuneConstants.clrName) : RuneConstants.colorAlternate;
     var nameColor2 = nameColor1;
-    var numberColor = !hasAlternateNameColor ? (hasHighlightedNumber ? RuneConstants.clrHighlight : RuneConstants.clrName) : ColorConstants.none;
+    var numberColor = !tier.isTierWithAlternateColor() ? (tier.isTierWithHighlightedNumber() ? RuneConstants.clrHighlight : RuneConstants.clrName) : ColorConstants.none;
 
-    if (!this.shouldHideAffix) {
-      name = `${name} Rune`;
-    }
+    let displayName = rune.getName();
+    this.addRuneAffixToDisplayName(displayName);
+    this.removeDuplicateColorCodes1(tier.isHighlightedTier(), nameColor1, highlightColor2, nameColor2, numberColor);
+    this.addRuneNumberToDisplayName(displayName, nameColor1, numberColor, rune.getNumber());
+    this.removeDuplicateColorCodes2(tier.isHighlightedTier(), highlightColor1, nameColor1); // remove last duplicate color code where possible
 
-    // remove duplicate color codes where possible
-    if ((hasHighlighting && nameColor2 === highlightColor2) || !hasHighlighting) {
+    let prefix = `${highlightColor1}${tier.getPattern()}${nameColor1}${tier.getPadding()}`;
+    let suffix = `${tier.getPadding()}${highlightColor2}${tier.getPattern()}${nameColor2}`;
+
+    return new DoubleHighlightItemEntry(rune.getKey(), displayName, iLvlFix.None, prefix, suffix);
+  }
+
+  private addRuneAffixToDisplayName(displayName: string): void {
+    if (SettingsConstants.runes.shouldHideAffix)
+      return;
+
+    displayName = `${displayName} Rune`;
+  }
+
+  private removeDuplicateColorCodes1(isHighlightedTier: boolean, nameColor1: D2Color, highlightColor2: D2Color, nameColor2: D2Color, numberColor: D2Color): void {
+    if ((isHighlightedTier && nameColor2 === highlightColor2) || !isHighlightedTier) {
       nameColor2 = ColorConstants.none;
     }
-    if (hasHighlighting && ((this.shouldAddNumber && highlightColor2 === numberColor) || (!this.shouldAddNumber && highlightColor2 === nameColor1))) {
+    if (isHighlightedTier
+      && ((SettingsConstants.runes.shouldAddNumber && highlightColor2 === numberColor) 
+         || (!SettingsConstants.runes.shouldAddNumber && highlightColor2 === nameColor1))) {
       highlightColor2 = ColorConstants.none;
     }
+  }
 
-    // set rune number
-    if (this.shouldAddNumber) {
-      if (numberColor === nameColor1) {
-        numberColor = ColorConstants.none;
-      }
-      name = `${name} ${numberColor}(${number})`;
-    }
+  private addRuneNumberToDisplayName(displayName: string, nameColor1: D2Color, numberColor: D2Color, number: number): void {
+    if (!SettingsConstants.runes.shouldAddNumber)
+      return;
 
-    // remove last duplicate color code where possible
-    if (hasHighlighting && highlightColor1 === nameColor1) {
+    if (numberColor === nameColor1)
+      numberColor = ColorConstants.none; // remove duplicate color code
+
+    displayName = `${displayName} ${numberColor}(${number})`;
+  }
+
+  private removeDuplicateColorCodes2(isHighlightedTier: boolean, highlightColor1: D2Color, nameColor1: D2Color): void {
+    if (isHighlightedTier && highlightColor1 === nameColor1) {
       nameColor1 = ColorConstants.none;
     }
-
-    return `${highlightColor1}${highlightPattern}${nameColor1}${padding}${name}${padding}${highlightColor2}${highlightPattern}${nameColor2}`;
-  }
-
-  private isHighlightedTier(tier: number): boolean {
-    return this.shouldAddHighlights && RuneConstants.tiersWithHighlights.includes(tier);
-  }
-
-  private isTierWithHighlightedNumber(tier: number): boolean {
-    return this.shouldAddHighlights && RuneConstants.tiersWithHighlightedNumbers.includes(tier);
-  }
-
-  private isTierWithHighlightedName(tier: number): boolean {
-    return this.shouldAddHighlights && RuneConstants.tiersWithHighlightedNames.includes(tier);;
-  }
-
-  private isTierWithAlternateColor(tier: number): boolean {
-    return this.shouldUseAlternateColor && RuneConstants.tiersWithAlternateColor.includes(tier);
   }
 
   public addBigTooltips() {
     RuneConstants.tiers.forEach(tier => {
-      // this.collection.upsertMultiple()
-      // Helper.addBigTooltips(tierCollection, tier.bigTooltipSetting);
+      if (tier.getBigTooltipSetting() == BigTooltipSetting.Disabled)
+        return;
+
+      tier.getRunes().forEach(rune => {
+        let entry = this.collection.getEntries().find(runeEntry => runeEntry.getKey() === rune.getKey());
+
+        // not found: rune is unchanged (not set to hidden but no highlighting set either)
+        if (entry == undefined && tier.getBigTooltipSetting() != BigTooltipSetting.Disabled) {
+          this.collection.upsert(this.createNewRuneEntryWithBigTooltip(rune, tier.getBigTooltipSetting()));
+          return;
+        }
+
+        // set to hidden: do not apply big tooltip
+        if (entry.isHidden())
+          return;
+
+        // found: apply big tooltip
+        entry.addBigTooltip(tier.getBigTooltipSetting());
+      });
     });
+  }
+
+  private createNewRuneEntryWithBigTooltip(rune: Rune, bigTooltipSetting: BigTooltipSetting): ItemEntry {
+    let newEntry = new ItemEntry(rune.getKey(), `${rune.getName()} Rune`);
+    newEntry.addBigTooltip(bigTooltipSetting);
+    
+    return newEntry;
   }
 }
