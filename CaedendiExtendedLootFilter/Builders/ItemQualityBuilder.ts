@@ -23,38 +23,24 @@ export class ItemQualityBuilder {
     D2RMM.writeJson(FileConstants.FILE_ITEM_NAMES_PATH, fileItemNames);
   }
 
-  addEquipmentQuality(equipmentWithQualityRows, itemNamesFile) {
-    equipmentWithQualityRows.forEach(item => {
+  addEquipmentQuality(equipmentRowsWithQuality, itemNamesFile) {
+    equipmentRowsWithQuality.forEach(item => {
       // get index and check if exists
       const index = itemNamesFile.findIndex(x => x.Key === item.code);
       if (index < 0) {
         return;
       }
       
-      var quality = this.getQualityIndicatorForItem(item);
-      let prefix = StatsAndModifiersSettings.getQualityIndicatorOpenChar();
-      let suffix = StatsAndModifiersSettings.getQualityIndicatorCloseChar();
+      // create quality tag
+      var indicator = this.getQualityIndicatorForItem(item);
+      let tag = `${StatsAndModifiersSettings.openChar}${indicator}${StatsAndModifiersSettings.closeChar}`;
 
-      // set indicator in name for all items
+      // set indicator tag in name for all items
       for (const key in itemNamesFile[index]) {
         if (key !== FileConstants.id && key !== FileConstants.key) { // set to all entries that arent "Key" and "id"
-          switch (Settings.statsAndModifiers.itemQualitySetting) {
-            case "suf-par":
-              itemNamesFile[index][key] = `${itemNamesFile[index][key]} (${quality})`;
-              continue;
-            case "suf-bts":
-              itemNamesFile[index][key] = `${itemNamesFile[index][key]} [${quality}]`;
-              continue;
-            case "pre-par":
-              itemNamesFile[index][key] = `(${quality}) ${itemNamesFile[index][key]}`;
-              continue;
-            case "pre-bts":
-              itemNamesFile[index][key] = `[${quality}] ${itemNamesFile[index][key]}`;
-              continue;
-            case SettingsConstants.custom:
-              itemNamesFile[index][key] = `${itemNamesFile[index][key]} (${quality})`; // to set custom quality indicator, see [CSTM-QLTY]
-              continue;
-          }
+          itemNamesFile[index][key] = Settings.statsAndModifiers.itemQuality.placement === "prefix" 
+            ? `${tag} ${itemNamesFile[index][key]}`
+            : `${itemNamesFile[index][key]} ${tag}`;
         }
       }
     });

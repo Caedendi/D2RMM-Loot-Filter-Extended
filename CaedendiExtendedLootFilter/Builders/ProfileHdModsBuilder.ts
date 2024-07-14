@@ -3,23 +3,8 @@ import { FileConstants } from "../Constants/FileConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
 
-
+// TODO: fix
 export class ProfileHdModsBuilder {
-  // ethColors = {
-  //   Beige: FontColorConstants.beige,
-  //   Black: FontColorConstants.black,
-  //   DarkGreen: FontColorConstants.darkGreen,
-  //   Green: FontColorConstants.green,
-  //   LightBlue: FontColorConstants.lightBlue,
-  //   LightGray: FontColorConstants.lightGray,
-  //   LightPurple: FontColorConstants.lightPurple,
-  //   LightRed: FontColorConstants.lightRed,
-  //   LightTeal: FontColorConstants.lightTeal,
-  //   Red: FontColorConstants.red,
-  //   VeryLightGray: FontColorConstants.veryLightGray,
-  //   White: FontColorConstants.white,
-  // };
-
   build() {
     let path = FileConstants.FILE_PROFILE_HD_PATH; // TODO: low vision and controller modes
     let profileHD = D2RMM.readJson(path);

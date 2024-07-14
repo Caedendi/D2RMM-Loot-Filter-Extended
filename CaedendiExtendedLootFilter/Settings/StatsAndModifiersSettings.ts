@@ -2,8 +2,18 @@ import { CharConstants } from "../Constants/CharConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "./Settings";
 
+enum ItemQuality {
+  Normal = 0,
+  Exceptional = 1,
+  Elite = 2,
+}
+
 // TODO
 export abstract class StatsAndModifiersSettings {
+  protected static customNormalQualityIndicator:      string = "custom n"; // replace "custom n" to your preference. [CSTM-QLTY]
+  protected static customExceptionalQualityIndicator: string = "custom x"; // replace "custom x" to your preference. [CSTM-QLTY]
+  protected static customEliteQualityIndicator:       string = "custom e"; // replace "custom e" to your preference. [CSTM-QLTY]
+  
   // ilvl
   // TODO: set protected where appliccable
   // public static shouldFixIlvlIndent: boolean = Settings.statsAndModifiers.itemLevelSetting === "fix" || Settings.statsAndModifiers.itemLevelSetting === "fix-btt";
@@ -15,31 +25,54 @@ export abstract class StatsAndModifiersSettings {
   // public static iLvlIndentFixQuestSingle: string = this.iLvlIndentFixSingle; // quest items with a single digit ilvl
   // public static iLvlIndentFixQuestDouble: string = this.iLvlIndentFixDouble; // quest items with a double digit ilvl
 
-  public static normalQualityIndicator:      string = Settings.statsAndModifiers.itemQualitySetting !== SettingsConstants.custom ? 'n' : "custom n"; // replace "custom n" to your preference. [CSTM-QLTY]
-  public static exceptionalQualityIndicator: string = Settings.statsAndModifiers.itemQualitySetting !== SettingsConstants.custom ? 'x' : "custom x"; // replace "custom n" to your preference. [CSTM-QLTY]
-  public static eliteQualityIndicator:       string = Settings.statsAndModifiers.itemQualitySetting !== SettingsConstants.custom ? 'e' : "custom e"; // replace "custom n" to your preference. [CSTM-QLTY]
+  public static normalQualityIndicator:      string = this.createQualityIndicator(ItemQuality.Normal);
+  public static exceptionalQualityIndicator: string = this.createQualityIndicator(ItemQuality.Normal);
+  public static eliteQualityIndicator:       string = this.createQualityIndicator(ItemQuality.Normal);
 
-  public static getQualityIndicatorOpenChar(): string {
-    if (this.isParenthesesQualitySetting())
-      return '(';
-    if (this.isBracketsQualitySetting())
-      return '[';
-    throw new Error("Could not determine StatsAndModifiersSettings.getQualityIndicatorOpenChar().");
-  }
-  
-  public static getQualityIndicatorCloseChar(): string {
-    if (this.isParenthesesQualitySetting())
-      return ')';
-    if (this.isBracketsQualitySetting())
-      return ']';
-    throw new Error("Could not determine StatsAndModifiersSettings.getQualityIndicatorCloseChar().");
-  }
-  private static isParenthesesQualitySetting(): boolean {
-    return Settings.statsAndModifiers.itemQualitySetting === "suf-par" || Settings.statsAndModifiers.itemQualitySetting === "pre-par";
+  public static openChar:  string = this.getQualityIndicatorOpenChar();
+  public static closeChar: string = this.getQualityIndicatorCloseChar();
+
+  private static createQualityIndicator(itemQuality: ItemQuality): string {
+    if (Settings.statsAndModifiers.itemQuality.style === SettingsConstants.custom)
+      return this.getCustomQualityIndicator(itemQuality);
+
+    let indicator = this.getQualityIndicator(itemQuality);
+    if (Settings.statsAndModifiers.itemQuality.style === "uppercase")
+      return indicator.toUpperCase();
+
+    return indicator;
   }
 
-  private static isBracketsQualitySetting(): boolean {
-    return Settings.statsAndModifiers.itemQualitySetting === "suf-par" || Settings.statsAndModifiers.itemQualitySetting === "pre-par";
+  private static getCustomQualityIndicator(itemQuality: ItemQuality): string {
+    return [
+      { quality: ItemQuality.Normal,      indicator: this.customNormalQualityIndicator },
+      { quality: ItemQuality.Exceptional, indicator: this.customExceptionalQualityIndicator },
+      { quality: ItemQuality.Elite,       indicator: this.customEliteQualityIndicator },
+    ].find(q => q.quality == itemQuality).indicator;
+  }
+
+  private static getQualityIndicator(itemQuality: ItemQuality): string {
+    return [
+      { quality: ItemQuality.Normal,      indicator: 'n' },
+      { quality: ItemQuality.Exceptional, indicator: 'x' },
+      { quality: ItemQuality.Elite,       indicator: 'e' },
+    ].find(q => q.quality == itemQuality).indicator;
+  }
+
+  private static getQualityIndicatorOpenChar(): string {
+    return [
+      { setting: SettingsConstants.disabled, char: CharConstants.empty },
+      { setting: "square", char: '[' },
+      { setting: "round",  char: '(' },
+    ].find(o => o.setting === Settings.statsAndModifiers.itemQuality.brackets).char;
+  }
+
+  private static getQualityIndicatorCloseChar(): string {
+    return [
+      { setting: SettingsConstants.disabled, char: CharConstants.empty },
+      { setting: "square", char: ']' },
+      { setting: "round",  char: ')' },
+    ].find(o => o.setting === Settings.statsAndModifiers.itemQuality.brackets).char;
   }
 }
 

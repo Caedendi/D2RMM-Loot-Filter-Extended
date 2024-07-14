@@ -50,14 +50,14 @@ export abstract class Settings {
   // Stats & Modifiers Section
   public static statsAndModifiers = {
     itemLevel: {
-      isShowItemLevelEnabled:        config.IsShowItemLevelEnabled        as boolean,
-      shouldFixItemLevelIndentation: config.ShouldFixItemLevelIndentation as boolean,
+      isEnabled:            config.IsShowItemLevelEnabled        as boolean,
+      shouldFixIndentation: config.ShouldFixItemLevelIndentation as boolean,
     },
     itemQuality: {
-      isShowItemQualityEnabled: config.IsShowItemQualityEnabled as boolean,
-      itemQualityPlacement:     config.ItemQualityPlacement     as string,
-      itemQualityBrackets:      config.ItemQualityBrackets      as string,
-      itemQualityStyle:         config.ItemQualityStyle         as string,
+      isEnabled: config.IsShowItemQualityEnabled as boolean,
+      placement: config.ItemQualityPlacement     as string,
+      brackets:  config.ItemQualityBrackets      as string,
+      style:     config.ItemQualityStyle         as string,
     },
     shortSupInfPrefixes: {
       isEnabled:        config.IsSupInferiorPrefixesEnabled as boolean,
