@@ -1,10 +1,10 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { D2Color } from "../Models/D2Color";
+import { D2rColor } from "../Models/D2rColor";
 import { BigTooltipSetting } from "./BigTooltipsSettings";
 
 export abstract class Settings {
+  // Filter Section
   public static filter = {
     junk: {
       goldTooltipColors: config.GoldTooltipColors as string,
@@ -17,16 +17,16 @@ export abstract class Settings {
       keys:              config.Keys              as string,
     },
     runes: {
-      isRunesSectionEnabled:   config.IsRunesSectionEnabled   as boolean,
-      shouldAddHighlights:     config.ShouldAddRuneHighlights as boolean,
-      shouldAddNumber:         config.ShouldAddRuneNumbers    as boolean,
-      shouldHideAffix:         config.ShouldHideRuneAffix     as boolean,
-      altHighlightColor:       ColorConstants.getColorByCode(config.RunesHighlightColorAlt as string),
-      shouldUseAltColor:       config.RunesHighlightColorAlt !== CharConstants.empty,
-      isLowRunesVisible:       config.ShouldShowRunesLow      as boolean,
-      isLowMidRunesVisible:    config.ShouldShowRunesLowMid   as boolean,
-      isMidRunesVisible:       config.ShouldShowRunesMid      as boolean,
-      isHighRunesVisible:      config.ShouldShowRunesHigh     as boolean,
+      isEnabled:            config.IsEnabled               as boolean,
+      shouldAddHighlights:  config.ShouldAddRuneHighlights as boolean,
+      shouldAddNumber:      config.ShouldAddRuneNumbers    as boolean,
+      shouldHideAffix:      config.ShouldHideRuneAffix     as boolean,
+      altHighlightColor:    ColorConstants.getColorByCode(config.RunesHighlightColorAlt as string),
+      shouldUseAltColor:    config.RunesHighlightColorAlt !== CharConstants.empty,
+      isLowRunesVisible:    config.ShouldShowRunesLow      as boolean,
+      isLowMidRunesVisible: config.ShouldShowRunesLowMid   as boolean,
+      isMidRunesVisible:    config.ShouldShowRunesMid      as boolean,
+      isHighRunesVisible:   config.ShouldShowRunesHigh     as boolean,
     },
     jewelry: {
       gems:   config.Gems   as string,
@@ -35,20 +35,45 @@ export abstract class Settings {
       isFacetAltPatternEnabled:  config.IsFacetAltPattern  as boolean,
       isSunderAltPatternEnabled: config.IsSunderAltPattern as boolean,
     },
-    quest:   config.Quest   as string,
-    endgame: config.Endgame as string,
-    isCustomFilterListEnabled: config.shouldUseCustomFilterList as boolean,
+    questEndgame: {
+      quest:   config.Quest   as string,
+      endgame: config.Endgame as string,
+    },
+    settings: {
+      highlightCharacter: config.HighlightCharacter    as string,
+      highlightColor:     ColorConstants.getColorByCode(config.HighlightColor as string),
+      hiddenSize:         config.HiddenItemTooltipSize as number,
+    },
+    isCustomFilterListEnabled: config.IsCustomFilterListEnabled as boolean,
   };
   
+  // Stats & Modifiers Section
   public static statsAndModifiers = {
-    itemLevelSetting:     config.ItemLevel           as string,
-    itemQualitySetting:   config.ItemQuality         as string,
-    shortSupInfSetting:   config.ShortSupInfPrefixes as string,
-    ethItemsColorSetting: config.EthItemsColor       as string, // TODO: refactor to D2rColor
+    itemLevel: {
+      isShowItemLevelEnabled:        config.IsShowItemLevelEnabled        as boolean,
+      shouldFixItemLevelIndentation: config.ShouldFixItemLevelIndentation as boolean,
+    },
+    itemQuality: {
+      isShowItemQualityEnabled: config.IsShowItemQualityEnabled as boolean,
+      itemQualityPlacement:     config.ItemQualityPlacement     as string,
+      itemQualityBrackets:      config.ItemQualityBrackets      as string,
+      itemQualityStyle:         config.ItemQualityStyle         as string,
+    },
+    shortSupInfPrefixes: {
+      isEnabled:        config.IsSupInferiorPrefixesEnabled as boolean,
+      style:            config.SupInfPrefixesStyle          as string,
+      isGrayInfEnabled: config.IsGrayInferiorItemsEnabled   as boolean,
+    },
+    ethColor: {
+      isEnabled: config.IsEthItemsColorEnabled     as boolean,
+      color:     new D2rColor(config.EthItemsColor as string),
+    }    
   };
 
+  // Big Tooltips Section
   public static bigTooltips = {
-    isEnabled: config.IsBigTooltipsEnabled as boolean,
+    isEnabled:      config.IsBigTooltipsEnabled   as boolean,
+    shouldHideIlvl: config.IsHideIlvlOnBttEnabled as boolean,
     runes: {
       lowRunesSetting:    config.BigTooltipRunesLow    as number as BigTooltipSetting,
       lowMidRunesSetting: config.BigTooltipRunesLowMid as number as BigTooltipSetting,
@@ -70,8 +95,10 @@ export abstract class Settings {
     },
   };
 
+  // Light Pillars Section
   public static lightPillars = {
-    globalSetting: config.LightPillarsGlobal as string,
+    isEnabled:              config.IsLightPillarsEnabled         as boolean,
+    shouldExcludeForHidden: config.ShouldExcludeHiddenItemsForLp as boolean,
     runes: {
       isLowRunesEnabled:    config.ShouldAddLightPillarRunesLow    as boolean,
       isLowMidRunesEnabled: config.ShouldAddLightPillarRunesLowMid as boolean,
@@ -95,8 +122,10 @@ export abstract class Settings {
     },
   };
 
+  // Drop Sounds Section
   public static dropSounds = {
-    globalSetting: config.DropSoundsGlobal as string,
+    isEnabled:              config.IsDropSoundsEnabled           as boolean,
+    shouldExcludeForHidden: config.ShouldExcludeHiddenItemsForDs as boolean,
     runes: {
       low:    config.DropSoundRunesLow    as string,
       lowMid: config.DropSoundRunesLowMid as string,
@@ -113,12 +142,10 @@ export abstract class Settings {
     },
   };
 
+  // Tooltip Mods Section
   public static tooltips = {
-    highlightCharacter: config.HighlightCharacter    as string,
-    highlightColor:     ColorConstants.getColorByCode(config.HighlightColor as string),
-    hiddenSize:         config.HiddenItemTooltipSize as number,
-    tooltipModsSetting: config.Tooltip               as string,
-    tooltipOpacity:     config.TooltipOpacity        as number,
-    tooltipSize:        config.TooltipSize           as number,
+    isTooltipModsEnabled: config.IsTooltipModsEnabled as boolean,
+    tooltipOpacity:       config.TooltipOpacity       as number,
+    tooltipSize:          config.TooltipSize          as number,
   };
 }

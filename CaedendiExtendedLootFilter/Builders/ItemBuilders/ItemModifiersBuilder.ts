@@ -1,8 +1,8 @@
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { iLvlFix } from "../../Models/iLvlFix";
+import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
+import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 

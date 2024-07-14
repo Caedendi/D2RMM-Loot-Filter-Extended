@@ -1,5 +1,7 @@
 import { FileConstants } from "../Constants/FileConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
+import { Settings } from "../Settings/Settings";
+import { StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
 
 export class ItemQualityBuilder {
   // todo: refactor if possible
@@ -15,46 +17,55 @@ export class ItemQualityBuilder {
     const fileWeaponsWithQuality = fileWeapons.rows.filter(row => row.ubercode && row.ultracode);
     const fileArmorsWithQuality = fileArmor.rows.filter(row => row.ubercode && row.ultracode);
 
-    this.addEquipmentQuality(fileWeaponsWithQuality, fileItemNames, config.ItemQuality);
-    this.addEquipmentQuality(fileArmorsWithQuality, fileItemNames, config.ItemQuality);
+    this.addEquipmentQuality(fileWeaponsWithQuality, fileItemNames);
+    this.addEquipmentQuality(fileArmorsWithQuality, fileItemNames);
 
     D2RMM.writeJson(FileConstants.FILE_ITEM_NAMES_PATH, fileItemNames);
   }
 
-  addEquipmentQuality(equipment, itemNames, setting) {
-    let txtNormal = config.ItemQuality !== SettingsConstants.custom ? 'n' : "custom n"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-    let txtExceptional = config.ItemQuality !== SettingsConstants.custom ? 'x' : "custom x"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-    let txtElite = config.ItemQuality !== SettingsConstants.custom ? 'e' : "custom e"; // replace custom with desired custom quality indicator. [CSTM-QLTY]
-
-    equipment.forEach(item => {
-      var quality = (item.code === item.ultracode ? txtElite : (item.code === item.ubercode ? txtExceptional : txtNormal));
-
-      const index = itemNames.findIndex((x) => x.Key === item.code);
+  addEquipmentQuality(equipmentWithQualityRows, itemNamesFile) {
+    equipmentWithQualityRows.forEach(item => {
+      // get index and check if exists
+      const index = itemNamesFile.findIndex(x => x.Key === item.code);
       if (index < 0) {
         return;
       }
+      
+      var quality = this.getQualityIndicatorForItem(item);
+      let prefix = StatsAndModifiersSettings.getQualityIndicatorOpenChar();
+      let suffix = StatsAndModifiersSettings.getQualityIndicatorCloseChar();
 
-      for (const key in itemNames[index]) {
-        if (key !== FileConstants.id && key !== FileConstants.key) {
-          switch (setting) {
+      // set indicator in name for all items
+      for (const key in itemNamesFile[index]) {
+        if (key !== FileConstants.id && key !== FileConstants.key) { // set to all entries that arent "Key" and "id"
+          switch (Settings.statsAndModifiers.itemQualitySetting) {
             case "suf-par":
-              itemNames[index][key] = `${itemNames[index][key]} (${quality})`;
+              itemNamesFile[index][key] = `${itemNamesFile[index][key]} (${quality})`;
               continue;
             case "suf-bts":
-              itemNames[index][key] = `${itemNames[index][key]} [${quality}]`;
+              itemNamesFile[index][key] = `${itemNamesFile[index][key]} [${quality}]`;
               continue;
             case "pre-par":
-              itemNames[index][key] = `(${quality}) ${itemNames[index][key]}`;
+              itemNamesFile[index][key] = `(${quality}) ${itemNamesFile[index][key]}`;
               continue;
             case "pre-bts":
-              itemNames[index][key] = `[${quality}] ${itemNames[index][key]}`;
+              itemNamesFile[index][key] = `[${quality}] ${itemNamesFile[index][key]}`;
               continue;
             case SettingsConstants.custom:
-              itemNames[index][key] = `${itemNames[index][key]} (${quality})`; // to set custom quality indicator, see [CSTM-QLTY]
+              itemNamesFile[index][key] = `${itemNamesFile[index][key]} (${quality})`; // to set custom quality indicator, see [CSTM-QLTY]
               continue;
           }
         }
       }
     });
+  }
+
+  private getQualityIndicatorForItem(item): string {
+    return item.code === item.ultracode 
+      ? StatsAndModifiersSettings.eliteQualityIndicator 
+      : (item.code === item.ubercode 
+        ? StatsAndModifiersSettings.exceptionalQualityIndicator 
+        : StatsAndModifiersSettings.normalQualityIndicator
+        );
   }
 }

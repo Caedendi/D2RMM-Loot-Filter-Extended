@@ -2,23 +2,17 @@ import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { GemConstants } from "../../Constants/Items/GemConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
 import { D2Color } from "../../Models/D2Color";
 import { Gem } from "../../Models/Gem";
 import { ItemEntry } from "../../Models/ItemEntry";
 import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
+import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
+import { Settings } from "../../Settings/Settings";
 import { TooltipSettings } from "../../Settings/TooltipSettings";
 import { BigTooltipItemBuilderBase } from "./BigTooltipItemBuilderBase";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
 
 export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements IItemBuilder {
-  protected readonly goldFilterSetting:          string = config.GoldTooltipColors        as string;
-  protected readonly goldSuffixFilterSetting:    string = config.GoldSuffix               as string;
-  protected readonly shortSupInfPrefixesSetting: string = config.ShortSupInferiorPrefixes as string;
-  protected readonly gemsFilterSetting:          string = config.Gems                     as string;
-
-  protected readonly bigTooltipGemsSetting: BigTooltipSetting = config.BigTooltipGems as number as BigTooltipSetting;
-
   protected readonly gems: Gem[] = GemConstants.gemExceptions;
 
   constructor() {
@@ -40,7 +34,7 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
     let color = this.getGoldAffixColor();
     let gld = "gld";
 
-    switch (this.goldSuffixFilterSetting) { // todo: rename
+    switch (Settings.filter.junk.goldSuffix) { // todo: rename
       case SettingsConstants.disabled: // Gold displays as "1234 Gold".
         if (color !== ColorConstants.none)
           this.collection.upsert(new ItemEntry(gld, `${color}Gold`));
@@ -54,7 +48,7 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
       case SettingsConstants.custom: // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
 
-        // TODO: refactor
+        // TODO: refactor => move to custom builder
         /*
         this.upsert(goldCol, gld, `${ColorConstants.purple}Gold`);
         */
@@ -63,16 +57,17 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
   }
 
   private getGoldAffixColor(): D2Color {
-    if (this.goldFilterSetting === "wg")
+    if (Settings.filter.junk.goldTooltipColors === "wg")
       return ColorConstants.gold;
-    if (this.goldFilterSetting === "gw")
+    if (Settings.filter.junk.goldTooltipColors === "gw")
       return ColorConstants.white;
 
     return ColorConstants.none;
   }
 
   protected applyShortSupInferiorPrefixes(): void {
-    var color = (this.shortSupInfPrefixesSetting === "color") ? ColorConstants.gray : ColorConstants.none;
+    let setting = Settings.statsAndModifiers.shortSupInfSetting;
+    var color = (setting === "color") ? ColorConstants.gray : ColorConstants.none;
     var superior = `${CharConstants.plus}`;
     var inferior = `${color}${CharConstants.minus}`;
 
@@ -82,7 +77,7 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
     let low = "Low Quality";
     let crd = "Crude";
 
-    switch (this.shortSupInfPrefixesSetting) {
+    switch (setting) {
       case SettingsConstants.disabled:
         return;
       case "short": // Enable
@@ -109,7 +104,7 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
   }
 
   protected applyGems(): void {
-    switch (this.gemsFilterSetting) {
+    switch (Settings.filter.jewelry.gems) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
@@ -144,7 +139,8 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
   }
 
   protected addBigTooltipsToGems() {
-    if (this.bigTooltipGemsSetting != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToEntries(this.gems.map(gem => gem.getKey()), this.bigTooltipGemsSetting);
+    let setting = Settings.bigTooltips.jewelry.gemsSetting
+    if (setting != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToEntries(this.gems.map(gem => gem.getKey()), setting);
   }
 }

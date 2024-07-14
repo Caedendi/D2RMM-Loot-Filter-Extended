@@ -41,22 +41,22 @@ export class LightPillarBuilder {
 
   // rings & amulets
   pushLightPillarsForRingsAmulets() {
-    if (config.ShouldAddLightPillarRings)
+    if (Settings.lightPillars.jewelry.isRingsEnabled)
       this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}ring\\`, "ring");
-    if (config.ShouldAddLightPillarAmulets)
+    if (Settings.lightPillars.jewelry.isAmuletsEnabled)
       this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}amulet\\`, "amulet");
   }
 
   // gems & jewels
   pushLightPillarsForGemsJewels() {
-    if (!config.ShouldAddLightPillarGemsJewels
+    if (!Settings.lightPillars.jewelry.isGemsJewelsEnabled
       || (this.globalSetting === SettingsConstants.hide && this.gemsFilterSetting == SettingsConstants.hide)) {
       return;
     }
 
     let gemQualities = this.getLightPillarGemQualities();
 
-    let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"];
+    let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"]; // "saphire": not a typo
     gemQualities.forEach((quality) => {
       gemTypes.forEach((type) => {
         this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
@@ -79,7 +79,7 @@ export class LightPillarBuilder {
 
   // charms
   pushLightPillarsForCharms() {
-    if (!config.ShouldAddLightPillarCharms) {
+    if (!Settings.lightPillars.jewelry.isCharmsEnabled) {
       return;
     }
 
@@ -87,21 +87,21 @@ export class LightPillarBuilder {
       this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}charm\\`, `charm_${charm}`);
     });
     // pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
-    if (!config.ShouldAddLightPillarQuestItems) {
+    if (!Settings.lightPillars.questEndgame.isQuestItemsEnabled) {
       this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
     }
   }
 
   // quest items
   pushLightPillarsForQuestItems() {
-    if (!config.ShouldAddLightPillarQuestItems && !config.ShouldAddLightPillarQuestWeapons) {
+    if (!Settings.lightPillars.questEndgame.isQuestItemsEnabled && !Settings.lightPillars.questEndgame.isQuestWeaponsEnabled) {
       return;
     }
 
     let questItems = [];
 
     // quest items
-    if (config.ShouldAddLightPillarQuestItems) {
+    if (Settings.lightPillars.questEndgame.isQuestItemsEnabled) {
       questItems = questItems.concat([
         // act 1
         [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "bark_scroll"], // Scroll of Inifuss & Malah's Potion
@@ -131,7 +131,7 @@ export class LightPillarBuilder {
     }
 
     // quest weapons
-    if (config.ShouldAddLightPillarQuestWeapons) {
+    if (Settings.lightPillars.questEndgame.isQuestWeaponsEnabled) {
       questItems = questItems.concat([
         // act 1
         [`${LightPillarConstants.PATH_ITEMS_WEAPON}club\\`, "wirts_leg"], // Wirt's Leg
@@ -160,7 +160,7 @@ export class LightPillarBuilder {
 
   // essences
   pushLightPillarsForEssences() {
-    if (!config.ShouldAddLightPillarEssences) {
+    if (!Settings.lightPillars.questEndgame.isEssencesEnabled) {
       return;
     }
 
@@ -172,7 +172,7 @@ export class LightPillarBuilder {
 
   // token
   pushLightPillarForToken() {
-    if (!config.ShouldAddLightPillarTokens) {
+    if (!Settings.lightPillars.questEndgame.isTokensEnabled) {
       return;
     }
 
@@ -181,7 +181,7 @@ export class LightPillarBuilder {
 
   // pandemonium keys
   pushLightPillarsForKeys() {
-    if (!config.ShouldAddLightPillarKeys) {
+    if (!Settings.lightPillars.questEndgame.isKeysEnabled) {
       return;
     }
 
@@ -196,12 +196,12 @@ export class LightPillarBuilder {
 
   // pandemonium event (ubers) organs
   pushLightPillarsForUberOrgans() {
-    if (!config.ShouldAddLightPillarOrgans) {
+    if (!Settings.lightPillars.questEndgame.isOrgansEnabled) {
       return;
     }
 
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "horn");
-    if (config.ShouldAddLightPillarQuestItems) {
+    if (Settings.lightPillars.questEndgame.isQuestItemsEnabled) {
       return;
     }
 
@@ -211,8 +211,8 @@ export class LightPillarBuilder {
 
   // standard of heroes
   pushLightPillarForStandardOfHeroes() {
-    if (!config.ShouldAddLightPillarStandardOfHeroes
-      || (this.globalSetting === SettingsConstants.hide && config.Endgame === "hsh")) {
+    if (!Settings.lightPillars.questEndgame.isStandardEnabled
+      || (this.globalSetting === SettingsConstants.hide && Settings.filter.endgame === "hsh")) {
       return;
     }
 
