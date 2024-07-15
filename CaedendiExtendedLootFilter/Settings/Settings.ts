@@ -1,7 +1,6 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { D2rColor } from "../Models/D2rColor";
-import { BigTooltipSetting } from "./BigTooltipsSettings";
 
 export abstract class Settings {
   // Filter Section
@@ -42,7 +41,7 @@ export abstract class Settings {
     settings: {
       highlightCharacter: config.HighlightCharacter    as string,
       highlightColor:     ColorConstants.getColorByCode(config.HighlightColor as string),
-      hiddenSize:         config.HiddenItemTooltipSize as number,
+      hidden:             CharConstants.space.repeat(config.HiddenItemTooltipSize as number),
     },
     isCustomFilterListEnabled: config.IsCustomFilterListEnabled as boolean,
   };
@@ -148,4 +147,14 @@ export abstract class Settings {
     tooltipOpacity:       config.TooltipOpacity       as number,
     tooltipSize:          config.TooltipSize          as number,
   };
+}
+
+export enum BigTooltipSetting {
+  Disabled = 0,
+  TwoLines = 1,
+  TwoLinesPickUp = 2,
+  ThreeLines = 3,
+  FourLinesPickUp = 4,
+  FiveLines = 5,
+  Custom = 6,
 }

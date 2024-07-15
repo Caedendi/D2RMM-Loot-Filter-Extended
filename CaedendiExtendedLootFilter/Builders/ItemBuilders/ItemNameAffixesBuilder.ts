@@ -6,9 +6,7 @@ import { D2Color } from "../../Models/D2Color";
 import { Gem } from "../../Models/Gem";
 import { ItemEntry } from "../../Models/ItemEntry";
 import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
-import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
-import { Settings } from "../../Settings/Settings";
-import { TooltipSettings } from "../../Settings/TooltipSettings";
+import { BigTooltipSetting, Settings } from "../../Settings/Settings";
 import { IBigTooltipItemBuilder } from "./Interfaces/IBigTooltipItemBuilder";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 
@@ -43,7 +41,7 @@ export class ItemNameAffixesBuilder extends ItemBuilderBase implements IBigToolt
         this.collection.upsert(new ItemEntry(gld, `${color}G`));
         return;
       case "hide": // Gold displays as "1234".
-        this.collection.upsert(new ItemEntry(gld, TooltipSettings.hidden));
+        this.collection.upsert(new ItemEntry(gld, Settings.filter.settings.hidden));
         return;
       case SettingsConstants.custom: // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE

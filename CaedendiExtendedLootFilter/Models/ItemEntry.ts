@@ -1,9 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { Helper } from "../Helper";
-import { TooltipSettings } from "../Settings/TooltipSettings";
-import { BigTooltipSetting } from "./BigTooltipSetting";
-import { iLvlFix } from "./iLvlFix";
+import { BigTooltipSetting, Settings } from "../Settings/Settings";
+import { iLvlFix, StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
 
 export class ItemEntry {
   protected readonly key: string;
@@ -31,14 +29,14 @@ export class ItemEntry {
 
   public static createArray(array: [string, string, iLvlFix?][]): ItemEntry[] {
     return array.map<ItemEntry>(x => {
-      let indent = Helper.getiLvlIndent(x[2]);
+      let indent = StatsAndModifiersSettings.getiLvlIndent(x[2]);
       return new ItemEntry(x[0], `${indent}${x[1]}`);
     });
   }
 
   public generateDisplayName(): string {
     if (!this.isVisible)
-      return TooltipSettings.hidden;
+      return Settings.filter.settings.hidden;
 
     if (!this.hasBigTooltip)
       return this.name;

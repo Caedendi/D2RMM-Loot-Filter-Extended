@@ -1,6 +1,5 @@
 import { RuneConstants } from "../Constants/Items/RuneConstants";
-import { BigTooltipSetting } from "../Settings/BigTooltipsSettings";
-import { Settings } from "../Settings/Settings";
+import { BigTooltipSetting, Settings } from "../Settings/Settings";
 import { Rune } from "./Rune";
 
 export class RuneTier {

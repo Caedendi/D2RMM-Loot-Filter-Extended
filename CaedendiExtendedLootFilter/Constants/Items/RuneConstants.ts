@@ -1,7 +1,6 @@
 import { Rune } from "../../Models/Rune";
 import { RuneTier } from "../../Models/RuneTier";
-import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
-import { Settings } from "../../Settings/Settings";
+import { BigTooltipSetting, Settings } from "../../Settings/Settings";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 

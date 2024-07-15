@@ -1,14 +1,14 @@
 import { D2rmmVersion } from "./Models/D2rmmVersion";
-import { IWriter } from "./Writers/Interfaces/IWriter";
-import { ItemModifiersWriter } from "./Writers/ItemModifiersWriter";
-import { ItemNameAffixesWriter } from "./Writers/ItemNameAffixesWriter";
-import { ItemNamesWriter } from "./Writers/ItemNamesWriter";
-import { ItemRunesWriter } from "./Writers/ItemRunesWriter";
-import { UiWriter } from "./Writers/UiWriter";
+import { IItemWriter } from "./Writers/ItemWriters/Interfaces/IItemWriter";
+import { ItemModifiersWriter } from "./Writers/ItemWriters/ItemModifiersWriter";
+import { ItemNameAffixesWriter } from "./Writers/ItemWriters/ItemNameAffixesWriter";
+import { ItemNamesWriter } from "./Writers/ItemWriters/ItemNamesWriter";
+import { ItemRunesWriter } from "./Writers/ItemWriters/ItemRunesWriter";
+import { UiWriter } from "./Writers/ItemWriters/UiWriter";
 
 export class CaedendiExtendedLootFilterMod {
   public readonly requiredD2rmmVersion: D2rmmVersion = new D2rmmVersion(1, 7, 0);
-  protected writers: IWriter[];
+  protected writers: IItemWriter[];
   
   public build(): void {
     this.checkVersion();

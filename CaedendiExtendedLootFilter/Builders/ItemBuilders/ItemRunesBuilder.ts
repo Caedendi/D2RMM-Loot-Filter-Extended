@@ -5,8 +5,7 @@ import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry"
 import { ItemEntry } from "../../Models/ItemEntry";
 import { Rune } from "../../Models/Rune";
 import { RuneTier } from "../../Models/RuneTier";
-import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
-import { Settings } from "../../Settings/Settings";
+import { BigTooltipSetting, Settings } from "../../Settings/Settings";
 import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemBuilder } from "./Interfaces/IBigTooltipItemBuilder";
 import { ItemBuilderBase } from "./ItemBuilderBase";

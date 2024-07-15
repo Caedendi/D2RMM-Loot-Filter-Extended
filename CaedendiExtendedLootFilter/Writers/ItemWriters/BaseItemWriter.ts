@@ -1,10 +1,10 @@
-import { IBigTooltipItemBuilder } from "../Builders/ItemBuilders/Interfaces/IBigTooltipItemBuilder";
-import { IItemBuilder } from "../Builders/ItemBuilders/Interfaces/IItemBuilder";
-import { CharConstants } from "../Constants/CharConstants";
-import { FileConstants } from "../Constants/FileConstants";
-import { Helper } from "../Helper";
-import { ItemCollection } from "../Models/ItemCollection";
-import { IWriter } from "./Interfaces/IWriter";
+import { IBigTooltipItemBuilder } from "../../Builders/ItemBuilders/Interfaces/IBigTooltipItemBuilder";
+import { IItemBuilder } from "../../Builders/ItemBuilders/Interfaces/IItemBuilder";
+import { CharConstants } from "../../Constants/CharConstants";
+import { FileConstants } from "../../Constants/FileConstants";
+import { Helper } from "../../Helper";
+import { ItemCollection } from "../../Models/ItemCollection";
+import { IItemWriter } from "./Interfaces/IItemWriter";
 
 /**
  * An abstract containing implementations for IWriter.
@@ -12,7 +12,7 @@ import { IWriter } from "./Interfaces/IWriter";
  * @property {string} target The path to the target .json file.
  * @property {IBaseBuilder[]} builders A collection of builders.
  */
-export abstract class BaseItemWriter implements IWriter {
+export abstract class BaseItemWriter implements IItemWriter {
   protected target: string = CharConstants.empty;
   protected builders: IItemBuilder[] = [];
 

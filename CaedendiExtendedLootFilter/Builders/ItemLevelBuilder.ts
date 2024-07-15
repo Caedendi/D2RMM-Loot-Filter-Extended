@@ -1,8 +1,7 @@
 import { FileConstants } from "../Constants/FileConstants";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
 import { JewelryConstants } from "../Constants/Items/JewelryConstants";
-import { BigTooltipSetting } from "../Settings/BigTooltipsSettings";
-import { Settings } from "../Settings/Settings";
+import { BigTooltipSetting, Settings } from "../Settings/Settings";
 
 //  extends ItemBuilderBase implements IItemBuilder
 export class ItemLevelBuilder {
