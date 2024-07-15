@@ -22,6 +22,7 @@ export class ProfileHdModsBuilder {
       return;
     }
 
+    // TODO: fix
     let goldColor: FontColorConstants;
     switch (tooltipColors) {
       case "g":
@@ -34,26 +35,15 @@ export class ProfileHdModsBuilder {
   }
 
   applyCustomEtherealColor(profileHD) { // TODO: typing
-    profileHD.TooltipStyle.EtherealColor = Settings.statsAndModifiers.ethItemsColor; // [CSTM-ETH] change FontColorConstants.lightTeal into any color variable in _profilehd.json
+    // TODO: enable/disable
+    profileHD.TooltipStyle.EtherealColor = Settings.statsAndModifiers.ethColor.color; // [CSTM-ETH] change FontColorConstants.lightTeal into any color variable in _profilehd.json
   }
 
   applyTooltipMods(profileHD) { // TODO: typing
-    if (Settings.tooltips.tooltipModsSetting === SettingsConstants.disabled) {
+    if (!Settings.tooltips.isTooltipModsEnabled)
       return;
-    }
 
-    let bgColor = [0, 0, 0, Settings.tooltips.tooltipOpacity]; // [R, G, B, opacity]
-    switch (Settings.tooltips.tooltipModsSetting) {
-      case SettingsConstants.all:
-        profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
-        profileHD.TooltipFontSize = Settings.tooltips.tooltipSize;
-        break;
-      case "opacity":
-        profileHD.TooltipStyle.inGameBackgroundColor = bgColor;
-        break;
-      case "size":
-        profileHD.TooltipFontSize = Settings.tooltips.tooltipSize;
-        break;
-    }
+    profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, Settings.tooltips.tooltipOpacity]; // [R, G, B, opacity];
+    profileHD.TooltipFontSize = Settings.tooltips.tooltipSize;
   }
 }

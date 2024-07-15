@@ -1,12 +1,11 @@
 import { FileConstants } from "../Constants/FileConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
 import { StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
 
 export class ItemQualityBuilder {
   // todo: refactor if possible
   build() {
-    if (config.ItemQuality === SettingsConstants.disabled) {
+    if (!Settings.statsAndModifiers.itemQuality.isEnabled) {
       return;
     }
 

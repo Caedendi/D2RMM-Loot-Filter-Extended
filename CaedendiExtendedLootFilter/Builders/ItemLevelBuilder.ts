@@ -1,5 +1,4 @@
 import { CharConstants } from "../Constants/CharConstants";
-import { CollectionConstants } from "../Constants/Items/CollectionConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { JewelryConstants } from "../Constants/Items/JewelryConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
@@ -18,9 +17,8 @@ export class ItemLevelBuilder extends ItemBuilder {
   }
 
   build() {
-    if (!(config.ItemLevel === "show" || config.ItemLevel === "btt" || config.ItemLevel === "fix" || config.ItemLevel === "fix-btt")) {
+    if (!Settings.statsAndModifiers.itemLevel.isEnabled)
       return;
-    }
 
     // contrary to all other builders, these 3 collections are used for items that we do _not_ want to show their iLvl
     let weaponsCol = this.getCollectionById(CollectionConstants.weapons);

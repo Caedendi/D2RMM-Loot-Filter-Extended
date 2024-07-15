@@ -2,23 +2,20 @@ import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
 import { FacetConstants } from "../../../Constants/Items/FacetConstants";
 import { JewelryConstants } from "../../../Constants/Items/JewelryConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
-import { iLvlFix } from "../../../Models/iLvlFix";
 import { ItemEntry } from "../../../Models/ItemEntry";
+import { Settings } from "../../../Settings/Settings";
+import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
 import { BigTooltipItemBuilderBase } from "../BigTooltipItemBuilderBase";
 import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
 
 export class JewelsBuilder extends BigTooltipItemBuilderBase implements IBigTooltipItemBuilder {
-  protected readonly filterSetting: string = config.Jewels as string;
-  protected readonly bigTooltipSetting: BigTooltipSetting = config.BigTooltipFacets as number as BigTooltipSetting;
-
   constructor() {
     super();
   }
 
   public applyFilter(): void {
-    switch (this.filterSetting) { // todo: validate setting as string
+    switch (Settings.filter.jewelry.jewels) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;
       case "facet":
@@ -37,6 +34,6 @@ export class JewelsBuilder extends BigTooltipItemBuilderBase implements IBigTool
   }
 
   public addBigTooltips() {
-    this.collection.addBigTooltipToEntry(FacetConstants.facetId, this.bigTooltipSetting);
+    this.collection.addBigTooltipToEntry(FacetConstants.facetId, Settings.bigTooltips.jewelry.facetsSetting);
   }
 }

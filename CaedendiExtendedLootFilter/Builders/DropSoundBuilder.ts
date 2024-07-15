@@ -1,16 +1,12 @@
-import { TSVData } from "../../../types";
 import { DropSoundConstants } from "../Constants/DropSoundConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
-
+import { Settings } from "../Settings/Settings";
 
 export class DropSoundBuilder {
-  protected readonly globalSetting = config.DropSoundsGlobal as string;
-
   build() {
-    if (this.globalSetting === SettingsConstants.disabled) {
+    if (!Settings.dropSounds.isEnabled) {
       return;
     }
 
@@ -27,18 +23,17 @@ export class DropSoundBuilder {
     D2RMM.writeTsv(FileConstants.FILE_SOUNDS_PATH, soundsFile);
   }
 
-  modifyDropSoundForRunes(soundsFile:TSVData) {
+  modifyDropSoundForRunes(soundsFile) {
     RuneConstants.tiers.forEach((tier) => {
-      if (this.globalSetting === SettingsConstants.hide && !tier.isVisible) {
+      if (tier.isHidden() && Settings.dropSounds.shouldExcludeForHidden)
         return;
-      }
 
-      let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
-      this.modifyDropSoundForMiscItems(soundsFile, itemCodes, `rune_tier_${tier.tier}`, tier.dropSound);
+      let itemCodes = tier.getRunes().map((rune) => rune.getNumber() < 10 ? `r0${rune.getNumber()}` : `r${rune.getNumber()}`);
+      this.modifyDropSoundForMiscItems(soundsFile, itemCodes, `rune_tier_${tier.getTier()}`, tier.getDropSound());
     });
   }
 
-  modifyDropSoundForQuestItems(soundsFile:TSVData) {
+  modifyDropSoundForQuestItems(soundsFile) {
     let itemCodesWeapons = [
       "leg", // Wirt's Leg
       "hdm", // Horadric Malus
@@ -71,35 +66,35 @@ export class DropSoundBuilder {
     ];
 
     let suffix = "quest";
-    this.modifyDropSoundForMiscItems(soundsFile, itemCodesMisc, suffix, config.DropSoundQuest as string);
-    this.modifyDropSoundForWeapons(soundsFile, itemCodesWeapons, suffix, config.DropSoundQuest as string);
+    this.modifyDropSoundForMiscItems(soundsFile, itemCodesMisc, suffix, Settings.dropSounds.questEndgame.questItems);
+    this.modifyDropSoundForWeapons(soundsFile, itemCodesWeapons, suffix, Settings.dropSounds.questEndgame.questItems);
   }
 
-  modifyDropSoundForEssences(soundsFile:TSVData) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["tes", "ceh", "bet", "fed"], "essence", config.DropSoundEssences as string);
+  modifyDropSoundForEssences(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["tes", "ceh", "bet", "fed"], "essence", Settings.dropSounds.questEndgame.essences);
   }
 
-  modifyDropSoundForTokens(soundsFile:TSVData) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["toa"], "token", config.DropSoundToken as string);
+  modifyDropSoundForTokens(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["toa"], "token", Settings.dropSounds.questEndgame.tokens);
   }
 
-  modifyDropSoundForKeys(soundsFile:TSVData) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["pk1", "pk2", "pk3"], "key", config.DropSoundKeys as string);
+  modifyDropSoundForKeys(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["pk1", "pk2", "pk3"], "key", Settings.dropSounds.questEndgame.keys);
   }
 
-  modifyDropSoundForOrgans(soundsFile:TSVData) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["eyz", "brz", "hrn"], "organ", config.DropSoundOrgans as string);
+  modifyDropSoundForOrgans(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["eyz", "brz", "hrn"], "organ", Settings.dropSounds.questEndgame.organs);
   }
 
-  modifyDropSoundForStandardOfHeroes(soundsFile:TSVData) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["std"], "flag", config.DropSoundStandard as string);
+  modifyDropSoundForStandardOfHeroes(soundsFile) {
+    this.modifyDropSoundForMiscItems(soundsFile, ["std"], "flag", Settings.dropSounds.questEndgame.standard);
   }
 
-  modifyDropSoundForMiscItems(soundsFile:TSVData, itemCodes:string[], newNameSuffix:string, dropSound:string) {
+  modifyDropSoundForMiscItems(soundsFile, itemCodes: string[], newNameSuffix: string, dropSound: string) {
     this.modifyDropSoundForItems(FileConstants.FILE_MISC_PATH, soundsFile, itemCodes, newNameSuffix, dropSound);
   }
 
-  modifyDropSoundForWeapons(soundsFile:TSVData, itemCodes:string[], newNameSuffix:string, dropSound:string) {
+  modifyDropSoundForWeapons(soundsFile, itemCodes: string[], newNameSuffix: string, dropSound: string) {
     this.modifyDropSoundForItems(FileConstants.FILE_WEAPONS_PATH, soundsFile, itemCodes, newNameSuffix, dropSound);
   }
 
@@ -107,7 +102,7 @@ export class DropSoundBuilder {
   // - check if set dropSound is not default
   // - create a new SD and HD dropsound pair in sounds.txt with the right settings
   // - link the newly created dropsound to the right items
-  modifyDropSoundForItems(itemsFilePath:string, soundsFile:TSVData, itemCodes:string[], newNameSuffix:string, dropSound:string) {
+  modifyDropSoundForItems(itemsFilePath: string, soundsFile, itemCodes: string[], newNameSuffix: string, dropSound: string) {
     if (dropSound === "default") {
       return;
     }
@@ -117,7 +112,7 @@ export class DropSoundBuilder {
   }
 
   // create SD and HD sound, redirect SD to HD
-  createNewDropSound(soundsFile:TSVData, soundNameSuffix:string, sfxFileNames:SoundEffectPair) {
+  createNewDropSound(soundsFile, soundNameSuffix: string, sfxFileNames: SoundEffectPair) {
     let soundNameSd = `${DropSoundConstants.SOUND_PREFIX}${soundNameSuffix}`;
     let soundNameHd = `${soundNameSd}_hd`;
 
@@ -128,7 +123,7 @@ export class DropSoundBuilder {
   }
 
   // create new entry in sounds.txt
-  pushSound(soundsFile:TSVData, soundName:string, template:string, sfxChannel:string, sfxFileName:string, sfxRedirect:string) {
+  pushSound(soundsFile, soundName: string, template: string, sfxChannel: string, sfxFileName: string, sfxRedirect: string) {
     let newSound = { ...(soundsFile.rows.find((sound) => sound.Sound === template)) }; // create deep copy of template
 
     newSound["Sound"] = soundName;

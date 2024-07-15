@@ -1,24 +1,21 @@
 import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
 import { CharmConstants } from "../../../Constants/Items/CharmConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
-import { iLvlFix } from "../../../Models/iLvlFix";
 import { ItemEntry } from "../../../Models/ItemEntry";
 import { SunderCharm } from "../../../Models/SunderCharm";
+import { Settings } from "../../../Settings/Settings";
+import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
 import { ItemBuilderBase } from "../ItemBuilderBase";
 
 export class CharmsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
-  protected readonly filterSetting: string = config.Charms as string;
-  protected readonly bigTooltipUniquesSetting: BigTooltipSetting = config.BigTooltipUniqueCharms as number as BigTooltipSetting;
-
   constructor() {
     super();
   }
 
   public applyFilter(): void {
-    switch (this.filterSetting) { // todo: validate setting as string
+    switch (Settings.filter.jewelry.charms) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
@@ -74,7 +71,7 @@ export class CharmsBuilder extends ItemBuilderBase implements IBigTooltipItemBui
   }
 
   protected highlightSunderCharms(): void {
-    if (config.IsSunderAltPattern)
+    if (Settings.filter.jewelry.isSunderAltPatternEnabled)
       this.highlightSunderCharmsAlt(CharmConstants.sunderCharms);
     else 
       this.highlightSunderCharmsDefault(CharmConstants.sunderCharms);
@@ -93,10 +90,9 @@ export class CharmsBuilder extends ItemBuilderBase implements IBigTooltipItemBui
   }
 
   public addBigTooltips(): void {
-    let uniqueCharms = []
-    .concat(CharmConstants.uniqueLodCharmIds)
-    .concat(CharmConstants.sunderCharms.map(sunder => sunder.getId()));
+    let uniques = CharmConstants.uniqueLodCharmIds;
+    let sunders = CharmConstants.sunderCharms.map(sunder => sunder.getId());
 
-    this.collection.addBigTooltipToEntries(uniqueCharms, this.bigTooltipUniquesSetting as number as BigTooltipSetting);
+    this.collection.addBigTooltipToEntries(uniques.concat(sunders), Settings.bigTooltips.jewelry.uniqueCharmsSetting);
   }
 }

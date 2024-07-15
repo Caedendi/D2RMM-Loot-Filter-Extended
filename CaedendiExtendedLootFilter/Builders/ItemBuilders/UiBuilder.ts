@@ -1,14 +1,12 @@
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { iLvlFix } from "../../Models/iLvlFix";
+import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
+import { Settings } from "../../Settings/Settings";
+import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 
 export class UiBuilder extends ItemBuilderBase {
-  protected readonly filterSetting:      string = config.Quest as string;
-  protected readonly bigTooltipsSetting: BigTooltipSetting = config.BigTooltipQuestItems as number as BigTooltipSetting;
-
   constructor() {
     super();
   }
@@ -21,7 +19,7 @@ export class UiBuilder extends ItemBuilderBase {
     let prefix = HighlightConstants.questPrefix;
     let suffix = HighlightConstants.questSuffix;
 
-    switch (this.filterSetting) {
+    switch (Settings.filter.questEndgame.quest) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
@@ -43,7 +41,7 @@ export class UiBuilder extends ItemBuilderBase {
   }
 
   public addBigTooltips(): void {
-    if (this.bigTooltipsSetting != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToAllEntries(this.bigTooltipsSetting);
+    if (Settings.bigTooltips.questEndgame.questItems != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToAllEntries(Settings.bigTooltips.questEndgame.questItems);
   }
 }

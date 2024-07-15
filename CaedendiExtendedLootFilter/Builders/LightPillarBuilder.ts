@@ -6,11 +6,12 @@ import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
 
 export class LightPillarBuilder {
-  protected readonly globalSetting = Settings.lightPillars.globalSetting;
+  protected readonly isEnabled = Settings.lightPillars.isEnabled;
+  protected readonly shouldExcludeForHidden = Settings.lightPillars.shouldExcludeForHidden;
   protected readonly gemsFilterSetting = Settings.filter.jewelry.gems;
 
   build() {
-    if (this.globalSetting === SettingsConstants.disabled) {
+    if (!this.isEnabled) {
       return;
     }
 
@@ -29,7 +30,7 @@ export class LightPillarBuilder {
   // runes
   pushLightPillarsForRunes() {
     RuneConstants.tiers.forEach(tier => {
-      if (!tier.getHasLightPillar() || (this.globalSetting === SettingsConstants.hide && tier.isHidden())) {
+      if (!tier.getHasLightPillar() || (this.shouldExcludeForHidden && tier.isHidden())) {
         return;
       }
 
@@ -50,7 +51,7 @@ export class LightPillarBuilder {
   // gems & jewels
   pushLightPillarsForGemsJewels() {
     if (!Settings.lightPillars.jewelry.isGemsJewelsEnabled
-      || (this.globalSetting === SettingsConstants.hide && this.gemsFilterSetting == SettingsConstants.hide)) {
+      || (this.shouldExcludeForHidden && Settings.filter.jewelry.gems === SettingsConstants.disabled)) {
       return;
     }
 
@@ -66,11 +67,11 @@ export class LightPillarBuilder {
 
   getLightPillarGemQualities() {
     let gemQualities = ["perfect_"];
-    if (this.gemsFilterSetting === "perfect" && this.globalSetting === SettingsConstants.hide) {
+    if (this.gemsFilterSetting === "perfect" && Settings.lightPillars.shouldExcludeForHidden) {
       return gemQualities;
     }
     gemQualities.push("flawless_");
-    if (this.gemsFilterSetting === "flawless" && this.globalSetting === SettingsConstants.hide) {
+    if (this.gemsFilterSetting === "flawless" && Settings.lightPillars.shouldExcludeForHidden) {
       return gemQualities;
     }
 
@@ -98,7 +99,7 @@ export class LightPillarBuilder {
       return;
     }
 
-    let questItems = [];
+    let questItems: [string, string][] = [];
 
     // quest items
     if (Settings.lightPillars.questEndgame.isQuestItemsEnabled) {
@@ -212,7 +213,7 @@ export class LightPillarBuilder {
   // standard of heroes
   pushLightPillarForStandardOfHeroes() {
     if (!Settings.lightPillars.questEndgame.isStandardEnabled
-      || (this.globalSetting === SettingsConstants.hide && Settings.filter.endgame === "hsh")) {
+      || (Settings.lightPillars.shouldExcludeForHidden && Settings.filter.questEndgame.endgame === "hsh")) {
       return;
     }
 

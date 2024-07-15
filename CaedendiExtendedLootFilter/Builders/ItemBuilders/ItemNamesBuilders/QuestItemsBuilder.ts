@@ -1,15 +1,13 @@
 import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
 import { ItemEntry } from "../../../Models/ItemEntry";
-import { iLvlFix } from "../../../Models/iLvlFix";
+import { Settings } from "../../../Settings/Settings";
+import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
 import { BigTooltipItemBuilderBase } from "../BigTooltipItemBuilderBase";
 import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
 
 export class QuestItemsBuilder extends BigTooltipItemBuilderBase implements IBigTooltipItemBuilder {
-  protected readonly filterSetting: string = config.Quest as string;
-  protected readonly bigTooltipSetting: BigTooltipSetting = config.BigTooltipSetting as number as BigTooltipSetting;
   protected readonly prefix = HighlightConstants.questPrefix;
   protected readonly suffix = HighlightConstants.questSuffix;
 
@@ -18,7 +16,7 @@ export class QuestItemsBuilder extends BigTooltipItemBuilderBase implements IBig
   }
 
   public applyFilter(): void {
-    switch (this.filterSetting) {
+    switch (Settings.filter.questEndgame.quest) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
@@ -132,6 +130,6 @@ export class QuestItemsBuilder extends BigTooltipItemBuilderBase implements IBig
   }
 
   public addBigTooltips(): void {
-    this.collection.addBigTooltipToAllEntries(this.bigTooltipSetting);
+    this.collection.addBigTooltipToAllEntries(Settings.bigTooltips.questEndgame.questItems);
   }
 }

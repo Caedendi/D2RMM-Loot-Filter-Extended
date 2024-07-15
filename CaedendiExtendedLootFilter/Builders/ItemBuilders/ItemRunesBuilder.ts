@@ -1,19 +1,17 @@
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
-import { BigTooltipSetting } from "../../Models/BigTooltipSetting";
 import { D2Color } from "../../Models/D2Color";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { iLvlFix } from "../../Models/iLvlFix";
 import { ItemEntry } from "../../Models/ItemEntry";
 import { Rune } from "../../Models/Rune";
 import { RuneTier } from "../../Models/RuneTier";
+import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
 import { Settings } from "../../Settings/Settings";
+import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
 import { BigTooltipItemBuilderBase } from "./BigTooltipItemBuilderBase";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
 
 export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItemBuilder {
-  protected readonly highlightingSetting: string = config.RunesHighlighting as string;
-  
   constructor() {
     super();
   }
@@ -22,7 +20,7 @@ export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItem
     RuneConstants.tiers.forEach((tier) => {
       let runes = tier.getRunes();
 
-      if (!tier.getIsVisible()) {
+      if (tier.isHidden()) {
         this.collection.upsertMultipleHidden(runes.map<string>(rune => rune.getKey()));
         return;
       }
@@ -34,7 +32,7 @@ export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItem
   protected createRuneEntry(rune: Rune, tier: RuneTier): DoubleHighlightItemEntry {
     var highlightColor1 = tier.isHighlightedTier() ? RuneConstants.clrHighlight : ColorConstants.none;
     var highlightColor2 = highlightColor1;
-    var nameColor1 = !tier.isTierWithAlternateColor() ? (tier.isTierWithHighlightedName() ? RuneConstants.clrHighlight : RuneConstants.clrName) : RuneConstants.colorAlternate;
+    var nameColor1 = !tier.isTierWithAlternateColor() ? (tier.isTierWithHighlightedName() ? RuneConstants.clrHighlight : RuneConstants.clrName) : Settings.filter.runes.altHighlightColor;
     var nameColor2 = nameColor1;
     var numberColor = !tier.isTierWithAlternateColor() ? (tier.isTierWithHighlightedNumber() ? RuneConstants.clrHighlight : RuneConstants.clrName) : ColorConstants.none;
 
@@ -51,7 +49,7 @@ export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItem
   }
 
   private addRuneAffixToDisplayName(displayName: string): void {
-    if (Settings.runes.shouldHideAffix)
+    if (Settings.filter.runes.shouldHideAffix)
       return;
 
     displayName = `${displayName} Rune`;
@@ -62,14 +60,14 @@ export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItem
       nameColor2 = ColorConstants.none;
     }
     if (isHighlightedTier
-      && ((Settings.runes.shouldAddNumber && highlightColor2 === numberColor) 
-         || (!Settings.runes.shouldAddNumber && highlightColor2 === nameColor1))) {
+      && ((Settings.filter.runes.shouldAddNumber && highlightColor2 === numberColor) 
+         || (!Settings.filter.runes.shouldAddNumber && highlightColor2 === nameColor1))) {
       highlightColor2 = ColorConstants.none;
     }
   }
 
   private addRuneNumberToDisplayName(displayName: string, nameColor1: D2Color, numberColor: D2Color, number: number): void {
-    if (!Settings.runes.shouldAddNumber)
+    if (!Settings.filter.runes.shouldAddNumber)
       return;
 
     if (numberColor === nameColor1)
@@ -93,7 +91,7 @@ export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItem
         let entry = this.collection.getEntries().find(runeEntry => runeEntry.getKey() === rune.getKey());
 
         // not found: rune is unchanged (not set to hidden but no highlighting set either)
-        if (entry == undefined && tier.getBigTooltipSetting() != BigTooltipSetting.Disabled) {
+        if (entry == undefined) {
           this.collection.upsert(this.createNewRuneEntryWithBigTooltip(rune, tier.getBigTooltipSetting()));
           return;
         }

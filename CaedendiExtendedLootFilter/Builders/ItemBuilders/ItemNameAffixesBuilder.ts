@@ -66,8 +66,10 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
   }
 
   protected applyShortSupInferiorPrefixes(): void {
-    let setting = Settings.statsAndModifiers.shortSupInfSetting;
-    var color = (setting === "color") ? ColorConstants.gray : ColorConstants.none;
+    if (!Settings.statsAndModifiers.shortSupInfPrefixes.isEnabled)
+      return;
+
+    var color = Settings.statsAndModifiers.shortSupInfPrefixes.isGrayInfEnabled ? ColorConstants.gray : ColorConstants.none;
     var superior = `${CharConstants.plus}`;
     var inferior = `${color}${CharConstants.minus}`;
 
@@ -77,9 +79,12 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
     let low = "Low Quality";
     let crd = "Crude";
 
-    switch (setting) {
-      case SettingsConstants.disabled:
-        return;
+    // Style:
+    // - plus/minus
+    // - sup/inf
+    // - custom
+
+    switch (Settings.statsAndModifiers.shortSupInfPrefixes.style) { // TODO
       case "short": // Enable
       case "color": // Enable, gray Inferior items
         this.collection.upsert(new ItemEntry(hiq, superior));
@@ -88,6 +93,8 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
         this.collection.upsert(new ItemEntry(low, inferior));
         this.collection.upsert(new ItemEntry(crd, inferior));
         return;
+
+        
       case SettingsConstants.custom: // [CSTM-SPIF]
         // ADD YOUR CUSTOM ITEM NAMES HERE
 
@@ -99,7 +106,6 @@ export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements
         this.upsert(supInfCol, low, `Low Quality`);
         this.upsert(supInfCol, crd, `Crude`);
         */
-        return;
     }
   }
 

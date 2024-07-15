@@ -5,8 +5,8 @@ import { ColorConstants } from "../Colors/ColorConstants";
 import { SettingsConstants } from "../SettingsConstants";
 
 export class HighlightConstants {
-  static character: string  = Settings.tooltips.highlightCharacter !== SettingsConstants.custom ? Settings.tooltips.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
-  static color:     D2Color = Settings.tooltips.highlightColor;
+  static character: string  = Settings.filter.settings.highlightCharacter !== SettingsConstants.custom ? Settings.filter.settings.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
+  static color:     D2Color = Settings.filter.settings.highlightColor;
 
   static paddingNone = CharConstants.empty;
   static padding1    = CharConstants.space;
@@ -28,12 +28,12 @@ export class HighlightConstants {
   static uniqueColorHighlight = this.color;
   static uniquePattern = this.pattern10;
   static uniquePadding = this.padding5;
-  static uniquePrefix = `${this.uniqueColorHighlight.toString()}${this.uniquePattern}${this.uniqueColorName.toString()}${this.uniquePadding}`;
-  static uniqueSuffix = `${this.uniquePadding}${this.uniqueColorHighlight.toString()}${this.uniquePattern}${this.uniqueColorName.toString()}`;
+  static uniquePrefix = `${this.uniqueColorHighlight}${this.uniquePattern}${this.uniqueColorName}${this.uniquePadding}`;
+  static uniqueSuffix = `${this.uniquePadding}${this.uniqueColorHighlight}${this.uniquePattern}${this.uniqueColorName}`;
 
   static questPrefix = this.uniquePrefix;
   static questSuffix = this.uniqueSuffix;
 
   static bttPadding = this.padding5;
-  static bttPickUpMsg = `${ColorConstants.purple.toString()}Pick Up`;
+  static bttPickUpMsg = `${ColorConstants.purple}Pick Up`;
 }

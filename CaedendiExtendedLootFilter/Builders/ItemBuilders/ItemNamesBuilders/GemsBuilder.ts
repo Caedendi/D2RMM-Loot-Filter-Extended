@@ -1,21 +1,18 @@
 import { GemConstants } from "../../../Constants/Items/GemConstants";
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { BigTooltipSetting } from "../../../Models/BigTooltipSetting";
 import { Gem } from "../../../Models/Gem";
 import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
+import { Settings } from "../../../Settings/Settings";
 import { BigTooltipItemBuilderBase } from "../BigTooltipItemBuilderBase";
 import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
 
 export class GemsBuilder extends BigTooltipItemBuilderBase implements IBigTooltipItemBuilder {
-  protected readonly filterSetting: string = config.Gems as string;
-  protected readonly bigTooltipSetting: BigTooltipSetting = config.BigTooltipGems as number as BigTooltipSetting;
-
   constructor() {
     super();
   }
 
   public applyFilter(): void {
-    switch (this.filterSetting) { // todo: validate setting as string
+    switch (Settings.filter.jewelry.gems) { // todo: validate setting as string
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
@@ -99,6 +96,6 @@ export class GemsBuilder extends BigTooltipItemBuilderBase implements IBigToolti
   }
 
   public addBigTooltips() {
-    this.collection.addBigTooltipToAllEntries(this.bigTooltipSetting);
+    this.collection.addBigTooltipToAllEntries(Settings.bigTooltips.jewelry.gemsSetting);
   }
 }

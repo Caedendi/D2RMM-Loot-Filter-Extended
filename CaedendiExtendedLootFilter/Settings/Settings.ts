@@ -86,12 +86,12 @@ export abstract class Settings {
       uniqueCharmsSetting: config.BigTooltipUniqueCharms as number as BigTooltipSetting,
     },
     questEndgame: {
-      questItemsSetting: config.BigTooltipQuestItems as number as BigTooltipSetting,
-      essencesSetting:   config.BigTooltipEssences   as number as BigTooltipSetting,
-      tokensSetting:     config.BigTooltipTokens     as number as BigTooltipSetting,
-      keysSetting:       config.BigTooltipKeys       as number as BigTooltipSetting,
-      organsSetting:     config.BigTooltipOrgans     as number as BigTooltipSetting,
-      standardSetting:   config.BigTooltipStandard   as number as BigTooltipSetting,
+      questItems: config.BigTooltipQuestItems as number as BigTooltipSetting,
+      essences:   config.BigTooltipEssences   as number as BigTooltipSetting,
+      tokens:     config.BigTooltipTokens     as number as BigTooltipSetting,
+      keys:       config.BigTooltipKeys       as number as BigTooltipSetting,
+      organs:     config.BigTooltipOrgans     as number as BigTooltipSetting,
+      standard:   config.BigTooltipStandard   as number as BigTooltipSetting,
     },
   };
 

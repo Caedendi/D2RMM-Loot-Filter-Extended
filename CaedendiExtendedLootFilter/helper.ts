@@ -1,7 +1,6 @@
 import { CharConstants } from "./Constants/CharConstants";
 import { SettingsConstants } from "./Constants/SettingsConstants";
-import { iLvlFix } from "./Models/iLvlFix";
-import { ItemCollection } from "./Models/ItemCollection";
+import { iLvlFix } from "./Settings/StatsAndModifiersSettings";
 
 export class Helper {
   protected static newLine: string = CharConstants.newLine;
@@ -52,77 +51,4 @@ export class Helper {
 
     throw new Error("Helper.getiLvlIndent() received undefined iLvlFix value.");
   }
-
-  /**
-   * TODO: remove
-   * DEPRECATED: use ItemCollection.addBigTooltipToAllEntries()
-   */
-  public static addBigTooltips(collection: ItemCollection, setting: string, indentPickUpMsg: string = CharConstants.empty) {
-    throw new Error("Helper.addBigTooltips() is deprecated, use ItemCollection.addBigTooltipToAll() instead.");
-    
-    // collection.getEntries().forEach(entry => entry.setName(Helper.generateBigTooltip(setting, entry.getName(), indentPickUpMsg)));
-  }
-
-  /**
-   * TODO: remove
-   * DEPRECATED: use ItemCollection.addBigTooltipToEntries()
-   */
-  public static addBigTooltipsForIds(collection: ItemCollection, ids: string[], setting: string) {
-    throw new Error("Helper.addBigTooltipsForIds() is deprecated, use ItemCollection.addBigTooltipToEntries() instead.");
-
-    // ids.forEach(id => {
-    //   this.addBigTooltipForId(collection, id, setting);
-    // })
-  }
-  
-  /**
-   * TODO: remove
-   * DEPRECATED: use ItemCollection.addBigTooltipToEntry()
-   */
-  public static addBigTooltipForId(collection: ItemCollection, key: string, setting: string) {
-    throw new Error("Helper.addBigTooltipForId() is deprecated, use ItemCollection.addBigTooltipToEntry() instead.");
-
-    // const i = collection.getEntries().findIndex(x => x.getKey() === key);
-    // if (i < 0) 
-    //   throw new Error(`Can't find item \"${key}\" in collection.`);
-    // collection[i].value = this.generateBigTooltip(setting, collection[i].value);
-  }
-
-
-  // /**
-  //  * 
-  //  * @param {*} setting A setting as set in the Big Tooltips section of the settings menu. Determines the height of the Big Tooltip and if it contains the Pick Up message.
-  //  * @param {*} name The item name (after other filtering and highlighting has been applied). Nothing in this line will be changed.
-  //  * @returns A multi-line item name, which will show as a Big Tooltip when the item is on the ground.
-  //  */
-  // protected static generateBigTooltip(setting: string, name: string, indentPickUpMsg: string = CharConstants.empty) {
-  //   if (setting === SettingsConstants.disabled || name === TooltipSettings.hidden) {
-  //     return name;
-  //   }
-
-  //   // new lines work upside-down: adding \n will add a new line on top of the current one (instead of below like you would expect)
-  //   if (setting === SettingsConstants.custom) { // [CSTM-BTT]
-  //     // ADD YOUR CUSTOM BIG TOOLTIP HERE
-  //     return this.newLine + `${HighlightConstants.bttPadding}${name}${HighlightConstants.bttPadding}` + this.newLine;
-  //   }
-
-  //   name = `${HighlightConstants.bttPadding}${name}${HighlightConstants.bttPadding}`;
-  //   if (setting === "2") {
-  //     return name + this.newLine;
-  //   }
-  //   if (setting === "2pu") {
-  //     return name + this.newLine + indentPickUpMsg + HighlightConstants.bttPickUpMsg;
-  //   }
-  //   if (setting === "3") {
-  //     return this.newLine + name + this.newLine;
-  //   }
-  //   if (setting === "4pu") {
-  //     return this.newLine + name + this.newLine + indentPickUpMsg + HighlightConstants.bttPickUpMsg + this.newLine;
-  //   }
-  //   if (setting === "5") {
-  //     return this.newLine + this.newLine + name + this.newLine + this.newLine;
-  //   }
-
-  //   throw new Error(`Big Tooltip setting is undefined for ${name}.`);
-  // }
 }

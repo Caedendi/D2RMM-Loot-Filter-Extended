@@ -35,13 +35,13 @@ export abstract class CharmConstants {
     this.charmGrandId,
   ];
 
-  static uniqueLodCharmIds = [
+  static uniqueLodCharmIds: string[] = [
     this.anniId,
     this.torchId,
     this.gheedsId,
   ];
 
-  static sunderCharms = [
+  static sunderCharms: SunderCharm[] = [
     new SunderCharm(this.sunderMagiId, this.sunderMagiName, ColorConstants.gray     ),
     new SunderCharm(this.sunderPhysId, this.sunderPhysName, ColorConstants.white    ),
     new SunderCharm(this.sunderColdId, this.sunderColdName, ColorConstants.lightBlue),

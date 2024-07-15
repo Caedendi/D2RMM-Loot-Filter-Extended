@@ -1,16 +1,15 @@
 import { CustomFilterList } from "../../CustomFilterList";
+import { Settings } from "../../Settings/Settings";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 
 export class CustomUiBuilder extends ItemBuilderBase implements IItemBuilder {
-  protected readonly shouldUseFilter: boolean = config.shouldUseCustomFilterList as boolean;
-
   constructor() {
     super();
   }
   
   public applyFilter(): void {
-    if (!this.shouldUseFilter) {
+    if (!Settings.filter.isCustomFilterListEnabled) {
       return;
     }
 

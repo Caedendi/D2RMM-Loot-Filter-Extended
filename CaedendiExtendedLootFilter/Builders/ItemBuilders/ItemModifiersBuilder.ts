@@ -2,6 +2,7 @@ import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
 import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
+import { Settings } from "../../Settings/Settings";
 import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
 import { IItemBuilder } from "./Interfaces/IItemBuilder";
 import { ItemBuilderBase } from "./ItemBuilderBase";
@@ -12,9 +13,6 @@ import { ItemBuilderBase } from "./ItemBuilderBase";
  * Used for Malah's Potion and Scroll of Resistance.
  */
 export class ItemModifiersBuilder extends ItemBuilderBase implements IItemBuilder {
-  protected readonly filterSetting: string = config.Quest as string
-  protected readonly bigTooltipsSetting: BigTooltipSetting = config.BigTooltipQuestItems as number as BigTooltipSetting;
-
   constructor() {
     super();
   }
@@ -25,7 +23,7 @@ export class ItemModifiersBuilder extends ItemBuilderBase implements IItemBuilde
     let prefix = HighlightConstants.questPrefix;
     let suffix = HighlightConstants.questSuffix;
 
-    switch (this.filterSetting) {
+    switch (Settings.filter.questEndgame.quest) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
@@ -46,7 +44,7 @@ export class ItemModifiersBuilder extends ItemBuilderBase implements IItemBuilde
   }
 
   public addBigTooltips(): void {
-    if (this.bigTooltipsSetting != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToAllEntries(this.bigTooltipsSetting);
+    if (Settings.bigTooltips.questEndgame.questItems != BigTooltipSetting.Disabled)
+      this.collection.addBigTooltipToAllEntries(Settings.bigTooltips.questEndgame.questItems);
   }
 }

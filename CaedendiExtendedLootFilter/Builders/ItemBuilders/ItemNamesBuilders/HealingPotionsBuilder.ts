@@ -4,25 +4,21 @@ import { HighlightConstants } from "../../../Constants/Items/HighlightConstants"
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
 import { D2Color } from "../../../Models/D2Color";
 import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
+import { Settings } from "../../../Settings/Settings";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
 import { ItemBuilderBase } from "../ItemBuilderBase";
 
 export class HealingPotionsBuilder extends ItemBuilderBase implements IItemBuilder {
-  protected readonly filterSetting: string = config.HealingPotions as string;
-
   protected readonly clrHeal = ColorConstants.red;
   protected readonly clrMana = ColorConstants.blue;
   protected readonly clrRej  = ColorConstants.purple;
-  protected readonly clrName = ColorConstants.white;
-  protected readonly pattern = CharConstants.plus;
-  protected readonly padding = HighlightConstants.paddingNone;
 
   constructor() {
     super();
   }
 
   public applyFilter(): void {
-    switch (this.filterSetting) {
+    switch (Settings.filter.junk.healingPotions) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
@@ -132,12 +128,10 @@ export class HealingPotionsBuilder extends ItemBuilderBase implements IItemBuild
   }
 
   protected upsertPotions(potions: {key: string, name: string, color: D2Color}[]): void {
-    potions.forEach(pot => {
-      this.collection.upsert(new SingleHighlightItemEntry(pot.key, pot.name, this.pattern, pot.color, this.padding, this.clrName));
-    });
+    potions.forEach(pot => this.upsertPotion(pot.key, pot.name, pot.color));
   }
 
   protected upsertPotion(key: string, name: string, color: D2Color): void {
-    this.collection.upsert(new SingleHighlightItemEntry(key, name, this.pattern, color, this.padding, this.clrName));
+    this.collection.upsert(new SingleHighlightItemEntry(key, name, CharConstants.plus, color, HighlightConstants.paddingNone, ColorConstants.white));
   }
 }

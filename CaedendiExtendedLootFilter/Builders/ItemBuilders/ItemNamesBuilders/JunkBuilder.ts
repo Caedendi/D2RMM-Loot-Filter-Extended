@@ -4,15 +4,11 @@ import { HighlightConstants } from "../../../Constants/Items/HighlightConstants"
 import { SettingsConstants } from "../../../Constants/SettingsConstants";
 import { D2Color } from "../../../Models/D2Color";
 import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
+import { Settings } from "../../../Settings/Settings";
 import { IItemBuilder } from "../Interfaces/IItemBuilder";
 import { ItemBuilderBase } from "../ItemBuilderBase";
 
 export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
-  protected readonly buffPotionsFilterSetting:     string = config.BuffPotions     as string;
-  protected readonly throwingPotionsFilterSetting: string = config.ThrowingPotions as string;
-  protected readonly ammoFilterSetting:            string = config.ArrowsBolts     as string;
-  protected readonly keysFilterSetting:            string = config.Keys            as string;
-
   constructor() {
     super();
   }
@@ -31,7 +27,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
       { key: "vps", name: "Stamina" },  // Stamina Potion
     ];
 
-    switch (this.buffPotionsFilterSetting) {
+    switch (Settings.filter.junk.buffPotions) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // show all
@@ -55,9 +51,6 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
   protected applyThrowingPotions(): void {
     let clrGas = ColorConstants.darkGreen;
     let clrOil = ColorConstants.orange;
-    let clrName = ColorConstants.white;
-    let highlight = CharConstants.o;
-    let padding = HighlightConstants.padding1;
   
     let throwingPots: {key: string, name: string, color: D2Color}[] = [
       { key: "gpl", name: "Gas 1", color: clrGas }, // Strangling Gas Potion
@@ -68,11 +61,11 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
       { key: "ops", name: "Oil 3", color: clrOil }, // Oil Potion
     ];
 
-    switch (this.throwingPotionsFilterSetting) {
+    switch (Settings.filter.junk.throwingPotions) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // show all
-        let entries = SingleHighlightItemEntry.createMultiColorArray(throwingPots, highlight, padding, clrName);
+        let entries = SingleHighlightItemEntry.createMultiColorArray(throwingPots, CharConstants.o, HighlightConstants.padding1, ColorConstants.white);
         this.collection.upsertMultiple(entries);
         return;
       case "hide": // hide all
@@ -102,7 +95,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
     let arrows = new SingleHighlightItemEntry(aqv, "Arrows", highlight, clrHighlight, padding, clrName);
     let bolts  = new SingleHighlightItemEntry(cqv, "Bolts",  highlight, clrHighlight, padding, clrName);
 
-    switch (this.ammoFilterSetting) {
+    switch (Settings.filter.junk.arrowsBolts) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
@@ -130,7 +123,7 @@ export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
   }
 
   protected applyKeys(): void {
-    switch (this.keysFilterSetting) {
+    switch (Settings.filter.junk.keys) {
       case SettingsConstants.disabled:
         return;
       case "hide":
