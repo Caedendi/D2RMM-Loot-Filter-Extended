@@ -1051,14 +1051,15 @@
           "type": "checkbox",
           "name": "Exclude hidden items",
           "description": "Do not set custom drop sounds for items set to hidden in the filter settings.",
-          "defaultValue": true
+          "defaultValue": true,
+          "visible": ["value", "IsDropSoundsEnabled"]
         },
         {
           "id": "DropSoundRunesSection",
           "type": "section",
           "name": "Runes",
-          "visible": ["value", "IsDropSoundsEnabled"],
           "defaultExpanded": false,
+          "visible": ["value", "IsDropSoundsEnabled"],
           "children": [
             {
               "id": "DropSoundRunesLow",
@@ -1066,7 +1067,7 @@
               "name": "Low Runes",
               "description": "Select a custom drop sound for Low Runes (El [1] - Dol [14], except Ral [8]).",
               "defaultValue": "default",
-              "visible": ["value", "DropSoundsGlobal"],
+              "visible": ["value", "IsDropSoundsEnabled"],
               "options": [
                 { "value": "default", "label": "Default" },
                 { "value": "hostile", "label": "Hostile (PVP)" },
