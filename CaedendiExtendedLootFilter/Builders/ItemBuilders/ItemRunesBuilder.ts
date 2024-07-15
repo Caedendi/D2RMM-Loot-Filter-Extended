@@ -8,10 +8,10 @@ import { RuneTier } from "../../Models/RuneTier";
 import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
 import { Settings } from "../../Settings/Settings";
 import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
-import { BigTooltipItemBuilderBase } from "./BigTooltipItemBuilderBase";
-import { IItemBuilder } from "./Interfaces/IItemBuilder";
+import { IBigTooltipItemBuilder } from "./Interfaces/IBigTooltipItemBuilder";
+import { ItemBuilderBase } from "./ItemBuilderBase";
 
-export class ItemRunesBuilder extends BigTooltipItemBuilderBase implements IItemBuilder {
+export class ItemRunesBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
   constructor() {
     super();
   }

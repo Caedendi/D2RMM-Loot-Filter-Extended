@@ -3,10 +3,10 @@ import { SettingsConstants } from "../../../Constants/SettingsConstants";
 import { Gem } from "../../../Models/Gem";
 import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
 import { Settings } from "../../../Settings/Settings";
-import { BigTooltipItemBuilderBase } from "../BigTooltipItemBuilderBase";
 import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
+import { ItemBuilderBase } from "../ItemBuilderBase";
 
-export class GemsBuilder extends BigTooltipItemBuilderBase implements IBigTooltipItemBuilder {
+export class GemsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
   constructor() {
     super();
   }

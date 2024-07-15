@@ -4,7 +4,7 @@ import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry"
 import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
 import { Settings } from "../../Settings/Settings";
 import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
-import { IItemBuilder } from "./Interfaces/IItemBuilder";
+import { IBigTooltipItemBuilder } from "./Interfaces/IBigTooltipItemBuilder";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 
 /**
@@ -12,7 +12,7 @@ import { ItemBuilderBase } from "./ItemBuilderBase";
  * 
  * Used for Malah's Potion and Scroll of Resistance.
  */
-export class ItemModifiersBuilder extends ItemBuilderBase implements IItemBuilder {
+export class ItemModifiersBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
   constructor() {
     super();
   }

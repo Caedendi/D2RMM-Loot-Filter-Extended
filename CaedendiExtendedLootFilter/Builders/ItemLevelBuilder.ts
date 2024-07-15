@@ -1,94 +1,74 @@
-import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { JewelryConstants } from "../Constants/Items/JewelryConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
-import { BigTooltipsSettings } from "../Settings/BigTooltipsSettings";
+import { JewelryConstants } from "../Constants/Items/JewelryConstants";
+import { BigTooltipSetting } from "../Settings/BigTooltipsSettings";
 import { Settings } from "../Settings/Settings";
 
 //  extends ItemBuilderBase implements IItemBuilder
-export class ItemLevelBuilder extends ItemBuilder {
+export class ItemLevelBuilder {
   protected readonly isBigTooltipsEnabled: boolean = Settings.bigTooltips.isEnabled;
-  protected readonly weaponsExclusions: string[] = this.createWeaponsExclusions();
-  protected readonly miscExclusions: string[] = this.createMiscExclusions();
+  protected readonly weaponsExclusions: string[];
+  protected readonly miscExclusions: string[];
 
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
 
-  build() {
+  public build() {
     if (!Settings.statsAndModifiers.itemLevel.isEnabled)
       return;
 
-    // contrary to all other builders, these 3 collections are used for items that we do _not_ want to show their iLvl
-    let weaponsCol = this.getCollectionById(CollectionConstants.weapons);
-    // let armorCol   = this.getCollectionById(CollectionConstants.armor);
-    let miscCol = this.getCollectionById(CollectionConstants.misc);
-    this.addExclusions(weaponsCol, miscCol);
+    this.setWeaponsExclusions();
+    this.setMiscExclusions();
 
-    this.enableForWeapons(weaponsCol.map(item => item.id));
+    this.enableForWeapons();
     this.enableForArmor();
-    this.enableForMiscItems(miscCol.map(item => item.id));
+    this.enableForMiscItems();
   }
 
-  private createWeaponsExclusions(): string[] {
-    let list: string[] = [];
-    list.push("tpot");
+  private setWeaponsExclusions(): void {
+    this.weaponsExclusions.push("tpot"); // always exclude throwing pots
 
-    if (!this.isBigTooltipsEnabled || !BigTooltipsSettings.shouldExcludeIlvl)
+    if ( !Settings.bigTooltips.isEnabled 
+      || !Settings.bigTooltips.shouldHideIlvl 
+      ||  Settings.bigTooltips.questEndgame.questItems == BigTooltipSetting.Disabled)
       return;
 
-    return list;
+    // exclude quest weapons with iLvls if Big Tooltips is enabled
+    [
+      "leg", // Wirt's Leg
+      "hdm", // Horadric Malus
+      "msf", // Staff of Kings
+      "hst", // Horadric Staff
+      "g33", // The Gidbinn
+      "qf1", // Khalim's Flail
+      "qf2", // Khalim's Will
+      "hfh", // Hell Forge Hammer
+    ].forEach(questWeapon => this.weaponsExclusions.push(questWeapon));
   }
-
-  private createMiscExclusions(): string[] {
     
-    return [];
-  }
-
-  addExclusions(weaponsCol: {id: string, value: string}[], miscCol: {id: string, value: string}[]) {
-    this.upsert(weaponsCol, "tpot", CharConstants.empty); // always exclude throwing potions
-
-    if (!config.IsBigTooltipsEnabled || !BigTooltipsSettings.shouldExcludeIlvl) {
+  protected setMiscExclusions(): void {
+    if (!Settings.bigTooltips.isEnabled || !Settings.bigTooltips.shouldHideIlvl)
       return;
-    }
+    
+    if (Settings.bigTooltips.jewelry.facetsSetting != BigTooltipSetting.Disabled)
+      this.miscExclusions.push(JewelryConstants.jewelId);
+    if (Settings.bigTooltips.jewelry.uniqueCharmsSetting != BigTooltipSetting.Disabled)
+      CharmConstants.charmIds.forEach(charm => this.miscExclusions.push(charm));
 
-    if (config.BigTooltipFacets !== SettingsConstants.disabled) {
-      this.upsert(miscCol, JewelryConstants.jewelId, CharConstants.empty);
-    }
-
-    if (config.BigTooltipUniqueCharms !== SettingsConstants.disabled) {
-      CharmConstants.charmIds.forEach(charm => {
-        this.upsert(miscCol, charm, CharConstants.empty);
-      });
-    }
-
-    if (config.BigTooltipQuestItems !== SettingsConstants.disabled) {
-      // this.upsert(miscCol, "vip", CharConstants.empty); // amulet of the viper // todo: check if this has ilvl and correct here + in quest item naming
-      [
-        "leg", // Wirt's Leg
-        "hdm", // Horadric Malus
-        "msf", // Staff of Kings
-        "hst", // Horadric Staff
-        "g33", // The Gidbinn
-        "qf1", // Khalim's Flail
-        "qf2", // Khalim's Will
-        "hfh", // Hell Forge Hammer
-      ].forEach(questWeapon => {
-        this.upsert(weaponsCol, questWeapon, CharConstants.empty);
-      });
-    }
+    // TODO: check if this has ilvl and correct here + in quest item naming
+    // this.upsert(miscCol, "vip", CharConstants.empty); // amulet of the viper // todo: 
   }
 
-  enableForWeapons(exclusions :string[]) {
-    this.enableForWeaponsArmor(FileConstants.FILE_WEAPONS_PATH, exclusions);
+  protected enableForWeapons() {
+    this.enableForWeaponsArmor(FileConstants.FILE_WEAPONS_PATH, this.weaponsExclusions);
   }
 
-  enableForArmor() {
+  protected enableForArmor() {
     this.enableForWeaponsArmor(FileConstants.FILE_ARMOR_PATH, []);
   }
 
-  enableForWeaponsArmor(path: string, exclusions: string[]) {
+  protected enableForWeaponsArmor(path: string, exclusions: string[]) {
     const fileWeapons = D2RMM.readTsv(path);
 
     // in these files, all entries need ShowLevel to be set to 1, except those in the exclusions list.
@@ -102,12 +82,12 @@ export class ItemLevelBuilder extends ItemBuilder {
     D2RMM.writeTsv(path, fileWeapons);
   }
 
-  enableForMiscItems(exclusions: string[]) {
+  protected enableForMiscItems() {
     const fileMisc = D2RMM.readTsv(FileConstants.FILE_MISC_PATH);
 
     // in this file, we only want the entries matching JewelryConstants.iLvlJewelry to have their ShowLevel be set to 1.
     // matching JewelryConstants.iLvlJewelry against the exclusions list makes the target list even smaller.
-    let misc = JewelryConstants.iLvlJewelry.filter(item => !exclusions.includes(item));
+    let misc = JewelryConstants.iLvlJewelry.filter(item => !this.miscExclusions.includes(item));
     fileMisc.rows.forEach((row) => {
       if (misc.includes(row.code)) {
         row.ShowLevel = "1";

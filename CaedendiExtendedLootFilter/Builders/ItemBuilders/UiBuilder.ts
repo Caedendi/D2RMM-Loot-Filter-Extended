@@ -4,9 +4,10 @@ import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry"
 import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
 import { Settings } from "../../Settings/Settings";
 import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { IBigTooltipItemBuilder } from "./Interfaces/IBigTooltipItemBuilder";
 import { ItemBuilderBase } from "./ItemBuilderBase";
 
-export class UiBuilder extends ItemBuilderBase {
+export class UiBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
   constructor() {
     super();
   }

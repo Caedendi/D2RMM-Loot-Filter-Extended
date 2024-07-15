@@ -9,10 +9,10 @@ import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry"
 import { BigTooltipSetting } from "../../Settings/BigTooltipsSettings";
 import { Settings } from "../../Settings/Settings";
 import { TooltipSettings } from "../../Settings/TooltipSettings";
-import { BigTooltipItemBuilderBase } from "./BigTooltipItemBuilderBase";
-import { IItemBuilder } from "./Interfaces/IItemBuilder";
+import { IBigTooltipItemBuilder } from "./Interfaces/IBigTooltipItemBuilder";
+import { ItemBuilderBase } from "./ItemBuilderBase";
 
-export class ItemNameAffixesBuilder extends BigTooltipItemBuilderBase implements IItemBuilder {
+export class ItemNameAffixesBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
   protected readonly gems: Gem[] = GemConstants.gemExceptions;
 
   constructor() {

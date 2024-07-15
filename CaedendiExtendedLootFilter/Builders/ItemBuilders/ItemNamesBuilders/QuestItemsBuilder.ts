@@ -4,10 +4,10 @@ import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEnt
 import { ItemEntry } from "../../../Models/ItemEntry";
 import { Settings } from "../../../Settings/Settings";
 import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
-import { BigTooltipItemBuilderBase } from "../BigTooltipItemBuilderBase";
 import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
+import { ItemBuilderBase } from "../ItemBuilderBase";
 
-export class QuestItemsBuilder extends BigTooltipItemBuilderBase implements IBigTooltipItemBuilder {
+export class QuestItemsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
   protected readonly prefix = HighlightConstants.questPrefix;
   protected readonly suffix = HighlightConstants.questSuffix;
 

@@ -5,13 +5,13 @@ import { ItemEntry } from "../../../Models/ItemEntry";
 import { BigTooltipSetting } from "../../../Settings/BigTooltipsSettings";
 import { Settings } from "../../../Settings/Settings";
 import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
-import { IItemBuilder } from "../Interfaces/IItemBuilder";
+import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
 import { ItemBuilderBase } from "../ItemBuilderBase";
 
 /**
  * Endgame: Pandemonium Event Items, Essences & Tokens of Absolution
  */
-export class EndgameItemsBuilder extends ItemBuilderBase implements IItemBuilder {
+export class EndgameItemsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
   constructor() {
     super();
   }

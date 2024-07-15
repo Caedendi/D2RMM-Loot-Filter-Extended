@@ -3,8 +3,7 @@ import { Settings } from "../Settings/Settings";
 import { StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
 
 export class ItemQualityBuilder {
-  // todo: refactor if possible
-  build() {
+  public build() { // todo: refactor if possible
     if (!Settings.statsAndModifiers.itemQuality.isEnabled) {
       return;
     }
@@ -22,35 +21,34 @@ export class ItemQualityBuilder {
     D2RMM.writeJson(FileConstants.FILE_ITEM_NAMES_PATH, fileItemNames);
   }
 
-  addEquipmentQuality(equipmentRowsWithQuality, itemNamesFile) {
+  protected addEquipmentQuality(equipmentRowsWithQuality, itemNamesFile) {
     equipmentRowsWithQuality.forEach(item => {
-      // get index and check if exists
-      const index = itemNamesFile.findIndex(x => x.Key === item.code);
-      if (index < 0) {
+      let index = itemNamesFile.findIndex(x => x.Key === item.code); // get index and check if exists
+      if (index < 0)
         return;
-      }
       
-      // create quality tag
-      var indicator = this.getQualityIndicatorForItem(item);
-      let tag = `${StatsAndModifiersSettings.openChar}${indicator}${StatsAndModifiersSettings.closeChar}`;
-
-      // set indicator tag in name for all items
-      for (const key in itemNamesFile[index]) {
-        if (key !== FileConstants.id && key !== FileConstants.key) { // set to all entries that arent "Key" and "id"
-          itemNamesFile[index][key] = Settings.statsAndModifiers.itemQuality.placement === "prefix" 
-            ? `${tag} ${itemNamesFile[index][key]}`
-            : `${itemNamesFile[index][key]} ${tag}`;
-        }
-      }
+      let tag = `${StatsAndModifiersSettings.openChar}${this.getQualityIndicatorForItem(item)}${StatsAndModifiersSettings.closeChar}`;
+      this.setTagForAllTranslationsAtIndex(itemNamesFile, index, tag);
     });
   }
 
-  private getQualityIndicatorForItem(item): string {
-    return item.code === item.ultracode 
-      ? StatsAndModifiersSettings.eliteQualityIndicator 
-      : (item.code === item.ubercode 
-        ? StatsAndModifiersSettings.exceptionalQualityIndicator 
-        : StatsAndModifiersSettings.normalQualityIndicator
-        );
+  protected setTagForAllTranslationsAtIndex(itemNamesFile, index, tag): void {
+    for (const key in itemNamesFile[index]) {
+      if (key === FileConstants.id || key !== FileConstants.key) // set to all translation entries that aren't "Key" and "id"
+        return;
+      
+      itemNamesFile[index][key] = (Settings.statsAndModifiers.itemQuality.placement === "prefix")
+        ? `${tag} ${itemNamesFile[index][key]}`  // prefix tag
+        : `${itemNamesFile[index][key]} ${tag}`; // suffix tag
+    }
+  }
+
+  protected getQualityIndicatorForItem(item): string {
+    if (item.code === item.ultracode)
+      return StatsAndModifiersSettings.eliteQualityIndicator;
+    if (item.code === item.ubercode)
+      return StatsAndModifiersSettings.exceptionalQualityIndicator;
+
+    return StatsAndModifiersSettings.normalQualityIndicator;
   }
 }

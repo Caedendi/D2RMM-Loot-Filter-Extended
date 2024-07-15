@@ -6,12 +6,8 @@ import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
 
 export class LightPillarBuilder {
-  protected readonly isEnabled = Settings.lightPillars.isEnabled;
-  protected readonly shouldExcludeForHidden = Settings.lightPillars.shouldExcludeForHidden;
-  protected readonly gemsFilterSetting = Settings.filter.jewelry.gems;
-
-  build() {
-    if (!this.isEnabled) {
+  public build() {
+    if (!Settings.lightPillars.isEnabled) {
       return;
     }
 
@@ -28,9 +24,9 @@ export class LightPillarBuilder {
   }
 
   // runes
-  pushLightPillarsForRunes() {
+  protected pushLightPillarsForRunes() {
     RuneConstants.tiers.forEach(tier => {
-      if (!tier.getHasLightPillar() || (this.shouldExcludeForHidden && tier.isHidden())) {
+      if (!tier.getHasLightPillar() || (Settings.lightPillars.shouldExcludeForHidden && tier.isHidden())) {
         return;
       }
 
@@ -41,7 +37,7 @@ export class LightPillarBuilder {
   }
 
   // rings & amulets
-  pushLightPillarsForRingsAmulets() {
+  protected pushLightPillarsForRingsAmulets() {
     if (Settings.lightPillars.jewelry.isRingsEnabled)
       this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}ring\\`, "ring");
     if (Settings.lightPillars.jewelry.isAmuletsEnabled)
@@ -49,9 +45,9 @@ export class LightPillarBuilder {
   }
 
   // gems & jewels
-  pushLightPillarsForGemsJewels() {
+  protected pushLightPillarsForGemsJewels() {
     if (!Settings.lightPillars.jewelry.isGemsJewelsEnabled
-      || (this.shouldExcludeForHidden && Settings.filter.jewelry.gems === SettingsConstants.disabled)) {
+      || (Settings.lightPillars.shouldExcludeForHidden && Settings.filter.jewelry.gems === SettingsConstants.disabled)) {
       return;
     }
 
@@ -65,13 +61,13 @@ export class LightPillarBuilder {
     });
   }
 
-  getLightPillarGemQualities() {
+  private getLightPillarGemQualities() {
     let gemQualities = ["perfect_"];
-    if (this.gemsFilterSetting === "perfect" && Settings.lightPillars.shouldExcludeForHidden) {
+    if (Settings.filter.jewelry.gems === "perfect" && Settings.lightPillars.shouldExcludeForHidden) {
       return gemQualities;
     }
     gemQualities.push("flawless_");
-    if (this.gemsFilterSetting === "flawless" && Settings.lightPillars.shouldExcludeForHidden) {
+    if (Settings.filter.jewelry.gems === "flawless" && Settings.lightPillars.shouldExcludeForHidden) {
       return gemQualities;
     }
 
@@ -79,7 +75,7 @@ export class LightPillarBuilder {
   }
 
   // charms
-  pushLightPillarsForCharms() {
+  protected pushLightPillarsForCharms() {
     if (!Settings.lightPillars.jewelry.isCharmsEnabled) {
       return;
     }
@@ -94,7 +90,7 @@ export class LightPillarBuilder {
   }
 
   // quest items
-  pushLightPillarsForQuestItems() {
+  protected pushLightPillarsForQuestItems() {
     if (!Settings.lightPillars.questEndgame.isQuestItemsEnabled && !Settings.lightPillars.questEndgame.isQuestWeaponsEnabled) {
       return;
     }
@@ -160,7 +156,7 @@ export class LightPillarBuilder {
   }
 
   // essences
-  pushLightPillarsForEssences() {
+  protected pushLightPillarsForEssences() {
     if (!Settings.lightPillars.questEndgame.isEssencesEnabled) {
       return;
     }
@@ -172,7 +168,7 @@ export class LightPillarBuilder {
   }
 
   // token
-  pushLightPillarForToken() {
+  protected pushLightPillarForToken() {
     if (!Settings.lightPillars.questEndgame.isTokensEnabled) {
       return;
     }
@@ -181,7 +177,7 @@ export class LightPillarBuilder {
   }
 
   // pandemonium keys
-  pushLightPillarsForKeys() {
+  protected pushLightPillarsForKeys() {
     if (!Settings.lightPillars.questEndgame.isKeysEnabled) {
       return;
     }
@@ -196,7 +192,7 @@ export class LightPillarBuilder {
   }
 
   // pandemonium event (ubers) organs
-  pushLightPillarsForUberOrgans() {
+  protected pushLightPillarsForUberOrgans() {
     if (!Settings.lightPillars.questEndgame.isOrgansEnabled) {
       return;
     }
@@ -211,7 +207,7 @@ export class LightPillarBuilder {
   }
 
   // standard of heroes
-  pushLightPillarForStandardOfHeroes() {
+  protected pushLightPillarForStandardOfHeroes() {
     if (!Settings.lightPillars.questEndgame.isStandardEnabled
       || (Settings.lightPillars.shouldExcludeForHidden && Settings.filter.questEndgame.endgame === "hsh")) {
       return;
@@ -220,14 +216,14 @@ export class LightPillarBuilder {
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "flag");
   }
 
-  pushLightPillarToPath(path, item) {
+  protected pushLightPillarToPath(path: string, item: string) {
     let filePath = `${path}${item}${FileConstants.FILE_EXTENSION_JSON}`;
     let file = D2RMM.readJson(filePath);
     this.pushLightPillarToFile(file);
     D2RMM.writeJson(filePath, file);
   }
 
-  pushLightPillarToFile(file) {
+  protected pushLightPillarToFile(file) {
     file.dependencies.particles.push(LightPillarConstants.LIGHT_PILLAR_COMPONENT.particle);
     file.entities = file.entities.concat(LightPillarConstants.LIGHT_PILLAR_COMPONENT.entities);
   }

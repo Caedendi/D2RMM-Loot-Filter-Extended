@@ -6,10 +6,10 @@ import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEnt
 import { ItemEntry } from "../../../Models/ItemEntry";
 import { Settings } from "../../../Settings/Settings";
 import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
-import { BigTooltipItemBuilderBase } from "../BigTooltipItemBuilderBase";
 import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
+import { ItemBuilderBase } from "../ItemBuilderBase";
 
-export class JewelsBuilder extends BigTooltipItemBuilderBase implements IBigTooltipItemBuilder {
+export class JewelsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
   constructor() {
     super();
   }

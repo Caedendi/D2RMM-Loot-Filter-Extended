@@ -6,9 +6,6 @@ import { ItemNamesWriter } from "./Writers/ItemNamesWriter";
 import { ItemRunesWriter } from "./Writers/ItemRunesWriter";
 import { UiWriter } from "./Writers/UiWriter";
 
-/**
- * Master Builder
- */
 export class CaedendiExtendedLootFilterMod {
   public readonly requiredD2rmmVersion: D2rmmVersion = new D2rmmVersion(1, 7, 0);
   protected writers: IWriter[];

@@ -5,7 +5,7 @@ import { Settings } from "../Settings/Settings";
 
 // TODO: fix
 export class ProfileHdModsBuilder {
-  build() {
+  public build() {
     let path = FileConstants.FILE_PROFILE_HD_PATH; // TODO: low vision and controller modes
     let profileHD = D2RMM.readJson(path);
 
