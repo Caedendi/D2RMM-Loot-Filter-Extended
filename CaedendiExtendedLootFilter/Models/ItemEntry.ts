@@ -44,9 +44,7 @@ export class ItemEntry {
   }
 
   public addBigTooltip(setting: BigTooltipSetting): void {
-    this.bigTooltipSetting = setting; // TODO: remove?
-
-     switch (setting) {
+    switch (+setting) {
       // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
       case BigTooltipSetting.Disabled:
         break;

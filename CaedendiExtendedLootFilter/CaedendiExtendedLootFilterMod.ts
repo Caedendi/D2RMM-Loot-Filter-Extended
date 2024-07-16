@@ -14,6 +14,7 @@ export class CaedendiExtendedLootFilterMod {
   public build(): void {
     this.checkVersion();
     this.initializeBuilders();
+    this.buildAll();
   }
   
   protected checkVersion() {

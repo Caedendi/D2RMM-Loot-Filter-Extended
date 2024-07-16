@@ -7,6 +7,7 @@ import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItem
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
 export class GemsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
+
   constructor() {
     super();
   }

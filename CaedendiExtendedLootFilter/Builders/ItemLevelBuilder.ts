@@ -7,8 +7,8 @@ import { IBuilder } from "./Interfaces/IBuilder";
 //  extends ItemBuilderBase implements IItemBuilder
 export class ItemLevelBuilder implements IBuilder {
   protected readonly isBigTooltipsEnabled: boolean = Settings.bigTooltips.isEnabled;
-  protected readonly weaponsExclusions: string[];
-  protected readonly miscExclusions: string[];
+  protected readonly weaponsExclusions: string[] = [];
+  protected readonly miscExclusions: string[] = [];
 
   public build() {
     if (!Settings.statsAndModifiers.itemLevel.isEnabled)

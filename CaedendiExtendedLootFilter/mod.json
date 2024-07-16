@@ -293,8 +293,7 @@
               "defaultValue": "facet",
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "facet", "label": "Highlight Facets" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "facet", "label": "Highlight Facets" }
               ]
             },
             {
