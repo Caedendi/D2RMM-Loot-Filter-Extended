@@ -7,7 +7,7 @@ export class ItemEntry {
   protected readonly key: string;
   protected name: string;
   protected isVisible: boolean = true;
-  protected bigTooltipSetting: BigTooltipSetting = BigTooltipSetting.Disabled; // TODO: remove?
+  protected bigTooltipSetting: BigTooltipSetting = BigTooltipSetting.Disabled;
   protected bigTooltipPrefix:  string = CharConstants.empty;
   protected bigTooltipSuffix:  string = CharConstants.empty;
   protected bigTooltipPadding: string = HighlightConstants.bttPadding
@@ -36,16 +36,16 @@ export class ItemEntry {
     if (!this.isVisible)
       return Settings.filter.settings.hidden;
 
-    if (!this.hasBigTooltip)
+    if (!this.hasBigTooltip())
       return this.name;
 
     // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
     return `${this.bigTooltipSuffix}${this.bigTooltipPadding}${this.name}${this.bigTooltipPadding}${this.bigTooltipPrefix}`;
   }
 
+  // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
   public addBigTooltip(setting: BigTooltipSetting): void {
     switch (+setting) {
-      // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
       case BigTooltipSetting.Disabled:
         break;
       case BigTooltipSetting.TwoLines:
@@ -53,7 +53,7 @@ export class ItemEntry {
         break;
       case BigTooltipSetting.TwoLinesPickUp:
         this.bigTooltipPrefix = this.createTwosLinePickUpBigTooltipPrefix();
-        // prefix = `${CharConstants.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}`;
+        // prefix = `${CharConstants.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}`; // TODO: remove
         break;
       case BigTooltipSetting.ThreeLines:
         this.bigTooltipPrefix = `${CharConstants.newLine}`;
