@@ -1,8 +1,9 @@
 import { FileConstants } from "../Constants/FileConstants";
 import { Settings } from "../Settings/Settings";
 import { StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
+import { IBuilder } from "./Interfaces/IBuilder";
 
-export class ItemQualityBuilder {
+export class ItemQualityBuilder implements IBuilder {
   public build() { // todo: refactor if possible
     if (!Settings.statsAndModifiers.itemQuality.isEnabled) {
       return;

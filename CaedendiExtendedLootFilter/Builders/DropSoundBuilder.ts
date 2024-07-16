@@ -3,8 +3,9 @@ import { FileConstants } from "../Constants/FileConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
 import { Settings } from "../Settings/Settings";
+import { IBuilder } from "./Interfaces/IBuilder";
 
-export class DropSoundBuilder {
+export class DropSoundBuilder implements IBuilder {
   public build() {
     if (!Settings.dropSounds.isEnabled) {
       return;
@@ -141,7 +142,9 @@ export class DropSoundBuilder {
     soundsFile.rows.push(newSound);
   }
 
-  // give items in filePath with corresponding itemCodes the newly created dropSound in sounds.txt
+  /**
+   * assign the newly created dropSound in sounds.txt to the items with the corresponding itemCodes in filePath
+   */
   protected pushNewDropSoundToItems(itemsFilePath:string, itemCodes:string[], dropSound:string) {
     let file = D2RMM.readTsv(itemsFilePath);
 

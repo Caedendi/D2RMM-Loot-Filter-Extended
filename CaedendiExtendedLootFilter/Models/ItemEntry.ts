@@ -12,8 +12,6 @@ export class ItemEntry {
   protected bigTooltipSuffix:  string = CharConstants.empty;
   protected bigTooltipPadding: string = HighlightConstants.bttPadding
 
-  protected readonly newLine: string = CharConstants.newLine;
-
   constructor(key: string, name: string) {
     this.key = key;
     this.name = name;
@@ -53,28 +51,28 @@ export class ItemEntry {
       case BigTooltipSetting.Disabled:
         break;
       case BigTooltipSetting.TwoLines:
-        this.bigTooltipPrefix = `${this.newLine}`;
+        this.bigTooltipPrefix = `${CharConstants.newLine}`;
         break;
       case BigTooltipSetting.TwoLinesPickUp:
         this.bigTooltipPrefix = this.createTwosLinePickUpBigTooltipPrefix();
-        // prefix = `${this.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}`;
+        // prefix = `${CharConstants.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}`;
         break;
       case BigTooltipSetting.ThreeLines:
-        this.bigTooltipPrefix = `${this.newLine}`;
-        this.bigTooltipSuffix = `${this.newLine}`;
+        this.bigTooltipPrefix = `${CharConstants.newLine}`;
+        this.bigTooltipSuffix = `${CharConstants.newLine}`;
         break;
       case BigTooltipSetting.FourLinesPickUp:
         this.bigTooltipPrefix = this.createFourLinesPickUpBigTooltipPrefix();
-        // prefix = `${this.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}${this.newLine}`;
-        this.bigTooltipSuffix = `${this.newLine}`;
+        // prefix = `${CharConstants.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}${CharConstants.newLine}`;
+        this.bigTooltipSuffix = `${CharConstants.newLine}`;
         break;
       case BigTooltipSetting.FiveLines:
-        this.bigTooltipPrefix = `${this.newLine}${this.newLine}`;
-        this.bigTooltipSuffix = `${this.newLine}${this.newLine}`;
+        this.bigTooltipPrefix = `${CharConstants.newLine}${CharConstants.newLine}`;
+        this.bigTooltipSuffix = `${CharConstants.newLine}${CharConstants.newLine}`;
         break;
       case BigTooltipSetting.Custom: // [CSTM-BTT]
-        this.bigTooltipPrefix = `${this.newLine}`; // ADD YOUR CUSTOM BIG TOOLTIP HERE
-        this.bigTooltipSuffix = `${this.newLine}`; // ADD YOUR CUSTOM BIG TOOLTIP HERE
+        this.bigTooltipPrefix = `${CharConstants.newLine}`; // ADD YOUR CUSTOM BIG TOOLTIP HERE
+        this.bigTooltipSuffix = `${CharConstants.newLine}`; // ADD YOUR CUSTOM BIG TOOLTIP HERE
         break;
       default:
         throw new Error("Invalid Big Tooltip setting in ItemEntry.addBigTooltip().");
@@ -82,11 +80,11 @@ export class ItemEntry {
   }
 
   protected createTwosLinePickUpBigTooltipPrefix(): string {
-    return `${this.newLine}${HighlightConstants.bttPickUpMsg}`;
+    return `${CharConstants.newLine}${HighlightConstants.bttPickUpMsg}`;
   }
 
   protected createFourLinesPickUpBigTooltipPrefix(): string {
-    return `${this.newLine}${HighlightConstants.bttPickUpMsg}${this.newLine}`;
+    return `${CharConstants.newLine}${HighlightConstants.bttPickUpMsg}${CharConstants.newLine}`;
   }
 
   public getKey(): string {

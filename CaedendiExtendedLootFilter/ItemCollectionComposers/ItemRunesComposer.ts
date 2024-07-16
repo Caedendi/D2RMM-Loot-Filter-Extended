@@ -1,16 +1,16 @@
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { RuneConstants } from "../../Constants/Items/RuneConstants";
-import { D2Color } from "../../Models/D2Color";
-import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../Models/ItemEntry";
-import { Rune } from "../../Models/Rune";
-import { RuneTier } from "../../Models/RuneTier";
-import { BigTooltipSetting, Settings } from "../../Settings/Settings";
-import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemBuilder } from "./Interfaces/IBigTooltipItemBuilder";
-import { ItemBuilderBase } from "./ItemBuilderBase";
+import { ColorConstants } from "../Constants/Colors/ColorConstants";
+import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { D2Color } from "../Models/D2Color";
+import { DoubleHighlightItemEntry } from "../Models/DoubleHighlightItemEntry";
+import { ItemEntry } from "../Models/ItemEntry";
+import { Rune } from "../Models/Rune";
+import { RuneTier } from "../Models/RuneTier";
+import { BigTooltipSetting, Settings } from "../Settings/Settings";
+import { iLvlFix } from "../Settings/StatsAndModifiersSettings";
+import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
+import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
-export class ItemRunesBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
+export class ItemRunesComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
   constructor() {
     super();
   }

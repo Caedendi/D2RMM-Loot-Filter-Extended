@@ -1,16 +1,16 @@
-import { EndgameConstants } from "../../../Constants/Items/EndgameConstants";
-import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../../Models/ItemEntry";
-import { BigTooltipSetting, Settings } from "../../../Settings/Settings";
-import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
-import { ItemBuilderBase } from "../ItemBuilderBase";
+import { EndgameConstants } from "../../Constants/Items/EndgameConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
+import { ItemEntry } from "../../Models/ItemEntry";
+import { BigTooltipSetting, Settings } from "../../Settings/Settings";
+import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
+import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
 /**
  * Endgame: Pandemonium Event Items, Essences & Tokens of Absolution
  */
-export class EndgameItemsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
+export class EndgameItemsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
   constructor() {
     super();
   }

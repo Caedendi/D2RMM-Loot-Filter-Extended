@@ -1,14 +1,14 @@
-import { CharConstants } from "../../../Constants/CharConstants";
-import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
-import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { D2Color } from "../../../Models/D2Color";
-import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
-import { ItemBuilderBase } from "../ItemBuilderBase";
-import { IItemBuilder } from "../Interfaces/IItemBuilder";
-import { Settings } from "../../../Settings/Settings";
+import { CharConstants } from "../../Constants/CharConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { D2Color } from "../../Models/D2Color";
+import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
+import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
+import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
+import { Settings } from "../../Settings/Settings";
 
-export class ScrollsAndTomesBuilder extends ItemBuilderBase implements IItemBuilder {
+export class ScrollsAndTomesComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   protected readonly clrScroll: D2Color = ColorConstants.green;
   protected readonly clrTome:   D2Color = ColorConstants.darkGreen;
   protected readonly clrName:   D2Color = ColorConstants.white;

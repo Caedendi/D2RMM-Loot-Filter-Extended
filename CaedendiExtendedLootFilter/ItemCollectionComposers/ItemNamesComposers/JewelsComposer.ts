@@ -1,15 +1,15 @@
-import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
-import { FacetConstants } from "../../../Constants/Items/FacetConstants";
-import { JewelryConstants } from "../../../Constants/Items/JewelryConstants";
-import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../../Models/ItemEntry";
-import { Settings } from "../../../Settings/Settings";
-import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
-import { ItemBuilderBase } from "../ItemBuilderBase";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { FacetConstants } from "../../Constants/Items/FacetConstants";
+import { JewelryConstants } from "../../Constants/Items/JewelryConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
+import { ItemEntry } from "../../Models/ItemEntry";
+import { Settings } from "../../Settings/Settings";
+import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
+import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
-export class JewelsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
+export class JewelsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
   constructor() {
     super();
   }

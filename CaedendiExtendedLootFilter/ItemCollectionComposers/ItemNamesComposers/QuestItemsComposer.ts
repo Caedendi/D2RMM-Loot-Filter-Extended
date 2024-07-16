@@ -1,13 +1,13 @@
-import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../../Models/ItemEntry";
-import { Settings } from "../../../Settings/Settings";
-import { iLvlFix } from "../../../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
-import { ItemBuilderBase } from "../ItemBuilderBase";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
+import { ItemEntry } from "../../Models/ItemEntry";
+import { Settings } from "../../Settings/Settings";
+import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
+import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
-export class QuestItemsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
+export class QuestItemsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
   protected readonly prefix = HighlightConstants.questPrefix;
   protected readonly suffix = HighlightConstants.questSuffix;
 

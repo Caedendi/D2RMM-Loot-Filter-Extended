@@ -1,11 +1,12 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { LightPillarConstants } from "../Constants/LightPillarConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { LightPillarConstants } from "../Constants/LightPillarConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
+import { IBuilder } from "./Interfaces/IBuilder";
 
-export class LightPillarBuilder {
+export class LightPillarBuilder implements IBuilder {
   public build() {
     if (!Settings.lightPillars.isEnabled) {
       return;

@@ -1,16 +1,16 @@
-import { CharConstants } from "../../Constants/CharConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { GemConstants } from "../../Constants/Items/GemConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { D2Color } from "../../Models/D2Color";
-import { Gem } from "../../Models/Gem";
-import { ItemEntry } from "../../Models/ItemEntry";
-import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
-import { BigTooltipSetting, Settings } from "../../Settings/Settings";
-import { IBigTooltipItemBuilder } from "./Interfaces/IBigTooltipItemBuilder";
-import { ItemBuilderBase } from "./ItemBuilderBase";
+import { CharConstants } from "../Constants/CharConstants";
+import { ColorConstants } from "../Constants/Colors/ColorConstants";
+import { GemConstants } from "../Constants/Items/GemConstants";
+import { SettingsConstants } from "../Constants/SettingsConstants";
+import { D2Color } from "../Models/D2Color";
+import { Gem } from "../Models/Gem";
+import { ItemEntry } from "../Models/ItemEntry";
+import { SingleHighlightItemEntry } from "../Models/SingleHighlightItemEntry";
+import { BigTooltipSetting, Settings } from "../Settings/Settings";
+import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
+import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
-export class ItemNameAffixesBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
+export class ItemNameAffixesComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
   protected readonly gems: Gem[] = GemConstants.gemExceptions;
 
   constructor() {

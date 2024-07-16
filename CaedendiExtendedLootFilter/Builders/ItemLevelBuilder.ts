@@ -2,16 +2,13 @@ import { FileConstants } from "../Constants/FileConstants";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
 import { JewelryConstants } from "../Constants/Items/JewelryConstants";
 import { BigTooltipSetting, Settings } from "../Settings/Settings";
+import { IBuilder } from "./Interfaces/IBuilder";
 
 //  extends ItemBuilderBase implements IItemBuilder
-export class ItemLevelBuilder {
+export class ItemLevelBuilder implements IBuilder {
   protected readonly isBigTooltipsEnabled: boolean = Settings.bigTooltips.isEnabled;
   protected readonly weaponsExclusions: string[];
   protected readonly miscExclusions: string[];
-
-  // constructor() {
-  //   super();
-  // }
 
   public build() {
     if (!Settings.statsAndModifiers.itemLevel.isEnabled)

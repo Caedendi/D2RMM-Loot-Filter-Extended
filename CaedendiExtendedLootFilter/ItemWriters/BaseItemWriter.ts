@@ -1,10 +1,10 @@
-import { IBigTooltipItemBuilder } from "../../Builders/ItemBuilders/Interfaces/IBigTooltipItemBuilder";
-import { IItemBuilder } from "../../Builders/ItemBuilders/Interfaces/IItemBuilder";
-import { CharConstants } from "../../Constants/CharConstants";
-import { FileConstants } from "../../Constants/FileConstants";
-import { Helper } from "../../Helper";
-import { ItemCollection } from "../../Models/ItemCollection";
-import { Settings } from "../../Settings/Settings";
+import { CharConstants } from "../Constants/CharConstants";
+import { FileConstants } from "../Constants/FileConstants";
+import { Helper } from "../Helper";
+import { IBigTooltipItemCollectionComposer } from "../ItemCollectionComposers/Interfaces/IBigTooltipItemCollectionComposer";
+import { IItemCollectionComposer } from "../ItemCollectionComposers/Interfaces/IItemCollectionComposer";
+import { ItemCollection } from "../Models/ItemCollection";
+import { Settings } from "../Settings/Settings";
 import { IItemWriter } from "./Interfaces/IItemWriter";
 
 /**
@@ -15,7 +15,7 @@ import { IItemWriter } from "./Interfaces/IItemWriter";
  */
 export abstract class BaseItemWriter implements IItemWriter {
   protected target: string = CharConstants.empty;
-  protected builders: IItemBuilder[] = [];
+  protected builders: IItemCollectionComposer[] = [];
 
   constructor(target: string) {
     this.target = target;
@@ -52,8 +52,8 @@ export abstract class BaseItemWriter implements IItemWriter {
     });
   }
 
-  protected isIBigTooltipItemBuilder(builder: IItemBuilder): builder is IBigTooltipItemBuilder {
-    return (builder as IBigTooltipItemBuilder).addBigTooltips !== undefined;
+  protected isIBigTooltipItemBuilder(builder: IItemCollectionComposer): builder is IBigTooltipItemCollectionComposer {
+    return (builder as IBigTooltipItemCollectionComposer).addBigTooltips !== undefined;
   }
 
   /**

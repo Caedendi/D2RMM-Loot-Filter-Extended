@@ -1,12 +1,12 @@
-import { GemConstants } from "../../../Constants/Items/GemConstants";
-import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { Gem } from "../../../Models/Gem";
-import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
-import { Settings } from "../../../Settings/Settings";
-import { IBigTooltipItemBuilder } from "../Interfaces/IBigTooltipItemBuilder";
-import { ItemBuilderBase } from "../ItemBuilderBase";
+import { GemConstants } from "../../Constants/Items/GemConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { Gem } from "../../Models/Gem";
+import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
+import { Settings } from "../../Settings/Settings";
+import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
+import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
-export class GemsBuilder extends ItemBuilderBase implements IBigTooltipItemBuilder {
+export class GemsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
   constructor() {
     super();
   }

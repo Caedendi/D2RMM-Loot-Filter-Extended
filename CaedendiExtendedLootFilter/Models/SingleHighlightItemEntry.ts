@@ -71,11 +71,11 @@ export class SingleHighlightItemEntry extends ItemEntry {
   }
 
   protected createTwosLinePickUpBigTooltipPrefix(): string {
-    return `${this.newLine}${this.createPickUpIndent()}${HighlightConstants.bttPickUpMsg}`;
+    return `${CharConstants.newLine}${this.createPickUpIndent()}${HighlightConstants.bttPickUpMsg}`;
   }
 
   protected createFourLinesPickUpBigTooltipPrefix(): string {
-    return `${this.newLine}${this.createPickUpIndent()}${HighlightConstants.bttPickUpMsg}${this.newLine}`;
+    return `${CharConstants.newLine}${this.createPickUpIndent()}${HighlightConstants.bttPickUpMsg}${CharConstants.newLine}`;
   }
 
   // TODO: refactor to be generic and not use GemConstants

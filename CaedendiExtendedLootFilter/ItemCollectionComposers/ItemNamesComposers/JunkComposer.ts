@@ -1,14 +1,14 @@
-import { CharConstants } from "../../../Constants/CharConstants";
-import { ColorConstants } from "../../../Constants/Colors/ColorConstants";
-import { HighlightConstants } from "../../../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../../../Constants/SettingsConstants";
-import { D2Color } from "../../../Models/D2Color";
-import { SingleHighlightItemEntry } from "../../../Models/SingleHighlightItemEntry";
-import { Settings } from "../../../Settings/Settings";
-import { IItemBuilder } from "../Interfaces/IItemBuilder";
-import { ItemBuilderBase } from "../ItemBuilderBase";
+import { CharConstants } from "../../Constants/CharConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { D2Color } from "../../Models/D2Color";
+import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
+import { Settings } from "../../Settings/Settings";
+import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
+import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
-export class JunkBuilder extends ItemBuilderBase implements IItemBuilder {
+export class JunkComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   constructor() {
     super();
   }

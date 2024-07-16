@@ -2,8 +2,9 @@ import { FontColorConstants } from "../Constants/Colors/FontColorConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
+import { IBuilder } from "./Interfaces/IBuilder";
 
-export class ProfileHdModsBuilder {
+export class ProfileHdModsBuilder implements IBuilder {
   public build() {
     let path = FileConstants.FILE_PROFILE_HD_PATH; // TODO: low vision and controller modes
     let profileHD = D2RMM.readJson(path);
