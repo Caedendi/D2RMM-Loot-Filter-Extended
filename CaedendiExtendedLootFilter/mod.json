@@ -12,18 +12,18 @@
       "defaultExpanded": false,
       "children": [
         {
+          "id": "IsFilterEnabled",
+          "type": "checkbox",
+          "name": "Enable",
+          "description": "Enable the Filter section. TODO:",
+          "defaultValue": true
+        },
+        {
           "id": "JunkSection",
           "type": "section",
           "name": "Junk",
           "defaultExpanded": false,
           "children": [
-            {
-              "id": "IsFilterEnabled",
-              "type": "checkbox",
-              "name": "Enable",
-              "description": "Enable the Filter section. TODO:",
-              "defaultValue": true
-            },
             {
               "id": "GoldTooltipColors",
               "type": "select",
