@@ -33,7 +33,7 @@ export class SingleHighlightItemEntry extends ItemEntry {
 
     let displayName = `${this.highlightColor}${this.highlight}${this.padding}${this.nameColor}${this.name}`;
 
-    if (!this.hasBigTooltip)
+    if (!this.hasBigTooltip())
       return displayName;
 
     // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect

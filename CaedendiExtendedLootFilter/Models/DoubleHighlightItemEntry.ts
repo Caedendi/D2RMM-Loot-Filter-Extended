@@ -33,7 +33,7 @@ export class DoubleHighlightItemEntry extends ItemEntry {
     let indent = this.shouldFixiLvlIndent ? StatsAndModifiersSettings.getiLvlIndent(this.ilvlFix) : CharConstants.empty;
     let displayName = `${indent}${this.highlightPrefix}${this.name}${this.highlightSuffix}`;
     
-    if (!this.hasBigTooltip)
+    if (!this.hasBigTooltip())
       return displayName;
 
     // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
