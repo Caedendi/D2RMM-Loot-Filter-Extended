@@ -15,6 +15,14 @@ export class ItemCollection {
     return this.entries;
   }
 
+  public getKeys(): string[] {
+    return this.entries.map(entry => entry.getKey());
+  }
+
+  public getDisplayNameForKey(key: string): string {
+    return this.entries.find(entry => entry.getKey() === key)?.generateDisplayName() ?? "CELF_ERROR"
+  }
+
   public upsert(entry: ItemEntry): void {
     const i = this.findIndex(entry.getKey());
     if (i > -1) 

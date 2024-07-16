@@ -1,6 +1,5 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { Helper } from "../Helper";
 import { IBigTooltipItemCollectionComposer } from "../ItemCollectionComposers/Interfaces/IBigTooltipItemCollectionComposer";
 import { IItemCollectionComposer } from "../ItemCollectionComposers/Interfaces/IItemCollectionComposer";
 import { ItemCollection } from "../Models/ItemCollection";
@@ -60,37 +59,19 @@ export abstract class BaseItemWriter implements IItemWriter {
    * Update all entries in this.target matching the IDs in this.collections to their new values.
    */
   public writeCustomNames(): void {
-    let entries = this.createMergedCollection().getEntries();
-    if (!Helper.isDefined(entries) || entries.length == 0) {
-      return;
-    }
+    let mergedCollection = this.createMergedCollection();
+    var keys = mergedCollection.getKeys();
+    
+    let file = D2RMM.readJson(this.target);
 
-    let file = D2RMM.readJson(this.target); // copy existing file
-    var keys = entries.map(entry => entry.getKey());
-    Object.entries(file).forEach(item => {
-      if (keys.includes(item[FileConstants.key])) { // todo: was item.Key, now replaced
-        for (const key in item) {
-          if (key !== FileConstants.id && key !== FileConstants.key) {
-            item[key] = entries.find(entry => entry.getKey() === item[FileConstants.key])?.generateDisplayName() ?? "";
-          }
+    Object.entries(file).forEach(([index, _]) => {
+      if (keys.includes(file[index][FileConstants.key])) { // if file entry's Key value matches with one of the keys in entries
+        for (const key in file[index]) { // for each property in this entry ...
+          if (key !== FileConstants.id && key !== FileConstants.key) // ... that is a translation (not the id or Key property) ...
+            file[index][key] = mergedCollection.getDisplayNameForKey(file[index][FileConstants.key]); // ... set to the corresponding name found in entries
         }
       }
     });
-
-    /*
-    // TODO: test
-
-    // file.forEach((item) => {
-    //   var idList = customNames.map(x => x.id);
-    //   if (idList.includes(item[FileConstants.key])) { // todo: was item.Key, now replaced
-    //     for (const key in item) {
-    //       if (key !== FileConstants.id && key !== FileConstants.key) {
-    //         item[key] = customNames.find(x => x.id == [item.Key]).value;
-    //       }
-    //     }
-    //   }
-    // });
-    */
     
     D2RMM.writeJson(this.target, file);
   }
