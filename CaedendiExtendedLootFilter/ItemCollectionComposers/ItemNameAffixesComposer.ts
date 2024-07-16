@@ -76,7 +76,7 @@ export class ItemNameAffixesComposer extends ItemCollectionComposerBase implemen
     let low = "Low Quality";
     let crd = "Crude";
 
-    // Style:
+    // TODO: style:
     // - plus/minus
     // - sup/inf
     // - custom

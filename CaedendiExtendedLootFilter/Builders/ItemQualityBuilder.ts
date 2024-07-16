@@ -34,10 +34,11 @@ export class ItemQualityBuilder implements IBuilder {
   }
 
   protected setTagForAllTranslationsAtIndex(itemNamesFile, index, tag): void {
+    // TODO: fix, is broken
     for (const key in itemNamesFile[index]) {
       if (key === FileConstants.id || key !== FileConstants.key) // set to all translation entries that aren't "Key" and "id"
         return;
-      
+
       itemNamesFile[index][key] = (Settings.statsAndModifiers.itemQuality.placement === "prefix")
         ? `${tag} ${itemNamesFile[index][key]}`  // prefix tag
         : `${itemNamesFile[index][key]} ${tag}`; // suffix tag
