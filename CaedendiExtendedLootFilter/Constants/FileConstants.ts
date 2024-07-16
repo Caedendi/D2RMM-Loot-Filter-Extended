@@ -2,6 +2,7 @@ export class FileConstants {
   // extensions
   static FILE_EXTENSION_JSON = ".json";
   static FILE_EXTENSION_TXT  = ".txt";
+  static FILE_EXTENSION_FLAC = ".flac";
   
   // ui layouts
   static FILE_PROFILE_HD_PATH = `global\\ui\\layouts\\_profilehd${this.FILE_EXTENSION_JSON}`;

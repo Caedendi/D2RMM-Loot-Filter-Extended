@@ -5,6 +5,8 @@ export class D2rColor {
   protected name: string;
   protected code: string;
 
+  protected readonly prefix = "$FontColor";
+
   constructor(name: string) {
     this.name = name;
     this.code = name;
@@ -19,6 +21,6 @@ export class D2rColor {
   }
 
   public toString(): string {
-    return `${FontColorConstants.prefix}${this.code}`;
+    return `${this.prefix}${this.code}`;
   }
 }

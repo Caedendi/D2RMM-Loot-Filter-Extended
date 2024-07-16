@@ -1,9 +1,10 @@
 import { CharConstants } from "../Constants/CharConstants";
-import { ColorConstants } from "../Constants/Colors/ColorConstants";
 
 export class D2Color {
   protected code: string;
   protected name: string;
+
+  protected readonly prefix = "ÿc";
 
   constructor(code: string, name: string) {
     this.code = code;
@@ -14,7 +15,7 @@ export class D2Color {
     if (this.code === CharConstants.empty)
       return CharConstants.empty;
     
-    return `${ColorConstants.prefix}${this.code}`;
+    return `${this.prefix}${this.code}`;
   }
 
   public getName(): string {

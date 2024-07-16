@@ -13,7 +13,7 @@ import { HighlightConstants } from "./HighlightConstants";
  * I have however moved Ral (8), Hel (15) and Lem (20) a tier up because of their usefulness.
  */
 export abstract class RuneConstants {
-  private static tierLow: Rune[] = [
+  public static tierLow: Rune[] = [
     new Rune(1, "El"),
     new Rune(2, "Eld"),
     new Rune(3, "Tir"),
@@ -28,7 +28,7 @@ export abstract class RuneConstants {
     new Rune(13, "Shael"),
     new Rune(14, "Dol"),
   ];
-  private static tierLowMid = [
+  public static tierLowMid = [
     new Rune(8, "Ral"),
     new Rune(15, "Hel"),
     new Rune(16, "Io"),
@@ -36,7 +36,7 @@ export abstract class RuneConstants {
     new Rune(18, "Ko"),
     new Rune(19, "Fal"),
   ];
-  private static tierMid = [
+  public static tierMid = [
     new Rune(20, "Lem"),
     new Rune(21, "Pul"),
     new Rune(22, "Um"),
@@ -44,7 +44,7 @@ export abstract class RuneConstants {
     new Rune(24, "Ist"),
     new Rune(25, "Gul"),
   ];
-  private static tierHigh = [
+  public static tierHigh = [
     new Rune(26, "Vex"),
     new Rune(27, "Ohm"),
     new Rune(28, "Lo"),
@@ -59,25 +59,18 @@ export abstract class RuneConstants {
   public static clrHighlight   = HighlightConstants.color;
 
   // set the highlight patterns for each rune tier
-  private static patternLow = HighlightConstants.patternNone; // 
-  private static patternLowMid = HighlightConstants.pattern5; // *****
-  private static patternMid = HighlightConstants.pattern10;   // **********
-  private static patternHigh = Settings.bigTooltips.runes.highRunesSetting == BigTooltipSetting.Disabled
+  public static patternLow = HighlightConstants.patternNone; // 
+  public static patternLowMid = HighlightConstants.pattern5; // *****
+  public static patternMid = HighlightConstants.pattern10;   // **********
+  public static patternHigh = Settings.bigTooltips.runes.highRunesSetting == BigTooltipSetting.Disabled
     ? HighlightConstants.pattern3x10  // ********** ********** **********, or
     : HighlightConstants.pattern2x10; // ********** ********** (with big tooltips)
 
   // set the amount of spaces between the rune name and the highlight patterns for each rune tier
-  private static paddingLow    = HighlightConstants.paddingNone;
-  private static paddingLowMid = HighlightConstants.padding3;
-  private static paddingMid    = HighlightConstants.padding5;
-  private static paddingHigh   = HighlightConstants.padding5;
-
-  public static tiers = [
-    new RuneTier(1, this.tierLow,    this.paddingLow,    this.patternLow,    Settings.filter.runes.isLowRunesVisible,    Settings.bigTooltips.runes.lowRunesSetting,    Settings.lightPillars.runes.isLowRunesEnabled,    Settings.dropSounds.runes.low),
-    new RuneTier(2, this.tierLowMid, this.paddingLowMid, this.patternLowMid, Settings.filter.runes.isLowMidRunesVisible, Settings.bigTooltips.runes.lowMidRunesSetting, Settings.lightPillars.runes.isLowMidRunesEnabled, Settings.dropSounds.runes.lowMid),
-    new RuneTier(3, this.tierMid,    this.paddingMid,    this.patternMid,    Settings.filter.runes.isMidRunesVisible,    Settings.bigTooltips.runes.midRunesSetting,    Settings.lightPillars.runes.isMidRunesEnabled,    Settings.dropSounds.runes.mid),
-    new RuneTier(4, this.tierHigh,   this.paddingHigh,   this.patternHigh,   Settings.filter.runes.isHighRunesVisible,   Settings.bigTooltips.runes.highRunesSetting,   Settings.lightPillars.runes.isHighRunesEnabled,   Settings.dropSounds.runes.high),
-  ];
+  public static paddingLow    = HighlightConstants.paddingNone;
+  public static paddingLowMid = HighlightConstants.padding3;
+  public static paddingMid    = HighlightConstants.padding5;
+  public static paddingHigh   = HighlightConstants.padding5;
 
   public static tiersWithHighlights         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
   public static tiersWithHighlightedNumbers = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default

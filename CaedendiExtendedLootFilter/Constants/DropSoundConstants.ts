@@ -1,7 +1,8 @@
 import { SoundEffectPair } from "../Models/SoundEffect";
 import { CharConstants } from "./CharConstants";
+import { FileConstants } from "./FileConstants";
 
-export class DropSoundConstants {
+export abstract class DropSoundConstants {
   // sound names
   static SOUND_NONE = "";
   static SOUND_ITEM_RUNE = "item_rune";
@@ -14,8 +15,7 @@ export class DropSoundConstants {
   // file names
   static FILE_CURSOR = "cursor\\";
   static FILE_OBJECT = "object\\";
-  static FILE_EXTENSION_FLAC = ".flac";
-  static FILE_NONE = `none${this.FILE_EXTENSION_FLAC}`;
+  static FILE_NONE = `none${FileConstants.FILE_EXTENSION_FLAC}`;
 
   static SOUND_EFFECTS = {
     hostile:       new SoundEffectPair(this.FILE_CURSOR, "hostile",        this.FILE_CURSOR, "cursor_hostile_1_hd"),

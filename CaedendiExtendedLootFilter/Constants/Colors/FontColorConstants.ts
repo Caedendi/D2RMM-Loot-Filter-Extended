@@ -4,8 +4,6 @@ import { D2rColor } from "../../Models/D2rColor";
  * Font color variables set in _profilehd.json, _profilelv.json, etc
  */
 export abstract class FontColorConstants {
-  public static prefix = "$FontColor";
-
   public static beige:         D2rColor = new D2rColor("Beige");
   public static black:         D2rColor = new D2rColor("Black");
   public static currencyGold:  D2rColor = new D2rColor("CurrencyGold");

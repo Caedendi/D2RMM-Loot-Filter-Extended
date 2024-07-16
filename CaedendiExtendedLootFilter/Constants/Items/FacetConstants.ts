@@ -5,8 +5,6 @@ import { HighlightConstants } from "./HighlightConstants";
 export abstract class FacetConstants {
   public static facetId = "Rainbow Facet";
   public static facetName = this.facetId;
-  public static prefix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createAltPrefix() : HighlightConstants.uniquePrefix;
-  public static suffix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createAltSuffix() : HighlightConstants.uniqueSuffix;
   
   protected static altClrName  = ColorConstants.gold;
   protected static altPattern  = this.hasPickUpMessage() ? HighlightConstants.pattern3 : HighlightConstants.pattern5;
@@ -18,6 +16,9 @@ export abstract class FacetConstants {
     ColorConstants.blue,
     ColorConstants.green,
   ];
+  
+  public static prefix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createAltPrefix() : HighlightConstants.uniquePrefix;
+  public static suffix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createAltSuffix() : HighlightConstants.uniqueSuffix;
   
   protected static hasPickUpMessage(): boolean {
     if (!Settings.bigTooltips.isEnabled)

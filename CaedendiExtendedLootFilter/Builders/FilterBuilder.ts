@@ -7,7 +7,7 @@ import { UiWriter } from "../ItemWriters/UiWriter";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 export class FilterBuilder implements IBuilder {
-  protected itemWriters: IItemWriter[];
+  protected itemWriters: IItemWriter[] = [];
 
   constructor() {
     this.itemWriters.push(new ItemNamesWriter());       // Most items

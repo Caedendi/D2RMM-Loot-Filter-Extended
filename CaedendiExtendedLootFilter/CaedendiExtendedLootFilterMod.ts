@@ -9,7 +9,7 @@ import { D2rmmVersion } from "./Models/D2rmmVersion";
 
 export class CaedendiExtendedLootFilterMod {
   public readonly requiredD2rmmVersion: D2rmmVersion = new D2rmmVersion(1, 7, 0);
-  protected builders: IBuilder[];
+  protected builders: IBuilder[] = [];
   
   public build(): void {
     this.checkVersion();

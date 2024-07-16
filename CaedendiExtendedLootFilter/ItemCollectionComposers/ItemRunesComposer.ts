@@ -1,5 +1,6 @@
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { D2Color } from "../Models/D2Color";
 import { DoubleHighlightItemEntry } from "../Models/DoubleHighlightItemEntry";
 import { ItemEntry } from "../Models/ItemEntry";
@@ -16,7 +17,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IBi
   }
 
   public applyFilter(): void {
-    RuneConstants.tiers.forEach((tier) => {
+    RuneTierConstants.tiers.forEach((tier) => {
       let runes = tier.getRunes();
 
       if (tier.isHidden()) {
@@ -82,7 +83,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IBi
   }
 
   public addBigTooltips() {
-    RuneConstants.tiers.forEach(tier => {
+    RuneTierConstants.tiers.forEach(tier => {
       if (tier.getBigTooltipSetting() == BigTooltipSetting.Disabled)
         return;
 

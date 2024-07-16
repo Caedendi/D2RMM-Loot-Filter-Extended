@@ -1,6 +1,6 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { LightPillarConstants } from "../Constants/LightPillarConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
@@ -26,7 +26,7 @@ export class LightPillarBuilder implements IBuilder {
 
   // runes
   protected pushLightPillarsForRunes() {
-    RuneConstants.tiers.forEach(tier => {
+    RuneTierConstants.tiers.forEach(tier => {
       if (!tier.getHasLightPillar() || (Settings.lightPillars.shouldExcludeForHidden && tier.isHidden())) {
         return;
       }

@@ -1,6 +1,6 @@
 import { DropSoundConstants } from "../Constants/DropSoundConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
 import { Settings } from "../Settings/Settings";
 import { IBuilder } from "./Interfaces/IBuilder";
@@ -25,7 +25,7 @@ export class DropSoundBuilder implements IBuilder {
   }
 
   protected modifyDropSoundForRunes(soundsFile) {
-    RuneConstants.tiers.forEach((tier) => {
+    RuneTierConstants.tiers.forEach((tier) => {
       if (tier.isHidden() && Settings.dropSounds.shouldExcludeForHidden)
         return;
 

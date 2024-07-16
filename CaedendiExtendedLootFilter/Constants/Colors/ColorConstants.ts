@@ -1,8 +1,6 @@
 import { D2Color } from "../../Models/D2Color";
 
 export abstract class ColorConstants {
-  public static prefix = "ÿc";
-
   protected static baseColors = {
     none            : new D2Color( "", "none"),
     white           : new D2Color("0", "White"),
