@@ -15,6 +15,10 @@ export class D2rColor {
   }
 
   public getCode(): string {
+    return this.code;
+  }
+
+  public toString(): string {
     return `${FontColorConstants.prefix}${this.code}`;
   }
 }

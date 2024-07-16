@@ -5,6 +5,7 @@ import { D2rColor } from "../Models/D2rColor";
 export abstract class Settings {
   // Filter Section
   public static filter = {
+    isEnabled: config.IsFilterEnabled as boolean,
     junk: {
       goldTooltipColors: config.GoldTooltipColors as string,
       goldSuffix:        config.GoldSuffix        as string,

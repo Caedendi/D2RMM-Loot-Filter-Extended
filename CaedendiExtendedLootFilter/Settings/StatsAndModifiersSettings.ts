@@ -23,16 +23,13 @@ export abstract class StatsAndModifiersSettings {
   // public static iLvlIndentFixQuality: string = this.iLvlIndentFixDouble; // for double digit ilvl items when item quality is enabled // TODO: check if needed
 
   public static getiLvlIndent(fix?: iLvlFix): string {
-    if (!Helper.isDefined(fix) || !Settings.statsAndModifiers.itemLevel.shouldFixIndentation || fix === iLvlFix.None) {
+    if (!Helper.isDefined(fix) || !Settings.statsAndModifiers.itemLevel.shouldFixIndentation || fix === iLvlFix.None)
       return CharConstants.empty;
-    }
 
-    if (fix == iLvlFix.Single) {
+    if (fix == iLvlFix.Single)
       return this.iLvlIndentFixSingle;
-    }
-    if (fix == iLvlFix.Double) {
+    if (fix == iLvlFix.Double)
       return this.iLvlIndentFixDouble;
-    }
 
     throw new Error("Helper.getiLvlIndent() received undefined iLvlFix value.");
   }
@@ -57,34 +54,34 @@ export abstract class StatsAndModifiersSettings {
 
   private static getCustomQualityIndicator(itemQuality: ItemQuality): string {
     return [
-      { quality: ItemQuality.Normal,      indicator: this.customNormalQualityIndicator },
-      { quality: ItemQuality.Exceptional, indicator: this.customExceptionalQualityIndicator },
-      { quality: ItemQuality.Elite,       indicator: this.customEliteQualityIndicator },
-    ].find(q => q.quality == itemQuality).indicator;
+        { quality: ItemQuality.Normal,      indicator: this.customNormalQualityIndicator },
+        { quality: ItemQuality.Exceptional, indicator: this.customExceptionalQualityIndicator },
+        { quality: ItemQuality.Elite,       indicator: this.customEliteQualityIndicator },
+      ].find(q => q.quality == itemQuality)!.indicator;
   }
 
   private static getQualityIndicator(itemQuality: ItemQuality): string {
     return [
-      { quality: ItemQuality.Normal,      indicator: 'n' },
-      { quality: ItemQuality.Exceptional, indicator: 'x' },
-      { quality: ItemQuality.Elite,       indicator: 'e' },
-    ].find(q => q.quality == itemQuality).indicator;
+        { quality: ItemQuality.Normal,      indicator: 'n' },
+        { quality: ItemQuality.Exceptional, indicator: 'x' },
+        { quality: ItemQuality.Elite,       indicator: 'e' },
+      ].find(q => q.quality == itemQuality)!.indicator;
   }
 
   private static getQualityIndicatorOpenChar(): string {
     return [
-      { setting: SettingsConstants.disabled, char: CharConstants.empty },
-      { setting: "square", char: '[' },
-      { setting: "round",  char: '(' },
-    ].find(o => o.setting === Settings.statsAndModifiers.itemQuality.brackets).char;
+        { setting: SettingsConstants.disabled, char: CharConstants.empty },
+        { setting: "square", char: '[' },
+        { setting: "round",  char: '(' },
+      ].find(o => o.setting === Settings.statsAndModifiers.itemQuality.brackets)!.char;
   }
 
   private static getQualityIndicatorCloseChar(): string {
     return [
-      { setting: SettingsConstants.disabled, char: CharConstants.empty },
-      { setting: "square", char: ']' },
-      { setting: "round",  char: ')' },
-    ].find(o => o.setting === Settings.statsAndModifiers.itemQuality.brackets).char;
+        { setting: SettingsConstants.disabled, char: CharConstants.empty },
+        { setting: "square", char: ']' },
+        { setting: "round",  char: ')' },
+      ].find(o => o.setting === Settings.statsAndModifiers.itemQuality.brackets)!.char;
   }
 }
 

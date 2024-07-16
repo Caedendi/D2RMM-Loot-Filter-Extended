@@ -1,3 +1,7 @@
+import { ItemCollection } from "../../../Models/ItemCollection";
+
 export interface IItemWriter {
-  run(): void;
+  applyFilters(): void;
+  addBigTooltips(): void;
+  writeCustomNames(): void;
 }

@@ -4,6 +4,7 @@ import { CharConstants } from "../../Constants/CharConstants";
 import { FileConstants } from "../../Constants/FileConstants";
 import { Helper } from "../../Helper";
 import { ItemCollection } from "../../Models/ItemCollection";
+import { Settings } from "../../Settings/Settings";
 import { IItemWriter } from "./Interfaces/IItemWriter";
 
 /**
@@ -16,8 +17,6 @@ export abstract class BaseItemWriter implements IItemWriter {
   protected target: string = CharConstants.empty;
   protected builders: IItemBuilder[] = [];
 
-  protected readonly isBigTooltipsEnabled: boolean = config.IsBigTooltipsEnabled as boolean;
-
   constructor(target: string) {
     this.target = target;
     this.initializeBuilders();
@@ -29,18 +28,12 @@ export abstract class BaseItemWriter implements IItemWriter {
   protected abstract initializeBuilders(): void;
 
   /**
-   * Builds all builders, merges their collections into one and writes these entries to the target file.
-   */
-  public run(): void {
-    this.applyFilters();
-    this.addBigTooltips();
-    this.writeCustomNames(this.createMergedCollection());
-  }
-
-  /**
    * 
    */
-  protected applyFilters(): void {
+  public applyFilters(): void {
+    if (!Settings.filter.isEnabled)
+      return;
+    
     this.builders.forEach(builder => {
       builder.applyFilter();
     });
@@ -49,8 +42,8 @@ export abstract class BaseItemWriter implements IItemWriter {
   /**
    * Runs the IBigTooltipItemBuilder.addBigTooltips() function on all builders of type IBigTooltipItemBuilder.
    */
-  protected addBigTooltips(): void {
-    if (!this.isBigTooltipsEnabled)
+  public addBigTooltips(): void {
+    if (!Settings.bigTooltips.isEnabled)
       return;
 
     this.builders.forEach(builder => {
@@ -64,23 +57,10 @@ export abstract class BaseItemWriter implements IItemWriter {
   }
 
   /**
-   * 
-   * @returns A single {@link ItemCollection} containing all entries in {@property builders} asd
-   */
-  protected createMergedCollection(): ItemCollection {
-    let mergedCollection = new ItemCollection();
-    this.builders.forEach(builder => {
-      mergedCollection.upsertCollection(builder.getCollection());
-    });
-
-    return mergedCollection;
-  }
-
-  /**
    * Update all entries in this.target matching the IDs in this.collections to their new values.
    */
-  protected writeCustomNames(customNames: ItemCollection): void {
-    let entries = customNames.getEntries();
+  public writeCustomNames(): void {
+    let entries = this.createMergedCollection().getEntries();
     if (!Helper.isDefined(entries) || entries.length == 0) {
       return;
     }
@@ -113,5 +93,18 @@ export abstract class BaseItemWriter implements IItemWriter {
     */
     
     D2RMM.writeJson(this.target, file);
+  }
+
+  /**
+   * 
+   * @returns A single {@link ItemCollection} containing all entries in {@property builders} asd
+   */
+  protected createMergedCollection(): ItemCollection {
+    let mergedCollection = new ItemCollection();
+    this.builders.forEach(builder => {
+      mergedCollection.upsertCollection(builder.getCollection());
+    });
+
+    return mergedCollection;
   }
 }

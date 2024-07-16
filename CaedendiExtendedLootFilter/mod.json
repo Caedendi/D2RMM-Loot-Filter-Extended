@@ -18,6 +18,13 @@
           "defaultExpanded": false,
           "children": [
             {
+              "id": "IsFilterEnabled",
+              "type": "checkbox",
+              "name": "Enable",
+              "description": "Enable the Filter section. TODO:",
+              "defaultValue": true
+            },
+            {
               "id": "GoldTooltipColors",
               "type": "select",
               "name": "Gold: Color",
@@ -25,9 +32,9 @@
               "defaultValue": "wg",
               "options": [
                 { "value": "none", "label": "Default" },
-                { "value": "g", "label": "All gold" },
                 { "value": "wg", "label": "White amount, gold suffix" },
-                { "value": "gw", "label": "Gold amount, white suffix" }
+                { "value": "gw", "label": "Gold amount, white suffix" },
+                { "value": "g", "label": "All gold" }
               ]
             },
             {

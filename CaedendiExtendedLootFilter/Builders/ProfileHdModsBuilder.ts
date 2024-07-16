@@ -3,7 +3,6 @@ import { FileConstants } from "../Constants/FileConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
 
-// TODO: fix
 export class ProfileHdModsBuilder {
   public build() {
     let path = FileConstants.FILE_PROFILE_HD_PATH; // TODO: low vision and controller modes
@@ -16,30 +15,21 @@ export class ProfileHdModsBuilder {
     D2RMM.writeJson(path, profileHD);
   }
 
-  applyCustomGoldColor(profileHD) { // TODO: typing
-    let tooltipColors: string = Settings.filter.junk.goldTooltipColors;
-    if (tooltipColors === SettingsConstants.disabled || tooltipColors === "wg") {
+  protected applyCustomGoldColor(profileHD) { // TODO: typing
+    if (Settings.filter.junk.goldTooltipColors === SettingsConstants.disabled || Settings.filter.junk.goldTooltipColors === "wg")
       return;
-    }
 
-    // TODO: fix
-    let goldColor: FontColorConstants;
-    switch (tooltipColors) {
-      case "g":
-      case "gw":
-        goldColor = FontColorConstants.currencyGold;
-        break;
-    }
-
-    profileHD.TooltipStyle.GoldColor = goldColor;
+    profileHD.TooltipStyle.GoldColor = FontColorConstants.currencyGold.toString();
   }
 
-  applyCustomEtherealColor(profileHD) { // TODO: typing
-    // TODO: enable/disable
-    profileHD.TooltipStyle.EtherealColor = Settings.statsAndModifiers.ethColor.color; // [CSTM-ETH] change FontColorConstants.lightTeal into any color variable in _profilehd.json
+  protected applyCustomEtherealColor(profileHD) { // TODO: typing
+    if (!Settings.statsAndModifiers.ethColor.isEnabled)
+      return;
+
+    profileHD.TooltipStyle.EtherealColor = Settings.statsAndModifiers.ethColor.color.toString(); // [CSTM-ETH]
   }
 
-  applyTooltipMods(profileHD) { // TODO: typing
+  protected applyTooltipMods(profileHD) { // TODO: typing
     if (!Settings.tooltips.isTooltipModsEnabled)
       return;
 

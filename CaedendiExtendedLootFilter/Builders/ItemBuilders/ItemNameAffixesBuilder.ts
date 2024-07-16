@@ -27,7 +27,6 @@ export class ItemNameAffixesBuilder extends ItemBuilderBase implements IBigToolt
     this.addBigTooltipsToGems();
   }
 
-  // TODO: refactor
   protected applyGold(): void {
     let color = this.getGoldAffixColor();
     let gld = "gld";
@@ -41,13 +40,13 @@ export class ItemNameAffixesBuilder extends ItemBuilderBase implements IBigToolt
         this.collection.upsert(new ItemEntry(gld, `${color}G`));
         return;
       case "hide": // Gold displays as "1234".
-        this.collection.upsert(new ItemEntry(gld, Settings.filter.settings.hidden));
+        this.collection.upsertHidden(gld);
         return;
+        /*
       case SettingsConstants.custom: // [CSTM-GLD]
         // ADD YOUR CUSTOM ITEM NAMES HERE
 
         // TODO: refactor => move to custom builder
-        /*
         this.upsert(goldCol, gld, `${ColorConstants.purple}Gold`);
         */
         return;

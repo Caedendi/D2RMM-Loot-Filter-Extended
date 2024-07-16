@@ -8,12 +8,13 @@ import { UiWriter } from "./Writers/ItemWriters/UiWriter";
 
 export class CaedendiExtendedLootFilterMod {
   public readonly requiredD2rmmVersion: D2rmmVersion = new D2rmmVersion(1, 7, 0);
-  protected writers: IItemWriter[];
+  protected itemWriters: IItemWriter[];
+  protected featureWriters: IItemWriter[];
   
   public build(): void {
     this.checkVersion();
     this.initializeWriters();
-    this.runWriters();
+    this.runItemWriters();
   }
   
   protected checkVersion() {
@@ -29,12 +30,14 @@ export class CaedendiExtendedLootFilterMod {
   }
 
   protected initializeWriters(): void {
-    this.writers.push(new ItemNamesWriter()); // Most items
-    this.writers.push(new ItemNameAffixesWriter()); // Gold, Superior/Inferior affixes, Gems (exceptions)
-    this.writers.push(new ItemRunesWriter()); // Runes
-    this.writers.push(new UiWriter()); // Quest items (exceptions)
-    this.writers.push(new ItemModifiersWriter()); // Quest items (exceptions)
+    // item filter writers
+    this.itemWriters.push(new ItemNamesWriter()); // Most items
+    this.itemWriters.push(new ItemNameAffixesWriter()); // Gold, Superior/Inferior affixes, Gems (exceptions)
+    this.itemWriters.push(new ItemRunesWriter()); // Runes
+    this.itemWriters.push(new UiWriter()); // Quest items (exceptions)
+    this.itemWriters.push(new ItemModifiersWriter()); // Quest items (exceptions)
     
+    // feature writers
     /*
     (new       ItemLevelBuilder()).build(); // iLvl
     (new     ItemQualityBuilder()).build(); // Quality (normal/exceptional/elite)
@@ -45,9 +48,17 @@ export class CaedendiExtendedLootFilterMod {
   }
   
   /**
-   * Builds the mod by running all writers.
+   * Builds all builders, merges their collections into one and writes these entries to the target file.
    */
-  protected runWriters(): void {
-    this.writers.forEach(writer => writer.run());
+  protected runItemWriters(): void {
+    this.itemWriters.forEach(writer => {
+      writer.applyFilters();
+      writer.addBigTooltips();
+      writer.writeCustomNames();
+    });
+  }
+
+  protected runFeatureWriters(): void {
+    this.featureWriters.forEach(writer => writer.run());
   }
 }
