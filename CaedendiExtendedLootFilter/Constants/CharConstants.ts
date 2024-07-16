@@ -1,4 +1,4 @@
-export class CharConstants {
+export abstract class CharConstants {
   public static empty = '';
   public static space = ' ';
   public static newLine = "\n";

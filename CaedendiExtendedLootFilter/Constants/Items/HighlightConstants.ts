@@ -4,7 +4,7 @@ import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { SettingsConstants } from "../SettingsConstants";
 
-export class HighlightConstants {
+export abstract class HighlightConstants {
   static character: string  = Settings.filter.settings.highlightCharacter !== SettingsConstants.custom ? Settings.filter.settings.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
   static color:     D2Color = Settings.filter.settings.highlightColor;
 

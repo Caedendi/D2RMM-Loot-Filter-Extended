@@ -1,6 +1,6 @@
 import { CharmConstants } from "./CharmConstants";
 
-export class JewelryConstants {
+export abstract class JewelryConstants {
   public static ringId = "rin";
   public static amuletId = "amu";
   public static jewelId = "jew";

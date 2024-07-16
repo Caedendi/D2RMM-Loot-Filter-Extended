@@ -6,7 +6,7 @@ import { SettingsConstants } from "../SettingsConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
 // todo: public protected
-export class GemConstants {
+export abstract class GemConstants {
   static amethyst = "Amethyst";
   static diamond = "Diamond";
   static emerald = "Emerald";

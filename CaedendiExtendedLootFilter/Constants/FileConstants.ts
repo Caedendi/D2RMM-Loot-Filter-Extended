@@ -1,4 +1,4 @@
-export class FileConstants {
+export abstract class FileConstants {
   // extensions
   static FILE_EXTENSION_JSON = ".json";
   static FILE_EXTENSION_TXT  = ".txt";
