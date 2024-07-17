@@ -28,6 +28,7 @@ export class FilterBuilder implements IBuilder {
   protected runItemWriters(): void {
     // TODO: does this conflict?
     // TODO: think of entries that keep their vanilla translated names
+    // TODO: global settings here conflict with Item Quality and Short Sup-/Inferior Prefixes
     if (Settings.filter.isEnabled)
       this.itemWriters.forEach(writer => writer.applyFilters());
     if (Settings.bigTooltips.isEnabled)
