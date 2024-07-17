@@ -10,6 +10,7 @@ import { BigTooltipSetting, Settings } from "../Settings/Settings";
 import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
+// TODO: extract into separate composers?
 export class ItemNameAffixesComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
   protected readonly gems: Gem[] = GemConstants.gemExceptions;
 

@@ -3,6 +3,9 @@ import { Settings } from "../Settings/Settings";
 import { StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
+// TODO: convert to ItemQualityComposer for ItemNamesWriter
+// since this excludes quest weapons and throwing pots, there should be no conflicts with other builders
+// this way it will not conflict with CustomBuilder either
 export class ItemQualityBuilder implements IBuilder {
   public build() { // todo: refactor if possible
     if (!Settings.statsAndModifiers.itemQuality.isEnabled) {
@@ -13,8 +16,8 @@ export class ItemQualityBuilder implements IBuilder {
     const fileArmor = D2RMM.readTsv(FileConstants.FILE_ARMOR_PATH);
     const fileItemNames = D2RMM.readJson(FileConstants.FILE_ITEM_NAMES_PATH);
 
-    const fileWeaponsWithQuality = fileWeapons.rows.filter(row => row.ubercode && row.ultracode);
-    const fileArmorsWithQuality = fileArmor.rows.filter(row => row.ubercode && row.ultracode);
+    const fileWeaponsWithQuality = fileWeapons.rows.filter(row => row.ubercode && row.ultracode); // excludes quest items and throwing pots
+    const fileArmorsWithQuality = fileArmor.rows.filter(row => row.ubercode && row.ultracode);    // filters nothing in vanilla but leaving it in for possible compatibility with other mods
 
     this.addEquipmentQuality(fileWeaponsWithQuality, fileItemNames);
     this.addEquipmentQuality(fileArmorsWithQuality, fileItemNames);
