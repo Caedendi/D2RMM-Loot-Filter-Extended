@@ -65,15 +65,20 @@ export abstract class BaseItemWriter implements IItemWriter {
     let file = D2RMM.readJson(this.target);
 
     Object.entries(file).forEach(([index, _]) => {
-      if (keys.includes(file[index][FileConstants.key])) { // if file entry's Key value matches with one of the keys in entries
-        for (const key in file[index]) { // for each property in this entry ...
-          if (key !== FileConstants.id && key !== FileConstants.key) // ... that is a translation (not the id or Key property) ...
-            file[index][key] = mergedCollection.getDisplayNameForKey(file[index][FileConstants.key]); // ... set to the corresponding name found in entries
-        }
-      }
+      if (keys.includes(file[index][FileConstants.key])) // if file entry's Key value matches with one of the keys in entries
+        this.writeCustomName(file, index, mergedCollection.getDisplayNameForKey(file[index][FileConstants.key]));
     });
     
     D2RMM.writeJson(this.target, file);
+  }
+
+  protected writeCustomName(file, index: string, name: string): void {
+    for (const key in file[index]) { // for each property in this entry ...
+      if (key === FileConstants.id || key === FileConstants.key) // ... that is a translation (not the id or Key property) ...
+        continue;
+
+        file[index][key] = name; // ... set to the corresponding name found in mergedCollection
+    }
   }
 
   /**

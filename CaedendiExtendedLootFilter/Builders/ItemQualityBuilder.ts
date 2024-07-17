@@ -23,21 +23,23 @@ export class ItemQualityBuilder implements IBuilder {
   }
 
   protected addEquipmentQuality(equipmentRowsWithQuality, itemNamesFile) {
-    equipmentRowsWithQuality.forEach(item => {
-      let index = itemNamesFile.findIndex(x => x.Key === item.code); // get index and check if exists
-      if (index < 0)
+    Object.entries(equipmentRowsWithQuality).forEach(([rowIndex, _]) => {
+      let itemRow = equipmentRowsWithQuality[rowIndex];
+      
+      let nameIndex = itemNamesFile.findIndex(x => x.Key === itemRow["code"]); // get index and check if exists
+      if (nameIndex < 0)
         return;
       
-      let tag = `${StatsAndModifiersSettings.openChar}${this.getQualityIndicatorForItem(item)}${StatsAndModifiersSettings.closeChar}`;
-      this.setTagForAllTranslationsAtIndex(itemNamesFile, index, tag);
+      let tag = `${StatsAndModifiersSettings.openChar}${this.getQualityIndicatorForItem(itemRow)}${StatsAndModifiersSettings.closeChar}`;
+      this.setTagForAllTranslationsAtIndex(itemNamesFile, nameIndex, tag);
     });
   }
 
-  protected setTagForAllTranslationsAtIndex(itemNamesFile, index, tag): void {
-    // TODO: fix, is broken
+  // TODO: exact same function as BaseItemWriter.writeCustomName()
+  protected setTagForAllTranslationsAtIndex(itemNamesFile, index: string, tag: string): void {
     for (const key in itemNamesFile[index]) {
-      if (key === FileConstants.id || key !== FileConstants.key) // set to all translation entries that aren't "Key" and "id"
-        return;
+      if (key === FileConstants.id || key === FileConstants.key) // set to all translation entries that aren't "Key" and "id"
+        continue;
 
       itemNamesFile[index][key] = (Settings.statsAndModifiers.itemQuality.placement === "prefix")
         ? `${tag} ${itemNamesFile[index][key]}`  // prefix tag
@@ -45,10 +47,10 @@ export class ItemQualityBuilder implements IBuilder {
     }
   }
 
-  protected getQualityIndicatorForItem(item): string {
-    if (item.code === item.ultracode)
+  protected getQualityIndicatorForItem(itemRow): string {
+    if (itemRow.code === itemRow.ultracode)
       return StatsAndModifiersSettings.eliteQualityIndicator;
-    if (item.code === item.ubercode)
+    if (itemRow.code === itemRow.ubercode)
       return StatsAndModifiersSettings.exceptionalQualityIndicator;
 
     return StatsAndModifiersSettings.normalQualityIndicator;
