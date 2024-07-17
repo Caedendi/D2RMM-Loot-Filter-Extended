@@ -1,5 +1,6 @@
+import { CharConstants } from "../Constants/CharConstants";
 import { Helper } from "../Helper";
-import { BigTooltipSetting } from "../Settings/Settings";
+import { BigTooltipSetting, Settings } from "../Settings/Settings";
 import { ItemEntry } from "./ItemEntry";
 
 export class ItemCollection {
@@ -55,6 +56,15 @@ export class ItemCollection {
     this.upsertMultiple(collection.entries);
   }
 
+  // TODO: remove?
+  private findEntry(key: string): ItemEntry {
+    return this.entries.find(entry => entry.getKey() === key);
+  }
+
+  private findEntryByIndex(index: number): ItemEntry {
+    return this.entries[index];
+  }
+
   private findIndex(key: string): number {
     return this.entries.findIndex(entry => entry.getKey() === key);
   }
@@ -69,9 +79,19 @@ export class ItemCollection {
   
   public addBigTooltipToEntry(key: string, setting: BigTooltipSetting) {
     let index = this.findIndex(key);
-    if (index < 0) 
-      throw new Error(`Can't find item entry with key "${key}" in ItemCollection.`);
+    if (index < 0) { 
+      // push new entry without name but with big tooltip
+      let newEntry = new ItemEntry(key, CharConstants.empty);
+      newEntry.addBigTooltip(setting);
+      this.entries.push(newEntry);
+      return;
+    }
 
-    this.entries[index].addBigTooltip(setting);
+    let entry = this.findEntryByIndex(index);
+    if (entry.isHidden())
+      return;
+
+    entry.addBigTooltip(setting);
+    // this.entries[index].addBigTooltip(setting);
   }
 }

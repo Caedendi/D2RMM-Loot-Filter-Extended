@@ -45,7 +45,7 @@ export class ItemEntry {
 
   // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
   public addBigTooltip(setting: BigTooltipSetting): void {
-    switch (+setting) {
+    switch (+setting) { // TODO: find better way than using + to match enum with switch case
       case BigTooltipSetting.Disabled:
         break;
       case BigTooltipSetting.TwoLines:
