@@ -137,6 +137,22 @@ remove this line (2/2) */
   public static createForItemNameAffixesJson(): ItemCollection {
     let list: [string, string][] = [
       // [ "key", "value" ],
+
+      // gold [CSTM-GLD]
+      // [ "gld", `${ColorConstants.purple}Gold` ],
+      
+      // superior/inferior quality prefixes [CSTM-SPIF]
+      // [ "Hiquality", "+" ],
+      // [ "Damaged", "-" ],
+      // [ "Cracked", "-" ],
+      // [ "Low Quality", "-" ],
+      // [ "Crude", "-" ],
+
+      // gems [CSTM-GEM2]
+      // [ "gsw", `Diamond` ],
+      // [ "gsg", `Emerald` ],
+      // [ "gsr", `Ruby` ],
+      // [ "gsb", `Sapphire` ],
     ];
 
     return new ItemCollection(ItemEntry.createArray(list));

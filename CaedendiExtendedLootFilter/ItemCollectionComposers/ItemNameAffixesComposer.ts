@@ -31,7 +31,7 @@ export class ItemNameAffixesComposer extends ItemCollectionComposerBase implemen
     let color = this.getGoldAffixColor();
     let gld = "gld";
 
-    switch (Settings.filter.junk.goldSuffix) { // todo: rename
+    switch (Settings.filter.junk.goldSuffix) {
       case SettingsConstants.disabled: // Gold displays as "1234 Gold".
         if (color !== ColorConstants.none)
           this.collection.upsert(new ItemEntry(gld, `${color}Gold`));
@@ -41,14 +41,6 @@ export class ItemNameAffixesComposer extends ItemCollectionComposerBase implemen
         return;
       case "hide": // Gold displays as "1234".
         this.collection.upsertHidden(gld);
-        return;
-        /*
-      case SettingsConstants.custom: // [CSTM-GLD]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
-
-        // TODO: refactor => move to custom builder
-        this.upsert(goldCol, gld, `${ColorConstants.purple}Gold`);
-        */
         return;
     }
   }
@@ -66,44 +58,31 @@ export class ItemNameAffixesComposer extends ItemCollectionComposerBase implemen
     if (!Settings.statsAndModifiers.shortSupInfPrefixes.isEnabled)
       return;
 
-    var color = Settings.statsAndModifiers.shortSupInfPrefixes.isGrayInfEnabled ? ColorConstants.gray : ColorConstants.none;
-    var superior = `${CharConstants.plus}`;
-    var inferior = `${color}${CharConstants.minus}`;
+    let supKey = "Hiquality";
+    let infKeys = [ "Damaged", "Cracked", "Low Quality", "Crude" ];
 
-    let hiq = "Hiquality";
-    let dam = "Damaged";
-    let cra = "Cracked";
-    let low = "Low Quality";
-    let crd = "Crude";
+    let supPrefix: string = CharConstants.empty;
+    let infPrefix: string = CharConstants.empty;
+    switch (Settings.statsAndModifiers.shortSupInfPrefixes.style) {
+      case "plusminus": // Enable
+        supPrefix = `${CharConstants.plus}`;
+        infPrefix = `${CharConstants.minus}`;
+        break;
+      case "supinf": // Enable
+        supPrefix = `Sup`;
+        infPrefix = `Inf`;
+        break;
+      case "custom": // Enable
+        supPrefix = `[CSTM-SPIF]`; // [CSTM-SPIF]
+        infPrefix = `[CSTM-SPIF]`; // [CSTM-SPIF]
+        break;
+      }
 
-    // TODO: style:
-    // - plus/minus
-    // - sup/inf
-    // - custom
+      if (Settings.statsAndModifiers.shortSupInfPrefixes.isGrayInfEnabled)
+        infPrefix = `${ColorConstants.gray}${infPrefix}`;
 
-    switch (Settings.statsAndModifiers.shortSupInfPrefixes.style) { // TODO
-      case "short": // Enable
-      case "color": // Enable, gray Inferior items
-        this.collection.upsert(new ItemEntry(hiq, superior));
-        this.collection.upsert(new ItemEntry(dam, inferior));
-        this.collection.upsert(new ItemEntry(cra, inferior));
-        this.collection.upsert(new ItemEntry(low, inferior));
-        this.collection.upsert(new ItemEntry(crd, inferior));
-        return;
-
-        
-      case SettingsConstants.custom: // [CSTM-SPIF]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
-
-        // TODO: refactor
-        /*
-        this.upsert(supInfCol, hiq, `Superior`);
-        this.upsert(supInfCol, dam, `Damaged`);
-        this.upsert(supInfCol, cra, `Cracked`);
-        this.upsert(supInfCol, low, `Low Quality`);
-        this.upsert(supInfCol, crd, `Crude`);
-        */
-    }
+      this.collection.upsert(new ItemEntry(supKey, supPrefix));
+      infKeys.forEach(key => this.collection.upsert(new ItemEntry(key, infPrefix)));
   }
 
   protected applyGems(): void {
@@ -118,17 +97,6 @@ export class ItemNameAffixesComposer extends ItemCollectionComposerBase implemen
         return;
       case "perfect": // hide chipped/flawed/regular/flawless gems
         this.hideGems(this.gems);
-        return;
-      case SettingsConstants.custom: // [CSTM-GEM2]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
-
-        // TODO: refactor
-        /*
-        this.upsert(gemsCol, "gsw", `Diamond`);
-        this.upsert(gemsCol, "gsg", `Emerald`);
-        this.upsert(gemsCol, "gsr", `Ruby`);
-        this.upsert(gemsCol, "gsb", `Sapphire`);
-        */
         return;
     }
   }
