@@ -2,7 +2,6 @@ import { DropSoundBuilder } from "./Builders/DropSoundBuilder";
 import { FilterBuilder } from "./Builders/FilterBuilder";
 import { IBuilder } from "./Builders/Interfaces/IBuilder";
 import { ItemLevelBuilder } from "./Builders/ItemLevelBuilder";
-import { ItemQualityBuilder } from "./Builders/ItemQualityBuilder";
 import { LightPillarBuilder } from "./Builders/LightPillarBuilder";
 import { ProfileHdModsBuilder } from "./Builders/ProfileHdModsBuilder";
 import { D2rmmVersion } from "./Models/D2rmmVersion";
@@ -32,7 +31,6 @@ export class CaedendiExtendedLootFilterMod {
   protected initializeBuilders(): void {
     this.builders.push(new FilterBuilder());        // loot filter
     this.builders.push(new ItemLevelBuilder());     // iLvl
-    this.builders.push(new ItemQualityBuilder());   // Quality (normal/exceptional/elite)
     this.builders.push(new LightPillarBuilder());   // Light Pillars
     this.builders.push(new DropSoundBuilder());     // Drop Sounds
     this.builders.push(new ProfileHdModsBuilder()); // _profilehd.json stuff

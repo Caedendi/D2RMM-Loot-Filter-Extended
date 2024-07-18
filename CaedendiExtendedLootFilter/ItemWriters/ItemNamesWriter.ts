@@ -3,6 +3,7 @@ import { CustomFilterList } from "../CustomFilterList";
 import { CustomComposer } from "../ItemCollectionComposers/CustomComposer";
 import { CharmsComposer } from "../ItemCollectionComposers/ItemNamesComposers/CharmsComposer";
 import { EndgameItemsComposer } from "../ItemCollectionComposers/ItemNamesComposers/EndgameItemsComposer";
+import { EquipmentQualityComposer } from "../ItemCollectionComposers/ItemNamesComposers/EquipmentQualityComposer";
 import { GemsComposer } from "../ItemCollectionComposers/ItemNamesComposers/GemsComposer";
 import { HealingPotionsComposer } from "../ItemCollectionComposers/ItemNamesComposers/HealingPotionsComposer";
 import { JewelsComposer } from "../ItemCollectionComposers/ItemNamesComposers/JewelsComposer";
@@ -26,6 +27,7 @@ export class ItemNamesWriter extends BaseItemWriter implements IItemWriter {
     this.builders.push(new CharmsComposer());
     this.builders.push(new QuestItemsComposer());
     this.builders.push(new EndgameItemsComposer());
+    this.builders.push(new EquipmentQualityComposer());
     this.builders.push(new CustomComposer(CustomFilterList.createForItemNamesJson()));
   }
 }
