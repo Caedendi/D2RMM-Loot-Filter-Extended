@@ -1,4 +1,4 @@
-
+# Notes
 
 charms, facets
 
@@ -9,8 +9,4 @@ charms, facets
 | enabled | enabled    | fix          |      |
 | enabled | enabled    | fix-btt      |      |
 
-BTT enabled => btt => no fix
-BTT enabled => fix => no fix
-BTT enabled => fix-btt => no fix
 
-BTT disabled, 
