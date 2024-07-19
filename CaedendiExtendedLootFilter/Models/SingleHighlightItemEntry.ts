@@ -5,6 +5,9 @@ import { Settings } from "../Settings/Settings";
 import { D2Color } from "./D2Color";
 import { Gem } from "./Gem";
 import { ItemEntry } from "./ItemEntry";
+import { BigTooltip } from "./NewItemEntry/BigTooltip";
+import { NewItemEntry } from "./NewItemEntry/NewItemEntry";
+import { SingleHighlight } from "./NewItemEntry/SingleHighlight";
 
 export class SingleHighlightItemEntry extends ItemEntry {
   protected highlight: string;
@@ -66,11 +69,18 @@ export class SingleHighlightItemEntry extends ItemEntry {
       gem.getKey(), gem.getName(), GemConstants.highlight, gem.getColor(), GemConstants.padding, GemConstants.clrName);
   }
 
+  public static fromGemNew(gem: Gem): NewItemEntry {
+    let highlight = new SingleHighlight(CharConstants.o, gem.getColor(), GemConstants.padding);
+    let bigTooltip = new BigTooltip(Settings.bigTooltips. jewelry.gemsSetting);
+
+    return new NewItemEntry(gem.getKey(), gem.getName(), GemConstants.clrName, highlight, bigTooltip);
+  }
+
   public static fromGems(gems: Gem[]): SingleHighlightItemEntry[] {
     return gems.map<SingleHighlightItemEntry>(gem => this.fromGem(gem));
   }
 
-  protected createTwosLinePickUpBigTooltipPrefix(): string {
+  protected createTwoLinesPickUpBigTooltipPrefix(): string {
     return `${CharConstants.newLine}${this.createPickUpIndent()}${HighlightConstants.bttPickUpMsg}`;
   }
 

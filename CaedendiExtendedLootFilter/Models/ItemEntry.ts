@@ -17,7 +17,6 @@ export class ItemEntry {
     this.name = name;
   }
 
-  // TODO: test
   public static createHidden(key: string): ItemEntry {
     let entry = new ItemEntry(key, CharConstants.empty);
     entry.setIsVisible(false);
@@ -52,7 +51,7 @@ export class ItemEntry {
         this.bigTooltipPrefix = `${CharConstants.newLine}`;
         break;
       case BigTooltipSetting.TwoLinesPickUp:
-        this.bigTooltipPrefix = this.createTwosLinePickUpBigTooltipPrefix();
+        this.bigTooltipPrefix = this.createTwoLinesPickUpBigTooltipPrefix();
         // prefix = `${CharConstants.newLine}${pickUpIndent ?? CharConstants.empty}${HighlightConstants.bttPickUpMsg}`; // TODO: remove
         break;
       case BigTooltipSetting.ThreeLines:
@@ -77,7 +76,7 @@ export class ItemEntry {
     }
   }
 
-  protected createTwosLinePickUpBigTooltipPrefix(): string {
+  protected createTwoLinesPickUpBigTooltipPrefix(): string {
     return `${CharConstants.newLine}${HighlightConstants.bttPickUpMsg}`;
   }
 

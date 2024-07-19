@@ -1,10 +1,13 @@
 import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { BigTooltipSetting, Settings } from "../Settings/Settings";
+import { DoubleHighlightPattern } from "./NewItemEntry/DoubleHighlightPattern";
+import { IHighlightPattern } from "./NewItemEntry/IHighlightPattern";
 import { Rune } from "./Rune";
 
 export class RuneTier {
   protected readonly tier: number;
   protected readonly runes: Rune[];
+  protected readonly _pattern?: DoubleHighlightPattern;
   protected readonly padding: string;
   protected readonly pattern: string;
   protected readonly isVisible: boolean;
@@ -15,8 +18,7 @@ export class RuneTier {
   constructor(
     tier: number,
     runes: Rune[],
-    padding: string,
-    pattern: string,
+    pattern?: DoubleHighlightPattern,
     isVisible: boolean,
     bigTooltipSetting: BigTooltipSetting,
     hasLightPillar: boolean,
@@ -24,8 +26,7 @@ export class RuneTier {
   ) {
     this.tier = tier;
     this.runes = runes;
-    this.padding = padding;
-    this.pattern = pattern;
+    this._pattern = pattern;
     this.isVisible = isVisible;
     this.bigTooltipSetting = bigTooltipSetting;
     this.hasLightPillar = hasLightPillar;
