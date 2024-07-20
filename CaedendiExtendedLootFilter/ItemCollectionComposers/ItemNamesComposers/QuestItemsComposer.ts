@@ -3,7 +3,7 @@ import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
 import { ItemEntry } from "../../Models/ItemEntry";
 import { Settings } from "../../Settings/Settings";
-import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -27,7 +27,7 @@ export class QuestItemsComposer extends ItemCollectionComposerBase implements IB
         this.highlightQuestItems();
         return;
       case SettingsConstants.custom: // [CSTM-QST1]
-        let customList: [string, string, iLvlFix?][] = [
+        let customList: [string, string, iLvlDigits?][] = [
           // ADD YOUR CUSTOM ITEM NAMES HERE
 
           // See UiBuilder.ts for Book of Skill and Potion of Life, and 
@@ -82,43 +82,43 @@ export class QuestItemsComposer extends ItemCollectionComposerBase implements IB
   protected highlightQuestItems(): void {
     let questItems: DoubleHighlightItemEntry[] = [
       // Act 1
-      new DoubleHighlightItemEntry("leg", "Wirt's Leg", iLvlFix.Double),
-      new DoubleHighlightItemEntry("hdm", "Horadric Malus", iLvlFix.Double),
+      new DoubleHighlightItemEntry("leg", "Wirt's Leg", iLvlDigits.Double),
+      new DoubleHighlightItemEntry("hdm", "Horadric Malus", iLvlDigits.Double),
       new DoubleHighlightItemEntry("bks", "Scroll of Inifuss"),
       new DoubleHighlightItemEntry("bkd", "Scroll of Inifuss"), // deciphered
 
       // Act 2
       new DoubleHighlightItemEntry("tr1", "Horadric Scroll"),
-      new DoubleHighlightItemEntry("msf", "Staff of Kings", iLvlFix.Double),
+      new DoubleHighlightItemEntry("msf", "Staff of Kings", iLvlDigits.Double),
       new DoubleHighlightItemEntry("vip", "Amulet of the Viper"),
-      new DoubleHighlightItemEntry("hst", "Horadric Staff", iLvlFix.Single),
+      new DoubleHighlightItemEntry("hst", "Horadric Staff", iLvlDigits.Single),
 
       // Act 3
       new DoubleHighlightItemEntry("j34", "A Jade Figurine"),
       new DoubleHighlightItemEntry("g34", "The Golden Bird"),
       new DoubleHighlightItemEntry("bbb", "Lam Esen's Tome"),
-      new DoubleHighlightItemEntry("g33", "The Gidbinn", iLvlFix.Double),
-      new DoubleHighlightItemEntry("qf1", "Khalim's Flail", iLvlFix.Double),
-      new DoubleHighlightItemEntry("qf2", "Khalim's Will", iLvlFix.Single),
+      new DoubleHighlightItemEntry("g33", "The Gidbinn", iLvlDigits.Double),
+      new DoubleHighlightItemEntry("qf1", "Khalim's Flail", iLvlDigits.Double),
+      new DoubleHighlightItemEntry("qf2", "Khalim's Will", iLvlDigits.Single),
       new DoubleHighlightItemEntry("qey", "Khalim's Eye"),
       new DoubleHighlightItemEntry("qhr", "Khalim's Heart"),
       new DoubleHighlightItemEntry("qbr", "Khalim's Brain"),
       new DoubleHighlightItemEntry("mss", "Mephisto's Soulstone"),
 
       // Act 4
-      new DoubleHighlightItemEntry("hfh", "Hell Forge Hammer", iLvlFix.Double),
+      new DoubleHighlightItemEntry("hfh", "Hell Forge Hammer", iLvlDigits.Double),
 
       // Act 5
       // See exceptions mentioned above [CSTM-QST2]
 
       // Extra
-      new DoubleHighlightItemEntry("Staff of Kings",      "Staff of Kings", iLvlFix.Double),
+      new DoubleHighlightItemEntry("Staff of Kings",      "Staff of Kings", iLvlDigits.Double),
       new DoubleHighlightItemEntry("Amulet of the Viper", "Amulet of the Viper"),
-      new DoubleHighlightItemEntry("Horadric Staff",      "Horadric Staff", iLvlFix.Single),
+      new DoubleHighlightItemEntry("Horadric Staff",      "Horadric Staff", iLvlDigits.Single),
       new DoubleHighlightItemEntry("LamTome",             "Lam Esen's Tome"),
-      new DoubleHighlightItemEntry("KhalimFlail",         "Khalim's Flail", iLvlFix.Double),
-      new DoubleHighlightItemEntry("SuperKhalimFlail",    "Khalim's Will", iLvlFix.Single),
-      new DoubleHighlightItemEntry("Hell Forge Hammer",   "Hell Forge Hammer", iLvlFix.Double),
+      new DoubleHighlightItemEntry("KhalimFlail",         "Khalim's Flail", iLvlDigits.Double),
+      new DoubleHighlightItemEntry("SuperKhalimFlail",    "Khalim's Will", iLvlDigits.Single),
+      new DoubleHighlightItemEntry("Hell Forge Hammer",   "Hell Forge Hammer", iLvlDigits.Double),
     ];
 
     questItems.forEach(item => item.setPrefixSuffix(this.prefix, this.suffix)); // TODO: remove/refactor?
@@ -126,7 +126,7 @@ export class QuestItemsComposer extends ItemCollectionComposerBase implements IB
   }
 
   protected highlightCube(): void {
-    this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlFix.None, this.prefix, this.suffix));
+    this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlDigits.None, this.prefix, this.suffix));
   }
 
   public addBigTooltips(): void {

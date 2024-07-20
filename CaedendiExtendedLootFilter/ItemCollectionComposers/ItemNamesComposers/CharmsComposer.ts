@@ -5,7 +5,7 @@ import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry"
 import { ItemEntry } from "../../Models/ItemEntry";
 import { SunderCharm } from "../../Models/SunderCharm";
 import { Settings } from "../../Settings/Settings";
-import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -66,7 +66,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IBigTo
       CharmConstants.torchId, 
       CharmConstants.gheedsId
     ].forEach(charm => {
-      this.collection.upsert(new DoubleHighlightItemEntry(charm, charm, iLvlFix.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix));
+      this.collection.upsert(new DoubleHighlightItemEntry(charm, charm, iLvlDigits.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix));
     });
   }
 
@@ -79,13 +79,13 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IBigTo
 
   private highlightSunderCharmsDefault(sunders: SunderCharm[]): void {
     sunders.forEach(sunder => this.collection.upsert(
-      new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlFix.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix)
+      new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlDigits.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix)
     ));
   }
 
   private highlightSunderCharmsAlt(sunders: SunderCharm[]): void {
     sunders.forEach(sunder => this.collection.upsert(
-      new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlFix.Double, sunder.getAltPatternPrefix(), sunder.getAltPatternSuffix())
+      new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlDigits.Double, sunder.getAltPatternPrefix(), sunder.getAltPatternSuffix())
     ));
   }
 

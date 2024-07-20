@@ -3,7 +3,7 @@ import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
 import { ItemEntry } from "../../Models/ItemEntry";
 import { BigTooltipSetting, Settings } from "../../Settings/Settings";
-import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -31,7 +31,7 @@ export class EndgameItemsComposer extends ItemCollectionComposerBase implements 
         this.hideStandardOfHeroes();
         return;
       case SettingsConstants.custom: // [CSTM-END]
-        let customList: [string, string, iLvlFix?][] = [
+        let customList: [string, string, iLvlDigits?][] = [
           // ADD YOUR CUSTOM ITEM NAMES HERE
 
           [ "tes", `Twisted Essence of Suffering` ],
@@ -73,7 +73,7 @@ export class EndgameItemsComposer extends ItemCollectionComposerBase implements 
   }
 
   private pushEntries(target: DoubleHighlightItemEntry[], entries: ItemEntry[], prefix: string, suffix: string): void {
-    entries.forEach(entry => target.push(DoubleHighlightItemEntry.fromItemEntry(entry, iLvlFix.None, prefix, suffix)));
+    entries.forEach(entry => target.push(DoubleHighlightItemEntry.fromItemEntry(entry, iLvlDigits.None, prefix, suffix)));
   }
 
   //

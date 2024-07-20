@@ -7,7 +7,7 @@ import { ItemEntry } from "../Models/ItemEntry";
 import { Rune } from "../Models/Rune";
 import { RuneTier } from "../Models/RuneTier";
 import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { iLvlFix } from "../Settings/StatsAndModifiersSettings";
+import { iLvlDigits } from "../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
@@ -45,7 +45,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IBi
     let prefix = `${highlightColor1}${tier.getPattern()}${nameColor1}${tier.getPadding()}`;
     let suffix = `${tier.getPadding()}${highlightColor2}${tier.getPattern()}${nameColor2}`;
 
-    return new DoubleHighlightItemEntry(rune.getKey(), displayName, iLvlFix.None, prefix, suffix);
+    return new DoubleHighlightItemEntry(rune.getKey(), displayName, iLvlDigits.None, prefix, suffix);
   }
 
   private addRuneAffixToDisplayName(displayName: string): void {

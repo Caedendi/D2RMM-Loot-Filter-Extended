@@ -28,4 +28,10 @@ export class RuneItemEntry extends NewItemEntry implements IItemEntry {
       displayName = ``
     return super.generateDisplayName(displayName);
   }
+
+  protected removeDuplicateColorCodes(name: string): string {
+    // TODO: 
+    // "ÿc" // TODO: make constant?
+    return ``;
+  }
 }

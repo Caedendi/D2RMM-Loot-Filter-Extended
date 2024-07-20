@@ -22,13 +22,13 @@ export abstract class StatsAndModifiersSettings {
 
   // public static iLvlIndentFixQuality: string = this.iLvlIndentFixDouble; // for double digit ilvl items when item quality is enabled // TODO: check if needed
 
-  public static getiLvlIndent(fix?: iLvlFix): string {
-    if (!Helper.isDefined(fix) || !Settings.statsAndModifiers.itemLevel.shouldFixIndentation || fix === iLvlFix.None)
+  public static getiLvlIndent(fix?: iLvlDigits): string {
+    if (!Helper.isDefined(fix) || !Settings.statsAndModifiers.itemLevel.shouldFixIndentation || fix === iLvlDigits.None)
       return CharConstants.empty;
 
-    if (fix == iLvlFix.Single)
+    if (fix == iLvlDigits.Single)
       return this.iLvlIndentFixSingle;
-    if (fix == iLvlFix.Double)
+    if (fix == iLvlDigits.Double)
       return this.iLvlIndentFixDouble;
 
     throw new Error("Helper.getiLvlIndent() received undefined iLvlFix value.");
@@ -90,7 +90,7 @@ export abstract class StatsAndModifiersSettings {
  * 
  * Use None if the item has no iLvl, Single if it _always_ has a single digit iLvl (1 to 9, like Khalim's Will) and Double if it can have a two digits iLvl (10-99, like most items).
  */
-export enum iLvlFix {
+export enum iLvlDigits {
   None = 0,
   Single = 1,
   Double = 2,

@@ -2,7 +2,7 @@ import { FacetConstants } from "../../Constants/Items/FacetConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
 import { Settings } from "../../Settings/Settings";
-import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -15,7 +15,7 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IBigTo
     if (Settings.filter.jewelry.jewels == SettingsConstants.disabled)
       return;
     
-    this.collection.upsert(new DoubleHighlightItemEntry(FacetConstants.facetId, FacetConstants.facetName, iLvlFix.Double, FacetConstants.prefix, FacetConstants.suffix));
+    this.collection.upsert(new DoubleHighlightItemEntry(FacetConstants.facetId, FacetConstants.facetName, iLvlDigits.Double, FacetConstants.prefix, FacetConstants.suffix));
 
     /*
     case SettingsConstants.custom: // [CSTM-JWL]

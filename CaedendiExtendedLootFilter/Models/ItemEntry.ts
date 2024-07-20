@@ -1,7 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { iLvlFix, StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
+import { iLvlDigits, StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
 
 export class ItemEntry {
   protected readonly key: string;
@@ -24,7 +24,7 @@ export class ItemEntry {
     return entry;
   }
 
-  public static createArray(array: [string, string, iLvlFix?][]): ItemEntry[] {
+  public static createArray(array: [string, string, iLvlDigits?][]): ItemEntry[] {
     return array.map<ItemEntry>(x => {
       let indent = StatsAndModifiersSettings.getiLvlIndent(x[2]);
       return new ItemEntry(x[0], `${indent}${x[1]}`);

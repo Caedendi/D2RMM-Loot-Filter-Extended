@@ -1,6 +1,6 @@
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
 import { ItemEntry } from "../../Models/ItemEntry";
-import { iLvlFix } from "../../Settings/StatsAndModifiersSettings";
+import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
@@ -39,6 +39,6 @@ export abstract class EndgameConstants {
     new ItemEntry("mbr", "Mephisto's Brain"),
   ];
 
-  public static token:    DoubleHighlightItemEntry = new DoubleHighlightItemEntry("toa", "Token of Absolution", iLvlFix.None, this.prefixToa, this.suffixToa);
-  public static standard: DoubleHighlightItemEntry = new DoubleHighlightItemEntry("std",  "Standard of Heroes", iLvlFix.None, this.prefixStd, this.suffixStd);
+  public static token:    DoubleHighlightItemEntry = new DoubleHighlightItemEntry("toa", "Token of Absolution", iLvlDigits.None, this.prefixToa, this.suffixToa);
+  public static standard: DoubleHighlightItemEntry = new DoubleHighlightItemEntry("std",  "Standard of Heroes", iLvlDigits.None, this.prefixStd, this.suffixStd);
 }

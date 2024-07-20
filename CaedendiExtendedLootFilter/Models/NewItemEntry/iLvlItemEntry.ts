@@ -1,17 +1,28 @@
+import { CharConstants } from "../../Constants/CharConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { Settings } from "../../Settings/Settings";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IItemEntry } from "../IItemEntry";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
-import { iLvlItemEntry } from "./iLvlItemEntry";
+import { NewItemEntry } from "./NewItemEntry";
 import { QualityTag } from "./QualityTag";
 
-export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
-  protected _qualityTag?: QualityTag;
+export class iLvlItemEntry extends NewItemEntry implements IItemEntry {
+  /**
+   * iLvl
+   */
+  private _iLvl?: iLvlDigits;
+  public get iLvl(): iLvlDigits {
+    return this._iLvl;
+  }
+  public set iLvl(value: iLvlDigits) {
+    this._iLvl = value;
+  }
   
   constructor(key: string, iLvlDigits: iLvlDigits, newName?: string, pattern?: IHighlightPattern, bigTooltip?: BigTooltip, quality?: QualityTag) {
-    super(key, iLvlDigits, newName, pattern, bigTooltip);
-    this._qualityTag = quality;
+    super(key, newName, ColorConstants.none, pattern, bigTooltip);
+    this._iLvl = iLvlDigits;
   }
 
   // TODO
@@ -30,18 +41,13 @@ export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
     return displayName;
   }
 
-  protected applyQualityTag(displayName: string): string {
-    if (this._qualityTag != null)
-      displayName = this._qualityTag.apply(displayName);
-
-    return displayName;
-  }
-
-  protected applyQualityIndent(displayName: string): string {
-    if (this._qualityTag == null)
-      return displayName;
-
+  protected applyIlvlIndent(displayName: string): string {
+    if (!Settings.statsAndModifiers.itemLevel.shouldFixIndentation)
+      return;
     
+
+    // if highlight pattern is double pattern => fix indent
+    //   displayName = `${StatsAndModifiersSettings.getiLvlIndent(this._iLvl)}${displayName}`;
 
     return displayName;
   }

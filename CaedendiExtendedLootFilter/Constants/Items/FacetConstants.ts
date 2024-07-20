@@ -17,8 +17,8 @@ export abstract class FacetConstants {
     ColorConstants.green,
   ];
   
-  public static prefix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createAltPrefix() : HighlightConstants.uniquePrefix;
-  public static suffix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createAltSuffix() : HighlightConstants.uniqueSuffix;
+  public static prefix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createRainbowPrefix() : HighlightConstants.uniquePrefix;
+  public static suffix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createRainbowSuffix() : HighlightConstants.uniqueSuffix;
   
   protected static hasPickUpMessage(): boolean {
     if (!Settings.bigTooltips.isEnabled)
@@ -29,7 +29,7 @@ export abstract class FacetConstants {
   }
   
   // protected static altPrefix = `${ColorConstants.red}${this.altPattern}${this.altPadding1}${ColorConstants.yellow}${this.altPattern}${this.altPadding1}${ColorConstants.blue}${this.altPattern}${this.altPadding1}${ColorConstants.green}${this.altPattern}${this.altClrName}${this.altPadding2}`;
-  protected static createAltPrefix(): string {
+  public static createRainbowPrefix(): string {
     let altPrefix = "";
     
     // all: clr/pattern/padding1
@@ -42,7 +42,7 @@ export abstract class FacetConstants {
   }
   
   // protected static altSuffix = `${this.altPadding2}${ColorConstants.green}${this.altPattern}${this.altPadding1}${ColorConstants.blue}${this.altPattern}${this.altPadding1}${ColorConstants.yellow}${this.altPattern}${this.altPadding1}${ColorConstants.red}${this.altPattern}${this.altClrName}`;
-  protected static createAltSuffix(): string {
+  public static createRainbowSuffix(): string {
     let altSuffix = "";
 
     // first: padding2/clr/pattern

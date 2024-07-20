@@ -2,7 +2,7 @@ import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { DoubleHighlightItemEntry } from "../Models/DoubleHighlightItemEntry";
 import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { iLvlFix } from "../Settings/StatsAndModifiersSettings";
+import { iLvlDigits } from "../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
@@ -24,8 +24,8 @@ export class UiComposer extends ItemCollectionComposerBase implements IBigToolti
         return;
       case SettingsConstants.all: // highlight all
       case "xhc": // exclude horadric cube
-        this.collection.upsert(new DoubleHighlightItemEntry(ass, "Book of Skill", iLvlFix.None, prefix, suffix));
-        this.collection.upsert(new DoubleHighlightItemEntry(xyz, "Potion of Life", iLvlFix.None, prefix, suffix));
+        this.collection.upsert(new DoubleHighlightItemEntry(ass, "Book of Skill", iLvlDigits.None, prefix, suffix));
+        this.collection.upsert(new DoubleHighlightItemEntry(xyz, "Potion of Life", iLvlDigits.None, prefix, suffix));
         return;
       case SettingsConstants.custom: // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE

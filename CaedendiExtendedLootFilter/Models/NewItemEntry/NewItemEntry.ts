@@ -1,5 +1,6 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { Settings } from "../../Settings/Settings";
+import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { D2Color } from "../D2Color";
 import { IItemEntry } from "../IItemEntry";
 import { BigTooltip } from "./BigTooltip";
@@ -24,10 +25,16 @@ import { SingleHighlight } from "./SingleHighlight";
 
 // TOOD: ilvl indent fix and big tooltips
 export class NewItemEntry implements IItemEntry {
+  /**
+   * Key / item code
+   */
   private readonly _key: string;
   public get key(): string {
     return this._key;
   }
+  /**
+   * Visibility
+   */
   private _isVisible: boolean = true;
   public get isVisible(): boolean {
     return this._isVisible;
@@ -35,17 +42,32 @@ export class NewItemEntry implements IItemEntry {
   public set isVisible(value: boolean) {
     this._isVisible = value;
   }
+  /**
+   * Name color
+   */
   private readonly _nameColor: D2Color;
   protected get nameColor(): D2Color {
     return this._nameColor;
   }
-  private readonly _newName?: string;
+  /**
+   * Name replacement. Leave empty to use vanilla translated name.
+   */
+  private readonly _newName: string;
   public get newName(): string {
     return this._newName;
   }
+  /**
+   * Highlight pattern
+   */
   protected _highlightPattern?: IHighlightPattern;
+  /**
+   * Big tooltip
+   */
   protected _bigTooltip?: BigTooltip;
 
+  /**
+   * TODO
+   */
   constructor(key: string, newName?: string, nameColor?: D2Color, pattern?: IHighlightPattern, bigTooltip?: BigTooltip) {
     this._key = key;
     this._newName = newName;
@@ -62,23 +84,44 @@ export class NewItemEntry implements IItemEntry {
   }
 
   public generateDisplayName(translatedName: string): string {
-    if (!this._isVisible)
+    if (!this.isVisible)
       return Settings.filter.settings.hidden;
 
-    let displayName = this._newName === CharConstants.empty ? translatedName : `${this._nameColor}${this._newName}`;
-    
-    if (this._highlightPattern != null)
-      displayName = this._highlightPattern.apply(displayName);
+    let displayName = this.setNewOrTranslatedName(translatedName);
+    displayName = this.applyHighlightPattern(displayName);
+    displayName = this.applyBigTooltip(displayName);
 
+    return displayName;
+  }
+
+  protected setNewOrTranslatedName(translatedName: string) {
+    return this._newName === CharConstants.empty ? translatedName : `${this._nameColor}${this._newName}`;
+  }
+
+  // EquipmentEntry:
+  // protected applyQualityTag(): string {
+
+  // }
+
+  protected applyHighlightPattern(displayName: string): string {
+    if (this._highlightPattern == null)
+      return displayName;
+
+    displayName = this._highlightPattern.apply(displayName);
+
+    return displayName;
+  }
+
+  protected applyBigTooltip(displayName: string): string {
+    if (this._bigTooltip == null)
+      return displayName;
 
     // if:
-    // - has single highlight pattern
-    // - if has big tooltip
-    // - big tooltip has pickup message (PuMsg)
-    // => PuMsg should have indent (= highlight pattern length)
+    // - hightlight pattern is single
+    // - BTT has pickup message (PuMsg)
+    // add PuMsg indent (== length of highlight pattern)
 
-    if (this._bigTooltip != null)
-      displayName = this._bigTooltip.apply(displayName);
+    displayName = this._bigTooltip.apply(displayName);
 
     return displayName;
   }

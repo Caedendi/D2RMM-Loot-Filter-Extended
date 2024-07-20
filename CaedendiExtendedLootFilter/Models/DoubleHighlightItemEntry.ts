@@ -1,10 +1,10 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { Settings } from "../Settings/Settings";
-import { iLvlFix, StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
+import { iLvlDigits, StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
 import { ItemEntry } from "./ItemEntry";
 
 export class DoubleHighlightItemEntry extends ItemEntry {
-  protected readonly ilvlFix: iLvlFix;
+  protected readonly ilvlFix: iLvlDigits;
   protected highlightPrefix: string;
   protected highlightSuffix: string;
   protected readonly shouldFixiLvlIndent: boolean = false; // TODO: fix use
@@ -12,17 +12,17 @@ export class DoubleHighlightItemEntry extends ItemEntry {
   constructor(
     key: string,
     name: string,
-    ilvlFix?: iLvlFix,
+    ilvlFix?: iLvlDigits,
     highlightPrefix?: string,
     highlightSuffix?: string
   ) {
     super(key, name);
-    this.ilvlFix = ilvlFix ?? iLvlFix.None;
+    this.ilvlFix = ilvlFix ?? iLvlDigits.None;
     this.highlightPrefix = highlightPrefix ?? CharConstants.empty;
     this.highlightSuffix = highlightSuffix ?? CharConstants.empty;
   }
 
-  public static fromItemEntry(entry: ItemEntry, ilvlFix?: iLvlFix, prefix?: string, suffix?: string): DoubleHighlightItemEntry {
+  public static fromItemEntry(entry: ItemEntry, ilvlFix?: iLvlDigits, prefix?: string, suffix?: string): DoubleHighlightItemEntry {
     return new DoubleHighlightItemEntry(entry.getKey(), entry.getName(), ilvlFix, prefix, suffix);
   }
 
@@ -40,7 +40,7 @@ export class DoubleHighlightItemEntry extends ItemEntry {
     return `${this.bigTooltipSuffix}${this.bigTooltipPadding}${displayName}${this.bigTooltipPadding}${this.bigTooltipPrefix}`;
   }
 
-  public static createArray(array: [string, string, iLvlFix?, string?, string?][]): ItemEntry[] {
+  public static createArray(array: [string, string, iLvlDigits?, string?, string?][]): ItemEntry[] {
     return array.map<DoubleHighlightItemEntry>(x => new DoubleHighlightItemEntry(x[0], x[1], x[2], x[3], x[4]));
   }
 

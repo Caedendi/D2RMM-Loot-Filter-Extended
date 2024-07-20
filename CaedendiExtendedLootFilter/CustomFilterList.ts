@@ -1,7 +1,7 @@
 import { ColorConstants } from "./Constants/Colors/ColorConstants";
 import { ItemCollection } from "./Models/ItemCollection";
 import { ItemEntry } from "./Models/ItemEntry";
-import { iLvlFix } from "./Settings/StatsAndModifiersSettings";
+import { iLvlDigits } from "./Settings/StatsAndModifiersSettings";
 
 export abstract class CustomFilterList {
   
@@ -9,7 +9,7 @@ export abstract class CustomFilterList {
   public static createForItemNamesJson(): ItemCollection {
     // let griffons1 = `My custom item name in a variable`;
 
-    let list: [string, string, iLvlFix?][] = [
+    let list: [string, string, iLvlDigits?][] = [
     
       //----------------------------------------------//
       // ENTER YOUR CUSTOM ITEM NAMES HERE [CSTM-CFL] //
