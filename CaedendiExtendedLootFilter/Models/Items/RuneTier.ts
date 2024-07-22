@@ -1,7 +1,7 @@
 import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { DoubleHighlightPattern } from "./NewItemEntry/DoubleHighlightPattern";
-import { IHighlightPattern } from "./NewItemEntry/IHighlightPattern";
+import { DoubleHighlightPattern } from "./ItemCollectionEntries/DoubleHighlightPattern";
+import { IHighlightPattern } from "./ItemCollectionEntries/IHighlightPattern";
 import { Rune } from "./Rune";
 
 export class RuneTier {

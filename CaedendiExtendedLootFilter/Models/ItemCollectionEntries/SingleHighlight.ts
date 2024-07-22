@@ -1,5 +1,5 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { D2Color } from "../D2Color";
+import { D2Color } from "../Colors/D2Color";
 import { IHighlightPattern } from "./IHighlightPattern";
 
 export class SingleHighlight implements IHighlightPattern {

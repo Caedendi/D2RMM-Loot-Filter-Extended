@@ -1,5 +1,5 @@
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { D2Color } from "./D2Color";
+import { D2Color } from "./Colors/D2Color";
 
 export class SunderCharm {
   protected id: string;

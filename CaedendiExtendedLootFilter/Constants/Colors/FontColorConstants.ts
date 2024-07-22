@@ -1,4 +1,4 @@
-import { D2rColor } from "../../Models/D2rColor";
+import { D2rColor } from "../../Models/Colors/D2rColor";
 
 /**
  * Font color variables set in _profilehd.json, _profilelv.json, etc

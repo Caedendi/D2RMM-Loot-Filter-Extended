@@ -1,4 +1,4 @@
-import { D2Color } from "./D2Color";
+import { D2Color } from "../Colors/D2Color";
 
 export class Gem {
   protected readonly key: string;

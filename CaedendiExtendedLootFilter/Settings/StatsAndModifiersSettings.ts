@@ -1,8 +1,8 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Helper } from "../Helper";
 import { Settings } from "./Settings";
 
+// TODO: extract
 enum ItemQuality {
   Normal = 0,
   Exceptional = 1,
@@ -19,20 +19,6 @@ export abstract class StatsAndModifiersSettings {
   protected static customNormalQualityIndicator:      string = "custom n"; // replace "custom n" to your preference. [CSTM-QLTY]
   protected static customExceptionalQualityIndicator: string = "custom x"; // replace "custom x" to your preference. [CSTM-QLTY]
   protected static customEliteQualityIndicator:       string = "custom e"; // replace "custom e" to your preference. [CSTM-QLTY]
-
-  // public static iLvlIndentFixQuality: string = this.iLvlIndentFixDouble; // for double digit ilvl items when item quality is enabled // TODO: check if needed
-
-  // public static getiLvlIndent(fix?: iLvlDigits): string {
-  //   if (!Helper.isDefined(fix) || !Settings.statsAndModifiers.itemLevel.shouldFixIndentation || fix === iLvlDigits.None)
-  //     return CharConstants.empty;
-
-  //   if (fix == iLvlDigits.Single)
-  //     return this.iLvlIndentFixSingle;
-  //   if (fix == iLvlDigits.Double)
-  //     return this.iLvlIndentFixDouble;
-
-  //   throw new Error("Helper.getiLvlIndent() received undefined iLvlFix value.");
-  // }
 
   public static normalQualityIndicator:      string = this.createQualityIndicator(ItemQuality.Normal);
   public static exceptionalQualityIndicator: string = this.createQualityIndicator(ItemQuality.Normal);
@@ -91,6 +77,7 @@ export abstract class StatsAndModifiersSettings {
  * Use None if the item has no iLvl, Single if it _always_ has a single digit iLvl (1 to 9, like Khalim's Will) and Double if it can have a two digits iLvl (10-99, like most items).
  */
 export enum iLvlDigits {
+  // TODO: extract
   None = 0,
   Single = 1,
   Double = 2,

@@ -1,5 +1,5 @@
 import { ColorConstants } from "./Constants/Colors/ColorConstants";
-import { ItemCollection } from "./Models/ItemCollection";
+import { ItemCollection } from "./Models/ItemCollectionEntries/ItemCollection";
 import { ItemEntry } from "./Models/_old/ItemEntry";
 import { iLvlDigits } from "./Settings/StatsAndModifiersSettings";
 

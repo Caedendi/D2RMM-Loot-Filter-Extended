@@ -11,7 +11,7 @@ export class ItemModifiersWriter extends BaseItemWriter implements IItemWriter {
   }
 
   protected initializeBuilders(): void {
-    this.builders.push(new ItemModifiersComposer());
-    this.builders.push(new CustomComposer(CustomFilterList.createForItemModifiersJson()));
+    this.composers.push(new ItemModifiersComposer());
+    this.composers.push(new CustomComposer(CustomFilterList.createForItemModifiersJson()));
   }
 }

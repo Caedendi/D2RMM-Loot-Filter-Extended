@@ -2,16 +2,16 @@ import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { GemConstants } from "../Constants/Items/GemConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { D2Color } from "../Models/D2Color";
-import { Gem } from "../Models/Gem";
-import { ItemEntry } from "../Models/_old/ItemEntry";
-import { SingleHighlightItemEntry } from "../Models/_old/SingleHighlightItemEntry";
-import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
+import { D2Color } from "../Models/Colors/D2Color";
+import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
+import { Gem } from "../Models/Items/Gem";
+import { BigTooltipSetting } from "../Settings/BigTooltipSetting";
+import { Settings } from "../Settings/Settings";
+import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
 // TODO: extract into separate composers?
-export class ItemNameAffixesComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
+export class ItemNameAffixesComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   protected readonly gems: Gem[] = GemConstants.gemExceptions;
 
   constructor() {
@@ -110,6 +110,7 @@ export class ItemNameAffixesComposer extends ItemCollectionComposerBase implemen
     this.collection.upsertMultiple(SingleHighlightItemEntry.fromGems(gems));
   }
 
+  // TODO: remove
   protected addBigTooltipsToGems() {
     let setting = Settings.bigTooltips.jewelry.gemsSetting
     if (setting != BigTooltipSetting.Disabled)

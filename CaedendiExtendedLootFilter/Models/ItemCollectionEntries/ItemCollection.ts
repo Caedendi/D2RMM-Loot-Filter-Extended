@@ -1,15 +1,13 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { Helper } from "../Helper";
-import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { ItemEntry } from "./_old/ItemEntry";
+import { CharConstants } from "../../Constants/CharConstants";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { ItemEntry } from "./ItemEntry";
 
 export class ItemCollection {
   protected entries: ItemEntry[] = [];
 
   constructor(entries?: ItemEntry[]) {
-    if (Helper.isDefined(entries)) {
-      this.entries = entries!;
-    }
+    if (entries != null)
+      this.entries = entries;
   }
 
   public getEntries(): ItemEntry[] {
@@ -17,15 +15,15 @@ export class ItemCollection {
   }
 
   public getKeys(): string[] {
-    return this.entries.map(entry => entry.getKey());
+    return this.entries.map(entry => entry.key);
   }
 
   public getDisplayNameForKey(key: string): string {
-    return this.entries.find(entry => entry.getKey() === key)?.generateDisplayName() ?? "CELF_ERROR"
+    return this.entries.find(entry => entry.key === key)?.generateDisplayName() ?? "CELF_ERROR"
   }
 
   public upsert(entry: ItemEntry): void {
-    const i = this.findIndex(entry.getKey());
+    const i = this.findIndex(entry.key);
     if (i > -1) 
       this.entries[i] = entry;
     else 
@@ -41,7 +39,7 @@ export class ItemCollection {
   public upsertHidden(key: string): void {
     const i = this.findIndex(key);
     if (i > -1) 
-      this.entries[i].setIsVisible(false);
+      this.entries[i].isVisible = false;
     else 
       this.entries.push(ItemEntry.createHidden(key));
   }
@@ -58,7 +56,7 @@ export class ItemCollection {
 
   // TODO: remove?
   private findEntry(key: string): ItemEntry {
-    return this.entries.find(entry => entry.getKey() === key);
+    return this.entries.find(entry => entry.key === key);
   }
 
   private findEntryByIndex(index: number): ItemEntry {
@@ -66,7 +64,7 @@ export class ItemCollection {
   }
 
   private findIndex(key: string): number {
-    return this.entries.findIndex(entry => entry.getKey() === key);
+    return this.entries.findIndex(entry => entry.key === key);
   }
 
   public addBigTooltipToAllEntries(setting: BigTooltipSetting) {

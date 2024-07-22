@@ -1,4 +1,4 @@
-import { ItemCollection } from "../Models/ItemCollection";
+import { ItemCollection } from "../Models/ItemCollectionEntries/ItemCollection";
 import { Settings } from "../Settings/Settings";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";

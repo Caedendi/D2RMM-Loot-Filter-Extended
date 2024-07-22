@@ -1,9 +1,8 @@
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../Models/DoubleHighlightItemEntry";
-import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { iLvlDigits } from "../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
+import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
+import { Settings } from "../Settings/Settings";
+import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
 /**
@@ -11,7 +10,7 @@ import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
  * 
  * Used for Malah's Potion and Scroll of Resistance.
  */
-export class ItemModifiersComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
+export class ItemModifiersComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   constructor() {
     super();
   }
@@ -19,16 +18,14 @@ export class ItemModifiersComposer extends ItemCollectionComposerBase implements
   public applyFilter() {
     let ice = "ice";
     let tr2 = "tr2";
-    let prefix = HighlightConstants.questPrefix;
-    let suffix = HighlightConstants.questSuffix;
 
     switch (Settings.filter.questEndgame.quest) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
       case "xhc": // exclude horadric cube
-        this.collection.upsert(new DoubleHighlightItemEntry(ice, "Malah's Potion",       iLvlDigits.None, prefix, suffix));
-        this.collection.upsert(new DoubleHighlightItemEntry(tr2, "Scroll of Resistance", iLvlDigits.None, prefix, suffix));
+        this.collection.upsert(this.createQuestEntry(ice, "Malah's Potion"));
+        this.collection.upsert(this.createQuestEntry(tr2, "Scroll of Resistance"));
         return;
       case SettingsConstants.custom: // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -42,8 +39,7 @@ export class ItemModifiersComposer extends ItemCollectionComposerBase implements
     }
   }
 
-  public addBigTooltips(): void {
-    if (Settings.bigTooltips.questEndgame.questItems != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToAllEntries(Settings.bigTooltips.questEndgame.questItems);
+  private createQuestEntry(key: string, name: string): ItemEntry {
+    return new ItemEntry(key, name, HighlightConstants.uniqueColorName, HighlightConstants.questPattern, Settings.bigTooltips.questEndgame.questItems);
   }
 }

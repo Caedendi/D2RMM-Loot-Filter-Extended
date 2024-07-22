@@ -1,6 +1,6 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { BigTooltipSetting } from "../../Settings/Settings";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { IHighlightPattern } from "./IHighlightPattern";
 import { SingleHighlight } from "./SingleHighlight";
 

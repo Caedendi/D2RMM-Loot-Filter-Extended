@@ -11,7 +11,7 @@ export class ItemRunesWriter extends BaseItemWriter implements IItemWriter {
   }
 
   protected initializeBuilders(): void {
-    this.builders.push(new ItemRunesComposer());
-    this.builders.push(new CustomComposer(CustomFilterList.createForItemRunesJson()))
+    this.composers.push(new ItemRunesComposer());
+    this.composers.push(new CustomComposer(CustomFilterList.createForItemRunesJson()))
   }
 }

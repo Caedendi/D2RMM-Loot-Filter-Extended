@@ -1,9 +1,10 @@
 import { CharConstants } from "../../Constants/CharConstants";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
-import { D2Color } from "../D2Color";
-import { IItemEntry } from "./IItemEntry";
+import { D2Color } from "../Colors/D2Color";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
+import { IItemEntry } from "./IItemEntry";
 
 // - key
 // - visible/hidden
@@ -22,7 +23,7 @@ import { IHighlightPattern } from "./IHighlightPattern";
 //   - number
 
 // TOOD: ilvl indent fix and big tooltips
-export class NewItemEntry implements IItemEntry {
+export class ItemEntry implements IItemEntry {
   /**
    * Key / item code
    */
@@ -67,21 +68,33 @@ export class NewItemEntry implements IItemEntry {
   /**
    * Big tooltip
    */
-  protected _bigTooltip?: BigTooltip;
+  private _bigTooltip?: BigTooltip;
+  protected get bigTooltip(): BigTooltip {
+    return this._bigTooltip;
+  }
+  protected set bigTooltip(value: BigTooltip) {
+    this._bigTooltip = value;
+  }
 
   /**
-   * TODO
+   * TODO: ItemEntry Constructor
    */
-  constructor(key: string, newName?: string, nameColor?: D2Color, pattern?: IHighlightPattern, bigTooltip?: BigTooltip) {
+  constructor(
+    key: string, 
+    newName?: string, 
+    nameColor?: D2Color, 
+    pattern?: IHighlightPattern, 
+    bigTooltipSetting?: BigTooltipSetting
+  ) {
     this._key = key;
     this._newName = newName;
     this._nameColor = nameColor;
     this._highlightPattern = pattern;
-    this._bigTooltip = bigTooltip;
+    this._bigTooltip = new BigTooltip(bigTooltipSetting);
   }
 
-  public static createHidden(key: string): NewItemEntry {
-    let entry = new NewItemEntry(key);
+  public static createHidden(key: string): ItemEntry {
+    let entry = new ItemEntry(key);
     entry.isVisible = false;
 
     return entry;

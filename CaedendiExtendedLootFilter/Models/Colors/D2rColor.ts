@@ -1,4 +1,4 @@
-import { FontColorConstants } from "../Constants/Colors/FontColorConstants";
+import { FontColorConstants } from "../../Constants/Colors/FontColorConstants";
 
 // TODO: refactor
 export class D2rColor {

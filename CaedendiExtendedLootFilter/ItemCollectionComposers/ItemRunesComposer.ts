@@ -1,17 +1,17 @@
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
-import { D2Color } from "../Models/D2Color";
-import { DoubleHighlightItemEntry } from "../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../Models/_old/ItemEntry";
-import { Rune } from "../Models/Rune";
-import { RuneTier } from "../Models/RuneTier";
-import { BigTooltipSetting, Settings } from "../Settings/Settings";
+import { D2Color } from "../Models/Colors/D2Color";
+import { RuneItemEntry } from "../Models/ItemCollectionEntries/RuneItemEntry";
+import { Rune } from "../Models/Items/Rune";
+import { RuneTier } from "../Models/Items/RuneTier";
+import { BigTooltipSetting } from "../Settings/BigTooltipSetting";
+import { Settings } from "../Settings/Settings";
 import { iLvlDigits } from "../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
+import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
-export class ItemRunesComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
+export class ItemRunesComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   constructor() {
     super();
   }
@@ -29,7 +29,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IBi
     });
   }
 
-  protected createRuneEntry(rune: Rune, tier: RuneTier): DoubleHighlightItemEntry {
+  protected createRuneEntry(rune: Rune, tier: RuneTier): RuneItemEntry {
     var highlightColor1 = tier.isHighlightedTier() ? RuneConstants.clrHighlight : ColorConstants.none;
     var highlightColor2 = highlightColor1;
     var nameColor1 = !tier.isTierWithAlternateColor() ? (tier.isTierWithHighlightedName() ? RuneConstants.clrHighlight : RuneConstants.clrName) : Settings.filter.runes.altHighlightColor;
@@ -46,6 +46,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IBi
     let suffix = `${tier.getPadding()}${highlightColor2}${tier.getPattern()}${nameColor2}`;
 
     return new DoubleHighlightItemEntry(rune.getKey(), displayName, iLvlDigits.None, prefix, suffix);
+    // return new RuneItemEntry(rune.getKey(), )
   }
 
   private addRuneAffixToDisplayName(displayName: string): void {
@@ -82,6 +83,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IBi
     }
   }
 
+  // TODO: remove
   public addBigTooltips() {
     RuneTierConstants.tiers.forEach(tier => {
       if (tier.getBigTooltipSetting() == BigTooltipSetting.Disabled)
@@ -106,6 +108,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IBi
     });
   }
 
+  // TODO: remove?
   private createNewRuneEntryWithBigTooltip(rune: Rune, bigTooltipSetting: BigTooltipSetting): ItemEntry {
     let newEntry = new ItemEntry(rune.getKey(), `${rune.getName()} Rune`);
     newEntry.addBigTooltip(bigTooltipSetting);

@@ -1,4 +1,5 @@
-import { D2Color } from "../../Models/D2Color";
+import { D2Color } from "../../Models/Colors/D2Color";
+import { DoubleHighlightPattern } from "../../Models/ItemCollectionEntries/DoubleHighlightPattern";
 import { Settings } from "../../Settings/Settings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
@@ -24,6 +25,7 @@ export abstract class HighlightConstants {
   static pattern2x10 = `${this.pattern10}${this.padding2}${this.pattern10}`;
   static pattern3x10 = `${this.pattern10}${this.padding2}${this.pattern10}${this.padding2}${this.pattern10}`;
 
+  // TODO: remove?
   static uniqueColorName = ColorConstants.gold;
   static uniqueColorHighlight = this.color;
   static uniquePattern = this.pattern10;
@@ -33,6 +35,9 @@ export abstract class HighlightConstants {
 
   static questPrefix = this.uniquePrefix;
   static questSuffix = this.uniqueSuffix;
+
+  static readonly uniqPattern = new DoubleHighlightPattern(this.pattern10, this.padding5, ColorConstants.gold);
+  static readonly questPattern = this.uniqPattern;
 
   static bttPadding = this.padding5;
   static bttPickUpMsg = `${ColorConstants.purple}Pick Up`;

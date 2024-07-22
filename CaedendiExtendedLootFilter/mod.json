@@ -322,7 +322,7 @@
         {
           "id": "QuestEndgameSection",
           "type": "section",
-          "name": "Quest & Endgame Items",
+          "name": "Quest & Endgame",
           "defaultExpanded": false,
           "children": [
             {
@@ -479,7 +479,7 @@
         {
           "id": "StatsModifiersItemQualitySection",
           "type": "section",
-          "name": "Show Item Quality",
+          "name": "Show Equipment Quality",
           "defaultExpanded": false,
           "children": [
             {
@@ -765,7 +765,7 @@
         {
           "id": "BigTooltipsQuestEndgameSection",
           "type": "section",
-          "name": "Quest & Endgame Items",
+          "name": "Quest & Endgame",
           "defaultExpanded": false,
           "visible": ["value", "IsBigTooltipsEnabled"],
           "children": [
@@ -972,7 +972,7 @@
         {
           "id": "LightPillarsQuestEndgameSection",
           "type": "section",
-          "name": "Quest & Endgame Items",
+          "name": "Quest & Endgame",
           "visible": ["value", "IsLightPillarsEnabled"],
           "defaultExpanded": false,
           "children": [
@@ -1134,7 +1134,7 @@
         {
           "id": "DropSoundQuestEndgameSection",
           "type": "section",
-          "name": "Quest & Endgame Items",
+          "name": "Quest & Endgame",
           "visible": ["value", "IsDropSoundsEnabled"],
           "defaultExpanded": false,
           "children": [

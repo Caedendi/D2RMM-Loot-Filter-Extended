@@ -1,4 +1,4 @@
-import { CharConstants } from "../Constants/CharConstants";
+import { CharConstants } from "../../Constants/CharConstants";
 
 export class D2Color {
   protected code: string;

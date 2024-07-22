@@ -5,9 +5,9 @@ import { iLvlDigits, StatsAndModifiersSettings } from "../../Settings/StatsAndMo
 import { IItemEntry } from "./IItemEntry";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
-import { NewItemEntry } from "./NewItemEntry";
+import { ItemEntry } from "./ItemEntry";
 
-export class iLvlItemEntry extends NewItemEntry implements IItemEntry {
+export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   /**
    * iLvl
    */

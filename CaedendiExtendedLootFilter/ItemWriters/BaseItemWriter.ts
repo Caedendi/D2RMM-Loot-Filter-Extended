@@ -1,8 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { IBigTooltipItemCollectionComposer } from "../ItemCollectionComposers/Interfaces/IBigTooltipItemCollectionComposer";
 import { IItemCollectionComposer } from "../ItemCollectionComposers/Interfaces/IItemCollectionComposer";
-import { ItemCollection } from "../Models/ItemCollection";
+import { ItemCollection } from "../Models/ItemCollectionEntries/ItemCollection";
 import { Settings } from "../Settings/Settings";
 import { IItemWriter } from "./Interfaces/IItemWriter";
 
@@ -14,7 +13,7 @@ import { IItemWriter } from "./Interfaces/IItemWriter";
  */
 export abstract class BaseItemWriter implements IItemWriter {
   protected target: string = CharConstants.empty;
-  protected builders: IItemCollectionComposer[] = [];
+  protected composers: IItemCollectionComposer[] = [];
 
   constructor(target: string) {
     this.target = target;
@@ -33,26 +32,9 @@ export abstract class BaseItemWriter implements IItemWriter {
     if (!Settings.filter.isEnabled)
       return;
     
-    this.builders.forEach(builder => {
+    this.composers.forEach(builder => {
       builder.applyFilter();
     });
-  }
-
-  /**
-   * Runs the IBigTooltipItemBuilder.addBigTooltips() function on all builders of type IBigTooltipItemBuilder.
-   */
-  public addBigTooltips(): void {
-    if (!Settings.bigTooltips.isEnabled)
-      return;
-
-    this.builders.forEach(builder => {
-      if (this.isIBigTooltipItemBuilder(builder)) 
-        builder.addBigTooltips();
-    });
-  }
-
-  protected isIBigTooltipItemBuilder(builder: IItemCollectionComposer): builder is IBigTooltipItemCollectionComposer {
-    return (builder as IBigTooltipItemCollectionComposer).addBigTooltips !== undefined;
   }
 
   /**
@@ -87,7 +69,7 @@ export abstract class BaseItemWriter implements IItemWriter {
    */
   protected createMergedCollection(): ItemCollection {
     let mergedCollection = new ItemCollection();
-    this.builders.forEach(builder => {
+    this.composers.forEach(builder => {
       mergedCollection.upsertCollection(builder.getCollection());
     });
 

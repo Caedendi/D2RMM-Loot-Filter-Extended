@@ -1,12 +1,11 @@
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../Models/DoubleHighlightItemEntry";
-import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { iLvlDigits } from "../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemCollectionComposer } from "./Interfaces/IBigTooltipItemCollectionComposer";
+import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
+import { Settings } from "../Settings/Settings";
+import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
-export class UiComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
+export class UiComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   constructor() {
     super();
   }
@@ -16,16 +15,13 @@ export class UiComposer extends ItemCollectionComposerBase implements IBigToolti
     let ass = "ass";
     let xyz = "xyz";
 
-    let prefix = HighlightConstants.questPrefix;
-    let suffix = HighlightConstants.questSuffix;
-
     switch (Settings.filter.questEndgame.quest) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight all
       case "xhc": // exclude horadric cube
-        this.collection.upsert(new DoubleHighlightItemEntry(ass, "Book of Skill", iLvlDigits.None, prefix, suffix));
-        this.collection.upsert(new DoubleHighlightItemEntry(xyz, "Potion of Life", iLvlDigits.None, prefix, suffix));
+        this.collection.upsert(this.createQuestEntry(ass, "Book of Skill"));
+        this.collection.upsert(this.createQuestEntry(xyz, "Potion of Life"));
         return;
       case SettingsConstants.custom: // [CSTM-QST2]
         // ADD YOUR CUSTOM ITEM NAMES HERE
@@ -40,8 +36,8 @@ export class UiComposer extends ItemCollectionComposerBase implements IBigToolti
     }
   }
 
-  public addBigTooltips(): void {
-    if (Settings.bigTooltips.questEndgame.questItems != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToAllEntries(Settings.bigTooltips.questEndgame.questItems);
+  // TODO: add to ItemEntry? same method used in ItemModifiersComposer
+  private createQuestEntry(key: string, name: string): ItemEntry {
+    return new ItemEntry(key, name, HighlightConstants.uniqueColorName, HighlightConstants.questPattern, Settings.bigTooltips.questEndgame.questItems);
   }
 }

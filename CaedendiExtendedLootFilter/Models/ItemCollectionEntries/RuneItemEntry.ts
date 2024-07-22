@@ -6,11 +6,11 @@ import { IItemEntry } from "./IItemEntry";
 import { Rune } from "../Rune";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
-import { NewItemEntry } from "./NewItemEntry";
+import { ItemEntry } from "./ItemEntry";
 
 // if has no affix: rune name will be hardcoded
 // if has affix: use translated name and 
-export class RuneItemEntry extends NewItemEntry implements IItemEntry {
+export class RuneItemEntry extends ItemEntry implements IItemEntry {
   protected _rune: Rune;
   protected _tier: number;
 

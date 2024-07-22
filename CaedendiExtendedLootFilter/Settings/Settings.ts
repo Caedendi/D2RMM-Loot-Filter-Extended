@@ -1,6 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
-import { D2rColor } from "../Models/D2rColor";
+import { D2rColor } from "../Models/Colors/D2rColor";
+import { BigTooltipSetting } from "./BigTooltipSetting";
 
 export abstract class Settings {
   // Filter Section
@@ -148,14 +149,4 @@ export abstract class Settings {
     tooltipOpacity:       config.TooltipOpacity       as number,
     tooltipSize:          config.TooltipSize          as number,
   };
-}
-
-export enum BigTooltipSetting {
-  Disabled = 0,
-  TwoLines = 1,
-  TwoLinesPickUp = 2,
-  ThreeLines = 3,
-  FourLinesPickUp = 4,
-  FiveLines = 5,
-  Custom = 6,
 }

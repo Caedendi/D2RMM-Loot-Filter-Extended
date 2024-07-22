@@ -1,4 +1,4 @@
-import { D2Color } from "../../Models/D2Color";
+import { D2Color } from "../../Models/Colors/D2Color";
 
 export abstract class ColorConstants {
   protected static baseColors = {

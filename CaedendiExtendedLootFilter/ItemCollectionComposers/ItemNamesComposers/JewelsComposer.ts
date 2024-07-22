@@ -4,10 +4,10 @@ import { FacetConstants } from "../../Constants/Items/FacetConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { ItemEntry } from "../../Models/_old/ItemEntry";
-import { BigTooltip } from "../../Models/NewItemEntry/BigTooltip";
-import { DoubleHighlightPattern } from "../../Models/NewItemEntry/DoubleHighlightPattern";
-import { NewItemEntry } from "../../Models/NewItemEntry/NewItemEntry";
-import { RainbowHighlightPattern } from "../../Models/NewItemEntry/RainbowHighlightPattern";
+import { BigTooltip } from "../../Models/ItemCollectionEntries/BigTooltip";
+import { DoubleHighlightPattern } from "../../Models/ItemCollectionEntries/DoubleHighlightPattern";
+import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
+import { RainbowHighlightPattern } from "../../Models/ItemCollectionEntries/RainbowHighlightPattern";
 import { Settings } from "../../Settings/Settings";
 import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
@@ -36,12 +36,12 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IBigTo
     */
   }
 
-  protected createFacetEntry(): NewItemEntry {
+  protected createFacetEntry(): ItemEntry {
     let pattern = Settings.filter.jewelry.isFacetAltPatternEnabled
       ? new RainbowHighlightPattern(Settings.bigTooltips.jewelry.facetsSetting)
       : new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, ColorConstants.red);
 
-    return new NewItemEntry(FacetConstants.facetId, CharConstants.empty, ColorConstants.gold, pattern, new BigTooltip(Settings.bigTooltips.jewelry.facetsSetting))
+    return new ItemEntry(FacetConstants.facetId, CharConstants.empty, ColorConstants.gold, pattern, new BigTooltip(Settings.bigTooltips.jewelry.facetsSetting))
   }
 
   public addBigTooltips() {

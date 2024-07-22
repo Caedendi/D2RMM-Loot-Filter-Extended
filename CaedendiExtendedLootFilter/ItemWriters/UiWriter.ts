@@ -11,7 +11,7 @@ export class UiWriter extends BaseItemWriter implements IItemWriter {
   }
 
   protected initializeBuilders(): void {
-    this.builders.push(new UiComposer());
-    this.builders.push(new CustomComposer(CustomFilterList.createForUiJson()));
+    this.composers.push(new UiComposer());
+    this.composers.push(new CustomComposer(CustomFilterList.createForUiJson()));
   }
 }

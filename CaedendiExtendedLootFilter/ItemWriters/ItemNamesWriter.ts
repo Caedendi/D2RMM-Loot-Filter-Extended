@@ -19,15 +19,15 @@ export class ItemNamesWriter extends BaseItemWriter implements IItemWriter {
   }
 
   protected initializeBuilders(): void {
-    this.builders.push(new HealingPotionsComposer());
-    this.builders.push(new ScrollsAndTomesComposer());
-    this.builders.push(new JunkComposer());
-    this.builders.push(new GemsComposer());
-    this.builders.push(new JewelsComposer());
-    this.builders.push(new CharmsComposer());
-    this.builders.push(new QuestItemsComposer());
-    this.builders.push(new EndgameItemsComposer());
-    this.builders.push(new EquipmentQualityComposer());
-    this.builders.push(new CustomComposer(CustomFilterList.createForItemNamesJson()));
+    this.composers.push(new HealingPotionsComposer());
+    this.composers.push(new ScrollsAndTomesComposer());
+    this.composers.push(new JunkComposer());
+    this.composers.push(new GemsComposer());
+    this.composers.push(new JewelsComposer());
+    this.composers.push(new CharmsComposer());
+    this.composers.push(new QuestItemsComposer());
+    this.composers.push(new EndgameItemsComposer());
+    this.composers.push(new EquipmentQualityComposer());
+    this.composers.push(new CustomComposer(CustomFilterList.createForItemNamesJson()));
   }
 }

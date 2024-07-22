@@ -11,7 +11,7 @@ export class ItemNameAffixesWriter extends BaseItemWriter implements IItemWriter
   }
 
   protected initializeBuilders(): void {
-    this.builders.push(new ItemNameAffixesComposer());
-    this.builders.push(new CustomComposer(CustomFilterList.createForItemNameAffixesJson()));
+    this.composers.push(new ItemNameAffixesComposer());
+    this.composers.push(new CustomComposer(CustomFilterList.createForItemNameAffixesJson()));
   }
 }
