@@ -22,17 +22,17 @@ export abstract class StatsAndModifiersSettings {
 
   // public static iLvlIndentFixQuality: string = this.iLvlIndentFixDouble; // for double digit ilvl items when item quality is enabled // TODO: check if needed
 
-  public static getiLvlIndent(fix?: iLvlDigits): string {
-    if (!Helper.isDefined(fix) || !Settings.statsAndModifiers.itemLevel.shouldFixIndentation || fix === iLvlDigits.None)
-      return CharConstants.empty;
+  // public static getiLvlIndent(fix?: iLvlDigits): string {
+  //   if (!Helper.isDefined(fix) || !Settings.statsAndModifiers.itemLevel.shouldFixIndentation || fix === iLvlDigits.None)
+  //     return CharConstants.empty;
 
-    if (fix == iLvlDigits.Single)
-      return this.iLvlIndentFixSingle;
-    if (fix == iLvlDigits.Double)
-      return this.iLvlIndentFixDouble;
+  //   if (fix == iLvlDigits.Single)
+  //     return this.iLvlIndentFixSingle;
+  //   if (fix == iLvlDigits.Double)
+  //     return this.iLvlIndentFixDouble;
 
-    throw new Error("Helper.getiLvlIndent() received undefined iLvlFix value.");
-  }
+  //   throw new Error("Helper.getiLvlIndent() received undefined iLvlFix value.");
+  // }
 
   public static normalQualityIndicator:      string = this.createQualityIndicator(ItemQuality.Normal);
   public static exceptionalQualityIndicator: string = this.createQualityIndicator(ItemQuality.Normal);

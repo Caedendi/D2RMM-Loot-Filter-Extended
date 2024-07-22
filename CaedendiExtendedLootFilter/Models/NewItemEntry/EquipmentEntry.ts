@@ -7,42 +7,55 @@ import { iLvlItemEntry } from "./iLvlItemEntry";
 import { QualityTag } from "./QualityTag";
 
 export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
-  protected _qualityTag?: QualityTag;
+  /**
+   * Quality Tag
+   */
+  private _qualityTag?: QualityTag;
+  protected get qualityTag(): QualityTag {
+    return this._qualityTag;
+  }
+  protected set qualityTag(value: QualityTag) {
+    this._qualityTag = value;
+  }
   
-  constructor(key: string, iLvlDigits: iLvlDigits, newName?: string, pattern?: IHighlightPattern, bigTooltip?: BigTooltip, quality?: QualityTag) {
+  constructor(key: string, iLvlDigits: iLvlDigits, quality?: QualityTag, newName?: string, pattern?: IHighlightPattern, bigTooltip?: BigTooltip) {
     super(key, iLvlDigits, newName, pattern, bigTooltip);
     this._qualityTag = quality;
   }
 
-  // TODO
-  public generateDisplayName(translatedName: string): string {
-    if (!this.isVisible)
-      return Settings.filter.settings.hidden;
+  // TODO: if quality indent tag is unnecessary, convert to simply only change this.applyNewName(translatedName);
+  // public generateDisplayName(translatedName: string): string {
+  //   if (!this.isVisible)
+  //     return Settings.filter.settings.hidden;
 
-    let displayName = this.setNewOrTranslatedName(translatedName);
-    displayName = this.applyHighlightPattern(displayName);
+  //   let displayName = this.applyNewName(translatedName);
+  //   displayName = this.applyQualityTag(translatedName);
+  //   displayName = this.applyHighlightPattern(displayName);
+  //   displayName = this.applyQualityIndent(displayName);
+  //   displayName = this.applyIlvlIndent(displayName);
+  //   displayName = this.applyBigTooltip(displayName);
 
-    // set ilvl indent
-    // set item quality indent
+  //   return displayName;
+  // }
 
-    displayName = this.applyBigTooltip(displayName);
-
-    return displayName;
+  protected applyNewName(translatedName: string): string {
+    let displayName = super.applyNewName(translatedName);
+    return this.applyQualityTag(displayName);
   }
 
   protected applyQualityTag(displayName: string): string {
-    if (this._qualityTag != null)
-      displayName = this._qualityTag.apply(displayName);
-
-    return displayName;
-  }
-
-  protected applyQualityIndent(displayName: string): string {
     if (this._qualityTag == null)
       return displayName;
-
-    
-
-    return displayName;
+      
+    return this._qualityTag.apply(displayName);
   }
+
+  // protected applyQualityIndent(displayName: string): string {
+  //   if (this._qualityTag == null)
+  //     return displayName;
+
+  //   // TODO: implement
+
+  //   return displayName;
+  // }
 }

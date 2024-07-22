@@ -1,8 +1,13 @@
+import { CharConstants } from "../../Constants/CharConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { FacetConstants } from "../../Constants/Items/FacetConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
+import { BigTooltip } from "../../Models/NewItemEntry/BigTooltip";
+import { DoubleHighlightPattern } from "../../Models/NewItemEntry/DoubleHighlightPattern";
+import { NewItemEntry } from "../../Models/NewItemEntry/NewItemEntry";
+import { RainbowHighlightPattern } from "../../Models/NewItemEntry/RainbowHighlightPattern";
 import { Settings } from "../../Settings/Settings";
-import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -15,7 +20,12 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IBigTo
     if (Settings.filter.jewelry.jewels == SettingsConstants.disabled)
       return;
     
-    this.collection.upsert(new DoubleHighlightItemEntry(FacetConstants.facetId, FacetConstants.facetName, iLvlDigits.Double, FacetConstants.prefix, FacetConstants.suffix));
+    let pattern = Settings.filter.jewelry.isFacetAltPatternEnabled
+      ? new RainbowHighlightPattern()
+      : new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, ColorConstants.red);
+
+    this.collection.upsert(new NewItemEntry(FacetConstants.facetId, CharConstants.empty, ColorConstants.gold, pattern, new BigTooltip(Settings.bigTooltips.jewelry.facetsSetting)))
+    // this.collection.upsert(new DoubleHighlightItemEntry(FacetConstants.facetId, FacetConstants.facetName, iLvlDigits.Double, FacetConstants.prefix, FacetConstants.suffix));
 
     /*
     case SettingsConstants.custom: // [CSTM-JWL]

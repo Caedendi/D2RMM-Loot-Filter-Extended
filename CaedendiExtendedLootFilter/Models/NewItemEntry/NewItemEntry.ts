@@ -1,11 +1,9 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { Settings } from "../../Settings/Settings";
-import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { D2Color } from "../D2Color";
 import { IItemEntry } from "../IItemEntry";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
-import { SingleHighlight } from "./SingleHighlight";
 
 // - key
 // - visible/hidden
@@ -59,7 +57,13 @@ export class NewItemEntry implements IItemEntry {
   /**
    * Highlight pattern
    */
-  protected _highlightPattern?: IHighlightPattern;
+  private _highlightPattern?: IHighlightPattern;
+  protected get highlightPattern(): IHighlightPattern {
+    return this._highlightPattern;
+  }
+  protected set highlightPattern(value: IHighlightPattern) {
+    this._highlightPattern = value;
+  }
   /**
    * Big tooltip
    */
@@ -87,21 +91,16 @@ export class NewItemEntry implements IItemEntry {
     if (!this.isVisible)
       return Settings.filter.settings.hidden;
 
-    let displayName = this.setNewOrTranslatedName(translatedName);
+    let displayName = this.applyNewName(translatedName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyBigTooltip(displayName);
 
     return displayName;
   }
 
-  protected setNewOrTranslatedName(translatedName: string) {
+  protected applyNewName(translatedName: string) {
     return this._newName === CharConstants.empty ? translatedName : `${this._nameColor}${this._newName}`;
   }
-
-  // EquipmentEntry:
-  // protected applyQualityTag(): string {
-
-  // }
 
   protected applyHighlightPattern(displayName: string): string {
     if (this._highlightPattern == null)
@@ -116,18 +115,6 @@ export class NewItemEntry implements IItemEntry {
     if (this._bigTooltip == null)
       return displayName;
 
-    // if:
-    // - hightlight pattern is single
-    // - BTT has pickup message (PuMsg)
-    // add PuMsg indent (== length of highlight pattern)
-
-    displayName = this._bigTooltip.apply(displayName);
-
-    return displayName;
-  }
-
-  // TODO: test if this only works on SingleHighlights vs DoubleHighlights
-  protected isSingleHighlightPattern(pattern: IHighlightPattern): pattern is SingleHighlight {
-    return (pattern as SingleHighlight).getIndent !== undefined;
+    return this._bigTooltip.apply(displayName, this.highlightPattern);
   }
 }

@@ -1,4 +1,3 @@
-import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { D2Color } from "../D2Color";
 import { DoubleHighlightPatternBase } from "./DoubleHighlightPatternBase";
 import { IHighlightPattern } from "./IHighlightPattern";
@@ -7,9 +6,8 @@ export class DoubleHighlightPattern extends DoubleHighlightPatternBase implement
   protected _pattern: string;
   protected _padding: string;
   protected _color: D2Color;
-  protected _iLvlFix: iLvlDigits;
 
-  constructor(pattern: string, padding: string, color: D2Color, iLvlFix: iLvlDigits) {
+  constructor(pattern: string, padding: string, color: D2Color) {
     super();
     this._pattern = pattern;
     this._padding = padding;
