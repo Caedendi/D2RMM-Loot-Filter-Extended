@@ -1,6 +1,6 @@
 import { Settings } from "../../Settings/Settings";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
-import { IItemEntry } from "../IItemEntry";
+import { IItemEntry } from "./IItemEntry";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
 import { iLvlItemEntry } from "./iLvlItemEntry";

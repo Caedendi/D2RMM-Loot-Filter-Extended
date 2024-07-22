@@ -1,7 +1,7 @@
 import { GemConstants } from "../../Constants/Items/GemConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { Gem } from "../../Models/Gem";
-import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
+import { SingleHighlightItemEntry } from "../../Models/_old/SingleHighlightItemEntry";
 import { Settings } from "../../Settings/Settings";
 import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";

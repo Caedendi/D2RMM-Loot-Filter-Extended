@@ -1,7 +1,7 @@
 import { EndgameConstants } from "../../Constants/Items/EndgameConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../Models/ItemEntry";
+import { ItemEntry } from "../../Models/_old/ItemEntry";
 import { BigTooltipSetting, Settings } from "../../Settings/Settings";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";

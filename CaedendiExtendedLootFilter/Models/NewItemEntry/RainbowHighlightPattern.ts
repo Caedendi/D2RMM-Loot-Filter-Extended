@@ -1,7 +1,8 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { BigTooltipSetting, Settings } from "../../Settings/Settings";
+import { BigTooltipSetting } from "../../Settings/Settings";
+import { BigTooltip } from "./BigTooltip";
 import { DoubleHighlightPatternBase } from "./DoubleHighlightPatternBase";
 import { IHighlightPattern } from "./IHighlightPattern";
 
@@ -18,9 +19,9 @@ export class RainbowHighlightPattern extends DoubleHighlightPatternBase implemen
   ];
 
   // TODO
-  constructor(hasPickUpMessage: boolean) {
+  constructor(bigTooltipSetting?: BigTooltipSetting) {
     super();
-    this.pattern = this.hasPickUpMessage() ? HighlightConstants.pattern3 : HighlightConstants.pattern5;
+    this.pattern = BigTooltip.hasPickUpMessage(bigTooltipSetting ?? BigTooltipSetting.Disabled) ? HighlightConstants.pattern3 : HighlightConstants.pattern5;
   }
 
   // protected static altPrefix = `${ColorConstants.red}${this.altPattern}${this.altPadding1}${ColorConstants.yellow}${this.altPattern}${this.altPadding1}${ColorConstants.blue}${this.altPattern}${this.altPadding1}${ColorConstants.green}${this.altPattern}${this.altClrName}${this.altPadding2}`;

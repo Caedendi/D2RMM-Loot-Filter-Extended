@@ -3,7 +3,7 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { D2Color } from "../../Models/D2Color";
-import { SingleHighlightItemEntry } from "../../Models/SingleHighlightItemEntry";
+import { SingleHighlightItemEntry } from "../../Models/_old/SingleHighlightItemEntry";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { Settings } from "../../Settings/Settings";

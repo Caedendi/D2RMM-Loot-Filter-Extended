@@ -1,7 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { Settings } from "../Settings/Settings";
 import { iLvlDigits, StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
-import { ItemEntry } from "./ItemEntry";
+import { ItemEntry } from "./_old/ItemEntry";
 
 export class DoubleHighlightItemEntry extends ItemEntry {
   protected readonly ilvlFix: iLvlDigits;

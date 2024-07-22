@@ -3,7 +3,7 @@ import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { D2Color } from "../Models/D2Color";
 import { DoubleHighlightItemEntry } from "../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../Models/ItemEntry";
+import { ItemEntry } from "../Models/_old/ItemEntry";
 import { Rune } from "../Models/Rune";
 import { RuneTier } from "../Models/RuneTier";
 import { BigTooltipSetting, Settings } from "../Settings/Settings";

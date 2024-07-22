@@ -4,7 +4,7 @@ import { IBuilder } from "./Builders/Interfaces/IBuilder";
 import { ItemLevelBuilder } from "./Builders/ItemLevelBuilder";
 import { LightPillarBuilder } from "./Builders/LightPillarBuilder";
 import { ProfileHdModsBuilder } from "./Builders/ProfileHdModsBuilder";
-import { D2rmmVersion } from "./Models/D2rmmVersion";
+import { D2rmmVersion } from "./Settings/D2rmmVersion";
 
 export class CaedendiExtendedLootFilterMod {
   public readonly requiredD2rmmVersion: D2rmmVersion = new D2rmmVersion(1, 7, 0);

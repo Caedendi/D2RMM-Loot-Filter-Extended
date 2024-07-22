@@ -1,5 +1,5 @@
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../Models/ItemEntry";
+import { ItemEntry } from "../../Models/_old/ItemEntry";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";

@@ -1,7 +1,7 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { iLvlDigits, StatsAndModifiersSettings } from "../Settings/StatsAndModifiersSettings";
+import { CharConstants } from "../../Constants/CharConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { BigTooltipSetting, Settings } from "../../Settings/Settings";
+import { iLvlDigits, StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
 
 export class ItemEntry {
   protected readonly key: string;

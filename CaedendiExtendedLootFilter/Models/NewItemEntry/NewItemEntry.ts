@@ -1,7 +1,7 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { Settings } from "../../Settings/Settings";
 import { D2Color } from "../D2Color";
-import { IItemEntry } from "../IItemEntry";
+import { IItemEntry } from "./IItemEntry";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
 

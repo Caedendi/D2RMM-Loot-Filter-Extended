@@ -1,7 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { Helper } from "../Helper";
 import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { ItemEntry } from "./ItemEntry";
+import { ItemEntry } from "./_old/ItemEntry";
 
 export class ItemCollection {
   protected entries: ItemEntry[] = [];

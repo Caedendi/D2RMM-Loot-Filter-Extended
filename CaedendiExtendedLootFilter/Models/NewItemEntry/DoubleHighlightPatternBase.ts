@@ -6,6 +6,5 @@ export abstract class DoubleHighlightPatternBase implements IHighlightPattern {
   }
 
   protected abstract getPrefix(): string;
-
   protected abstract getSuffix(): string;
 }

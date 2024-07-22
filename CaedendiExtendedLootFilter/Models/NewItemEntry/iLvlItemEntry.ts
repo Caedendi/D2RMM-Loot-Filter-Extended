@@ -2,7 +2,7 @@ import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { Settings } from "../../Settings/Settings";
 import { iLvlDigits, StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
-import { IItemEntry } from "../IItemEntry";
+import { IItemEntry } from "./IItemEntry";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
 import { NewItemEntry } from "./NewItemEntry";

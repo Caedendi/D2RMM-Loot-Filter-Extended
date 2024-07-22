@@ -1,13 +1,13 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { GemConstants } from "../Constants/Items/GemConstants";
-import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { Settings } from "../Settings/Settings";
-import { D2Color } from "./D2Color";
-import { Gem } from "./Gem";
+import { CharConstants } from "../../Constants/CharConstants";
+import { GemConstants } from "../../Constants/Items/GemConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { Settings } from "../../Settings/Settings";
+import { D2Color } from "../D2Color";
+import { Gem } from "../Gem";
 import { ItemEntry } from "./ItemEntry";
-import { BigTooltip } from "./NewItemEntry/BigTooltip";
-import { NewItemEntry } from "./NewItemEntry/NewItemEntry";
-import { SingleHighlight } from "./NewItemEntry/SingleHighlight";
+import { BigTooltip } from "../NewItemEntry/BigTooltip";
+import { NewItemEntry } from "../NewItemEntry/NewItemEntry";
+import { SingleHighlight } from "../NewItemEntry/SingleHighlight";
 
 export class SingleHighlightItemEntry extends ItemEntry {
   protected highlight: string;

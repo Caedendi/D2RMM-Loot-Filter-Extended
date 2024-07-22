@@ -2,7 +2,7 @@ import { CharConstants } from "../../Constants/CharConstants";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { RuneTierConstants } from "../../Constants/Items/RuneTierConstants";
 import { Settings } from "../../Settings/Settings";
-import { IItemEntry } from "../IItemEntry";
+import { IItemEntry } from "./IItemEntry";
 import { Rune } from "../Rune";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";

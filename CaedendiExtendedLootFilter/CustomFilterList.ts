@@ -1,6 +1,6 @@
 import { ColorConstants } from "./Constants/Colors/ColorConstants";
 import { ItemCollection } from "./Models/ItemCollection";
-import { ItemEntry } from "./Models/ItemEntry";
+import { ItemEntry } from "./Models/_old/ItemEntry";
 import { iLvlDigits } from "./Settings/StatsAndModifiersSettings";
 
 export abstract class CustomFilterList {

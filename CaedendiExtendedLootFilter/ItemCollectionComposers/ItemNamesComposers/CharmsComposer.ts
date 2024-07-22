@@ -2,7 +2,7 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { CharmConstants } from "../../Constants/Items/CharmConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../Models/ItemEntry";
+import { ItemEntry } from "../../Models/_old/ItemEntry";
 import { SunderCharm } from "../../Models/SunderCharm";
 import { Settings } from "../../Settings/Settings";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";

@@ -1,6 +1,6 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { BigTooltipSetting, Settings } from "../../Settings/Settings";
+import { BigTooltipSetting } from "../../Settings/Settings";
 import { IHighlightPattern } from "./IHighlightPattern";
 import { SingleHighlight } from "./SingleHighlight";
 
@@ -75,9 +75,8 @@ export class BigTooltip {
     return `${this._padding}${this._suffix}`;
   }
 
-  // TODO:
-  public static hasPickUpMessage(setting: BigTooltipSetting): boolean {
-    return Settings.bigTooltips.jewelry.facetsSetting == BigTooltipSetting.TwoLinesPickUp 
-        || Settings.bigTooltips.jewelry.facetsSetting == BigTooltipSetting.FourLinesPickUp;
+  public static hasPickUpMessage(setting?: BigTooltipSetting): boolean {
+    return setting == BigTooltipSetting.TwoLinesPickUp 
+        || setting == BigTooltipSetting.FourLinesPickUp;
   }
 }
