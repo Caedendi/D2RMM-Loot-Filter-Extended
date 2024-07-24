@@ -1,3 +1,4 @@
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { D2Color } from "../Colors/D2Color";
 import { DoubleHighlightPatternBase } from "./DoubleHighlightPatternBase";
 import { IHighlightPattern } from "./IHighlightPattern";
@@ -7,11 +8,11 @@ export class DoubleHighlightPattern extends DoubleHighlightPatternBase implement
   protected _padding: string;
   protected _color: D2Color;
 
-  constructor(pattern: string, padding: string, color: D2Color) {
+  constructor(pattern: string, padding: string, color?: D2Color) {
     super();
     this._pattern = pattern;
     this._padding = padding;
-    this._color = color;
+    this._color = color != undefined ? color : HighlightConstants.defaultHighlightColor;
   }
 
   protected getPrefix(): string {

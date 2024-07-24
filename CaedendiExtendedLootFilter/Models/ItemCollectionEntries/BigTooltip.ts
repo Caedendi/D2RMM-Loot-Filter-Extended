@@ -15,13 +15,13 @@ export class BigTooltip {
     this._setting = setting;
   }
 
-  public apply(displayName: string, highlightPattern?: IHighlightPattern): string {
+  public apply(displayName: string, highlightPattern: IHighlightPattern | null): string {
     this.setPickUpMessageIndent(highlightPattern);
     this.setAffixes();
     return `${this.getPrefix()}${displayName}${this.getSuffix()}`;
   }
 
-  protected setPickUpMessageIndent(highlightPattern?: IHighlightPattern): void {
+  protected setPickUpMessageIndent(highlightPattern: IHighlightPattern | null): void {
     if (highlightPattern != null && this.isSingleHighlightPattern(highlightPattern))
       this._pumIndent = highlightPattern.getIndent();
   }

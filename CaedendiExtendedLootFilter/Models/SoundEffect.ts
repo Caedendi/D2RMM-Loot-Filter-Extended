@@ -1,5 +1,6 @@
 import { FileConstants } from "../Constants/FileConstants";
 
+// TODO: match class name with file name
 export class SoundEffectPair {
   public sd: string;
   public hd: string;

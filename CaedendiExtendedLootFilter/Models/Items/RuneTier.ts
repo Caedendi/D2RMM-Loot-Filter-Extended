@@ -1,36 +1,76 @@
-import { RuneConstants } from "../Constants/Items/RuneConstants";
-import { BigTooltipSetting, Settings } from "../Settings/Settings";
-import { DoubleHighlightPattern } from "./ItemCollectionEntries/DoubleHighlightPattern";
-import { IHighlightPattern } from "./ItemCollectionEntries/IHighlightPattern";
+import { RuneConstants } from "../../Constants/Items/RuneConstants";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { Settings } from "../../Settings/Settings";
+import { IHighlightPattern } from "../ItemCollectionEntries/IHighlightPattern";
 import { Rune } from "./Rune";
 
 export class RuneTier {
-  protected readonly tier: number;
-  protected readonly runes: Rune[];
-  protected readonly _pattern?: DoubleHighlightPattern;
-  protected readonly padding: string;
-  protected readonly pattern: string;
-  protected readonly isVisible: boolean;
-  protected readonly bigTooltipSetting: BigTooltipSetting;
-  protected readonly hasLightPillar: boolean;
-  protected readonly dropSound: string;
+  /**
+   * tier number
+   */
+  private readonly _tier: number;
+  protected get tier(): number {
+    return this._tier;
+  }
+  /**
+   * runes
+   */
+  private readonly _runes: Rune[];
+  protected get runes(): Rune[] {
+    return this._runes;
+  }
+  /**
+   * isVisible
+   */
+  private readonly _isVisible: boolean;
+  protected get isVisible(): boolean {
+    return this._isVisible;
+  }
+  /**
+   * pattern
+   */
+  private readonly _pattern?: IHighlightPattern | undefined;
+  protected get pattern(): IHighlightPattern | undefined {
+    return this._pattern;
+  }
+  /**
+   * big tooltip setting
+   */
+  private readonly _bigTooltipSetting: BigTooltipSetting;
+  protected get bigTooltipSetting(): BigTooltipSetting {
+    return this._bigTooltipSetting;
+  }
+  /**
+   * has light pillar
+   */
+  private readonly _hasLightPillar: boolean;
+  protected get hasLightPillar(): boolean {
+    return this._hasLightPillar;
+  }
+  /**
+   * drop sound
+   */
+  private readonly _dropSound: string;
+  protected get dropSound(): string {
+    return this._dropSound;
+  }
 
   constructor(
     tier: number,
     runes: Rune[],
-    pattern?: DoubleHighlightPattern,
     isVisible: boolean,
+    pattern: IHighlightPattern | undefined,
     bigTooltipSetting: BigTooltipSetting,
     hasLightPillar: boolean,
     dropSound: string
   ) {
-    this.tier = tier;
-    this.runes = runes;
+    this._tier = tier;
+    this._runes = runes;
+    this._isVisible = isVisible;
     this._pattern = pattern;
-    this.isVisible = isVisible;
-    this.bigTooltipSetting = bigTooltipSetting;
-    this.hasLightPillar = hasLightPillar;
-    this.dropSound = dropSound;
+    this._bigTooltipSetting = bigTooltipSetting;
+    this._hasLightPillar = hasLightPillar;
+    this._dropSound = dropSound;
   }
     
   public isHighlightedTier(): boolean {
@@ -49,35 +89,7 @@ export class RuneTier {
     return Settings.filter.runes.shouldUseAltColor && RuneConstants.tiersWithAlternateColor.includes(this.tier);
   }
 
-  public getTier(): number {
-    return this.tier;
-  }
-
-  public getRunes(): Rune[] {
-    return this.runes;
-  }
-
-  public getPadding(): string {
-    return this.padding;
-  }
-
-  public getPattern(): string {
-    return this.pattern;
-  }
-
   public isHidden(): boolean {
     return !this.isVisible;
-  }
-
-  public getBigTooltipSetting(): BigTooltipSetting {
-    return this.bigTooltipSetting;
-  }
-
-  public getHasLightPillar(): boolean {
-    return this.hasLightPillar;
-  }
-
-  public getDropSound(): string {
-    return this.dropSound;
   }
 }

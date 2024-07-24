@@ -1,15 +1,17 @@
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { CharmConstants } from "../../Constants/Items/CharmConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../Models/_old/ItemEntry";
-import { SunderCharm } from "../../Models/SunderCharm";
+import { DoubleHighlightPattern } from "../../Models/ItemCollectionEntries/DoubleHighlightPattern";
+import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
+import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
+import { SunderCharm } from "../../Models/Items/SunderCharm";
 import { Settings } from "../../Settings/Settings";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
+import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
-export class CharmsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
+export class CharmsComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   constructor() {
     super();
   }
@@ -66,7 +68,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IBigTo
       CharmConstants.torchId, 
       CharmConstants.gheedsId
     ].forEach(charm => {
-      this.collection.upsert(new DoubleHighlightItemEntry(charm, charm, iLvlDigits.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix));
+      this.collection.upsert(new iLvlItemEntry(charm, iLvlDigits.Double, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting))
     });
   }
 
@@ -79,20 +81,13 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IBigTo
 
   private highlightSunderCharmsDefault(sunders: SunderCharm[]): void {
     sunders.forEach(sunder => this.collection.upsert(
-      new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlDigits.Double, CharmConstants.charmsUniquePrefix, CharmConstants.charmsUniqueSuffix)
+      new iLvlItemEntry(sunder.id, iLvlDigits.Double, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting)
     ));
   }
 
   private highlightSunderCharmsAlt(sunders: SunderCharm[]): void {
     sunders.forEach(sunder => this.collection.upsert(
-      new DoubleHighlightItemEntry(sunder.getId(), sunder.getName(), iLvlDigits.Double, sunder.getAltPatternPrefix(), sunder.getAltPatternSuffix())
+      new iLvlItemEntry(sunder.id, iLvlDigits.Double, null, new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color))
     ));
-  }
-
-  public addBigTooltips(): void {
-    let uniques = CharmConstants.uniqueLodCharmIds;
-    let sunders = CharmConstants.sunderCharms.map(sunder => sunder.getId());
-
-    this.collection.addBigTooltipToEntries(uniques.concat(sunders), Settings.bigTooltips.jewelry.uniqueCharmsSetting);
   }
 }

@@ -1,12 +1,12 @@
-import { RuneTier } from "../../Models/RuneTier";
+import { RuneTier } from "../../Models/Items/RuneTier";
 import { Settings } from "../../Settings/Settings";
 import { RuneConstants } from "./RuneConstants";
 
 export abstract class RuneTierConstants {
   public static tiers = [
-    new RuneTier(1, RuneConstants.tierLow,    RuneConstants.paddingLow,    RuneConstants.patternLow,    Settings.filter.runes.isLowRunesVisible,    Settings.bigTooltips.runes.lowRunesSetting,    Settings.lightPillars.runes.isLowRunesEnabled,    Settings.dropSounds.runes.low),
-    new RuneTier(2, RuneConstants.tierLowMid, RuneConstants.paddingLowMid, RuneConstants.patternLowMid, Settings.filter.runes.isLowMidRunesVisible, Settings.bigTooltips.runes.lowMidRunesSetting, Settings.lightPillars.runes.isLowMidRunesEnabled, Settings.dropSounds.runes.lowMid),
-    new RuneTier(3, RuneConstants.tierMid,    RuneConstants.paddingMid,    RuneConstants.patternMid,    Settings.filter.runes.isMidRunesVisible,    Settings.bigTooltips.runes.midRunesSetting,    Settings.lightPillars.runes.isMidRunesEnabled,    Settings.dropSounds.runes.mid),
-    new RuneTier(4, RuneConstants.tierHigh,   RuneConstants.paddingHigh,   RuneConstants.patternHigh,   Settings.filter.runes.isHighRunesVisible,   Settings.bigTooltips.runes.highRunesSetting,   Settings.lightPillars.runes.isHighRunesEnabled,   Settings.dropSounds.runes.high),
+    new RuneTier(1, RuneConstants.tierLow,    Settings.filter.runes.isLowRunesVisible,    RuneConstants.highlightLow,    Settings.bigTooltips.runes.lowRunesSetting,    Settings.lightPillars.runes.isLowRunesEnabled,    Settings.dropSounds.runes.low),
+    new RuneTier(2, RuneConstants.tierLowMid, Settings.filter.runes.isLowMidRunesVisible, RuneConstants.highlightLowMid, Settings.bigTooltips.runes.lowMidRunesSetting, Settings.lightPillars.runes.isLowMidRunesEnabled, Settings.dropSounds.runes.lowMid),
+    new RuneTier(3, RuneConstants.tierMid,    Settings.filter.runes.isMidRunesVisible,    RuneConstants.highlightMid,    Settings.bigTooltips.runes.midRunesSetting,    Settings.lightPillars.runes.isMidRunesEnabled,    Settings.dropSounds.runes.mid),
+    new RuneTier(4, RuneConstants.tierHigh,   Settings.filter.runes.isHighRunesVisible,   RuneConstants.highlightHigh,   Settings.bigTooltips.runes.highRunesSetting,   Settings.lightPillars.runes.isHighRunesEnabled,   Settings.dropSounds.runes.high),
   ];
 }

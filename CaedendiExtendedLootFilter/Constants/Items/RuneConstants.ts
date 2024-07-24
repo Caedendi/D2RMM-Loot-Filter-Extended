@@ -1,6 +1,8 @@
-import { Rune } from "../../Models/Rune";
-import { RuneTier } from "../../Models/RuneTier";
-import { BigTooltipSetting, Settings } from "../../Settings/Settings";
+import { DoubleHighlightPattern } from "../../Models/ItemCollectionEntries/DoubleHighlightPattern";
+import { IHighlightPattern } from "../../Models/ItemCollectionEntries/IHighlightPattern";
+import { Rune } from "../../Models/Items/Rune";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { Settings } from "../../Settings/Settings";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
@@ -56,21 +58,27 @@ export abstract class RuneConstants {
   ];
 
   public static clrName        = ColorConstants.orange;
-  public static clrHighlight   = HighlightConstants.color;
+  public static clrHighlight   = HighlightConstants.defaultHighlightColor;
 
-  // set the highlight patterns for each rune tier
-  public static patternLow = HighlightConstants.patternNone; // 
-  public static patternLowMid = HighlightConstants.pattern5; // *****
-  public static patternMid = HighlightConstants.pattern10;   // **********
-  public static patternHigh = Settings.bigTooltips.runes.highRunesSetting == BigTooltipSetting.Disabled
+  protected static patternHigh = Settings.bigTooltips.runes.highRunesSetting == BigTooltipSetting.Disabled
     ? HighlightConstants.pattern3x10  // ********** ********** **********, or
     : HighlightConstants.pattern2x10; // ********** ********** (with big tooltips)
 
-  // set the amount of spaces between the rune name and the highlight patterns for each rune tier
-  public static paddingLow    = HighlightConstants.paddingNone;
-  public static paddingLowMid = HighlightConstants.padding3;
-  public static paddingMid    = HighlightConstants.padding5;
-  public static paddingHigh   = HighlightConstants.padding5;
+  public static highlightLow?:    IHighlightPattern = undefined;
+  public static highlightLowMid?: IHighlightPattern = new DoubleHighlightPattern(HighlightConstants.pattern5,  HighlightConstants.padding3);
+  public static highlightMid?:    IHighlightPattern = new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5);
+  public static highlightHigh?:   IHighlightPattern = new DoubleHighlightPattern(this.patternHigh,  HighlightConstants.padding5);
+
+  // // set the highlight patterns for each rune tier
+  // public static patternLow = HighlightConstants.patternNone; // 
+  // public static patternLowMid = HighlightConstants.pattern5; // *****
+  // public static patternMid = HighlightConstants.pattern10;   // **********
+
+  // // set the amount of spaces between the rune name and the highlight patterns for each rune tier
+  // public static paddingLow    = HighlightConstants.paddingNone;
+  // public static paddingLowMid = HighlightConstants.padding3;
+  // public static paddingMid    = HighlightConstants.padding5;
+  // public static paddingHigh   = HighlightConstants.padding5;
 
   public static tiersWithHighlights         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
   public static tiersWithHighlightedNumbers = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default

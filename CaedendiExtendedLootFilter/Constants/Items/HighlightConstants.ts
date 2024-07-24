@@ -7,14 +7,13 @@ import { SettingsConstants } from "../SettingsConstants";
 
 export abstract class HighlightConstants {
   static character: string  = Settings.filter.settings.highlightCharacter !== SettingsConstants.custom ? Settings.filter.settings.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
-  static color:     D2Color = Settings.filter.settings.highlightColor;
+  static defaultHighlightColor:     D2Color = Settings.filter.settings.highlightColor;
 
   static paddingNone = CharConstants.empty;
   static padding1    = CharConstants.space;
   static padding2    = CharConstants.space.repeat(2);
   static padding3    = CharConstants.space.repeat(3);
   static padding5    = CharConstants.space.repeat(5);
-  static padding10   = CharConstants.space.repeat(10);
 
   static patternNone = CharConstants.empty;
   static pattern2    = this.character.repeat(2);
@@ -27,7 +26,7 @@ export abstract class HighlightConstants {
 
   // TODO: remove?
   static uniqueColorName = ColorConstants.gold;
-  static uniqueColorHighlight = this.color;
+  static uniqueColorHighlight = this.defaultHighlightColor;
   static uniquePattern = this.pattern10;
   static uniquePadding = this.padding5;
   static uniquePrefix = `${this.uniqueColorHighlight}${this.uniquePattern}${this.uniqueColorName}${this.uniquePadding}`;

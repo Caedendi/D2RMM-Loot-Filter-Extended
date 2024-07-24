@@ -1,4 +1,5 @@
 import { CharConstants } from "../../Constants/CharConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { D2Color } from "../Colors/D2Color";
@@ -51,15 +52,15 @@ export class ItemEntry implements IItemEntry {
   /**
    * Name replacement. Leave empty to use vanilla translated name.
    */
-  private readonly _newName: string;
-  public get newName(): string {
+  private readonly _newName: string | null;
+  protected get newName(): string | null {
     return this._newName;
   }
   /**
    * Highlight pattern
    */
-  private _highlightPattern?: IHighlightPattern;
-  protected get highlightPattern(): IHighlightPattern {
+  private _highlightPattern: IHighlightPattern | null;
+  protected get highlightPattern(): IHighlightPattern | null {
     return this._highlightPattern;
   }
   protected set highlightPattern(value: IHighlightPattern) {
@@ -68,8 +69,8 @@ export class ItemEntry implements IItemEntry {
   /**
    * Big tooltip
    */
-  private _bigTooltip?: BigTooltip;
-  protected get bigTooltip(): BigTooltip {
+  private _bigTooltip: BigTooltip | null;
+  protected get bigTooltip(): BigTooltip | null {
     return this._bigTooltip;
   }
   protected set bigTooltip(value: BigTooltip) {
@@ -81,16 +82,16 @@ export class ItemEntry implements IItemEntry {
    */
   constructor(
     key: string, 
-    newName?: string, 
+    newName?: string | null, 
     nameColor?: D2Color, 
-    pattern?: IHighlightPattern, 
-    bigTooltipSetting?: BigTooltipSetting
+    pattern?: IHighlightPattern | null, 
+    bigTooltipSetting?: BigTooltipSetting | null
   ) {
     this._key = key;
-    this._newName = newName;
-    this._nameColor = nameColor;
-    this._highlightPattern = pattern;
-    this._bigTooltip = new BigTooltip(bigTooltipSetting);
+    this._newName = newName ??= null;
+    this._nameColor = nameColor ??= ColorConstants.none;
+    this._highlightPattern = pattern ??= null;
+    this._bigTooltip = (bigTooltipSetting != undefined && bigTooltipSetting != BigTooltipSetting.Disabled) ? new BigTooltip(bigTooltipSetting) : null;
   }
 
   public static createHidden(key: string): ItemEntry {

@@ -1,4 +1,4 @@
-import { SunderCharm } from "../../Models/SunderCharm";
+import { SunderCharm } from "../../Models/Items/SunderCharm";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 

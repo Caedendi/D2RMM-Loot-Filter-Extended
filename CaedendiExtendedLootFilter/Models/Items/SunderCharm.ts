@@ -1,34 +1,31 @@
-import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { D2Color } from "./Colors/D2Color";
+import { D2Color } from "../Colors/D2Color";
 
 export class SunderCharm {
-  protected id: string;
-  protected name: string;
-  protected color: D2Color;
+  /**
+   * ID
+   */
+  private readonly _id: string;
+  public get id(): string {
+    return this._id;
+  }
+  /**
+   * name
+   */
+  private readonly _name: string;
+  public get name(): string {
+    return this._name;
+  }
+  /**
+   * color
+   */
+  private readonly _color: D2Color;
+  public get color(): D2Color {
+    return this._color;
+  }
 
   constructor(id: string, name: string, color: D2Color) {
-    this.id = id;
-    this.name = name;
-    this.color = color;
-  }
-
-  public getId(): string {
-    return this.id;
-  }
-
-  public getName(): string {
-    return this.name;
-  }
-
-  public getColor(): D2Color {
-    return this.color;
-  }
-
-  public getAltPatternPrefix(): string {
-    return `${this.color}${HighlightConstants.uniquePattern}${HighlightConstants.uniqueColorName}${HighlightConstants.uniquePadding}`;
-  }
-
-  public getAltPatternSuffix(): string {
-    return `${HighlightConstants.uniquePadding}${this.color}${HighlightConstants.uniquePattern}${HighlightConstants.uniqueColorName}`;
+    this._id = id;
+    this._name = name;
+    this._color = color;
   }
 }

@@ -3,9 +3,9 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { Settings } from "../../Settings/Settings";
 import { iLvlDigits, StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
 import { IItemEntry } from "./IItemEntry";
-import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
 import { ItemEntry } from "./ItemEntry";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 
 export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   /**
@@ -19,7 +19,13 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
     this._iLvl = value;
   }
   
-  constructor(key: string, iLvlDigits: iLvlDigits, newName?: string, pattern?: IHighlightPattern, bigTooltip?: BigTooltip) {
+  constructor(
+    key: string, 
+    iLvlDigits: iLvlDigits, 
+    newName?: string | null, 
+    pattern?: IHighlightPattern | null, 
+    bigTooltip?: BigTooltipSetting | null
+  ) {
     super(key, newName, ColorConstants.none, pattern, bigTooltip);
     this._iLvl = iLvlDigits;
   }

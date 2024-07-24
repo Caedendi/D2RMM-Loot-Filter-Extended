@@ -1,25 +1,31 @@
 import { D2Color } from "../Colors/D2Color";
 
 export class Gem {
-  protected readonly key: string;
-  protected readonly color: D2Color;
-  protected readonly name: string;
+  /**
+   * key property
+   */
+  private readonly _key: string;
+  protected get key(): string {
+    return this._key;
+  }
+  /**
+   * color property
+   */
+  private readonly _color: D2Color;
+  protected get color(): D2Color {
+    return this._color;
+  }
+  /**
+   * name property
+   */
+  private readonly _name: string;
+  protected get name(): string {
+    return this._name;
+  }
 
   constructor(key: string, color: D2Color, name: string) {
-    this.key = key;
-    this.color = color;
-    this.name = name;
-  }
-
-  public getKey(): string {
-    return this.key;
-  }
-
-  public getColor(): D2Color {
-    return this.color;
-  }
-
-  public getName(): string {
-    return this.name;
+    this._key = key;
+    this._color = color;
+    this._name = name;
   }
 }

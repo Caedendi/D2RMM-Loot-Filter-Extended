@@ -6,7 +6,7 @@ import { HighlightConstants } from "./HighlightConstants";
 
 export abstract class EndgameConstants {
   public static clrName = ColorConstants.orange;
-  public static clrHighlight = HighlightConstants.color;
+  public static clrHighlight = HighlightConstants.defaultHighlightColor;
 
   public static prefixEss = `${this.clrHighlight}${HighlightConstants.pattern5}${this.clrName}${HighlightConstants.padding3}`;
   public static prefixPkx = `${this.clrHighlight}${HighlightConstants.pattern10}${this.clrName}${HighlightConstants.padding5}`;
