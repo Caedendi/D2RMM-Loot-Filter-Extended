@@ -3,14 +3,14 @@ export class Rune {
    * number property
    */
   private readonly _number: number;
-  protected get number(): number {
+  public get number(): number {
     return this._number;
   }
   /**
    * name property
    */
   private readonly _name: string;
-  protected get name(): string {
+  public get name(): string {
     return this._name;
   }
 

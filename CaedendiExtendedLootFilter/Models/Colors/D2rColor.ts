@@ -1,23 +1,24 @@
-import { FontColorConstants } from "../../Constants/Colors/FontColorConstants";
-
-// TODO: refactor
 export class D2rColor {
-  protected name: string;
-  protected code: string;
+  /**
+   * name
+   */
+  private readonly _name: string;
+  public get name(): string {
+    return this._name;
+  }
+  /**
+   * code
+   */
+  private readonly _code: string;
+  public get code(): string {
+    return this._code;
+  }
 
   protected readonly prefix = "$FontColor";
 
   constructor(name: string) {
-    this.name = name;
-    this.code = name;
-  }
-
-  public getName(): string {
-    return this.name;
-  }
-
-  public getCode(): string {
-    return this.code;
+    this._name = name;
+    this._code = name;
   }
 
   public toString(): string {

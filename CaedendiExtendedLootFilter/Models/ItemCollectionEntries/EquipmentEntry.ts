@@ -1,8 +1,7 @@
-import { Settings } from "../../Settings/Settings";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
-import { IItemEntry } from "./IItemEntry";
-import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
+import { IItemEntry } from "./IItemEntry";
 import { iLvlItemEntry } from "./iLvlItemEntry";
 import { QualityTag } from "./QualityTag";
 
@@ -10,7 +9,7 @@ export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
   /**
    * Quality Tag
    */
-  private _qualityTag?: QualityTag;
+  private _qualityTag: QualityTag;
   protected get qualityTag(): QualityTag {
     return this._qualityTag;
   }
@@ -18,7 +17,14 @@ export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
     this._qualityTag = value;
   }
   
-  constructor(key: string, iLvlDigits: iLvlDigits, quality?: QualityTag, newName?: string, pattern?: IHighlightPattern, bigTooltip?: BigTooltip) {
+  constructor(
+    key: string,
+    iLvlDigits: iLvlDigits,
+    quality: QualityTag,
+    newName?: string | null,
+    pattern?: IHighlightPattern | null,
+    bigTooltip?: BigTooltipSetting | null
+  ) {
     super(key, iLvlDigits, newName, pattern, bigTooltip);
     this._qualityTag = quality;
   }

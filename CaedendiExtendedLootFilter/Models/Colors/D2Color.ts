@@ -1,14 +1,31 @@
 import { CharConstants } from "../../Constants/CharConstants";
 
 export class D2Color {
-  protected code: string;
-  protected name: string;
-
-  protected readonly prefix = "ÿc";
+  /**
+   * code
+   */
+  private readonly _code: string;
+  public get code(): string {
+    return this._code;
+  }
+  /**
+   * name
+   */
+  private readonly _name: string;
+  public get name(): string {
+    return this._name;
+  }
+  /**
+   * prefix
+   */
+  private readonly _prefix = "ÿc";
+  protected get prefix() {
+    return this._prefix;
+  }
 
   constructor(code: string, name: string) {
-    this.code = code;
-    this.name = name;
+    this._code = code;
+    this._name = name;
   }
 
   public toString(): string {
@@ -16,13 +33,5 @@ export class D2Color {
       return CharConstants.empty;
     
     return `${this.prefix}${this.code}`;
-  }
-
-  public getName(): string {
-    return this.name;
-  }
-
-  public getCode(): string {
-    return this.code;
   }
 }

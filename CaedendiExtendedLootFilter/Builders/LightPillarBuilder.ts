@@ -27,12 +27,12 @@ export class LightPillarBuilder implements IBuilder {
   // runes
   protected pushLightPillarsForRunes() {
     RuneTierConstants.tiers.forEach(tier => {
-      if (!tier.getHasLightPillar() || (Settings.lightPillars.shouldExcludeForHidden && tier.isHidden())) {
+      if (!tier.hasLightPillar || (Settings.lightPillars.shouldExcludeForHidden && tier.isHidden())) {
         return;
       }
 
-      tier.getRunes().forEach((rune) => {
-        this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}rune\\`, `${rune.getName().toLowerCase()}_rune`);
+      tier.runes.forEach((rune) => {
+        this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}rune\\`, `${rune.name.toLowerCase()}_rune`);
       });
     });
   }

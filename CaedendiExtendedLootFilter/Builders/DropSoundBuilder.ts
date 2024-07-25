@@ -29,8 +29,8 @@ export class DropSoundBuilder implements IBuilder {
       if (tier.isHidden() && Settings.dropSounds.shouldExcludeForHidden)
         return;
 
-      let itemCodes = tier.getRunes().map((rune) => rune.getNumber() < 10 ? `r0${rune.getNumber()}` : `r${rune.getNumber()}`);
-      this.modifyDropSoundForMiscItems(soundsFile, itemCodes, `rune_tier_${tier.getTier()}`, tier.getDropSound());
+      let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
+      this.modifyDropSoundForMiscItems(soundsFile, itemCodes, `rune_tier_${tier.tier}`, tier.dropSound);
     });
   }
 

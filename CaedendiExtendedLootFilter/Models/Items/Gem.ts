@@ -2,21 +2,21 @@ import { D2Color } from "../Colors/D2Color";
 
 export class Gem {
   /**
-   * key property
+   * key
    */
   private readonly _key: string;
   protected get key(): string {
     return this._key;
   }
   /**
-   * color property
+   * color
    */
   private readonly _color: D2Color;
   protected get color(): D2Color {
     return this._color;
   }
   /**
-   * name property
+   * name
    */
   private readonly _name: string;
   protected get name(): string {

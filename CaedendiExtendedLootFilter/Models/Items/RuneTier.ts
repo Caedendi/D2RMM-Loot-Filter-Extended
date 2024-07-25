@@ -9,49 +9,49 @@ export class RuneTier {
    * tier number
    */
   private readonly _tier: number;
-  protected get tier(): number {
+  public get tier(): number {
     return this._tier;
   }
   /**
    * runes
    */
   private readonly _runes: Rune[];
-  protected get runes(): Rune[] {
+  public get runes(): Rune[] {
     return this._runes;
   }
   /**
    * isVisible
    */
   private readonly _isVisible: boolean;
-  protected get isVisible(): boolean {
+  public get isVisible(): boolean {
     return this._isVisible;
   }
   /**
    * pattern
    */
   private readonly _pattern?: IHighlightPattern | undefined;
-  protected get pattern(): IHighlightPattern | undefined {
+  public get pattern(): IHighlightPattern | undefined {
     return this._pattern;
   }
   /**
    * big tooltip setting
    */
   private readonly _bigTooltipSetting: BigTooltipSetting;
-  protected get bigTooltipSetting(): BigTooltipSetting {
+  public get bigTooltipSetting(): BigTooltipSetting {
     return this._bigTooltipSetting;
   }
   /**
    * has light pillar
    */
   private readonly _hasLightPillar: boolean;
-  protected get hasLightPillar(): boolean {
+  public get hasLightPillar(): boolean {
     return this._hasLightPillar;
   }
   /**
    * drop sound
    */
   private readonly _dropSound: string;
-  protected get dropSound(): string {
+  public get dropSound(): string {
     return this._dropSound;
   }
 

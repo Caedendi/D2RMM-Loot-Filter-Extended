@@ -18,8 +18,8 @@ export class ItemCollection {
     return this.entries.map(entry => entry.key);
   }
 
-  public getDisplayNameForKey(key: string): string {
-    return this.entries.find(entry => entry.key === key)?.generateDisplayName() ?? "CELF_ERROR"
+  public getDisplayNameForKey(key: string, translatedName: string): string {
+    return this.entries.find(entry => entry.key === key)?.generateDisplayName(translatedName) ?? "CELF_ERROR"
   }
 
   public upsert(entry: ItemEntry): void {

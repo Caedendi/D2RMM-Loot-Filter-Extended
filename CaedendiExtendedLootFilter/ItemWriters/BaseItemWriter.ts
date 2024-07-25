@@ -54,6 +54,7 @@ export abstract class BaseItemWriter implements IItemWriter {
     D2RMM.writeJson(this.target, file);
   }
 
+  // sets all translated entries to "name"
   protected writeCustomName(file, index: string, name: string): void {
     for (const key in file[index]) { // for each property in this entry ...
       if (key === FileConstants.id || key === FileConstants.key) // ... that is a translation (not the id or Key property) ...
