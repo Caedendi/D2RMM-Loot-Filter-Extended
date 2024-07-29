@@ -1,4 +1,4 @@
-import { Gem } from "../../Models/Gem";
+import { Gem } from "../../Models/Items/Gem";
 import { Settings } from "../../Settings/Settings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";

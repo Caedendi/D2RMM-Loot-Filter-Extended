@@ -6,6 +6,7 @@ import { IItemEntry } from "./IItemEntry";
 import { IHighlightPattern } from "./IHighlightPattern";
 import { ItemEntry } from "./ItemEntry";
 import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { D2Color } from "../Colors/D2Color";
 
 export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   /**
@@ -20,13 +21,14 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   }
   
   constructor(
-    key: string, 
-    iLvlDigits: iLvlDigits, 
-    newName?: string | null, 
-    pattern?: IHighlightPattern | null, 
+    key: string,
+    iLvlDigits: iLvlDigits,
+    newName?: string | null,
+    nameColor?: D2Color,
+    pattern?: IHighlightPattern | null,
     bigTooltip?: BigTooltipSetting | null
   ) {
-    super(key, newName, ColorConstants.none, pattern, bigTooltip);
+    super(key, newName, nameColor, pattern, bigTooltip);
     this._iLvl = iLvlDigits;
   }
 

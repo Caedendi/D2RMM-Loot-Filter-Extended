@@ -2,6 +2,8 @@ import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { D2Color } from "../Models/Colors/D2Color";
+import { BigTooltip } from "../Models/ItemCollectionEntries/BigTooltip";
+import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
 import { RuneItemEntry } from "../Models/ItemCollectionEntries/RuneItemEntry";
 import { Rune } from "../Models/Items/Rune";
 import { RuneTier } from "../Models/Items/RuneTier";
@@ -18,7 +20,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IIt
 
   public applyFilter(): void {
     RuneTierConstants.tiers.forEach((tier) => {
-      let runes = tier.getRunes();
+      let runes = tier.runes;
 
       if (tier.isHidden()) {
         this.collection.upsertMultipleHidden(runes.map<string>(rune => rune.getKey()));
@@ -36,7 +38,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IIt
     var nameColor2 = nameColor1;
     var numberColor = !tier.isTierWithAlternateColor() ? (tier.isTierWithHighlightedNumber() ? RuneConstants.clrHighlight : RuneConstants.clrName) : ColorConstants.none;
 
-    let displayName = rune.getName();
+    let displayName = rune.name;
     this.addRuneAffixToDisplayName(displayName);
     this.removeDuplicateColorCodes1(tier.isHighlightedTier(), nameColor1, highlightColor2, nameColor2, numberColor);
     this.addRuneNumberToDisplayName(displayName, nameColor1, numberColor, rune.getNumber());
@@ -45,8 +47,9 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IIt
     let prefix = `${highlightColor1}${tier.getPattern()}${nameColor1}${tier.getPadding()}`;
     let suffix = `${tier.getPadding()}${highlightColor2}${tier.getPattern()}${nameColor2}`;
 
+
     return new DoubleHighlightItemEntry(rune.getKey(), displayName, iLvlDigits.None, prefix, suffix);
-    // return new RuneItemEntry(rune.getKey(), )
+    return new RuneItemEntry(rune, tier.tier, tier.pattern, new BigTooltip(tier.bigTooltipSetting));
   }
 
   private addRuneAffixToDisplayName(displayName: string): void {
@@ -86,15 +89,15 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IIt
   // TODO: remove
   public addBigTooltips() {
     RuneTierConstants.tiers.forEach(tier => {
-      if (tier.getBigTooltipSetting() == BigTooltipSetting.Disabled)
+      if (tier.bigTooltipSetting == BigTooltipSetting.Disabled)
         return;
 
-      tier.getRunes().forEach(rune => {
-        let entry = this.collection.getEntries().find(runeEntry => runeEntry.getKey() === rune.getKey());
+      tier.runes.forEach(rune => {
+        let entry = this.collection.getEntries().find(runeEntry => runeEntry.key === rune.getKey());
 
         // not found: rune is unchanged (not set to hidden but no highlighting set either)
         if (entry == undefined) {
-          this.collection.upsert(this.createNewRuneEntryWithBigTooltip(rune, tier.getBigTooltipSetting()));
+          this.collection.upsert(this.createNewRuneEntryWithBigTooltip(rune, tier.bigTooltipSetting));
           return;
         }
 
@@ -103,14 +106,14 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IIt
           return;
 
         // found: apply big tooltip
-        entry.addBigTooltip(tier.getBigTooltipSetting());
+        entry.addBigTooltip(tier.bigTooltipSetting);
       });
     });
   }
 
   // TODO: remove?
   private createNewRuneEntryWithBigTooltip(rune: Rune, bigTooltipSetting: BigTooltipSetting): ItemEntry {
-    let newEntry = new ItemEntry(rune.getKey(), `${rune.getName()} Rune`);
+    let newEntry = new ItemEntry(rune.getKey(), `${rune.name} Rune`);
     newEntry.addBigTooltip(bigTooltipSetting);
     
     return newEntry;

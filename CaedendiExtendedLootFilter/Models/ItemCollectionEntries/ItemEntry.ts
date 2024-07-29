@@ -1,11 +1,14 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { GemConstants } from "../../Constants/Items/GemConstants";
 import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { D2Color } from "../Colors/D2Color";
+import { Gem } from "../Items/Gem";
 import { BigTooltip } from "./BigTooltip";
 import { IHighlightPattern } from "./IHighlightPattern";
 import { IItemEntry } from "./IItemEntry";
+import { SingleHighlight } from "./SingleHighlight";
 
 // - key
 // - visible/hidden
@@ -99,6 +102,14 @@ export class ItemEntry implements IItemEntry {
     entry.isVisible = false;
 
     return entry;
+  }
+
+  public static fromGem(gem: Gem): ItemEntry {
+    return new ItemEntry(gem.key, gem.name, GemConstants.clrName, new SingleHighlight(GemConstants.highlight, gem.color, GemConstants.padding), Settings.bigTooltips.jewelry.gemsSetting);
+  }
+
+  public static fromGems(gems: Gem[]): ItemEntry[] {
+    return gems.map<ItemEntry>(gem => this.fromGem(gem));
   }
 
   public generateDisplayName(translatedName: string): string {

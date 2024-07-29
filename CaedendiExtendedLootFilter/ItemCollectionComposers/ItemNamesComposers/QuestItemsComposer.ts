@@ -1,15 +1,15 @@
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { QuestConstants } from "../../Constants/Items/QuestConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../Models/_old/ItemEntry";
+import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
+import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { Settings } from "../../Settings/Settings";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
+import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
-export class QuestItemsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
-  protected readonly prefix = HighlightConstants.questPrefix;
-  protected readonly suffix = HighlightConstants.questSuffix;
+export class QuestItemsComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
+  protected readonly pattern = HighlightConstants.questPattern;
 
   constructor() {
     super();
@@ -80,56 +80,19 @@ export class QuestItemsComposer extends ItemCollectionComposerBase implements IB
   }
 
   protected highlightQuestItems(): void {
-    let questItems: DoubleHighlightItemEntry[] = [
-      // Act 1
-      new DoubleHighlightItemEntry("leg", "Wirt's Leg", iLvlDigits.Double),
-      new DoubleHighlightItemEntry("hdm", "Horadric Malus", iLvlDigits.Double),
-      new DoubleHighlightItemEntry("bks", "Scroll of Inifuss"),
-      new DoubleHighlightItemEntry("bkd", "Scroll of Inifuss"), // deciphered
-
-      // Act 2
-      new DoubleHighlightItemEntry("tr1", "Horadric Scroll"),
-      new DoubleHighlightItemEntry("msf", "Staff of Kings", iLvlDigits.Double),
-      new DoubleHighlightItemEntry("vip", "Amulet of the Viper"),
-      new DoubleHighlightItemEntry("hst", "Horadric Staff", iLvlDigits.Single),
-
-      // Act 3
-      new DoubleHighlightItemEntry("j34", "A Jade Figurine"),
-      new DoubleHighlightItemEntry("g34", "The Golden Bird"),
-      new DoubleHighlightItemEntry("bbb", "Lam Esen's Tome"),
-      new DoubleHighlightItemEntry("g33", "The Gidbinn", iLvlDigits.Double),
-      new DoubleHighlightItemEntry("qf1", "Khalim's Flail", iLvlDigits.Double),
-      new DoubleHighlightItemEntry("qf2", "Khalim's Will", iLvlDigits.Single),
-      new DoubleHighlightItemEntry("qey", "Khalim's Eye"),
-      new DoubleHighlightItemEntry("qhr", "Khalim's Heart"),
-      new DoubleHighlightItemEntry("qbr", "Khalim's Brain"),
-      new DoubleHighlightItemEntry("mss", "Mephisto's Soulstone"),
-
-      // Act 4
-      new DoubleHighlightItemEntry("hfh", "Hell Forge Hammer", iLvlDigits.Double),
-
-      // Act 5
-      // See exceptions mentioned above [CSTM-QST2]
-
-      // Extra
-      new DoubleHighlightItemEntry("Staff of Kings",      "Staff of Kings", iLvlDigits.Double),
-      new DoubleHighlightItemEntry("Amulet of the Viper", "Amulet of the Viper"),
-      new DoubleHighlightItemEntry("Horadric Staff",      "Horadric Staff", iLvlDigits.Single),
-      new DoubleHighlightItemEntry("LamTome",             "Lam Esen's Tome"),
-      new DoubleHighlightItemEntry("KhalimFlail",         "Khalim's Flail", iLvlDigits.Double),
-      new DoubleHighlightItemEntry("SuperKhalimFlail",    "Khalim's Will", iLvlDigits.Single),
-      new DoubleHighlightItemEntry("Hell Forge Hammer",   "Hell Forge Hammer", iLvlDigits.Double),
-    ];
-
-    questItems.forEach(item => item.setPrefixSuffix(this.prefix, this.suffix)); // TODO: remove/refactor?
-    this.collection.upsertMultiple(questItems);
+    QuestConstants.questItems.forEach(key => this.collection.upsert(this.createQuestItemEntry(key)));
+    QuestConstants.questWeapons.forEach(weapon => this.collection.upsert(this.createQuestWeaponEntry(weapon.key, weapon.digits)));
   }
 
   protected highlightCube(): void {
-    this.collection.upsert(new DoubleHighlightItemEntry("box", "Horadric Cube", iLvlDigits.None, this.prefix, this.suffix));
+    this.collection.upsert(this.createQuestItemEntry("box"));
   }
 
-  public addBigTooltips(): void {
-    this.collection.addBigTooltipToAllEntries(Settings.bigTooltips.questEndgame.questItems);
+  private createQuestItemEntry(key: string): ItemEntry {
+    return new ItemEntry(key, null, HighlightConstants.uniqueColorName, this.pattern, Settings.bigTooltips.questEndgame.questItems);
+  }
+
+  private createQuestWeaponEntry(key: string, digits: iLvlDigits): ItemEntry {
+    return new iLvlItemEntry(key, digits, null, HighlightConstants.uniqueColorName, this.pattern, Settings.bigTooltips.questEndgame.questItems);
   }
 }

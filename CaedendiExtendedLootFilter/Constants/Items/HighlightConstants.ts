@@ -35,7 +35,7 @@ export abstract class HighlightConstants {
   static questPrefix = this.uniquePrefix;
   static questSuffix = this.uniqueSuffix;
 
-  static readonly uniqPattern = new DoubleHighlightPattern(this.pattern10, this.padding5, ColorConstants.gold);
+  static readonly uniqPattern = new DoubleHighlightPattern(this.pattern10, this.padding5);
   static readonly questPattern = this.uniqPattern;
 
   static bttPadding = this.padding5;

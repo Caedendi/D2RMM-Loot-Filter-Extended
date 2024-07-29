@@ -16,7 +16,7 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase impleme
     // TODO:
     // this feature needs to read the current item name and either prefix or suffix the item quality tag to it
     // current implementation of ItemEntry does not support this, needs a rewrite to only add a prefix or suffix
-    return; 
+    return;
 
     let fileWeapons = D2RMM.readTsv(FileConstants.FILE_WEAPONS_PATH);
     let fileArmor = D2RMM.readTsv(FileConstants.FILE_ARMOR_PATH);

@@ -1,13 +1,12 @@
 import { GemConstants } from "../../Constants/Items/GemConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { Gem } from "../../Models/Gem";
-import { SingleHighlightItemEntry } from "../../Models/_old/SingleHighlightItemEntry";
+import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
+import { Gem } from "../../Models/Items/Gem";
 import { Settings } from "../../Settings/Settings";
-import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
+import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
-export class GemsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
-
+export class GemsComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   constructor() {
     super();
   }
@@ -89,14 +88,10 @@ export class GemsComposer extends ItemCollectionComposerBase implements IBigTool
   }
 
   protected hideGems(gems: Gem[]): void {
-    this.collection.upsertMultipleHidden(gems.map(gem => gem.getKey()));
+    this.collection.upsertMultipleHidden(gems.map(gem => gem.key));
   }
 
   protected highlightGems(gems: Gem[]): void {
-    this.collection.upsertMultiple(SingleHighlightItemEntry.fromGems(gems));
-  }
-
-  public addBigTooltips() {
-    this.collection.addBigTooltipToAllEntries(Settings.bigTooltips.jewelry.gemsSetting);
+    this.collection.upsertMultiple(ItemEntry.fromGems(gems));
   }
 }

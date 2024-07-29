@@ -5,7 +5,6 @@ import { SettingsConstants } from "../Constants/SettingsConstants";
 import { D2Color } from "../Models/Colors/D2Color";
 import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
 import { Gem } from "../Models/Items/Gem";
-import { BigTooltipSetting } from "../Settings/BigTooltipSetting";
 import { Settings } from "../Settings/Settings";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
@@ -22,10 +21,6 @@ export class ItemNameAffixesComposer extends ItemCollectionComposerBase implemen
     this.applyGold();
     this.applyShortSupInferiorPrefixes();
     this.applyGems();
-  }
-
-  public addBigTooltips(): void {
-    this.addBigTooltipsToGems();
   }
 
   protected applyGold(): void {
@@ -103,17 +98,10 @@ export class ItemNameAffixesComposer extends ItemCollectionComposerBase implemen
   }
 
   protected hideGems(gems: Gem[]) {
-    this.collection.upsertMultipleHidden(gems.map<string>(gem => gem.getKey()));
+    this.collection.upsertMultipleHidden(gems.map<string>(gem => gem.key));
   }
 
   protected highlightGems(gems: Gem[]) {
-    this.collection.upsertMultiple(SingleHighlightItemEntry.fromGems(gems));
-  }
-
-  // TODO: remove
-  protected addBigTooltipsToGems() {
-    let setting = Settings.bigTooltips.jewelry.gemsSetting
-    if (setting != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToEntries(this.gems.map(gem => gem.getKey()), setting);
+    this.collection.upsertMultiple(ItemEntry.fromGems(gems));
   }
 }

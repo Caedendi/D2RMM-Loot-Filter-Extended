@@ -67,29 +67,33 @@ export class ItemCollection {
     return this.entries.findIndex(entry => entry.key === key);
   }
 
-  public addBigTooltipToAllEntries(setting: BigTooltipSetting) {
-    this.entries.forEach(entry => entry.addBigTooltip(setting));
-  }
 
-  public addBigTooltipToEntries(keys: string[], setting: BigTooltipSetting) {
-    keys.forEach(key => this.addBigTooltipToEntry(key, setting));
-  }
+  // TODO: REMOVE
+
   
-  public addBigTooltipToEntry(key: string, setting: BigTooltipSetting) {
-    let index = this.findIndex(key);
-    if (index < 0) { 
-      // push new entry without name but with big tooltip
-      let newEntry = new ItemEntry(key, CharConstants.empty);
-      newEntry.addBigTooltip(setting);
-      this.entries.push(newEntry);
-      return;
-    }
+  // public addBigTooltipToAllEntries(setting: BigTooltipSetting) {
+  //   this.entries.forEach(entry => entry.addBigTooltip(setting));
+  // }
 
-    let entry = this.findEntryByIndex(index);
-    if (entry.isHidden())
-      return;
+  // public addBigTooltipToEntries(keys: string[], setting: BigTooltipSetting) {
+  //   keys.forEach(key => this.addBigTooltipToEntry(key, setting));
+  // }
+  
+  // public addBigTooltipToEntry(key: string, setting: BigTooltipSetting) {
+  //   let index = this.findIndex(key);
+  //   if (index < 0) { 
+  //     // push new entry without name but with big tooltip
+  //     let newEntry = new ItemEntry(key, CharConstants.empty);
+  //     newEntry.addBigTooltip(setting);
+  //     this.entries.push(newEntry);
+  //     return;
+  //   }
 
-    entry.addBigTooltip(setting);
-    // this.entries[index].addBigTooltip(setting);
-  }
+  //   let entry = this.findEntryByIndex(index);
+  //   if (entry.isHidden())
+  //     return;
+
+  //   entry.addBigTooltip(setting);
+  //   // this.entries[index].addBigTooltip(setting);
+  // }
 }

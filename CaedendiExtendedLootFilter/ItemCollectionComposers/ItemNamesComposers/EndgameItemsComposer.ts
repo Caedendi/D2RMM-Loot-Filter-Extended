@@ -1,16 +1,17 @@
 import { EndgameConstants } from "../../Constants/Items/EndgameConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightItemEntry } from "../../Models/DoubleHighlightItemEntry";
-import { ItemEntry } from "../../Models/_old/ItemEntry";
-import { BigTooltipSetting, Settings } from "../../Settings/Settings";
-import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
-import { IBigTooltipItemCollectionComposer } from "../Interfaces/IBigTooltipItemCollectionComposer";
+import { IHighlightPattern } from "../../Models/ItemCollectionEntries/IHighlightPattern";
+import { IItemEntry } from "../../Models/ItemCollectionEntries/IItemEntry";
+import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { Settings } from "../../Settings/Settings";
+import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
 /**
  * Endgame: Pandemonium Event Items, Essences & Tokens of Absolution
  */
-export class EndgameItemsComposer extends ItemCollectionComposerBase implements IBigTooltipItemCollectionComposer {
+export class EndgameItemsComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   constructor() {
     super();
   }
@@ -54,50 +55,54 @@ export class EndgameItemsComposer extends ItemCollectionComposerBase implements 
   }
 
   protected highlightEndgameItems(): void {
-    let entries: DoubleHighlightItemEntry[] = [];
+    let entries: ItemEntry[] = [];
 
-    this.pushEntries(entries, EndgameConstants.essences, EndgameConstants.prefixEss, EndgameConstants.suffixEss);
-    this.pushEntries(entries, EndgameConstants.keys,     EndgameConstants.prefixPkx, EndgameConstants.suffixPkx);
-    this.pushEntries(entries, EndgameConstants.organs,   EndgameConstants.prefixOrg, EndgameConstants.suffixOrg);
-    entries.push(EndgameConstants.token);
+    this.pushEntries(entries, EndgameConstants.essences, EndgameConstants.patternEss, Settings.bigTooltips.questEndgame.essences);
+    this.pushEntries(entries, EndgameConstants.keys,     EndgameConstants.patternPkx, Settings.bigTooltips.questEndgame.keys);
+    this.pushEntries(entries, EndgameConstants.organs,   EndgameConstants.patternOrg, Settings.bigTooltips.questEndgame.organs);
+    entries.push(new ItemEntry(EndgameConstants.token, null, EndgameConstants.clrName, EndgameConstants.patternToa, Settings.bigTooltips.questEndgame.tokens));
 
     this.collection.upsertMultiple(entries);
   }
 
   protected highlightStandardOfHeroes(): void {
-    this.collection.upsert(EndgameConstants.standard);
+    this.collection.upsert(new ItemEntry(EndgameConstants.standard, null, EndgameConstants.clrName, EndgameConstants.patternStd, Settings.bigTooltips.questEndgame.standard));
   }
 
   protected hideStandardOfHeroes(): void {
-    this.collection.upsertHidden(EndgameConstants.standard.getKey());
+    this.collection.upsertHidden(EndgameConstants.standard);
   }
 
-  private pushEntries(target: DoubleHighlightItemEntry[], entries: ItemEntry[], prefix: string, suffix: string): void {
-    entries.forEach(entry => target.push(DoubleHighlightItemEntry.fromItemEntry(entry, iLvlDigits.None, prefix, suffix)));
+  private pushEntries(target: IItemEntry[], keys: string[], pattern: IHighlightPattern, bigTooltipSetting: BigTooltipSetting): void {
+    keys.forEach(key => target.push(new ItemEntry(key, null, EndgameConstants.clrName, pattern, bigTooltipSetting)));
   }
 
-  //
-  // SETTING as number as BigTooltipSetting ??
-  //
-  public addBigTooltips(): void {
-    // essences
-    if (Settings.bigTooltips.questEndgame.essences != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToEntries(EndgameConstants.essences.map(essence => essence.getKey()), Settings.bigTooltips.questEndgame.essences);
 
-    // token of absolution
-    if (Settings.bigTooltips.questEndgame.tokens != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToEntry(EndgameConstants.token.getKey(), Settings.bigTooltips.questEndgame.tokens);
+  
+  // TODO: REMOVE
 
-    // pandemonium keys
-    if (Settings.bigTooltips.questEndgame.keys != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToEntries(EndgameConstants.keys.map(key => key.getKey()), Settings.bigTooltips.questEndgame.keys);
+  // //
+  // // SETTING as number as BigTooltipSetting ??
+  // //
+  // public addBigTooltips(): void {
+  //   // essences
+  //   if (Settings.bigTooltips.questEndgame.essences != BigTooltipSetting.Disabled)
+  //     this.collection.addBigTooltipToEntries(EndgameConstants.essences.map(essence => essence.key), Settings.bigTooltips.questEndgame.essences);
 
-    // pandemonium organs
-    if (Settings.bigTooltips.questEndgame.organs != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToEntries(EndgameConstants.organs.map(organ => organ.getKey()), Settings.bigTooltips.questEndgame.organs);
+  //   // token of absolution
+  //   if (Settings.bigTooltips.questEndgame.tokens != BigTooltipSetting.Disabled)
+  //     this.collection.addBigTooltipToEntry(EndgameConstants.token.key, Settings.bigTooltips.questEndgame.tokens);
 
-    // standard of heroes
-    if (Settings.bigTooltips.questEndgame.standard != BigTooltipSetting.Disabled)
-      this.collection.addBigTooltipToEntry(EndgameConstants.standard.getKey(), Settings.bigTooltips.questEndgame.standard);
-  }
+  //   // pandemonium keys
+  //   if (Settings.bigTooltips.questEndgame.keys != BigTooltipSetting.Disabled)
+  //     this.collection.addBigTooltipToEntries(EndgameConstants.keys.map(key => key.key), Settings.bigTooltips.questEndgame.keys);
+
+  //   // pandemonium organs
+  //   if (Settings.bigTooltips.questEndgame.organs != BigTooltipSetting.Disabled)
+  //     this.collection.addBigTooltipToEntries(EndgameConstants.organs.map(organ => organ.key), Settings.bigTooltips.questEndgame.organs);
+
+  //   // standard of heroes
+  //   if (Settings.bigTooltips.questEndgame.standard != BigTooltipSetting.Disabled)
+  //     this.collection.addBigTooltipToEntry(EndgameConstants.standard.key, Settings.bigTooltips.questEndgame.standard);
+  // }
 }

@@ -5,21 +5,21 @@ export class Gem {
    * key
    */
   private readonly _key: string;
-  protected get key(): string {
+  public get key(): string {
     return this._key;
   }
   /**
    * color
    */
   private readonly _color: D2Color;
-  protected get color(): D2Color {
+  public get color(): D2Color {
     return this._color;
   }
   /**
    * name
    */
   private readonly _name: string;
-  protected get name(): string {
+  public get name(): string {
     return this._name;
   }
 

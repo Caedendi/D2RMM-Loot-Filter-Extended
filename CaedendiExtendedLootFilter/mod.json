@@ -486,7 +486,7 @@
               "id": "IsShowItemQualityEnabled",
               "type": "checkbox",
               "name": "Enable",
-              "description": "Hides the iLvl on items that have Big Tooltips.",
+              "description": "Show Equipment Quality tag.",
               "defaultValue": false
             },
             {
