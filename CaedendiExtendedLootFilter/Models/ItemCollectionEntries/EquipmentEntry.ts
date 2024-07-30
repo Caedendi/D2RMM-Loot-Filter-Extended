@@ -1,5 +1,6 @@
 import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
+import { D2Color } from "../Colors/D2Color";
 import { IHighlightPattern } from "./IHighlightPattern";
 import { IItemEntry } from "./IItemEntry";
 import { iLvlItemEntry } from "./iLvlItemEntry";
@@ -9,8 +10,8 @@ export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
   /**
    * Quality Tag
    */
-  private _qualityTag: QualityTag;
-  protected get qualityTag(): QualityTag {
+  private _qualityTag: QualityTag | null;
+  protected get qualityTag(): QualityTag | null {
     return this._qualityTag;
   }
   protected set qualityTag(value: QualityTag) {
@@ -20,13 +21,14 @@ export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
   constructor(
     key: string,
     iLvlDigits: iLvlDigits,
-    quality: QualityTag,
     newName?: string | null,
+    nameColor?: D2Color,
+    quality?: QualityTag | null,
     pattern?: IHighlightPattern | null,
     bigTooltip?: BigTooltipSetting | null
   ) {
-    super(key, iLvlDigits, newName, pattern, bigTooltip);
-    this._qualityTag = quality;
+    super(key, iLvlDigits, newName, nameColor, pattern, bigTooltip);
+    this._qualityTag = quality ??= null;
   }
 
   // TODO: if quality indent tag is unnecessary, convert to simply only change this.applyNewName(translatedName);

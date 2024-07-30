@@ -97,6 +97,10 @@ export class ItemEntry implements IItemEntry {
     this._bigTooltip = (bigTooltipSetting != undefined && bigTooltipSetting != BigTooltipSetting.Disabled) ? new BigTooltip(bigTooltipSetting) : null;
   }
 
+  public static createArray(items: [string, string][]): ItemEntry[] {
+    return items.map<ItemEntry>(item => new ItemEntry(item[0], item[1]));
+  }
+
   public static createHidden(key: string): ItemEntry {
     let entry = new ItemEntry(key);
     entry.isVisible = false;
@@ -104,6 +108,7 @@ export class ItemEntry implements IItemEntry {
     return entry;
   }
 
+  // TODO: convert fromGem to Gem.ToItemEntry()
   public static fromGem(gem: Gem): ItemEntry {
     return new ItemEntry(gem.key, gem.name, GemConstants.clrName, new SingleHighlight(GemConstants.highlight, gem.color, GemConstants.padding), Settings.bigTooltips.jewelry.gemsSetting);
   }

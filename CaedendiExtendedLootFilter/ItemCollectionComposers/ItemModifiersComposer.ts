@@ -27,15 +27,6 @@ export class ItemModifiersComposer extends ItemCollectionComposerBase implements
         this.collection.upsert(this.createQuestEntry(ice, "Malah's Potion"));
         this.collection.upsert(this.createQuestEntry(tr2, "Scroll of Resistance"));
         return;
-      case SettingsConstants.custom: // [CSTM-QST2]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
-
-        // TODO: refactor
-        /*
-        this.upsert(questCol, ice, `Malah's Potion`); // Malah's Potion
-        this.upsert(questCol, tr2, `Scroll of Resistance`); // Scroll of Resistance
-        */
-        return;
     }
   }
 

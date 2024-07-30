@@ -3,7 +3,6 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { D2Color } from "../../Models/Colors/D2Color";
-import { SingleHighlightItemEntry } from "../../Models/_old/SingleHighlightItemEntry";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
@@ -63,25 +62,6 @@ export class HealingPotionsComposer extends ItemCollectionComposerBase implement
         return;
       case "hide": // hide all healing potions
         this.hideHealingPotions();
-        return;
-      case SettingsConstants.custom: // [CSTM-HPT]
-        // ADD YOUR CUSTOM ITEM NAMES HERE
-
-        // TODO: refactor
-        // this.collection.upsertOLD("hp1", `${this.clrHeal}+${this.clrName}HP1`); // Minor Healing Potion
-        // this.collection.upsertOLD("hp2", `${this.clrHeal}+${this.clrName}HP2`); // Light Healing Potion
-        // this.collection.upsertOLD("hp3", `${this.clrHeal}+${this.clrName}HP3`); // Healing Potion
-        // this.collection.upsertOLD("hp4", `${this.clrHeal}+${this.clrName}HP4`); // Greater Healing Potion
-        // this.collection.upsertOLD("hp5", `${this.clrHeal}+${this.clrName}HP5`); // Super Healing Potion
-
-        // this.collection.upsertOLD("mp1", `${this.clrMana}+${this.clrName}MP1`); // Minor Mana Potion
-        // this.collection.upsertOLD("mp2", `${this.clrMana}+${this.clrName}MP2`); // Light Mana Potion
-        // this.collection.upsertOLD("mp3", `${this.clrMana}+${this.clrName}MP3`); // Mana Potion
-        // this.collection.upsertOLD("mp4", `${this.clrMana}+${this.clrName}MP4`); // Greater Mana Potion
-        // this.collection.upsertOLD("mp5", `${this.clrMana}+${this.clrName}MP5`); // Super Mana Potion
-
-        // this.collection.upsertOLD("rvs", `${this.clrRej}+${this.clrName}RPS`); // Rejuvenation Potion
-        // this.collection.upsertOLD("rvl", `${this.clrRej}+${this.clrName}RPF`); // Full Rejuvenation Potion
         return;
     }
   }

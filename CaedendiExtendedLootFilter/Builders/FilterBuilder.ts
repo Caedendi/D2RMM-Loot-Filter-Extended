@@ -31,8 +31,7 @@ export class FilterBuilder implements IBuilder {
     // TODO: global settings here conflict with Item Quality and Short Sup-/Inferior Prefixes
     if (Settings.filter.isEnabled)
       this.itemWriters.forEach(writer => writer.applyFilters());
-    if (Settings.bigTooltips.isEnabled)
-      this.itemWriters.forEach(writer => writer.addBigTooltips());
+    
     this.itemWriters.forEach(writer => writer.writeCustomNames());
   }
 }

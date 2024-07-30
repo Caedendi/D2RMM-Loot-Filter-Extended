@@ -1,6 +1,6 @@
 import { ColorConstants } from "./Constants/Colors/ColorConstants";
 import { ItemCollection } from "./Models/ItemCollectionEntries/ItemCollection";
-import { ItemEntry } from "./Models/_old/ItemEntry";
+import { ItemEntry } from "./Models/ItemCollectionEntries/ItemEntry";
 import { iLvlDigits } from "./Settings/StatsAndModifiersSettings";
 
 export abstract class CustomFilterList {
@@ -19,19 +19,11 @@ export abstract class CustomFilterList {
       //
       // Format: 
       // [ key, name ],
-      // or
-      // [ key, name, iLvlDigits ],
       //
       // - Set "key" to directly match the value of "Key" for the corresponding entry in "item-names.json". This can 
       //   either be an item code like "7wc" for Giant Thresher or a full name like "Death's Web".
       // - Name can be whatever you want. Use "quotes" for text-only or use `backtick` to incorporate variables using 
       //   `something ${variable} something`.
-      // - iLvlFix is optional and can be used to fix the indentation for items that have both double highlighting and 
-      //   an iLvl (by default these are quest weapons like Khalim's Will, facets and unique charms). 
-      //   Set this to either:
-      //   - None if not applicable or to disable
-      //   - Single if it _always_ has a single digit iLvl (1 to 9, like Khalim's Will)
-      //   - Double if it can have a double digit iLvl (10-99, like most items)
       //
       // See "D2RMM mod settings => Tooltips => Highlight Character" for a list of safe to use highlight characters.
       // Characters like ¤ (which were used in legacy loot filters) are not fully compatible with D2R, they increase the
@@ -58,6 +50,122 @@ export abstract class CustomFilterList {
       [ "Griffon's Eye", griffons1 ],
 
 remove this line (2/2) */
+
+      //============================//
+      // Healing Potions [CSTM-HPT] //
+      //============================//
+      // [ "hp1", `HP1` ], // Minor Healing Potion
+      // [ "hp2", `HP2` ], // Light Healing Potion
+      // [ "hp3", `HP3` ], // Healing Potion
+      // [ "hp4", `HP4` ], // Greater Healing Potion
+      // [ "hp5", `HP5` ], // Super Healing Potion
+      // [ "mp1", `MP1` ], // Minor Mana Potion
+      // [ "mp2", `MP2` ], // Light Mana Potion
+      // [ "mp3", `MP3` ], // Mana Potion
+      // [ "mp4", `MP4` ], // Greater Mana Potion
+      // [ "mp5", `MP5` ], // Super Mana Potion
+      // [ "rvs", `RPS` ], // Rejuvenation Potion
+      // [ "rvl", `RPF` ], // Full Rejuvenation Potion
+      
+      //=========================//
+      // Buff Potions [CSTM-BPT] //
+      //=========================//
+      // [ "yps", "Antidote Potion" ],
+      // [ "wms", "Thawing Potion" ],
+      // [ "vps", "Stamina Potion" ],
+
+      //=============================//
+      // Throwing Potions [CSTM-TPT] //
+      //=============================//
+      // [ "gpl", "Strangling Gas Potion" ],
+      // [ "gpm", "Choking Gas Potion" ],
+      // [ "gps", "Rancid Gas Potion" ],
+      // [ "opl", "Fulminating Potion" ],
+      // [ "opm", "Exploding Potion" ],
+      // [ "ops", "Oil Potion" ],
+       
+      //============================//
+      // Scrolls & Tomes [CSTM-SCR] //
+      //============================//
+      // [ "tsc", "Scroll of Town Portal" ],
+      // [ "isc", "Scroll of Identify" ],
+      // [ "tbk", "Tome of Town Portal" ],
+      // [ "ibk", "Tome of Identify" ],
+
+      //================================//
+      // Arrows, Bolts, Keys [CSTM-ABK] //
+      //================================//
+      // [ "aqv", "Arrows" ],
+      // [ "cqv", "Bolts" ],
+      // [ "key", "Key" ],
+
+      //===================//
+      // Jewels [CSTM-JWL] //
+      //===================//
+      // [ JewelryConstants.jewelId, `${ColorConstants.red}Jewel${ColorConstants.magic}` ], // includes (unidentified) magic, rare and unique jewels
+      // [ FacetConstants.facetId, `Rainbow Facet` ], // identified facets
+
+      //===================//
+      // Charms [CSTM-CHA] //
+      //===================//
+      // [ CharmConstants.charmSmallId, `Small Charm` ],
+      // [ CharmConstants.charmLargeId, `Large Charm` ],
+      // [ CharmConstants.charmGrandId, `Grand Charm` ],
+      // [ CharmConstants.anniId,       `Annihilus` ],
+      // [ CharmConstants.torchId,      `Hellfire Torch` ],
+      // [ CharmConstants.gheedsId,     `Gheed's Fortune` ],
+      // [ CharmConstants.sunderMagiId, `Black Cleft` ],
+      // [ CharmConstants.sunderPhysId, `Bone Break` ],
+      // [ CharmConstants.sunderColdId, `Cold Rupture` ],
+      // [ CharmConstants.sunderLiteId, `Crack of the Heavens` ],
+      // [ CharmConstants.sunderFireId, `Flame Rift` ],
+      // [ CharmConstants.sunderPoisId, `Rotting Fissure` ],
+
+      //=========================//
+      // Quest Items [CSTM-QST1] //
+      //=========================//
+      // See UiBuilder.ts for Book of Skill and Potion of Life, and 
+      // see ItemModifiersBuilder.ts for Malah's Potion and Scroll of Resistance [CSTM-QST2]
+      
+      // Act 1
+      [ "leg", `Wirt's Leg` ], // Wirt's Leg
+      [ "hdm", `Horadric Malus` ], // Horadric Malus
+      [ "bks", `Scroll of Inifuss` ], // Scroll of Inifuss
+      [ "bkd", `Scroll of Inifuss` ], // Scroll of Inifuss (deciphered)
+      
+      // Act 2
+      [ "tr1", `Horadric Scroll` ], // Horadric Scroll
+      [ "box", `Horadric Cube` ], // Horadric Cube
+      [ "msf", `Staff of Kings` ], // Staff of Kings
+      [ "vip", `Amulet of the Viper` ], // Amulet of the Viper
+      [ "hst", `Horadric Staff` ], // Horadric Staff
+
+      // Act 3
+      [ "j34", `A Jade Figurine` ], // A Jade Figurine
+      [ "g34", `The Golden Bird` ], // The Golden Bird
+      [ "bbb", `Lam Esen's Tome` ], // Lam Esen's Tome
+      [ "g33", `The Gidbinn` ], // The Gidbinn
+      [ "qf1", `Khalim's Flail` ], // Khalim's Flail
+      [ "qf2", `Khalim's Will` ], // Khalim's Will
+      [ "qey", `Khalim's Eye` ], // Khalim's Eye
+      [ "qhr", `Khalim's Heart` ], // Khalim's Heart
+      [ "qbr", `Khalim's Brain` ], // Khalim's Brain
+      [ "mss", `Mephisto's Soulstone` ], // Mephisto's Soulstone
+      
+      // Act 4
+      [ "hfh", `Hell Forge Hammer` ], // Hell Forge Hammer
+      
+      // Act 5
+      // See exceptions mentioned above [CSTM-QST2]
+      
+      // Extra
+      [ "Staff of Kings",      `Staff of Kings` ], // Staff of Kings
+      [ "Amulet of the Viper", `Amulet of the Viper` ], // Amulet of the Viper
+      [ "Horadric Staff",      `Horadric Staff` ], // Horadric Staff
+      [ "LamTome",             `Lam Esen's Tome` ], // Lam Esen's Tome
+      [ "KhalimFlail",         `Khalim's Flail` ], // Khalim's Flail
+      [ "SuperKhalimFlail",    `Khalim's Will` ], // Khalim's Will
+      [ "Hell Forge Hammer",   `Hell Forge Hammer` ], // Hell Forge Hammer
       
     ];
 
@@ -66,68 +174,53 @@ remove this line (2/2) */
 
   // Custom Filter List for item-runes.json
   public static createForItemRunesJson(): ItemCollection {
-    
-    // todo: is broken, correct
-    let clrMsg = ColorConstants.purple;
-    let clrRune = ColorConstants.orange;
-    let clrHighlight = ColorConstants.red;
-    let highlight1 = "**";
-    let highlight2 = "*****";
-    let highlight3 = "**********";
-
     let list: [string, string][] = [
       // [ "key", "value" ],
-      // [ "r01", "*** My custom El Rune name ***" ],
 
+      /*
+      [ "r01", `El (1)` ], // El
+      [ "r02", `Eld (2)` ], // Eld
+      [ "r03", `Tir (3)` ], // Tir
+      [ "r04", `Nef (4)` ], // Nef
+      [ "r05", `Eth (5)` ], // Eth
+      [ "r06", `Ith (6)` ], // Ith
+      [ "r07", `Tal (7)` ], // Tal
+      [ "r08", `${ColorConstants.red}*****${ColorConstants.orange}  Ral (8)  ${ColorConstants.red}*****${ColorConstants.orange}` ], // Ral
+      [ "r09", `Ort (9)` ], // Ort
+      [ "r10", `Thul (10)` ], // Thul
+      [ "r11", `Amn (11)` ], // Amn
+      [ "r12", `Sol (12)` ], // Sol
+      [ "r13", `Shael (13)` ], // Shael
+      [ "r14", `Dol (14)` ], // Dol
+      [ "r15", `${ColorConstants.red}*****${ColorConstants.orange}  Hel (15)  ${ColorConstants.red}*****${ColorConstants.orange}` ], // Hel
+      [ "r16", `Io (16)` ], // Io
+      [ "r17", `Lum (17)` ], // Lum
+      [ "r18", `${ColorConstants.red}*****  Ko (18)  *****` ], // Ko
+      [ "r19", `${ColorConstants.red}*****  Fal (19)  *****` ], // Fal
+      [ "r20", `${ColorConstants.red}*****  Lem (20)  *****` ], // Lem
+      [ "r21", `${ColorConstants.red}**********   Pul (21)   **********` ], // Pul
+      [ "r22", `${ColorConstants.red}**********   Um (22)   **********` ], // Um
+      [ "r23", `${ColorConstants.red}**********   Mal (23)   **********` ], // Mal
+      [ "r24", `${ColorConstants.red}**********   Ist (24)   **********` ], // Ist
+      [ "r25", `${ColorConstants.red}**********   Gul (25)   **********` ], // Gul
+      [ "r26", `${ColorConstants.red}********** ********** **********     Vex (26)     ********** ********** **********` ],
+      [ "r27", `${ColorConstants.red}********** ********** **********     Ohm (27)     ********** ********** **********` ],
+      [ "r28", `${ColorConstants.red}********** ********** **********     Lo (28)     ********** ********** **********` ],
+      [ "r29", `${ColorConstants.red}********** ********** **********     Sur (29)     ********** ********** **********` ],
+      [ "r30", `${ColorConstants.red}********** ********** **********     Ber (30)     ********** ********** **********` ],
+      [ "r31", `${ColorConstants.red}********** ********** **********     Jah (31)     ********** ********** **********` ],
       
-
-        
-
-        // TODO: fix
-        /*
-        this.runes.r01 = `${clrRune}El (1)`; // El
-        this.runes.r02 = `${clrRune}Eld (2)`; // Eld
-        this.runes.r03 = `${clrRune}Tir (3)`; // Tir
-        this.runes.r04 = `${clrRune}Nef (4)`; // Nef
-        this.runes.r05 = `${clrRune}Eth (5)`; // Eth
-        this.runes.r06 = `${clrRune}Ith (6)`; // Ith
-        this.runes.r07 = `${clrRune}Tal (7)`; // Tal
-        this.runes.r08 = `${clrHighlight}${highlight1}${clrRune}  Ral (8)  ${clrHighlight}${highlight1}${clrRune}`; // Ral
-        this.runes.r09 = `${clrRune}Ort (9)`; // Ort
-        this.runes.r10 = `${clrRune}Thul (10)`; // Thul
-        this.runes.r11 = `${clrRune}Amn (11)`; // Amn
-        this.runes.r12 = `${clrRune}Sol (12)`; // Sol
-        this.runes.r13 = `${clrRune}Shael (13)`; // Shael
-        this.runes.r14 = `${clrRune}Dol (14)`; // Dol
-        this.runes.r15 = `${clrHighlight}${highlight1}${clrRune}  Hel (15) ${clrHighlight}${highlight1}${clrRune}`; // Hel
-        this.runes.r16 = `${clrRune}Io (16)`; // Io
-        this.runes.r17 = `${clrRune}Lum (17)`; // Lum
-        this.runes.r18 = `${clrHighlight}${highlight1}${clrRune}  Ko (18)  ${clrHighlight}${highlight1}${clrRune}`; // Ko
-        this.runes.r19 = `${clrHighlight}${highlight1}${clrRune}  Fal (19)  ${clrHighlight}${highlight1}${clrRune}`; // Fal
-        this.runes.r20 = `${clrHighlight}${highlight1}${clrRune}  Lem (20)  ${clrHighlight}${highlight1}${clrRune}`; // Lem
-        this.runes.r21 = `${clrHighlight}${highlight2}${clrRune}   Pul (21)   ${clrHighlight}${highlight2}${clrRune}`; // Pul
-        this.runes.r22 = `${clrHighlight}${highlight2}${clrRune}   Um (22)   ${clrHighlight}${highlight2}${clrRune}`; // Um
-        this.runes.r23 = `${clrHighlight}${highlight2}${clrRune}   Mal (23)   ${clrHighlight}${highlight2}${clrRune}`; // Mal
-        this.runes.r24 = `${clrHighlight}${highlight2}${clrRune}   Ist (24)   ${clrHighlight}${highlight2}${clrRune}`; // Ist
-        this.runes.r25 = `${clrHighlight}${highlight2}${clrRune}   Gul (25)   ${clrHighlight}${highlight2}${clrRune}`; // Gul
-        this.runes.r26 = `${clrHighlight}${highlight3}${clrRune}     Vex (26)     ${clrHighlight}${highlight3}${clrRune}`; // Vex
-        this.runes.r27 = `${clrHighlight}${highlight3}${clrRune}     Ohm (27)     ${clrHighlight}${highlight3}${clrRune}`; // Ohm
-        this.runes.r28 = `${clrHighlight}${highlight3}${clrRune}     Lo (28)     ${clrHighlight}${highlight3}${clrRune}`; // Lo
-        this.runes.r29 = `${clrHighlight}${highlight3}${clrRune}     Sur (29)     ${clrHighlight}${highlight3}${clrRune}`; // Sur
-        this.runes.r30 = `${clrHighlight}${highlight3}${clrRune}     Ber (30)     ${clrHighlight}${highlight3}${clrRune}`; // Ber
-        this.runes.r31 = `${clrHighlight}${highlight3}${clrRune}     Jah (31)     ${clrHighlight}${highlight3}${clrRune}`; // Jah
-
-        // this.runes.r32 = `${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}`; // Cham
-        this.runes.r32 = `\n\n${clrMsg}Pick Up\n${LTT_PADDING}${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}${LTT_PADDING}\n\n`; // Cham
-        this.runes.r32 = Helper.generateBigTooltip(config.BigTooltipRunesHigh, `${clrHighlight}${HighlightConstants.pattern2x10}${clrRune}${HighlightConstants.padding10}Cham (32)${HighlightConstants.padding10}${clrHighlight}${HighlightConstants.pattern2x10}${clrRune}`); // Cham
+      [ "r32", `${ColorConstants.red}********** ********** **********     Cham (32)     ********** ********** **********`;
+      this.runes.r32 = `\n\n${clrMsg}Pick Up\n${LTT_PADDING}********** ********** **********     Cham (32)     ********** ********** **********${LTT_PADDING}\n\n`; // Cham
+      this.runes.r32 = Helper.generateBigTooltip(config.BigTooltipRunesHigh, `${clrHighlight}${HighlightConstants.pattern2x10}${clrRune}${HighlightConstants.padding10}Cham (32)${HighlightConstants.padding10}${clrHighlight}${HighlightConstants.pattern2x10}${clrRune}`); // Cham
 
 
 
-        // this.runes.r32 = Helper.generateBigTooltip(`${clrHighlight}${highlight3}${clrRune}     Cham (32)     ${clrHighlight}${highlight3}${clrRune}`); // Cham
-        // this.runes.r33 = `${clrHighlight}${highlight3}${clrRune}     Zod (33)     ${clrHighlight}${highlight3}${clrRune}`;  // Zod
-        // this.runes.r33 = `${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${HighlightConstants.padding5}${RuneConstants.clrName}Zod (33)${HighlightConstants.padding5}${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${RuneConstants.clrName}`;  // Zod
-        this.runes.r33 = Helper.generateDoubleHighlight(clrHighlight, HighlightConstants.pattern10, HighlightConstants.padding5, clrRune, "Zod Rune (33)"); // Zod
-        */
+      // this.runes.r32 = Helper.generateBigTooltip(`********** ********** **********     Cham (32)     ********** ********** **********`); // Cham
+      // this.runes.r33 = `********** ********** **********     Zod (33)     ********** ********** **********`;  // Zod
+      // this.runes.r33 = `${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${HighlightConstants.padding5}${RuneConstants.clrName}Zod (33)${HighlightConstants.padding5}${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${RuneConstants.clrName}`;  // Zod
+      this.runes.r33 = Helper.generateDoubleHighlight(clrHighlight, HighlightConstants.pattern10, HighlightConstants.padding5, clrRune, "Zod Rune (33)"); // Zod
+      */
     ];
 
     return new ItemCollection(ItemEntry.createArray(list));
@@ -162,6 +255,10 @@ remove this line (2/2) */
   public static createForItemModifiersJson(): ItemCollection {
     let list: [string, string][] = [
       // [ "key", "value" ],
+
+      // [CSTM-QST2]
+      // [ "ice", `Malah's Potion`],       // Malah's Potion
+      // [ "tr2", `Scroll of Resistance`], // Scroll of Resistance
     ];
 
     return new ItemCollection(ItemEntry.createArray(list));

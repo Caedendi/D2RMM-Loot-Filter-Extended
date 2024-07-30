@@ -1,15 +1,15 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { BigTooltipSetting } from "../../Settings/Settings";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { BigTooltip } from "./BigTooltip";
 import { DoubleHighlightPatternBase } from "./DoubleHighlightPatternBase";
 import { IHighlightPattern } from "./IHighlightPattern";
 
 export class RainbowHighlightPattern extends DoubleHighlightPatternBase implements IHighlightPattern {
   protected altClrName  = ColorConstants.gold;
-  protected padding1 = HighlightConstants.padding1; // padding between individual patterns
-  protected padding2 = HighlightConstants.padding3; // padding between name and facetAltPrefix / facetAltSuffix
+  protected paddingPatterns = HighlightConstants.padding1; // padding between individual patterns
+  protected paddingName = HighlightConstants.padding3; // padding between name and patterns
   protected pattern: string;
   protected patternColors = [
     ColorConstants.red,
@@ -24,29 +24,27 @@ export class RainbowHighlightPattern extends DoubleHighlightPatternBase implemen
     this.pattern = BigTooltip.hasPickUpMessage(bigTooltipSetting ?? BigTooltipSetting.Disabled) ? HighlightConstants.pattern3 : HighlightConstants.pattern5;
   }
 
-  // protected static altPrefix = `${ColorConstants.red}${this.altPattern}${this.altPadding1}${ColorConstants.yellow}${this.altPattern}${this.altPadding1}${ColorConstants.blue}${this.altPattern}${this.altPadding1}${ColorConstants.green}${this.altPattern}${this.altClrName}${this.altPadding2}`;
   protected getPrefix(): string {
     let prefix = CharConstants.empty;
     
-    // all: clr/pattern/padding1
+    // all: clr/pattern/paddingPatterns
     this.patternColors.forEach((clr, i) => {
-      // if last, use clrName+padding2, else use padding1
-      let next = (i == this.patternColors.length - 1) ? `${this.altClrName}${this.padding2}` : this.padding1;
+      // if last, use clrName+paddingName, else use paddingPatterns
+      let next = (i == this.patternColors.length - 1) ? `${this.altClrName}${this.paddingName}` : this.paddingPatterns;
       prefix += `${clr}${this.pattern}${next}`;
     });
       
     return prefix;
   }
 
-  // protected static altSuffix = `${this.altPadding2}${ColorConstants.green}${this.altPattern}${this.altPadding1}${ColorConstants.blue}${this.altPattern}${this.altPadding1}${ColorConstants.yellow}${this.altPattern}${this.altPadding1}${ColorConstants.red}${this.altPattern}${this.altClrName}`;
   protected getSuffix(): string {
     let sufix = CharConstants.empty;
     
-    // first: padding2/clr/pattern
-    // rest:  padding1/clr/pattern
+    // first: paddingName/clr/pattern
+    // rest:  paddingPatterns/clr/pattern
     // end:   altClrName
     this.patternColors.reverse().forEach((clr, i) => {
-      let next = (i == 0) ? this.padding2 : this.padding1;
+      let next = (i == 0) ? this.paddingName : this.paddingPatterns;
       sufix += `${next}${clr}${this.pattern}`;
     });
     

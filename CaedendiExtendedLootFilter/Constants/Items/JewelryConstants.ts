@@ -6,9 +6,12 @@ export abstract class JewelryConstants {
   public static jewelId = "jew";
 
   public static iLvlJewelry: string[] = [
-    JewelryConstants.ringId,
-    JewelryConstants.amuletId,
-    JewelryConstants.jewelId,
+    this.ringId,
+    this.amuletId,
+    this.jewelId,
+    // JewelryConstants.ringId,
+    // JewelryConstants.amuletId,
+    // JewelryConstants.jewelId,
     CharmConstants.charmSmallId,
     CharmConstants.charmLargeId,
     CharmConstants.charmGrandId,

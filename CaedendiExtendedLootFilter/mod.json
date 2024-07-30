@@ -80,8 +80,7 @@
                   "value": "fr",
                   "label": "Show only Full Rejuvenation Potions"
                 },
-                { "value": "hide", "label": "Hide all" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "hide", "label": "Hide all" }
               ]
             },
             {
@@ -93,8 +92,7 @@
               "options": [
                 { "value": "none", "label": "Disable" },
                 { "value": "all", "label": "Enable" },
-                { "value": "hide", "label": "Hide" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "hide", "label": "Hide" }
               ]
             },
             {
@@ -106,8 +104,7 @@
               "options": [
                 { "value": "none", "label": "Disable" },
                 { "value": "all", "label": "Enable" },
-                { "value": "hide", "label": "Hide" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "hide", "label": "Hide" }
               ]
             },
             {
@@ -119,35 +116,32 @@
               "options": [
                 { "value": "none", "label": "Disable" },
                 { "value": "all", "label": "Enable" },
-                { "value": "hide", "label": "Hide Scrolls" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "hide", "label": "Hide Scrolls" }
               ]
             },
             {
               "id": "ArrowsBolts",
               "type": "select",
               "name": "Arrows & Bolts",
-              "description": "Customize Arrows & Bolts. [CSTM-ARB]",
+              "description": "Customize Arrows & Bolts. [CSTM-ABK]",
               "defaultValue": "all",
               "options": [
                 { "value": "none", "label": "Disable" },
                 { "value": "all", "label": "Enable" },
                 { "value": "arw", "label": "Enable Arrows, hide Bolts" },
                 { "value": "blt", "label": "Enable Bolts, hide Arrows" },
-                { "value": "hide", "label": "Hide" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "hide", "label": "Hide" }
               ]
             },
             {
               "id": "Keys",
               "type": "select",
               "name": "Keys",
-              "description": "Customize regular keys for opening locked chests. For Über keys, see Endgame. [CSTM-KEY]",
+              "description": "Customize regular keys for opening locked chests. For Über keys, see Endgame. [CSTM-ABK]",
               "defaultValue": "none",
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "hide", "label": "Hide" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "hide", "label": "Hide" }
               ]
             }
           ]
@@ -333,9 +327,8 @@
               "defaultValue": "xhc",
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "all", "label": "Highlight" },
-                { "value": "xhc", "label": "Highlight, exclude Cube" },
-                { "value": "custom", "label": "Custom" }
+                { "value": "all", "label": "Highlight all" },
+                { "value": "xhc", "label": "Highlight, exclude Cube" }
               ]
             },
             {
@@ -346,16 +339,9 @@
               "defaultValue": "all",
               "options": [
                 { "value": "none", "label": "Disable" },
-                { "value": "all", "label": "Highlight" },
-                {
-                  "value": "xsh",
-                  "label": "Highlight, exclude Standard of Heroes"
-                },
-                {
-                  "value": "hsh",
-                  "label": "Highlight, hide Standard of Heroes"
-                },
-                { "value": "custom", "label": "Custom" }
+                { "value": "all",  "label": "Highlight" },
+                { "value": "xsh",  "label": "Highlight, exclude Standard of Heroes" },
+                { "value": "hsh",  "label": "Highlight, hide Standard of Heroes" }
               ]
             }
           ]
