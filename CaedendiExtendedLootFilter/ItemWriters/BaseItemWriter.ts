@@ -32,8 +32,8 @@ export abstract class BaseItemWriter implements IItemWriter {
     if (!Settings.filter.isEnabled)
       return;
     
-    this.composers.forEach(builder => {
-      builder.applyFilter();
+    this.composers.forEach(composer => {
+      composer.applyFilter();
     });
   }
 

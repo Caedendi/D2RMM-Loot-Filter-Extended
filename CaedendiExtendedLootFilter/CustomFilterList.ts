@@ -1,7 +1,6 @@
 import { ColorConstants } from "./Constants/Colors/ColorConstants";
 import { ItemCollection } from "./Models/ItemCollectionEntries/ItemCollection";
 import { ItemEntry } from "./Models/ItemCollectionEntries/ItemEntry";
-import { iLvlDigits } from "./Settings/StatsAndModifiersSettings";
 
 export abstract class CustomFilterList {
   
@@ -9,7 +8,7 @@ export abstract class CustomFilterList {
   public static createForItemNamesJson(): ItemCollection {
     // let griffons1 = `My custom item name in a variable`;
 
-    let list: [string, string, iLvlDigits?][] = [
+    let list: [string, string][] = [
     
       //----------------------------------------------//
       // ENTER YOUR CUSTOM ITEM NAMES HERE [CSTM-CFL] //
@@ -29,27 +28,12 @@ export abstract class CustomFilterList {
       // Characters like ¤ (which were used in legacy loot filters) are not fully compatible with D2R, they increase the
       // font size of the tooltip.
 
-/* remove this line (1/2)
+      // Examples
+      // [ "jav", `` ], // Javelin, hidden (forced zero-space name)
+      // [ "jav", `${Setting.hidden}` ], // Javelin, hidden (respecting the "Tooltip width for hidden items" setting)
+      // [ "ci3", `${Color.red}Diadem${Color.blue}` ], // Diadem, red-colored name, ends with blue color code for when the item is magic and has an affix (side effect: iLvls also turn blue)
+      // [ "Griffon's Eye", `${Color.red}**********${Color.purple}     "Griffon's Eye"     ${Color.red}**********${Color.purple}` ], // named key with manual highlighting
 
-      // Javelin, hidden (forced zero-space name)
-      [ "jav", `` ],
-
-      // Javelin, hidden (respecting the "Tooltip width for hidden items" setting)
-      [ "jav", `${Setting.hidden}` ],
-
-      // Diadem, red-colored name, ends with blue color code for when the item is magic and has an affix (side effect: iLvls also turn blue)
-      [ "ci3", `${Color.red}Diadem${Color.blue}` ],
-
-      // named key with manual highlighting
-      [ "Griffon's Eye", `${Color.red}**********${Color.purple}     "Griffon's Eye"     ${Color.red}**********${Color.purple}`, iLvlFix.DoubleDigits ],
-      
-      // name with generated highlighting
-      [ "Griffon's Eye", Helper.generateDoubleHighlight(Color.red, Highlighting.pattern10, Highlighting.padding5, Color.purple, "Griffon's Eye"), iLvlFix.DoubleDigits ],
-
-      // name defined in a variable
-      [ "Griffon's Eye", griffons1 ],
-
-remove this line (2/2) */
 
       //============================//
       // Healing Potions [CSTM-HPT] //
@@ -99,11 +83,48 @@ remove this line (2/2) */
       // [ "cqv", "Bolts" ],
       // [ "key", "Key" ],
 
+      //==================//
+      // Gems [CSTM-GEM1] //
+      //==================//
+      // [ "gcv", `Chipped Amethyst` ],
+      // [ "gcw", `Chipped Diamond` ],
+      // [ "gcg", `Chipped Emerald` ],
+      // [ "gcr", `Chipped Ruby` ],
+      // [ "gcb", `Chipped Sapphire` ],
+      // [ "gcy", `Chipped Topaz` ],
+      // [ "skc", `Chipped Skull` ],
+      // [ "gfv", `Flawed Amethyst` ],
+      // [ "gfw", `Flawed Diamond` ],
+      // [ "gfg", `Flawed Emerald` ],
+      // [ "gfr", `Flawed Ruby` ],
+      // [ "gfb", `Flawed Sapphire` ],
+      // [ "gfy", `Flawed Topaz` ],
+      // [ "skf", `Flawed Skull` ],
+      // [ "gsv", `Amethyst` ],
+      // For Ruby, Sapphire, Emerald and Diamond, see [CSTM-GEM2] in the "Affixes" section above.
+      // For some reason, the devs put these gems in another JSON file because they're also the names of some affixes.
+      // [ "gsy", `Topaz` ],
+      // [ "sku", `Skull` ],
+      // [ "gzv", `Flawless Amethyst` ],
+      // [ "glw", `Flawless Diamond` ],
+      // [ "glg", `Flawless Emerald` ],
+      // [ "glr", `Flawless Ruby` ],
+      // [ "glb", `Flawless Sapphire` ],
+      // [ "gly", `Flawless Topaz` ],
+      // [ "skl", `Flawless Skull` ],
+      // [ "gpv", `Perfect Amethyst` ],
+      // [ "gpw", `Perfect Diamond` ],
+      // [ "gpg", `Perfect Emerald` ],
+      // [ "gpr", `Perfect Ruby` ],
+      // [ "gpb", `Perfect Sapphire` ],
+      // [ "gpy", `Perfect Topaz` ],
+      // [ "skz", `Perfect Skull` ],
+
       //===================//
       // Jewels [CSTM-JWL] //
       //===================//
-      // [ JewelryConstants.jewelId, `${ColorConstants.red}Jewel${ColorConstants.magic}` ], // includes (unidentified) magic, rare and unique jewels
-      // [ FacetConstants.facetId, `Rainbow Facet` ], // identified facets
+      // [ "jew", `${ColorConstants.red}Jewel${ColorConstants.magic}` ], // includes (unidentified) magic, rare and unique jewels
+      // [ "Rainbow Facet", `Rainbow Facet` ], // identified facets
 
       //===================//
       // Charms [CSTM-CHA] //
@@ -128,45 +149,60 @@ remove this line (2/2) */
       // see ItemModifiersBuilder.ts for Malah's Potion and Scroll of Resistance [CSTM-QST2]
       
       // Act 1
-      [ "leg", `Wirt's Leg` ], // Wirt's Leg
-      [ "hdm", `Horadric Malus` ], // Horadric Malus
-      [ "bks", `Scroll of Inifuss` ], // Scroll of Inifuss
-      [ "bkd", `Scroll of Inifuss` ], // Scroll of Inifuss (deciphered)
+      // [ "leg", `Wirt's Leg` ], // Wirt's Leg
+      // [ "hdm", `Horadric Malus` ], // Horadric Malus
+      // [ "bks", `Scroll of Inifuss` ], // Scroll of Inifuss
+      // [ "bkd", `Scroll of Inifuss` ], // Scroll of Inifuss (deciphered)
       
       // Act 2
-      [ "tr1", `Horadric Scroll` ], // Horadric Scroll
-      [ "box", `Horadric Cube` ], // Horadric Cube
-      [ "msf", `Staff of Kings` ], // Staff of Kings
-      [ "vip", `Amulet of the Viper` ], // Amulet of the Viper
-      [ "hst", `Horadric Staff` ], // Horadric Staff
+      // [ "tr1", `Horadric Scroll` ], // Horadric Scroll
+      // [ "box", `Horadric Cube` ], // Horadric Cube
+      // [ "msf", `Staff of Kings` ], // Staff of Kings
+      // [ "vip", `Amulet of the Viper` ], // Amulet of the Viper
+      // [ "hst", `Horadric Staff` ], // Horadric Staff
 
       // Act 3
-      [ "j34", `A Jade Figurine` ], // A Jade Figurine
-      [ "g34", `The Golden Bird` ], // The Golden Bird
-      [ "bbb", `Lam Esen's Tome` ], // Lam Esen's Tome
-      [ "g33", `The Gidbinn` ], // The Gidbinn
-      [ "qf1", `Khalim's Flail` ], // Khalim's Flail
-      [ "qf2", `Khalim's Will` ], // Khalim's Will
-      [ "qey", `Khalim's Eye` ], // Khalim's Eye
-      [ "qhr", `Khalim's Heart` ], // Khalim's Heart
-      [ "qbr", `Khalim's Brain` ], // Khalim's Brain
-      [ "mss", `Mephisto's Soulstone` ], // Mephisto's Soulstone
+      // [ "j34", `A Jade Figurine` ], // A Jade Figurine
+      // [ "g34", `The Golden Bird` ], // The Golden Bird
+      // [ "bbb", `Lam Esen's Tome` ], // Lam Esen's Tome
+      // [ "g33", `The Gidbinn` ], // The Gidbinn
+      // [ "qf1", `Khalim's Flail` ], // Khalim's Flail
+      // [ "qf2", `Khalim's Will` ], // Khalim's Will
+      // [ "qey", `Khalim's Eye` ], // Khalim's Eye
+      // [ "qhr", `Khalim's Heart` ], // Khalim's Heart
+      // [ "qbr", `Khalim's Brain` ], // Khalim's Brain
+      // [ "mss", `Mephisto's Soulstone` ], // Mephisto's Soulstone
       
       // Act 4
-      [ "hfh", `Hell Forge Hammer` ], // Hell Forge Hammer
+      // [ "hfh", `Hell Forge Hammer` ], // Hell Forge Hammer
       
       // Act 5
       // See exceptions mentioned above [CSTM-QST2]
       
       // Extra
-      [ "Staff of Kings",      `Staff of Kings` ], // Staff of Kings
-      [ "Amulet of the Viper", `Amulet of the Viper` ], // Amulet of the Viper
-      [ "Horadric Staff",      `Horadric Staff` ], // Horadric Staff
-      [ "LamTome",             `Lam Esen's Tome` ], // Lam Esen's Tome
-      [ "KhalimFlail",         `Khalim's Flail` ], // Khalim's Flail
-      [ "SuperKhalimFlail",    `Khalim's Will` ], // Khalim's Will
-      [ "Hell Forge Hammer",   `Hell Forge Hammer` ], // Hell Forge Hammer
+      // [ "Staff of Kings",      `Staff of Kings` ], // Staff of Kings
+      // [ "Amulet of the Viper", `Amulet of the Viper` ], // Amulet of the Viper
+      // [ "Horadric Staff",      `Horadric Staff` ], // Horadric Staff
+      // [ "LamTome",             `Lam Esen's Tome` ], // Lam Esen's Tome
+      // [ "KhalimFlail",         `Khalim's Flail` ], // Khalim's Flail
+      // [ "SuperKhalimFlail",    `Khalim's Will` ], // Khalim's Will
+      // [ "Hell Forge Hammer",   `Hell Forge Hammer` ], // Hell Forge Hammer
       
+      //==========================//
+      // Endgame Items [CSTM-END] //
+      //==========================//
+      // [ "tes", `Twisted Essence of Suffering` ],
+      // [ "ceh", `Charged Essense of Hatred` ],
+      // [ "bet", `Burning Essence of Terror` ],
+      // [ "fed", `Festering Essence of Destruction` ],
+      // [ "toa", `Token of Absolution` ],
+      // [ "pk1", `Key of Terror` ],
+      // [ "pk2", `Key of Hate` ],
+      // [ "pk3", `Key of Destruction` ],
+      // [ "dhn", `Diablo's Horn` ],
+      // [ "bey", `Baal's Eye` ],
+      // [ "mbr", `Mephisto's Brain` ],
+      // [ "std", `Standard of Heroes` ],
     ];
 
     return new ItemCollection(ItemEntry.createArray(list));
@@ -176,51 +212,43 @@ remove this line (2/2) */
   public static createForItemRunesJson(): ItemCollection {
     let list: [string, string][] = [
       // [ "key", "value" ],
-
-      /*
-      [ "r01", `El (1)` ], // El
-      [ "r02", `Eld (2)` ], // Eld
-      [ "r03", `Tir (3)` ], // Tir
-      [ "r04", `Nef (4)` ], // Nef
-      [ "r05", `Eth (5)` ], // Eth
-      [ "r06", `Ith (6)` ], // Ith
-      [ "r07", `Tal (7)` ], // Tal
-      [ "r08", `${ColorConstants.red}*****${ColorConstants.orange}  Ral (8)  ${ColorConstants.red}*****${ColorConstants.orange}` ], // Ral
-      [ "r09", `Ort (9)` ], // Ort
-      [ "r10", `Thul (10)` ], // Thul
-      [ "r11", `Amn (11)` ], // Amn
-      [ "r12", `Sol (12)` ], // Sol
-      [ "r13", `Shael (13)` ], // Shael
-      [ "r14", `Dol (14)` ], // Dol
-      [ "r15", `${ColorConstants.red}*****${ColorConstants.orange}  Hel (15)  ${ColorConstants.red}*****${ColorConstants.orange}` ], // Hel
-      [ "r16", `Io (16)` ], // Io
-      [ "r17", `Lum (17)` ], // Lum
-      [ "r18", `${ColorConstants.red}*****  Ko (18)  *****` ], // Ko
-      [ "r19", `${ColorConstants.red}*****  Fal (19)  *****` ], // Fal
-      [ "r20", `${ColorConstants.red}*****  Lem (20)  *****` ], // Lem
-      [ "r21", `${ColorConstants.red}**********   Pul (21)   **********` ], // Pul
-      [ "r22", `${ColorConstants.red}**********   Um (22)   **********` ], // Um
-      [ "r23", `${ColorConstants.red}**********   Mal (23)   **********` ], // Mal
-      [ "r24", `${ColorConstants.red}**********   Ist (24)   **********` ], // Ist
-      [ "r25", `${ColorConstants.red}**********   Gul (25)   **********` ], // Gul
-      [ "r26", `${ColorConstants.red}********** ********** **********     Vex (26)     ********** ********** **********` ],
-      [ "r27", `${ColorConstants.red}********** ********** **********     Ohm (27)     ********** ********** **********` ],
-      [ "r28", `${ColorConstants.red}********** ********** **********     Lo (28)     ********** ********** **********` ],
-      [ "r29", `${ColorConstants.red}********** ********** **********     Sur (29)     ********** ********** **********` ],
-      [ "r30", `${ColorConstants.red}********** ********** **********     Ber (30)     ********** ********** **********` ],
-      [ "r31", `${ColorConstants.red}********** ********** **********     Jah (31)     ********** ********** **********` ],
-      
-      [ "r32", `${ColorConstants.red}********** ********** **********     Cham (32)     ********** ********** **********`;
-      this.runes.r32 = `\n\n${clrMsg}Pick Up\n${LTT_PADDING}********** ********** **********     Cham (32)     ********** ********** **********${LTT_PADDING}\n\n`; // Cham
-      this.runes.r32 = Helper.generateBigTooltip(config.BigTooltipRunesHigh, `${clrHighlight}${HighlightConstants.pattern2x10}${clrRune}${HighlightConstants.padding10}Cham (32)${HighlightConstants.padding10}${clrHighlight}${HighlightConstants.pattern2x10}${clrRune}`); // Cham
-
-
-
-      // this.runes.r32 = Helper.generateBigTooltip(`********** ********** **********     Cham (32)     ********** ********** **********`); // Cham
-      // this.runes.r33 = `********** ********** **********     Zod (33)     ********** ********** **********`;  // Zod
-      // this.runes.r33 = `${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${HighlightConstants.padding5}${RuneConstants.clrName}Zod (33)${HighlightConstants.padding5}${RuneConstants.clrHighlight}${HighlightConstants.pattern10}${RuneConstants.clrName}`;  // Zod
-      this.runes.r33 = Helper.generateDoubleHighlight(clrHighlight, HighlightConstants.pattern10, HighlightConstants.padding5, clrRune, "Zod Rune (33)"); // Zod
-      */
+  
+      //===================//
+      // Runes [CSTM-RUNE] //
+      //===================//
+      // [ "r01", `El (1)` ],
+      // [ "r02", `Eld (2)` ],
+      // [ "r03", `Tir (3)` ],
+      // [ "r04", `Nef (4)` ],
+      // [ "r05", `Eth (5)` ],
+      // [ "r06", `Ith (6)` ],
+      // [ "r07", `Tal (7)` ],
+      // [ "r08", `${ColorConstants.red}*****${ColorConstants.orange}  Ral (8)  ${ColorConstants.red}*****${ColorConstants.orange}` ],
+      // [ "r09", `Ort (9)` ],
+      // [ "r10", `Thul (10)` ],
+      // [ "r11", `Amn (11)` ],
+      // [ "r12", `Sol (12)` ],
+      // [ "r13", `Shael (13)` ],
+      // [ "r14", `Dol (14)` ],
+      // [ "r15", `${ColorConstants.red}*****${ColorConstants.orange}  Hel (15)  ${ColorConstants.red}*****${ColorConstants.orange}` ],
+      // [ "r16", `Io (16)` ],
+      // [ "r17", `Lum (17)` ],
+      // [ "r18", `${ColorConstants.red}*****  Ko (18)  *****` ],
+      // [ "r19", `${ColorConstants.red}*****  Fal (19)  *****` ],
+      // [ "r20", `${ColorConstants.red}*****  Lem (20)  *****` ],
+      // [ "r21", `${ColorConstants.red}**********   Pul (21)   **********` ],
+      // [ "r22", `${ColorConstants.red}**********   Um (22)   **********` ],
+      // [ "r23", `${ColorConstants.red}**********   Mal (23)   **********` ],
+      // [ "r24", `${ColorConstants.red}**********   Ist (24)   **********` ],
+      // [ "r25", `${ColorConstants.red}**********   Gul (25)   **********` ],
+      // [ "r26", `${ColorConstants.red}********** ********** **********     Vex (26)     ********** ********** **********` ],
+      // [ "r27", `${ColorConstants.red}********** ********** **********     Ohm (27)     ********** ********** **********` ],
+      // [ "r28", `${ColorConstants.red}********** ********** **********     Lo (28)     ********** ********** **********` ],
+      // [ "r29", `${ColorConstants.red}********** ********** **********     Sur (29)     ********** ********** **********` ],
+      // [ "r30", `${ColorConstants.red}********** ********** **********     Ber (30)     ********** ********** **********` ],
+      // [ "r31", `${ColorConstants.red}********** ********** **********     Jah (31)     ********** ********** **********` ],
+      // [ "r32", `${ColorConstants.red}********** ********** **********     Cham (32)     ********** ********** **********` ],
+      // [ "r33", `${ColorConstants.red}********** ********** **********     Zod (33)     ********** ********** **********` ],
     ];
 
     return new ItemCollection(ItemEntry.createArray(list));
@@ -231,17 +259,23 @@ remove this line (2/2) */
     let list: [string, string][] = [
       // [ "key", "value" ],
 
-      // gold [CSTM-GLD]
+      //=================//
+      // Gold [CSTM-GLD] //
+      //=================//
       // [ "gld", `${ColorConstants.purple}Gold` ],
       
-      // superior/inferior quality prefixes [CSTM-SPIF]
+      //================================================//
+      // Superior/Inferior Quality Prefixes [CSTM-SPIF] //
+      //================================================//
       // [ "Hiquality", "+" ],
       // [ "Damaged", "-" ],
       // [ "Cracked", "-" ],
       // [ "Low Quality", "-" ],
       // [ "Crude", "-" ],
 
-      // gems [CSTM-GEM2]
+      //==================//
+      // Gems [CSTM-GEM2] //
+      //==================//
       // [ "gsw", `Diamond` ],
       // [ "gsg", `Emerald` ],
       // [ "gsr", `Ruby` ],
@@ -256,7 +290,9 @@ remove this line (2/2) */
     let list: [string, string][] = [
       // [ "key", "value" ],
 
-      // [CSTM-QST2]
+      //======================================//
+      // Quest Items (exceptions) [CSTM-QST2] //
+      //======================================//
       // [ "ice", `Malah's Potion`],       // Malah's Potion
       // [ "tr2", `Scroll of Resistance`], // Scroll of Resistance
     ];
@@ -268,6 +304,12 @@ remove this line (2/2) */
   public static createForUiJson(): ItemCollection {
     let list: [string, string][] = [
       // [ "key", "value" ],
+
+      //======================================//
+      // Quest Items (exceptions) [CSTM-QST3] //
+      //======================================//
+      // [ "ass", `Book of Skill` ],  // Book of Skill
+      // [ "xyz", `Potion of Life` ], // Potion of Life
     ];
 
     return new ItemCollection(ItemEntry.createArray(list));

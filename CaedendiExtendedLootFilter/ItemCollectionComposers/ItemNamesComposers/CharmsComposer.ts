@@ -36,13 +36,12 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   protected highlightUnidentifiedCharms(): void {
-    let suffix = "Charm";
     [
       [ CharmConstants.charmSmallId, "Small" ],
       [ CharmConstants.charmLargeId, "Large" ],
       [ CharmConstants.charmGrandId, "Grand" ],
     ].forEach(([key, size]) => {
-      this.collection.upsert(new ItemEntry(key, `${size} ${ColorConstants.red}${suffix}${ColorConstants.magic}`));
+      this.collection.upsert(new ItemEntry(key, `${size} ${ColorConstants.red}${"Charm"}${ColorConstants.magic}`));
     });
   }
 
@@ -52,7 +51,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
       CharmConstants.torchId, 
       CharmConstants.gheedsId
     ].forEach(charm => {
-      this.collection.upsert(new iLvlItemEntry(charm, iLvlDigits.Double, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting))
+      this.collection.upsert(new iLvlItemEntry(charm, iLvlDigits.Double, null, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting))
     });
   }
 
@@ -65,13 +64,13 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
 
   private highlightSunderCharmsDefault(sunders: SunderCharm[]): void {
     sunders.forEach(sunder => this.collection.upsert(
-      new iLvlItemEntry(sunder.id, iLvlDigits.Double, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting)
+      new iLvlItemEntry(sunder.id, iLvlDigits.Double, null, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting)
     ));
   }
 
   private highlightSunderCharmsAlt(sunders: SunderCharm[]): void {
     sunders.forEach(sunder => this.collection.upsert(
-      new iLvlItemEntry(sunder.id, iLvlDigits.Double, null, new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color))
+      new iLvlItemEntry(sunder.id, iLvlDigits.Double, null, null, new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color))
     ));
   }
 }

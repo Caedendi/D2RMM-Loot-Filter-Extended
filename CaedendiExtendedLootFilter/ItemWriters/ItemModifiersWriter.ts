@@ -6,7 +6,7 @@ import { BaseItemWriter } from "./BaseItemWriter";
 import { IItemWriter } from "./Interfaces/IItemWriter";
 
 export class ItemModifiersWriter extends BaseItemWriter implements IItemWriter {
-  constructor() {
+constructor() {
     super(FileConstants.FILE_ITEM_MODIFIERS_PATH);
   }
 

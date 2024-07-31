@@ -86,7 +86,7 @@ export class ItemEntry implements IItemEntry {
   constructor(
     key: string, 
     newName?: string | null, 
-    nameColor?: D2Color, 
+    nameColor?: D2Color | null, 
     pattern?: IHighlightPattern | null, 
     bigTooltipSetting?: BigTooltipSetting | null
   ) {

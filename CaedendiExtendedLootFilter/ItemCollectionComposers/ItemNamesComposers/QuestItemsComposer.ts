@@ -26,15 +26,6 @@ export class QuestItemsComposer extends ItemCollectionComposerBase implements II
       case "xhc": // exclude cube
         this.highlightQuestItems();
         return;
-      case SettingsConstants.custom: // [CSTM-QST1]
-        let customList: [string, string][] = [
-          // ADD YOUR CUSTOM ITEM NAMES HERE
-
-
-        ];
-
-        this.collection.upsertMultiple(ItemEntry.createArray(customList));
-        return;
     }
   }
 

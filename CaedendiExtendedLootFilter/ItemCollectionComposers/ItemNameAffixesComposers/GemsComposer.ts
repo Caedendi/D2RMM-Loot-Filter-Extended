@@ -7,42 +7,33 @@ import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
 export class GemsComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
+  protected readonly gems: Gem[] = GemConstants.gemExceptions;
+
   constructor() {
     super();
   }
 
   public applyFilter(): void {
-    switch (Settings.filter.jewelry.gems) { // todo: validate setting as string
+    switch (Settings.filter.jewelry.gems) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
-        this.highlightGems(GemConstants.chippedFlawedRegularGems);
-        this.highlightGems(GemConstants.flawlessGems);
-        this.highlightGems(GemConstants.perfectGems);
+        this.highlightGems(this.gems);
         return;
       case "flawless": // hide chipped/flawed/regular gems
-        this.hideGems(GemConstants.chippedFlawedRegularGems);
-        this.highlightGems(GemConstants.flawlessGems);
-        this.highlightGems(GemConstants.perfectGems);
+        this.hideGems(this.gems);
         return;
       case "perfect": // hide chipped/flawed/regular/flawless gems
-        this.hideGems(GemConstants.chippedFlawedRegularGems);
-        this.hideGems(GemConstants.flawlessGems);
-        this.highlightGems(GemConstants.perfectGems);
-        return;
-      case "hide": // hide chipped/flawed/regular/flawless gems
-        this.hideGems(GemConstants.chippedFlawedRegularGems);
-        this.hideGems(GemConstants.flawlessGems);
-        this.hideGems(GemConstants.perfectGems);
+        this.hideGems(this.gems);
         return;
     }
   }
 
-  protected hideGems(gems: Gem[]): void {
-    this.collection.upsertMultipleHidden(gems.map(gem => gem.key));
+  protected hideGems(gems: Gem[]) {
+    this.collection.upsertMultipleHidden(gems.map<string>(gem => gem.key));
   }
 
-  protected highlightGems(gems: Gem[]): void {
+  protected highlightGems(gems: Gem[]) {
     this.collection.upsertMultiple(ItemEntry.fromGems(gems));
   }
 }

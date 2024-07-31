@@ -4,7 +4,6 @@ import { ItemNameAffixesWriter } from "../ItemWriters/ItemNameAffixesWriter";
 import { ItemNamesWriter } from "../ItemWriters/ItemNamesWriter";
 import { ItemRunesWriter } from "../ItemWriters/ItemRunesWriter";
 import { UiWriter } from "../ItemWriters/UiWriter";
-import { Settings } from "../Settings/Settings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 export class FilterBuilder implements IBuilder {
@@ -26,12 +25,7 @@ export class FilterBuilder implements IBuilder {
    * Builds all builders, merges their collections into one and writes these entries to the target file.
    */
   protected runItemWriters(): void {
-    // TODO: does this conflict?
-    // TODO: think of entries that keep their vanilla translated names
-    // TODO: global settings here conflict with Item Quality and Short Sup-/Inferior Prefixes
-    if (Settings.filter.isEnabled)
-      this.itemWriters.forEach(writer => writer.applyFilters());
-    
+    this.itemWriters.forEach(writer => writer.applyFilters());
     this.itemWriters.forEach(writer => writer.writeCustomNames());
   }
 }

@@ -24,7 +24,7 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
     key: string,
     iLvlDigits: iLvlDigits,
     newName?: string | null,
-    nameColor?: D2Color,
+    nameColor?: D2Color | null,
     pattern?: IHighlightPattern | null,
     bigTooltip?: BigTooltipSetting | null
   ) {
