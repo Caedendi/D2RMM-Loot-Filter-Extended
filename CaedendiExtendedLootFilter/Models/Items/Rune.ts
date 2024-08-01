@@ -1,13 +1,20 @@
 export class Rune {
   /**
-   * number property
+   * key
+   */
+  public get key(): string {
+    return this.number < 10 ? `r0${this.number}` : `r${this.number}`;
+  }
+
+  /**
+   * number
    */
   private readonly _number: number;
   public get number(): number {
     return this._number;
   }
   /**
-   * name property
+   * name
    */
   private readonly _name: string;
   public get name(): string {
@@ -20,9 +27,5 @@ export class Rune {
   ) {
     this._number = number;
     this._name = name;
-  }
-
-  public getKey(): string {
-    return this.number < 10 ? `r0${this.number}` : `r${this.number}`;
   }
 }

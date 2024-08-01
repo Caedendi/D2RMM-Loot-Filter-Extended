@@ -1,12 +1,11 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { iLvlDigits, StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
-import { IItemEntry } from "./IItemEntry";
-import { IHighlightPattern } from "./IHighlightPattern";
-import { ItemEntry } from "./ItemEntry";
-import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { D2Color } from "../Colors/D2Color";
+import { IHighlightPattern } from "./IHighlightPattern";
+import { IItemEntry } from "./IItemEntry";
+import { ItemEntry } from "./ItemEntry";
 
 export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   /**

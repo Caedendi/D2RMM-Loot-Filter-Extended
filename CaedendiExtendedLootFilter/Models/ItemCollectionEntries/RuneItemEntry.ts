@@ -1,28 +1,36 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { RuneConstants } from "../../Constants/Items/RuneConstants";
-import { RuneTierConstants } from "../../Constants/Items/RuneTierConstants";
+import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
-import { IItemEntry } from "./IItemEntry";
-import { BigTooltip } from "./BigTooltip";
-import { IHighlightPattern } from "./IHighlightPattern";
-import { ItemEntry } from "./ItemEntry";
+import { D2Color } from "../Colors/D2Color";
 import { Rune } from "../Items/Rune";
+import { IHighlightPattern } from "./IHighlightPattern";
+import { IItemEntry } from "./IItemEntry";
+import { ItemEntry } from "./ItemEntry";
 
-// if has no affix: rune name will be hardcoded
-// if has affix: use translated name and 
 export class RuneItemEntry extends ItemEntry implements IItemEntry {
-  protected _rune: Rune;
-  protected _tier: number;
+  private readonly _rune: Rune;
+  protected get rune(): Rune {
+    return this._rune;
+  }
+  private readonly _tierNumber: number;
+  protected get tierNumber(): number {
+    return this._tierNumber;
+  }
 
-  constructor(rune: Rune, runeTier: number, pattern?: IHighlightPattern, bigToolip?: BigTooltip) {
-    let tier = RuneTierConstants.tiers.find(tier => tier.tier == runeTier);
-    super(rune.getKey(), CharConstants.empty, RuneConstants.clrName, tier.getPattern(), tier.getBigTooltipSetting());
+  constructor(
+    rune: Rune,
+    tier: number,
+    nameColor?: D2Color | null,
+    pattern?: IHighlightPattern | null,
+    bigToolipSetting?: BigTooltipSetting | null
+  ) {
+    super(rune.key, CharConstants.empty, nameColor, pattern, bigToolipSetting);
     this._rune = rune;
-    this._tier = runeTier;
+    this._tierNumber = tier;
   }
 
   public generateDisplayName(translatedName: string): string {
-    let displayName = Settings.filter.runes.shouldHideAffix ? this._rune.name : translatedName;
+    let displayName = Settings.filter.runes.shouldHideAffix ? this.rune.name : translatedName;
 
     if (Settings.filter.runes.shouldAddNumber)
       displayName = ``
@@ -33,5 +41,10 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
     // TODO: 
     // "ÿc" // TODO: make constant?
     return ``;
+  }
+
+  // TODO: create function that removes the translated "Rune" affix from all translations so the original translated name can be used
+  protected removeRuneAffix(): void {
+
   }
 }

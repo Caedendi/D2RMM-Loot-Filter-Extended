@@ -9,6 +9,18 @@ enum ItemQuality {
   Elite = 2,
 }
 
+/**
+ * Represents the amount of digits the iLvl has when shown in the item name.
+ * 
+ * Use None if the item has no iLvl, Single if it _always_ has a single digit iLvl (1 to 9, like Khalim's Will) and Double if it can have a two digits iLvl (10-99, like most items).
+ */
+export enum iLvlDigits {
+  // TODO: extract
+  None = 0,
+  Single = 1,
+  Double = 2,
+}
+
 // TODO
 export abstract class StatsAndModifiersSettings {
   // ilvl
@@ -21,8 +33,8 @@ export abstract class StatsAndModifiersSettings {
   protected static customEliteQualityIndicator:       string = "custom e"; // replace "custom e" to your preference. [CSTM-QLTY]
 
   public static normalQualityIndicator:      string = this.createQualityIndicator(ItemQuality.Normal);
-  public static exceptionalQualityIndicator: string = this.createQualityIndicator(ItemQuality.Normal);
-  public static eliteQualityIndicator:       string = this.createQualityIndicator(ItemQuality.Normal);
+  public static exceptionalQualityIndicator: string = this.createQualityIndicator(ItemQuality.Exceptional);
+  public static eliteQualityIndicator:       string = this.createQualityIndicator(ItemQuality.Elite);
 
   public static openChar:  string = this.getQualityIndicatorOpenChar();
   public static closeChar: string = this.getQualityIndicatorCloseChar();
@@ -69,16 +81,4 @@ export abstract class StatsAndModifiersSettings {
         { setting: "round",  char: ')' },
       ].find(o => o.setting === Settings.statsAndModifiers.itemQuality.brackets)!.char;
   }
-}
-
-/**
- * Represents the amount of digits the iLvl has when shown in the item name.
- * 
- * Use None if the item has no iLvl, Single if it _always_ has a single digit iLvl (1 to 9, like Khalim's Will) and Double if it can have a two digits iLvl (10-99, like most items).
- */
-export enum iLvlDigits {
-  // TODO: extract
-  None = 0,
-  Single = 1,
-  Double = 2,
 }

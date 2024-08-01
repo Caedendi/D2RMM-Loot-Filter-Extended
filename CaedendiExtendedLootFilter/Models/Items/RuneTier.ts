@@ -8,10 +8,11 @@ export class RuneTier {
   /**
    * tier number
    */
-  private readonly _tier: number;
-  public get tier(): number {
-    return this._tier;
+  private readonly _number: number;
+  public get number(): number {
+    return this._number;
   }
+
   /**
    * runes
    */
@@ -19,6 +20,7 @@ export class RuneTier {
   public get runes(): Rune[] {
     return this._runes;
   }
+
   /**
    * isVisible
    */
@@ -26,13 +28,15 @@ export class RuneTier {
   public get isVisible(): boolean {
     return this._isVisible;
   }
+
   /**
    * pattern
    */
-  private readonly _pattern?: IHighlightPattern | undefined;
-  public get pattern(): IHighlightPattern | undefined {
+  private readonly _pattern: IHighlightPattern | null;
+  public get pattern(): IHighlightPattern | null {
     return this._pattern;
   }
+
   /**
    * big tooltip setting
    */
@@ -40,6 +44,7 @@ export class RuneTier {
   public get bigTooltipSetting(): BigTooltipSetting {
     return this._bigTooltipSetting;
   }
+
   /**
    * has light pillar
    */
@@ -47,6 +52,7 @@ export class RuneTier {
   public get hasLightPillar(): boolean {
     return this._hasLightPillar;
   }
+
   /**
    * drop sound
    */
@@ -55,16 +61,54 @@ export class RuneTier {
     return this._dropSound;
   }
 
+  // /**
+  //  * shouldHaveHighlights
+  //  */
+  // private readonly _shouldHaveHighlights: boolean = RuneTier.isTierWithHighlights(this.number);
+  // public get shouldHaveHighlights(): boolean {
+  //   return this._shouldHaveHighlights;
+  // }
+
+  // /**
+  //  * shouldHaveHighlightedName
+  //  */
+  // private readonly _shouldHaveHighlightedName: boolean = RuneTier.isTierWithHighlightedName(this.number);
+  // public get shouldHaveHighlightedName(): boolean {
+  //   return this._shouldHaveHighlightedName;
+  // }
+
+  // /**shouldHaveHighlightedNumber */
+  // private readonly _shouldHaveHighlightedNumber: boolean = RuneTier.isTierWithHighlightedNumber(this.number);
+  // public get shouldHaveHighlightedNumber(): boolean {
+  //   return this._shouldHaveHighlightedNumber;
+  // }
+
+  // /**
+  //  * shouldHaveAlternateColor
+  //  */
+  // private readonly _shouldHaveAlternateColor: boolean = RuneTier.isTierWithAlternateColor(this.number);
+  // public get shouldHaveAlternateColor(): boolean {
+  //   return this._shouldHaveAlternateColor;
+  // }
+
+  /**
+   * isHidden
+   */
+  private readonly _isHidden: boolean = !this.isVisible;
+  public get isHidden(): boolean {
+    return this._isHidden;
+  }
+
   constructor(
     tier: number,
     runes: Rune[],
     isVisible: boolean,
-    pattern: IHighlightPattern | undefined,
+    pattern: IHighlightPattern | null,
     bigTooltipSetting: BigTooltipSetting,
     hasLightPillar: boolean,
     dropSound: string
   ) {
-    this._tier = tier;
+    this._number = tier;
     this._runes = runes;
     this._isVisible = isVisible;
     this._pattern = pattern;
@@ -73,23 +117,19 @@ export class RuneTier {
     this._dropSound = dropSound;
   }
     
-  public isHighlightedTier(): boolean {
-    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlights.includes(this.tier);
+  public static isTierWithHighlights(number: number): boolean {
+    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlights.includes(number);
   }
 
-  public isTierWithHighlightedNumber(): boolean {
-    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNumbers.includes(this.tier);
+  public static isTierWithHighlightedNumber(number: number): boolean {
+    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNumbers.includes(number);
   }
 
-  public isTierWithHighlightedName(): boolean {
-    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNames.includes(this.tier);;
+  public static isTierWithHighlightedName(number: number): boolean {
+    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNames.includes(number);;
   }
 
-  public isTierWithAlternateColor(): boolean {
-    return Settings.filter.runes.shouldUseAltColor && RuneConstants.tiersWithAlternateColor.includes(this.tier);
-  }
-
-  public isHidden(): boolean {
-    return !this.isVisible;
+  public static isTierWithAlternateColor(number: number): boolean {
+    return Settings.filter.runes.shouldUseAltColor && RuneConstants.tiersWithAlternateColor.includes(number);
   }
 }
