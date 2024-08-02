@@ -1,4 +1,4 @@
-import { DoubleHighlightPattern } from "../../Models/ItemCollectionEntries/DoubleHighlightPattern";
+import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 

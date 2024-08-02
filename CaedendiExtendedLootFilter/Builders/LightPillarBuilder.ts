@@ -27,7 +27,7 @@ export class LightPillarBuilder implements IBuilder {
   // runes
   protected pushLightPillarsForRunes() {
     RuneTierConstants.tiers.forEach(tier => {
-      if (!tier.hasLightPillar || (Settings.lightPillars.shouldExcludeForHidden && tier.isHidden())) {
+      if (!tier.hasLightPillar || (Settings.lightPillars.shouldExcludeForHidden && tier.isHidden)) {
         return;
       }
 

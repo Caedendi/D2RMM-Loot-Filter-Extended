@@ -25,12 +25,12 @@ export class DropSoundBuilder implements IBuilder {
   }
 
   protected modifyDropSoundForRunes(soundsFile) {
-    RuneTierConstants.tiers.forEach((tier) => {
-      if (tier.isHidden() && Settings.dropSounds.shouldExcludeForHidden)
+    RuneTierConstants.tiers.forEach(tier => {
+      if (tier.isHidden && Settings.dropSounds.shouldExcludeForHidden)
         return;
 
-      let itemCodes = tier.runes.map((rune) => rune.number < 10 ? `r0${rune.number}` : `r${rune.number}`);
-      this.modifyDropSoundForMiscItems(soundsFile, itemCodes, `rune_tier_${tier.tier}`, tier.dropSound);
+      let itemCodes = tier.runes.map(rune => rune.key);
+      this.modifyDropSoundForMiscItems(soundsFile, itemCodes, `rune_tier_${tier.number}`, tier.dropSound);
     });
   }
 

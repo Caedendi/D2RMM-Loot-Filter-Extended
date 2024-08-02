@@ -8,30 +8,21 @@ export class D2Color {
   public get code(): string {
     return this._code;
   }
-  /**
-   * name
-   */
-  private readonly _name: string;
-  public get name(): string {
-    return this._name;
-  }
-  /**
-   * prefix
-   */
-  private readonly _prefix = "ÿc";
-  protected get prefix() {
-    return this._prefix;
+
+  constructor(code: string) {
+    this._code = code;
   }
 
-  constructor(code: string, name: string) {
-    this._code = code;
-    this._name = name;
+  public equals(color: D2Color): boolean {
+    return this.code === color.code;
   }
 
   public toString(): string {
     if (this.code === CharConstants.empty)
       return CharConstants.empty;
     
-    return `${this.prefix}${this.code}`;
+    return `${D2Color.prefix}${this.code}`;
   }
+
+  public static prefix = "ÿc";
 }

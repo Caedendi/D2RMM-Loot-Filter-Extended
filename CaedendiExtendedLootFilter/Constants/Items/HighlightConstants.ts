@@ -1,5 +1,5 @@
 import { D2Color } from "../../Models/Colors/D2Color";
-import { DoubleHighlightPattern } from "../../Models/ItemCollectionEntries/DoubleHighlightPattern";
+import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
 import { Settings } from "../../Settings/Settings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";

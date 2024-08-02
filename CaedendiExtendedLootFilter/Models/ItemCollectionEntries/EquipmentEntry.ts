@@ -1,8 +1,8 @@
-import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
-import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
+import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { EiLvlDigits } from "../../Settings/EiLvlDigits";
 import { D2Color } from "../Colors/D2Color";
-import { IHighlightPattern } from "./IHighlightPattern";
-import { IItemEntry } from "./IItemEntry";
+import { IHighlight } from "../Highlights/Interfaces/IHighlight";
+import { IItemEntry } from "./Interfaces/IItemEntry";
 import { iLvlItemEntry } from "./iLvlItemEntry";
 import { QualityTag } from "./QualityTag";
 
@@ -20,12 +20,12 @@ export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
   
   constructor(
     key: string,
-    iLvlDigits: iLvlDigits,
+    iLvlDigits: EiLvlDigits,
     quality: QualityTag,
     newName?: string | null,
     nameColor?: D2Color,
-    pattern?: IHighlightPattern | null,
-    bigTooltip?: BigTooltipSetting | null
+    pattern?: IHighlight | null,
+    bigTooltip?: EBigTooltipSetting | null
   ) {
     super(key, iLvlDigits, newName, nameColor, pattern, bigTooltip);
     this._qualityTag = quality;

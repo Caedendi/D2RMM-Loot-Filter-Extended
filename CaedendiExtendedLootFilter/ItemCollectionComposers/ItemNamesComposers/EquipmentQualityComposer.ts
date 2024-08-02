@@ -1,8 +1,9 @@
 import { FileConstants } from "../../Constants/FileConstants";
 import { EquipmentEntry } from "../../Models/ItemCollectionEntries/EquipmentEntry";
 import { QualityTag } from "../../Models/ItemCollectionEntries/QualityTag";
+import { EiLvlDigits } from "../../Settings/EiLvlDigits";
 import { Settings } from "../../Settings/Settings";
-import { iLvlDigits, StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
+import { StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
 /**
@@ -31,7 +32,7 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
   protected addEquipmentQuality(rows) {
     Object.entries(rows).forEach(([i, _]) => {
       let row = rows[i];
-      this.collection.upsert(new EquipmentEntry(row[FileConstants.key], iLvlDigits.Double, new QualityTag(this.getQualityIndicatorForItem(row))));
+      this.collection.upsert(new EquipmentEntry(row[FileConstants.key], EiLvlDigits.Double, new QualityTag(this.getQualityIndicatorForItem(row))));
     });
   }
 

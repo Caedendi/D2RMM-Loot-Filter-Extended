@@ -1,4 +1,4 @@
-import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
+import { EiLvlDigits } from "../../Settings/EiLvlDigits";
 
 export abstract class QuestConstants {
   public static readonly questItems: string[] = [
@@ -22,26 +22,26 @@ export abstract class QuestConstants {
     "LamTome", // Lam Esen's Tome
   ];
 
-  public static readonly questWeapons: { key: string, digits: iLvlDigits }[] = [
+  public static readonly questWeapons: { key: string, digits: EiLvlDigits }[] = [
     // Act 1
-    { key: "leg", digits: iLvlDigits.Double }, // Wirt's Leg
-    { key: "hdm", digits: iLvlDigits.Double }, // Horadric Malus
+    { key: "leg", digits: EiLvlDigits.Double }, // Wirt's Leg
+    { key: "hdm", digits: EiLvlDigits.Double }, // Horadric Malus
     // Act 2
-    { key: "msf", digits: iLvlDigits.Double }, // Staff of Kings
-    { key: "hst", digits: iLvlDigits.Single }, // Horadric Staff
+    { key: "msf", digits: EiLvlDigits.Double }, // Staff of Kings
+    { key: "hst", digits: EiLvlDigits.Single }, // Horadric Staff
     // Act 3
-    { key: "g33", digits: iLvlDigits.Double }, // The Gidbinn
-    { key: "qf1", digits: iLvlDigits.Double }, // Khalim's Flail
-    { key: "qf2", digits: iLvlDigits.Single }, // Khalim's Will
+    { key: "g33", digits: EiLvlDigits.Double }, // The Gidbinn
+    { key: "qf1", digits: EiLvlDigits.Double }, // Khalim's Flail
+    { key: "qf2", digits: EiLvlDigits.Single }, // Khalim's Will
     // Act 4
-    { key: "hfh", digits: iLvlDigits.Double }, // Hell Forge Hammer
+    { key: "hfh", digits: EiLvlDigits.Double }, // Hell Forge Hammer
     // Act 5: see exceptions mentioned above [CSTM-QST2]
     // Extra
-    { key: "Staff of Kings",      digits: iLvlDigits.Double }, 
-    { key: "Amulet of the Viper", digits: iLvlDigits.Double }, 
-    { key: "Horadric Staff",      digits: iLvlDigits.Single }, 
-    { key: "KhalimFlail",         digits: iLvlDigits.Double }, // Khalim's Flail
-    { key: "SuperKhalimFlail",    digits: iLvlDigits.Single }, // Khalim's Will
-    { key: "Hell Forge Hammer",   digits: iLvlDigits.Double }, 
+    { key: "Staff of Kings",      digits: EiLvlDigits.Double }, 
+    { key: "Amulet of the Viper", digits: EiLvlDigits.Double }, 
+    { key: "Horadric Staff",      digits: EiLvlDigits.Single }, 
+    { key: "KhalimFlail",         digits: EiLvlDigits.Double }, // Khalim's Flail
+    { key: "SuperKhalimFlail",    digits: EiLvlDigits.Single }, // Khalim's Will
+    { key: "Hell Forge Hammer",   digits: EiLvlDigits.Double }, 
   ];
 }

@@ -1,5 +1,5 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { ItemEntry } from "./ItemEntry";
 
 export class ItemCollection {

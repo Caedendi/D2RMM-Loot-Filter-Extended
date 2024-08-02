@@ -1,9 +1,9 @@
 import { EndgameConstants } from "../../Constants/Items/EndgameConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { IHighlightPattern } from "../../Models/ItemCollectionEntries/IHighlightPattern";
-import { IItemEntry } from "../../Models/ItemCollectionEntries/IItemEntry";
+import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
+import { IItemEntry } from "../../Models/ItemCollectionEntries/Interfaces/IItemEntry";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
@@ -53,7 +53,7 @@ export class EndgameItemsComposer extends ItemCollectionComposerBase implements 
     this.collection.upsertHidden(EndgameConstants.standard);
   }
 
-  private pushEntries(target: IItemEntry[], keys: string[], pattern: IHighlightPattern, bigTooltipSetting: BigTooltipSetting): void {
+  private pushEntries(target: IItemEntry[], keys: string[], pattern: IHighlight, bigTooltipSetting: EBigTooltipSetting): void {
     keys.forEach(key => target.push(new ItemEntry(key, null, EndgameConstants.clrName, pattern, bigTooltipSetting)));
   }
 }

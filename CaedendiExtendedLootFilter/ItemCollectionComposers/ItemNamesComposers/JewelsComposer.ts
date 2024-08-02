@@ -2,8 +2,8 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { FacetConstants } from "../../Constants/Items/FacetConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightPattern } from "../../Models/ItemCollectionEntries/DoubleHighlightPattern";
-import { IHighlightPattern } from "../../Models/ItemCollectionEntries/IHighlightPattern";
+import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
+import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { RainbowHighlightPattern } from "../../Models/ItemCollectionEntries/RainbowHighlightPattern";
 import { Settings } from "../../Settings/Settings";
@@ -20,7 +20,7 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IItemC
       this.collection.upsert(new ItemEntry(FacetConstants.facetId, null, ColorConstants.gold, this.createFacetPattern(), Settings.bigTooltips.jewelry.facetsSetting));
   }
 
-  protected createFacetPattern(): IHighlightPattern {
+  protected createFacetPattern(): IHighlight {
     return Settings.filter.jewelry.isFacetAltPatternEnabled
       ? new RainbowHighlightPattern(Settings.bigTooltips.jewelry.facetsSetting)
       : new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, ColorConstants.red);

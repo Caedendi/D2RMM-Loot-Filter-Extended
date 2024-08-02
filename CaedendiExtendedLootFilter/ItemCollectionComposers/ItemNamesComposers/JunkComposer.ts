@@ -3,9 +3,9 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { D2Color } from "../../Models/Colors/D2Color";
-import { IHighlightPattern } from "../../Models/ItemCollectionEntries/IHighlightPattern";
+import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { SingleHighlight } from "../../Models/ItemCollectionEntries/SingleHighlight";
+import { SingleHighlight } from "../../Models/Highlights/SingleHighlight";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
@@ -47,7 +47,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     let highlightGas = new SingleHighlight(CharConstants.o, ColorConstants.darkGreen, HighlightConstants.padding1);
     let highlightOil = new SingleHighlight(CharConstants.o, ColorConstants.orange, HighlightConstants.padding1);
   
-    let throwingPots: { key: string, name: string, highlight: IHighlightPattern }[] = [
+    let throwingPots: { key: string, name: string, highlight: IHighlight }[] = [
       { key: "gpl", name: "Gas 1", highlight: highlightGas }, // Strangling Gas Potion
       { key: "gpm", name: "Gas 2", highlight: highlightGas }, // Choking Gas Potion
       { key: "gps", name: "Gas 3", highlight: highlightGas }, // Rancid Gas Potion

@@ -1,60 +1,60 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
-import { IHighlightPattern } from "./IHighlightPattern";
-import { SingleHighlight } from "./SingleHighlight";
+import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { IHighlight } from "../Highlights/Interfaces/IHighlight";
+import { SingleHighlight } from "../Highlights/SingleHighlight";
 
 export class BigTooltip {
-  protected _setting: BigTooltipSetting = BigTooltipSetting.Disabled;
+  protected _setting: EBigTooltipSetting = EBigTooltipSetting.Disabled;
   protected _prefix: string = CharConstants.empty;
   protected _suffix: string = CharConstants.empty;
   protected _pumIndent: string = CharConstants.empty;
   protected _padding: string = HighlightConstants.bttPadding
 
-  constructor(setting: BigTooltipSetting) {
+  constructor(setting: EBigTooltipSetting) {
     this._setting = setting;
   }
 
-  public apply(displayName: string, highlightPattern: IHighlightPattern | null): string {
+  public apply(displayName: string, highlightPattern: IHighlight | null): string {
     this.setPickUpMessageIndent(highlightPattern);
     this.setAffixes();
     return `${this.getPrefix()}${displayName}${this.getSuffix()}`;
   }
 
-  protected setPickUpMessageIndent(highlightPattern: IHighlightPattern | null): void {
+  protected setPickUpMessageIndent(highlightPattern: IHighlight | null): void {
     if (highlightPattern != null && this.isSingleHighlightPattern(highlightPattern))
       this._pumIndent = highlightPattern.getIndent();
   }
 
   // TODO: test if this only works on SingleHighlights vs DoubleHighlights
-  protected isSingleHighlightPattern(pattern: IHighlightPattern): pattern is SingleHighlight {
+  protected isSingleHighlightPattern(pattern: IHighlight): pattern is SingleHighlight {
     return (pattern as SingleHighlight).getIndent !== undefined;
   }
 
   protected setAffixes(): void {
     // // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
     switch (+this._setting) { // TODO: find better way than using + to match enum with switch case
-      case BigTooltipSetting.Disabled:
+      case EBigTooltipSetting.Disabled:
         break;
-      case BigTooltipSetting.TwoLines:
+      case EBigTooltipSetting.TwoLines:
         this._prefix = CharConstants.newLine;
         break;
-      case BigTooltipSetting.TwoLinesPickUp:
+      case EBigTooltipSetting.TwoLinesPickUp:
         this._prefix = `${CharConstants.newLine}${this.getPickUpMessage()}`; // TODO: add color after?
         break;
-      case BigTooltipSetting.ThreeLines:
+      case EBigTooltipSetting.ThreeLines:
         this._prefix = CharConstants.newLine;
         this._suffix = CharConstants.newLine;
         break;
-      case BigTooltipSetting.FourLinesPickUp:
+      case EBigTooltipSetting.FourLinesPickUp:
         this._prefix = `${CharConstants.newLine}${this.getPickUpMessage()}${CharConstants.newLine}`;
         this._suffix = CharConstants.newLine;
         break;
-      case BigTooltipSetting.FiveLines:
+      case EBigTooltipSetting.FiveLines:
         this._prefix = CharConstants.newLine2;
         this._suffix = CharConstants.newLine2;
         break;
-      case BigTooltipSetting.Custom: // [CSTM-BTT]
+      case EBigTooltipSetting.Custom: // [CSTM-BTT]
         this._prefix = CharConstants.newLine; // ADD YOUR CUSTOM BIG TOOLTIP STYLE HERE
         this._suffix = CharConstants.newLine; // ADD YOUR CUSTOM BIG TOOLTIP STYLE HERE
         break;
@@ -75,8 +75,8 @@ export class BigTooltip {
     return `${this._padding}${this._suffix}`;
   }
 
-  public static hasPickUpMessage(setting?: BigTooltipSetting): boolean {
-    return setting == BigTooltipSetting.TwoLinesPickUp 
-        || setting == BigTooltipSetting.FourLinesPickUp;
+  public static hasPickUpMessage(setting?: EBigTooltipSetting): boolean {
+    return setting == EBigTooltipSetting.TwoLinesPickUp 
+        || setting == EBigTooltipSetting.FourLinesPickUp;
   }
 }

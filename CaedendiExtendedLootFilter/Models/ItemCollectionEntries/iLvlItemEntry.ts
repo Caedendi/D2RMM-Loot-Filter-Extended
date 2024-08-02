@@ -1,31 +1,32 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { EiLvlDigits } from "../../Settings/EiLvlDigits";
 import { Settings } from "../../Settings/Settings";
-import { iLvlDigits, StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
+import { StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
 import { D2Color } from "../Colors/D2Color";
-import { IHighlightPattern } from "./IHighlightPattern";
-import { IItemEntry } from "./IItemEntry";
+import { IHighlight } from "../Highlights/Interfaces/IHighlight";
+import { IItemEntry } from "./Interfaces/IItemEntry";
 import { ItemEntry } from "./ItemEntry";
 
 export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   /**
    * iLvl
    */
-  private _iLvl: iLvlDigits;
-  protected get iLvl(): iLvlDigits {
+  private _iLvl: EiLvlDigits;
+  protected get iLvl(): EiLvlDigits {
     return this._iLvl;
   }
-  protected set iLvl(value: iLvlDigits) {
+  protected set iLvl(value: EiLvlDigits) {
     this._iLvl = value;
   }
   
   constructor(
     key: string,
-    iLvlDigits: iLvlDigits,
+    iLvlDigits: EiLvlDigits,
     newName?: string | null,
     nameColor?: D2Color | null,
-    pattern?: IHighlightPattern | null,
-    bigTooltip?: BigTooltipSetting | null
+    pattern?: IHighlight | null,
+    bigTooltip?: EBigTooltipSetting | null
   ) {
     super(key, newName, nameColor, pattern, bigTooltip);
     this._iLvl = iLvlDigits;
@@ -52,11 +53,11 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   
   protected getiLvlIndent(): string {
     switch (+this.iLvl) {
-      case iLvlDigits.None:
+      case EiLvlDigits.None:
         return CharConstants.empty;
-      case iLvlDigits.Single:
+      case EiLvlDigits.Single:
         return StatsAndModifiersSettings.iLvlIndentFixSingle;
-      case iLvlDigits.Double:
+      case EiLvlDigits.Double:
         return StatsAndModifiersSettings.iLvlIndentFixDouble;
       default:
         throw new Error("Received undefined iLvlDigits value.");

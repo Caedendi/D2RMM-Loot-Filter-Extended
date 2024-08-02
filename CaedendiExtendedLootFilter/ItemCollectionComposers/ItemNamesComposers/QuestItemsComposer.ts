@@ -3,8 +3,8 @@ import { QuestConstants } from "../../Constants/Items/QuestConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
+import { EiLvlDigits } from "../../Settings/EiLvlDigits";
 import { Settings } from "../../Settings/Settings";
-import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -42,7 +42,7 @@ export class QuestItemsComposer extends ItemCollectionComposerBase implements II
     return new ItemEntry(key, null, HighlightConstants.uniqueColorName, this.pattern, Settings.bigTooltips.questEndgame.questItems);
   }
 
-  private createQuestWeaponEntry(key: string, digits: iLvlDigits): ItemEntry {
+  private createQuestWeaponEntry(key: string, digits: EiLvlDigits): ItemEntry {
     return new iLvlItemEntry(key, digits, null, HighlightConstants.uniqueColorName, this.pattern, Settings.bigTooltips.questEndgame.questItems);
   }
 }

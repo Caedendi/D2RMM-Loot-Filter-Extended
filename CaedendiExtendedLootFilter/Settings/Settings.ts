@@ -1,7 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { D2rColor } from "../Models/Colors/D2rColor";
-import { BigTooltipSetting } from "./BigTooltipSetting";
+import { EBigTooltipSetting } from "./EBigTooltipSetting";
 
 export abstract class Settings {
   // Filter Section
@@ -22,7 +22,7 @@ export abstract class Settings {
       shouldAddHighlights:  config.ShouldAddRuneHighlights as boolean,
       shouldAddNumber:      config.ShouldAddRuneNumbers    as boolean,
       shouldHideAffix:      config.ShouldHideRuneAffix     as boolean,
-      altHighlightColor:    ColorConstants.getColorByCode(config.RunesHighlightColorAlt as string),
+      altHighlightColor:    ColorConstants.getColorByCode(config.RunesHighlightColorAlt as string), // TODO: report bug: if value is empty, label is also empty
       shouldUseAltColor:    config.RunesHighlightColorAlt !== CharConstants.empty,
       isLowRunesVisible:    config.ShouldShowRunesLow      as boolean,
       isLowMidRunesVisible: config.ShouldShowRunesLowMid   as boolean,
@@ -76,23 +76,23 @@ export abstract class Settings {
     isEnabled:      config.IsBigTooltipsEnabled   as boolean,
     shouldHideIlvl: config.IsHideIlvlOnBttEnabled as boolean,
     runes: {
-      lowRunesSetting:    config.BigTooltipRunesLow    as number as BigTooltipSetting,
-      lowMidRunesSetting: config.BigTooltipRunesLowMid as number as BigTooltipSetting,
-      midRunesSetting:    config.BigTooltipRunesMid    as number as BigTooltipSetting,
-      highRunesSetting:   config.BigTooltipRunesHigh   as number as BigTooltipSetting,
+      lowRunesSetting:    config.BigTooltipRunesLow    as number as EBigTooltipSetting,
+      lowMidRunesSetting: config.BigTooltipRunesLowMid as number as EBigTooltipSetting,
+      midRunesSetting:    config.BigTooltipRunesMid    as number as EBigTooltipSetting,
+      highRunesSetting:   config.BigTooltipRunesHigh   as number as EBigTooltipSetting,
     },
     jewelry: {
-      gemsSetting:         config.BigTooltipGems         as number as BigTooltipSetting,
-      facetsSetting:       config.BigTooltipFacets       as number as BigTooltipSetting,
-      uniqueCharmsSetting: config.BigTooltipUniqueCharms as number as BigTooltipSetting,
+      gemsSetting:         config.BigTooltipGems         as number as EBigTooltipSetting,
+      facetsSetting:       config.BigTooltipFacets       as number as EBigTooltipSetting,
+      uniqueCharmsSetting: config.BigTooltipUniqueCharms as number as EBigTooltipSetting,
     },
     questEndgame: {
-      questItems: config.BigTooltipQuestItems as number as BigTooltipSetting,
-      essences:   config.BigTooltipEssences   as number as BigTooltipSetting,
-      tokens:     config.BigTooltipTokens     as number as BigTooltipSetting,
-      keys:       config.BigTooltipKeys       as number as BigTooltipSetting,
-      organs:     config.BigTooltipOrgans     as number as BigTooltipSetting,
-      standard:   config.BigTooltipStandard   as number as BigTooltipSetting,
+      questItems: config.BigTooltipQuestItems as number as EBigTooltipSetting,
+      essences:   config.BigTooltipEssences   as number as EBigTooltipSetting,
+      tokens:     config.BigTooltipTokens     as number as EBigTooltipSetting,
+      keys:       config.BigTooltipKeys       as number as EBigTooltipSetting,
+      organs:     config.BigTooltipOrgans     as number as EBigTooltipSetting,
+      standard:   config.BigTooltipStandard   as number as EBigTooltipSetting,
     },
   };
 

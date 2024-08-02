@@ -1,7 +1,7 @@
 import { FileConstants } from "../Constants/FileConstants";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
 import { JewelryConstants } from "../Constants/Items/JewelryConstants";
-import { BigTooltipSetting } from "../Settings/BigTooltipSetting";
+import { EBigTooltipSetting } from "../Settings/EBigTooltipSetting";
 import { Settings } from "../Settings/Settings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
@@ -28,7 +28,7 @@ export class ItemLevelBuilder implements IBuilder {
 
     if ( !Settings.bigTooltips.isEnabled 
       || !Settings.bigTooltips.shouldHideIlvl 
-      ||  Settings.bigTooltips.questEndgame.questItems == BigTooltipSetting.Disabled)
+      ||  Settings.bigTooltips.questEndgame.questItems == EBigTooltipSetting.Disabled)
       return;
 
     // exclude quest weapons with iLvls if Big Tooltips is enabled
@@ -48,9 +48,9 @@ export class ItemLevelBuilder implements IBuilder {
     if (!Settings.bigTooltips.isEnabled || !Settings.bigTooltips.shouldHideIlvl)
       return;
     
-    if (Settings.bigTooltips.jewelry.facetsSetting != BigTooltipSetting.Disabled)
+    if (Settings.bigTooltips.jewelry.facetsSetting != EBigTooltipSetting.Disabled)
       this.miscExclusions.push(JewelryConstants.jewelId);
-    if (Settings.bigTooltips.jewelry.uniqueCharmsSetting != BigTooltipSetting.Disabled)
+    if (Settings.bigTooltips.jewelry.uniqueCharmsSetting != EBigTooltipSetting.Disabled)
       CharmConstants.charmIds.forEach(charm => this.miscExclusions.push(charm));
 
     // TODO: check if this has ilvl and correct here + in quest item naming

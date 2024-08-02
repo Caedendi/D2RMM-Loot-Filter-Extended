@@ -1,32 +1,15 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { GemConstants } from "../../Constants/Items/GemConstants";
-import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { D2Color } from "../Colors/D2Color";
 import { Gem } from "../Items/Gem";
-import { BigTooltip } from "./BigTooltip";
-import { IHighlightPattern } from "./IHighlightPattern";
-import { IItemEntry } from "./IItemEntry";
-import { SingleHighlight } from "./SingleHighlight";
+import { IHighlight } from "../Highlights/Interfaces/IHighlight";
+import { IItemEntry } from "./Interfaces/IItemEntry";
+import { SingleHighlight } from "../Highlights/SingleHighlight";
+import { BigTooltip } from "../BigTooltip";
 
-// - key
-// - visible/hidden
-// - item name
-//   - new name (hardcoded)
-//   - empty (vanilla translated name)
-// - highlight
-//   - no highlight
-//   - single highlight (with/without padding) prefix
-//   - double highlight pattern
-//   - ilvl + indent fix
-// - big tooltip
-// - item quality tag
-// - runes:
-//   - rune affix
-//   - number
-
-// TOOD: ilvl indent fix and big tooltips
 export class ItemEntry implements IItemEntry {
   /**
    * Key / item code
@@ -62,11 +45,11 @@ export class ItemEntry implements IItemEntry {
   /**
    * Highlight pattern
    */
-  private _highlightPattern: IHighlightPattern | null;
-  protected get highlightPattern(): IHighlightPattern | null {
+  private _highlightPattern: IHighlight | null;
+  protected get highlightPattern(): IHighlight | null {
     return this._highlightPattern;
   }
-  protected set highlightPattern(value: IHighlightPattern) {
+  protected set highlightPattern(value: IHighlight) {
     this._highlightPattern = value;
   }
   /**
@@ -80,21 +63,18 @@ export class ItemEntry implements IItemEntry {
     this._bigTooltip = value;
   }
 
-  /**
-   * TODO: ItemEntry Constructor
-   */
   constructor(
     key: string, 
     newName?: string | null, 
     nameColor?: D2Color | null, 
-    pattern?: IHighlightPattern | null, 
-    bigTooltipSetting?: BigTooltipSetting | null
+    highlight?: IHighlight | null, 
+    bigTooltipSetting?: EBigTooltipSetting | null
   ) {
     this._key = key;
     this._newName = newName ??= null;
     this._nameColor = nameColor ??= ColorConstants.none;
-    this._highlightPattern = pattern ??= null;
-    this._bigTooltip = (bigTooltipSetting != undefined && bigTooltipSetting != BigTooltipSetting.Disabled) ? new BigTooltip(bigTooltipSetting) : null;
+    this._highlightPattern = highlight ??= null;
+    this._bigTooltip = (bigTooltipSetting != undefined && bigTooltipSetting != EBigTooltipSetting.Disabled) ? new BigTooltip(bigTooltipSetting) : null;
   }
 
   public static createArray(items: [string, string][]): ItemEntry[] {
@@ -124,6 +104,7 @@ export class ItemEntry implements IItemEntry {
     let displayName = this.applyNewName(translatedName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyBigTooltip(displayName);
+    displayName = this.removeRedundantColorCodes(displayName);
 
     return displayName;
   }
@@ -136,9 +117,7 @@ export class ItemEntry implements IItemEntry {
     if (this._highlightPattern == null)
       return displayName;
 
-    displayName = this._highlightPattern.apply(displayName);
-
-    return displayName;
+    return this._highlightPattern.apply(displayName);
   }
 
   protected applyBigTooltip(displayName: string): string {
@@ -146,5 +125,32 @@ export class ItemEntry implements IItemEntry {
       return displayName;
 
     return this._bigTooltip.apply(displayName, this.highlightPattern);
+  }
+
+  // TODO: test
+  /**
+   * Removes all adjacent redundant color codes from a name. Assumes occurrences of "ÿc" are always followed by a valid color code character.
+   * @param name The item name.
+   * @param startColor The item's default or current tooltip color.
+   * @returns The provided name with all duplicate adjacent color codes removed.
+   */
+  protected removeRedundantColorCodes(name: string, startColor?: D2Color): string {
+    if (name.length < 3) // name too short to have a color code
+      return name;
+
+    let i = name.indexOf(D2Color.prefix);
+    if (i == -1) // no color code found
+      return name;
+
+    let nextColor = new D2Color(name[i+2]);
+    
+    // if adjacent color code matches startColor, remove it and proceed with next recursive iteration
+    if (nextColor.equals(startColor ??= ColorConstants.none)) {
+      name = name.replace(startColor.toString(), CharConstants.empty);
+      return this.removeRedundantColorCodes(name, startColor);
+    }
+
+    // if next color code does not match, proceed to search from there on
+    return this.removeRedundantColorCodes(name.slice(i+3), nextColor);
   }
 }

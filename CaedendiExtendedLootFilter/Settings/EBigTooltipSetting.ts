@@ -1,4 +1,4 @@
-export enum BigTooltipSetting {
+export enum EBigTooltipSetting {
   Disabled = 0, // TODO: phase out?
   TwoLines = 1,
   TwoLinesPickUp = 2,

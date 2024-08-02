@@ -1,11 +1,12 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { BigTooltipSetting } from "../../Settings/BigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { D2Color } from "../Colors/D2Color";
 import { Rune } from "../Items/Rune";
-import { IHighlightPattern } from "./IHighlightPattern";
-import { IItemEntry } from "./IItemEntry";
+import { IHighlight } from "../Highlights/Interfaces/IHighlight";
+import { IItemEntry } from "./Interfaces/IItemEntry";
 import { ItemEntry } from "./ItemEntry";
+import { RuneConstants } from "../../Constants/Items/RuneConstants";
 
 export class RuneItemEntry extends ItemEntry implements IItemEntry {
   private readonly _rune: Rune;
@@ -21,30 +22,47 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
     rune: Rune,
     tier: number,
     nameColor?: D2Color | null,
-    pattern?: IHighlightPattern | null,
-    bigToolipSetting?: BigTooltipSetting | null
+    highlight?: IHighlight | null,
+    bigToolipSetting?: EBigTooltipSetting | null
   ) {
-    super(rune.key, CharConstants.empty, nameColor, pattern, bigToolipSetting);
+    super(rune.key, CharConstants.empty, nameColor, highlight, bigToolipSetting);
     this._rune = rune;
     this._tierNumber = tier;
   }
 
-  public generateDisplayName(translatedName: string): string {
-    let displayName = Settings.filter.runes.shouldHideAffix ? this.rune.name : translatedName;
+  // tier 1 no highlight, orange name
+  // tier 2 red highlight, orange name/number
+  // tier 3 red 
+  // tier 4
+  public generateDisplayName(localizedName: string): string {
+    let displayName = this.removeRuneAffix(localizedName);
+    displayName = this.addRuneNumber(displayName);
+    displayName = this.applyHighlightPattern(displayName);
+    displayName = this.applyBigTooltip(displayName);
+    displayName = this.removeRedundantColorCodes(displayName);
 
-    if (Settings.filter.runes.shouldAddNumber)
-      displayName = ``
-    return super.generateDisplayName(displayName);
+    return displayName;
   }
 
-  protected removeDuplicateColorCodes(name: string): string {
-    // TODO: 
-    // "ÿc" // TODO: make constant?
-    return ``;
+  protected removeRuneAffix(localizedName: string): string {
+    if (!Settings.filter.runes.shouldHideAffix)
+      return localizedName;
+
+    RuneConstants.translatedAffixes.some(affix => {
+      if (!localizedName.includes(affix))
+        return false;
+
+      localizedName.replace(affix, CharConstants.empty);
+      return true;
+    });
+
+    return localizedName;
   }
 
-  // TODO: create function that removes the translated "Rune" affix from all translations so the original translated name can be used
-  protected removeRuneAffix(): void {
+  protected addRuneNumber(displayName: string): string {
+    if (!Settings.filter.runes.shouldAddNumber)
+      return displayName;
 
+    return `${displayName} (${this.rune.number})`;
   }
 }

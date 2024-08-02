@@ -2,26 +2,7 @@ import { CharConstants } from "../Constants/CharConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "./Settings";
 
-// TODO: extract
-enum ItemQuality {
-  Normal = 0,
-  Exceptional = 1,
-  Elite = 2,
-}
-
-/**
- * Represents the amount of digits the iLvl has when shown in the item name.
- * 
- * Use None if the item has no iLvl, Single if it _always_ has a single digit iLvl (1 to 9, like Khalim's Will) and Double if it can have a two digits iLvl (10-99, like most items).
- */
-export enum iLvlDigits {
-  // TODO: extract
-  None = 0,
-  Single = 1,
-  Double = 2,
-}
-
-// TODO
+// TODO: update
 export abstract class StatsAndModifiersSettings {
   // ilvl
   public static iLvlIndentFixSingle: string = CharConstants.space.repeat(4); // for single digit ilvl items
@@ -32,14 +13,14 @@ export abstract class StatsAndModifiersSettings {
   protected static customExceptionalQualityIndicator: string = "custom x"; // replace "custom x" to your preference. [CSTM-QLTY]
   protected static customEliteQualityIndicator:       string = "custom e"; // replace "custom e" to your preference. [CSTM-QLTY]
 
-  public static normalQualityIndicator:      string = this.createQualityIndicator(ItemQuality.Normal);
-  public static exceptionalQualityIndicator: string = this.createQualityIndicator(ItemQuality.Exceptional);
-  public static eliteQualityIndicator:       string = this.createQualityIndicator(ItemQuality.Elite);
+  public static normalQualityIndicator:      string = this.createQualityIndicator(EItemQuality.Normal);
+  public static exceptionalQualityIndicator: string = this.createQualityIndicator(EItemQuality.Exceptional);
+  public static eliteQualityIndicator:       string = this.createQualityIndicator(EItemQuality.Elite);
 
   public static openChar:  string = this.getQualityIndicatorOpenChar();
   public static closeChar: string = this.getQualityIndicatorCloseChar();
 
-  private static createQualityIndicator(itemQuality: ItemQuality): string {
+  private static createQualityIndicator(itemQuality: EItemQuality): string {
     if (Settings.statsAndModifiers.itemQuality.style === SettingsConstants.custom)
       return this.getCustomQualityIndicator(itemQuality);
 
@@ -50,19 +31,19 @@ export abstract class StatsAndModifiersSettings {
     return indicator;
   }
 
-  private static getCustomQualityIndicator(itemQuality: ItemQuality): string {
+  private static getCustomQualityIndicator(itemQuality: EItemQuality): string {
     return [
-        { quality: ItemQuality.Normal,      indicator: this.customNormalQualityIndicator },
-        { quality: ItemQuality.Exceptional, indicator: this.customExceptionalQualityIndicator },
-        { quality: ItemQuality.Elite,       indicator: this.customEliteQualityIndicator },
+        { quality: EItemQuality.Normal,      indicator: this.customNormalQualityIndicator },
+        { quality: EItemQuality.Exceptional, indicator: this.customExceptionalQualityIndicator },
+        { quality: EItemQuality.Elite,       indicator: this.customEliteQualityIndicator },
       ].find(q => q.quality == itemQuality)!.indicator;
   }
 
-  private static getQualityIndicator(itemQuality: ItemQuality): string {
+  private static getQualityIndicator(itemQuality: EItemQuality): string {
     return [
-        { quality: ItemQuality.Normal,      indicator: 'n' },
-        { quality: ItemQuality.Exceptional, indicator: 'x' },
-        { quality: ItemQuality.Elite,       indicator: 'e' },
+        { quality: EItemQuality.Normal,      indicator: 'n' },
+        { quality: EItemQuality.Exceptional, indicator: 'x' },
+        { quality: EItemQuality.Elite,       indicator: 'e' },
       ].find(q => q.quality == itemQuality)!.indicator;
   }
 

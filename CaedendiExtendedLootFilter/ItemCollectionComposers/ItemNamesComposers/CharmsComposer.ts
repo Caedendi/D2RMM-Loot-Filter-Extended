@@ -2,12 +2,12 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { CharmConstants } from "../../Constants/Items/CharmConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightPattern } from "../../Models/ItemCollectionEntries/DoubleHighlightPattern";
+import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
 import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { SunderCharm } from "../../Models/Items/SunderCharm";
+import { EiLvlDigits } from "../../Settings/EiLvlDigits";
 import { Settings } from "../../Settings/Settings";
-import { iLvlDigits } from "../../Settings/StatsAndModifiersSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -51,7 +51,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
       CharmConstants.torchId, 
       CharmConstants.gheedsId
     ].forEach(charm => {
-      this.collection.upsert(new iLvlItemEntry(charm, iLvlDigits.Double, null, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting))
+      this.collection.upsert(new iLvlItemEntry(charm, EiLvlDigits.Double, null, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting))
     });
   }
 
@@ -64,13 +64,13 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
 
   private highlightSunderCharmsDefault(sunders: SunderCharm[]): void {
     sunders.forEach(sunder => this.collection.upsert(
-      new iLvlItemEntry(sunder.id, iLvlDigits.Double, null, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting)
+      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting)
     ));
   }
 
   private highlightSunderCharmsAlt(sunders: SunderCharm[]): void {
     sunders.forEach(sunder => this.collection.upsert(
-      new iLvlItemEntry(sunder.id, iLvlDigits.Double, null, null, new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color))
+      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, null, new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color))
     ));
   }
 }
