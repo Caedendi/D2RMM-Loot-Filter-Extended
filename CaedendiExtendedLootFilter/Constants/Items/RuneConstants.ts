@@ -62,15 +62,6 @@ export abstract class RuneConstants {
   public static defaultNameColor = ColorConstants.orange;
   public static highlightColor   = HighlightConstants.defaultHighlightColor;
 
-  protected static patternHigh = Settings.bigTooltips.runes.highRunesSetting == EBigTooltipSetting.Disabled
-    ? HighlightConstants.pattern3x10  // ********** ********** **********, or
-    : HighlightConstants.pattern2x10; // ********** ********** (with big tooltips)
-
-  public static highlightLow:    IHighlight | null = null;
-  public static highlightLowMid: IHighlight | null = new DoubleHighlightPattern(HighlightConstants.pattern5,  HighlightConstants.padding3);
-  public static highlightMid:    IHighlight | null = new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5);
-  public static highlightHigh:   IHighlight | null = new DoubleHighlightPattern(this.patternHigh,  HighlightConstants.padding5);
-
   public static tiersWithHighlights         = [2, 3, 4]; // rune tiers with a highlight pattern (***** rune *****)
   public static tiersWithHighlightedNumbers = [3, 4];    // rune tiers where the added numbers (33) are in the highlight color instead of default
   public static tiersWithHighlightedNames   = [4];       // rune tiers where the rune name is in the highlight color instead of default

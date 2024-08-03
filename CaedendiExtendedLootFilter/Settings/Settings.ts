@@ -1,5 +1,6 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
+import { D2Color } from "../Models/Colors/D2Color";
 import { D2rColor } from "../Models/Colors/D2rColor";
 import { EBigTooltipSetting } from "./EBigTooltipSetting";
 
@@ -18,16 +19,37 @@ export abstract class Settings {
       keys:              config.Keys              as string,
     },
     runes: {
-      isEnabled:            config.IsEnabled               as boolean,
-      shouldAddHighlights:  config.ShouldAddRuneHighlights as boolean,
-      shouldAddNumber:      config.ShouldAddRuneNumbers    as boolean,
+      isEnabled:            config.IsRunesSectionEnabled   as boolean,
       shouldHideAffix:      config.ShouldHideRuneAffix     as boolean,
-      altHighlightColor:    ColorConstants.getColorByCode(config.RunesHighlightColorAlt as string), // TODO: report bug: if value is empty, label is also empty
-      shouldUseAltColor:    config.RunesHighlightColorAlt !== CharConstants.empty,
-      isLowRunesVisible:    config.ShouldShowRunesLow      as boolean,
-      isLowMidRunesVisible: config.ShouldShowRunesLowMid   as boolean,
-      isMidRunesVisible:    config.ShouldShowRunesMid      as boolean,
-      isHighRunesVisible:   config.ShouldShowRunesHigh     as boolean,
+      shouldAddNumber:      config.ShouldAddRuneNumbers    as boolean,
+      low: {
+         isVisible:      config.ShouldShowRunesLow as boolean,
+         highlight:      config.RunesLowHighlight  as string,
+         highlightColor: new D2Color(config.RunesLowColorHighlight as string),
+         nameColor:      new D2Color(config.RunesLowColorName      as string),
+         numberColor:    new D2Color(config.RunesLowColorNumber    as string),
+      },
+      lowMid: {
+         isVisible:      config.ShouldShowRunesLowMid as boolean,
+         highlight:      config.RunesLowMidHighlight  as string,
+         highlightColor: new D2Color(config.RunesLowMidColorHighlight as string),
+         nameColor:      new D2Color(config.RunesLowMidColorName      as string),
+         numberColor:    new D2Color(config.RunesLowMidColorNumber    as string),
+      },
+      mid: {
+         isVisible:      config.ShouldShowRunesMid as boolean,
+         highlight:      config.RunesMidHighlight  as string,
+         highlightColor: new D2Color(config.RunesMidColorHighlight as string),
+         nameColor:      new D2Color(config.RunesMidColorName      as string),
+         numberColor:    new D2Color(config.RunesMidColorNumber    as string),
+      },
+      high: {
+         isVisible:      config.ShouldShowRunesHigh as boolean,
+         highlight:      config.RunesHighHighlight  as string,
+         highlightColor: new D2Color(config.RunesHighColorHighlight as string),
+         nameColor:      new D2Color(config.RunesHighColorName      as string),
+         numberColor:    new D2Color(config.RunesHighColorNumber    as string),
+      },
     },
     jewelry: {
       gems:   config.Gems   as string,

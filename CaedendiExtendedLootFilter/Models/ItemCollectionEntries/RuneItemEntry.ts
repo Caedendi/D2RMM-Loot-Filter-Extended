@@ -9,13 +9,28 @@ import { ItemEntry } from "./ItemEntry";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
 
 export class RuneItemEntry extends ItemEntry implements IItemEntry {
+  /**
+   * rune
+   */
   private readonly _rune: Rune;
   protected get rune(): Rune {
     return this._rune;
   }
+
+  /**
+   * tier number
+   */
   private readonly _tierNumber: number;
   protected get tierNumber(): number {
     return this._tierNumber;
+  }
+
+  /**
+   * number color
+   */
+  private readonly _numberColor: D2Color;
+  protected get numberColor(): D2Color {
+    return this._numberColor;
   }
 
   constructor(

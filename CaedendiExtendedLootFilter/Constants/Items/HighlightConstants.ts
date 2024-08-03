@@ -1,5 +1,7 @@
 import { D2Color } from "../../Models/Colors/D2Color";
 import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
+import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
+import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
@@ -40,4 +42,24 @@ export abstract class HighlightConstants {
 
   static bttPadding = this.padding5;
   static bttPickUpMsg = `${ColorConstants.purple}Pick Up`;
+
+  // todo: change 3x10 pattern for all instances if BTT enabled
+  protected static patternXL = Settings.bigTooltips.runes.highRunesSetting == EBigTooltipSetting.Disabled
+    ? HighlightConstants.pattern3x10  // ********** ********** **********, or
+    : HighlightConstants.pattern2x10; // ********** ********** (with big tooltips)
+
+  protected static highlightLevels = [
+    { setting: "s",  pattern: HighlightConstants.pattern5,  padding: HighlightConstants.padding3 },
+    { setting: "l",  pattern: HighlightConstants.pattern10, padding: HighlightConstants.padding5 },
+    { setting: "xl", pattern: this.patternXL,               padding: HighlightConstants.padding5 },
+  ];
+
+  public static createHighlight(setting: string, highlightColor): IHighlight | null {
+    if (setting === SettingsConstants.disabled)
+      return null;
+
+    let level = this.highlightLevels.find(level => level.setting = setting);
+
+    return new DoubleHighlightPattern(level.pattern, level.padding, highlightColor);
+  }
 }
