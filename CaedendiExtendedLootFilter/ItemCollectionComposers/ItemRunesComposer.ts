@@ -23,7 +23,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IIt
         return;
       }
 
-      let pattern = tier.pattern;
+      let pattern = tier.highlight;
       if (RuneTier.isTierWithAlternateColor(tier.number))
         pattern.color = Settings.filter.runes.altHighlightColor;
 

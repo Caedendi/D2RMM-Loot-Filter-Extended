@@ -1,3 +1,4 @@
+import { D2Color } from "../../Models/Colors/D2Color";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { RuneTier } from "../../Models/Items/RuneTier";
 import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
@@ -10,6 +11,16 @@ export abstract class RuneTierConstants {
   protected static isLowMidVisible: boolean = Settings.filter.runes.lowMid.isVisible;
   protected static isMidVisible:    boolean = Settings.filter.runes.mid.isVisible;
   protected static isHighVisible:   boolean = Settings.filter.runes.high.isVisible;
+
+  protected static lowNameColor:    D2Color = Settings.filter.runes.low.nameColor;
+  protected static lowMidNameColor: D2Color = Settings.filter.runes.low.nameColor;
+  protected static midNameColor:    D2Color = Settings.filter.runes.low.nameColor;
+  protected static highNameColor:   D2Color = Settings.filter.runes.low.nameColor;
+
+  protected static lowNumberColor:    D2Color = Settings.filter.runes.low.numberColor;
+  protected static lowMidNumberColor: D2Color = Settings.filter.runes.low.numberColor;
+  protected static midNumberColor:    D2Color = Settings.filter.runes.low.numberColor;
+  protected static highNumberColor:   D2Color = Settings.filter.runes.low.numberColor;
 
   protected static lowHighlight:    IHighlight | null = HighlightConstants.createHighlight(Settings.filter.runes.low.highlight, Settings.filter.runes.low.highlightColor);
   protected static lowMidHighlight: IHighlight | null = HighlightConstants.createHighlight(Settings.filter.runes.low.highlight, Settings.filter.runes.low.highlightColor);

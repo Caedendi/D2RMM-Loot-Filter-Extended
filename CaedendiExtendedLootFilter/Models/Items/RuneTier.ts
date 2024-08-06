@@ -1,6 +1,7 @@
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
+import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { Rune } from "./Rune";
 
@@ -30,11 +31,27 @@ export class RuneTier {
   }
 
   /**
+   * name color
+   */
+  private readonly _nameColor: D2Color;
+  public get nameColor(): D2Color {
+    return this._nameColor;
+  }
+
+  /**
+   * number color
+   */
+  private readonly _numberColor: D2Color;
+  public get numberColor(): D2Color {
+    return this._numberColor;
+  }
+
+  /**
    * pattern
    */
-  private readonly _pattern: IHighlight | null;
-  public get pattern(): IHighlight | null {
-    return this._pattern;
+  private readonly _highlight: IHighlight | null;
+  public get highlight(): IHighlight | null {
+    return this._highlight;
   }
 
   /**
@@ -73,7 +90,9 @@ export class RuneTier {
     tier: number,
     runes: Rune[],
     isVisible: boolean,
-    pattern: IHighlight | null,
+    nameColor: D2Color,
+    numberColor: D2Color,
+    highlight: IHighlight | null,
     bigTooltipSetting: EBigTooltipSetting,
     hasLightPillar: boolean,
     dropSound: string
@@ -81,25 +100,28 @@ export class RuneTier {
     this._number = tier;
     this._runes = runes;
     this._isVisible = isVisible;
-    this._pattern = pattern;
+    this._nameColor = nameColor,
+    this._numberColor = numberColor;
+    this._highlight = highlight;
     this._bigTooltipSetting = bigTooltipSetting;
     this._hasLightPillar = hasLightPillar;
     this._dropSound = dropSound;
   }
-    
-  public static isTierWithHighlights(number: number): boolean {
-    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlights.includes(number);
-  }
 
-  public static isTierWithHighlightedNumber(number: number): boolean {
-    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNumbers.includes(number);
-  }
+  // TODO: remove
+  // public static isTierWithHighlights(number: number): boolean {
+  //   return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlights.includes(number);
+  // }
 
-  public static isTierWithHighlightedName(number: number): boolean {
-    return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNames.includes(number);;
-  }
+  // public static isTierWithHighlightedNumber(number: number): boolean {
+  //   return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNumbers.includes(number);
+  // }
 
-  public static isTierWithAlternateColor(number: number): boolean {
-    return Settings.filter.runes.shouldUseAltColor && RuneConstants.tiersWithAlternateColor.includes(number);
-  }
+  // public static isTierWithHighlightedName(number: number): boolean {
+  //   return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNames.includes(number);;
+  // }
+
+  // public static isTierWithAlternateColor(number: number): boolean {
+  //   return Settings.filter.runes.shouldUseAltColor && RuneConstants.tiersWithAlternateColor.includes(number);
+  // }
 }

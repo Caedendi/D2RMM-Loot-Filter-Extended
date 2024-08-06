@@ -36,6 +36,9 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
     });
   }
 
+  // TODO: add more options
+  // -name- & =name=
+  // .name. * :name:
   protected getQualityIndicatorForItem(itemRow): string {
     if (itemRow.code === itemRow.ultracode)
       return StatsAndModifiersSettings.eliteQualityIndicator;
