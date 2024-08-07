@@ -4,6 +4,8 @@ import { D2Color } from "../Models/Colors/D2Color";
 import { D2rColor } from "../Models/Colors/D2rColor";
 import { EBigTooltipSetting } from "./EBigTooltipSetting";
 
+// TODO: add this text somewhere
+// Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space].
 export abstract class Settings {
   // Filter Section
   public static filter = {
@@ -21,15 +23,16 @@ export abstract class Settings {
     },
     // Runes
     runes: {
-      isEnabled:            config.IsRunesSectionEnabled   as boolean,
-      shouldHideAffix:      config.ShouldHideRuneAffix     as boolean,
-      shouldAddNumber:      config.ShouldAddRuneNumbers    as boolean,
+      isEnabled:         config.IsRunesSectionEnabled   as boolean,
+      shouldHideAffix:   config.ShouldHideRuneAffix     as boolean,
+      shouldAddNumber:   config.ShouldAddRuneNumbers    as boolean,
       low: {
          isVisible:      config.ShouldShowRunesLow as boolean,
          highlight:      config.RunesLowHighlight  as string,
          highlightColor: new D2Color(config.RunesLowColorHighlight as string),
          nameColor:      new D2Color(config.RunesLowColorName      as string),
          numberColor:    new D2Color(config.RunesLowColorNumber    as string),
+         bigTooltip:     config.RunesLowBigTooltip    as number as EBigTooltipSetting,
       },
       lowMid: {
          isVisible:      config.ShouldShowRunesLowMid as boolean,
@@ -37,6 +40,7 @@ export abstract class Settings {
          highlightColor: new D2Color(config.RunesLowMidColorHighlight as string),
          nameColor:      new D2Color(config.RunesLowMidColorName      as string),
          numberColor:    new D2Color(config.RunesLowMidColorNumber    as string),
+         bigTooltip:     config.RunesLowMidBigTooltip as number as EBigTooltipSetting,
       },
       mid: {
          isVisible:      config.ShouldShowRunesMid as boolean,
@@ -44,6 +48,7 @@ export abstract class Settings {
          highlightColor: new D2Color(config.RunesMidColorHighlight as string),
          nameColor:      new D2Color(config.RunesMidColorName      as string),
          numberColor:    new D2Color(config.RunesMidColorNumber    as string),
+         bigTooltip:     config.RunesMidBigTooltip    as number as EBigTooltipSetting,
       },
       high: {
          isVisible:      config.ShouldShowRunesHigh as boolean,
@@ -51,6 +56,7 @@ export abstract class Settings {
          highlightColor: new D2Color(config.RunesHighColorHighlight as string),
          nameColor:      new D2Color(config.RunesHighColorName      as string),
          numberColor:    new D2Color(config.RunesHighColorNumber    as string),
+         bigTooltip:     config.RunesHighBigTooltip   as number as EBigTooltipSetting,
       },
     },
     // Jewelry
@@ -63,25 +69,11 @@ export abstract class Settings {
     },
     // Quest & Endgame
     questEndgame: {
-      quest:   config.Quest   as string,
-      endgame: config.Endgame as string,
-    },
-    // Big Tooltips
+      highlights: {
+        quest:   config.Quest   as string,
+        endgame: config.Endgame as string,
+      },
     bigTooltips: {
-      isEnabled:      config.IsBigTooltipsEnabled   as boolean,
-      shouldHideIlvl: config.IsHideIlvlOnBttEnabled as boolean,
-      runes: {
-        lowRunesSetting:    config.BigTooltipRunesLow    as number as EBigTooltipSetting,
-        lowMidRunesSetting: config.BigTooltipRunesLowMid as number as EBigTooltipSetting,
-        midRunesSetting:    config.BigTooltipRunesMid    as number as EBigTooltipSetting,
-        highRunesSetting:   config.BigTooltipRunesHigh   as number as EBigTooltipSetting,
-      },
-      jewelry: {
-        gemsSetting:         config.BigTooltipGems         as number as EBigTooltipSetting,
-        facetsSetting:       config.BigTooltipFacets       as number as EBigTooltipSetting,
-        uniqueCharmsSetting: config.BigTooltipUniqueCharms as number as EBigTooltipSetting,
-      },
-      questEndgame: {
         questItems: config.BigTooltipQuestItems as number as EBigTooltipSetting,
         essences:   config.BigTooltipEssences   as number as EBigTooltipSetting,
         tokens:     config.BigTooltipTokens     as number as EBigTooltipSetting,
@@ -89,12 +81,22 @@ export abstract class Settings {
         organs:     config.BigTooltipOrgans     as number as EBigTooltipSetting,
         standard:   config.BigTooltipStandard   as number as EBigTooltipSetting,
       },
+      shouldHideStandard: config.ShouldHideStandardOfHeroes as boolean,
+    },
+    // Big Tooltips
+    bigTooltips: {
+      jewelry: {
+        gemsSetting:         config.BigTooltipGems         as number as EBigTooltipSetting,
+        facetsSetting:       config.BigTooltipFacets       as number as EBigTooltipSetting,
+        uniqueCharmsSetting: config.BigTooltipUniqueCharms as number as EBigTooltipSetting,
+      },
     },
     // Stats & Modifiers
     statsAndModifiers: {
       itemLevel: {
-        isEnabled:            config.IsShowItemLevelEnabled        as boolean,
-        shouldFixIndentation: config.ShouldFixItemLevelIndentation as boolean,
+        isEnabled:               config.IsShowItemLevelEnabled        as boolean,
+        shouldFixIndentation:    config.ShouldFixItemLevelIndentation as boolean,
+        shouldHideOnBigTooltips: config.IsHideIlvlOnBttEnabled as boolean,
       },
       itemQuality: {
         isEnabled:   config.IsShowItemQualityEnabled as boolean,

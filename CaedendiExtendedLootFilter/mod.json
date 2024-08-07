@@ -8,7 +8,7 @@
     {
       "id": "FilterSection",
       "type": "section",
-      "name": "Filter",
+      "name": "Loot Filter",
       "defaultExpanded": false,
       "children": [
         {
@@ -291,6 +291,23 @@
                     { "value": "7", "label": "Tan 2" },
                     { "value": "M", "label": "Wheat" }
                   ]
+                },
+                {
+                  "id": "RunesLowBigTooltip",
+                  "type": "select",
+                  "name": "Big Tooltip",
+                  "description": "Enable Big Tooltips for Low Runes (El [1] - Dol [14], except Ral [8]).",
+                  "defaultValue": "0",
+                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
+                  ]
                 }
               ]
             },
@@ -425,6 +442,23 @@
                     { "value": "4", "label": "Tan" },
                     { "value": "7", "label": "Tan 2" },
                     { "value": "M", "label": "Wheat" }
+                  ]
+                },
+                {
+                  "id": "RunesLowMidBigTooltip",
+                  "type": "select",
+                  "name": "Low-Mid Runes",
+                  "description": "Enable Big Tooltips for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
+                  "defaultValue": "1",
+                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
                   ]
                 }
               ]
@@ -561,6 +595,23 @@
                     { "value": "7", "label": "Tan 2" },
                     { "value": "M", "label": "Wheat" }
                   ]
+                },
+                {
+                  "id": "RunesMidBigTooltip",
+                  "type": "select",
+                  "name": "Big Tooltip",
+                  "description": "Enable Big Tooltips for Mid Runes (Lem [20] - Gul [25]).",
+                  "defaultValue": "3",
+                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
+                  ]
                 }
               ]
             },
@@ -574,7 +625,7 @@
                   "id": "ShouldShowRunesHigh",
                   "type": "checkbox",
                   "name": "Show",
-                  "description": "Show High Runes (Vex [26] - Zod [33]).",
+                  "description": "Show High Runes (Vex [26] - Zod [33]). I have no idea why you would disable this.",
                   "visible": ["value", "IsRunesSectionEnabled"],
                   "defaultValue": true
                 },
@@ -696,6 +747,23 @@
                     { "value": "7", "label": "Tan 2" },
                     { "value": "M", "label": "Wheat" }
                   ]
+                },
+                {
+                  "id": "RunesHighBigTooltip",
+                  "type": "select",
+                  "name": "Big Tooltip",
+                  "description": "Enable Big Tooltips for High Runes (Vex [26] - Zod [33]).",
+                  "defaultValue": "3",
+                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
+                  ]
                 }
               ]
             }
@@ -768,196 +836,43 @@
           "defaultExpanded": false,
           "children": [
             {
-              "id": "Quest",
-              "type": "select",
-              "name": "Quest Items",
-              "description": "Highlight Quest Items. Exclude the Horadric Cube to fix messing up the Cube window's title and some NPC dialog where it is mentioned. [CSTM-QST1] and [CSTM-QST2]",
-              "defaultValue": "xhc",
-              "options": [
-                { "value": "none", "label": "Disable" },
-                { "value": "all", "label": "Highlight all" },
-                { "value": "xhc", "label": "Highlight, exclude Cube" }
-              ]
-            },
-            {
-              "id": "Endgame",
-              "type": "select",
-              "name": "Endgame Items",
-              "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. For Annihilus and Hellfire Torch, see Charms. [CSTM-END]",
-              "defaultValue": "all",
-              "options": [
-                { "value": "none", "label": "Disable" },
-                { "value": "all",  "label": "Highlight" },
-                { "value": "xsh",  "label": "Highlight, exclude Standard of Heroes" },
-                { "value": "hsh",  "label": "Highlight, hide Standard of Heroes" }
-              ]
-            }
-          ]
-        },
-        {
-          "id": "BigTooltipsSection",
-          "type": "section",
-          "name": "Big Tooltips",
-          "defaultExpanded": false,
-          "children": [
-            {
-              "id": "IsBigTooltipsEnabled",
-              "type": "checkbox",
-              "name": "Enable",
-              "description": "Enable Big Tooltips on the item types toggled below. Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space]. Note: ",
-              "defaultValue": true
-            },
-            {
-              "id": "IsHideIlvlOnBttEnabled",
-              "type": "checkbox",
-              "name": "Hide Item Level",
-              "description": "Hides the iLvl on items that have Big Tooltips.",
-              "defaultValue": true,
-              "visible": ["value", "IsBigTooltipsEnabled"]
-            },
-            {
-              "id": "BigTooltipsRunesSection",
+              "id": "QuestEndgameHighlightsSection",
               "type": "section",
-              "name": "Runes",
-              "defaultExpanded": false,
-              "visible": ["value", "IsBigTooltipsEnabled"],
+              "name": "Highlights",
+              "defaultExpanded": true,
               "children": [
                 {
-                  "id": "BigTooltipRunesLow",
+                  "id": "Quest",
                   "type": "select",
-                  "name": "Low Runes",
-                  "description": "Enable Big Tooltips for Low Runes (El [1] - Dol [14], except Ral [8]).",
-                  "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "name": "Quest Items",
+                  "description": "Highlight Quest Items. Exclude the Horadric Cube to fix messing up the Cube window's title and some NPC dialog where it is mentioned. [CSTM-QST1] and [CSTM-QST2]",
+                  "defaultValue": "xhc",
                   "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
+                    { "value": "none", "label": "Disable" },
+                    { "value": "all", "label": "Highlight all" },
+                    { "value": "xhc", "label": "Highlight, exclude Cube" }
                   ]
                 },
                 {
-                  "id": "BigTooltipRunesLowMid",
+                  "id": "Endgame",
                   "type": "select",
-                  "name": "Low-Mid Runes",
-                  "description": "Enable Big Tooltips for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
-                  "defaultValue": "1",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "name": "Endgame Items",
+                  "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. For Annihilus and Hellfire Torch, see Charms. [CSTM-END]",
+                  "defaultValue": "all",
                   "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
-                  ]
-                },
-                {
-                  "id": "BigTooltipRunesMid",
-                  "type": "select",
-                  "name": "Mid Runes",
-                  "description": "Enable Big Tooltips for Mid Runes (Lem [20] - Gul [25]).",
-                  "defaultValue": "3",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
-                  "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
-                  ]
-                },
-                {
-                  "id": "BigTooltipRunesHigh",
-                  "type": "select",
-                  "name": "High Runes",
-                  "description": "Enable Big Tooltips for High Runes (Vex [26] - Zod [33]).",
-                  "defaultValue": "3",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
-                  "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
+                    { "value": "none", "label": "Disable" },
+                    { "value": "all",  "label": "Highlight" },
+                    { "value": "xsh",  "label": "Highlight, exclude Standard of Heroes" }
                   ]
                 }
               ]
             },
             {
-              "id": "BigTooltipsJewelrySection",
+              "id": "QuestEndgameBigTooltipsSection",
               "type": "section",
-              "name": "Jewelry",
-              "defaultExpanded": false,
-              "visible": ["value", "IsBigTooltipsEnabled"],
-              "children": [
-                {
-                  "id": "BigTooltipGems",
-                  "type": "select",
-                  "name": "Gems",
-                  "description": "Enable Big Tooltips for Gems.",
-                  "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
-                  "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
-                  ]
-                },
-                {
-                  "id": "BigTooltipFacets",
-                  "type": "select",
-                  "name": "Facets",
-                  "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels. Recommended: Disable or Two Lines + Pick Up.",
-                  "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
-                  "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
-                  ]
-                },
-                {
-                  "id": "BigTooltipUniqueCharms",
-                  "type": "select",
-                  "name": "Unique Charms",
-                  "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
-                  "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
-                  "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "BigTooltipsQuestEndgameSection",
-              "type": "section",
-              "name": "Quest & Endgame",
-              "defaultExpanded": false,
-              "visible": ["value", "IsBigTooltipsEnabled"],
+              "name": "Big Tooltips",
+              "defaultExpanded": true,
+              "visible": [ "value", "IsBigTooltipsEnabled" ],
               "children": [
                 {
                   "id": "BigTooltipQuestItems",
@@ -1062,6 +977,81 @@
                   ]
                 }
               ]
+            },
+            {
+              "id": "ShouldHideStandardOfHeroes",
+              "type": "checkbox",
+              "name": "Hide Standard of Heroes",
+              "description": "Hide the Standard of Heroes. Overrides the Highlights and Big Tooltips settings above.",
+              "defaultValue": true
+            }
+          ]
+        },
+        {
+          "id": "BigTooltipsSection",
+          "type": "section",
+          "name": "Big Tooltips",
+          "defaultExpanded": false,
+          "children": [
+            {
+              "id": "BigTooltipsJewelrySection",
+              "type": "section",
+              "name": "Jewelry",
+              "defaultExpanded": false,
+              "visible": ["value", "IsBigTooltipsEnabled"],
+              "children": [
+                {
+                  "id": "BigTooltipGems",
+                  "type": "select",
+                  "name": "Gems",
+                  "description": "Enable Big Tooltips for Gems.",
+                  "defaultValue": "0",
+                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
+                  ]
+                },
+                {
+                  "id": "BigTooltipFacets",
+                  "type": "select",
+                  "name": "Facets",
+                  "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels. Recommended: Disable or Two Lines + Pick Up.",
+                  "defaultValue": "0",
+                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
+                  ]
+                },
+                {
+                  "id": "BigTooltipUniqueCharms",
+                  "type": "select",
+                  "name": "Unique Charms",
+                  "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
+                  "defaultValue": "0",
+                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1075,7 +1065,7 @@
               "id": "StatsModifiersItemLevelSection",
               "type": "section",
               "name": "Show Item Level",
-              "defaultExpanded": false,
+              "defaultExpanded": true,
               "children": [
                 {
                   "id": "IsShowItemLevelEnabled",
@@ -1091,6 +1081,14 @@
                   "description": "Fixes the indentation TODO:.",
                   "defaultValue": true,
                   "visible": ["value", "IsShowItemLevelEnabled"]
+                },
+                {
+                  "id": "IsHideIlvlOnBttEnabled",
+                  "type": "checkbox",
+                  "name": "Hide on Big Tooltips",
+                  "description": "Hides the iLvl on items that have Big Tooltips.",
+                  "defaultValue": true,
+                  "visible": ["value", "IsShowItemLevelEnabled"]
                 }
               ]
             },
@@ -1098,7 +1096,7 @@
               "id": "StatsModifiersItemQualitySection",
               "type": "section",
               "name": "Show Equipment Quality",
-              "defaultExpanded": false,
+              "defaultExpanded": true,
               "children": [
                 {
                   "id": "IsShowItemQualityEnabled",
@@ -1110,20 +1108,33 @@
                 {
                   "id": "ItemQualityPlacement",
                   "type": "select",
-                  "name": "todo ItemQualityPlacement",
+                  "name": "Position",
                   "description": "Show Equipment Quality tag.",
                   "defaultValue": "suffix",
                   "visible": ["value", "IsShowItemQualityEnabled"],
                   "options": [
                     { "value": "prefix", "label": "Prefix" },
                     { "value": "suffix", "label": "Suffix" },
-                    { "value": "both",   "label": "Both" }
+                    { "value": "both",   "label": "Prefix & Suffix" }
+                  ]
+                },
+                {
+                  "id": "ItemQualityStyleSingle",
+                  "type": "select",
+                  "name": "Indicator Style",
+                  "description": "Set the style for the quality indicator. [CSTM-QTYS]",
+                  "defaultValue": "lowercase",
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPlacement"], "both"]],
+                  "options": [
+                    { "value": "lowercase", "label": "Lowercase letter" },
+                    { "value": "uppercase", "label": "Uppercase letter" },
+                    { "value": "custom", "label": "Custom" }
                   ]
                 },
                 {
                   "id": "ItemQualityBrackets",
                   "type": "select",
-                  "name": "Brackets",
+                  "name": "Bracket Style",
                   "description": "Set the bracket style.",
                   "defaultValue": "square",
                   "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPlacement"], "both"]],
@@ -1134,28 +1145,15 @@
                   ]
                 },
                 {
-                  "id": "ItemQualityStyleSingle",
-                  "type": "select",
-                  "name": "Style",
-                  "description": "Set the style for the quality indicator. [CSTM-QTYS]",
-                  "defaultValue": "lowercase",
-                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPlacement"], "both"]],
-                  "options": [
-                    { "value": "lowercase", "label": "Lowercase" },
-                    { "value": "uppercase", "label": "Uppercase" },
-                    { "value": "custom", "label": "Custom" }
-                  ]
-                },
-                {
                   "id": "ItemQualityStyleDouble",
                   "type": "select",
-                  "name": "Style",
+                  "name": "Indicator Style",
                   "description": "Set the style for the quality indicator.",
-                  "defaultValue": "square",
+                  "defaultValue": "dashes",
                   "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["eq", ["value", "ItemQualityPlacement"], "both"]],
                   "options": [
+                    { "value": "dots",   "label": "Dots" },
                     { "value": "dashes", "label": "Dashes" },
-                    { "value": "dots", "label": "Dots" },
                     { "value": "custom", "label": "Custom" }
                   ]
                 }
@@ -1165,7 +1163,7 @@
               "id": "StatsModifiersSupInfPrefixesSection",
               "type": "section",
               "name": "Shorten Superior/Inferior Prefixes",
-              "defaultExpanded": false,
+              "defaultExpanded": true,
               "children": [
                 {
                   "id": "IsSupInferiorPrefixesEnabled",
@@ -1177,7 +1175,7 @@
                 {
                   "id": "SupInfPrefixesStyle",
                   "type": "select",
-                  "name": "Style",
+                  "name": "Prefix Style",
                   "description": "Shorten the Superior/Damaged/Cracked/Crude/Low Quality modifiers on weapons and armor to + (plus) and - (minus/dash). Optionally color Inferior items gray. Works the same as mod Short Quality Prefixes by Jobus. [CSTM-SPIF]",
                   "defaultValue": "plusminus",
                   "visible": ["value", "IsSupInferiorPrefixesEnabled"],
@@ -1189,13 +1187,13 @@
                 },
                 {
                   "id": "InferiorItemsColor",
-                  "type": "checkbox",
+                  "type": "select",
                   "name": "Color Inferior items",
                   "description": "Gives Inferior items a custom tooltip color",
-                  "defaultValue": "none",
+                  "defaultValue": "",
                   "visible": ["value", "IsSupInferiorPrefixesEnabled"],
                   "options": [
-                    { "value":  "", "label": "Default" },
+                    { "value":  "", "label": "Disable" },
                     { "value": "5", "label": "Gray" },
                     { "value": "6", "label": "Black" }
                   ]
@@ -1206,7 +1204,7 @@
               "id": "StatsModifiersEtherealSection",
               "type": "section",
               "name": "Ethereal Items Color",
-              "defaultExpanded": false,
+              "defaultExpanded": true,
               "children": [
                 {
                   "id": "IsEthItemsColorEnabled",
@@ -1218,7 +1216,7 @@
                 {
                   "id": "EthItemsColor",
                   "type": "select",
-                  "name": "Tooltip Color",
+                  "name": "Color",
                   "description": "Set the color for Ethereal items.",
                   "defaultValue": "LightTeal",
                   "visible": ["value", "IsEthItemsColorEnabled"],

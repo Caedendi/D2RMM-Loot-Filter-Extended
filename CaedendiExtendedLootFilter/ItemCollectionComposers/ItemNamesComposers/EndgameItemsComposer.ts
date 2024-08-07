@@ -17,36 +17,35 @@ export class EndgameItemsComposer extends ItemCollectionComposerBase implements 
   }
 
   public applyFilter(): void {
-    switch (Settings.filter.questEndgame.endgame) {
+    switch (Settings.filter.questEndgame.highlights.endgame) {
       case SettingsConstants.disabled:
-        return;
+        break;
       case SettingsConstants.all: // highlight all
         this.highlightEndgameItems();
         this.highlightStandardOfHeroes();
-        return;
+        break;
       case "xsh": // exclude Standard of Heroes from highlighting
         this.highlightEndgameItems();
-        return;
-      case "hsh": // hide Standard of Heroes
-        this.highlightEndgameItems();
-        this.hideStandardOfHeroes();
-        return;
+        break;
     }
+
+    if (Settings.filter.questEndgame.shouldHideStandard)
+      this.hideStandardOfHeroes();
   }
 
   protected highlightEndgameItems(): void {
     let entries: ItemEntry[] = [];
 
-    this.pushEntries(entries, EndgameConstants.essences, EndgameConstants.patternEss, Settings.bigTooltips.questEndgame.essences);
-    this.pushEntries(entries, EndgameConstants.keys,     EndgameConstants.patternPkx, Settings.bigTooltips.questEndgame.keys);
-    this.pushEntries(entries, EndgameConstants.organs,   EndgameConstants.patternOrg, Settings.bigTooltips.questEndgame.organs);
-    entries.push(new ItemEntry(EndgameConstants.token, null, EndgameConstants.clrName, EndgameConstants.patternToa, Settings.bigTooltips.questEndgame.tokens));
+    this.pushEntries(entries, EndgameConstants.essences, EndgameConstants.patternEss, Settings.filter.questEndgame.bigTooltips.essences);
+    this.pushEntries(entries, EndgameConstants.keys,     EndgameConstants.patternPkx, Settings.filter.questEndgame.bigTooltips.keys);
+    this.pushEntries(entries, EndgameConstants.organs,   EndgameConstants.patternOrg, Settings.filter.questEndgame.bigTooltips.organs);
+    entries.push(new ItemEntry(EndgameConstants.token, null, EndgameConstants.clrName, EndgameConstants.patternToa, Settings.filter.questEndgame.bigTooltips.tokens));
 
     this.collection.upsertMultiple(entries);
   }
 
   protected highlightStandardOfHeroes(): void {
-    this.collection.upsert(new ItemEntry(EndgameConstants.standard, null, EndgameConstants.clrName, EndgameConstants.patternStd, Settings.bigTooltips.questEndgame.standard));
+    this.collection.upsert(new ItemEntry(EndgameConstants.standard, null, EndgameConstants.clrName, EndgameConstants.patternStd, Settings.filter.questEndgame.bigTooltips.standard));
   }
 
   protected hideStandardOfHeroes(): void {
