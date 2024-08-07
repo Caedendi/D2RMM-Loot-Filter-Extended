@@ -8,6 +8,7 @@ export abstract class Settings {
   // Filter Section
   public static filter = {
     isEnabled: config.IsFilterEnabled as boolean,
+    // Junk
     junk: {
       goldTooltipColors: config.GoldTooltipColors as string,
       goldSuffix:        config.GoldSuffix        as string,
@@ -18,6 +19,7 @@ export abstract class Settings {
       arrowsBolts:       config.ArrowsBolts       as string,
       keys:              config.Keys              as string,
     },
+    // Runes
     runes: {
       isEnabled:            config.IsRunesSectionEnabled   as boolean,
       shouldHideAffix:      config.ShouldHideRuneAffix     as boolean,
@@ -51,6 +53,7 @@ export abstract class Settings {
          numberColor:    new D2Color(config.RunesHighColorNumber    as string),
       },
     },
+    // Jewelry
     jewelry: {
       gems:   config.Gems   as string,
       jewels: config.Jewels as string,
@@ -58,64 +61,66 @@ export abstract class Settings {
       isFacetAltPatternEnabled:  config.IsFacetAltPattern  as boolean,
       isSunderAltPatternEnabled: config.IsSunderAltPattern as boolean,
     },
+    // Quest & Endgame
     questEndgame: {
       quest:   config.Quest   as string,
       endgame: config.Endgame as string,
     },
+    // Big Tooltips
+    bigTooltips: {
+      isEnabled:      config.IsBigTooltipsEnabled   as boolean,
+      shouldHideIlvl: config.IsHideIlvlOnBttEnabled as boolean,
+      runes: {
+        lowRunesSetting:    config.BigTooltipRunesLow    as number as EBigTooltipSetting,
+        lowMidRunesSetting: config.BigTooltipRunesLowMid as number as EBigTooltipSetting,
+        midRunesSetting:    config.BigTooltipRunesMid    as number as EBigTooltipSetting,
+        highRunesSetting:   config.BigTooltipRunesHigh   as number as EBigTooltipSetting,
+      },
+      jewelry: {
+        gemsSetting:         config.BigTooltipGems         as number as EBigTooltipSetting,
+        facetsSetting:       config.BigTooltipFacets       as number as EBigTooltipSetting,
+        uniqueCharmsSetting: config.BigTooltipUniqueCharms as number as EBigTooltipSetting,
+      },
+      questEndgame: {
+        questItems: config.BigTooltipQuestItems as number as EBigTooltipSetting,
+        essences:   config.BigTooltipEssences   as number as EBigTooltipSetting,
+        tokens:     config.BigTooltipTokens     as number as EBigTooltipSetting,
+        keys:       config.BigTooltipKeys       as number as EBigTooltipSetting,
+        organs:     config.BigTooltipOrgans     as number as EBigTooltipSetting,
+        standard:   config.BigTooltipStandard   as number as EBigTooltipSetting,
+      },
+    },
+    // Stats & Modifiers
+    statsAndModifiers: {
+      itemLevel: {
+        isEnabled:            config.IsShowItemLevelEnabled        as boolean,
+        shouldFixIndentation: config.ShouldFixItemLevelIndentation as boolean,
+      },
+      itemQuality: {
+        isEnabled:   config.IsShowItemQualityEnabled as boolean,
+        placement:   config.ItemQualityPlacement     as string,
+        brackets:    config.ItemQualityBrackets      as string,
+        styleSingle: config.ItemQualityStyleSingle   as string,
+        styleDouble: config.ItemQualityStyleDouble   as string,
+      },
+      shortSupInfPrefixes: {
+        isEnabled:          config.IsSupInferiorPrefixesEnabled   as boolean,
+        style:              config.SupInfPrefixesStyle            as string,
+        inferiorItemsColor: new D2Color(config.InferiorItemsColor as string),
+      },
+      ethColor: {
+        isEnabled: config.IsEthItemsColorEnabled     as boolean,
+        color:     new D2rColor(config.EthItemsColor as string),
+      }    
+    },
+    // Filter Settings
     settings: {
       highlightCharacter: config.HighlightCharacter    as string,
       highlightColor:     ColorConstants.getColorByCode(config.HighlightColor as string),
       hidden:             CharConstants.space.repeat(config.HiddenItemTooltipSize as number),
     },
+    // Custom Filter List
     isCustomFilterListEnabled: config.IsCustomFilterListEnabled as boolean,
-  };
-  
-  // Stats & Modifiers Section
-  public static statsAndModifiers = {
-    itemLevel: {
-      isEnabled:            config.IsShowItemLevelEnabled        as boolean,
-      shouldFixIndentation: config.ShouldFixItemLevelIndentation as boolean,
-    },
-    itemQuality: {
-      isEnabled: config.IsShowItemQualityEnabled as boolean,
-      placement: config.ItemQualityPlacement     as string,
-      brackets:  config.ItemQualityBrackets      as string,
-      style:     config.ItemQualityStyle         as string,
-    },
-    shortSupInfPrefixes: {
-      isEnabled:        config.IsSupInferiorPrefixesEnabled as boolean,
-      style:            config.SupInfPrefixesStyle          as string,
-      isGrayInfEnabled: config.IsGrayInferiorItemsEnabled   as boolean,
-    },
-    ethColor: {
-      isEnabled: config.IsEthItemsColorEnabled     as boolean,
-      color:     new D2rColor(config.EthItemsColor as string),
-    }    
-  };
-
-  // Big Tooltips Section
-  public static bigTooltips = {
-    isEnabled:      config.IsBigTooltipsEnabled   as boolean,
-    shouldHideIlvl: config.IsHideIlvlOnBttEnabled as boolean,
-    runes: {
-      lowRunesSetting:    config.BigTooltipRunesLow    as number as EBigTooltipSetting,
-      lowMidRunesSetting: config.BigTooltipRunesLowMid as number as EBigTooltipSetting,
-      midRunesSetting:    config.BigTooltipRunesMid    as number as EBigTooltipSetting,
-      highRunesSetting:   config.BigTooltipRunesHigh   as number as EBigTooltipSetting,
-    },
-    jewelry: {
-      gemsSetting:         config.BigTooltipGems         as number as EBigTooltipSetting,
-      facetsSetting:       config.BigTooltipFacets       as number as EBigTooltipSetting,
-      uniqueCharmsSetting: config.BigTooltipUniqueCharms as number as EBigTooltipSetting,
-    },
-    questEndgame: {
-      questItems: config.BigTooltipQuestItems as number as EBigTooltipSetting,
-      essences:   config.BigTooltipEssences   as number as EBigTooltipSetting,
-      tokens:     config.BigTooltipTokens     as number as EBigTooltipSetting,
-      keys:       config.BigTooltipKeys       as number as EBigTooltipSetting,
-      organs:     config.BigTooltipOrgans     as number as EBigTooltipSetting,
-      standard:   config.BigTooltipStandard   as number as EBigTooltipSetting,
-    },
   };
 
   // Light Pillars Section

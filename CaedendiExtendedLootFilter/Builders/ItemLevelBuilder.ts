@@ -7,12 +7,12 @@ import { IBuilder } from "./Interfaces/IBuilder";
 
 //  extends ItemBuilderBase implements IItemBuilder
 export class ItemLevelBuilder implements IBuilder {
-  protected readonly isBigTooltipsEnabled: boolean = Settings.bigTooltips.isEnabled;
+  protected readonly isBigTooltipsEnabled: boolean = Settings.filter.bigTooltips.isEnabled;
   protected readonly weaponsExclusions: string[] = [];
   protected readonly miscExclusions: string[] = [];
 
   public build() {
-    if (!Settings.statsAndModifiers.itemLevel.isEnabled)
+    if (!Settings.filter.statsAndModifiers.itemLevel.isEnabled)
       return;
 
     this.setWeaponsExclusions();
@@ -26,9 +26,9 @@ export class ItemLevelBuilder implements IBuilder {
   private setWeaponsExclusions(): void {
     this.weaponsExclusions.push("tpot"); // always exclude throwing pots
 
-    if ( !Settings.bigTooltips.isEnabled 
-      || !Settings.bigTooltips.shouldHideIlvl 
-      ||  Settings.bigTooltips.questEndgame.questItems == EBigTooltipSetting.Disabled)
+    if ( !Settings.filter.bigTooltips.isEnabled 
+      || !Settings.filter.bigTooltips.shouldHideIlvl 
+      ||  Settings.filter.bigTooltips.questEndgame.questItems == EBigTooltipSetting.Disabled)
       return;
 
     // exclude quest weapons with iLvls if Big Tooltips is enabled
@@ -45,12 +45,12 @@ export class ItemLevelBuilder implements IBuilder {
   }
     
   protected setMiscExclusions(): void {
-    if (!Settings.bigTooltips.isEnabled || !Settings.bigTooltips.shouldHideIlvl)
+    if (!Settings.filter.bigTooltips.isEnabled || !Settings.filter.bigTooltips.shouldHideIlvl)
       return;
     
-    if (Settings.bigTooltips.jewelry.facetsSetting != EBigTooltipSetting.Disabled)
+    if (Settings.filter.bigTooltips.jewelry.facetsSetting != EBigTooltipSetting.Disabled)
       this.miscExclusions.push(JewelryConstants.jewelId);
-    if (Settings.bigTooltips.jewelry.uniqueCharmsSetting != EBigTooltipSetting.Disabled)
+    if (Settings.filter.bigTooltips.jewelry.uniqueCharmsSetting != EBigTooltipSetting.Disabled)
       CharmConstants.charmIds.forEach(charm => this.miscExclusions.push(charm));
 
     // TODO: check if this has ilvl and correct here + in quest item naming

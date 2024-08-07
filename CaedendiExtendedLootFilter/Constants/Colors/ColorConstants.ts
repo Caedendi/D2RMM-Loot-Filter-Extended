@@ -60,6 +60,6 @@ export abstract class ColorConstants {
   public static magic: D2Color = this.blue;
 
   public static getColorByCode(code: string): D2Color {
-    return Object.values(this.baseColors).find(color => color.code === code);
+    return Object.values(this.baseColors).find(color => color.code === code) ?? this.none;
   }
 }

@@ -4,24 +4,24 @@ import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 import { iLvlItemEntry } from "./iLvlItemEntry";
-import { QualityTag } from "./QualityTag";
+import { SingleQualityTag } from "../QualityTags/QualityTag";
 
 export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
   /**
    * Quality Tag
    */
-  private _qualityTag: QualityTag | null;
-  protected get qualityTag(): QualityTag | null {
+  private _qualityTag: SingleQualityTag | null;
+  protected get qualityTag(): SingleQualityTag | null {
     return this._qualityTag;
   }
-  protected set qualityTag(value: QualityTag) {
+  protected set qualityTag(value: SingleQualityTag) {
     this._qualityTag = value;
   }
   
   constructor(
     key: string,
     iLvlDigits: EiLvlDigits,
-    quality: QualityTag,
+    quality: SingleQualityTag,
     newName?: string | null,
     nameColor?: D2Color,
     pattern?: IHighlight | null,

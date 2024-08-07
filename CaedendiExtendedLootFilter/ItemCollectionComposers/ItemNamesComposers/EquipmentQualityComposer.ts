@@ -1,6 +1,6 @@
 import { FileConstants } from "../../Constants/FileConstants";
 import { EquipmentEntry } from "../../Models/ItemCollectionEntries/EquipmentEntry";
-import { QualityTag } from "../../Models/ItemCollectionEntries/QualityTag";
+import { SingleQualityTag } from "../../Models/QualityTags/QualityTag";
 import { EiLvlDigits } from "../../Settings/EiLvlDigits";
 import { Settings } from "../../Settings/Settings";
 import { StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
@@ -13,9 +13,15 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
   constructor() {
       super();
   }
+
+  // TODO: refactor this and StatsAndModifiersSettings
   
+  // TODO: add more options
+  // -name- & =name=
+  // ·name· & :name:
+  // -name- & +name+ & #name#
   public applyFilter(): void {
-    if (!Settings.statsAndModifiers.itemQuality.isEnabled) {
+    if (!Settings.filter.statsAndModifiers.itemQuality.isEnabled) {
       return;
     }
 
@@ -32,19 +38,25 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
   protected addEquipmentQuality(rows) {
     Object.entries(rows).forEach(([i, _]) => {
       let row = rows[i];
-      this.collection.upsert(new EquipmentEntry(row[FileConstants.key], EiLvlDigits.Double, new QualityTag(this.getQualityIndicatorForItem(row))));
+      this.collection.upsert(new EquipmentEntry(row[FileConstants.key], EiLvlDigits.Double, new SingleQualityTag(this.getSingleQualityIndicatorForItem(row))));
     });
   }
 
-  // TODO: add more options
-  // -name- & =name=
-  // .name. * :name:
-  protected getQualityIndicatorForItem(itemRow): string {
+  protected getSingleQualityIndicatorForItem(itemRow): string {
     if (itemRow.code === itemRow.ultracode)
-      return StatsAndModifiersSettings.eliteQualityIndicator;
+      return StatsAndModifiersSettings.singleEliteQualityIndicator;
     if (itemRow.code === itemRow.ubercode)
-      return StatsAndModifiersSettings.exceptionalQualityIndicator;
+      return StatsAndModifiersSettings.singleExceptionalQualityIndicator;
 
-    return StatsAndModifiersSettings.normalQualityIndicator;
+    return StatsAndModifiersSettings.singleNormalQualityIndicator;
+  }
+
+  protected getDoubleQualityIndicatorForItem(itemRow): string {
+    if (itemRow.code === itemRow.ultracode)
+      return StatsAndModifiersSettings.doubleEliteQualityIndicator;
+    if (itemRow.code === itemRow.ubercode)
+      return StatsAndModifiersSettings.doubleExceptionalQualityIndicator;
+
+    return StatsAndModifiersSettings.doubleNormalQualityIndicator;
   }
 }

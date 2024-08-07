@@ -11,8 +11,13 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
     super();
   }
 
+  // TODO: add option for regular gem name:
+  // - regular
+  // - common
+  // - gem name (Ruby)
+  // - custom
   public applyFilter(): void {
-    switch (Settings.filter.jewelry.gems) { // todo: validate setting as string
+    switch (Settings.filter.jewelry.gems) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all

@@ -1,8 +1,4 @@
-import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
-import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { Rune } from "../../Models/Items/Rune";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
-import { Settings } from "../../Settings/Settings";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { HighlightConstants } from "./HighlightConstants";
 

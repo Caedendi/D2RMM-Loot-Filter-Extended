@@ -1104,19 +1104,20 @@
                   "id": "IsShowItemQualityEnabled",
                   "type": "checkbox",
                   "name": "Enable",
-                  "description": "Show Equipment Quality tag.",
+                  "description": "",
                   "defaultValue": false
                 },
                 {
                   "id": "ItemQualityPlacement",
                   "type": "select",
-                  "name": "Placement",
-                  "description": "",
+                  "name": "todo ItemQualityPlacement",
+                  "description": "Show Equipment Quality tag.",
                   "defaultValue": "suffix",
                   "visible": ["value", "IsShowItemQualityEnabled"],
                   "options": [
                     { "value": "prefix", "label": "Prefix" },
-                    { "value": "suffix", "label": "Suffix" }
+                    { "value": "suffix", "label": "Suffix" },
+                    { "value": "both",   "label": "Both" }
                   ]
                 },
                 {
@@ -1125,7 +1126,7 @@
                   "name": "Brackets",
                   "description": "Set the bracket style.",
                   "defaultValue": "square",
-                  "visible": ["value", "IsShowItemQualityEnabled"],
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPlacement"], "both"]],
                   "options": [
                     { "value": "none", "label": "Disable" },
                     { "value": "square", "label": "Square" },
@@ -1133,15 +1134,28 @@
                   ]
                 },
                 {
-                  "id": "ItemQualityStyle",
+                  "id": "ItemQualityStyleSingle",
                   "type": "select",
                   "name": "Style",
-                  "description": "Set the style for the quality indicator.",
+                  "description": "Set the style for the quality indicator. [CSTM-QTYS]",
                   "defaultValue": "lowercase",
-                  "visible": ["value", "IsShowItemQualityEnabled"],
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPlacement"], "both"]],
                   "options": [
                     { "value": "lowercase", "label": "Lowercase" },
                     { "value": "uppercase", "label": "Uppercase" },
+                    { "value": "custom", "label": "Custom" }
+                  ]
+                },
+                {
+                  "id": "ItemQualityStyleDouble",
+                  "type": "select",
+                  "name": "Style",
+                  "description": "Set the style for the quality indicator.",
+                  "defaultValue": "square",
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["eq", ["value", "ItemQualityPlacement"], "both"]],
+                  "options": [
+                    { "value": "dashes", "label": "Dashes" },
+                    { "value": "dots", "label": "Dots" },
                     { "value": "custom", "label": "Custom" }
                   ]
                 }
@@ -1174,12 +1188,17 @@
                   ]
                 },
                 {
-                  "id": "IsGrayInferiorItemsEnabled",
+                  "id": "InferiorItemsColor",
                   "type": "checkbox",
-                  "name": "Gray Inferior items",
-                  "description": "Gives Inferior items a gray tooltip",
-                  "defaultValue": false,
-                  "visible": ["value", "IsSupInferiorPrefixesEnabled"]
+                  "name": "Color Inferior items",
+                  "description": "Gives Inferior items a custom tooltip color",
+                  "defaultValue": "none",
+                  "visible": ["value", "IsSupInferiorPrefixesEnabled"],
+                  "options": [
+                    { "value":  "", "label": "Default" },
+                    { "value": "5", "label": "Gray" },
+                    { "value": "6", "label": "Black" }
+                  ]
                 }
               ]
             },

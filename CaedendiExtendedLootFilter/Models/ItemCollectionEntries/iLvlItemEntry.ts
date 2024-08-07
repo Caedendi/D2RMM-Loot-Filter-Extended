@@ -45,7 +45,7 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   }
 
   protected applyIlvlIndent(displayName: string): string {
-    if (!Settings.statsAndModifiers.itemLevel.shouldFixIndentation)
+    if (!Settings.filter.statsAndModifiers.itemLevel.shouldFixIndentation)
       return displayName;
 
     return `${this.getiLvlIndent()}${displayName}`;

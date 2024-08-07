@@ -24,10 +24,10 @@ export class ProfileHdModsBuilder implements IBuilder {
   }
 
   protected applyCustomEtherealColor(profileHD) { // TODO: typing
-    if (!Settings.statsAndModifiers.ethColor.isEnabled)
+    if (!Settings.filter.statsAndModifiers.ethColor.isEnabled)
       return;
 
-    profileHD.TooltipStyle.EtherealColor = Settings.statsAndModifiers.ethColor.color.toString(); // [CSTM-ETH]
+    profileHD.TooltipStyle.EtherealColor = Settings.filter.statsAndModifiers.ethColor.color.toString(); // [CSTM-ETH]
   }
 
   protected applyTooltipMods(profileHD) { // TODO: typing
