@@ -776,56 +776,164 @@
           "defaultExpanded": false,
           "children": [
             {
-              "id": "Gems",
-              "type": "select",
+              "id": "JewelryGemsSection",
+              "type": "section",
               "name": "Gems",
-              "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
-              "defaultValue": "all",
-              "options": [
-                { "value": "none", "label": "Disable" },
-                { "value": "all", "label": "Highlight" },
-                { "value": "flawless", "label": "Highlight, show only Flawless and Perfect Gems" },
-                { "value": "perfect", "label": "Highlight, show only Perfect Gems" },
-                { "value": "hide", "label": "Hide all" }
+              "defaultExpanded": true,
+              "children": [
+                {
+                  "id": "JewelryGemsFilter",
+                  "type": "select",
+                  "name": "Filter",
+                  "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
+                  "defaultValue": "none",
+                  "options": [
+                    { "value": "none",     "label": "Disable" },
+                    { "value": "flawless", "label": "Hide Chipped, Flawed & regular" },
+                    { "value": "perfect",  "label": "Hide Chipped, Flawed, regular & Flawless" },
+                    { "value": "hide",     "label": "Hide all" }
+                  ]
+                },
+                {
+                  "id": "JewelryGemsFilter",
+                  "type": "select",
+                  "name": "Filter",
+                  "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
+                  "defaultValue": "all",
+                  "options": [
+                    { "value": "none",     "label": "Disable" },
+                    { "value": "flawless", "label": "Show only Flawless and Perfect Gems" },
+                    { "value": "perfect",  "label": "Show only Perfect Gems" },
+                    { "value": "hide",     "label": "Hide all" }
+                  ]
+                },
+                {
+                  "id": "JewelryGemsHighlight",
+                  "type": "select",
+                  "name": "Highlight",
+                  "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
+                  "defaultValue": "all",
+                  "options": [
+                    { "value": "none",     "label": "Disable" },
+                    { "value": "all",      "label": "Enable" }
+                  ]
+                },
+                {
+                  "id": "JewelryGemsBigTooltips",
+                  "type": "select",
+                  "name": "Big Tooltips",
+                  "description": "Enable Big Tooltips for Gems.",
+                  "defaultValue": "0",
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
+                  ]
+                }
               ]
             },
             {
-              "id": "Jewels",
-              "type": "select",
+              "id": "JewelryJewelsSection",
+              "type": "section",
               "name": "Jewels",
-              "description": "Customize Jewels. Currently identified Facets only; I have not yet found a good way to customize unidentified/Magic/Rare Jewels. [CSTM-JWL]",
-              "defaultValue": "facet",
-              "options": [
-                { "value": "none", "label": "Disable" },
-                { "value": "facet", "label": "Highlight Facets" }
+              "defaultExpanded": true,
+              "children": [
+                {
+                  "id": "FacetsHighlights",
+                  "type": "select",
+                  "name": "Highlights",
+                  "description": "Customize Jewels. Currently identified Facets only; I have not yet found a good way to customize unidentified/Magic/Rare Jewels. [CSTM-JWL]",
+                  "defaultValue": "rainbow",
+                  "options": [
+                    { "value": "none", "label": "Disable" },
+                    { "value": "highlight", "label": "Facets: default color" },
+                    { "value": "rainbow", "label": "Facets: rainbow pattern" }
+                  ]
+                },
+                {
+                  "id": "FacetsBigTooltips",
+                  "type": "select",
+                  "name": "Big Tooltips",
+                  "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels. Recommended: Disable or Two Lines + Pick Up.",
+                  "defaultValue": "0",
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
+                  ]
+                }
               ]
             },
             {
-              "id": "Charms",
-              "type": "select",
+              "id": "JewelryCharmsSection",
+              "type": "section",
               "name": "Charms",
-              "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
-              "defaultValue": "all",
-              "options": [
-                { "value": "none", "label": "Disable" },
-                { "value": "all", "label": "Highlight" },
-                { "value": "uniq", "label": "Highlight Unique Charms only" },
-                { "value": "unid", "label": "Highlight non-Unique Charms only" }
+              "defaultExpanded": true,
+              "children": [
+                {
+                  "id": "JewelryCharmsMagicSection",
+                  "type": "section",
+                  "name": "Magic",
+                  "defaultExpanded": true,
+                  "children": [
+                    {
+                      "id": "CharmsMagicHighlights",
+                      "type": "select",
+                      "name": "Highlights",
+                      "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
+                      "defaultValue": "all",
+                      "options": [
+                        { "value": "none", "label": "Disable" },
+                        { "value": "all", "label": "Highlight" }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "JewelryCharmsUniqueSection",
+                  "type": "section",
+                  "name": "Unique",
+                  "defaultExpanded": true,
+                  "children": [
+                    {
+                      "id": "CharmsUniqueHighlights",
+                      "type": "select",
+                      "name": "Highlights: Unique Charms",
+                      "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
+                      "defaultValue": "hl-sa",
+                      "options": [
+                        { "value": "none", "label": "Disable" },
+                        { "value": "hl", "label": "Highlight (default color)" },
+                        { "value": "hl-sa", "label": "Highlight (colored Sunder Charms" }
+                      ]
+                    },
+                    {
+                      "id": "CharmsUniqueBigTooltips",
+                      "type": "select",
+                      "name": "Big Tooltips: Unique Charms",
+                      "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
+                      "defaultValue": "0",
+                      "options": [
+                        { "value": "0", "label": "Disable" },
+                        { "value": "1", "label": "Two Lines" },
+                        { "value": "2", "label": "Two Lines + Pick Up" },
+                        { "value": "3", "label": "Three Lines" },
+                        { "value": "4", "label": "Four Lines + Pick Up" },
+                        { "value": "5", "label": "Five Lines" },
+                        { "value": "6", "label": "Custom" }
+                      ]
+                    }
+                  ]
+                }
               ]
-            },
-            {
-              "id": "IsFacetAltPattern",
-              "type": "checkbox",
-              "name": "Alternate pattern: Facets",
-              "description": "Use the alternate rainbow-colored pattern for Facets.",
-              "defaultValue": true
-            },
-            {
-              "id": "IsSunderAltPattern",
-              "type": "checkbox",
-              "name": "Alternate pattern: Sunder Charms",
-              "description": "Use the alternate immunity-colored pattern for Sunder Charms.",
-              "defaultValue": true
             }
           ]
         },
@@ -836,9 +944,31 @@
           "defaultExpanded": false,
           "children": [
             {
+              "id": "QuestEndgameFilterSection",
+              "type": "section",
+              "name": "Filter",
+              "defaultExpanded": true,
+              "children": [
+                {
+                  "id": "IsEssencesVisible",
+                  "type": "checkbox",
+                  "name": "Show Essences",
+                  "description": "Toggle visibility of Essences.",
+                  "defaultValue": true
+                },
+                {
+                  "id": "IsStandardOfHeroesVisible",
+                  "type": "checkbox",
+                  "name": "Show Standard of Heroes",
+                  "description": "Toggle visibility of the Standard of Heroes.",
+                  "defaultValue": true
+                }
+              ]
+            },
+            {
               "id": "QuestEndgameHighlightsSection",
               "type": "section",
-              "name": "Highlights",
+              "name": "Highlight",
               "defaultExpanded": true,
               "children": [
                 {
@@ -849,8 +979,8 @@
                   "defaultValue": "xhc",
                   "options": [
                     { "value": "none", "label": "Disable" },
-                    { "value": "all", "label": "Highlight all" },
-                    { "value": "xhc", "label": "Highlight, exclude Cube" }
+                    { "value": "all", "label": "All" },
+                    { "value": "xhc", "label": "All except Cube" }
                   ]
                 },
                 {
@@ -861,8 +991,8 @@
                   "defaultValue": "all",
                   "options": [
                     { "value": "none", "label": "Disable" },
-                    { "value": "all",  "label": "Highlight" },
-                    { "value": "xsh",  "label": "Highlight, exclude Standard of Heroes" }
+                    { "value": "all",  "label": "All" },
+                    { "value": "xsh",  "label": "All except Standard of Heroes" }
                   ]
                 }
               ]
@@ -872,7 +1002,6 @@
               "type": "section",
               "name": "Big Tooltips",
               "defaultExpanded": true,
-              "visible": [ "value", "IsBigTooltipsEnabled" ],
               "children": [
                 {
                   "id": "BigTooltipQuestItems",
@@ -880,7 +1009,6 @@
                   "name": "Quest Items",
                   "description": "Enable Big Tooltips for Quest Items.",
                   "defaultValue": "3",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -897,7 +1025,6 @@
                   "name": "Essences",
                   "description": "Enable Big Tooltips for Essences.",
                   "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -914,7 +1041,6 @@
                   "name": "Token of Absolution",
                   "description": " on Tokens of Absolution on the ground.",
                   "defaultValue": "3",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -931,7 +1057,6 @@
                   "name": "Pandemonium Keys",
                   "description": "Enable Big Tooltips for Keys of Terror/Hate/Destruction.",
                   "defaultValue": "3",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -948,7 +1073,6 @@
                   "name": "Pandemonium Organs",
                   "description": "Enable Big Tooltips for Über Organs. ",
                   "defaultValue": "3",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -965,82 +1089,6 @@
                   "name": "Standard of Heroes",
                   "description": "Enable Big Tooltips for the Standard of Heroes.",
                   "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
-                  "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "ShouldHideStandardOfHeroes",
-              "type": "checkbox",
-              "name": "Hide Standard of Heroes",
-              "description": "Hide the Standard of Heroes. Overrides the Highlights and Big Tooltips settings above.",
-              "defaultValue": true
-            }
-          ]
-        },
-        {
-          "id": "BigTooltipsSection",
-          "type": "section",
-          "name": "Big Tooltips",
-          "defaultExpanded": false,
-          "children": [
-            {
-              "id": "BigTooltipsJewelrySection",
-              "type": "section",
-              "name": "Jewelry",
-              "defaultExpanded": false,
-              "visible": ["value", "IsBigTooltipsEnabled"],
-              "children": [
-                {
-                  "id": "BigTooltipGems",
-                  "type": "select",
-                  "name": "Gems",
-                  "description": "Enable Big Tooltips for Gems.",
-                  "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
-                  "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
-                  ]
-                },
-                {
-                  "id": "BigTooltipFacets",
-                  "type": "select",
-                  "name": "Facets",
-                  "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels. Recommended: Disable or Two Lines + Pick Up.",
-                  "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
-                  "options": [
-                    { "value": "0", "label": "Disable" },
-                    { "value": "1", "label": "Two Lines" },
-                    { "value": "2", "label": "Two Lines + Pick Up" },
-                    { "value": "3", "label": "Three Lines" },
-                    { "value": "4", "label": "Four Lines + Pick Up" },
-                    { "value": "5", "label": "Five Lines" },
-                    { "value": "6", "label": "Custom" }
-                  ]
-                },
-                {
-                  "id": "BigTooltipUniqueCharms",
-                  "type": "select",
-                  "name": "Unique Charms",
-                  "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
-                  "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
