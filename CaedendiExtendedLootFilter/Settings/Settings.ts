@@ -23,9 +23,9 @@ export abstract class Settings {
     },
     // Runes
     runes: {
-      isEnabled:         config.IsRunesSectionEnabled   as boolean,
-      shouldHideAffix:   config.ShouldHideRuneAffix     as boolean,
-      shouldAddNumber:   config.ShouldAddRuneNumbers    as boolean,
+      isEnabled:         config.IsRunesSectionEnabled as boolean,
+      shouldHideAffix:   config.ShouldHideRuneAffix   as boolean,
+      shouldAddNumber:   config.ShouldAddRuneNumbers  as boolean,
       low: {
          isVisible:      config.ShouldShowRunesLow as boolean,
          highlight:      config.RunesLowHighlight  as string,
@@ -61,34 +61,38 @@ export abstract class Settings {
     },
     // Jewelry
     jewelry: {
-      gems:   config.Gems   as string,
-      jewels: config.Jewels as string,
-      charms: config.Charms as string,
-      isFacetAltPatternEnabled:  config.IsFacetAltPattern  as boolean,
-      isSunderAltPatternEnabled: config.IsSunderAltPattern as boolean,
+      gems: {
+        isHighlightEnabled:  config.JewelryGemsHighlight   as boolean,
+        filter:              config.JewelryGemsFilter      as string,
+        bigTooltip:          config.JewelryGemsBigTooltips as number as EBigTooltipSetting,
+      },
+      facets: {
+        highlight:  config.FacetsHighlights as string,
+        bigTooltip: config.FacetsBigTooltips as number as EBigTooltipSetting,
+      },
+      charms: {
+        isHighlightMagicEnabled: config.JewelryCharmsMagicHighlight    as string,
+        highlightUnique:         config.JewelryCharmsUniqueHighlight   as string,
+        bigTooltipUnique:        config.JewelryCharmsUniqueBigTooltips as number as EBigTooltipSetting,
+      },
     },
     // Quest & Endgame
     questEndgame: {
+      filter: {
+        shouldShowEssences: config.IsEssencesVisible         as boolean,
+        shouldShowStandard: config.IsStandardOfHeroesVisible as boolean,
+      },
       highlights: {
         quest:   config.Quest   as string,
         endgame: config.Endgame as string,
       },
-    bigTooltips: {
+      bigTooltips: {
         questItems: config.BigTooltipQuestItems as number as EBigTooltipSetting,
         essences:   config.BigTooltipEssences   as number as EBigTooltipSetting,
         tokens:     config.BigTooltipTokens     as number as EBigTooltipSetting,
         keys:       config.BigTooltipKeys       as number as EBigTooltipSetting,
         organs:     config.BigTooltipOrgans     as number as EBigTooltipSetting,
         standard:   config.BigTooltipStandard   as number as EBigTooltipSetting,
-      },
-      shouldHideStandard: config.ShouldHideStandardOfHeroes as boolean,
-    },
-    // Big Tooltips
-    bigTooltips: {
-      jewelry: {
-        gemsSetting:         config.BigTooltipGems         as number as EBigTooltipSetting,
-        facetsSetting:       config.BigTooltipFacets       as number as EBigTooltipSetting,
-        uniqueCharmsSetting: config.BigTooltipUniqueCharms as number as EBigTooltipSetting,
       },
     },
     // Stats & Modifiers
@@ -117,7 +121,7 @@ export abstract class Settings {
     },
     // Filter Settings
     settings: {
-      highlightCharacter: config.HighlightCharacter    as string,
+      highlightCharacter: config.HighlightCharacter as string,
       highlightColor:     ColorConstants.getColorByCode(config.HighlightColor as string),
       hidden:             CharConstants.space.repeat(config.HiddenItemTooltipSize as number),
     },

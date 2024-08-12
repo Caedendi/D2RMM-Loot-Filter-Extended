@@ -17,6 +17,9 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   // - gem name (Ruby)
   // - custom
   public applyFilter(): void {
+    if (Settings.filter.jewelry.gems.filter === SettingsConstants.hide)
+      return;
+
     switch (Settings.filter.jewelry.gems) {
       case SettingsConstants.disabled:
         return;

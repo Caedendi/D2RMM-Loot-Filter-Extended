@@ -1,8 +1,9 @@
 import { CharConstants } from "../../Constants/CharConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
 
 export class D2Color {
   /**
-   * code
+   * color code
    */
   private readonly _code: string;
   public get code(): string {
@@ -10,7 +11,7 @@ export class D2Color {
   }
 
   constructor(code: string) {
-    this._code = code;
+    this._code = code !== SettingsConstants.disabled ? code : CharConstants.empty;
   }
 
   public equals(color: D2Color): boolean {

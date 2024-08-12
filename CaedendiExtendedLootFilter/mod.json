@@ -191,11 +191,11 @@
                   "id": "RunesLowColorHighlight",
                   "type": "select",
                   "name": "Highlight Color",
-                  "description": "",
+                  "description": "Color of the highlight patterns for Low Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesLow"], ["neq", ["value", "RunesLowHighlight"], "none"]],
-                  "defaultValue": "",
+                  "defaultValue": "none",
                   "options": [
-                    { "value":  "", "label": "Default" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -226,11 +226,11 @@
                   "id": "RunesLowColorName",
                   "type": "select",
                   "name": "Name Color",
-                  "description": "",
+                  "description": "Color of the name for Low Runes.",
                   "visible": ["value", "ShouldShowRunesLow"],
                   "defaultValue": "8",
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -261,11 +261,11 @@
                   "id": "RunesLowColorNumber",
                   "type": "select",
                   "name": "Number Color",
-                  "description": "",
+                  "description": "Color of the number for Low Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesLow"], ["value", "ShouldAddRuneNumbers"]],
                   "defaultValue": "8",
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -343,11 +343,11 @@
                   "id": "RunesLowMidColorHighlight",
                   "type": "select",
                   "name": "Highlight Color",
-                  "description": "",
+                  "description": "Color of the highlight patterns for Low-Mid Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesLowMid"], ["neq", ["value", "RunesLowMidHighlight"], "none"]],
-                  "defaultValue": "",
+                  "defaultValue": "none",
                   "options": [
-                    { "value":  "", "label": "Default" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -378,11 +378,11 @@
                   "id": "RunesLowMidColorName",
                   "type": "select",
                   "name": "Name Color",
-                  "description": "",
+                  "description": "Color of the name for Low-Mid Runes.",
                   "visible": ["value", "ShouldShowRunesLowMid"],
                   "defaultValue": "8",
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -413,11 +413,11 @@
                   "id": "RunesLowMidColorNumber",
                   "type": "select",
                   "name": "Number Color",
-                  "description": "",
+                  "description": "Color of the number for Low-Mid Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesLowMid"], ["value", "ShouldAddRuneNumbers"]],
                   "defaultValue": "8",
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -495,11 +495,11 @@
                   "id": "RunesMidColorHighlight",
                   "type": "select",
                   "name": "Highlight Color",
-                  "description": "",
+                  "description": "Color of the highlight patterns for Mid Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesMid"], ["neq", ["value", "RunesMidHighlight"], "none"]],
-                  "defaultValue": "",
+                  "defaultValue": "none",
                   "options": [
-                    { "value":  "", "label": "Default" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -530,11 +530,11 @@
                   "id": "RunesMidColorName",
                   "type": "select",
                   "name": "Name Color",
-                  "description": "",
+                  "description": "Color of the name for Mid Runes.",
                   "visible": ["value", "ShouldShowRunesMid"],
                   "defaultValue": ";",
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -565,11 +565,11 @@
                   "id": "RunesMidColorNumber",
                   "type": "select",
                   "name": "Number Color",
-                  "description": "",
+                  "description": "Color of the number for Mid Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesMid"], ["value", "ShouldAddRuneNumbers"]],
                   "defaultValue": ";",
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -647,11 +647,11 @@
                   "id": "RunesHighColorHighlight",
                   "type": "select",
                   "name": "Highlight Color",
-                  "description": "",
+                  "description": "Color of the highlight patterns for High Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesHigh"], ["neq", ["value", "RunesHighHighlight"], "none"]],
                   "defaultValue": ";",
                   "options": [
-                    { "value":  "", "label": "Default" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -682,11 +682,11 @@
                   "id": "RunesHighColorName",
                   "type": "select",
                   "name": "Name Color",
-                  "description": "",
+                  "description": "Color of the name for High Runes.",
                   "visible": ["value", "ShouldShowRunesHigh"],
                   "defaultValue": ";",
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -717,11 +717,11 @@
                   "id": "RunesHighColorNumber",
                   "type": "select",
                   "name": "Number Color",
-                  "description": "",
+                  "description": "Color of the number for High Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesHigh"], ["value", "ShouldAddRuneNumbers"]],
                   "defaultValue": ";",
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -785,21 +785,8 @@
                   "id": "JewelryGemsFilter",
                   "type": "select",
                   "name": "Filter",
-                  "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
+                  "description": "Set filtering for Gems. [CSTM-GEM1] and [CSTM-GEM2]",
                   "defaultValue": "none",
-                  "options": [
-                    { "value": "none",     "label": "Disable" },
-                    { "value": "flawless", "label": "Hide Chipped, Flawed & regular" },
-                    { "value": "perfect",  "label": "Hide Chipped, Flawed, regular & Flawless" },
-                    { "value": "hide",     "label": "Hide all" }
-                  ]
-                },
-                {
-                  "id": "JewelryGemsFilter",
-                  "type": "select",
-                  "name": "Filter",
-                  "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
-                  "defaultValue": "all",
                   "options": [
                     { "value": "none",     "label": "Disable" },
                     { "value": "flawless", "label": "Show only Flawless and Perfect Gems" },
@@ -809,20 +796,18 @@
                 },
                 {
                   "id": "JewelryGemsHighlight",
-                  "type": "select",
+                  "type": "checkbox",
                   "name": "Highlight",
-                  "description": "Customize Gems. [CSTM-GEM1] and [CSTM-GEM2]",
-                  "defaultValue": "all",
-                  "options": [
-                    { "value": "none",     "label": "Disable" },
-                    { "value": "all",      "label": "Enable" }
-                  ]
+                  "description": "Enable highlighting for Gems. [CSTM-GEM1] and [CSTM-GEM2]",
+                  "visible": ["neq", ["value", "JewelryGemsFilter"], "hide"],
+                  "defaultValue": true
                 },
                 {
                   "id": "JewelryGemsBigTooltips",
                   "type": "select",
                   "name": "Big Tooltips",
                   "description": "Enable Big Tooltips for Gems.",
+                  "visible": ["neq", ["value", "JewelryGemsFilter"], "hide"],
                   "defaultValue": "0",
                   "options": [
                     { "value": "0", "label": "Disable" },
@@ -839,7 +824,7 @@
             {
               "id": "JewelryJewelsSection",
               "type": "section",
-              "name": "Jewels",
+              "name": "Facets",
               "defaultExpanded": true,
               "children": [
                 {
@@ -849,9 +834,9 @@
                   "description": "Customize Jewels. Currently identified Facets only; I have not yet found a good way to customize unidentified/Magic/Rare Jewels. [CSTM-JWL]",
                   "defaultValue": "rainbow",
                   "options": [
-                    { "value": "none", "label": "Disable" },
-                    { "value": "highlight", "label": "Facets: default color" },
-                    { "value": "rainbow", "label": "Facets: rainbow pattern" }
+                    { "value": "none",      "label": "Disable" },
+                    { "value": "highlight", "label": "Enable" },
+                    { "value": "rainbow",   "label": "Rainbow pattern" }
                   ]
                 },
                 {
@@ -859,7 +844,7 @@
                   "type": "select",
                   "name": "Big Tooltips",
                   "description": "Enable Big Tooltips for Facets. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Jewels. Recommended: Disable or Two Lines + Pick Up.",
-                  "defaultValue": "0",
+                  "defaultValue": "3",
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -879,58 +864,38 @@
               "defaultExpanded": true,
               "children": [
                 {
-                  "id": "JewelryCharmsMagicSection",
-                  "type": "section",
-                  "name": "Magic",
-                  "defaultExpanded": true,
-                  "children": [
-                    {
-                      "id": "CharmsMagicHighlights",
-                      "type": "select",
-                      "name": "Highlights",
-                      "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
-                      "defaultValue": "all",
-                      "options": [
-                        { "value": "none", "label": "Disable" },
-                        { "value": "all", "label": "Highlight" }
-                      ]
-                    }
+                  "id": "JewelryCharmsMagicHighlight",
+                  "type": "checkbox",
+                  "name": "Highlight Unidentified & Magic",
+                  "description": "Enable highlighting for unidentified and magic Small, Large and Grand Charms.",
+                  "defaultValue": true
+                },
+                {
+                  "id": "JewelryCharmsUniqueHighlight",
+                  "type": "select",
+                  "name": "Highlight Unique",
+                  "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
+                  "defaultValue": "hl-sa",
+                  "options": [
+                    { "value": "none",  "label": "Disable" },
+                    { "value": "hl",    "label": "Enable (default color)" },
+                    { "value": "hl-sa", "label": "Enable (colored Sunder Charms)" }
                   ]
                 },
                 {
-                  "id": "JewelryCharmsUniqueSection",
-                  "type": "section",
-                  "name": "Unique",
-                  "defaultExpanded": true,
-                  "children": [
-                    {
-                      "id": "CharmsUniqueHighlights",
-                      "type": "select",
-                      "name": "Highlights: Unique Charms",
-                      "description": "Customize Magic, Unique and Sunder Charms. Highlight (un)identified Charms by coloring \"Charm\" red. The Small/Large/Grand part stays in its original color to distinguish rarity.",
-                      "defaultValue": "hl-sa",
-                      "options": [
-                        { "value": "none", "label": "Disable" },
-                        { "value": "hl", "label": "Highlight (default color)" },
-                        { "value": "hl-sa", "label": "Highlight (colored Sunder Charms" }
-                      ]
-                    },
-                    {
-                      "id": "CharmsUniqueBigTooltips",
-                      "type": "select",
-                      "name": "Big Tooltips: Unique Charms",
-                      "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms.. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
-                      "defaultValue": "0",
-                      "options": [
-                        { "value": "0", "label": "Disable" },
-                        { "value": "1", "label": "Two Lines" },
-                        { "value": "2", "label": "Two Lines + Pick Up" },
-                        { "value": "3", "label": "Three Lines" },
-                        { "value": "4", "label": "Four Lines + Pick Up" },
-                        { "value": "5", "label": "Five Lines" },
-                        { "value": "6", "label": "Custom" }
-                      ]
-                    }
+                  "id": "JewelryCharmsUniqueBigTooltips",
+                  "type": "select",
+                  "name": "Big Tooltips: Unique Charms",
+                  "description": "Enable Big Tooltips for Anni, Torch, Gheed's and Sunder Charms. Toggling iLvl exclusion for Big Tooltips in the Item Stats & Modifiers section while having this enabled will disable iLvls for all Charms. Recommended: Disable or Two Lines + Pick Up.",
+                  "defaultValue": "3",
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Two Lines" },
+                    { "value": "2", "label": "Two Lines + Pick Up" },
+                    { "value": "3", "label": "Three Lines" },
+                    { "value": "4", "label": "Four Lines + Pick Up" },
+                    { "value": "5", "label": "Five Lines" },
+                    { "value": "6", "label": "Custom" }
                   ]
                 }
               ]
@@ -1150,7 +1115,7 @@
                   "id": "IsShowItemQualityEnabled",
                   "type": "checkbox",
                   "name": "Enable",
-                  "description": "",
+                  "description": "Enable showing the Equipment Quality tag in equipment tooltips.",
                   "defaultValue": false
                 },
                 {
@@ -1238,10 +1203,10 @@
                   "type": "select",
                   "name": "Color Inferior items",
                   "description": "Gives Inferior items a custom tooltip color",
-                  "defaultValue": "",
+                  "defaultValue": "Set the color for Inferior equipment.",
                   "visible": ["value", "IsSupInferiorPrefixesEnabled"],
                   "options": [
-                    { "value":  "", "label": "Disable" },
+                    { "value": "none", "label": "Disable" },
                     { "value": "5", "label": "Gray" },
                     { "value": "6", "label": "Black" }
                   ]
@@ -1327,7 +1292,7 @@
               "description": "Color used for the highlight character for items that have highlight patterns.",
               "defaultValue": "1",
               "options": [
-                { "value": "", "label": "None" },
+                { "value": "none", "label": "None" },
                 { "value": "0", "label": "White" },
                 { "value": "=", "label": "White Smoke" },
                 { "value": "I", "label": "Dim Gray" },
