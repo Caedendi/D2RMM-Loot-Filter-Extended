@@ -17,26 +17,21 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   // - gem name (Ruby)
   // - custom
   public applyFilter(): void {
-    if (Settings.filter.jewelry.gems.filter === SettingsConstants.hide)
-      return;
-
-    switch (Settings.filter.jewelry.gems) {
-      case SettingsConstants.disabled:
-        return;
+    switch (Settings.filter.jewelry.gems.filter) {
       case SettingsConstants.all: // show all
-        this.highlightGems(GemConstants.chippedFlawedRegularGems);
-        this.highlightGems(GemConstants.flawlessGems);
-        this.highlightGems(GemConstants.perfectGems);
+        this.upsertGems(GemConstants.chippedFlawedRegularGems);
+        this.upsertGems(GemConstants.flawlessGems);
+        this.upsertGems(GemConstants.perfectGems);
         return;
       case "flawless": // hide chipped/flawed/regular gems
         this.hideGems(GemConstants.chippedFlawedRegularGems);
-        this.highlightGems(GemConstants.flawlessGems);
-        this.highlightGems(GemConstants.perfectGems);
+        this.upsertGems(GemConstants.flawlessGems);
+        this.upsertGems(GemConstants.perfectGems);
         return;
       case "perfect": // hide chipped/flawed/regular/flawless gems
         this.hideGems(GemConstants.chippedFlawedRegularGems);
         this.hideGems(GemConstants.flawlessGems);
-        this.highlightGems(GemConstants.perfectGems);
+        this.upsertGems(GemConstants.perfectGems);
         return;
       case "hide": // hide chipped/flawed/regular/flawless gems
         this.hideGems(GemConstants.chippedFlawedRegularGems);
@@ -50,7 +45,7 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
     this.collection.upsertMultipleHidden(gems.map(gem => gem.key));
   }
 
-  protected highlightGems(gems: Gem[]): void {
-    this.collection.upsertMultiple(ItemEntry.fromGems(gems));
+  protected upsertGems(gems: Gem[]): void {
+    this.collection.upsertMultipleIfHasHighlightOrBigTooltip(ItemEntry.fromGems(gems, Settings.filter.jewelry.gems.isHighlightEnabled, Settings.filter.jewelry.gems.bigTooltip));
   }
 }

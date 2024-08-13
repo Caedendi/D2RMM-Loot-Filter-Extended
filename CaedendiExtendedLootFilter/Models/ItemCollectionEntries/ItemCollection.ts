@@ -1,5 +1,3 @@
-import { CharConstants } from "../../Constants/CharConstants";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { ItemEntry } from "./ItemEntry";
 
 export class ItemCollection {
@@ -31,9 +29,7 @@ export class ItemCollection {
   }
 
   public upsertMultiple(array: ItemEntry[]): void {
-    array.forEach(entry => {
-      this.upsert(entry);
-    });
+    array.forEach(entry => this.upsert(entry));
   }
 
   public upsertHidden(key: string): void {
@@ -45,55 +41,25 @@ export class ItemCollection {
   }
 
   public upsertMultipleHidden(keys: string[]): void {
-    keys.forEach(key => {
-      this.upsertHidden(key);
-    });
+    keys.forEach(key => this.upsertHidden(key));
+  }
+
+  public upsertIfHasHighlightOrBigTooltip(entry: ItemEntry): void {
+    if (entry.highlightPattern == null && entry.bigTooltip == null)
+      return;
+
+    this.upsert(entry);
+  }
+
+  public upsertMultipleIfHasHighlightOrBigTooltip(array: ItemEntry[]): void {
+    array.forEach(entry => this.upsertIfHasHighlightOrBigTooltip(entry));
   }
 
   public upsertCollection(collection: ItemCollection): void {
     this.upsertMultiple(collection.entries);
   }
 
-  // TODO: remove?
-  private findEntry(key: string): ItemEntry {
-    return this.entries.find(entry => entry.key === key);
-  }
-
-  private findEntryByIndex(index: number): ItemEntry {
-    return this.entries[index];
-  }
-
   private findIndex(key: string): number {
     return this.entries.findIndex(entry => entry.key === key);
   }
-
-
-  // TODO: REMOVE
-
-  
-  // public addBigTooltipToAllEntries(setting: BigTooltipSetting) {
-  //   this.entries.forEach(entry => entry.addBigTooltip(setting));
-  // }
-
-  // public addBigTooltipToEntries(keys: string[], setting: BigTooltipSetting) {
-  //   keys.forEach(key => this.addBigTooltipToEntry(key, setting));
-  // }
-  
-  // public addBigTooltipToEntry(key: string, setting: BigTooltipSetting) {
-  //   let index = this.findIndex(key);
-  //   if (index < 0) { 
-  //     // push new entry without name but with big tooltip
-  //     let newEntry = new ItemEntry(key, CharConstants.empty);
-  //     newEntry.addBigTooltip(setting);
-  //     this.entries.push(newEntry);
-  //     return;
-  //   }
-
-  //   let entry = this.findEntryByIndex(index);
-  //   if (entry.isHidden())
-  //     return;
-
-  //   entry.addBigTooltip(setting);
-  //   // this.entries[index].addBigTooltip(setting);
-  // }
 }

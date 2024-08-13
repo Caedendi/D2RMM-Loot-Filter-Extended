@@ -14,26 +14,22 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   }
 
   public applyFilter(): void {
-    switch (Settings.filter.jewelry.gems) {
-      case SettingsConstants.disabled:
-        return;
+    switch (Settings.filter.jewelry.gems.filter) {
       case SettingsConstants.all: // show all
         this.highlightGems(this.gems);
         return;
       case "flawless": // hide chipped/flawed/regular gems
-        this.hideGems(this.gems);
-        return;
-      case "perfect": // hide chipped/flawed/regular/flawless gems
-        this.hideGems(this.gems);
+      case "perfect":  // hide chipped/flawed/regular/flawless gems
+        this.hideGems();
         return;
     }
   }
 
-  protected hideGems(gems: Gem[]) {
-    this.collection.upsertMultipleHidden(gems.map<string>(gem => gem.key));
+  protected hideGems() {
+    this.collection.upsertMultipleHidden(this.gems.map<string>(gem => gem.key));
   }
 
   protected highlightGems(gems: Gem[]) {
-    this.collection.upsertMultiple(ItemEntry.fromGems(gems));
+    this.collection.upsertMultipleIfHasHighlightOrBigTooltip(ItemEntry.fromGems(gems, Settings.filter.jewelry.gems.isHighlightEnabled, Settings.filter.jewelry.gems.bigTooltip));
   }
 }

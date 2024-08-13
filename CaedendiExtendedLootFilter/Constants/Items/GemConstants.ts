@@ -5,8 +5,9 @@ import { ColorConstants } from "../Colors/ColorConstants";
 import { SettingsConstants } from "../SettingsConstants";
 import { HighlightConstants } from "./HighlightConstants";
 
-// todo: public protected
 export abstract class GemConstants {
+  // TODO: public/protected properties
+  // TODO: translated gem quality names
   static amethyst = "Amethyst";
   static diamond = "Diamond";
   static emerald = "Emerald";
@@ -34,7 +35,7 @@ export abstract class GemConstants {
 
   // indent for the pick up message if gem highlighting is enabled.
   public static getPickUpMessageIndent(): string {
-    let setting = Settings.filter.jewelry.gems;
+    let setting = Settings.filter.jewelry.gems.filter;
     if (setting === SettingsConstants.all || setting === "flawless" || setting === "perfect")
       return CharConstants.getSpaces(2);
 
@@ -83,10 +84,8 @@ export abstract class GemConstants {
   ];
 
   /**
-   * These gem names also function as affixes that are located in item-nameaffixes.json. The devs for some reason 
-   * decided it would be a good idea to borrow them from there instead of having their own entry in item-names.json.
-   * 
-   * Note: Enabling filtering for these gems will also change for example the "Ruby"-part in a "Ruby Jewel of Fervor".
+   * These gem names are found in item-nameaffixes.json, probably because there's also affixes of the same name. They 
+   * are however separate entries from the affixes, so no idea why the devs thought this makes sense.
    */
   public static gemExceptions: Gem[] = [
     new Gem("gsw", GemConstants.clrDiamond,  GemConstants.diamond),  // Diamond

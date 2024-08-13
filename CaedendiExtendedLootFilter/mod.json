@@ -786,9 +786,9 @@
                   "type": "select",
                   "name": "Filter",
                   "description": "Set filtering for Gems. [CSTM-GEM1] and [CSTM-GEM2]",
-                  "defaultValue": "none",
+                  "defaultValue": "all",
                   "options": [
-                    { "value": "none",     "label": "Disable" },
+                    { "value": "all",     "label": "Show all" },
                     { "value": "flawless", "label": "Show only Flawless and Perfect Gems" },
                     { "value": "perfect",  "label": "Show only Perfect Gems" },
                     { "value": "hide",     "label": "Hide all" }

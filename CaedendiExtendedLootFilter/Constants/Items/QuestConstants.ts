@@ -22,6 +22,8 @@ export abstract class QuestConstants {
     "LamTome", // Lam Esen's Tome
   ];
 
+  public static readonly cube: "box"; // Horadric Cube
+
   public static readonly questWeapons: { key: string, digits: EiLvlDigits }[] = [
     // Act 1
     { key: "leg", digits: EiLvlDigits.Double }, // Wirt's Leg

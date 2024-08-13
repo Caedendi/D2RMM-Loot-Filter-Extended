@@ -46,7 +46,7 @@ export class ItemEntry implements IItemEntry {
    * Highlight pattern
    */
   private _highlightPattern: IHighlight | null;
-  protected get highlightPattern(): IHighlight | null {
+  public get highlightPattern(): IHighlight | null {
     return this._highlightPattern;
   }
   protected set highlightPattern(value: IHighlight) {
@@ -56,7 +56,7 @@ export class ItemEntry implements IItemEntry {
    * Big tooltip
    */
   private _bigTooltip: BigTooltip | null;
-  protected get bigTooltip(): BigTooltip | null {
+  public get bigTooltip(): BigTooltip | null {
     return this._bigTooltip;
   }
   protected set bigTooltip(value: BigTooltip) {
@@ -88,13 +88,13 @@ export class ItemEntry implements IItemEntry {
     return entry;
   }
 
-  // TODO: convert fromGem to Gem.ToItemEntry()
-  public static fromGem(gem: Gem): ItemEntry {
-    return new ItemEntry(gem.key, gem.name, GemConstants.clrName, new SingleHighlight(GemConstants.highlight, gem.color, GemConstants.padding), Settings.bigTooltips.jewelry.gemsSetting);
+  public static fromGem(gem: Gem, hasHighlight: boolean, bigTooltipSetting: EBigTooltipSetting): ItemEntry {
+    let highlight = hasHighlight ? new SingleHighlight(GemConstants.highlight, gem.color, GemConstants.padding) : null;
+    return new ItemEntry(gem.key, null, GemConstants.clrName, highlight, bigTooltipSetting);
   }
 
-  public static fromGems(gems: Gem[]): ItemEntry[] {
-    return gems.map<ItemEntry>(gem => this.fromGem(gem));
+  public static fromGems(gems: Gem[], hasHighlight: boolean, bigTooltipSetting: EBigTooltipSetting): ItemEntry[] {
+    return gems.map<ItemEntry>(gem => this.fromGem(gem, hasHighlight, bigTooltipSetting));
   }
 
   public generateDisplayName(translatedName: string): string {

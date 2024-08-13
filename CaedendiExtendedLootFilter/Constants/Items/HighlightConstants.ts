@@ -44,7 +44,7 @@ export abstract class HighlightConstants {
   static bttPickUpMsg = `${ColorConstants.purple}Pick Up`;
 
   // todo: change 3x10 pattern for all instances if BTT enabled
-  protected static patternXL = Settings.bigTooltips.runes.highRunesSetting == EBigTooltipSetting.Disabled
+  protected static patternXL = Settings.filter.runes.high.bigTooltip == EBigTooltipSetting.Disabled
     ? HighlightConstants.pattern3x10  // ********** ********** **********, or
     : HighlightConstants.pattern2x10; // ********** ********** (with big tooltips)
 
