@@ -1,6 +1,6 @@
 import { DropSoundConstants } from "../Constants/DropSoundConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
 import { Settings } from "../Settings/Settings";
 import { IBuilder } from "./Interfaces/IBuilder";
@@ -13,19 +13,19 @@ export class DropSoundBuilder implements IBuilder {
 
     let soundsFile = D2RMM.readTsv(FileConstants.FILE_SOUNDS_PATH);
 
-    this.modifyDropSoundForRunes(soundsFile);
-    this.modifyDropSoundForQuestItems(soundsFile);
-    this.modifyDropSoundForEssences(soundsFile);
-    this.modifyDropSoundForTokens(soundsFile);
-    this.modifyDropSoundForKeys(soundsFile);
-    this.modifyDropSoundForOrgans(soundsFile);
+    // this.modifyDropSoundForRunes(soundsFile);
+    // this.modifyDropSoundForQuestItems(soundsFile);
+    // this.modifyDropSoundForEssences(soundsFile);
+    // this.modifyDropSoundForTokens(soundsFile);
+    // this.modifyDropSoundForKeys(soundsFile);
+    // this.modifyDropSoundForOrgans(soundsFile);
     this.modifyDropSoundForStandardOfHeroes(soundsFile);
 
     D2RMM.writeTsv(FileConstants.FILE_SOUNDS_PATH, soundsFile);
   }
 
   protected modifyDropSoundForRunes(soundsFile) {
-    RuneConstants.tiers.forEach(tier => {
+    RuneTierConstants.tiers.forEach(tier => {
       if (!tier.isVisible && Settings.dropSounds.shouldExcludeForHidden)
         return;
 
@@ -88,6 +88,8 @@ export class DropSoundBuilder implements IBuilder {
   }
 
   protected modifyDropSoundForStandardOfHeroes(soundsFile) {
+
+    throw new Error("HIT");
     this.modifyDropSoundForMiscItems(soundsFile, ["std"], "flag", Settings.dropSounds.questEndgame.standard);
   }
 
@@ -148,7 +150,11 @@ export class DropSoundBuilder implements IBuilder {
   protected pushNewDropSoundToItems(itemsFilePath: string, itemCodes: string[], dropSound: string) {
     let file = D2RMM.readTsv(itemsFilePath);
 
-    file.rows.forEach((row) => {
+    Object.entries(file.rows).forEach(([index, _]) => {
+
+    });
+
+    file.rows.forEach(row => {
       if (itemCodes.indexOf(row.code) !== -1) {
         row.dropsound = dropSound;
         return;

@@ -9,4 +9,4 @@
 
 import { CaedendiExtendedLootFilterMod } from "./CaedendiExtendedLootFilterMod"
 
-// new CaedendiExtendedLootFilterMod().build();
+new CaedendiExtendedLootFilterMod().build();

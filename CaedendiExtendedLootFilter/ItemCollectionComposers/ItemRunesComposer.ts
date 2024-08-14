@@ -1,4 +1,4 @@
-import { RuneConstants } from "../Constants/Items/RuneConstants";
+import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { RuneItemEntry } from "../Models/ItemCollectionEntries/RuneItemEntry";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
@@ -9,7 +9,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IIt
   }
 
   public applyFilter(): void {
-    RuneConstants.tiers.forEach((tier) => {
+    RuneTierConstants.tiers.forEach((tier) => {
       if (!tier.isVisible) {
         this.collection.upsertMultipleHidden(tier.runes.map<string>(rune => rune.key));
         return;

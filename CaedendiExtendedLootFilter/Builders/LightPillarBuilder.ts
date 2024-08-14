@@ -7,6 +7,7 @@ import { Settings } from "../Settings/Settings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 export class LightPillarBuilder implements IBuilder {
+  protected readonly shouldExcludeForHidden: boolean = Settings.lightPillars.shouldExcludeForHidden;
   public build() {
     if (!Settings.lightPillars.isEnabled) {
       return;
@@ -27,9 +28,8 @@ export class LightPillarBuilder implements IBuilder {
   // runes
   protected pushLightPillarsForRunes() {
     RuneConstants.tiers.forEach(tier => {
-      if (!tier.hasLightPillar || (Settings.lightPillars.shouldExcludeForHidden && !tier.isVisible)) {
+      if (!tier.hasLightPillar || (this.shouldExcludeForHidden && !tier.isVisible))
         return;
-      }
 
       tier.runes.forEach((rune) => {
         this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}rune\\`, `${rune.name.toLowerCase()}_rune`);
@@ -48,7 +48,7 @@ export class LightPillarBuilder implements IBuilder {
   // gems & jewels
   protected pushLightPillarsForGemsJewels() {
     if (!Settings.lightPillars.jewelry.isGemsJewelsEnabled
-      || (Settings.lightPillars.shouldExcludeForHidden && Settings.filter.jewelry.gems.filter === SettingsConstants.hide)) {
+      || (this.shouldExcludeForHidden && Settings.filter.jewelry.gems.filter === SettingsConstants.hide)) {
       return;
     }
 
@@ -64,11 +64,11 @@ export class LightPillarBuilder implements IBuilder {
 
   private getLightPillarGemQualities() {
     let gemQualities = ["perfect_"];
-    if (Settings.filter.jewelry.gems.filter === "perfect" && Settings.lightPillars.shouldExcludeForHidden) {
+    if (Settings.filter.jewelry.gems.filter === "perfect" && this.shouldExcludeForHidden) {
       return gemQualities;
     }
     gemQualities.push("flawless_");
-    if (Settings.filter.jewelry.gems.filter === "flawless" && Settings.lightPillars.shouldExcludeForHidden) {
+    if (Settings.filter.jewelry.gems.filter === "flawless" && this.shouldExcludeForHidden) {
       return gemQualities;
     }
 
@@ -201,7 +201,7 @@ export class LightPillarBuilder implements IBuilder {
   // standard of heroes
   protected pushLightPillarForStandardOfHeroes() {
     if (!Settings.lightPillars.questEndgame.isStandardEnabled
-      || (Settings.lightPillars.shouldExcludeForHidden && !Settings.filter.questEndgame.filter.shouldShowStandard))
+      || (this.shouldExcludeForHidden && !Settings.filter.questEndgame.filter.shouldShowStandard))
       return;
 
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "flag");
