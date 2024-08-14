@@ -5,7 +5,7 @@ import { Rune } from "./Rune";
 
 export class RuneTier {
   /**
-   * tier number
+   * number
    */
   private readonly _number: number;
   public get number(): number {
@@ -21,7 +21,7 @@ export class RuneTier {
   }
 
   /**
-   * isVisible
+   * is visible
    */
   private readonly _isVisible: boolean;
   public get isVisible(): boolean {
@@ -45,7 +45,7 @@ export class RuneTier {
   }
 
   /**
-   * pattern
+   * highlight
    */
   private readonly _highlight: IHighlight | null;
   public get highlight(): IHighlight | null {
@@ -76,16 +76,8 @@ export class RuneTier {
     return this._dropSound;
   }
 
-  /**
-   * isHidden
-   */
-  private readonly _isHidden: boolean = !this.isVisible;
-  public get isHidden(): boolean {
-    return this._isHidden;
-  }
-
   constructor(
-    tier: number,
+    number: number,
     runes: Rune[],
     isVisible: boolean,
     nameColor: D2Color,
@@ -95,7 +87,7 @@ export class RuneTier {
     hasLightPillar: boolean,
     dropSound: string
   ) {
-    this._number = tier;
+    this._number = number;
     this._runes = runes;
     this._isVisible = isVisible;
     this._nameColor = nameColor,

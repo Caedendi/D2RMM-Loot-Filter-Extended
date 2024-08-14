@@ -10,6 +10,8 @@ import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
+// TODO: add inheritance for QuestEndgameItemsComposer, UiComposer and ItemModifiersComposer to remove duplicate code
+
 /**
  * TODO: Endgame: Pandemonium Event Items, Essences & Tokens of Absolution
  */

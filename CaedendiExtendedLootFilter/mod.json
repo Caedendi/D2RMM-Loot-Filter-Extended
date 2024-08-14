@@ -1194,16 +1194,15 @@
                   "visible": ["value", "IsSupInferiorPrefixesEnabled"],
                   "options": [
                     { "value": "plusminus", "label": "Plus/Minus" },
-                    { "value": "supinf", "label": "Sup/Inf" },
-                    { "value": "custom", "label": "Custom" }
+                    { "value": "supinf", "label": "Sup/Inf" }
                   ]
                 },
                 {
                   "id": "InferiorItemsColor",
                   "type": "select",
                   "name": "Color Inferior items",
-                  "description": "Gives Inferior items a custom tooltip color",
-                  "defaultValue": "Set the color for Inferior equipment.",
+                  "description": "Set the color for Inferior equipment.",
+                  "defaultValue": "none",
                   "visible": ["value", "IsSupInferiorPrefixesEnabled"],
                   "options": [
                     { "value": "none", "label": "Disable" },

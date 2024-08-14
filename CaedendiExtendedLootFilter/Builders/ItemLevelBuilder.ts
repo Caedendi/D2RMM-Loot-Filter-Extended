@@ -7,7 +7,8 @@ import { IBuilder } from "./Interfaces/IBuilder";
 
 //  extends ItemBuilderBase implements IItemBuilder
 export class ItemLevelBuilder implements IBuilder {
-  protected readonly isBigTooltipsEnabled: boolean = Settings.filter.bigTooltips.isEnabled;
+  protected readonly shouldHideOnBtt = Settings.filter.statsAndModifiers.itemLevel.shouldHideOnBigTooltips;
+  
   protected readonly weaponsExclusions: string[] = [];
   protected readonly miscExclusions: string[] = [];
 
@@ -26,9 +27,7 @@ export class ItemLevelBuilder implements IBuilder {
   private setWeaponsExclusions(): void {
     this.weaponsExclusions.push("tpot"); // always exclude throwing pots
 
-    if ( !Settings.filter.bigTooltips.isEnabled 
-      || !Settings.filter.bigTooltips.shouldHideIlvl 
-      ||  Settings.filter.bigTooltips.questEndgame.questItems == EBigTooltipSetting.Disabled)
+    if (!this.shouldHideOnBtt || Settings.filter.questEndgame.bigTooltips.questItems == EBigTooltipSetting.Disabled)
       return;
 
     // exclude quest weapons with iLvls if Big Tooltips is enabled
@@ -45,16 +44,16 @@ export class ItemLevelBuilder implements IBuilder {
   }
     
   protected setMiscExclusions(): void {
-    if (!Settings.filter.bigTooltips.isEnabled || !Settings.filter.bigTooltips.shouldHideIlvl)
+    if (!this.shouldHideOnBtt)
       return;
     
-    if (Settings.filter.bigTooltips.jewelry.facetsSetting != EBigTooltipSetting.Disabled)
+    if (Settings.filter.jewelry.facets.bigTooltip != EBigTooltipSetting.Disabled)
       this.miscExclusions.push(JewelryConstants.jewelId);
-    if (Settings.filter.bigTooltips.jewelry.uniqueCharmsSetting != EBigTooltipSetting.Disabled)
+    if (Settings.filter.jewelry.charms.bigTooltipUnique != EBigTooltipSetting.Disabled)
       CharmConstants.charmIds.forEach(charm => this.miscExclusions.push(charm));
 
-    // TODO: check if this has ilvl and correct here + in quest item naming
-    // this.upsert(miscCol, "vip", CharConstants.empty); // amulet of the viper // todo: 
+    // TODO: check charms ilvls with BTT for uniques and magics
+    // TODO: add warning to charms BTT description
   }
 
   protected enableForWeapons() {
@@ -66,31 +65,30 @@ export class ItemLevelBuilder implements IBuilder {
   }
 
   protected enableForWeaponsArmor(path: string, exclusions: string[]) {
-    const fileWeapons = D2RMM.readTsv(path);
+    const file = D2RMM.readTsv(path);
 
     // in these files, all entries need ShowLevel to be set to 1, except those in the exclusions list.
-    fileWeapons.rows.forEach((row) => {
-      if (exclusions.includes(row.code) || exclusions.includes(row.type)) {
+    file.rows.forEach(row => {
+      if (exclusions.includes(row.code) || exclusions.includes(row.type))
         return;
-      }
+
       row.ShowLevel = "1";
     });
 
-    D2RMM.writeTsv(path, fileWeapons);
+    D2RMM.writeTsv(path, file);
   }
 
   protected enableForMiscItems() {
-    const fileMisc = D2RMM.readTsv(FileConstants.FILE_MISC_PATH);
+    const file = D2RMM.readTsv(FileConstants.FILE_MISC_PATH);
 
     // in this file, we only want the entries matching JewelryConstants.iLvlJewelry to have their ShowLevel be set to 1.
     // matching JewelryConstants.iLvlJewelry against the exclusions list makes the target list even smaller.
     let misc = JewelryConstants.iLvlJewelry.filter(item => !this.miscExclusions.includes(item));
-    fileMisc.rows.forEach((row) => {
-      if (misc.includes(row.code)) {
+    file.rows.forEach((row) => {
+      if (misc.includes(row.code))
         row.ShowLevel = "1";
-      }
     });
 
-    D2RMM.writeTsv(FileConstants.FILE_MISC_PATH, fileMisc);
+    D2RMM.writeTsv(FileConstants.FILE_MISC_PATH, file);
   }
 }

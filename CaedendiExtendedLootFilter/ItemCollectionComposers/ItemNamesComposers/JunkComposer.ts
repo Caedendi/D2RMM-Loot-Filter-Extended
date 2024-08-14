@@ -4,8 +4,8 @@ import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { D2Color } from "../../Models/Colors/D2Color";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
-import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { SingleHighlight } from "../../Models/Highlights/SingleHighlight";
+import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
@@ -97,6 +97,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     this.collection.upsert(new ItemEntry(key, null, this.nameColor, new SingleHighlight(CharConstants.o, ColorConstants.gray, HighlightConstants.padding1)));
   }
 
+  // TODO: add option for highlight?
   protected applyKeys(): void {
     if (Settings.filter.junk.keys == SettingsConstants.hide)
         this.collection.upsertHidden("key");

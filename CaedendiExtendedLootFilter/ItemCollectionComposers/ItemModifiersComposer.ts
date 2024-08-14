@@ -1,9 +1,13 @@
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
+import { QuestConstants } from "../Constants/Items/QuestConstants";
+import { IHighlight } from "../Models/Highlights/Interfaces/IHighlight";
 import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
+import { QuestEndgameSettings } from "../Settings/QuestEndgameSettings";
 import { Settings } from "../Settings/Settings";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
+
+// TODO: add inheritance for QuestEndgameItemsComposer, UiComposer and ItemModifiersComposer to remove duplicate code
 
 /**
  * Builder for ItemModifiers.json. 
@@ -16,21 +20,18 @@ export class ItemModifiersComposer extends ItemCollectionComposerBase implements
   }
 
   public applyFilter() {
-    let ice = "ice";
-    let tr2 = "tr2";
-
-    switch (Settings.filter.questEndgame.quest) {
-      case SettingsConstants.disabled: // no change
-        return;
-      case SettingsConstants.all: // highlight all
-      case "xhc": // exclude horadric cube
-        this.collection.upsert(this.createQuestEntry(ice, "Malah's Potion"));
-        this.collection.upsert(this.createQuestEntry(tr2, "Scroll of Resistance"));
-        return;
-    }
+    this.applyQuestItems();
   }
 
-  private createQuestEntry(key: string, name: string): ItemEntry {
-    return new ItemEntry(key, name, HighlightConstants.uniqueColorName, HighlightConstants.questPattern, Settings.bigTooltips.questEndgame.questItems);
+  protected applyQuestItems(): void {
+    QuestConstants.questItemExceptionsAct5.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlight.quest));
+  }
+
+  private upsertQuestItem(key: string, highlight: IHighlight | null) {
+    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, Settings.filter.questEndgame.bigTooltips.questItems));
+  }
+
+  private upsertEntry(entry: ItemEntry): void {
+    this.collection.upsertIfHasHighlightOrBigTooltip(entry);
   }
 }

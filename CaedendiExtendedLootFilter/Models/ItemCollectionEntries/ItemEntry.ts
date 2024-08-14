@@ -1,4 +1,3 @@
-import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { GemConstants } from "../../Constants/Items/GemConstants";
 import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
@@ -9,6 +8,7 @@ import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 import { SingleHighlight } from "../Highlights/SingleHighlight";
 import { BigTooltip } from "../BigTooltip";
+import { CharConstants } from "../../Constants/CharConstants";
 
 export class ItemEntry implements IItemEntry {
   /**
@@ -64,10 +64,10 @@ export class ItemEntry implements IItemEntry {
   }
 
   constructor(
-    key: string, 
-    newName?: string | null, 
-    nameColor?: D2Color | null, 
-    highlight?: IHighlight | null, 
+    key: string,
+    newName?: string | null,
+    nameColor?: D2Color | null,
+    highlight?: IHighlight | null,
     bigTooltipSetting?: EBigTooltipSetting | null
   ) {
     this._key = key;
@@ -102,6 +102,7 @@ export class ItemEntry implements IItemEntry {
       return Settings.filter.settings.hidden;
 
     let displayName = this.applyNewName(translatedName);
+    displayName = this.applyNameColor(displayName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyBigTooltip(displayName);
     displayName = this.removeRedundantColorCodes(displayName);
@@ -110,21 +111,25 @@ export class ItemEntry implements IItemEntry {
   }
 
   protected applyNewName(translatedName: string) {
-    return this._newName === CharConstants.empty ? translatedName : `${this._nameColor}${this._newName}`;
+    return this.newName === CharConstants.empty ? translatedName : this.newName;
+  }
+
+  protected applyNameColor(displayName: string) {
+    return `${this.nameColor}${displayName}`;
   }
 
   protected applyHighlightPattern(displayName: string): string {
-    if (this._highlightPattern == null)
+    if (this.highlightPattern == null)
       return displayName;
 
-    return this._highlightPattern.apply(displayName);
+    return this.highlightPattern.apply(displayName);
   }
 
   protected applyBigTooltip(displayName: string): string {
-    if (this._bigTooltip == null)
+    if (this.bigTooltip == null)
       return displayName;
 
-    return this._bigTooltip.apply(displayName, this.highlightPattern);
+    return this.bigTooltip.apply(displayName, this.highlightPattern);
   }
 
   // TODO: test

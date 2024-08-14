@@ -1,6 +1,6 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
+import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { LightPillarConstants } from "../Constants/LightPillarConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { Settings } from "../Settings/Settings";
@@ -26,8 +26,8 @@ export class LightPillarBuilder implements IBuilder {
 
   // runes
   protected pushLightPillarsForRunes() {
-    RuneTierConstants.tiers.forEach(tier => {
-      if (!tier.hasLightPillar || (Settings.lightPillars.shouldExcludeForHidden && tier.isHidden)) {
+    RuneConstants.tiers.forEach(tier => {
+      if (!tier.hasLightPillar || (Settings.lightPillars.shouldExcludeForHidden && !tier.isVisible)) {
         return;
       }
 
@@ -48,13 +48,13 @@ export class LightPillarBuilder implements IBuilder {
   // gems & jewels
   protected pushLightPillarsForGemsJewels() {
     if (!Settings.lightPillars.jewelry.isGemsJewelsEnabled
-      || (Settings.lightPillars.shouldExcludeForHidden && Settings.filter.jewelry.gems === SettingsConstants.disabled)) {
+      || (Settings.lightPillars.shouldExcludeForHidden && Settings.filter.jewelry.gems.filter === SettingsConstants.hide)) {
       return;
     }
 
     let gemQualities = this.getLightPillarGemQualities();
 
-    let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"]; // "saphire": not a typo
+    let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"]; // "saphire" is not a typo
     gemQualities.forEach((quality) => {
       gemTypes.forEach((type) => {
         this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
@@ -64,11 +64,11 @@ export class LightPillarBuilder implements IBuilder {
 
   private getLightPillarGemQualities() {
     let gemQualities = ["perfect_"];
-    if (Settings.filter.jewelry.gems === "perfect" && Settings.lightPillars.shouldExcludeForHidden) {
+    if (Settings.filter.jewelry.gems.filter === "perfect" && Settings.lightPillars.shouldExcludeForHidden) {
       return gemQualities;
     }
     gemQualities.push("flawless_");
-    if (Settings.filter.jewelry.gems === "flawless" && Settings.lightPillars.shouldExcludeForHidden) {
+    if (Settings.filter.jewelry.gems.filter === "flawless" && Settings.lightPillars.shouldExcludeForHidden) {
       return gemQualities;
     }
 
@@ -81,20 +81,16 @@ export class LightPillarBuilder implements IBuilder {
       return;
     }
 
-    ["small", "medium", "large"].forEach((charm) => {
-      this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}charm\\`, `charm_${charm}`);
-    });
-    // pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
-    if (!Settings.lightPillars.questEndgame.isQuestItemsEnabled) {
+    ["small", "medium", "large"].forEach(charm => this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}charm\\`, `charm_${charm}`));
+    // this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}torch\\`, "torch"); // enable this to turn Fallen groups into a dance party
+    if (!Settings.lightPillars.questEndgame.isQuestItemsEnabled)
       this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone");
-    }
   }
 
   // quest items
   protected pushLightPillarsForQuestItems() {
-    if (!Settings.lightPillars.questEndgame.isQuestItemsEnabled && !Settings.lightPillars.questEndgame.isQuestWeaponsEnabled) {
+    if (!Settings.lightPillars.questEndgame.isQuestItemsEnabled && !Settings.lightPillars.questEndgame.isQuestWeaponsEnabled)
       return;
-    }
 
     let questItems: [string, string][] = [];
 
@@ -158,9 +154,8 @@ export class LightPillarBuilder implements IBuilder {
 
   // essences
   protected pushLightPillarsForEssences() {
-    if (!Settings.lightPillars.questEndgame.isEssencesEnabled) {
+    if (!Settings.lightPillars.questEndgame.isEssencesEnabled)
       return;
-    }
 
     let essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
     essences.forEach((essence) => {
@@ -170,18 +165,16 @@ export class LightPillarBuilder implements IBuilder {
 
   // token
   protected pushLightPillarForToken() {
-    if (!Settings.lightPillars.questEndgame.isTokensEnabled) {
+    if (!Settings.lightPillars.questEndgame.isTokensEnabled)
       return;
-    }
 
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_QUEST, "token_of_absolution");
   }
 
   // pandemonium keys
   protected pushLightPillarsForKeys() {
-    if (!Settings.lightPillars.questEndgame.isKeysEnabled) {
+    if (!Settings.lightPillars.questEndgame.isKeysEnabled)
       return;
-    }
 
     let path = `${LightPillarConstants.PATH_ITEMS_MISC}key\\mephisto_key`;
     var file = D2RMM.readJson(`${path}${FileConstants.FILE_EXTENSION_JSON}`);
@@ -194,14 +187,12 @@ export class LightPillarBuilder implements IBuilder {
 
   // pandemonium event (ubers) organs
   protected pushLightPillarsForUberOrgans() {
-    if (!Settings.lightPillars.questEndgame.isOrgansEnabled) {
+    if (!Settings.lightPillars.questEndgame.isOrgansEnabled)
       return;
-    }
 
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "horn");
-    if (Settings.lightPillars.questEndgame.isQuestItemsEnabled) {
+    if (Settings.lightPillars.questEndgame.isQuestItemsEnabled)
       return;
-    }
 
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "brain");
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "eye");
@@ -210,9 +201,8 @@ export class LightPillarBuilder implements IBuilder {
   // standard of heroes
   protected pushLightPillarForStandardOfHeroes() {
     if (!Settings.lightPillars.questEndgame.isStandardEnabled
-      || (Settings.lightPillars.shouldExcludeForHidden && Settings.filter.questEndgame.endgame === "hsh")) {
+      || (Settings.lightPillars.shouldExcludeForHidden && !Settings.filter.questEndgame.filter.shouldShowStandard))
       return;
-    }
 
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "flag");
   }

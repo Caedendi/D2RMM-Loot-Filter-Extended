@@ -48,7 +48,7 @@ export abstract class BaseItemWriter implements IItemWriter {
 
     Object.entries(file).forEach(([index, _]) => {
       if (keys.includes(file[index][FileConstants.key])) // if file entry's Key value matches with one of the keys in entries
-        this.writeCustomName(file, index, mergedCollection.getDisplayNameForKey(file[index][FileConstants.key]));
+        this.writeCustomName(file, index, mergedCollection.getDisplayNameForKey(file[index][FileConstants.key], "TODO BIW"));
     });
     
     D2RMM.writeJson(this.target, file);

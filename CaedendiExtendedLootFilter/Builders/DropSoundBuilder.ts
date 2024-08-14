@@ -1,6 +1,6 @@
 import { DropSoundConstants } from "../Constants/DropSoundConstants";
 import { FileConstants } from "../Constants/FileConstants";
-import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
+import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
 import { Settings } from "../Settings/Settings";
 import { IBuilder } from "./Interfaces/IBuilder";
@@ -25,8 +25,8 @@ export class DropSoundBuilder implements IBuilder {
   }
 
   protected modifyDropSoundForRunes(soundsFile) {
-    RuneTierConstants.tiers.forEach(tier => {
-      if (tier.isHidden && Settings.dropSounds.shouldExcludeForHidden)
+    RuneConstants.tiers.forEach(tier => {
+      if (!tier.isVisible && Settings.dropSounds.shouldExcludeForHidden)
         return;
 
       let itemCodes = tier.runes.map(rune => rune.key);
@@ -145,7 +145,7 @@ export class DropSoundBuilder implements IBuilder {
   /**
    * assign the newly created dropSound in sounds.txt to the items with the corresponding itemCodes in filePath
    */
-  protected pushNewDropSoundToItems(itemsFilePath:string, itemCodes:string[], dropSound:string) {
+  protected pushNewDropSoundToItems(itemsFilePath: string, itemCodes: string[], dropSound: string) {
     let file = D2RMM.readTsv(itemsFilePath);
 
     file.rows.forEach((row) => {

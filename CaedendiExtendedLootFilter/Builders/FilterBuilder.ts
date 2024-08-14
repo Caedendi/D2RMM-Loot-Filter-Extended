@@ -22,7 +22,7 @@ export class FilterBuilder implements IBuilder {
   }
 
   /**
-   * Builds all builders, merges their collections into one and writes these entries to the target file.
+   * Runes all writers, merges their collections into one and writes these entries to the target file.
    */
   protected runItemWriters(): void {
     this.itemWriters.forEach(writer => writer.applyFilters());

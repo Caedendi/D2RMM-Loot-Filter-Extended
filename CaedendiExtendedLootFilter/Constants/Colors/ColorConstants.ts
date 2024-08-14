@@ -42,7 +42,7 @@ export abstract class ColorConstants {
   };
 
   // loot filter colors
-  public static none:      D2Color = this.baseColors.none;
+  public static none:      D2Color = this.baseColors.none; // TODO: convert all entries to null
   public static white:     D2Color = this.baseColors.white;
   public static gray:      D2Color = this.baseColors.grayDimmer;
   public static black:     D2Color = this.baseColors.black;

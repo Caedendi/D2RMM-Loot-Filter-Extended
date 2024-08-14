@@ -1,9 +1,13 @@
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
+import { QuestConstants } from "../Constants/Items/QuestConstants";
+import { IHighlight } from "../Models/Highlights/Interfaces/IHighlight";
 import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
+import { QuestEndgameSettings } from "../Settings/QuestEndgameSettings";
 import { Settings } from "../Settings/Settings";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
+
+// TODO: add inheritance for QuestEndgameItemsComposer, UiComposer and ItemModifiersComposer to remove duplicate code
 
 export class UiComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   constructor() {
@@ -11,18 +15,18 @@ export class UiComposer extends ItemCollectionComposerBase implements IItemColle
   }
 
   public applyFilter() {
-    switch (Settings.filter.questEndgame.quest) {
-      case SettingsConstants.disabled: // no change
-        return;
-      case SettingsConstants.all: // highlight all
-      case "xhc": // exclude horadric cube
-        this.collection.upsert(this.createQuestEntry("ass"));
-        this.collection.upsert(this.createQuestEntry("xyz"));
-        return;
-    }
+    this.applyQuestItems();
   }
 
-  private createQuestEntry(key: string): ItemEntry {
-    return new ItemEntry(key, null, HighlightConstants.uniqueColorName, HighlightConstants.questPattern, Settings.bigTooltips.questEndgame.questItems);
+  protected applyQuestItems(): void {
+    QuestConstants.questItemExceptionsAct23.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlight.quest));
+  }
+
+  private upsertQuestItem(key: string, highlight: IHighlight | null) {
+    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, Settings.filter.questEndgame.bigTooltips.questItems));
+  }
+
+  private upsertEntry(entry: ItemEntry): void {
+    this.collection.upsertIfHasHighlightOrBigTooltip(entry);
   }
 }

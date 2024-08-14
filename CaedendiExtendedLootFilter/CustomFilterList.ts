@@ -1,41 +1,36 @@
-import { ColorConstants } from "./Constants/Colors/ColorConstants";
 import { ItemCollection } from "./Models/ItemCollectionEntries/ItemCollection";
 import { ItemEntry } from "./Models/ItemCollectionEntries/ItemEntry";
 
-//----------------------------------------------//
-// ENTER YOUR CUSTOM ITEM NAMES HERE [CSTM-CFL] //
-//----------------------------------------------//
-
-// This file can be used to customize the name of _any_ item defined in "item-names.json".
-//
-// Format: 
-// [ key, name ],
-//
-// - Set "key" to directly match the value of "Key" for the corresponding entry in "item-names.json". This can 
-//   either be an item code like "7wc" for Giant Thresher or a full name like "Death's Web".
-// - Name can be whatever you want. Use "quotes" for text-only or use `backtick` to incorporate variables using 
-//   `something ${variable} something`.
-//
-// See "D2RMM mod settings => Tooltips => Highlight Character" for a list of safe to use highlight characters.
-// Characters like ¤ (which were used in legacy loot filters) are not fully compatible with D2R, they increase the
-// font size of the tooltip.
-
-// Examples
-// [ "jav", `` ], // Javelin, hidden (forced zero-space name)
-// [ "jav", `${Setting.hidden}` ], // Javelin, hidden (respecting the "Tooltip width for hidden items" setting)
-// [ "ci3", `${Color.red}Diadem${Color.blue}` ], // Diadem, red-colored name, ends with blue color code for when the item is magic and has an affix (side effect: iLvls also turn blue)
-// [ "Griffon's Eye", `${Color.red}**********${Color.purple}     "Griffon's Eye"     ${Color.red}**********${Color.purple}` ], // named key with manual highlighting
-
 /**
- * TODO
- */
+ * This file can be used to customize the name of _any_ item defined in "item-names.json".
+ * 
+ * Format: 
+ * [ key, name ],
+ * 
+ * - Set "key" to directly match the value of "Key" for the corresponding entry in "item-names.json". This can 
+ *   either be an item code like "7wc" for Giant Thresher or a full name like "Death's Web".
+ * - Name can be whatever you want. Use "quotes" for text-only or use `backtick` to incorporate variables using 
+ *   `something ${variable} something`.
+ * 
+ * See "D2RMM mod settings => Tooltips => Highlight Character" for a list of safe to use highlight characters.
+ * Characters like ¤ (which were used in legacy loot filters) are not fully compatible with D2R, they increase the
+ * font size of the tooltip.
+*
+* Examples
+* - [ "jav", `` ], // Javelin, hidden (forced zero-space name)
+* - [ "jav", `${Setting.hidden}` ], // Javelin, hidden (respecting the "Tooltip width for hidden items" setting)
+* - [ "ci3", `${Color.red}Diadem${Color.blue}` ], // Diadem, red-colored name, ends with blue color code for when the item is magic and has an affix (side effect: iLvls also turn blue)
+* - [ "Griffon's Eye", `${Color.red}**********${Color.purple}     "Griffon's Eye"     ${Color.red}**********${Color.purple}` ], // named key with manual highlighting
+*/
 export abstract class CustomFilterList {
+
+  //----------------------------------------------//
+  // ENTER YOUR CUSTOM ITEM NAMES HERE [CSTM-CFL] //
+  //----------------------------------------------//
   
   // Custom Filter List for item-names.json
   public static createForItemNamesJson(): ItemCollection {
     let list: [string, string][] = [
-    
-
 
       //============================//
       // Healing Potions [CSTM-HPT] //
@@ -293,7 +288,7 @@ export abstract class CustomFilterList {
       // [ "key", "value" ],
 
       //======================================//
-      // Quest Items (exceptions) [CSTM-QST2] //
+      // Quest Items (exceptions) [CSTM-QST3] //
       //======================================//
       // [ "ice", `Malah's Potion`],       // Malah's Potion
       // [ "tr2", `Scroll of Resistance`], // Scroll of Resistance
@@ -308,7 +303,7 @@ export abstract class CustomFilterList {
       // [ "key", "value" ],
 
       //======================================//
-      // Quest Items (exceptions) [CSTM-QST3] //
+      // Quest Items (exceptions) [CSTM-QST2] //
       //======================================//
       // [ "ass", `Book of Skill` ],  // Book of Skill
       // [ "xyz", `Potion of Life` ], // Potion of Life

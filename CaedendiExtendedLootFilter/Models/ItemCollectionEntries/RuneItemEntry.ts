@@ -1,13 +1,13 @@
 import { CharConstants } from "../../Constants/CharConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
+import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { D2Color } from "../Colors/D2Color";
-import { Rune } from "../Items/Rune";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
+import { Rune } from "../Items/Rune";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 import { ItemEntry } from "./ItemEntry";
-import { RuneConstants } from "../../Constants/Items/RuneConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 
 export class RuneItemEntry extends ItemEntry implements IItemEntry {
   /**
@@ -17,14 +17,6 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
   protected get rune(): Rune {
     return this._rune;
   }
-
-  // /**
-  //  * tier number
-  //  */
-  // private readonly _tierNumber: number;
-  // protected get tierNumber(): number {
-  //   return this._tierNumber;
-  // }
 
   /**
    * number color
@@ -36,7 +28,6 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
 
   constructor(
     rune: Rune,
-    // tier: number,
     nameColor?: D2Color | null,
     numberColor?: D2Color | null,
     highlight?: IHighlight | null,
@@ -44,7 +35,6 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
   ) {
     super(rune.key, CharConstants.empty, nameColor, highlight, bigToolipSetting);
     this._rune = rune;
-    // this._tierNumber = tier;
     this._numberColor = numberColor ??= ColorConstants.none;
   }
 
@@ -54,6 +44,7 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
   // tier 4 all red
   public generateDisplayName(localizedName: string): string {
     let displayName = this.removeRuneAffix(localizedName);
+    displayName = this.applyNameColor(displayName);
     displayName = this.addRuneNumber(displayName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyBigTooltip(displayName);
@@ -81,6 +72,6 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
     if (!Settings.filter.runes.shouldAddNumber)
       return displayName;
 
-    return `${displayName} (${this.rune.number})`;
+    return `${displayName} ${this.numberColor}(${this.rune.number})`;
   }
 }

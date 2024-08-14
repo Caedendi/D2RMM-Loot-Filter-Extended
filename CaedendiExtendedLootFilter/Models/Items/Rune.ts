@@ -21,10 +21,7 @@ export class Rune {
     return this._name;
   }
 
-  constructor(
-    number: number,
-    name: string,
-  ) {
+  constructor(number: number, name: string) {
     this._number = number;
     this._name = name;
   }

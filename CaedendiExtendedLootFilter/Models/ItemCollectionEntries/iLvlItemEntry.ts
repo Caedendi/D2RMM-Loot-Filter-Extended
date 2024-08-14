@@ -37,6 +37,7 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
       return Settings.filter.settings.hidden;
 
     let displayName = this.applyNewName(translatedName);
+    displayName = this.applyNameColor(displayName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyIlvlIndent(displayName);
     displayName = this.applyBigTooltip(displayName);

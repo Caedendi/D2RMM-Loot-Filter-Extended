@@ -42,6 +42,9 @@ export abstract class GemConstants {
     return CharConstants.empty;
   }
 
+  // TODO:
+  // - use translated names for chipped/flawed/flawless/perfect
+  // - use selectable name for [translated]/common/regular/whatever gems
   public static chippedFlawedRegularGems: Gem[] = [
     new Gem("gcv", this.clrAmethyst, this.chipped ), // Chipped Amethyst
     new Gem("gcw", this.clrDiamond,  this.chipped ), // Chipped Diamond

@@ -17,9 +17,23 @@ export abstract class QuestConstants {
     "qbr", // Khalim's Brain
     "mss", // Mephisto's Soulstone
     // Act 4: none
-    // Act 5: see exceptions mentioned above [CSTM-QST2]
+    // Act 5: see exceptions below [CSTM-QST2]
     // Extra
     "LamTome", // Lam Esen's Tome
+  ];
+
+  // [CSTM-QST2]
+  public static readonly questItemExceptionsAct23: string[] = [
+    // Act 5
+    "ass", // Book of Skill
+    "xyz", // Potion of Life
+  ];
+
+  // [CSTM-QST3] // TODO: correct search tags in codebase
+  public static readonly questItemExceptionsAct5: string[] = [
+    // Act 5
+    "ice", // Malah's Potion
+    "tr2", // Scroll of Resistance
   ];
 
   public static readonly cube: "box"; // Horadric Cube

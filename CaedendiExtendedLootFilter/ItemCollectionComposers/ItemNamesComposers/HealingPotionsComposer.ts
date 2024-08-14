@@ -3,6 +3,8 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { D2Color } from "../../Models/Colors/D2Color";
+import { SingleHighlight } from "../../Models/Highlights/SingleHighlight";
+import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
@@ -107,11 +109,11 @@ export class HealingPotionsComposer extends ItemCollectionComposerBase implement
     this.upsertPotion("rvl", "RPF", this.clrRej);
   }
 
-  protected upsertPotions(potions: {key: string, name: string, color: D2Color}[]): void {
+  protected upsertPotions(potions: { key: string, name: string, color: D2Color }[]): void { // TODO: create model?
     potions.forEach(pot => this.upsertPotion(pot.key, pot.name, pot.color));
   }
 
   protected upsertPotion(key: string, name: string, color: D2Color): void {
-    this.collection.upsert(new SingleHighlightItemEntry(key, name, CharConstants.plus, color, HighlightConstants.paddingNone, ColorConstants.white));
+    this.collection.upsert(new ItemEntry(key, name, ColorConstants.white, new SingleHighlight(CharConstants.plus, color, HighlightConstants.paddingNone)));
   }
 }
