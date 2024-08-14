@@ -1,6 +1,4 @@
-import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
-import { Settings } from "../../Settings/Settings";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { Rune } from "./Rune";
@@ -107,21 +105,4 @@ export class RuneTier {
     this._hasLightPillar = hasLightPillar;
     this._dropSound = dropSound;
   }
-
-  // TODO: remove
-  // public static isTierWithHighlights(number: number): boolean {
-  //   return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlights.includes(number);
-  // }
-
-  // public static isTierWithHighlightedNumber(number: number): boolean {
-  //   return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNumbers.includes(number);
-  // }
-
-  // public static isTierWithHighlightedName(number: number): boolean {
-  //   return Settings.filter.runes.shouldAddHighlights && RuneConstants.tiersWithHighlightedNames.includes(number);;
-  // }
-
-  // public static isTierWithAlternateColor(number: number): boolean {
-  //   return Settings.filter.runes.shouldUseAltColor && RuneConstants.tiersWithAlternateColor.includes(number);
-  // }
 }

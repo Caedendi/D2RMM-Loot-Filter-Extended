@@ -5,7 +5,6 @@ import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
-import { EiLvlDigits } from "../../Settings/EiLvlDigits";
 import { QuestEndgameSettings } from "../../Settings/QuestEndgameSettings";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
@@ -21,74 +20,57 @@ export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implem
 
   public applyFilter(): void {
     this.applyQuestItems();
-    this.applyCube();
-    this.applyQuestWeapons();
-    this.applyEssences();
-    this.applyToken();
-    this.applyKeys();
-    this.applyOrgans();
-    this.applyStandardOfHeroes();
+    this.applyEndgameItems();
   }
 
   protected applyQuestItems(): void {
-    QuestConstants.questItems.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlight.quest));
+    this.upsertQuestItem(QuestConstants.cube, QuestEndgameSettings.highlight.cube); // cube
+    QuestConstants.questItems.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlight.quest)); // quest items
+    QuestConstants.questWeapons.forEach(weapon => this.upsertEntry( // quest weapons
+      new iLvlItemEntry(weapon.key, weapon.digits, null, HighlightConstants.uniqueColorName, QuestEndgameSettings.highlight.quest, Settings.filter.questEndgame.bigTooltips.questItems)
+    ));
   }
 
-  protected applyCube(): void {
-    this.upsertQuestItem(QuestConstants.cube, QuestEndgameSettings.highlight.cube);
+  protected applyEndgameItems(): void {
+    this.applyEssences();
+    this.applyStandardOfHeroes();
+
+    this.upsertEndgameItem(EndgameConstants.token, QuestEndgameSettings.highlight.token, Settings.filter.questEndgame.bigTooltips.tokens);           // token
+    this.upsertEndgameItems(EndgameConstants.keys, QuestEndgameSettings.highlight.keys, Settings.filter.questEndgame.bigTooltips.keys);       // keys
+    this.upsertEndgameItems(EndgameConstants.organs, QuestEndgameSettings.highlight.organs, Settings.filter.questEndgame.bigTooltips.organs); // organs
   }
 
-  protected applyQuestWeapons(): void {
-    QuestConstants.questWeapons.forEach(weapon => this.upsertQuestWeapon(weapon.key, weapon.digits));
-  }
-
-  protected applyEssences(): void {
+  private applyEssences(): void {
     if (!Settings.filter.questEndgame.filter.shouldShowEssences) {
       this.collection.upsertMultipleHidden(EndgameConstants.essences);
       return;
     }
 
-    this.upsertMultipleEndgame(EndgameConstants.essences, QuestEndgameSettings.highlight.essences, Settings.filter.questEndgame.bigTooltips.essences);
+    this.upsertEndgameItems(EndgameConstants.essences, QuestEndgameSettings.highlight.essences, Settings.filter.questEndgame.bigTooltips.essences);
   }
 
-  protected applyStandardOfHeroes(): void {
+  private applyStandardOfHeroes(): void {
     if (!Settings.filter.questEndgame.filter.shouldShowStandard) {
       this.collection.upsertHidden(EndgameConstants.standard);
       return;
     }
 
-    this.upsertEndgame(EndgameConstants.standard, QuestEndgameSettings.highlight.standard, Settings.filter.questEndgame.bigTooltips.standard);
-  }
-
-  protected applyToken(): void {
-    this.upsertEndgame(EndgameConstants.token, QuestEndgameSettings.highlight.token, Settings.filter.questEndgame.bigTooltips.tokens);
-  }
-
-  protected applyKeys(): void {
-    this.upsertMultipleEndgame(EndgameConstants.keys, QuestEndgameSettings.highlight.keys, Settings.filter.questEndgame.bigTooltips.keys);
-  }
-
-  protected applyOrgans(): void {
-    this.upsertMultipleEndgame(EndgameConstants.organs, QuestEndgameSettings.highlight.organs, Settings.filter.questEndgame.bigTooltips.organs);
+    this.upsertEndgameItem(EndgameConstants.standard, QuestEndgameSettings.highlight.standard, Settings.filter.questEndgame.bigTooltips.standard);
   }
 
   private upsertQuestItem(key: string, highlight: IHighlight | null) {
-    this.upsert(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, Settings.filter.questEndgame.bigTooltips.questItems));
+    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, Settings.filter.questEndgame.bigTooltips.questItems));
   }
 
-  private upsertQuestWeapon(key: string, digits: EiLvlDigits) {
-    this.upsert(new iLvlItemEntry(key, digits, null, HighlightConstants.uniqueColorName, QuestEndgameSettings.highlight.quest, Settings.filter.questEndgame.bigTooltips.questItems));
+  private upsertEndgameItem(key: string, highlight: IHighlight | null, bigTooltipSetting: EBigTooltipSetting): void {
+    this.upsertEntry(new ItemEntry(key, null, EndgameConstants.clrName, highlight, bigTooltipSetting));
   }
 
-  private upsertEndgame(key: string, highlight: IHighlight | null, bigTooltipSetting: EBigTooltipSetting): void {
-    this.upsert(new ItemEntry(key, null, EndgameConstants.clrName, highlight, bigTooltipSetting));
+  private upsertEndgameItems(keys: string[], highlight: IHighlight | null, bigTooltipSetting: EBigTooltipSetting) {
+    keys.forEach(key => this.upsertEndgameItem(key, highlight, bigTooltipSetting));
   }
 
-  private upsertMultipleEndgame(keys: string[], highlight: IHighlight | null, bigTooltipSetting: EBigTooltipSetting) {
-    keys.forEach(key => this.upsertEndgame(key, highlight, bigTooltipSetting));
-  }
-
-  private upsert(entry: ItemEntry): void {
+  private upsertEntry(entry: ItemEntry): void {
     this.collection.upsertIfHasHighlightOrBigTooltip(entry);
   }
 }

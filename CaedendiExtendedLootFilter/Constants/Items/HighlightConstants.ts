@@ -60,6 +60,9 @@ export abstract class HighlightConstants {
 
     let level = this.highlightLevels.find(level => level.setting = setting);
 
+    // TODO:
+    // - implement
+    // - use patternXL
     return new DoubleHighlightPattern(level.pattern, level.padding, highlightColor);
   }
 }

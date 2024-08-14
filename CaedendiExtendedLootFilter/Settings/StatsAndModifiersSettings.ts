@@ -88,6 +88,8 @@ export abstract class StatsAndModifiersSettings {
   }
 
   private static getDoubleQualityIndicator(itemQuality: EItemQuality): string {
+    throw new Error("not implemented");
+    
     let indicator = CharConstants.empty;
 
     switch (Settings.filter.statsAndModifiers.itemQuality.styleDouble) {

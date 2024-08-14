@@ -7,6 +7,7 @@ import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 import { ItemEntry } from "./ItemEntry";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
+import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 
 export class RuneItemEntry extends ItemEntry implements IItemEntry {
   /**
@@ -17,13 +18,13 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
     return this._rune;
   }
 
-  /**
-   * tier number
-   */
-  private readonly _tierNumber: number;
-  protected get tierNumber(): number {
-    return this._tierNumber;
-  }
+  // /**
+  //  * tier number
+  //  */
+  // private readonly _tierNumber: number;
+  // protected get tierNumber(): number {
+  //   return this._tierNumber;
+  // }
 
   /**
    * number color
@@ -35,20 +36,22 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
 
   constructor(
     rune: Rune,
-    tier: number,
+    // tier: number,
     nameColor?: D2Color | null,
+    numberColor?: D2Color | null,
     highlight?: IHighlight | null,
     bigToolipSetting?: EBigTooltipSetting | null
   ) {
     super(rune.key, CharConstants.empty, nameColor, highlight, bigToolipSetting);
     this._rune = rune;
-    this._tierNumber = tier;
+    // this._tierNumber = tier;
+    this._numberColor = numberColor ??= ColorConstants.none;
   }
 
   // tier 1 no highlight, orange name
   // tier 2 red highlight, orange name/number
-  // tier 3 red 
-  // tier 4
+  // tier 3 red highlight/number, orange name
+  // tier 4 all red
   public generateDisplayName(localizedName: string): string {
     let displayName = this.removeRuneAffix(localizedName);
     displayName = this.addRuneNumber(displayName);
