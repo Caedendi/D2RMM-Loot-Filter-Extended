@@ -1,14 +1,14 @@
+import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { GemConstants } from "../../Constants/Items/GemConstants";
 import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
-import { D2Color } from "../Colors/D2Color";
-import { Gem } from "../Items/Gem";
-import { IHighlight } from "../Highlights/Interfaces/IHighlight";
-import { IItemEntry } from "./Interfaces/IItemEntry";
-import { SingleHighlight } from "../Highlights/SingleHighlight";
 import { BigTooltip } from "../BigTooltip";
-import { CharConstants } from "../../Constants/CharConstants";
+import { D2Color } from "../Colors/D2Color";
+import { IHighlight } from "../Highlights/Interfaces/IHighlight";
+import { SingleHighlight } from "../Highlights/SingleHighlight";
+import { Gem } from "../Items/Gem";
+import { IItemEntry } from "./Interfaces/IItemEntry";
 
 export class ItemEntry implements IItemEntry {
   /**

@@ -1,8 +1,8 @@
-import { CharConstants } from "../../Constants/CharConstants";
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
-import { IHighlight } from "../Highlights/Interfaces/IHighlight";
-import { SingleHighlight } from "../Highlights/SingleHighlight";
+import { CharConstants } from "../Constants/CharConstants";
+import { HighlightConstants } from "../Constants/Items/HighlightConstants";
+import { EBigTooltipSetting } from "../Settings/EBigTooltipSetting";
+import { IHighlight } from "./Highlights/Interfaces/IHighlight";
+import { SingleHighlight } from "./Highlights/SingleHighlight";
 
 export class BigTooltip {
   protected _setting: EBigTooltipSetting = EBigTooltipSetting.Disabled;
