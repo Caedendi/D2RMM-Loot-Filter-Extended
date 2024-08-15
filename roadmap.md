@@ -33,3 +33,13 @@
 - [ ] _profilelv.json and controller compatibility
 - [ ] search all // todo
 - [ ] 
+
+## New Featuers
+
+- [ ] pre-/suffix tag for which items sell for 35K
+  - [ ] $
+  - [ ] 35K
+  - [ ] brackets
+- [ ] Settings Menu
+  - [ ] toggle switch etc inside section
+
