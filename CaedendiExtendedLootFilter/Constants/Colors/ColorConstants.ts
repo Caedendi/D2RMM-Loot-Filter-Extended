@@ -1,5 +1,37 @@
 import { D2Color } from "../../Models/Colors/D2Color";
 
+// TODO: fix
+
+/*
+White
+Light Grey
+Dark Grey
+Black
+Light Blue
+Dark Blue
+Crystal Blue
+Light Red
+Dark Red
+Crystal Red
+Light Green
+Dark Green
+Crystal Green
+Light Yellow
+Dark Yellow
+Light Gold
+Dark Gold
+Light Purple
+Dark Purple
+Orange
+Bright White
+*/
+
+/*
+https://d2mods.info/forum/viewtopic.php?t=67420&sid=47faa4e28760d543f321a67f36a125ab
+https://d2mods.info/forum/viewtopic.php?t=1762
+https://d2mods.info/forum/viewtopic.php?f=6&t=66716&p=499720&hilit=color+codes#p499720
+*/
+
 export abstract class ColorConstants {
   protected static baseColors = {
     none            : new D2Color( ""),

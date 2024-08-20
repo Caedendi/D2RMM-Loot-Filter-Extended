@@ -11,10 +11,13 @@ import { RuneConstants } from "./RuneConstants";
  * I have however moved Ral (8), Hel (15) and Lem (20) a tier up because of their usefulness.
  */
 export abstract class RuneTierConstants {
-  public static tiers = [
-    new RuneTier(1, RuneConstants.lowRunes,    RuneSettings.isLowVisible,    RuneSettings.lowNameColor,    RuneSettings.lowNumberColor,    RuneSettings.lowHighlight,    RuneSettings.lowBigTooltipSetting,    RuneSettings.isLowLightPillarsEnabled,    RuneSettings.lowDropSound),
-    new RuneTier(2, RuneConstants.lowMidRunes, RuneSettings.isLowMidVisible, RuneSettings.lowMidNameColor, RuneSettings.lowMidNumberColor, RuneSettings.lowMidHighlight, RuneSettings.lowMidBigTooltipSetting, RuneSettings.isLowMidLightPillarsEnabled, RuneSettings.lowMidDropSound),
-    new RuneTier(3, RuneConstants.midRunes,    RuneSettings.isMidVisible,    RuneSettings.midNameColor,    RuneSettings.midNumberColor,    RuneSettings.midHighlight,    RuneSettings.midBigTooltipSetting,    RuneSettings.isMidLightPillarsEnabled,    RuneSettings.midDropSound),
-    new RuneTier(4, RuneConstants.highRunes,   RuneSettings.isHighVisible,   RuneSettings.highNameColor,   RuneSettings.highNumberColor,   RuneSettings.highHighlight,   RuneSettings.highBigTooltipSetting,   RuneSettings.isHighLightPillarsEnabled,   RuneSettings.highDropSound),
-  ];
+  // public static tiers = [
+  //   new RuneTier(1, RuneConstants.lowRunes,    RuneSettings.isLowVisible,    RuneSettings.lowNameColor,    RuneSettings.lowNumberColor,    RuneSettings.lowHighlight,    RuneSettings.lowBigTooltipSetting,    RuneSettings.isLowLightPillarsEnabled,    RuneSettings.lowDropSound),
+  //   new RuneTier(2, RuneConstants.lowMidRunes, RuneSettings.isLowMidVisible, RuneSettings.lowMidNameColor, RuneSettings.lowMidNumberColor, RuneSettings.lowMidHighlight, RuneSettings.lowMidBigTooltipSetting, RuneSettings.isLowMidLightPillarsEnabled, RuneSettings.lowMidDropSound),
+  //   new RuneTier(3, RuneConstants.midRunes,    RuneSettings.isMidVisible,    RuneSettings.midNameColor,    RuneSettings.midNumberColor,    RuneSettings.midHighlight,    RuneSettings.midBigTooltipSetting,    RuneSettings.isMidLightPillarsEnabled,    RuneSettings.midDropSound),
+  //   new RuneTier(4, RuneConstants.highRunes,   RuneSettings.isHighVisible,   RuneSettings.highNameColor,   RuneSettings.highNumberColor,   RuneSettings.highHighlight,   RuneSettings.highBigTooltipSetting,   RuneSettings.isHighLightPillarsEnabled,   RuneSettings.highDropSound),
+  // ];
 }
+
+
+// TODO: remove?

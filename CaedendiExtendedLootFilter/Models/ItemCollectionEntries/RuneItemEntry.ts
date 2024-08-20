@@ -1,7 +1,7 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
@@ -46,7 +46,7 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
     let displayName = this.removeRuneAffix(localizedName);
     displayName = this.applyNameColor(displayName);
     displayName = this.addRuneNumber(displayName);
-    displayName = this.applyHighlightPattern(displayName);
+    displayName = this.applyHighlightPattern(displayName); // TODO: create EDoubleHighlightPattern with values none/small/large/xl/rainbow
     displayName = this.applyBigTooltip(displayName);
     displayName = this.removeRedundantColorCodes(displayName);
 
@@ -61,10 +61,10 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
       if (!localizedName.includes(affix))
         return false;
 
-      localizedName.replace(affix, CharConstants.empty);
+      localizedName = localizedName.replace(affix, CharConstants.empty);
       return true;
     });
-
+    
     return localizedName;
   }
 

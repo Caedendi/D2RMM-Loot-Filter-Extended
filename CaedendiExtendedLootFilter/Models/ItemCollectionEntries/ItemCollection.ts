@@ -8,6 +8,10 @@ export class ItemCollection {
       this.entries = entries;
   }
 
+  public hasEntries(): boolean {
+    return (Array.isArray(this.entries) && this.entries.length > 0);
+  }
+
   public getEntries(): ItemEntry[] {
     return this.entries;
   }
@@ -45,7 +49,7 @@ export class ItemCollection {
   }
 
   public upsertIfHasHighlightOrBigTooltip(entry: ItemEntry): void {
-    if (entry.highlightPattern == null && entry.bigTooltip == null)
+    if (entry.highlight == null && entry.bigTooltip == null)
       return;
 
     this.upsert(entry);

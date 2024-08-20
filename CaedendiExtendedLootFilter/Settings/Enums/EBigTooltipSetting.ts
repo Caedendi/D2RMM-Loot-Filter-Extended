@@ -1,5 +1,5 @@
 export enum EBigTooltipSetting {
-  Disabled = 0, // TODO: phase out?
+  Disabled = 0, // TODO: phase out for null?
   TwoLines = 1,
   TwoLinesPickUp = 2,
   ThreeLines = 3,

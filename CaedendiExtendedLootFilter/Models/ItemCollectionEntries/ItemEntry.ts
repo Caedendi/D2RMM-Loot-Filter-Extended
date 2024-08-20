@@ -1,7 +1,7 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { GemConstants } from "../../Constants/Items/GemConstants";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { BigTooltip } from "../BigTooltip";
 import { D2Color } from "../Colors/D2Color";
@@ -45,12 +45,12 @@ export class ItemEntry implements IItemEntry {
   /**
    * Highlight pattern
    */
-  private _highlightPattern: IHighlight | null;
-  public get highlightPattern(): IHighlight | null {
-    return this._highlightPattern;
+  private _highlight: IHighlight | null;
+  public get highlight(): IHighlight | null {
+    return this._highlight;
   }
-  protected set highlightPattern(value: IHighlight) {
-    this._highlightPattern = value;
+  protected set highlight(value: IHighlight) {
+    this._highlight = value;
   }
   /**
    * Big tooltip
@@ -73,7 +73,7 @@ export class ItemEntry implements IItemEntry {
     this._key = key;
     this._newName = newName ??= null;
     this._nameColor = nameColor ??= ColorConstants.none;
-    this._highlightPattern = highlight ??= null;
+    this._highlight = highlight ??= null;
     this._bigTooltip = (bigTooltipSetting != undefined && bigTooltipSetting != EBigTooltipSetting.Disabled) ? new BigTooltip(bigTooltipSetting) : null;
   }
 
@@ -101,17 +101,18 @@ export class ItemEntry implements IItemEntry {
     if (!this.isVisible)
       return Settings.filter.settings.hidden;
 
+    
     let displayName = this.applyNewName(translatedName);
     displayName = this.applyNameColor(displayName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyBigTooltip(displayName);
-    displayName = this.removeRedundantColorCodes(displayName);
+    displayName = this.removeRedundantColorCodes(displayName); // TODO: fix
 
     return displayName;
   }
 
   protected applyNewName(translatedName: string) {
-    return this.newName === CharConstants.empty ? translatedName : this.newName;
+    return (this.newName == null || this.newName === CharConstants.empty) ? translatedName : this.newName;
   }
 
   protected applyNameColor(displayName: string) {
@@ -119,20 +120,20 @@ export class ItemEntry implements IItemEntry {
   }
 
   protected applyHighlightPattern(displayName: string): string {
-    if (this.highlightPattern == null)
+    if (this.highlight == null)
       return displayName;
 
-    return this.highlightPattern.apply(displayName);
+    return this.highlight.apply(displayName);
   }
 
   protected applyBigTooltip(displayName: string): string {
     if (this.bigTooltip == null)
       return displayName;
 
-    return this.bigTooltip.apply(displayName, this.highlightPattern);
+    return this.bigTooltip.apply(displayName, this.highlight);
   }
 
-  // TODO: test
+  // TODO: fix
   /**
    * Removes all adjacent redundant color codes from a name. Assumes occurrences of "ÿc" are always followed by a valid color code character.
    * @param name The item name.
@@ -140,6 +141,10 @@ export class ItemEntry implements IItemEntry {
    * @returns The provided name with all duplicate adjacent color codes removed.
    */
   protected removeRedundantColorCodes(name: string, startColor?: D2Color): string {
+
+    return name;
+    // TODO: fix
+
     if (name.length < 3) // name too short to have a color code
       return name;
 

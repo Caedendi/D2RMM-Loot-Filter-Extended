@@ -1,6 +1,6 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { EItemQuality } from "./EItemQuality";
+import { EItemQuality } from "./Enums/EItemQuality";
 import { Settings } from "./Settings";
 
 // TODO: update
@@ -76,6 +76,9 @@ export abstract class StatsAndModifiersSettings {
     if (Settings.filter.statsAndModifiers.itemQuality.styleDouble === SettingsConstants.custom)
       return this.getCustomDoubleQualityIndicator(itemQuality);
 
+    return CharConstants.empty;
+
+    // TODO: implement
     return this.getDoubleQualityIndicator(itemQuality);
   }
 

@@ -1,5 +1,5 @@
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
-import { EiLvlDigits } from "../../Settings/EiLvlDigits";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
+import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { IItemEntry } from "./Interfaces/IItemEntry";

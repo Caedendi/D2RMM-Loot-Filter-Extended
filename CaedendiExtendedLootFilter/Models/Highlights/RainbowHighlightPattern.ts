@@ -1,7 +1,7 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { BigTooltip } from "../BigTooltip";
 import { DoubleHighlightPatternBase } from "./DoubleHighlightPatternBase";
 

@@ -1,6 +1,6 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
-import { EBigTooltipSetting } from "../Settings/EBigTooltipSetting";
+import { EBigTooltipSetting } from "../Settings/Enums/EBigTooltipSetting";
 import { IHighlight } from "./Highlights/Interfaces/IHighlight";
 import { SingleHighlight } from "./Highlights/SingleHighlight";
 

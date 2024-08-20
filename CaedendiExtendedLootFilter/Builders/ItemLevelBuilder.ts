@@ -1,7 +1,7 @@
 import { FileConstants } from "../Constants/FileConstants";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
 import { JewelryConstants } from "../Constants/Items/JewelryConstants";
-import { EBigTooltipSetting } from "../Settings/EBigTooltipSetting";
+import { EBigTooltipSetting } from "../Settings/Enums/EBigTooltipSetting";
 import { Settings } from "../Settings/Settings";
 import { IBuilder } from "./Interfaces/IBuilder";
 

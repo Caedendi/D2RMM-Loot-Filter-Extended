@@ -1,3 +1,4 @@
+import { Helper } from "../../../../_helper";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { CharmConstants } from "../../Constants/Items/CharmConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
@@ -5,8 +6,8 @@ import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
 import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { SunderCharm } from "../../Models/Items/SunderCharm";
-import { EiLvlDigits } from "../../Settings/EiLvlDigits";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
+import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
@@ -17,21 +18,16 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   public applyFilter(): void {
-    switch (Settings.filter.jewelry.charms) { // todo: validate setting as string
-      case SettingsConstants.disabled:
-        return;
-      case SettingsConstants.all:
-        this.highlightUnidentifiedCharms();
-        this.highlightUniqueCharms();
-        this.highlightSunderCharms();
-        return;
-      case "uniq":
-        this.highlightUniqueCharms();
-        this.highlightSunderCharms();
-        return;
-      case "unid":
-        this.highlightUnidentifiedCharms();
-        return;
+    if (Settings.filter.jewelry.charms.isHighlightMagicEnabled)
+      this.highlightUnidentifiedCharms();
+
+    this.applyLodUniqueCharms();
+    this.applySunderCharms();
+
+    if ( Settings.filter.jewelry.charms.highlightUnique !== SettingsConstants.disabled
+      && Settings.filter.jewelry.charms.bigTooltipUnique != EBigTooltipSetting.Disabled
+    ) {
+
     }
   }
 
@@ -45,32 +41,40 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
     });
   }
 
-  protected highlightUniqueCharms(): void {
+  protected applyLodUniqueCharms(): void {
+    let highlight = Settings.filter.jewelry.charms.highlightUnique !== SettingsConstants.disabled ? Helper.uniqPattern : null;
+    let bttSetting = Settings.filter.jewelry.charms.bigTooltipUnique;
+    if (highlight == null && bttSetting == EBigTooltipSetting.Disabled)
+      return;
+
     [
       CharmConstants.anniId, 
       CharmConstants.torchId, 
       CharmConstants.gheedsId
-    ].forEach(charm => {
-      this.collection.upsert(new iLvlItemEntry(charm, EiLvlDigits.Double, null, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting))
-    });
+    ].forEach(charm => this.collection.upsert(new iLvlItemEntry(charm, EiLvlDigits.Double, null, null, highlight, bttSetting)));
   }
 
-  protected highlightSunderCharms(): void {
-    if (Settings.filter.jewelry.isSunderAltPatternEnabled)
-      this.highlightSunderCharmsAlt(CharmConstants.sunderCharms);
+  protected applySunderCharms(): void {
+    let hlSetting = Settings.filter.jewelry.charms.highlightUnique;
+    let bttSetting = Settings.filter.jewelry.charms.bigTooltipUnique;
+    if (hlSetting === SettingsConstants.disabled && bttSetting == EBigTooltipSetting.Disabled)
+      return;
+    
+    if (hlSetting === "hl-sa")
+      this.highlightSunderCharmsAlt(bttSetting);
     else 
-      this.highlightSunderCharmsDefault(CharmConstants.sunderCharms);
+      this.highlightSunderCharmsDefault(bttSetting);
   }
 
-  private highlightSunderCharmsDefault(sunders: SunderCharm[]): void {
-    sunders.forEach(sunder => this.collection.upsert(
-      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, null, HighlightConstants.uniqPattern, Settings.bigTooltips.jewelry.uniqueCharmsSetting)
+  private highlightSunderCharmsDefault(bigTooltipSetting: EBigTooltipSetting): void {
+    CharmConstants.sunderCharms.forEach(sunder => this.collection.upsert(
+      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, null, Helper.uniqPattern, bigTooltipSetting)
     ));
   }
 
-  private highlightSunderCharmsAlt(sunders: SunderCharm[]): void {
-    sunders.forEach(sunder => this.collection.upsert(
-      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, null, new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color))
+  private highlightSunderCharmsAlt(bigTooltipSetting: EBigTooltipSetting): void {
+    CharmConstants.sunderCharms.forEach(sunder => this.collection.upsert(
+      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, null, new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color), bigTooltipSetting)
     ));
   }
 }

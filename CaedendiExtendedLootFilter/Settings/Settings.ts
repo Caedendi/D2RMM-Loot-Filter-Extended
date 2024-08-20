@@ -2,7 +2,7 @@ import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { D2Color } from "../Models/Colors/D2Color";
 import { D2rColor } from "../Models/Colors/D2rColor";
-import { EBigTooltipSetting } from "./EBigTooltipSetting";
+import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 
 // TODO: add this text somewhere
 // Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space].
@@ -121,9 +121,9 @@ export abstract class Settings {
     },
     // Filter Settings
     settings: {
-      highlightCharacter: config.HighlightCharacter as string,
-      highlightColor:     ColorConstants.getColorByCode(config.HighlightColor as string),
-      hidden:             CharConstants.space.repeat(config.HiddenItemTooltipSize as number),
+      highlightCharacter:    config.HighlightCharacter as string,
+      defaultHighlightColor: ColorConstants.getColorByCode(config.DefaultHighlightColor as string),
+      hidden:                CharConstants.space.repeat(config.HiddenItemTooltipSize as number),
     },
     // Custom Filter List
     isCustomFilterListEnabled: config.IsCustomFilterListEnabled as boolean,

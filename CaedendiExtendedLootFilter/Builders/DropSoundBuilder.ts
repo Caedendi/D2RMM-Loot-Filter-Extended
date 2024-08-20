@@ -1,5 +1,6 @@
 import { DropSoundConstants } from "../Constants/DropSoundConstants";
 import { FileConstants } from "../Constants/FileConstants";
+import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
 import { Settings } from "../Settings/Settings";
@@ -13,19 +14,19 @@ export class DropSoundBuilder implements IBuilder {
 
     let soundsFile = D2RMM.readTsv(FileConstants.FILE_SOUNDS_PATH);
 
-    // this.modifyDropSoundForRunes(soundsFile);
-    // this.modifyDropSoundForQuestItems(soundsFile);
-    // this.modifyDropSoundForEssences(soundsFile);
-    // this.modifyDropSoundForTokens(soundsFile);
-    // this.modifyDropSoundForKeys(soundsFile);
-    // this.modifyDropSoundForOrgans(soundsFile);
+    this.modifyDropSoundForRunes(soundsFile);
+    this.modifyDropSoundForQuestItems(soundsFile);
+    this.modifyDropSoundForEssences(soundsFile);
+    this.modifyDropSoundForTokens(soundsFile);
+    this.modifyDropSoundForKeys(soundsFile);
+    this.modifyDropSoundForOrgans(soundsFile);
     this.modifyDropSoundForStandardOfHeroes(soundsFile);
 
     D2RMM.writeTsv(FileConstants.FILE_SOUNDS_PATH, soundsFile);
   }
 
   protected modifyDropSoundForRunes(soundsFile) {
-    RuneTierConstants.tiers.forEach(tier => {
+    RuneConstants.tiers.forEach(tier => {
       if (!tier.isVisible && Settings.dropSounds.shouldExcludeForHidden)
         return;
 
@@ -88,8 +89,6 @@ export class DropSoundBuilder implements IBuilder {
   }
 
   protected modifyDropSoundForStandardOfHeroes(soundsFile) {
-
-    throw new Error("HIT");
     this.modifyDropSoundForMiscItems(soundsFile, ["std"], "flag", Settings.dropSounds.questEndgame.standard);
   }
 

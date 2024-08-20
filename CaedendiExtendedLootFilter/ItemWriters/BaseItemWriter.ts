@@ -1,6 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { IItemCollectionComposer } from "../ItemCollectionComposers/Interfaces/IItemCollectionComposer";
+import { IItemEntry } from "../Models/ItemCollectionEntries/Interfaces/IItemEntry";
 import { ItemCollection } from "../Models/ItemCollectionEntries/ItemCollection";
 import { Settings } from "../Settings/Settings";
 import { IItemWriter } from "./Interfaces/IItemWriter";
@@ -42,25 +43,29 @@ export abstract class BaseItemWriter implements IItemWriter {
    */
   public writeCustomNames(): void {
     let mergedCollection = this.createMergedCollection();
-    var keys = mergedCollection.getKeys();
+    if (!mergedCollection.hasEntries())
+      return;
     
     let file = D2RMM.readJson(this.target);
 
-    Object.entries(file).forEach(([index, _]) => {
-      if (keys.includes(file[index][FileConstants.key])) // if file entry's Key value matches with one of the keys in entries
-        this.writeCustomName(file, index, mergedCollection.getDisplayNameForKey(file[index][FileConstants.key], "TODO BIW"));
+    mergedCollection.getEntries().forEach(filterEntry => {
+      Object.entries(file).forEach(([index, _]) => {
+        let fileEntry = file[index];
+        if (fileEntry[FileConstants.key] === filterEntry.key)
+          this.writeCustomNamesForEntry(fileEntry, filterEntry);
+      });
     });
     
     D2RMM.writeJson(this.target, file);
   }
-
-  // sets all translated entries to "name"
-  protected writeCustomName(file, index: string, name: string): void {
-    for (const key in file[index]) { // for each property in this entry ...
+    
+  protected writeCustomNamesForEntry(fileEntry, filterEntry: IItemEntry): void {
+    for (const key in fileEntry) { // for each property in this entry ...
       if (key === FileConstants.id || key === FileConstants.key) // ... that is a translation (not the id or Key property) ...
+      // if (key === FileConstants.id || key === FileConstants.key) // ... that is a translation (not the id or Key property) ...
         continue;
-
-        file[index][key] = name; // ... set to the corresponding name found in mergedCollection
+      
+      fileEntry[key] = filterEntry.generateDisplayName(fileEntry[key]); // ... set to the corresponding name found in mergedCollection
     }
   }
 
@@ -70,8 +75,8 @@ export abstract class BaseItemWriter implements IItemWriter {
    */
   protected createMergedCollection(): ItemCollection {
     let mergedCollection = new ItemCollection();
-    this.composers.forEach(builder => {
-      mergedCollection.upsertCollection(builder.getCollection());
+    this.composers.forEach(composer => {
+      mergedCollection.upsertCollection(composer.getCollection());
     });
 
     return mergedCollection;

@@ -298,7 +298,7 @@
                   "name": "Big Tooltip",
                   "description": "Enable Big Tooltips for Low Runes (El [1] - Dol [14], except Ral [8]).",
                   "defaultValue": "0",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "visible": ["value", "ShouldShowRunesLow"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -450,7 +450,7 @@
                   "name": "Low-Mid Runes",
                   "description": "Enable Big Tooltips for Low-Mid Runes (Hel [15] - Fal [19] and Ral [8]).",
                   "defaultValue": "1",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "visible": ["value", "ShouldShowRunesLowMid"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -602,7 +602,7 @@
                   "name": "Big Tooltip",
                   "description": "Enable Big Tooltips for Mid Runes (Lem [20] - Gul [25]).",
                   "defaultValue": "3",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "visible": ["value", "ShouldShowRunesMid"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -754,7 +754,7 @@
                   "name": "Big Tooltip",
                   "description": "Enable Big Tooltips for High Runes (Vex [26] - Zod [33]).",
                   "defaultValue": "3",
-                  "visible": ["value", "IsBigTooltipsEnabled"],
+                  "visible": ["value", "ShouldShowRunesHigh"],
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Two Lines" },
@@ -1285,10 +1285,10 @@
               ]
             },
             {
-              "id": "HighlightColor",
+              "id": "DefaultHighlightColor",
               "type": "select",
-              "name": "Highlight Color",
-              "description": "Color used for the highlight character for items that have highlight patterns.",
+              "name": "Highlight Color (default)",
+              "description": "Default color used for the highlight character for items that have highlight patterns.",
               "defaultValue": "1",
               "options": [
                 { "value": "none", "label": "None" },

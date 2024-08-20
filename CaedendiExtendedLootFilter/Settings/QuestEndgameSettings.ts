@@ -1,3 +1,4 @@
+import { Helper } from "../../../_helper";
 import { EndgameConstants } from "../Constants/Items/EndgameConstants";
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
@@ -10,7 +11,7 @@ export abstract class QuestEndgameSettings {
     keys:     Settings.filter.questEndgame.highlights.endgame !== SettingsConstants.disabled ? EndgameConstants.patternPkx : null,
     organs:   Settings.filter.questEndgame.highlights.endgame !== SettingsConstants.disabled ? EndgameConstants.patternOrg : null,
     standard: Settings.filter.questEndgame.highlights.endgame === SettingsConstants.all      ? EndgameConstants.patternStd : null,
-    quest:    Settings.filter.questEndgame.highlights.quest   !== SettingsConstants.disabled ? HighlightConstants.questPattern : null,
-    cube:     Settings.filter.questEndgame.highlights.quest   === SettingsConstants.all      ? HighlightConstants.questPattern : null,
+    quest:    Settings.filter.questEndgame.highlights.quest   !== SettingsConstants.disabled ? Helper.questPattern : null,
+    cube:     Settings.filter.questEndgame.highlights.quest   === SettingsConstants.all      ? Helper.questPattern : null,
   };
 }

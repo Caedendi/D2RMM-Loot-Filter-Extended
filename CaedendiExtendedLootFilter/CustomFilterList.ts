@@ -9,10 +9,10 @@ import { ItemEntry } from "./Models/ItemCollectionEntries/ItemEntry";
  * 
  * - Set "key" to directly match the value of "Key" for the corresponding entry in "item-names.json". This can 
  *   either be an item code like "7wc" for Giant Thresher or a full name like "Death's Web".
- * - Name can be whatever you want. Use "quotes" for text-only or use `backtick` to incorporate variables using 
+ * - Name can be whatever you want. Use "quotes" for text-only or use `backticks` to incorporate variables using 
  *   `something ${variable} something`.
  * 
- * See "D2RMM mod settings => Tooltips => Highlight Character" for a list of safe to use highlight characters.
+ * See "D2RMM mod settings => Loot Filter => Settings => Highlight Character" for a list of safe to use highlight characters.
  * Characters like ¤ (which were used in legacy loot filters) are not fully compatible with D2R, they increase the
  * font size of the tooltip.
 *
@@ -98,8 +98,8 @@ export abstract class CustomFilterList {
       // [ "gfy", `Flawed Topaz` ],
       // [ "skf", `Flawed Skull` ],
       // [ "gsv", `Amethyst` ],
-      // For Ruby, Sapphire, Emerald and Diamond, see [CSTM-GEM2] in the "Affixes" section above.
-      // For some reason, the devs put these gems in another JSON file because they're also the names of some affixes.
+      // For Ruby, Sapphire, Emerald and Diamond, see [CSTM-GEM2] in the "Affixes" section below
+      // For some reason, the devs put these gems in another JSON file, probably because they're also the names of some affixes.
       // [ "gsy", `Topaz` ],
       // [ "sku", `Skull` ],
       // [ "gzv", `Flawless Amethyst` ],

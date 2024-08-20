@@ -1,6 +1,6 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
-import { EiLvlDigits } from "../../Settings/EiLvlDigits";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
+import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
 import { Settings } from "../../Settings/Settings";
 import { StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
 import { D2Color } from "../Colors/D2Color";

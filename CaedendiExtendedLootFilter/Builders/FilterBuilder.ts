@@ -10,11 +10,11 @@ export class FilterBuilder implements IBuilder {
   protected itemWriters: IItemWriter[] = [];
 
   constructor() {
-    // this.itemWriters.push(new ItemNamesWriter());       // Most items
-    // this.itemWriters.push(new ItemNameAffixesWriter()); // Gold, Superior/Inferior affixes, Gems (exceptions)
+    this.itemWriters.push(new ItemNamesWriter());       // Most items
+    this.itemWriters.push(new ItemNameAffixesWriter()); // Gold, Superior/Inferior affixes, Gems (exceptions)
     this.itemWriters.push(new ItemRunesWriter());       // Runes
-    // this.itemWriters.push(new UiWriter());              // Quest items (exceptions)
-    // this.itemWriters.push(new ItemModifiersWriter());   // Quest items (exceptions)
+    this.itemWriters.push(new UiWriter());              // Quest items (exceptions)
+    this.itemWriters.push(new ItemModifiersWriter());   // Quest items (exceptions)
   }
 
   public build(): void {

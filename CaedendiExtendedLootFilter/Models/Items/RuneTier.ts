@@ -1,4 +1,4 @@
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { Rune } from "./Rune";
@@ -96,5 +96,9 @@ export class RuneTier {
     this._bigTooltipSetting = bigTooltipSetting;
     this._hasLightPillar = hasLightPillar;
     this._dropSound = dropSound;
+  }
+
+  public getKeys(): string[] {
+    return this.runes.map<string>(rune => rune.key);
   }
 }

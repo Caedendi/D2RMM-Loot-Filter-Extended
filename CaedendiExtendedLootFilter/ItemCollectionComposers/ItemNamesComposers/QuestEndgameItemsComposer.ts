@@ -4,7 +4,7 @@ import { QuestConstants } from "../../Constants/Items/QuestConstants";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { QuestEndgameSettings } from "../../Settings/QuestEndgameSettings";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";

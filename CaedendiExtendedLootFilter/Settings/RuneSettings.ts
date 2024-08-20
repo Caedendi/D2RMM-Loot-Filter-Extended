@@ -1,7 +1,7 @@
-import { HighlightConstants } from "../Constants/Items/HighlightConstants";
+import { Helper } from "../../../_helper";
 import { D2Color } from "../Models/Colors/D2Color";
 import { IHighlight } from "../Models/Highlights/Interfaces/IHighlight";
-import { EBigTooltipSetting } from "./EBigTooltipSetting";
+import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 import { Settings } from "./Settings";
 
 export abstract class RuneSettings {
@@ -20,10 +20,10 @@ export abstract class RuneSettings {
   public static midNumberColor:    D2Color = Settings.filter.runes.mid.numberColor;
   public static highNumberColor:   D2Color = Settings.filter.runes.high.numberColor;
 
-  public static lowHighlight:    IHighlight | null = HighlightConstants.createHighlight(Settings.filter.runes.low.highlight,    Settings.filter.runes.low.highlightColor);
-  public static lowMidHighlight: IHighlight | null = HighlightConstants.createHighlight(Settings.filter.runes.lowMid.highlight, Settings.filter.runes.lowMid.highlightColor);
-  public static midHighlight:    IHighlight | null = HighlightConstants.createHighlight(Settings.filter.runes.mid.highlight,    Settings.filter.runes.mid.highlightColor);
-  public static highHighlight:   IHighlight | null = HighlightConstants.createHighlight(Settings.filter.runes.high.highlight,   Settings.filter.runes.high.highlightColor);
+  public static lowHighlight:    IHighlight | null = Helper.createHighlight(Settings.filter.runes.low.highlight,    Settings.filter.runes.low.highlightColor);
+  public static lowMidHighlight: IHighlight | null = Helper.createHighlight(Settings.filter.runes.lowMid.highlight, Settings.filter.runes.lowMid.highlightColor);
+  public static midHighlight:    IHighlight | null = Helper.createHighlight(Settings.filter.runes.mid.highlight,    Settings.filter.runes.mid.highlightColor);
+  public static highHighlight:   IHighlight | null = Helper.createHighlight(Settings.filter.runes.high.highlight,   Settings.filter.runes.high.highlightColor);
 
   public static lowBigTooltipSetting:    EBigTooltipSetting = Settings.filter.runes.low.bigTooltip;
   public static lowMidBigTooltipSetting: EBigTooltipSetting = Settings.filter.runes.lowMid.bigTooltip;

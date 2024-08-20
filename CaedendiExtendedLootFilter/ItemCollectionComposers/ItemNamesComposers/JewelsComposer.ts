@@ -6,7 +6,7 @@ import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightP
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { RainbowHighlightPattern } from "../../Models/Highlights/RainbowHighlightPattern";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { EBigTooltipSetting } from "../../Settings/EBigTooltipSetting";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";

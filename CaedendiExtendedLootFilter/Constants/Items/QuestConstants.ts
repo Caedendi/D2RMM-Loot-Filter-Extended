@@ -1,4 +1,4 @@
-import { EiLvlDigits } from "../../Settings/EiLvlDigits";
+import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
 
 export abstract class QuestConstants {
   public static readonly questItems: string[] = [
