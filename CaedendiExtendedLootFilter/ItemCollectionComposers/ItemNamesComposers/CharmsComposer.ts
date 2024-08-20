@@ -1,9 +1,8 @@
-import { Helper } from "../../../../_helper";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { CharmConstants } from "../../Constants/Items/CharmConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
+import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
 import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
@@ -74,7 +73,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
 
   private highlightSunderCharmsAlt(bigTooltipSetting: EBigTooltipSetting): void {
     CharmConstants.sunderCharms.forEach(sunder => this.collection.upsert(
-      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, null, new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color), bigTooltipSetting)
+      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, null, new DoubleHighlight(HighlightConstants.pattern10, HighlightConstants.padding5, sunder.color), bigTooltipSetting)
     ));
   }
 }

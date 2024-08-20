@@ -1,6 +1,6 @@
-import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
+import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
+import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSize";
 import { ColorConstants } from "../Colors/ColorConstants";
-import { HighlightConstants } from "./HighlightConstants";
 
 export abstract class EndgameConstants {
   public static clrName = ColorConstants.orange;
@@ -11,9 +11,10 @@ export abstract class EndgameConstants {
   public static token:    string = "toa";
   public static standard: string = "std";
 
-  public static patternEss = new DoubleHighlightPattern(HighlightConstants.pattern5,    HighlightConstants.padding3);
-  public static patternPkx = new DoubleHighlightPattern(HighlightConstants.pattern10,   HighlightConstants.padding5);
-  public static patternOrg = new DoubleHighlightPattern(HighlightConstants.pattern3x10, HighlightConstants.padding5);
+  // TODO: colors
+  public static patternEss = new DoubleHighlight(EDoubleHighlightSetting.SMALL);
+  public static patternPkx = new DoubleHighlight(EDoubleHighlightSetting.MEDIUM);
+  public static patternOrg = new DoubleHighlight(EDoubleHighlightSetting.EXTRA_LARGE);
   public static patternStd = this.patternEss;
   public static patternToa = this.patternPkx;
 }

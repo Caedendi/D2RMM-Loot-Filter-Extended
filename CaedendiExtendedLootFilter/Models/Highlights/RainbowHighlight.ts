@@ -3,9 +3,9 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { BigTooltip } from "../BigTooltip";
-import { DoubleHighlightPatternBase } from "./DoubleHighlightPatternBase";
+import { DoubleHighlightBase } from "./DoubleHighlightBase";
 
-export class RainbowHighlightPattern extends DoubleHighlightPatternBase {
+export class RainbowHighlight extends DoubleHighlightBase {
   /**
    * paddingPatterns: padding between individual patterns
    */
@@ -17,12 +17,7 @@ export class RainbowHighlightPattern extends DoubleHighlightPatternBase {
   /**
    * patternColors: 
    */
-  private readonly _patternColors = [
-    ColorConstants.red,
-    ColorConstants.yellow,
-    ColorConstants.blue,
-    ColorConstants.green,
-  ];
+  private readonly _patternColors = [ ColorConstants.red, ColorConstants.yellow, ColorConstants.blue, ColorConstants.green ];
   protected get patternColors() {
     return this._patternColors;
   }

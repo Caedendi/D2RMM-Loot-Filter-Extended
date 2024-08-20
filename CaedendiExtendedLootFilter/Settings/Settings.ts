@@ -2,6 +2,7 @@ import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { D2Color } from "../Models/Colors/D2Color";
 import { D2rColor } from "../Models/Colors/D2rColor";
+import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSize";
 import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 
 // TODO: add this text somewhere
@@ -28,7 +29,7 @@ export abstract class Settings {
       shouldAddNumber:   config.ShouldAddRuneNumbers  as boolean,
       low: {
          isVisible:      config.ShouldShowRunesLow as boolean,
-         highlight:      config.RunesLowHighlight  as string,
+         highlight:      config.RunesLowHighlight  as number as EDoubleHighlightSetting,
          highlightColor: new D2Color(config.RunesLowColorHighlight as string),
          nameColor:      new D2Color(config.RunesLowColorName      as string),
          numberColor:    new D2Color(config.RunesLowColorNumber    as string),
@@ -36,7 +37,7 @@ export abstract class Settings {
       },
       lowMid: {
          isVisible:      config.ShouldShowRunesLowMid as boolean,
-         highlight:      config.RunesLowMidHighlight  as string,
+         highlight:      config.RunesLowMidHighlight  as number as EDoubleHighlightSetting,
          highlightColor: new D2Color(config.RunesLowMidColorHighlight as string),
          nameColor:      new D2Color(config.RunesLowMidColorName      as string),
          numberColor:    new D2Color(config.RunesLowMidColorNumber    as string),
@@ -44,7 +45,7 @@ export abstract class Settings {
       },
       mid: {
          isVisible:      config.ShouldShowRunesMid as boolean,
-         highlight:      config.RunesMidHighlight  as string,
+         highlight:      config.RunesMidHighlight  as number as EDoubleHighlightSetting,
          highlightColor: new D2Color(config.RunesMidColorHighlight as string),
          nameColor:      new D2Color(config.RunesMidColorName      as string),
          numberColor:    new D2Color(config.RunesMidColorNumber    as string),
@@ -52,7 +53,7 @@ export abstract class Settings {
       },
       high: {
          isVisible:      config.ShouldShowRunesHigh as boolean,
-         highlight:      config.RunesHighHighlight  as string,
+         highlight:      config.RunesHighHighlight  as number as EDoubleHighlightSetting,
          highlightColor: new D2Color(config.RunesHighColorHighlight as string),
          nameColor:      new D2Color(config.RunesHighColorName      as string),
          numberColor:    new D2Color(config.RunesHighColorNumber    as string),

@@ -485,10 +485,12 @@
                   "visible": ["value", "ShouldShowRunesMid"],
                   "defaultValue": "l",
                   "options": [
-                    { "value": "none", "label": "Disable" },
-                    { "value": "s", "label": "Small" },
-                    { "value": "l", "label": "Large" },
-                    { "value": "xl", "label": "Extra Large" }
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" }
+                    { "value": "5", "label": "Extra Extra Large" }
                   ]
                 },
                 {

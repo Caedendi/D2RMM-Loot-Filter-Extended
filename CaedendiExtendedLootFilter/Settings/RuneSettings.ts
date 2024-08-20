@@ -1,5 +1,6 @@
-import { Helper } from "../../../_helper";
 import { D2Color } from "../Models/Colors/D2Color";
+import { DoubleHighlight } from "../Models/Highlights/DoubleHighlight";
+import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSize";
 import { IHighlight } from "../Models/Highlights/Interfaces/IHighlight";
 import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 import { Settings } from "./Settings";
@@ -20,10 +21,10 @@ export abstract class RuneSettings {
   public static midNumberColor:    D2Color = Settings.filter.runes.mid.numberColor;
   public static highNumberColor:   D2Color = Settings.filter.runes.high.numberColor;
 
-  public static lowHighlight:    IHighlight | null = Helper.createHighlight(Settings.filter.runes.low.highlight,    Settings.filter.runes.low.highlightColor);
-  public static lowMidHighlight: IHighlight | null = Helper.createHighlight(Settings.filter.runes.lowMid.highlight, Settings.filter.runes.lowMid.highlightColor);
-  public static midHighlight:    IHighlight | null = Helper.createHighlight(Settings.filter.runes.mid.highlight,    Settings.filter.runes.mid.highlightColor);
-  public static highHighlight:   IHighlight | null = Helper.createHighlight(Settings.filter.runes.high.highlight,   Settings.filter.runes.high.highlightColor);
+  public static lowHighlight:    IHighlight | null = this.createHighlight(Settings.filter.runes.low.highlight,    Settings.filter.runes.low.highlightColor);
+  public static lowMidHighlight: IHighlight | null = this.createHighlight(Settings.filter.runes.lowMid.highlight, Settings.filter.runes.lowMid.highlightColor);
+  public static midHighlight:    IHighlight | null = this.createHighlight(Settings.filter.runes.mid.highlight,    Settings.filter.runes.mid.highlightColor);
+  public static highHighlight:   IHighlight | null = this.createHighlight(Settings.filter.runes.high.highlight,   Settings.filter.runes.high.highlightColor);
 
   public static lowBigTooltipSetting:    EBigTooltipSetting = Settings.filter.runes.low.bigTooltip;
   public static lowMidBigTooltipSetting: EBigTooltipSetting = Settings.filter.runes.lowMid.bigTooltip;
@@ -39,4 +40,11 @@ export abstract class RuneSettings {
   public static lowMidDropSound: string = Settings.dropSounds.runes.lowMid;
   public static midDropSound:    string = Settings.dropSounds.runes.mid;
   public static highDropSound:   string = Settings.dropSounds.runes.high;
+
+  protected static createHighlight(setting: EDoubleHighlightSetting, color?: D2Color): DoubleHighlight | null {
+    Helper.createHighlight(
+    Helper.createHighlight(
+    Helper.createHighlight(
+    Helper.createHighlight(
+  }
 }

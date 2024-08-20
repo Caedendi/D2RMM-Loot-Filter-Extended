@@ -1,10 +1,10 @@
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { FacetConstants } from "../../Constants/Items/FacetConstants";
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { DoubleHighlightPattern } from "../../Models/Highlights/DoubleHighlightPattern";
+import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
+import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSize";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
-import { RainbowHighlightPattern } from "../../Models/Highlights/RainbowHighlightPattern";
+import { RainbowHighlight } from "../../Models/Highlights/RainbowHighlight";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { Settings } from "../../Settings/Settings";
@@ -26,9 +26,9 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IItemC
 
   protected createFacetPattern(): IHighlight | null {
     if (Settings.filter.jewelry.facets.highlight === "rainbow")
-      return new RainbowHighlightPattern(Settings.filter.jewelry.facets.bigTooltip);
+      return new RainbowHighlight(Settings.filter.jewelry.facets.bigTooltip);
     if (Settings.filter.jewelry.facets.highlight === "highlight")
-      return new DoubleHighlightPattern(HighlightConstants.pattern10, HighlightConstants.padding5, ColorConstants.red);
+      return new DoubleHighlight(EDoubleHighlightSetting.LARGE, ColorConstants.red);
 
     return null;
   }

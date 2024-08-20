@@ -1,7 +1,7 @@
 import { D2Color } from "../Colors/D2Color";
 import { HighlightBase } from "./HighlightBase";
 
-export abstract class DoubleHighlightPatternBase extends HighlightBase {
+export abstract class DoubleHighlightBase extends HighlightBase {
   constructor(pattern: string, padding: string, color?: D2Color) {
     super(pattern, padding, color);
   }
