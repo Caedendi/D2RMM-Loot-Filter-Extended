@@ -179,12 +179,14 @@
                   "name": "Highlight",
                   "description": "Select a highlight pattern.",
                   "visible": ["value", "ShouldShowRunesLow"],
-                  "defaultValue": "none",
+                  "defaultValue": "0",
                   "options": [
-                    { "value": "none", "label": "Disable" },
-                    { "value": "s", "label": "Small" },
-                    { "value": "l", "label": "Large" },
-                    { "value": "xl", "label": "Extra Large" }
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
                   ]
                 },
                 {
@@ -192,7 +194,7 @@
                   "type": "select",
                   "name": "Highlight Color",
                   "description": "Color of the highlight patterns for Low Runes.",
-                  "visible": ["and", ["value", "ShouldShowRunesLow"], ["neq", ["value", "RunesLowHighlight"], "none"]],
+                  "visible": ["and", ["value", "ShouldShowRunesLow"], ["neq", ["value", "RunesLowHighlight"], "0"]],
                   "defaultValue": "none",
                   "options": [
                     { "value": "none", "label": "Default" },
@@ -331,12 +333,14 @@
                   "name": "Highlight",
                   "description": "Select a highlight pattern.",
                   "visible": ["value", "ShouldShowRunesLowMid"],
-                  "defaultValue": "s",
+                  "defaultValue": "2",
                   "options": [
-                    { "value": "none", "label": "Disable" },
-                    { "value": "s", "label": "Small" },
-                    { "value": "l", "label": "Large" },
-                    { "value": "xl", "label": "Extra Large" }
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
                   ]
                 },
                 {
@@ -344,7 +348,7 @@
                   "type": "select",
                   "name": "Highlight Color",
                   "description": "Color of the highlight patterns for Low-Mid Runes.",
-                  "visible": ["and", ["value", "ShouldShowRunesLowMid"], ["neq", ["value", "RunesLowMidHighlight"], "none"]],
+                  "visible": ["and", ["value", "ShouldShowRunesLowMid"], ["neq", ["value", "RunesLowMidHighlight"], "0"]],
                   "defaultValue": "none",
                   "options": [
                     { "value": "none", "label": "Default" },
@@ -483,7 +487,7 @@
                   "name": "Highlight",
                   "description": "Select a highlight pattern.",
                   "visible": ["value", "ShouldShowRunesMid"],
-                  "defaultValue": "l",
+                  "defaultValue": "3",
                   "options": [
                     { "value": "0", "label": "Disable" },
                     { "value": "1", "label": "Small" },
@@ -498,7 +502,7 @@
                   "type": "select",
                   "name": "Highlight Color",
                   "description": "Color of the highlight patterns for Mid Runes.",
-                  "visible": ["and", ["value", "ShouldShowRunesMid"], ["neq", ["value", "RunesMidHighlight"], "none"]],
+                  "visible": ["and", ["value", "ShouldShowRunesMid"], ["neq", ["value", "RunesMidHighlight"], "0"]],
                   "defaultValue": "none",
                   "options": [
                     { "value": "none", "label": "Default" },
@@ -637,12 +641,14 @@
                   "name": "Highlight",
                   "description": "Select a highlight pattern.",
                   "visible": ["value", "ShouldShowRunesHigh"],
-                  "defaultValue": "xl",
+                  "defaultValue": "5",
                   "options": [
-                    { "value": "none", "label": "Disable" },
-                    { "value": "s", "label": "Small" },
-                    { "value": "l", "label": "Large" },
-                    { "value": "xl", "label": "Extra Large" }
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
                   ]
                 },
                 {
@@ -650,7 +656,7 @@
                   "type": "select",
                   "name": "Highlight Color",
                   "description": "Color of the highlight patterns for High Runes.",
-                  "visible": ["and", ["value", "ShouldShowRunesHigh"], ["neq", ["value", "RunesHighHighlight"], "none"]],
+                  "visible": ["and", ["value", "ShouldShowRunesHigh"], ["neq", ["value", "RunesHighHighlight"], "0"]],
                   "defaultValue": ";",
                   "options": [
                     { "value": "none", "label": "Default" },
@@ -939,27 +945,100 @@
               "defaultExpanded": true,
               "children": [
                 {
-                  "id": "Quest",
+                  "id": "IsCubeHighlightExcluded",
+                  "type": "checkbox",
+                  "name": "Exclude Cube",
+                  "description": "Exclude the Horadric Cube from highlighting. Enable this to fix messing up the Cube window's title and some NPC dialog where it is mentioned.",
+                  "defaultValue": true
+                },
+                {
+                  "id": "QuestEndgameHighlightsQuest",
                   "type": "select",
                   "name": "Quest Items",
-                  "description": "Highlight Quest Items. Exclude the Horadric Cube to fix messing up the Cube window's title and some NPC dialog where it is mentioned. [CSTM-QST1] and [CSTM-QST2]",
-                  "defaultValue": "xhc",
+                  "description": "Highlight Quest Items. [CSTM-QST1] and [CSTM-QST2]",
+                  "defaultValue": "5",
                   "options": [
-                    { "value": "none", "label": "Disable" },
-                    { "value": "all", "label": "All" },
-                    { "value": "xhc", "label": "All except Cube" }
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
                   ]
                 },
                 {
-                  "id": "Endgame",
+                  "id": "QuestEndgameHighlightsEssences",
                   "type": "select",
-                  "name": "Endgame Items",
-                  "description": "Highlight Essences, Tokens, Keys, Organs and optionally the Standard of Heroes. For Annihilus and Hellfire Torch, see Charms. [CSTM-END]",
-                  "defaultValue": "all",
+                  "name": "Essences",
+                  "description": "Highlight Essences. [CSTM-END]",
+                  "defaultValue": "0",
                   "options": [
-                    { "value": "none", "label": "Disable" },
-                    { "value": "all",  "label": "All" },
-                    { "value": "xsh",  "label": "All except Standard of Heroes" }
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
+                  ]
+                },
+                {
+                  "id": "QuestEndgameHighlightsTokens",
+                  "type": "select",
+                  "name": "Tokens of Absolution",
+                  "description": "Highlight Tokens of Absolution. [CSTM-END]",
+                  "defaultValue": "3",
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
+                  ]
+                },
+                {
+                  "id": "QuestEndgameHighlightsKeys",
+                  "type": "select",
+                  "name": "Pandemonium Keys",
+                  "description": "Highlight Pandemonium Keys. [CSTM-END]",
+                  "defaultValue": "5",
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
+                  ]
+                },
+                {
+                  "id": "QuestEndgameHighlightsOrgans",
+                  "type": "select",
+                  "name": "Pandemonium Organs",
+                  "description": "Highlight Pandemonium Organs. [CSTM-END]",
+                  "defaultValue": "5",
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
+                  ]
+                },
+                {
+                  "id": "QuestEndgameHighlightsStandard",
+                  "type": "select",
+                  "name": "Standard of Heroes",
+                  "description": "Highlight the Standard of Heroes. [CSTM-END]",
+                  "defaultValue": "0",
+                  "options": [
+                    { "value": "0", "label": "Disable" },
+                    { "value": "1", "label": "Small" },
+                    { "value": "2", "label": "Medium" },
+                    { "value": "3", "label": "Large" },
+                    { "value": "4", "label": "Extra Large" },
+                    { "value": "5", "label": "Extra Extra Large" }
                   ]
                 }
               ]

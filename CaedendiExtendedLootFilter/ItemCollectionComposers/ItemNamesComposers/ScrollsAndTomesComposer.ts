@@ -32,14 +32,14 @@ export class ScrollsAndTomesComposer extends ItemCollectionComposerBase implemen
     [ 
       { key: "tsc", name: "TP" }, // Scroll of Town Portal
       { key: "isc", name: "ID" }, // Scroll of Identify
-    ].forEach(item => this.collection.upsert(new ItemEntry(item.key, item.name, ColorConstants.white, new SingleHighlight(CharConstants.plus, ColorConstants.green, HighlightConstants.paddingNone))));
+    ].forEach(item => this.collection.upsert(new ItemEntry(item.key, item.name, ColorConstants.white, new SingleHighlight(CharConstants.plus, ColorConstants.green, HighlightConstants.padding.none))));
   }
 
   protected highlightTomes(): void {
     [ 
       { key: "tbk", name: "TP Tome" }, // Tome of Town Portal
       { key: "ibk", name: "ID Tome" }, // Tome of Identify
-    ].forEach(item => this.collection.upsert(new ItemEntry(item.key, item.name, ColorConstants.white, new SingleHighlight(CharConstants.plus, ColorConstants.darkGreen, HighlightConstants.paddingNone))));
+    ].forEach(item => this.collection.upsert(new ItemEntry(item.key, item.name, ColorConstants.white, new SingleHighlight(CharConstants.plus, ColorConstants.darkGreen, HighlightConstants.padding.none))));
   }
 
   protected hideScrolls(): void {

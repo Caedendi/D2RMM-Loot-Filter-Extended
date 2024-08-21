@@ -2,9 +2,8 @@ import { CharConstants } from "../../Constants/CharConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { EItemQuality } from "../Enums/EItemQuality";
 import { RawSettings } from "../RawSettings";
-import { FilterSettingsBase } from "./FilterSettingsBase";
 
-export abstract class ItemQualitySettings extends FilterSettingsBase {
+export abstract class ItemQualitySettings {
   public static readonly isEnabled:   boolean = RawSettings.filter.statsAndModifiers.itemQuality.isEnabled;
   public static readonly placement:   string  = RawSettings.filter.statsAndModifiers.itemQuality.placement;
   public static readonly brackets:    string  = RawSettings.filter.statsAndModifiers.itemQuality.brackets;

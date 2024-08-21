@@ -9,7 +9,7 @@ export class RainbowHighlight extends DoubleHighlightBase {
   /**
    * paddingPatterns: padding between individual patterns
    */
-  private readonly _patternsPadding = HighlightConstants.padding1;
+  private readonly _patternsPadding = HighlightConstants.padding.p1;
   protected get patternsPadding() {
     return this._patternsPadding;
   }
@@ -33,10 +33,10 @@ export class RainbowHighlight extends DoubleHighlightBase {
   // TODO
   constructor(bigTooltipSetting?: EBigTooltipSetting) {
     let pattern = BigTooltip.hasPickUpMessage(bigTooltipSetting ?? EBigTooltipSetting.Disabled) 
-      ? HighlightConstants.pattern3 
-      : HighlightConstants.pattern5;
+      ? HighlightConstants.pattern.p3 
+      : HighlightConstants.pattern.p5;
 
-    super(pattern, HighlightConstants.padding3);
+    super(pattern, HighlightConstants.padding.p3);
   }
 
   protected getPrefix(): string {

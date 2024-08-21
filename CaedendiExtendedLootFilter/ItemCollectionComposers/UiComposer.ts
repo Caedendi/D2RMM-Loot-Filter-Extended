@@ -22,7 +22,7 @@ export class UiComposer extends ItemCollectionComposerBase implements IItemColle
   }
 
   private upsertQuestItem(key: string, highlight: IHighlight | null) {
-    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, QuestEndgameSettings.bigTooltips.questItems));
+    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueNameColor, highlight, QuestEndgameSettings.bigTooltips.questItems));
   }
 
   private upsertEntry(entry: ItemEntry): void {

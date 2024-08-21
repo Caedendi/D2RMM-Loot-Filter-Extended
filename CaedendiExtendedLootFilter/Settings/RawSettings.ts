@@ -84,8 +84,13 @@ export abstract class RawSettings {
         shouldShowStandard: config.IsStandardOfHeroesVisible as boolean,
       },
       highlights: {
-        quest:   config.Quest   as string,
-        endgame: config.Endgame as string,
+        isCubeEnabled: !(config.IsCubeHighlightExcluded as boolean),
+        quest:    config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
+        essences: config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
+        tokens:   config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
+        keys:     config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
+        organs:   config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
+        standard: config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
       },
       bigTooltips: {
         questItems: config.BigTooltipQuestItems as number as EBigTooltipSetting,
@@ -184,3 +189,4 @@ export abstract class RawSettings {
     tooltipSize:          config.TooltipSize          as number,
   };
 }
+  

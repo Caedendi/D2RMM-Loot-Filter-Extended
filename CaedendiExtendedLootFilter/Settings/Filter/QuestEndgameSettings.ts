@@ -1,22 +1,25 @@
-import { EndgameConstants } from "../../Constants/Items/EndgameConstants";
-import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
+import { D2Color } from "../../Models/Colors/D2Color";
+import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
 import { RawSettings } from "../RawSettings";
-import { FilterSettingsBase } from "./FilterSettingsBase";
 
-export abstract class QuestEndgameSettings extends FilterSettingsBase {
+export abstract class QuestEndgameSettings {
   public static readonly filter = {
     shouldShowEssences: RawSettings.filter.questEndgame.filter.shouldShowEssences,
     shouldShowStandard: RawSettings.filter.questEndgame.filter.shouldShowStandard,
   };
 
+  // TODO: move?
+  protected static readonly highlightColor: D2Color = HighlightConstants.defaultHighlightColor;
+
   public static readonly highlights = {
-    essences: RawSettings.filter.questEndgame.highlights.endgame !== SettingsConstants.disabled ? EndgameConstants.patternEss : null,
-    token:    RawSettings.filter.questEndgame.highlights.endgame !== SettingsConstants.disabled ? EndgameConstants.patternToa : null,
-    keys:     RawSettings.filter.questEndgame.highlights.endgame !== SettingsConstants.disabled ? EndgameConstants.patternPkx : null,
-    organs:   RawSettings.filter.questEndgame.highlights.endgame !== SettingsConstants.disabled ? EndgameConstants.patternOrg : null,
-    standard: RawSettings.filter.questEndgame.highlights.endgame === SettingsConstants.all      ? EndgameConstants.patternStd : null,
-    quest:    RawSettings.filter.questEndgame.highlights.quest   !== SettingsConstants.disabled ? Helper.questPattern : null,
-    cube:     RawSettings.filter.questEndgame.highlights.quest   === SettingsConstants.all      ? Helper.questPattern : null,
+    isCubeEnabled: RawSettings.filter.questEndgame.highlights.isCubeEnabled,
+    quest:    DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.quest,    this.highlightColor, RawSettings.filter.questEndgame.bigTooltips.questItems),
+    essences: DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.essences, this.highlightColor, RawSettings.filter.questEndgame.bigTooltips.essences),
+    token:    DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.tokens,   this.highlightColor, RawSettings.filter.questEndgame.bigTooltips.tokens),
+    keys:     DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.keys,     this.highlightColor, RawSettings.filter.questEndgame.bigTooltips.keys),
+    organs:   DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.organs,   this.highlightColor, RawSettings.filter.questEndgame.bigTooltips.organs),
+    standard: DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.standard, this.highlightColor, RawSettings.filter.questEndgame.bigTooltips.standard),
   };
 
   public static readonly bigTooltips = {

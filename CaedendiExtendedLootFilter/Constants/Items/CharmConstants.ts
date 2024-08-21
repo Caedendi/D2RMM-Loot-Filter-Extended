@@ -49,7 +49,4 @@ export abstract class CharmConstants {
     new SunderCharm(this.sunderFireId, this.sunderFireName, ColorConstants.red      ),
     new SunderCharm(this.sunderPoisId, this.sunderPoisName, ColorConstants.green    ),
   ];
-
-  static charmsUniquePrefix = HighlightConstants.uniquePrefix;
-  static charmsUniqueSuffix = HighlightConstants.uniqueSuffix;
 }

@@ -31,7 +31,7 @@ export abstract class GemConstants {
 
   static clrName = ColorConstants.white;
   static highlight = CharConstants.o;
-  static padding = HighlightConstants.padding1;
+  static padding = HighlightConstants.padding.p1;
 
   // indent for the pick up message if gem highlighting is enabled.
   public static getPickUpMessageIndent(): string {

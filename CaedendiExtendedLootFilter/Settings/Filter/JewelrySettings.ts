@@ -1,7 +1,6 @@
 import { RawSettings } from "../RawSettings";
-import { FilterSettingsBase } from "./FilterSettingsBase";
 
-export abstract class JewelrySettings extends FilterSettingsBase {
+export abstract class JewelrySettings {
   public static readonly gems = {
     isHighlightEnabled:  RawSettings.filter.jewelry.gems.isHighlightEnabled,
     filter:              RawSettings.filter.jewelry.gems.filter,

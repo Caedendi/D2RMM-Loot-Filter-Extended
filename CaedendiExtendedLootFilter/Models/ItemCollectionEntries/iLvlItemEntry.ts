@@ -57,9 +57,9 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
       case EiLvlDigits.None:
         return CharConstants.empty;
       case EiLvlDigits.Single:
-        return ItemLevelSettings.iLvlIndentFixSingle;
+        return ItemLevelSettings.singleDigitIndent;
       case EiLvlDigits.Double:
-        return ItemLevelSettings.iLvlIndentFixDouble;
+        return ItemLevelSettings.doubleDigitIndent;
       default:
         throw new Error("Received undefined iLvlDigits value.");
     }

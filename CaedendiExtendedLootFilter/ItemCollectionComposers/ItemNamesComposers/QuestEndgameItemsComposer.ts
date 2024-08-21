@@ -20,15 +20,30 @@ export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implem
   }
 
   public applyFilter(): void {
-    this.applyQuestItems();
+    this.applyQuestItemsAndWeapons();
     this.applyEndgameItems();
   }
 
-  protected applyQuestItems(): void {
-    this.upsertQuestItem(QuestConstants.cube, QuestEndgameSettings.highlights.cube); // cube
-    QuestConstants.questItems.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlights.quest)); // quest items
-    QuestConstants.questWeapons.forEach(weapon => this.upsertEntry( // quest weapons
-      new iLvlItemEntry(weapon.key, weapon.digits, null, HighlightConstants.uniqueColorName, QuestEndgameSettings.highlights.quest, QuestEndgameSettings.bigTooltips.questItems)
+  protected applyQuestItemsAndWeapons(): void {
+    this.applyCube();
+    this.applyQuestItems();
+    this.applyQuestWeapons();
+  }
+
+  private applyCube(): void {
+    if (QuestEndgameSettings.highlights.isCubeEnabled)
+      return;
+
+    this.upsertQuestItem(QuestConstants.cube, QuestEndgameSettings.highlights.quest);
+  }
+
+  private applyQuestItems(): void {
+    QuestConstants.questItems.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlights.quest));
+  }
+
+  private applyQuestWeapons(): void {
+    QuestConstants.questWeapons.forEach(weapon => this.upsertEntry(
+      new iLvlItemEntry(weapon.key, weapon.digits, null, HighlightConstants.uniqueNameColor, QuestEndgameSettings.highlights.quest, QuestEndgameSettings.bigTooltips.questItems)
     ));
   }
 
@@ -36,9 +51,9 @@ export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implem
     this.applyEssences();
     this.applyStandardOfHeroes();
 
-    this.upsertEndgameItem(EndgameConstants.token, QuestEndgameSettings.highlights.token, QuestEndgameSettings.bigTooltips.tokens);           // token
-    this.upsertEndgameItems(EndgameConstants.keys, QuestEndgameSettings.highlights.keys, QuestEndgameSettings.bigTooltips.keys);       // keys
-    this.upsertEndgameItems(EndgameConstants.organs, QuestEndgameSettings.highlights.organs, QuestEndgameSettings.bigTooltips.organs); // organs
+    this.upsertEndgameItem( EndgameConstants.token,  QuestEndgameSettings.highlights.token,  QuestEndgameSettings.bigTooltips.tokens);
+    this.upsertEndgameItems(EndgameConstants.keys,   QuestEndgameSettings.highlights.keys,   QuestEndgameSettings.bigTooltips.keys);
+    this.upsertEndgameItems(EndgameConstants.organs, QuestEndgameSettings.highlights.organs, QuestEndgameSettings.bigTooltips.organs);
   }
 
   private applyEssences(): void {
@@ -60,7 +75,7 @@ export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implem
   }
 
   private upsertQuestItem(key: string, highlight: IHighlight | null) {
-    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, QuestEndgameSettings.bigTooltips.questItems));
+    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueNameColor, highlight, QuestEndgameSettings.bigTooltips.questItems));
   }
 
   private upsertEndgameItem(key: string, highlight: IHighlight | null, bigTooltipSetting: EBigTooltipSetting): void {

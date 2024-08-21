@@ -44,8 +44,8 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
   }
 
   protected applyThrowingPotions(): void {
-    let highlightGas = new SingleHighlight(CharConstants.o, ColorConstants.darkGreen, HighlightConstants.padding1);
-    let highlightOil = new SingleHighlight(CharConstants.o, ColorConstants.orange, HighlightConstants.padding1);
+    let highlightGas = new SingleHighlight(CharConstants.o, ColorConstants.darkGreen, HighlightConstants.padding.p1);
+    let highlightOil = new SingleHighlight(CharConstants.o, ColorConstants.orange, HighlightConstants.padding.p1);
   
     let throwingPots: { key: string, name: string, highlight: IHighlight }[] = [
       { key: "gpl", name: "Gas 1", highlight: highlightGas }, // Strangling Gas Potion
@@ -94,7 +94,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
   }
 
   private highlightAmmo(key: string): void {
-    this.collection.upsert(new ItemEntry(key, null, this.nameColor, new SingleHighlight(CharConstants.o, ColorConstants.gray, HighlightConstants.padding1)));
+    this.collection.upsert(new ItemEntry(key, null, this.nameColor, new SingleHighlight(CharConstants.o, ColorConstants.gray, HighlightConstants.padding.p1)));
   }
 
   // TODO: add option for highlight?

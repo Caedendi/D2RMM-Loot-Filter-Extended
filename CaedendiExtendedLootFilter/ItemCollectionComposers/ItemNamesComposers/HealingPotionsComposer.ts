@@ -114,6 +114,6 @@ export class HealingPotionsComposer extends ItemCollectionComposerBase implement
   }
 
   protected upsertPotion(key: string, name: string, color: D2Color): void {
-    this.collection.upsert(new ItemEntry(key, name, ColorConstants.white, new SingleHighlight(CharConstants.plus, color, HighlightConstants.paddingNone)));
+    this.collection.upsert(new ItemEntry(key, name, ColorConstants.white, new SingleHighlight(CharConstants.plus, color, HighlightConstants.padding.none)));
   }
 }
