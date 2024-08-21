@@ -2,7 +2,7 @@ import { GemConstants } from "../../Constants/Items/GemConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { Gem } from "../../Models/Items/Gem";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -17,7 +17,7 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   // - gem name (Ruby)
   // - custom
   public applyFilter(): void {
-    switch (Settings.filter.jewelry.gems.filter) {
+    switch (RawSettings.filter.jewelry.gems.filter) {
       case SettingsConstants.all: // show all
         this.upsertGems(GemConstants.chippedFlawedRegularGems);
         this.upsertGems(GemConstants.flawlessGems);
@@ -46,6 +46,6 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   }
 
   protected upsertGems(gems: Gem[]): void {
-    this.collection.upsertMultipleIfHasHighlightOrBigTooltip(ItemEntry.fromGems(gems, Settings.filter.jewelry.gems.isHighlightEnabled, Settings.filter.jewelry.gems.bigTooltip));
+    this.collection.upsertMultipleIfHasHighlightOrBigTooltip(ItemEntry.fromGems(gems, RawSettings.filter.jewelry.gems.isHighlightEnabled, RawSettings.filter.jewelry.gems.bigTooltip));
   }
 }

@@ -1,13 +1,13 @@
 import { D2Color } from "../../Models/Colors/D2Color";
 import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSize";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { SettingsConstants } from "../SettingsConstants";
 
 export abstract class HighlightConstants {
-  public static character: string  = Settings.filter.settings.highlightCharacter !== SettingsConstants.custom ? Settings.filter.settings.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
-  public static defaultHighlightColor: D2Color = Settings.filter.settings.defaultHighlightColor;
+  public static character: string  = RawSettings.filter.settings.highlightCharacter !== SettingsConstants.custom ? RawSettings.filter.settings.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
+  public static defaultHighlightColor: D2Color = RawSettings.filter.settings.defaultHighlightColor;
 
   public static paddingNone = CharConstants.empty;
   public static padding1    = CharConstants.space;

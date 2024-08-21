@@ -6,7 +6,7 @@ import { D2Color } from "../../Models/Colors/D2Color";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { SingleHighlight } from "../../Models/Highlights/SingleHighlight";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -31,7 +31,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
       { key: "vps", name: "Stamina" },  // Stamina Potion
     ];
 
-    switch (Settings.filter.junk.buffPotions) {
+    switch (RawSettings.filter.junk.buffPotions) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // show all
@@ -56,7 +56,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
       { key: "ops", name: "Oil 3", highlight: highlightOil }, // Oil Potion
     ];
 
-    switch (Settings.filter.junk.throwingPotions) {
+    switch (RawSettings.filter.junk.throwingPotions) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // show all
@@ -72,7 +72,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     let aqv: string  = "aqv";
     let cqv: string  = "cqv";
 
-    switch (Settings.filter.junk.arrowsBolts) {
+    switch (RawSettings.filter.junk.arrowsBolts) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
@@ -99,7 +99,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
 
   // TODO: add option for highlight?
   protected applyKeys(): void {
-    if (Settings.filter.junk.keys == SettingsConstants.hide)
+    if (RawSettings.filter.junk.keys == SettingsConstants.hide)
         this.collection.upsertHidden("key");
   }
 }

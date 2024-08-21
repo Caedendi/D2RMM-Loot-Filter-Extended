@@ -1,7 +1,7 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
@@ -34,7 +34,7 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
 
   public generateDisplayName(translatedName: string): string {
     if (!this.isVisible)
-      return Settings.filter.settings.hidden;
+      return RawSettings.filter.settings.hidden;
 
     let displayName = this.applyNewName(translatedName);
     displayName = this.applyNameColor(displayName);
@@ -46,7 +46,7 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
   }
 
   protected applyIlvlIndent(displayName: string): string {
-    if (!Settings.filter.statsAndModifiers.itemLevel.shouldFixIndentation)
+    if (!RawSettings.filter.statsAndModifiers.itemLevel.shouldFixIndentation)
       return displayName;
 
     return `${this.getiLvlIndent()}${displayName}`;

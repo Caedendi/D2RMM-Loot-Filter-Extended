@@ -3,12 +3,12 @@ import { FileConstants } from "../Constants/FileConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
 import { RuneTierConstants } from "../Constants/Items/RuneTierConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
-import { Settings } from "../Settings/Settings";
+import { RawSettings } from "../Settings/RawSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 export class DropSoundBuilder implements IBuilder {
   public build() {
-    if (!Settings.dropSounds.isEnabled) {
+    if (!RawSettings.dropSounds.isEnabled) {
       return;
     }
 
@@ -27,7 +27,7 @@ export class DropSoundBuilder implements IBuilder {
 
   protected modifyDropSoundForRunes(soundsFile) {
     RuneConstants.tiers.forEach(tier => {
-      if (!tier.isVisible && Settings.dropSounds.shouldExcludeForHidden)
+      if (!tier.isVisible && RawSettings.dropSounds.shouldExcludeForHidden)
         return;
 
       let itemCodes = tier.runes.map(rune => rune.key);
@@ -68,28 +68,28 @@ export class DropSoundBuilder implements IBuilder {
     ];
 
     let suffix = "quest";
-    this.modifyDropSoundForMiscItems(soundsFile, itemCodesMisc, suffix, Settings.dropSounds.questEndgame.questItems);
-    this.modifyDropSoundForWeapons(soundsFile, itemCodesWeapons, suffix, Settings.dropSounds.questEndgame.questItems);
+    this.modifyDropSoundForMiscItems(soundsFile, itemCodesMisc, suffix, RawSettings.dropSounds.questEndgame.questItems);
+    this.modifyDropSoundForWeapons(soundsFile, itemCodesWeapons, suffix, RawSettings.dropSounds.questEndgame.questItems);
   }
 
   protected modifyDropSoundForEssences(soundsFile) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["tes", "ceh", "bet", "fed"], "essence", Settings.dropSounds.questEndgame.essences);
+    this.modifyDropSoundForMiscItems(soundsFile, ["tes", "ceh", "bet", "fed"], "essence", RawSettings.dropSounds.questEndgame.essences);
   }
 
   protected modifyDropSoundForTokens(soundsFile) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["toa"], "token", Settings.dropSounds.questEndgame.tokens);
+    this.modifyDropSoundForMiscItems(soundsFile, ["toa"], "token", RawSettings.dropSounds.questEndgame.tokens);
   }
 
   protected modifyDropSoundForKeys(soundsFile) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["pk1", "pk2", "pk3"], "key", Settings.dropSounds.questEndgame.keys);
+    this.modifyDropSoundForMiscItems(soundsFile, ["pk1", "pk2", "pk3"], "key", RawSettings.dropSounds.questEndgame.keys);
   }
 
   protected modifyDropSoundForOrgans(soundsFile) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["eyz", "brz", "hrn"], "organ", Settings.dropSounds.questEndgame.organs);
+    this.modifyDropSoundForMiscItems(soundsFile, ["eyz", "brz", "hrn"], "organ", RawSettings.dropSounds.questEndgame.organs);
   }
 
   protected modifyDropSoundForStandardOfHeroes(soundsFile) {
-    this.modifyDropSoundForMiscItems(soundsFile, ["std"], "flag", Settings.dropSounds.questEndgame.standard);
+    this.modifyDropSoundForMiscItems(soundsFile, ["std"], "flag", RawSettings.dropSounds.questEndgame.standard);
   }
 
   protected modifyDropSoundForMiscItems(soundsFile, itemCodes: string[], newNameSuffix: string, dropSound: string) {

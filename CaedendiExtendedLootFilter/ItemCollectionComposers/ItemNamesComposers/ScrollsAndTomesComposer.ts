@@ -4,7 +4,7 @@ import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { SingleHighlight } from "../../Models/Highlights/SingleHighlight";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -14,7 +14,7 @@ export class ScrollsAndTomesComposer extends ItemCollectionComposerBase implemen
   }
 
   public applyFilter(): void {
-    switch (Settings.filter.junk.scrollsTomes) {
+    switch (RawSettings.filter.junk.scrollsTomes) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // highlight scrolls and tomes

@@ -3,7 +3,7 @@ import { FileConstants } from "../Constants/FileConstants";
 import { IItemCollectionComposer } from "../ItemCollectionComposers/Interfaces/IItemCollectionComposer";
 import { IItemEntry } from "../Models/ItemCollectionEntries/Interfaces/IItemEntry";
 import { ItemCollection } from "../Models/ItemCollectionEntries/ItemCollection";
-import { Settings } from "../Settings/Settings";
+import { RawSettings } from "../Settings/RawSettings";
 import { IItemWriter } from "./Interfaces/IItemWriter";
 
 /**
@@ -30,7 +30,7 @@ export abstract class BaseItemWriter implements IItemWriter {
    * 
    */
   public applyFilters(): void {
-    if (!Settings.filter.isEnabled)
+    if (!RawSettings.filter.isEnabled)
       return;
     
     this.composers.forEach(composer => {

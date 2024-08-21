@@ -3,7 +3,7 @@ import { QuestConstants } from "../Constants/Items/QuestConstants";
 import { IHighlight } from "../Models/Highlights/Interfaces/IHighlight";
 import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
 import { QuestEndgameSettings } from "../Settings/QuestEndgameSettings";
-import { Settings } from "../Settings/Settings";
+import { RawSettings } from "../Settings/RawSettings";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
@@ -28,7 +28,7 @@ export class ItemModifiersComposer extends ItemCollectionComposerBase implements
   }
 
   private upsertQuestItem(key: string, highlight: IHighlight | null) {
-    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, Settings.filter.questEndgame.bigTooltips.questItems));
+    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, RawSettings.filter.questEndgame.bigTooltips.questItems));
   }
 
   private upsertEntry(entry: ItemEntry): void {

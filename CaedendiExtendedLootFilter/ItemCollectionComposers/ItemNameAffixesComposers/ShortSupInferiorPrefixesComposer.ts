@@ -1,7 +1,7 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { D2Color } from "../../Models/Colors/D2Color";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -11,7 +11,7 @@ export class ShortSupInferiorPrefixesComposer extends ItemCollectionComposerBase
   }
 
   public applyFilter(): void {
-    if (!Settings.filter.statsAndModifiers.shortSupInfPrefixes.isEnabled)
+    if (!RawSettings.filter.statsAndModifiers.shortSupInfPrefixes.isEnabled)
       return;
 
     let supKey = "Hiquality";
@@ -19,8 +19,8 @@ export class ShortSupInferiorPrefixesComposer extends ItemCollectionComposerBase
 
     let supPrefix: string = CharConstants.empty;
     let infPrefix: string = CharConstants.empty;
-    let infColor: D2Color = Settings.filter.statsAndModifiers.shortSupInfPrefixes.inferiorItemsColor;
-    switch (Settings.filter.statsAndModifiers.shortSupInfPrefixes.style) {
+    let infColor: D2Color = RawSettings.filter.statsAndModifiers.shortSupInfPrefixes.inferiorItemsColor;
+    switch (RawSettings.filter.statsAndModifiers.shortSupInfPrefixes.style) {
       case "plusminus": // Enable
         supPrefix = `${CharConstants.plus}`;
         infPrefix = `${CharConstants.minus}`;

@@ -6,7 +6,7 @@ import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry"
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { QuestEndgameSettings } from "../../Settings/QuestEndgameSettings";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -29,7 +29,7 @@ export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implem
     this.upsertQuestItem(QuestConstants.cube, QuestEndgameSettings.highlight.cube); // cube
     QuestConstants.questItems.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlight.quest)); // quest items
     QuestConstants.questWeapons.forEach(weapon => this.upsertEntry( // quest weapons
-      new iLvlItemEntry(weapon.key, weapon.digits, null, HighlightConstants.uniqueColorName, QuestEndgameSettings.highlight.quest, Settings.filter.questEndgame.bigTooltips.questItems)
+      new iLvlItemEntry(weapon.key, weapon.digits, null, HighlightConstants.uniqueColorName, QuestEndgameSettings.highlight.quest, RawSettings.filter.questEndgame.bigTooltips.questItems)
     ));
   }
 
@@ -37,31 +37,31 @@ export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implem
     this.applyEssences();
     this.applyStandardOfHeroes();
 
-    this.upsertEndgameItem(EndgameConstants.token, QuestEndgameSettings.highlight.token, Settings.filter.questEndgame.bigTooltips.tokens);           // token
-    this.upsertEndgameItems(EndgameConstants.keys, QuestEndgameSettings.highlight.keys, Settings.filter.questEndgame.bigTooltips.keys);       // keys
-    this.upsertEndgameItems(EndgameConstants.organs, QuestEndgameSettings.highlight.organs, Settings.filter.questEndgame.bigTooltips.organs); // organs
+    this.upsertEndgameItem(EndgameConstants.token, QuestEndgameSettings.highlight.token, RawSettings.filter.questEndgame.bigTooltips.tokens);           // token
+    this.upsertEndgameItems(EndgameConstants.keys, QuestEndgameSettings.highlight.keys, RawSettings.filter.questEndgame.bigTooltips.keys);       // keys
+    this.upsertEndgameItems(EndgameConstants.organs, QuestEndgameSettings.highlight.organs, RawSettings.filter.questEndgame.bigTooltips.organs); // organs
   }
 
   private applyEssences(): void {
-    if (!Settings.filter.questEndgame.filter.shouldShowEssences) {
+    if (!RawSettings.filter.questEndgame.filter.shouldShowEssences) {
       this.collection.upsertMultipleHidden(EndgameConstants.essences);
       return;
     }
 
-    this.upsertEndgameItems(EndgameConstants.essences, QuestEndgameSettings.highlight.essences, Settings.filter.questEndgame.bigTooltips.essences);
+    this.upsertEndgameItems(EndgameConstants.essences, QuestEndgameSettings.highlight.essences, RawSettings.filter.questEndgame.bigTooltips.essences);
   }
 
   private applyStandardOfHeroes(): void {
-    if (!Settings.filter.questEndgame.filter.shouldShowStandard) {
+    if (!RawSettings.filter.questEndgame.filter.shouldShowStandard) {
       this.collection.upsertHidden(EndgameConstants.standard);
       return;
     }
 
-    this.upsertEndgameItem(EndgameConstants.standard, QuestEndgameSettings.highlight.standard, Settings.filter.questEndgame.bigTooltips.standard);
+    this.upsertEndgameItem(EndgameConstants.standard, QuestEndgameSettings.highlight.standard, RawSettings.filter.questEndgame.bigTooltips.standard);
   }
 
   private upsertQuestItem(key: string, highlight: IHighlight | null) {
-    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, Settings.filter.questEndgame.bigTooltips.questItems));
+    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, RawSettings.filter.questEndgame.bigTooltips.questItems));
   }
 
   private upsertEndgameItem(key: string, highlight: IHighlight | null, bigTooltipSetting: EBigTooltipSetting): void {

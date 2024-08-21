@@ -1,5 +1,5 @@
 import { GemConstants } from "../../Constants/Items/GemConstants";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { D2Color } from "../Colors/D2Color";
 import { SingleHighlight } from "../Highlights/SingleHighlight";
 import { ItemEntry } from "../ItemCollectionEntries/ItemEntry";

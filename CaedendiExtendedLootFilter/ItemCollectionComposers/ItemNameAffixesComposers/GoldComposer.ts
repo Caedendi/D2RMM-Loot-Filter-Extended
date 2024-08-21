@@ -2,7 +2,7 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { D2Color } from "../../Models/Colors/D2Color";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -15,7 +15,7 @@ export class GoldComposer extends ItemCollectionComposerBase implements IItemCol
     let color = this.getGoldAffixColor();
     let gld = "gld";
 
-    switch (Settings.filter.junk.goldSuffix) {
+    switch (RawSettings.filter.junk.goldSuffix) {
       case SettingsConstants.disabled: // Gold displays as "1234 Gold".
         if (color !== ColorConstants.none)
           this.collection.upsert(new ItemEntry(gld, `${color}Gold`));
@@ -30,9 +30,9 @@ export class GoldComposer extends ItemCollectionComposerBase implements IItemCol
   }
 
   private getGoldAffixColor(): D2Color {
-    if (Settings.filter.junk.goldTooltipColors === "wg")
+    if (RawSettings.filter.junk.goldTooltipColors === "wg")
       return ColorConstants.gold;
-    if (Settings.filter.junk.goldTooltipColors === "gw")
+    if (RawSettings.filter.junk.goldTooltipColors === "gw")
       return ColorConstants.white;
 
     return ColorConstants.none;

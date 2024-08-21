@@ -5,7 +5,7 @@ import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { D2Color } from "../../Models/Colors/D2Color";
 import { SingleHighlight } from "../../Models/Highlights/SingleHighlight";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -19,7 +19,7 @@ export class HealingPotionsComposer extends ItemCollectionComposerBase implement
   }
 
   public applyFilter(): void {
-    switch (Settings.filter.junk.healingPotions) {
+    switch (RawSettings.filter.junk.healingPotions) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all

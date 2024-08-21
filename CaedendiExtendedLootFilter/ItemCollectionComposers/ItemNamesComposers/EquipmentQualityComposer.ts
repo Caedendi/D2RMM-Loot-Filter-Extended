@@ -2,7 +2,7 @@ import { FileConstants } from "../../Constants/FileConstants";
 import { EquipmentEntry } from "../../Models/ItemCollectionEntries/EquipmentEntry";
 import { SingleQualityTag } from "../../Models/QualityTags/QualityTag";
 import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -21,7 +21,7 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
   // ·name· & :name:
   // -name- & +name+ & #name#
   public applyFilter(): void {
-    if (!Settings.filter.statsAndModifiers.itemQuality.isEnabled) {
+    if (!RawSettings.filter.statsAndModifiers.itemQuality.isEnabled) {
       return;
     }
 

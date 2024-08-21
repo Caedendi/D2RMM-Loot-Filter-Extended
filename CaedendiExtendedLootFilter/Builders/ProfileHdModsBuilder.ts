@@ -1,7 +1,7 @@
 import { FontColorConstants } from "../Constants/Colors/FontColorConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { Settings } from "../Settings/Settings";
+import { RawSettings } from "../Settings/RawSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 export class ProfileHdModsBuilder implements IBuilder {
@@ -17,24 +17,24 @@ export class ProfileHdModsBuilder implements IBuilder {
   }
 
   protected applyCustomGoldColor(profileHD) { // TODO: typing
-    if (Settings.filter.junk.goldTooltipColors === SettingsConstants.disabled || Settings.filter.junk.goldTooltipColors === "wg")
+    if (RawSettings.filter.junk.goldTooltipColors === SettingsConstants.disabled || RawSettings.filter.junk.goldTooltipColors === "wg")
       return;
 
     profileHD.TooltipStyle.GoldColor = FontColorConstants.currencyGold.toString();
   }
 
   protected applyCustomEtherealColor(profileHD) { // TODO: typing
-    if (!Settings.filter.statsAndModifiers.ethColor.isEnabled)
+    if (!RawSettings.filter.statsAndModifiers.ethColor.isEnabled)
       return;
 
-    profileHD.TooltipStyle.EtherealColor = Settings.filter.statsAndModifiers.ethColor.color.toString(); // [CSTM-ETH]
+    profileHD.TooltipStyle.EtherealColor = RawSettings.filter.statsAndModifiers.ethColor.color.toString(); // [CSTM-ETH]
   }
 
   protected applyTooltipMods(profileHD) { // TODO: typing
-    if (!Settings.tooltips.isTooltipModsEnabled)
+    if (!RawSettings.tooltips.isTooltipModsEnabled)
       return;
 
-    profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, Settings.tooltips.tooltipOpacity]; // [R, G, B, opacity];
-    profileHD.TooltipFontSize = Settings.tooltips.tooltipSize;
+    profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, RawSettings.tooltips.tooltipOpacity]; // [R, G, B, opacity];
+    profileHD.TooltipFontSize = RawSettings.tooltips.tooltipSize;
   }
 }

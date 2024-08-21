@@ -2,18 +2,18 @@ import { FileConstants } from "../Constants/FileConstants";
 import { CharmConstants } from "../Constants/Items/CharmConstants";
 import { JewelryConstants } from "../Constants/Items/JewelryConstants";
 import { EBigTooltipSetting } from "../Settings/Enums/EBigTooltipSetting";
-import { Settings } from "../Settings/Settings";
+import { RawSettings } from "../Settings/RawSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 //  extends ItemBuilderBase implements IItemBuilder
 export class ItemLevelBuilder implements IBuilder {
-  protected readonly shouldHideOnBtt = Settings.filter.statsAndModifiers.itemLevel.shouldHideOnBigTooltips;
+  protected readonly shouldHideOnBtt = RawSettings.filter.statsAndModifiers.itemLevel.shouldHideOnBigTooltips;
   
   protected readonly weaponsExclusions: string[] = [];
   protected readonly miscExclusions: string[] = [];
 
   public build() {
-    if (!Settings.filter.statsAndModifiers.itemLevel.isEnabled)
+    if (!RawSettings.filter.statsAndModifiers.itemLevel.isEnabled)
       return;
 
     this.setWeaponsExclusions();
@@ -27,7 +27,7 @@ export class ItemLevelBuilder implements IBuilder {
   private setWeaponsExclusions(): void {
     this.weaponsExclusions.push("tpot"); // always exclude throwing pots
 
-    if (!this.shouldHideOnBtt || Settings.filter.questEndgame.bigTooltips.questItems == EBigTooltipSetting.Disabled)
+    if (!this.shouldHideOnBtt || RawSettings.filter.questEndgame.bigTooltips.questItems == EBigTooltipSetting.Disabled)
       return;
 
     // exclude quest weapons with iLvls if Big Tooltips is enabled
@@ -47,9 +47,9 @@ export class ItemLevelBuilder implements IBuilder {
     if (!this.shouldHideOnBtt)
       return;
     
-    if (Settings.filter.jewelry.facets.bigTooltip != EBigTooltipSetting.Disabled)
+    if (RawSettings.filter.jewelry.facets.bigTooltip != EBigTooltipSetting.Disabled)
       this.miscExclusions.push(JewelryConstants.jewelId);
-    if (Settings.filter.jewelry.charms.bigTooltipUnique != EBigTooltipSetting.Disabled)
+    if (RawSettings.filter.jewelry.charms.bigTooltipUnique != EBigTooltipSetting.Disabled)
       CharmConstants.charmIds.forEach(charm => this.miscExclusions.push(charm));
 
     // TODO: check charms ilvls with BTT for uniques and magics

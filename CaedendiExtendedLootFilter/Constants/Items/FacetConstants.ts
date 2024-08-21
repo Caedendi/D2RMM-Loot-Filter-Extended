@@ -1,10 +1,10 @@
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { HighlightConstants } from "./HighlightConstants";
 
 export abstract class FacetConstants {
   public static facetId = "Rainbow Facet";
   // public static facetName = this.facetId; // TODO: remove?
   
-  public static prefix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createRainbowPrefix() : HighlightConstants.uniquePrefix; // TODO
-  public static suffix = Settings.filter.jewelry.isFacetAltPatternEnabled ? this.createRainbowSuffix() : HighlightConstants.uniqueSuffix; // TODO
+  public static prefix = RawSettings.filter.jewelry.isFacetAltPatternEnabled ? this.createRainbowPrefix() : HighlightConstants.uniquePrefix; // TODO
+  public static suffix = RawSettings.filter.jewelry.isFacetAltPatternEnabled ? this.createRainbowSuffix() : HighlightConstants.uniqueSuffix; // TODO
 }

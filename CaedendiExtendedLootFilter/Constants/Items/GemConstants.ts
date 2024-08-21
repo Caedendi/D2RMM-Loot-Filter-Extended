@@ -1,5 +1,5 @@
 import { Gem } from "../../Models/Items/Gem";
-import { Settings } from "../../Settings/Settings";
+import { RawSettings } from "../../Settings/RawSettings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { SettingsConstants } from "../SettingsConstants";
@@ -35,7 +35,7 @@ export abstract class GemConstants {
 
   // indent for the pick up message if gem highlighting is enabled.
   public static getPickUpMessageIndent(): string {
-    let setting = Settings.filter.jewelry.gems.filter;
+    let setting = RawSettings.filter.jewelry.gems.filter;
     if (setting === SettingsConstants.all || setting === "flawless" || setting === "perfect")
       return CharConstants.getSpaces(2);
 

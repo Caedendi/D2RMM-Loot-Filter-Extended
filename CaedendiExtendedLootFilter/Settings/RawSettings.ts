@@ -7,7 +7,7 @@ import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 
 // TODO: add this text somewhere
 // Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space].
-export abstract class Settings {
+export abstract class RawSettings {
   // Filter Section
   public static filter = {
     isEnabled: config.IsFilterEnabled as boolean,

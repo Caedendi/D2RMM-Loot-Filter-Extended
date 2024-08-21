@@ -1,7 +1,7 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
 import { EItemQuality } from "./Enums/EItemQuality";
-import { Settings } from "./Settings";
+import { RawSettings } from "./RawSettings";
 
 // TODO: update
 export abstract class StatsAndModifiersSettings {
@@ -30,11 +30,11 @@ export abstract class StatsAndModifiersSettings {
   public static closeChar: string = this.getSingleQualityIndicatorCloseChar();
 
   private static createSingleQualityIndicator(itemQuality: EItemQuality): string {
-    if (Settings.filter.statsAndModifiers.itemQuality.styleSingle === SettingsConstants.custom)
+    if (RawSettings.filter.statsAndModifiers.itemQuality.styleSingle === SettingsConstants.custom)
       return this.getCustomSingleQualityIndicator(itemQuality);
 
     let indicator = this.getSingleQualityIndicator(itemQuality);
-    if (Settings.filter.statsAndModifiers.itemQuality.styleSingle === "uppercase")
+    if (RawSettings.filter.statsAndModifiers.itemQuality.styleSingle === "uppercase")
       return indicator.toUpperCase();
 
     return indicator;
@@ -61,7 +61,7 @@ export abstract class StatsAndModifiersSettings {
         { setting: SettingsConstants.disabled, char: CharConstants.empty },
         { setting: "square", char: '[' },
         { setting: "round",  char: '(' },
-      ].find(o => o.setting === Settings.filter.statsAndModifiers.itemQuality.brackets)!.char;
+      ].find(o => o.setting === RawSettings.filter.statsAndModifiers.itemQuality.brackets)!.char;
   }
 
   private static getSingleQualityIndicatorCloseChar(): string {
@@ -69,11 +69,11 @@ export abstract class StatsAndModifiersSettings {
         { setting: SettingsConstants.disabled, char: CharConstants.empty },
         { setting: "square", char: ']' },
         { setting: "round",  char: ')' },
-      ].find(o => o.setting === Settings.filter.statsAndModifiers.itemQuality.brackets)!.char;
+      ].find(o => o.setting === RawSettings.filter.statsAndModifiers.itemQuality.brackets)!.char;
   }
 
   private static createDoubleQualityIndicator(itemQuality: EItemQuality): string {
-    if (Settings.filter.statsAndModifiers.itemQuality.styleDouble === SettingsConstants.custom)
+    if (RawSettings.filter.statsAndModifiers.itemQuality.styleDouble === SettingsConstants.custom)
       return this.getCustomDoubleQualityIndicator(itemQuality);
 
     return CharConstants.empty;
@@ -95,7 +95,7 @@ export abstract class StatsAndModifiersSettings {
     
     let indicator = CharConstants.empty;
 
-    switch (Settings.filter.statsAndModifiers.itemQuality.styleDouble) {
+    switch (RawSettings.filter.statsAndModifiers.itemQuality.styleDouble) {
       case "dashes":
         
     }

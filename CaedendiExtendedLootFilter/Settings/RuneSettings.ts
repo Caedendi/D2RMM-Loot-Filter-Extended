@@ -3,43 +3,44 @@ import { DoubleHighlight } from "../Models/Highlights/DoubleHighlight";
 import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSize";
 import { IHighlight } from "../Models/Highlights/Interfaces/IHighlight";
 import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
-import { Settings } from "./Settings";
+import { RawSettings } from "./RawSettings";
+import { SettingsBase } from "./SettingsBase";
 
-export abstract class RuneSettings {
-  public static isLowVisible:    boolean = Settings.filter.runes.low.isVisible;
-  public static isLowMidVisible: boolean = Settings.filter.runes.lowMid.isVisible;
-  public static isMidVisible:    boolean = Settings.filter.runes.mid.isVisible;
-  public static isHighVisible:   boolean = Settings.filter.runes.high.isVisible;
+export abstract class RuneSettings extends SettingsBase {
+  public static isLowVisible:    boolean = RawSettings.filter.runes.low.isVisible;
+  public static isLowMidVisible: boolean = RawSettings.filter.runes.lowMid.isVisible;
+  public static isMidVisible:    boolean = RawSettings.filter.runes.mid.isVisible;
+  public static isHighVisible:   boolean = RawSettings.filter.runes.high.isVisible;
 
-  public static lowNameColor:    D2Color = Settings.filter.runes.low.nameColor;
-  public static lowMidNameColor: D2Color = Settings.filter.runes.lowMid.nameColor;
-  public static midNameColor:    D2Color = Settings.filter.runes.mid.nameColor;
-  public static highNameColor:   D2Color = Settings.filter.runes.high.nameColor;
+  public static lowNameColor:    D2Color = RawSettings.filter.runes.low.nameColor;
+  public static lowMidNameColor: D2Color = RawSettings.filter.runes.lowMid.nameColor;
+  public static midNameColor:    D2Color = RawSettings.filter.runes.mid.nameColor;
+  public static highNameColor:   D2Color = RawSettings.filter.runes.high.nameColor;
 
-  public static lowNumberColor:    D2Color = Settings.filter.runes.low.numberColor;
-  public static lowMidNumberColor: D2Color = Settings.filter.runes.lowMid.numberColor;
-  public static midNumberColor:    D2Color = Settings.filter.runes.mid.numberColor;
-  public static highNumberColor:   D2Color = Settings.filter.runes.high.numberColor;
+  public static lowNumberColor:    D2Color = RawSettings.filter.runes.low.numberColor;
+  public static lowMidNumberColor: D2Color = RawSettings.filter.runes.lowMid.numberColor;
+  public static midNumberColor:    D2Color = RawSettings.filter.runes.mid.numberColor;
+  public static highNumberColor:   D2Color = RawSettings.filter.runes.high.numberColor;
 
-  public static lowHighlight:    IHighlight | null = this.createHighlight(Settings.filter.runes.low.highlight,    Settings.filter.runes.low.highlightColor);
-  public static lowMidHighlight: IHighlight | null = this.createHighlight(Settings.filter.runes.lowMid.highlight, Settings.filter.runes.lowMid.highlightColor);
-  public static midHighlight:    IHighlight | null = this.createHighlight(Settings.filter.runes.mid.highlight,    Settings.filter.runes.mid.highlightColor);
-  public static highHighlight:   IHighlight | null = this.createHighlight(Settings.filter.runes.high.highlight,   Settings.filter.runes.high.highlightColor);
+  public static lowHighlight:    IHighlight | null = this.createHighlight(RawSettings.filter.runes.low.highlight,    RawSettings.filter.runes.low.highlightColor);
+  public static lowMidHighlight: IHighlight | null = this.createHighlight(RawSettings.filter.runes.lowMid.highlight, RawSettings.filter.runes.lowMid.highlightColor);
+  public static midHighlight:    IHighlight | null = this.createHighlight(RawSettings.filter.runes.mid.highlight,    RawSettings.filter.runes.mid.highlightColor);
+  public static highHighlight:   IHighlight | null = this.createHighlight(RawSettings.filter.runes.high.highlight,   RawSettings.filter.runes.high.highlightColor);
 
-  public static lowBigTooltipSetting:    EBigTooltipSetting = Settings.filter.runes.low.bigTooltip;
-  public static lowMidBigTooltipSetting: EBigTooltipSetting = Settings.filter.runes.lowMid.bigTooltip;
-  public static midBigTooltipSetting:    EBigTooltipSetting = Settings.filter.runes.mid.bigTooltip;
-  public static highBigTooltipSetting:   EBigTooltipSetting = Settings.filter.runes.high.bigTooltip;
+  public static lowBigTooltipSetting:    EBigTooltipSetting = RawSettings.filter.runes.low.bigTooltip;
+  public static lowMidBigTooltipSetting: EBigTooltipSetting = RawSettings.filter.runes.lowMid.bigTooltip;
+  public static midBigTooltipSetting:    EBigTooltipSetting = RawSettings.filter.runes.mid.bigTooltip;
+  public static highBigTooltipSetting:   EBigTooltipSetting = RawSettings.filter.runes.high.bigTooltip;
 
-  public static isLowLightPillarsEnabled:    boolean = Settings.lightPillars.runes.isLowRunesEnabled;
-  public static isLowMidLightPillarsEnabled: boolean = Settings.lightPillars.runes.isLowMidRunesEnabled;
-  public static isMidLightPillarsEnabled:    boolean = Settings.lightPillars.runes.isMidRunesEnabled;
-  public static isHighLightPillarsEnabled:   boolean = Settings.lightPillars.runes.isHighRunesEnabled;
+  public static isLowLightPillarsEnabled:    boolean = RawSettings.lightPillars.runes.isLowRunesEnabled;
+  public static isLowMidLightPillarsEnabled: boolean = RawSettings.lightPillars.runes.isLowMidRunesEnabled;
+  public static isMidLightPillarsEnabled:    boolean = RawSettings.lightPillars.runes.isMidRunesEnabled;
+  public static isHighLightPillarsEnabled:   boolean = RawSettings.lightPillars.runes.isHighRunesEnabled;
 
-  public static lowDropSound:    string = Settings.dropSounds.runes.low;
-  public static lowMidDropSound: string = Settings.dropSounds.runes.lowMid;
-  public static midDropSound:    string = Settings.dropSounds.runes.mid;
-  public static highDropSound:   string = Settings.dropSounds.runes.high;
+  public static lowDropSound:    string = RawSettings.dropSounds.runes.low;
+  public static lowMidDropSound: string = RawSettings.dropSounds.runes.lowMid;
+  public static midDropSound:    string = RawSettings.dropSounds.runes.mid;
+  public static highDropSound:   string = RawSettings.dropSounds.runes.high;
 
   protected static createHighlight(setting: EDoubleHighlightSetting, color?: D2Color): DoubleHighlight | null {
     Helper.createHighlight(
