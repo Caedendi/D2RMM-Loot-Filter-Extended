@@ -1,5 +1,5 @@
 import { RuneTier } from "../../Models/Items/RuneTier";
-import { RuneSettings } from "../../Settings/RuneSettings";
+import { RunesSettings } from "../../Settings/Filter/RunesSettings";
 import { RuneConstants } from "./RuneConstants";
 
 /** I consider the rune tiers to be:

@@ -1,8 +1,4 @@
-import { GemConstants } from "../../Constants/Items/GemConstants";
-import { RawSettings } from "../../Settings/RawSettings";
 import { D2Color } from "../Colors/D2Color";
-import { SingleHighlight } from "../Highlights/SingleHighlight";
-import { ItemEntry } from "../ItemCollectionEntries/ItemEntry";
 
 export class Gem {
   /**

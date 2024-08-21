@@ -2,7 +2,7 @@ import { CharConstants } from "../Constants/CharConstants";
 import { ColorConstants } from "../Constants/Colors/ColorConstants";
 import { D2Color } from "../Models/Colors/D2Color";
 import { D2rColor } from "../Models/Colors/D2rColor";
-import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSize";
+import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSetting";
 import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 
 // TODO: add this text somewhere

@@ -2,7 +2,7 @@ import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
-import { RawSettings } from "../../Settings/RawSettings";
+import { RunesSettings } from "../../Settings/Filter/RunesSettings";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { Rune } from "../Items/Rune";
@@ -54,7 +54,7 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
   }
 
   protected removeRuneAffix(localizedName: string): string {
-    if (!RawSettings.filter.runes.shouldHideAffix)
+    if (!RunesSettings.shouldHideAffix)
       return localizedName;
 
     RuneConstants.translatedAffixes.some(affix => {
@@ -69,7 +69,7 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
   }
 
   protected addRuneNumber(displayName: string): string {
-    if (!RawSettings.filter.runes.shouldAddNumber)
+    if (!RunesSettings.shouldAddNumber)
       return displayName;
 
     return `${displayName} ${this.numberColor}(${this.rune.number})`;

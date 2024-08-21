@@ -1,12 +1,11 @@
-import { RawSettings } from "../../Settings/RawSettings";
-import { StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
+import { ItemQualitySettings } from "../../Settings/Filter/ItemQualitySettings";
 import { QualityTagBase } from "./QualityTagBase";
 
 export class SingleQualityTag extends QualityTagBase {
   public apply(displayName: string): string {
-    let tag = `${StatsAndModifiersSettings.openChar}${this._indicator}${StatsAndModifiersSettings.closeChar}`;
+    let tag = `${ItemQualitySettings.openChar}${this._indicator}${ItemQualitySettings.closeChar}`;
 
-    return RawSettings.filter.statsAndModifiers.itemQuality.placement === "prefix"
+    return ItemQualitySettings.placement === "prefix"
       ? `${tag} ${displayName}` 
       : `${displayName} ${tag}`;
   }

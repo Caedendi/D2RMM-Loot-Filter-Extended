@@ -2,7 +2,7 @@ import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { GemConstants } from "../../Constants/Items/GemConstants";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
-import { RawSettings } from "../../Settings/RawSettings";
+import { FilterSettings } from "../../Settings/Filter/FilterSettings";
 import { BigTooltip } from "../BigTooltip";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
@@ -99,7 +99,7 @@ export class ItemEntry implements IItemEntry {
 
   public generateDisplayName(translatedName: string): string {
     if (!this.isVisible)
-      return RawSettings.filter.settings.hidden;
+      return FilterSettings.hidden;
 
     
     let displayName = this.applyNewName(translatedName);

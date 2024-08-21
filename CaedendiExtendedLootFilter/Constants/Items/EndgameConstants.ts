@@ -1,5 +1,5 @@
 import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
-import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSize";
+import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
 import { ColorConstants } from "../Colors/ColorConstants";
 
 export abstract class EndgameConstants {

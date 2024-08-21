@@ -1,7 +1,7 @@
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { D2Color } from "../Colors/D2Color";
 import { DoubleHighlightBase } from "./DoubleHighlightBase";
-import { EDoubleHighlightSetting } from "./EDoubleHighlightSize";
+import { EDoubleHighlightSetting } from "./EDoubleHighlightSetting";
 import { IHighlight } from "./Interfaces/IHighlight";
 
 export class DoubleHighlight extends DoubleHighlightBase implements IHighlight {

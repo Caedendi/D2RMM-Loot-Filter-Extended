@@ -1,13 +1,12 @@
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { FacetConstants } from "../../Constants/Items/FacetConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
-import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSize";
+import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { RainbowHighlight } from "../../Models/Highlights/RainbowHighlight";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
-import { RawSettings } from "../../Settings/RawSettings";
+import { JewelrySettings } from "../../Settings/Filter/JewelrySettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -17,17 +16,17 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   public applyFilter(): void {
-    if ( RawSettings.filter.jewelry.facets.highlight === SettingsConstants.disabled 
-      && RawSettings.filter.jewelry.facets.bigTooltip == EBigTooltipSetting.Disabled)
+    if ( JewelrySettings.facets.highlight === SettingsConstants.disabled 
+      && JewelrySettings.facets.bigTooltip == EBigTooltipSetting.Disabled)
       return;
 
-    this.collection.upsert(new ItemEntry(FacetConstants.facetId, null, ColorConstants.gold, this.createFacetPattern(), RawSettings.filter.jewelry.facets.bigTooltip));
+    this.collection.upsert(new ItemEntry("Rainbow Facet", null, ColorConstants.gold, this.createFacetPattern(), JewelrySettings.facets.bigTooltip));
   }
 
   protected createFacetPattern(): IHighlight | null {
-    if (RawSettings.filter.jewelry.facets.highlight === "rainbow")
-      return new RainbowHighlight(RawSettings.filter.jewelry.facets.bigTooltip);
-    if (RawSettings.filter.jewelry.facets.highlight === "highlight")
+    if (JewelrySettings.facets.highlight === "rainbow")
+      return new RainbowHighlight(JewelrySettings.facets.bigTooltip);
+    if (JewelrySettings.facets.highlight === "highlight")
       return new DoubleHighlight(EDoubleHighlightSetting.LARGE, ColorConstants.red);
 
     return null;

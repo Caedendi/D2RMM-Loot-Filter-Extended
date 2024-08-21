@@ -2,8 +2,7 @@ import { HighlightConstants } from "../Constants/Items/HighlightConstants";
 import { QuestConstants } from "../Constants/Items/QuestConstants";
 import { IHighlight } from "../Models/Highlights/Interfaces/IHighlight";
 import { ItemEntry } from "../Models/ItemCollectionEntries/ItemEntry";
-import { QuestEndgameSettings } from "../Settings/QuestEndgameSettings";
-import { RawSettings } from "../Settings/RawSettings";
+import { QuestEndgameSettings } from "../Settings/Filter/QuestEndgameSettings";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
@@ -24,11 +23,11 @@ export class ItemModifiersComposer extends ItemCollectionComposerBase implements
   }
 
   protected applyQuestItems(): void {
-    QuestConstants.questItemExceptionsAct5.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlight.quest));
+    QuestConstants.questItemExceptionsAct5.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlights.quest));
   }
 
   private upsertQuestItem(key: string, highlight: IHighlight | null) {
-    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, RawSettings.filter.questEndgame.bigTooltips.questItems));
+    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueColorName, highlight, QuestEndgameSettings.bigTooltips.questItems));
   }
 
   private upsertEntry(entry: ItemEntry): void {

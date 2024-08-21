@@ -7,7 +7,7 @@ import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry"
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
-import { RawSettings } from "../../Settings/RawSettings";
+import { JewelrySettings } from "../../Settings/Filter/JewelrySettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
@@ -17,14 +17,14 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   public applyFilter(): void {
-    if (RawSettings.filter.jewelry.charms.isHighlightMagicEnabled)
+    if (JewelrySettings.charms.isHighlightMagicEnabled)
       this.highlightUnidentifiedCharms();
 
     this.applyLodUniqueCharms();
     this.applySunderCharms();
 
-    if ( RawSettings.filter.jewelry.charms.highlightUnique !== SettingsConstants.disabled
-      && RawSettings.filter.jewelry.charms.bigTooltipUnique != EBigTooltipSetting.Disabled
+    if ( JewelrySettings.charms.highlightUnique !== SettingsConstants.disabled
+      && JewelrySettings.charms.bigTooltipUnique != EBigTooltipSetting.Disabled
     ) {
 
     }
@@ -41,8 +41,8 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   protected applyLodUniqueCharms(): void {
-    let highlight = RawSettings.filter.jewelry.charms.highlightUnique !== SettingsConstants.disabled ? Helper.uniqPattern : null;
-    let bttSetting = RawSettings.filter.jewelry.charms.bigTooltipUnique;
+    let highlight = JewelrySettings.charms.highlightUnique !== SettingsConstants.disabled ? Helper.uniqPattern : null;
+    let bttSetting = JewelrySettings.charms.bigTooltipUnique;
     if (highlight == null && bttSetting == EBigTooltipSetting.Disabled)
       return;
 
@@ -54,8 +54,8 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   protected applySunderCharms(): void {
-    let hlSetting = RawSettings.filter.jewelry.charms.highlightUnique;
-    let bttSetting = RawSettings.filter.jewelry.charms.bigTooltipUnique;
+    let hlSetting = JewelrySettings.charms.highlightUnique;
+    let bttSetting = JewelrySettings.charms.bigTooltipUnique;
     if (hlSetting === SettingsConstants.disabled && bttSetting == EBigTooltipSetting.Disabled)
       return;
     

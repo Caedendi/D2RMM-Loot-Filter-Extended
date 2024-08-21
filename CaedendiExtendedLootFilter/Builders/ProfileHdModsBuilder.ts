@@ -1,7 +1,9 @@
 import { FontColorConstants } from "../Constants/Colors/FontColorConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { SettingsConstants } from "../Constants/SettingsConstants";
-import { RawSettings } from "../Settings/RawSettings";
+import { EtherealColorSettings } from "../Settings/Filter/EtherealColorSettings";
+import { JunkSettings } from "../Settings/Filter/JunkSettings";
+import { TooltipModsSettings } from "../Settings/TooltipModsSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 export class ProfileHdModsBuilder implements IBuilder {
@@ -17,24 +19,24 @@ export class ProfileHdModsBuilder implements IBuilder {
   }
 
   protected applyCustomGoldColor(profileHD) { // TODO: typing
-    if (RawSettings.filter.junk.goldTooltipColors === SettingsConstants.disabled || RawSettings.filter.junk.goldTooltipColors === "wg")
+    if (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === "wg")
       return;
 
     profileHD.TooltipStyle.GoldColor = FontColorConstants.currencyGold.toString();
   }
 
   protected applyCustomEtherealColor(profileHD) { // TODO: typing
-    if (!RawSettings.filter.statsAndModifiers.ethColor.isEnabled)
+    if (!EtherealColorSettings.isEnabled)
       return;
 
-    profileHD.TooltipStyle.EtherealColor = RawSettings.filter.statsAndModifiers.ethColor.color.toString(); // [CSTM-ETH]
+    profileHD.TooltipStyle.EtherealColor = EtherealColorSettings.color.toString(); // [CSTM-ETH]
   }
 
   protected applyTooltipMods(profileHD) { // TODO: typing
-    if (!RawSettings.tooltips.isTooltipModsEnabled)
+    if (!TooltipModsSettings.isEnabled)
       return;
 
-    profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, RawSettings.tooltips.tooltipOpacity]; // [R, G, B, opacity];
-    profileHD.TooltipFontSize = RawSettings.tooltips.tooltipSize;
+    profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, TooltipModsSettings.opacity]; // [R, G, B, opacity];
+    profileHD.TooltipFontSize = TooltipModsSettings.size;
   }
 }

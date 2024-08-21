@@ -2,8 +2,7 @@ import { FileConstants } from "../../Constants/FileConstants";
 import { EquipmentEntry } from "../../Models/ItemCollectionEntries/EquipmentEntry";
 import { SingleQualityTag } from "../../Models/QualityTags/QualityTag";
 import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
-import { RawSettings } from "../../Settings/RawSettings";
-import { StatsAndModifiersSettings } from "../../Settings/StatsAndModifiersSettings";
+import { ItemQualitySettings } from "../../Settings/Filter/ItemQualitySettings";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
 /**
@@ -21,7 +20,7 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
   // ·name· & :name:
   // -name- & +name+ & #name#
   public applyFilter(): void {
-    if (!RawSettings.filter.statsAndModifiers.itemQuality.isEnabled) {
+    if (!ItemQualitySettings.isEnabled) {
       return;
     }
 
@@ -44,19 +43,19 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
 
   protected getSingleQualityIndicatorForItem(itemRow): string {
     if (itemRow.code === itemRow.ultracode)
-      return StatsAndModifiersSettings.singleEliteQualityIndicator;
+      return ItemQualitySettings.singleEliteQualityIndicator;
     if (itemRow.code === itemRow.ubercode)
-      return StatsAndModifiersSettings.singleExceptionalQualityIndicator;
+      return ItemQualitySettings.singleExceptionalQualityIndicator;
 
-    return StatsAndModifiersSettings.singleNormalQualityIndicator;
+    return ItemQualitySettings.singleNormalQualityIndicator;
   }
 
   protected getDoubleQualityIndicatorForItem(itemRow): string {
     if (itemRow.code === itemRow.ultracode)
-      return StatsAndModifiersSettings.doubleEliteQualityIndicator;
+      return ItemQualitySettings.doubleEliteQualityIndicator;
     if (itemRow.code === itemRow.ubercode)
-      return StatsAndModifiersSettings.doubleExceptionalQualityIndicator;
+      return ItemQualitySettings.doubleExceptionalQualityIndicator;
 
-    return StatsAndModifiersSettings.doubleNormalQualityIndicator;
+    return ItemQualitySettings.doubleNormalQualityIndicator;
   }
 }

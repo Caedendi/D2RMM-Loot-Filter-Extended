@@ -1,5 +1,5 @@
 import { ItemCollection } from "../Models/ItemCollectionEntries/ItemCollection";
-import { RawSettings } from "../Settings/RawSettings";
+import { FilterSettings } from "../Settings/Filter/FilterSettings";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
@@ -12,7 +12,7 @@ export class CustomComposer extends ItemCollectionComposerBase implements IItemC
   }
   
   public applyFilter(): void {
-    if (!RawSettings.filter.isCustomFilterListEnabled) {
+    if (!FilterSettings.isCustomFilterListEnabled) {
       return;
     }
 

@@ -1,9 +1,9 @@
-import { D2Color } from "../Models/Colors/D2Color";
-import { DoubleHighlight } from "../Models/Highlights/DoubleHighlight";
-import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSize";
-import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
+import { D2Color } from "../../Models/Colors/D2Color";
+import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
+import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
+import { EBigTooltipSetting } from "../Enums/EBigTooltipSetting";
 
-export abstract class SettingsBase {
+export abstract class FilterSettingsBase {
 
 
   // TODO: move

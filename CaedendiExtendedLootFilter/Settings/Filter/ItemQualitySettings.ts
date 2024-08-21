@@ -1,22 +1,15 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { SettingsConstants } from "../Constants/SettingsConstants";
-import { EItemQuality } from "./Enums/EItemQuality";
-import { RawSettings } from "./RawSettings";
+import { CharConstants } from "../../Constants/CharConstants";
+import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { EItemQuality } from "../Enums/EItemQuality";
+import { RawSettings } from "../RawSettings";
+import { FilterSettingsBase } from "./FilterSettingsBase";
 
-// TODO: update
-export abstract class StatsAndModifiersSettings {
-  // ilvl
-  public static iLvlIndentFixSingle: string = CharConstants.space.repeat(4); // for single digit ilvl items
-  public static iLvlIndentFixDouble: string = CharConstants.space.repeat(6); // for double digit ilvl items
-
-  // item quality
-  protected static customSingleNormalQualityIndicator:      string = "[custom n]"; // replace "custom n" to your preference. [CSTM-QTYS]
-  protected static customSingleExceptionalQualityIndicator: string = "[custom x]"; // replace "custom x" to your preference. [CSTM-QTYS]
-  protected static customSingleEliteQualityIndicator:       string = "[custom e]"; // replace "custom e" to your preference. [CSTM-QTYS]
-
-  protected static customDoubleNormalQualityIndicator:      string = "[custom n]"; // replace "custom n" to your preference. [CSTM-QTYD]
-  protected static customDoubleExceptionalQualityIndicator: string = "[custom x]"; // replace "custom x" to your preference. [CSTM-QTYD]
-  protected static customDoubleEliteQualityIndicator:       string = "[custom e]"; // replace "custom e" to your preference. [CSTM-QTYD]
+export abstract class ItemQualitySettings extends FilterSettingsBase {
+  public static readonly isEnabled:   boolean = RawSettings.filter.statsAndModifiers.itemQuality.isEnabled;
+  public static readonly placement:   string  = RawSettings.filter.statsAndModifiers.itemQuality.placement;
+  public static readonly brackets:    string  = RawSettings.filter.statsAndModifiers.itemQuality.brackets;
+  public static readonly styleSingle: string  = RawSettings.filter.statsAndModifiers.itemQuality.styleSingle;
+  public static readonly styleDouble: string  = RawSettings.filter.statsAndModifiers.itemQuality.styleDouble;
 
   public static singleNormalQualityIndicator:      string = this.createSingleQualityIndicator(EItemQuality.Normal);
   public static singleExceptionalQualityIndicator: string = this.createSingleQualityIndicator(EItemQuality.Exceptional);
@@ -28,6 +21,14 @@ export abstract class StatsAndModifiersSettings {
 
   public static openChar:  string = this.getSingleQualityIndicatorOpenChar();
   public static closeChar: string = this.getSingleQualityIndicatorCloseChar();
+
+  protected static customSingleNormalQualityIndicator:      string = "[custom n]"; // replace "custom n" to your preference. [CSTM-QTYS]
+  protected static customSingleExceptionalQualityIndicator: string = "[custom x]"; // replace "custom x" to your preference. [CSTM-QTYS]
+  protected static customSingleEliteQualityIndicator:       string = "[custom e]"; // replace "custom e" to your preference. [CSTM-QTYS]
+
+  protected static customDoubleNormalQualityIndicator:      string = "[custom n]"; // replace "custom n" to your preference. [CSTM-QTYD]
+  protected static customDoubleExceptionalQualityIndicator: string = "[custom x]"; // replace "custom x" to your preference. [CSTM-QTYD]
+  protected static customDoubleEliteQualityIndicator:       string = "[custom e]"; // replace "custom e" to your preference. [CSTM-QTYD]
 
   private static createSingleQualityIndicator(itemQuality: EItemQuality): string {
     if (RawSettings.filter.statsAndModifiers.itemQuality.styleSingle === SettingsConstants.custom)
