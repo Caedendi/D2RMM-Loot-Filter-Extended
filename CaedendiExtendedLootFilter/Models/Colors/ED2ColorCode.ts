@@ -1,0 +1,42 @@
+export enum ED2ColorCode {
+  NONE               = "none",
+  DEFAULT            = "default",
+  WHITE              = "0", // SPRITE_COLOR_NORMAL / FONTCOLOR_WHITE
+  WHITE_SMOKE        = "=", // $DefaultColor
+  WHITE_SMOKE_2      = "E", // $HealthPotionColor
+  WHITE_SMOKE_3      = "F", // $ManaPotionColor
+  WHITE_SMOKE_4      = "G", // $RejuvPotionColor
+  WHITE_SMOKE_5      = "H", // $GoldColor
+  GRAY_DIM           = "I", // $EtherealColor
+  GRAY_DIM_2         = "K", // $SocketedColor
+  GRAY_DIMMER        = "5", // SPRITE_COLOR_GREY
+  BLACK              = "6", // SPRITE_COLOR_BLACK
+  RED                = "U", // rich red
+  TOMATO             = "1", // SPRITE_COLOR_RED
+  CRIMSON            = "S", // dark red
+  LIME               = "2", // SPRITE_COLOR_GREEN
+  LIME_2             = "Q", // light green
+  LIME_v2            = "C", // $SetColor
+  LIME_GREEN         = "<", // SPRITE_COLOR_NEWCHAR
+  GREEN              = "A", // $TemperedColor
+  GREEN_2            = ":", // SPRITE_COLOR_DARKGREEN
+  DEEP_SKY_BLUE      = "N", // light blue
+  LIGHT_SKY_BLUE     = "T", // sky-blue
+  MEDIUM_SLATE_BLUE  = "P", // pale violet
+  CORN_FLOWER_BLUE   = "3", // SPRITE_COLOR_BLUE
+  CORN_FLOWER_BLUE_2 = "B", // $MagicColor
+  YELLOW             = "9", // SPRITE_COLOR_YELLOW
+  LIGHT_YELLOW       = "R", // yellow
+  ORANGE             = "8", // SPRITE_COLOR_ORANGE
+  ORANGE_1           = "J", // $RuneColor
+  ORANGE_2           = "L", // $EventItemsColor
+  ORANGE_3           = "@", // $CraftedColor
+  VIOLET             = "O", // pink
+  DARK_VIOLET        = ";", // SPRITE_COLOR_PURPLE
+  TAN                = "4", // SPRITE_COLOR_PANEL / FONTCOLOR_GOLD
+  TAN_2              = ">", // $QuestColor
+  TAN_3              = "D", // $UniqueColor
+  TAN_4              = "?", // $RareColor
+  TAN_V2             = "7", // SPRITE_COLOR_BNETGOLD - unused
+  WHEAT              = "M", // light gold
+}

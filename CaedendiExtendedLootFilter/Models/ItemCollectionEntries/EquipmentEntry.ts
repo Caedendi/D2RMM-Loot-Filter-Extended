@@ -4,7 +4,7 @@ import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 import { iLvlItemEntry } from "./iLvlItemEntry";
-import { SingleQualityTag } from "../QualityTags/QualityTag";
+import { SingleQualityTag } from "../QualityTags/SingleQualityTag";
 
 export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
   /**

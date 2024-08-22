@@ -1,5 +1,4 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { RuneConstants } from "../../Constants/Items/RuneConstants";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { RunesSettings } from "../../Settings/Filter/RunesSettings";
@@ -21,8 +20,8 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
   /**
    * number color
    */
-  private readonly _numberColor: D2Color;
-  protected get numberColor(): D2Color {
+  private readonly _numberColor: D2Color | null;
+  protected get numberColor(): D2Color | null {
     return this._numberColor;
   }
 
@@ -35,7 +34,7 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
   ) {
     super(rune.key, CharConstants.empty, nameColor, highlight, bigToolipSetting);
     this._rune = rune;
-    this._numberColor = numberColor ??= ColorConstants.none;
+    this._numberColor = numberColor;
   }
 
   // tier 1 no highlight, orange name
@@ -72,6 +71,6 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
     if (!RunesSettings.shouldAddNumber)
       return displayName;
 
-    return `${displayName} ${this.numberColor}(${this.rune.number})`;
+    return `${displayName} ${this.numberColor ?? CharConstants.empty}(${this.rune.number})`;
   }
 }

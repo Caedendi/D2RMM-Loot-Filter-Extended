@@ -18,7 +18,7 @@ export class DoubleHighlight extends DoubleHighlightBase implements IHighlight {
     if (hlSetting == EDoubleHighlightSetting.EXTRA_EXTRA_LARGE && bttSetting != EBigTooltipSetting.Disabled)
       hlSetting = EDoubleHighlightSetting.EXTRA_LARGE;
 
-    let settings = HighlightConstants.doubleHighlightSizes.find(size => size.setting == hlSetting);
+    let settings = HighlightConstants.doubleHighlightSizes.find(size => size.setting == hlSetting)!;
     super(settings.pattern, settings.padding, color);
     this._setting = hlSetting;
   }

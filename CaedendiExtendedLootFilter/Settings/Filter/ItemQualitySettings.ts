@@ -4,11 +4,11 @@ import { EItemQuality } from "../Enums/EItemQuality";
 import { RawSettings } from "../RawSettings";
 
 export abstract class ItemQualitySettings {
-  public static readonly isEnabled:   boolean = RawSettings.filter.statsAndModifiers.itemQuality.isEnabled;
-  public static readonly placement:   string  = RawSettings.filter.statsAndModifiers.itemQuality.placement;
-  public static readonly brackets:    string  = RawSettings.filter.statsAndModifiers.itemQuality.brackets;
-  public static readonly styleSingle: string  = RawSettings.filter.statsAndModifiers.itemQuality.styleSingle;
-  public static readonly styleDouble: string  = RawSettings.filter.statsAndModifiers.itemQuality.styleDouble;
+  public static readonly isEnabled:     boolean = RawSettings.filter.statsAndModifiers.itemQuality.isEnabled;
+  public static readonly placement:      string = RawSettings.filter.statsAndModifiers.itemQuality.placement;
+  protected static readonly brackets:    string = RawSettings.filter.statsAndModifiers.itemQuality.brackets;
+  protected static readonly styleSingle: string = RawSettings.filter.statsAndModifiers.itemQuality.styleSingle;
+  protected static readonly styleDouble: string = RawSettings.filter.statsAndModifiers.itemQuality.styleDouble;
 
   public static singleNormalQualityIndicator:      string = this.createSingleQualityIndicator(EItemQuality.Normal);
   public static singleExceptionalQualityIndicator: string = this.createSingleQualityIndicator(EItemQuality.Exceptional);
@@ -30,30 +30,23 @@ export abstract class ItemQualitySettings {
   protected static customDoubleEliteQualityIndicator:       string = "[custom e]"; // replace "custom e" to your preference. [CSTM-QTYD]
 
   private static createSingleQualityIndicator(itemQuality: EItemQuality): string {
-    if (RawSettings.filter.statsAndModifiers.itemQuality.styleSingle === SettingsConstants.custom)
-      return this.getCustomSingleQualityIndicator(itemQuality);
+    if (this.styleSingle === SettingsConstants.custom)
+      return [
+          { quality: EItemQuality.Normal,      indicator: this.customSingleNormalQualityIndicator },
+          { quality: EItemQuality.Exceptional, indicator: this.customSingleExceptionalQualityIndicator },
+          { quality: EItemQuality.Elite,       indicator: this.customSingleEliteQualityIndicator },
+        ].find(q => q.quality == itemQuality)!.indicator;
 
-    let indicator = this.getSingleQualityIndicator(itemQuality);
-    if (RawSettings.filter.statsAndModifiers.itemQuality.styleSingle === "uppercase")
-      return indicator.toUpperCase();
-
-    return indicator;
-  }
-
-  private static getCustomSingleQualityIndicator(itemQuality: EItemQuality): string {
-    return [
-        { quality: EItemQuality.Normal,      indicator: this.customSingleNormalQualityIndicator },
-        { quality: EItemQuality.Exceptional, indicator: this.customSingleExceptionalQualityIndicator },
-        { quality: EItemQuality.Elite,       indicator: this.customSingleEliteQualityIndicator },
-      ].find(q => q.quality == itemQuality)!.indicator;
-  }
-
-  private static getSingleQualityIndicator(itemQuality: EItemQuality): string {
-    return [
+    let indicator = [
         { quality: EItemQuality.Normal,      indicator: 'n' },
         { quality: EItemQuality.Exceptional, indicator: 'x' },
         { quality: EItemQuality.Elite,       indicator: 'e' },
       ].find(q => q.quality == itemQuality)!.indicator;
+
+    if (this.styleSingle === "uppercase")
+      return indicator.toUpperCase();
+
+    return indicator;
   }
 
   private static getSingleQualityIndicatorOpenChar(): string {
@@ -61,7 +54,7 @@ export abstract class ItemQualitySettings {
         { setting: SettingsConstants.disabled, char: CharConstants.empty },
         { setting: "square", char: '[' },
         { setting: "round",  char: '(' },
-      ].find(o => o.setting === RawSettings.filter.statsAndModifiers.itemQuality.brackets)!.char;
+      ].find(o => o.setting === this.brackets)!.char;
   }
 
   private static getSingleQualityIndicatorCloseChar(): string {
@@ -69,12 +62,16 @@ export abstract class ItemQualitySettings {
         { setting: SettingsConstants.disabled, char: CharConstants.empty },
         { setting: "square", char: ']' },
         { setting: "round",  char: ')' },
-      ].find(o => o.setting === RawSettings.filter.statsAndModifiers.itemQuality.brackets)!.char;
+      ].find(o => o.setting === this.brackets)!.char;
   }
 
   private static createDoubleQualityIndicator(itemQuality: EItemQuality): string {
-    if (RawSettings.filter.statsAndModifiers.itemQuality.styleDouble === SettingsConstants.custom)
-      return this.getCustomDoubleQualityIndicator(itemQuality);
+    if (this.styleDouble === SettingsConstants.custom)
+      return [
+          { quality: EItemQuality.Normal,      indicator: this.customDoubleNormalQualityIndicator },
+          { quality: EItemQuality.Exceptional, indicator: this.customDoubleExceptionalQualityIndicator },
+          { quality: EItemQuality.Elite,       indicator: this.customDoubleEliteQualityIndicator },
+        ].find(q => q.quality == itemQuality)!.indicator;
 
     return CharConstants.empty;
 
@@ -82,20 +79,24 @@ export abstract class ItemQualitySettings {
     return this.getDoubleQualityIndicator(itemQuality);
   }
 
-  private static getCustomDoubleQualityIndicator(itemQuality: EItemQuality): string {
-    return [
-        { quality: EItemQuality.Normal,      indicator: this.customDoubleNormalQualityIndicator },
-        { quality: EItemQuality.Exceptional, indicator: this.customDoubleExceptionalQualityIndicator },
-        { quality: EItemQuality.Elite,       indicator: this.customDoubleEliteQualityIndicator },
-      ].find(q => q.quality == itemQuality)!.indicator;
-  }
-
   private static getDoubleQualityIndicator(itemQuality: EItemQuality): string {
     throw new Error("not implemented");
+
+    /**
+     *  -name-
+     *  =name=
+     * -=name=-
+     */
+
+    /**
+     *  ·name·
+     *  :name:
+     * ·:name:·
+     */
     
     let indicator = CharConstants.empty;
 
-    switch (RawSettings.filter.statsAndModifiers.itemQuality.styleDouble) {
+    switch (this.styleDouble) {
       case "dashes":
         
     }

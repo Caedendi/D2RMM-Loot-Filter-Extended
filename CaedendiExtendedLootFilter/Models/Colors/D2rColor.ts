@@ -1,3 +1,5 @@
+import { ED2rColor } from "./ED2rColor";
+
 export class D2rColor {
   /**
    * name
@@ -9,16 +11,15 @@ export class D2rColor {
   /**
    * code
    */
-  private readonly _code: string;
-  public get code(): string {
+  private readonly _code: ED2rColor;
+  public get code(): ED2rColor {
     return this._code;
   }
 
   protected readonly prefix = "$FontColor";
 
-  constructor(name: string) {
-    this._name = name;
-    this._code = name;
+  constructor(code: ED2rColor) {
+    this._code = code;
   }
 
   public toString(): string {

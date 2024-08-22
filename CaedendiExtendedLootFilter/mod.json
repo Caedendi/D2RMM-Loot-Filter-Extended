@@ -1372,7 +1372,6 @@
               "description": "Default color used for the highlight character for items that have highlight patterns.",
               "defaultValue": "1",
               "options": [
-                { "value": "none", "label": "None" },
                 { "value": "0", "label": "White" },
                 { "value": "=", "label": "White Smoke" },
                 { "value": "I", "label": "Dim Gray" },

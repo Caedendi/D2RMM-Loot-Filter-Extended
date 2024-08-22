@@ -1,6 +1,6 @@
 import { FileConstants } from "../../Constants/FileConstants";
 import { EquipmentEntry } from "../../Models/ItemCollectionEntries/EquipmentEntry";
-import { SingleQualityTag } from "../../Models/QualityTags/QualityTag";
+import { SingleQualityTag } from "../../Models/QualityTags/SingleQualityTag";
 import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
 import { ItemQualitySettings } from "../../Settings/Filter/ItemQualitySettings";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";

@@ -1,3 +1,4 @@
+import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { D2Color } from "../../Models/Colors/D2Color";
@@ -17,11 +18,11 @@ export class GoldComposer extends ItemCollectionComposerBase implements IItemCol
 
     switch (JunkSettings.goldSuffix) {
       case SettingsConstants.disabled: // Gold displays as "1234 Gold".
-        if (color !== ColorConstants.none)
-          this.collection.upsert(new ItemEntry(gld, `${color}Gold`));
+        if (color != null)
+          this.collection.upsert(new ItemEntry(gld, `${color ?? CharConstants.empty}Gold`));
         return;
       case "g": // Gold displays as "1234 G".
-        this.collection.upsert(new ItemEntry(gld, `${color}G`));
+        this.collection.upsert(new ItemEntry(gld, `${color ?? CharConstants.empty}G`));
         return;
       case "hide": // Gold displays as "1234".
         this.collection.upsertHidden(gld);
@@ -29,12 +30,12 @@ export class GoldComposer extends ItemCollectionComposerBase implements IItemCol
     }
   }
 
-  private getGoldAffixColor(): D2Color {
+  private getGoldAffixColor(): D2Color | null {
     if (JunkSettings.goldTooltipColors === "wg")
       return ColorConstants.gold;
     if (JunkSettings.goldTooltipColors === "gw")
       return ColorConstants.white;
 
-    return ColorConstants.none;
+    return null;
   }
 }

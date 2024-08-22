@@ -1,4 +1,5 @@
 import { D2Color } from "../../Models/Colors/D2Color";
+import { ED2ColorCode } from "../../Models/Colors/ED2ColorCode";
 import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
 import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
@@ -8,22 +9,23 @@ import { RawSettings } from "../RawSettings";
 class RuneTierSetting {
   public readonly isVisible: boolean;
   public readonly highlight: IHighlight | null;
-  public readonly nameColor: D2Color;
-  public readonly numberColor: D2Color;
+  public readonly nameColor: D2Color | null;
+  public readonly numberColor: D2Color | null;
   public readonly bigTooltip: EBigTooltipSetting;
 
   constructor(
     isVisible: boolean,
     hlSetting: EDoubleHighlightSetting,
-    hlColor: D2Color,
-    nameColor: D2Color,
-    numberColor: D2Color,
+    hlColorCode: ED2ColorCode,
+    nameColorCode: ED2ColorCode,
+    numberColorCode: ED2ColorCode,
     bttSetting: EBigTooltipSetting
   ) {
+    let hlColor = D2Color.create(hlColorCode, RawSettings.filter.settings.defaultHighlightColor)!;
     this.isVisible = isVisible;
     this.highlight = hlSetting == EDoubleHighlightSetting.DISABLED ? null : new DoubleHighlight(hlSetting, hlColor, bttSetting);
-    this.nameColor = nameColor;
-    this.numberColor = numberColor;
+    this.nameColor = D2Color.create(nameColorCode);
+    this.numberColor = D2Color.create(numberColorCode);
     this.bigTooltip = bttSetting;
   }
 }

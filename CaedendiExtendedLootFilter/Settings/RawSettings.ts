@@ -1,7 +1,5 @@
-import { CharConstants } from "../Constants/CharConstants";
-import { ColorConstants } from "../Constants/Colors/ColorConstants";
-import { D2Color } from "../Models/Colors/D2Color";
-import { D2rColor } from "../Models/Colors/D2rColor";
+import { ED2ColorCode } from "../Models/Colors/ED2ColorCode";
+import { ED2rColor } from "../Models/Colors/ED2rColor";
 import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSetting";
 import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 
@@ -30,42 +28,42 @@ export abstract class RawSettings {
       low: {
          isVisible:      config.ShouldShowRunesLow as boolean,
          highlight:      config.RunesLowHighlight  as number as EDoubleHighlightSetting,
-         highlightColor: new D2Color(config.RunesLowColorHighlight as string),
-         nameColor:      new D2Color(config.RunesLowColorName      as string),
-         numberColor:    new D2Color(config.RunesLowColorNumber    as string),
+         highlightColor: config.RunesLowColorHighlight as string as ED2ColorCode,
+         nameColor:      config.RunesLowColorName      as string as ED2ColorCode,
+         numberColor:    config.RunesLowColorNumber    as string as ED2ColorCode,
          bigTooltip:     config.RunesLowBigTooltip    as number as EBigTooltipSetting,
       },
       lowMid: {
          isVisible:      config.ShouldShowRunesLowMid as boolean,
          highlight:      config.RunesLowMidHighlight  as number as EDoubleHighlightSetting,
-         highlightColor: new D2Color(config.RunesLowMidColorHighlight as string),
-         nameColor:      new D2Color(config.RunesLowMidColorName      as string),
-         numberColor:    new D2Color(config.RunesLowMidColorNumber    as string),
+         highlightColor: config.RunesLowMidColorHighlight as string as ED2ColorCode,
+         nameColor:      config.RunesLowMidColorName      as string as ED2ColorCode,
+         numberColor:    config.RunesLowMidColorNumber    as string as ED2ColorCode,
          bigTooltip:     config.RunesLowMidBigTooltip as number as EBigTooltipSetting,
       },
       mid: {
          isVisible:      config.ShouldShowRunesMid as boolean,
          highlight:      config.RunesMidHighlight  as number as EDoubleHighlightSetting,
-         highlightColor: new D2Color(config.RunesMidColorHighlight as string),
-         nameColor:      new D2Color(config.RunesMidColorName      as string),
-         numberColor:    new D2Color(config.RunesMidColorNumber    as string),
+         highlightColor: config.RunesMidColorHighlight as string as ED2ColorCode,
+         nameColor:      config.RunesMidColorName      as string as ED2ColorCode,
+         numberColor:    config.RunesMidColorNumber    as string as ED2ColorCode,
          bigTooltip:     config.RunesMidBigTooltip    as number as EBigTooltipSetting,
       },
       high: {
          isVisible:      config.ShouldShowRunesHigh as boolean,
          highlight:      config.RunesHighHighlight  as number as EDoubleHighlightSetting,
-         highlightColor: new D2Color(config.RunesHighColorHighlight as string),
-         nameColor:      new D2Color(config.RunesHighColorName      as string),
-         numberColor:    new D2Color(config.RunesHighColorNumber    as string),
+         highlightColor: config.RunesHighColorHighlight as string as ED2ColorCode,
+         nameColor:      config.RunesHighColorName      as string as ED2ColorCode,
+         numberColor:    config.RunesHighColorNumber    as string as ED2ColorCode,
          bigTooltip:     config.RunesHighBigTooltip   as number as EBigTooltipSetting,
       },
     },
     // Jewelry
     jewelry: {
       gems: {
-        isHighlightEnabled:  config.JewelryGemsHighlight   as boolean,
-        filter:              config.JewelryGemsFilter      as string,
-        bigTooltip:          config.JewelryGemsBigTooltips as number as EBigTooltipSetting,
+        isHighlightEnabled: config.JewelryGemsHighlight   as boolean,
+        filter:             config.JewelryGemsFilter      as string,
+        bigTooltip:         config.JewelryGemsBigTooltips as number as EBigTooltipSetting,
       },
       facets: {
         highlight:  config.FacetsHighlights as string,
@@ -118,18 +116,18 @@ export abstract class RawSettings {
       shortSupInfPrefixes: {
         isEnabled:          config.IsSupInferiorPrefixesEnabled   as boolean,
         style:              config.SupInfPrefixesStyle            as string,
-        inferiorItemsColor: new D2Color(config.InferiorItemsColor as string),
+        inferiorItemsColor: config.InferiorItemsColor as string as ED2ColorCode,
       },
       ethColor: {
         isEnabled: config.IsEthItemsColorEnabled     as boolean,
-        color:     new D2rColor(config.EthItemsColor as string),
+        color:     config.EthItemsColor as string as ED2rColor,
       }    
     },
     // Filter Settings
     settings: {
       highlightCharacter:    config.HighlightCharacter as string,
-      defaultHighlightColor: ColorConstants.getColorByCode(config.DefaultHighlightColor as string),
-      hidden:                CharConstants.space.repeat(config.HiddenItemTooltipSize as number),
+      defaultHighlightColor: config.DefaultHighlightColor as string as ED2ColorCode,
+      hidden:                config.HiddenItemTooltipSize as number,
     },
     // Custom Filter List
     isCustomFilterListEnabled: config.IsCustomFilterListEnabled as boolean,

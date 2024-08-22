@@ -1,10 +1,10 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { GemConstants } from "../../Constants/Items/GemConstants";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { FilterSettings } from "../../Settings/Filter/FilterSettings";
 import { BigTooltip } from "../BigTooltip";
 import { D2Color } from "../Colors/D2Color";
+import { ED2ColorCode } from "../Colors/ED2ColorCode";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { SingleHighlight } from "../Highlights/SingleHighlight";
 import { Gem } from "../Items/Gem";
@@ -72,7 +72,7 @@ export class ItemEntry implements IItemEntry {
   ) {
     this._key = key;
     this._newName = newName ??= null;
-    this._nameColor = nameColor ??= ColorConstants.none;
+    this._nameColor = nameColor ??= null;
     this._highlight = highlight ??= null;
     this._bigTooltip = (bigTooltipSetting != undefined && bigTooltipSetting != EBigTooltipSetting.Disabled) ? new BigTooltip(bigTooltipSetting) : null;
   }
@@ -116,7 +116,7 @@ export class ItemEntry implements IItemEntry {
   }
 
   protected applyNameColor(displayName: string) {
-    return `${this.nameColor}${displayName}`;
+    return `${this.nameColor ?? CharConstants.empty}${displayName}`;
   }
 
   protected applyHighlightPattern(displayName: string): string {
@@ -152,10 +152,10 @@ export class ItemEntry implements IItemEntry {
     if (i == -1) // no color code found
       return name;
 
-    let nextColor = new D2Color(name[i+2]);
+    let nextColor = new D2Color(name[i+2] as ED2ColorCode);
     
     // if adjacent color code matches startColor, remove it and proceed with next recursive iteration
-    if (nextColor.equals(startColor ??= ColorConstants.none)) {
+    if (nextColor.equals(startColor)) {
       name = name.replace(startColor.toString(), CharConstants.empty);
       return this.removeRedundantColorCodes(name, startColor);
     }

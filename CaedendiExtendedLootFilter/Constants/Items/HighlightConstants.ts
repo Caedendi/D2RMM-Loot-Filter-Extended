@@ -7,7 +7,7 @@ import { SettingsConstants } from "../SettingsConstants";
 
 export abstract class HighlightConstants {
   public static character:             string  = FilterSettings.highlightCharacter !== SettingsConstants.custom ? FilterSettings.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
-  public static defaultHighlightColor: D2Color = FilterSettings.defaultHighlightColor;
+  public static defaultHighlightColor: D2Color = FilterSettings.defaultHighlightColor; // todo: redundant?
 
   public static readonly padding = {
     none: CharConstants.empty,
@@ -33,7 +33,7 @@ export abstract class HighlightConstants {
   public static bttPadding = this.padding.p5;
   public static bttPickUpMsg = `${ColorConstants.purple}Pick Up`;
 
-  public static doubleHighlightSizes = [
+  public static readonly doubleHighlightSizes = [
     { setting: EDoubleHighlightSetting.SMALL,             pattern: this.pattern.p2,    padding: this.padding.p2 },
     { setting: EDoubleHighlightSetting.MEDIUM,            pattern: this.pattern.p5,    padding: this.padding.p3 },
     { setting: EDoubleHighlightSetting.LARGE,             pattern: this.pattern.p10,   padding: this.padding.p5 },
