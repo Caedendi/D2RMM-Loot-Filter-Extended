@@ -41,12 +41,16 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyIlvlIndent(displayName);
     displayName = this.applyBigTooltip(displayName);
+    displayName = this.applyiLvlColor(displayName);
+    displayName = this.removeRedundantColorCodes(displayName);
 
     return displayName;
   }
 
   protected applyIlvlIndent(displayName: string): string {
-    if (!ItemLevelSettings.shouldFixIndentation)
+    if ( !ItemLevelSettings.isEnabled
+      || !ItemLevelSettings.shouldFixIndentation 
+      || (ItemLevelSettings.shouldHideOnBigTooltips && this.bigTooltip != null))
       return displayName;
 
     return `${this.getiLvlIndent()}${displayName}`;
@@ -63,5 +67,9 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
       default:
         throw new Error("Received undefined iLvlDigits value.");
     }
+  }
+
+  protected applyiLvlColor(displayName: string): string {
+    return `${displayName}${this.nameColor ?? CharConstants.empty}`;
   }
 }

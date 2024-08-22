@@ -9,25 +9,25 @@ export abstract class GemConstants {
   // TODO: public/protected properties
   // TODO: translated gem quality names
   static amethyst = "Amethyst";
-  static diamond = "Diamond";
-  static emerald = "Emerald";
-  static ruby = "Ruby";
+  static diamond  = "Diamond";
+  static emerald  = "Emerald";
+  static ruby     = "Ruby";
   static sapphire = "Sapphire";
-  static topaz = "Topaz";
-  static skull = "Skull";
+  static topaz    = "Topaz";
+  static skull    = "Skull";
 
-  static chipped = "Chipped";
-  static flawed = "Flawed";
+  static chipped  = "Chipped";
+  static flawed   = "Flawed";
   static flawless = "Flawless";
-  static perfect = "Perfect";
+  static perfect  = "Perfect";
 
-  static clrAmethyst = ColorConstants.purple;
-  static clrDiamond = ColorConstants.white;
-  static clrEmerald = ColorConstants.green;
-  static clrRuby = ColorConstants.red;
-  static clrSapphire = ColorConstants.blue;
-  static clrTopaz = ColorConstants.yellow;
-  static clrSkull = ColorConstants.gray;
+  static amethystColor = ColorConstants.purple;
+  static diamondColor  = ColorConstants.white;
+  static emeraldColor  = ColorConstants.green;
+  static rubyColor     = ColorConstants.red;
+  static sapphireColor = ColorConstants.blue;
+  static topazColor    = ColorConstants.yellow;
+  static skullColor    = ColorConstants.gray;
 
   static clrName = ColorConstants.white;
   static highlight = CharConstants.o;
@@ -46,44 +46,44 @@ export abstract class GemConstants {
   // - use translated names for chipped/flawed/flawless/perfect
   // - use selectable name for [translated]/common/regular/whatever gems
   public static chippedFlawedRegularGems: Gem[] = [
-    new Gem("gcv", this.clrAmethyst, this.chipped ), // Chipped Amethyst
-    new Gem("gcw", this.clrDiamond,  this.chipped ), // Chipped Diamond
-    new Gem("gcg", this.clrEmerald,  this.chipped ), // Chipped Emerald
-    new Gem("gcr", this.clrRuby,     this.chipped ), // Chipped Ruby
-    new Gem("gcb", this.clrSapphire, this.chipped ), // Chipped Sapphire
-    new Gem("gcy", this.clrTopaz,    this.chipped ), // Chipped Topaz
-    new Gem("skc", this.clrSkull,    this.chipped ), // Chipped Skull
-    new Gem("gfv", this.clrAmethyst, this.flawed  ), // Flawed Amethyst
-    new Gem("gfw", this.clrDiamond,  this.flawed  ), // Flawed Diamond
-    new Gem("gfg", this.clrEmerald,  this.flawed  ), // Flawed Emerald
-    new Gem("gfr", this.clrRuby,     this.flawed  ), // Flawed Ruby
-    new Gem("gfb", this.clrSapphire, this.flawed  ), // Flawed Sapphire
-    new Gem("gfy", this.clrTopaz,    this.flawed  ), // Flawed Topaz
-    new Gem("skf", this.clrSkull,    this.flawed  ), // Flawed Skull
-    new Gem("gsv", this.clrAmethyst, this.amethyst), // Amethyst
+    new Gem("gcv", this.amethystColor, this.chipped ), // Chipped Amethyst
+    new Gem("gcw", this.diamondColor,  this.chipped ), // Chipped Diamond
+    new Gem("gcg", this.emeraldColor,  this.chipped ), // Chipped Emerald
+    new Gem("gcr", this.rubyColor,     this.chipped ), // Chipped Ruby
+    new Gem("gcb", this.sapphireColor, this.chipped ), // Chipped Sapphire
+    new Gem("gcy", this.topazColor,    this.chipped ), // Chipped Topaz
+    new Gem("skc", this.skullColor,    this.chipped ), // Chipped Skull
+    new Gem("gfv", this.amethystColor, this.flawed  ), // Flawed Amethyst
+    new Gem("gfw", this.diamondColor,  this.flawed  ), // Flawed Diamond
+    new Gem("gfg", this.emeraldColor,  this.flawed  ), // Flawed Emerald
+    new Gem("gfr", this.rubyColor,     this.flawed  ), // Flawed Ruby
+    new Gem("gfb", this.sapphireColor, this.flawed  ), // Flawed Sapphire
+    new Gem("gfy", this.topazColor,    this.flawed  ), // Flawed Topaz
+    new Gem("skf", this.skullColor,    this.flawed  ), // Flawed Skull
+    new Gem("gsv", this.amethystColor, this.amethyst), // Amethyst
     // For Ruby, Sapphire, Emerald and Diamond, see "gemExceptions" below.
-    new Gem("gsy", this.clrTopaz,    this.topaz), // Topaz
-    new Gem("sku", this.clrSkull,    this.skull), // Skull
+    new Gem("gsy", this.topazColor,    this.topaz), // Topaz
+    new Gem("sku", this.skullColor,    this.skull), // Skull
   ];
 
   public static flawlessGems: Gem[] = [
-    new Gem("gzv", this.clrAmethyst, this.flawless), // Flawless Amethyst
-    new Gem("glw", this.clrDiamond,  this.flawless), // Flawless Diamond
-    new Gem("glg", this.clrEmerald,  this.flawless), // Flawless Emerald
-    new Gem("glr", this.clrRuby,     this.flawless), // Flawless Ruby
-    new Gem("glb", this.clrSapphire, this.flawless), // Flawless Sapphire
-    new Gem("gly", this.clrTopaz,    this.flawless), // Flawless Topaz
-    new Gem("skl", this.clrSkull,    this.flawless), // Flawless Skull
+    new Gem("gzv", this.amethystColor, this.flawless), // Flawless Amethyst
+    new Gem("glw", this.diamondColor,  this.flawless), // Flawless Diamond
+    new Gem("glg", this.emeraldColor,  this.flawless), // Flawless Emerald
+    new Gem("glr", this.rubyColor,     this.flawless), // Flawless Ruby
+    new Gem("glb", this.sapphireColor, this.flawless), // Flawless Sapphire
+    new Gem("gly", this.topazColor,    this.flawless), // Flawless Topaz
+    new Gem("skl", this.skullColor,    this.flawless), // Flawless Skull
   ];
 
   public static perfectGems: Gem[] = [
-    new Gem("gpv", this.clrAmethyst, this.perfect),  // Perfect Amethyst
-    new Gem("gpw", this.clrDiamond,  this.perfect),  // Perfect Diamond
-    new Gem("gpg", this.clrEmerald,  this.perfect),  // Perfect Emerald
-    new Gem("gpr", this.clrRuby,     this.perfect),  // Perfect Ruby
-    new Gem("gpb", this.clrSapphire, this.perfect),  // Perfect Sapphire
-    new Gem("gpy", this.clrTopaz,    this.perfect),  // Perfect Topaz
-    new Gem("skz", this.clrSkull,    this.perfect),  // Perfect Skull
+    new Gem("gpv", this.amethystColor, this.perfect),  // Perfect Amethyst
+    new Gem("gpw", this.diamondColor,  this.perfect),  // Perfect Diamond
+    new Gem("gpg", this.emeraldColor,  this.perfect),  // Perfect Emerald
+    new Gem("gpr", this.rubyColor,     this.perfect),  // Perfect Ruby
+    new Gem("gpb", this.sapphireColor, this.perfect),  // Perfect Sapphire
+    new Gem("gpy", this.topazColor,    this.perfect),  // Perfect Topaz
+    new Gem("skz", this.skullColor,    this.perfect),  // Perfect Skull
   ];
 
   /**
@@ -91,9 +91,9 @@ export abstract class GemConstants {
    * are however separate entries from the affixes, so no idea why the devs thought this makes sense.
    */
   public static gemExceptions: Gem[] = [
-    new Gem("gsw", GemConstants.clrDiamond,  GemConstants.diamond),  // Diamond
-    new Gem("gsg", GemConstants.clrEmerald,  GemConstants.emerald),  // Emerald
-    new Gem("gsr", GemConstants.clrRuby,     GemConstants.ruby),     // Ruby
-    new Gem("gsb", GemConstants.clrSapphire, GemConstants.sapphire), // Sapphire
+    new Gem("gsw", GemConstants.diamondColor,  GemConstants.diamond),  // Diamond
+    new Gem("gsg", GemConstants.emeraldColor,  GemConstants.emerald),  // Emerald
+    new Gem("gsr", GemConstants.rubyColor,     GemConstants.ruby),     // Ruby
+    new Gem("gsb", GemConstants.sapphireColor, GemConstants.sapphire), // Sapphire
   ];
 }

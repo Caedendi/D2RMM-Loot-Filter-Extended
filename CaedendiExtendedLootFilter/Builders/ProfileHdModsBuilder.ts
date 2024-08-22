@@ -8,6 +8,11 @@ import { IBuilder } from "./Interfaces/IBuilder";
 
 export class ProfileHdModsBuilder implements IBuilder {
   public build() {
+    if ( (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === "wg")
+      && !EtherealColorSettings.isEnabled
+      && !TooltipModsSettings.isEnabled)
+      return;
+
     let path = FileConstants.FILE_PROFILE_HD_PATH; // TODO: low vision and controller modes
     let profileHD = D2RMM.readJson(path);
 

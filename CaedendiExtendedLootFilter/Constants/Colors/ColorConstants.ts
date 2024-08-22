@@ -124,5 +124,6 @@ export abstract class ColorConstants {
   public static readonly purple:    D2Color = new D2Color(ED2ColorCode.DARK_VIOLET);
   public static readonly pink:      D2Color = new D2Color(ED2ColorCode.VIOLET);
 
-  public static readonly magic:     D2Color = new D2Color(ED2ColorCode.CORN_FLOWER_BLUE_2); // $MagicColor
+  public static readonly magic:     D2Color = new D2Color(ED2ColorCode.CORN_FLOWER_BLUE_2); // $FontColorMagic
+  public static readonly unique:    D2Color = new D2Color(ED2ColorCode.TAN_3); // $FontColorUnique
 }

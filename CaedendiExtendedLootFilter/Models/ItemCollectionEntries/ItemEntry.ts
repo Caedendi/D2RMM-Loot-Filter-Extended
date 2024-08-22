@@ -31,8 +31,8 @@ export class ItemEntry implements IItemEntry {
   /**
    * Name color
    */
-  private readonly _nameColor: D2Color;
-  protected get nameColor(): D2Color {
+  private readonly _nameColor: D2Color | null;
+  protected get nameColor(): D2Color | null {
     return this._nameColor;
   }
   /**
@@ -74,7 +74,7 @@ export class ItemEntry implements IItemEntry {
     this._newName = newName ??= null;
     this._nameColor = nameColor ??= null;
     this._highlight = highlight ??= null;
-    this._bigTooltip = (bigTooltipSetting != undefined && bigTooltipSetting != EBigTooltipSetting.Disabled) ? new BigTooltip(bigTooltipSetting) : null;
+    this._bigTooltip = (bigTooltipSetting != undefined && bigTooltipSetting != EBigTooltipSetting.DISABLED) ? new BigTooltip(bigTooltipSetting) : null;
   }
 
   public static createArray(items: [string, string][]): ItemEntry[] {

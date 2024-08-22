@@ -11,11 +11,11 @@ export class DoubleHighlight extends DoubleHighlightBase implements IHighlight {
     return this._setting;
   }
 
-  constructor(hlSetting: EDoubleHighlightSetting, color?: D2Color, bttSetting: EBigTooltipSetting = EBigTooltipSetting.Disabled) {
+  constructor(hlSetting: EDoubleHighlightSetting, color?: D2Color, bttSetting: EBigTooltipSetting = EBigTooltipSetting.DISABLED) {
     if (hlSetting == EDoubleHighlightSetting.DISABLED)
       throw new Error("hlSetting can not be DISABLED.");
 
-    if (hlSetting == EDoubleHighlightSetting.EXTRA_EXTRA_LARGE && bttSetting != EBigTooltipSetting.Disabled)
+    if (hlSetting == EDoubleHighlightSetting.EXTRA_EXTRA_LARGE && bttSetting != EBigTooltipSetting.DISABLED)
       hlSetting = EDoubleHighlightSetting.EXTRA_LARGE;
 
     let settings = HighlightConstants.doubleHighlightSizes.find(size => size.setting == hlSetting)!;
@@ -27,7 +27,7 @@ export class DoubleHighlight extends DoubleHighlightBase implements IHighlight {
     if (hlSetting == EDoubleHighlightSetting.DISABLED)
       return null;
 
-    return new DoubleHighlight(hlSetting, color, bttSetting ??= EBigTooltipSetting.Disabled);
+    return new DoubleHighlight(hlSetting, color, bttSetting ??= EBigTooltipSetting.DISABLED);
   }
 
   protected getPrefix(): string {

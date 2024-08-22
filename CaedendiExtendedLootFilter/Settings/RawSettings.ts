@@ -83,12 +83,12 @@ export abstract class RawSettings {
       },
       highlights: {
         isCubeEnabled: !(config.IsCubeHighlightExcluded as boolean),
-        quest:    config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
-        essences: config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
-        tokens:   config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
-        keys:     config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
-        organs:   config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
-        standard: config.QuestEndgameHighlightsQuest as number as EDoubleHighlightSetting,
+        quest:    config.QuestEndgameHighlightsQuest    as number as EDoubleHighlightSetting,
+        essences: config.QuestEndgameHighlightsEssences as number as EDoubleHighlightSetting,
+        tokens:   config.QuestEndgameHighlightsTokens   as number as EDoubleHighlightSetting,
+        keys:     config.QuestEndgameHighlightsKeys     as number as EDoubleHighlightSetting,
+        organs:   config.QuestEndgameHighlightsOrgans   as number as EDoubleHighlightSetting,
+        standard: config.QuestEndgameHighlightsStandard as number as EDoubleHighlightSetting,
       },
       bigTooltips: {
         questItems: config.BigTooltipQuestItems as number as EBigTooltipSetting,
@@ -187,4 +187,3 @@ export abstract class RawSettings {
     tooltipSize:          config.TooltipSize          as number,
   };
 }
-  

@@ -13,11 +13,11 @@ export class SingleHighlight extends HighlightBase {
 
   // TODO: remove?
   public getIndent(): string {
-    let highlightLength = `${this.size}${this.padding}`.length;
+    let highlightLength = `${this.pattern}${this.padding}`.length;
     return CharConstants.getSpaces(highlightLength);
   }
 
   protected getPrefix(): string {
-    return `${this.color}${this.size}${this.padding ?? CharConstants.empty}`;
+    return `${this.color}${this.pattern}${this.padding ?? CharConstants.empty}`;
   }
 }

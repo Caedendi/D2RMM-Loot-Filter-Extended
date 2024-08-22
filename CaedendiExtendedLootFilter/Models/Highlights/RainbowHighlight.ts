@@ -32,7 +32,7 @@ export class RainbowHighlight extends DoubleHighlightBase {
 
   // TODO
   constructor(bigTooltipSetting?: EBigTooltipSetting) {
-    let pattern = BigTooltip.hasPickUpMessage(bigTooltipSetting ?? EBigTooltipSetting.Disabled) 
+    let pattern = BigTooltip.hasPickUpMessage(bigTooltipSetting ?? EBigTooltipSetting.DISABLED) 
       ? HighlightConstants.pattern.p3 
       : HighlightConstants.pattern.p5;
 

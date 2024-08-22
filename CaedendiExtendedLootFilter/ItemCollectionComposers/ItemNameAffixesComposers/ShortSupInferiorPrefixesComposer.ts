@@ -19,7 +19,7 @@ export class ShortSupInferiorPrefixesComposer extends ItemCollectionComposerBase
 
     let supPrefix: string = CharConstants.empty;
     let infPrefix: string = CharConstants.empty;
-    let infColor: D2Color = ShortSupInfPrefixesSettings.inferiorItemsColor;
+    let infColor: D2Color | null = ShortSupInfPrefixesSettings.inferiorItemsColor;
     switch (ShortSupInfPrefixesSettings.style) {
       case "plusminus": // Enable
         supPrefix = `${CharConstants.plus}`;
@@ -32,6 +32,6 @@ export class ShortSupInferiorPrefixesComposer extends ItemCollectionComposerBase
       }
 
       this.collection.upsert(new ItemEntry(supKey, supPrefix));
-      infKeys.forEach(key => this.collection.upsert(new ItemEntry(key, `${infColor}${infPrefix}`)));
+      infKeys.forEach(key => this.collection.upsert(new ItemEntry(key, `${infColor ?? CharConstants.empty}${infPrefix}`)));
   }
 }
