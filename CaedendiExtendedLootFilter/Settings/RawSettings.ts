@@ -1,6 +1,7 @@
 import { ED2ColorCode } from "../Models/Colors/ED2ColorCode";
 import { ED2rColor } from "../Models/Colors/ED2rColor";
 import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSetting";
+import { EQualityTagPosition } from "../Models/QualityTags/EQualityTagPosition";
 import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 
 // TODO: add this text somewhere
@@ -26,36 +27,36 @@ export abstract class RawSettings {
       shouldHideAffix:   config.ShouldHideRuneAffix   as boolean,
       shouldAddNumber:   config.ShouldAddRuneNumbers  as boolean,
       low: {
-         isVisible:      config.ShouldShowRunesLow as boolean,
-         highlight:      config.RunesLowHighlight  as number as EDoubleHighlightSetting,
+         isVisible:      config.ShouldShowRunesLow     as boolean,
+         highlight:      config.RunesLowHighlight      as number as EDoubleHighlightSetting,
          highlightColor: config.RunesLowColorHighlight as string as ED2ColorCode,
          nameColor:      config.RunesLowColorName      as string as ED2ColorCode,
          numberColor:    config.RunesLowColorNumber    as string as ED2ColorCode,
-         bigTooltip:     config.RunesLowBigTooltip    as number as EBigTooltipSetting,
+         bigTooltip:     config.RunesLowBigTooltip     as number as EBigTooltipSetting,
       },
       lowMid: {
-         isVisible:      config.ShouldShowRunesLowMid as boolean,
-         highlight:      config.RunesLowMidHighlight  as number as EDoubleHighlightSetting,
+         isVisible:      config.ShouldShowRunesLowMid     as boolean,
+         highlight:      config.RunesLowMidHighlight      as number as EDoubleHighlightSetting,
          highlightColor: config.RunesLowMidColorHighlight as string as ED2ColorCode,
          nameColor:      config.RunesLowMidColorName      as string as ED2ColorCode,
          numberColor:    config.RunesLowMidColorNumber    as string as ED2ColorCode,
-         bigTooltip:     config.RunesLowMidBigTooltip as number as EBigTooltipSetting,
+         bigTooltip:     config.RunesLowMidBigTooltip     as number as EBigTooltipSetting,
       },
       mid: {
-         isVisible:      config.ShouldShowRunesMid as boolean,
-         highlight:      config.RunesMidHighlight  as number as EDoubleHighlightSetting,
+         isVisible:      config.ShouldShowRunesMid     as boolean,
+         highlight:      config.RunesMidHighlight      as number as EDoubleHighlightSetting,
          highlightColor: config.RunesMidColorHighlight as string as ED2ColorCode,
          nameColor:      config.RunesMidColorName      as string as ED2ColorCode,
          numberColor:    config.RunesMidColorNumber    as string as ED2ColorCode,
-         bigTooltip:     config.RunesMidBigTooltip    as number as EBigTooltipSetting,
+         bigTooltip:     config.RunesMidBigTooltip     as number as EBigTooltipSetting,
       },
       high: {
-         isVisible:      config.ShouldShowRunesHigh as boolean,
-         highlight:      config.RunesHighHighlight  as number as EDoubleHighlightSetting,
+         isVisible:      config.ShouldShowRunesHigh     as boolean,
+         highlight:      config.RunesHighHighlight      as number as EDoubleHighlightSetting,
          highlightColor: config.RunesHighColorHighlight as string as ED2ColorCode,
          nameColor:      config.RunesHighColorName      as string as ED2ColorCode,
          numberColor:    config.RunesHighColorNumber    as string as ED2ColorCode,
-         bigTooltip:     config.RunesHighBigTooltip   as number as EBigTooltipSetting,
+         bigTooltip:     config.RunesHighBigTooltip     as number as EBigTooltipSetting,
       },
     },
     // Jewelry
@@ -107,19 +108,25 @@ export abstract class RawSettings {
         shouldHideOnBigTooltips: config.IsHideIlvlOnBttEnabled as boolean,
       },
       itemQuality: {
-        isEnabled:   config.IsShowItemQualityEnabled as boolean,
-        placement:   config.ItemQualityPlacement     as string,
-        brackets:    config.ItemQualityBrackets      as string,
-        styleSingle: config.ItemQualityStyleSingle   as string,
-        styleDouble: config.ItemQualityStyleDouble   as string,
+        isEnabled: config.IsShowItemQualityEnabled as boolean,
+        position:  config.ItemQualityPosition      as number as EQualityTagPosition,
+        single: {
+          style:    config.ItemQualitySingleStyle    as string,
+          brackets: config.ItemQualitySingleBrackets as string,
+          padding:  config.ItemQualitySinglePadding  as number,
+        },
+        double: {
+          style:   config.ItemQualityDoubleStyle    as string,
+          padding: config.ItemQualityDoublePadding  as number,
+        },
       },
       shortSupInfPrefixes: {
-        isEnabled:          config.IsSupInferiorPrefixesEnabled   as boolean,
-        style:              config.SupInfPrefixesStyle            as string,
+        isEnabled:          config.IsSupInferiorPrefixesEnabled as boolean,
+        style:              config.SupInfPrefixesStyle          as string,
         inferiorItemsColor: config.InferiorItemsColor as string as ED2ColorCode,
       },
       ethColor: {
-        isEnabled: config.IsEthItemsColorEnabled     as boolean,
+        isEnabled: config.IsEthItemsColorEnabled as boolean,
         color:     config.EthItemsColor as string as ED2rColor,
       }    
     },

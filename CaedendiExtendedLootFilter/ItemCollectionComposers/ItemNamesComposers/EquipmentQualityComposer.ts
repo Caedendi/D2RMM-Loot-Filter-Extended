@@ -1,5 +1,9 @@
 import { FileConstants } from "../../Constants/FileConstants";
 import { EquipmentEntry } from "../../Models/ItemCollectionEntries/EquipmentEntry";
+import { DoubleQualityIndicatorPair } from "../../Models/QualityTags/DoubleQualityIndicatorPair";
+import { DoubleQualityTag } from "../../Models/QualityTags/DoubleQualityTag";
+import { EQualityTagPosition } from "../../Models/QualityTags/EQualityTagPosition";
+import { IQualityTag } from "../../Models/QualityTags/Interfaces/IQualityTag";
 import { SingleQualityTag } from "../../Models/QualityTags/SingleQualityTag";
 import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
 import { ItemQualitySettings } from "../../Settings/Filter/ItemQualitySettings";
@@ -13,12 +17,6 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
       super();
   }
 
-  // TODO: refactor this and StatsAndModifiersSettings
-  
-  // TODO: add more options
-  // -name- & =name=
-  // ·name· & :name:
-  // -name- & +name+ & #name#
   public applyFilter(): void {
     if (!ItemQualitySettings.isEnabled) {
       return;
@@ -32,13 +30,21 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
 
     this.addEquipmentQuality(armorRowsWithQuality);
     this.addEquipmentQuality(weaponRowsWithQuality);
+
+    D2RMM.writeTsv(FileConstants.FILE_ARMOR_PATH, fileArmor);
+    D2RMM.writeTsv(FileConstants.FILE_WEAPONS_PATH, fileWeapons);
   }
 
-  protected addEquipmentQuality(rows) {
-    Object.entries(rows).forEach(([i, _]) => {
-      let row = rows[i];
-      this.collection.upsert(new EquipmentEntry(row[FileConstants.key], EiLvlDigits.Double, new SingleQualityTag(this.getSingleQualityIndicatorForItem(row))));
-    });
+  protected addEquipmentQuality(items) {
+    Object.entries(items).forEach(([i, _]) => this.collection.upsert(
+      new EquipmentEntry(items[i].code, EiLvlDigits.None, this.createQualityTag(items[i]))
+    ));
+  }
+
+  protected createQualityTag(itemRow): IQualityTag {
+    return ItemQualitySettings.position == EQualityTagPosition.PREFIX_AND_SUFFIX
+      ? DoubleQualityTag.create(this.getDoubleQualityIndicatorsForItem(itemRow), ItemQualitySettings.paddingDouble)
+      : new SingleQualityTag(ItemQualitySettings.position, (this.getSingleQualityIndicatorForItem(itemRow)), ItemQualitySettings.openChar, ItemQualitySettings.closeChar, ItemQualitySettings.paddingSingle);
   }
 
   protected getSingleQualityIndicatorForItem(itemRow): string {
@@ -50,12 +56,12 @@ export class EquipmentQualityComposer extends ItemCollectionComposerBase {
     return ItemQualitySettings.singleNormalQualityIndicator;
   }
 
-  protected getDoubleQualityIndicatorForItem(itemRow): string {
+  protected getDoubleQualityIndicatorsForItem(itemRow): DoubleQualityIndicatorPair | null {
     if (itemRow.code === itemRow.ultracode)
-      return ItemQualitySettings.doubleEliteQualityIndicator;
+      return ItemQualitySettings.doubleEliteQualityIndicators;
     if (itemRow.code === itemRow.ubercode)
-      return ItemQualitySettings.doubleExceptionalQualityIndicator;
+      return ItemQualitySettings.doubleExceptionalQualityIndicators;
 
-    return ItemQualitySettings.doubleNormalQualityIndicator;
+    return ItemQualitySettings.doubleNormalQualityIndicators;
   }
 }

@@ -1189,7 +1189,7 @@
             {
               "id": "StatsModifiersItemQualitySection",
               "type": "section",
-              "name": "Show Equipment Quality [BROKEN]",
+              "name": "Show Equipment Quality",
               "defaultExpanded": true,
               "children": [
                 {
@@ -1200,25 +1200,25 @@
                   "defaultValue": false
                 },
                 {
-                  "id": "ItemQualityPlacement",
+                  "id": "ItemQualityPosition",
                   "type": "select",
                   "name": "Position",
                   "description": "Show Equipment Quality tag.",
-                  "defaultValue": "suffix",
+                  "defaultValue": "2",
                   "visible": ["value", "IsShowItemQualityEnabled"],
                   "options": [
-                    { "value": "prefix", "label": "Prefix" },
-                    { "value": "suffix", "label": "Suffix" },
-                    { "value": "both",   "label": "Prefix & Suffix" }
+                    { "value": "1", "label": "Prefix" },
+                    { "value": "2", "label": "Suffix" },
+                    { "value": "0", "label": "Prefix & Suffix" }
                   ]
                 },
                 {
-                  "id": "ItemQualityStyleSingle",
+                  "id": "ItemQualitySingleStyle",
                   "type": "select",
                   "name": "Indicator Style",
                   "description": "Set the style for the quality indicator. [CSTM-QTYS]",
                   "defaultValue": "lowercase",
-                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPlacement"], "both"]],
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPosition"], "0"]],
                   "options": [
                     { "value": "lowercase", "label": "Lowercase letter" },
                     { "value": "uppercase", "label": "Uppercase letter" },
@@ -1226,30 +1226,55 @@
                   ]
                 },
                 {
-                  "id": "ItemQualityBrackets",
+                  "id": "ItemQualitySingleBrackets",
                   "type": "select",
                   "name": "Bracket Style",
                   "description": "Set the bracket style.",
-                  "defaultValue": "square",
-                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPlacement"], "both"]],
+                  "defaultValue": "round",
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPosition"], "0"]],
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none",   "label": "Disable" },
                     { "value": "square", "label": "Square" },
-                    { "value": "round", "label": "Round" }
+                    { "value": "round",  "label": "Round" },
+                    { "value": "custom", "label": "Custom" }
                   ]
                 },
                 {
-                  "id": "ItemQualityStyleDouble",
+                  "id": "ItemQualitySinglePadding",
+                  "type": "number",
+                  "minValue": 0,
+                  "maxValue": 5,
+                  "name": "Padding",
+                  "description": "Set the padding between the item name and the quality indicator (0-10).",
+                  "defaultValue": 1,
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["neq", ["value", "ItemQualityPosition"], "0"]]
+                },
+                {
+                  "id": "ItemQualityDoubleStyle",
                   "type": "select",
                   "name": "Indicator Style",
                   "description": "Set the style for the quality indicator.",
-                  "defaultValue": "dashes",
-                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["eq", ["value", "ItemQualityPlacement"], "both"]],
+                  "defaultValue": "dots-2",
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["eq", ["value", "ItemQualityPosition"], "0"]],
                   "options": [
-                    { "value": "dots",   "label": "Dots" },
-                    { "value": "dashes", "label": "Dashes" },
-                    { "value": "custom", "label": "Custom" }
+                    { "value": "dots-1",   "label": "Dots 1" },
+                    { "value": "dots-2",   "label": "Dots 2" },
+                    { "value": "dashes-1", "label": "Dashes 1" },
+                    { "value": "dashes-2", "label": "Dashes 2" },
+                    { "value": "dashes-3", "label": "Dashes 3" },
+                    { "value": "dashes-4", "label": "Dashes 4" },
+                    { "value": "custom",   "label": "Custom" }
                   ]
+                },
+                {
+                  "id": "ItemQualityDoublePadding",
+                  "type": "number",
+                  "minValue": 0,
+                  "maxValue": 5,
+                  "name": "Padding",
+                  "description": "Set the padding between the item name and the quality indicators (0-10).",
+                  "defaultValue": 0,
+                  "visible": ["and", ["value", "IsShowItemQualityEnabled"], ["eq", ["value", "ItemQualityPosition"], "0"]]
                 }
               ]
             },

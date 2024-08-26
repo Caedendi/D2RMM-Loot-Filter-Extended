@@ -1,40 +1,38 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
+import { DoubleQualityIndicatorPair } from "../../Models/QualityTags/DoubleQualityIndicatorPair";
+import { EQualityTagPosition } from "../../Models/QualityTags/EQualityTagPosition";
+import { CustomSettings } from "../CustomSettings";
 import { EItemQuality } from "../Enums/EItemQuality";
 import { RawSettings } from "../RawSettings";
 
 export abstract class ItemQualitySettings {
-  public static readonly isEnabled:     boolean = RawSettings.filter.statsAndModifiers.itemQuality.isEnabled;
-  public static readonly placement:      string = RawSettings.filter.statsAndModifiers.itemQuality.placement;
-  protected static readonly brackets:    string = RawSettings.filter.statsAndModifiers.itemQuality.brackets;
-  protected static readonly styleSingle: string = RawSettings.filter.statsAndModifiers.itemQuality.styleSingle;
-  protected static readonly styleDouble: string = RawSettings.filter.statsAndModifiers.itemQuality.styleDouble;
+  protected static readonly brackets:    string  = RawSettings.filter.statsAndModifiers.itemQuality.single.brackets;
+  protected static readonly styleSingle: string  = RawSettings.filter.statsAndModifiers.itemQuality.single.style;
+  protected static readonly styleDouble: string  = RawSettings.filter.statsAndModifiers.itemQuality.double.style;
 
-  public static singleNormalQualityIndicator:      string = this.createSingleQualityIndicator(EItemQuality.Normal);
-  public static singleExceptionalQualityIndicator: string = this.createSingleQualityIndicator(EItemQuality.Exceptional);
-  public static singleEliteQualityIndicator:       string = this.createSingleQualityIndicator(EItemQuality.Elite);
+  public static readonly position:       EQualityTagPosition = RawSettings.filter.statsAndModifiers.itemQuality.position;
+  public static readonly isEnabled:      boolean = RawSettings.filter.statsAndModifiers.itemQuality.isEnabled;
+  public static readonly paddingSingle:  string  = CharConstants.space.repeat(RawSettings.filter.statsAndModifiers.itemQuality.single.padding);
+  public static readonly paddingDouble:  string  = CharConstants.space.repeat(RawSettings.filter.statsAndModifiers.itemQuality.double.padding);
 
-  public static doubleNormalQualityIndicator:      string = this.createDoubleQualityIndicator(EItemQuality.Normal);
-  public static doubleExceptionalQualityIndicator: string = this.createDoubleQualityIndicator(EItemQuality.Exceptional);
-  public static doubleEliteQualityIndicator:       string = this.createDoubleQualityIndicator(EItemQuality.Elite);
+  public static singleNormalQualityIndicator:      string = this.getSingleQualityIndicator(EItemQuality.Normal);
+  public static singleExceptionalQualityIndicator: string = this.getSingleQualityIndicator(EItemQuality.Exceptional);
+  public static singleEliteQualityIndicator:       string = this.getSingleQualityIndicator(EItemQuality.Elite);
 
   public static openChar:  string = this.getSingleQualityIndicatorOpenChar();
   public static closeChar: string = this.getSingleQualityIndicatorCloseChar();
 
-  protected static customSingleNormalQualityIndicator:      string = "[custom n]"; // replace "custom n" to your preference. [CSTM-QTYS]
-  protected static customSingleExceptionalQualityIndicator: string = "[custom x]"; // replace "custom x" to your preference. [CSTM-QTYS]
-  protected static customSingleEliteQualityIndicator:       string = "[custom e]"; // replace "custom e" to your preference. [CSTM-QTYS]
+  public static doubleNormalQualityIndicators:      DoubleQualityIndicatorPair | null = this.getDoubleQualityIndicators(EItemQuality.Normal);
+  public static doubleExceptionalQualityIndicators: DoubleQualityIndicatorPair | null = this.getDoubleQualityIndicators(EItemQuality.Exceptional);
+  public static doubleEliteQualityIndicators:       DoubleQualityIndicatorPair | null = this.getDoubleQualityIndicators(EItemQuality.Elite);
 
-  protected static customDoubleNormalQualityIndicator:      string = "[custom n]"; // replace "custom n" to your preference. [CSTM-QTYD]
-  protected static customDoubleExceptionalQualityIndicator: string = "[custom x]"; // replace "custom x" to your preference. [CSTM-QTYD]
-  protected static customDoubleEliteQualityIndicator:       string = "[custom e]"; // replace "custom e" to your preference. [CSTM-QTYD]
-
-  private static createSingleQualityIndicator(itemQuality: EItemQuality): string {
+  private static getSingleQualityIndicator(itemQuality: EItemQuality): string {
     if (this.styleSingle === SettingsConstants.custom)
       return [
-          { quality: EItemQuality.Normal,      indicator: this.customSingleNormalQualityIndicator },
-          { quality: EItemQuality.Exceptional, indicator: this.customSingleExceptionalQualityIndicator },
-          { quality: EItemQuality.Elite,       indicator: this.customSingleEliteQualityIndicator },
+          { quality: EItemQuality.Normal,      indicator: CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.single.normal },
+          { quality: EItemQuality.Exceptional, indicator: CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.single.exceptional },
+          { quality: EItemQuality.Elite,       indicator: CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.single.elite },
         ].find(q => q.quality == itemQuality)!.indicator;
 
     let indicator = [
@@ -44,7 +42,7 @@ export abstract class ItemQualitySettings {
       ].find(q => q.quality == itemQuality)!.indicator;
 
     if (this.styleSingle === "uppercase")
-      return indicator.toUpperCase();
+      indicator = indicator.toUpperCase();
 
     return indicator;
   }
@@ -52,6 +50,7 @@ export abstract class ItemQualitySettings {
   private static getSingleQualityIndicatorOpenChar(): string {
     return [
         { setting: SettingsConstants.disabled, char: CharConstants.empty },
+        { setting: SettingsConstants.custom,   char: CustomSettings.filter.statsAndModifiers.itemQuality.bracketStyle.openChar },
         { setting: "square", char: '[' },
         { setting: "round",  char: '(' },
       ].find(o => o.setting === this.brackets)!.char;
@@ -60,68 +59,67 @@ export abstract class ItemQualitySettings {
   private static getSingleQualityIndicatorCloseChar(): string {
     return [
         { setting: SettingsConstants.disabled, char: CharConstants.empty },
+        { setting: SettingsConstants.custom,   char: CustomSettings.filter.statsAndModifiers.itemQuality.bracketStyle.closeChar },
         { setting: "square", char: ']' },
         { setting: "round",  char: ')' },
       ].find(o => o.setting === this.brackets)!.char;
   }
 
-  private static createDoubleQualityIndicator(itemQuality: EItemQuality): string {
-    if (this.styleDouble === SettingsConstants.custom)
-      return [
-          { quality: EItemQuality.Normal,      indicator: this.customDoubleNormalQualityIndicator },
-          { quality: EItemQuality.Exceptional, indicator: this.customDoubleExceptionalQualityIndicator },
-          { quality: EItemQuality.Elite,       indicator: this.customDoubleEliteQualityIndicator },
-        ].find(q => q.quality == itemQuality)!.indicator;
-
-    return CharConstants.empty;
-
-    // TODO: implement
-    return this.getDoubleQualityIndicator(itemQuality);
-  }
-
-  private static getDoubleQualityIndicator(itemQuality: EItemQuality): string {
-    throw new Error("not implemented");
-
-    /**
-     *  -name-
-     *  =name=
-     * -=name=-
-     */
-
-    /**
-     *  ·name·
-     *  :name:
-     * ·:name:·
-     */
-    
-    let indicator = CharConstants.empty;
+  private static getDoubleQualityIndicators(itemQuality: EItemQuality): DoubleQualityIndicatorPair | null {
+    let settings: { quality: EItemQuality, indicators: DoubleQualityIndicatorPair | null }[];
 
     switch (this.styleDouble) {
-      case "dashes":
-        
+      case SettingsConstants.custom:
+        settings = [
+          { quality: EItemQuality.Normal,      indicators: new DoubleQualityIndicatorPair(CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.double.prefix.normal, CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.double.suffix.normal) },
+          { quality: EItemQuality.Exceptional, indicators: new DoubleQualityIndicatorPair(CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.double.prefix.normal, CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.double.suffix.normal) },
+          { quality: EItemQuality.Elite,       indicators: new DoubleQualityIndicatorPair(CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.double.prefix.normal, CustomSettings.filter.statsAndModifiers.itemQuality.indicatorStyle.double.suffix.normal) },
+        ];
+        break;
+      case "dots-1":
+        settings = [
+          { quality: EItemQuality.Normal,      indicators: null },
+          { quality: EItemQuality.Exceptional, indicators: new DoubleQualityIndicatorPair("·", "·") },
+          { quality: EItemQuality.Elite,       indicators: new DoubleQualityIndicatorPair(":", ":") },
+        ];
+        break;
+      case "dots-2":
+        settings = [
+          { quality: EItemQuality.Normal,      indicators: new DoubleQualityIndicatorPair( "·", "·" ) },
+          { quality: EItemQuality.Exceptional, indicators: new DoubleQualityIndicatorPair( ":", ":" ) },
+          { quality: EItemQuality.Elite,       indicators: new DoubleQualityIndicatorPair("·:", ":·") },
+        ];
+        break;
+      case "dashes-1":
+        settings = [
+          { quality: EItemQuality.Normal,      indicators: null },
+          { quality: EItemQuality.Exceptional, indicators: new DoubleQualityIndicatorPair("-", "-") },
+          { quality: EItemQuality.Elite,       indicators: new DoubleQualityIndicatorPair("=", "=") },
+        ];
+        break;
+      case "dashes-2":
+        settings = [
+          { quality: EItemQuality.Normal,      indicators: new DoubleQualityIndicatorPair( "-", "-" ) },
+          { quality: EItemQuality.Exceptional, indicators: new DoubleQualityIndicatorPair( "=", "=" ) },
+          { quality: EItemQuality.Elite,       indicators: new DoubleQualityIndicatorPair("-=", "=-") },
+        ];
+        break;
+      case "dashes-3":
+        settings = [
+          { quality: EItemQuality.Normal,      indicators: new DoubleQualityIndicatorPair("-", "-") },
+          { quality: EItemQuality.Exceptional, indicators: new DoubleQualityIndicatorPair("+", "+") },
+          { quality: EItemQuality.Elite,       indicators: new DoubleQualityIndicatorPair("#", "#") },
+        ];
+        break;
+      case "dashes-4":
+        settings = [
+          { quality: EItemQuality.Normal,      indicators: null },
+          { quality: EItemQuality.Exceptional, indicators: new DoubleQualityIndicatorPair( "+", "+" ) },
+          { quality: EItemQuality.Elite,       indicators: new DoubleQualityIndicatorPair("++", "++") },
+        ];
+        break;
     }
-
-    let dashesAll = [
-      { quality: EItemQuality.Normal, indicator: "-" },
-      { quality: EItemQuality.Normal, indicator: "=" },
-      { quality: EItemQuality.Normal, indicator: "≡" }, // test
-    ];
-    let dashesXE = [
-      { quality: EItemQuality.Normal, indicator: CharConstants.empty },
-      { quality: EItemQuality.Normal, indicator: "-" },
-      { quality: EItemQuality.Normal, indicator: "=" }, // test
-    ];
-
-    let dots = [
-      { quality: EItemQuality.Normal, indicator: "" },
-      { quality: EItemQuality.Normal, indicator: "·" }, // TODO: middle dot test, also as new highlight character
-      { quality: EItemQuality.Normal, indicator: ":" }, // test
-    ];
-
-    return [
-        { quality: EItemQuality.Normal,      indicator: 'n' },
-        { quality: EItemQuality.Exceptional, indicator: 'x' },
-        { quality: EItemQuality.Elite,       indicator: 'e' },
-      ].find(q => q.quality == itemQuality)!.indicator;
+    
+    return settings.find(q => q.quality == itemQuality)!.indicators;
   }
 }

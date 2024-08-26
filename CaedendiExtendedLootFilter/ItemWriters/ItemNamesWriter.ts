@@ -26,7 +26,7 @@ export class ItemNamesWriter extends BaseItemWriter {
     this.composers.push(new JewelsComposer());
     this.composers.push(new CharmsComposer());
     this.composers.push(new QuestEndgameItemsComposer());
-    // this.composers.push(new EquipmentQualityComposer()); // TODO: fix
+    this.composers.push(new EquipmentQualityComposer());
     this.composers.push(new CustomComposer(CustomFilterList.createForItemNamesJson()));
   }
 }

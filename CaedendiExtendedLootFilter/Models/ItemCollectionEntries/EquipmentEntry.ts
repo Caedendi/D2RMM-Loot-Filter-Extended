@@ -2,26 +2,23 @@ import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { EiLvlDigits } from "../../Settings/Enums/EiLvlDigits";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
+import { IQualityTag } from "../QualityTags/Interfaces/IQualityTag";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 import { iLvlItemEntry } from "./iLvlItemEntry";
-import { SingleQualityTag } from "../QualityTags/SingleQualityTag";
 
 export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
   /**
    * Quality Tag
    */
-  private _qualityTag: SingleQualityTag | null;
-  protected get qualityTag(): SingleQualityTag | null {
+  private readonly _qualityTag: IQualityTag | null;
+  protected get qualityTag(): IQualityTag | null {
     return this._qualityTag;
-  }
-  protected set qualityTag(value: SingleQualityTag) {
-    this._qualityTag = value;
   }
   
   constructor(
     key: string,
     iLvlDigits: EiLvlDigits,
-    quality: SingleQualityTag,
+    quality: IQualityTag | null,
     newName?: string | null,
     nameColor?: D2Color,
     pattern?: IHighlight | null,
