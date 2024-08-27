@@ -5,7 +5,13 @@ import { DoubleHighlightBase } from "./DoubleHighlightBase";
 import { EDoubleHighlightSetting } from "./EDoubleHighlightSetting";
 import { IHighlight } from "./Interfaces/IHighlight";
 
+/**
+ * A double highlight that can be applied to an ItemEntry.
+ */
 export class DoubleHighlight extends DoubleHighlightBase implements IHighlight {
+  /**
+   * The size setting for the highlight.
+   */
   private readonly _setting: EDoubleHighlightSetting;
   protected get setting(): EDoubleHighlightSetting {
     return this._setting;
@@ -23,6 +29,13 @@ export class DoubleHighlight extends DoubleHighlightBase implements IHighlight {
     this._setting = hlSetting;
   }
 
+  /**
+   * Creates a DoubleHighlight the exact same way as the constructor, but returns null if hlSetting is set to DISABLED.
+   * @param hlSetting The size setting for the highlight.
+   * @param color The color of the highlight.
+   * @param bttSetting The Big Tooltip setting for the item that uses this highlight. Used to try to prevent the item's combined display name from exceeding the maximum amount of characters.
+   * @returns A DoubleHighlight with the provided parameters, or null if hlSetting is set to DISABLED.
+   */
   public static create(hlSetting: EDoubleHighlightSetting, color?: D2Color, bttSetting?: EBigTooltipSetting): DoubleHighlight | null {
     if (hlSetting == EDoubleHighlightSetting.DISABLED)
       return null;

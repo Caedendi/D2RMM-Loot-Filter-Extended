@@ -33,6 +33,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
     }
   }
 
+  // TODO: make compatible with translations
   protected highlightUnidentifiedCharms(): void {
     [
       [ CharmConstants.charmSmallId, "Small" ],

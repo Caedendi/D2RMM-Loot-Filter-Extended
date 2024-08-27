@@ -148,6 +148,7 @@ export class DropSoundBuilder implements IBuilder {
   protected pushNewDropSoundToItems(itemsFilePath: string, itemCodes: string[], dropSound: string) {
     let file = D2RMM.readTsv(itemsFilePath);
 
+    // TODO: fix
     Object.entries(file.rows).forEach(([index, _]) => {
 
     });

@@ -11,9 +11,11 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
     super();
   }
 
+  // TODO: fix shortened displaynames when highlighted not displaying correctly
   // TODO: add option for regular gem name:
   // - regular
   // - common
+  // - standard
   // - gem name (Ruby)
   // - custom
   public applyFilter(): void {

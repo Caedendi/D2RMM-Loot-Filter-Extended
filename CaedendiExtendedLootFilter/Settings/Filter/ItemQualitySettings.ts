@@ -118,6 +118,8 @@ export abstract class ItemQualitySettings {
           { quality: EItemQuality.Elite,       indicators: new DoubleQualityIndicatorPair("++", "++") },
         ];
         break;
+      default:
+        throw new Error(`Invalid double Item Quality indicator setting: "${this.styleDouble}".`);
     }
     
     return settings.find(q => q.quality == itemQuality)!.indicators;

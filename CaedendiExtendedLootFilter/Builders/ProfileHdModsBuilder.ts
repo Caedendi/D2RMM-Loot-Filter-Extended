@@ -6,6 +6,7 @@ import { JunkSettings } from "../Settings/Filter/JunkSettings";
 import { TooltipModsSettings } from "../Settings/TooltipModsSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
+// TODO: function param typing
 export class ProfileHdModsBuilder implements IBuilder {
   public build() {
     if ( (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === "wg")
@@ -13,7 +14,8 @@ export class ProfileHdModsBuilder implements IBuilder {
       && !TooltipModsSettings.isEnabled)
       return;
 
-    let path = FileConstants.FILE_PROFILE_HD_PATH; // TODO: low vision and controller modes
+    // TODO: add support for low vision and controller modes
+    let path = FileConstants.FILE_PROFILE_HD_PATH;
     let profileHD = D2RMM.readJson(path);
 
     this.applyCustomGoldColor(profileHD);
@@ -23,21 +25,21 @@ export class ProfileHdModsBuilder implements IBuilder {
     D2RMM.writeJson(path, profileHD);
   }
 
-  protected applyCustomGoldColor(profileHD) { // TODO: typing
+  protected applyCustomGoldColor(profileHD) {
     if (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === "wg")
       return;
 
     profileHD.TooltipStyle.GoldColor = FontColorConstants.currencyGold.toString();
   }
 
-  protected applyCustomEtherealColor(profileHD) { // TODO: typing
+  protected applyCustomEtherealColor(profileHD) {
     if (!EtherealColorSettings.isEnabled)
       return;
 
-    profileHD.TooltipStyle.EtherealColor = EtherealColorSettings.color.toString(); // [CSTM-ETH]
+    profileHD.TooltipStyle.EtherealColor = EtherealColorSettings.color.toString();
   }
 
-  protected applyTooltipMods(profileHD) { // TODO: typing
+  protected applyTooltipMods(profileHD) {
     if (!TooltipModsSettings.isEnabled)
       return;
 

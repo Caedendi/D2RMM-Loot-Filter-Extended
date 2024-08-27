@@ -26,7 +26,7 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IItemC
 
   protected createFacetPattern(): IHighlight | null {
     if (JewelrySettings.facets.highlight === "rainbow")
-      return new RainbowHighlight(JewelrySettings.facets.bigTooltip);
+      return new RainbowHighlight();
     if (JewelrySettings.facets.highlight === "highlight")
       return new DoubleHighlight(EDoubleHighlightSetting.LARGE, ColorConstants.red);
 

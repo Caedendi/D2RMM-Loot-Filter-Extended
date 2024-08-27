@@ -1,12 +1,13 @@
 import { D2Color } from "../../Models/Colors/D2Color";
 import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
+import { CustomSettings } from "../../Settings/CustomSettings";
 import { FilterSettings } from "../../Settings/Filter/FilterSettings";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { SettingsConstants } from "../SettingsConstants";
 
 export abstract class HighlightConstants {
-  public static character:             string  = FilterSettings.highlightCharacter !== SettingsConstants.custom ? FilterSettings.highlightCharacter : '*'; // replace * with desired custom character [CSTM-HLCTR]
+  public static character:             string  = FilterSettings.highlightCharacter !== SettingsConstants.custom ? FilterSettings.highlightCharacter : CustomSettings.filter.settings.highlightCharacter;
   public static defaultHighlightColor: D2Color = FilterSettings.defaultHighlightColor; // todo: redundant?
 
   public static readonly padding = {
@@ -21,6 +22,7 @@ export abstract class HighlightConstants {
     none: CharConstants.empty,
     p2:    this.character.repeat(2),
     p3:    this.character.repeat(3),
+    p4:    this.character.repeat(4),
     p5:    this.character.repeat(5),
     p10:   this.character.repeat(10),
     p2x10: `${this.character.repeat(10)}${this.padding.p2}${this.character.repeat(10)}`,

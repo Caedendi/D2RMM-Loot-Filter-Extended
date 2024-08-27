@@ -1,3 +1,6 @@
+import { CharConstants } from "../Constants/CharConstants";
+import { SoundEffectPair } from "../Models/SoundEffect";
+
 export abstract class CustomSettings {
   // TODO
   public static readonly filter = {
@@ -28,6 +31,13 @@ export abstract class CustomSettings {
         }
       },
     },
+    settings: {
+      highlightCharacter: "c", // [CSTM-HLCTR]
+    },
+    bigTooltips: {
+      prefix: CharConstants.empty, // [CSTM-BTT]
+      suffix: CharConstants.empty, // [CSTM-BTT]
+    },
   };
   
   public static readonly lightPillars = {
@@ -35,6 +45,6 @@ export abstract class CustomSettings {
   };
   
   public static readonly dropSounds = {
-
+    customSound: new SoundEffectPair("", "", "", ""), // [CSTM-DSND]
   };
 }

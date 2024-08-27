@@ -1,5 +1,6 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { HighlightConstants } from "../Constants/Items/HighlightConstants";
+import { CustomSettings } from "../Settings/CustomSettings";
 import { EBigTooltipSetting } from "../Settings/Enums/EBigTooltipSetting";
 import { IHighlight } from "./Highlights/Interfaces/IHighlight";
 import { SingleHighlight } from "./Highlights/SingleHighlight";
@@ -30,12 +31,12 @@ export class BigTooltip {
 
   protected setPickUpMessageIndent(highlightPattern: IHighlight | null): void {
     if (highlightPattern != null && this.isSingleHighlightPattern(highlightPattern))
-      this._pumIndent = highlightPattern.getIndent();
+      this._pumIndent = highlightPattern.indent;
   }
 
   // TODO: test if this only works on SingleHighlights vs DoubleHighlights
   protected isSingleHighlightPattern(pattern: IHighlight): pattern is SingleHighlight {
-    return (pattern as SingleHighlight).getIndent !== undefined;
+    return (pattern as SingleHighlight).indent !== undefined;
   }
 
   protected setAffixes(): void {
@@ -61,9 +62,9 @@ export class BigTooltip {
         this._prefix = CharConstants.newLine2;
         this._suffix = CharConstants.newLine2;
         break;
-      case EBigTooltipSetting.CUSTOM: // [CSTM-BTT]
-        this._prefix = CharConstants.empty; // ADD YOUR CUSTOM BIG TOOLTIP STYLE HERE
-        this._suffix = CharConstants.empty; // ADD YOUR CUSTOM BIG TOOLTIP STYLE HERE
+      case EBigTooltipSetting.CUSTOM:
+        this._prefix = CustomSettings.filter.bigTooltips.prefix;
+        this._suffix = CustomSettings.filter.bigTooltips.suffix;
         break;
       default:
         throw new Error("Invalid BigTooltipSetting.");

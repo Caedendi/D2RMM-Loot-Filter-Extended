@@ -1,4 +1,5 @@
 import { SoundEffectPair } from "../Models/SoundEffect";
+import { CustomSettings } from "../Settings/CustomSettings";
 import { CharConstants } from "./CharConstants";
 import { FileConstants } from "./FileConstants";
 
@@ -25,6 +26,6 @@ export abstract class DropSoundConstants {
     portal_open:   new SoundEffectPair(this.FILE_OBJECT, "portalopen",     this.FILE_OBJECT, "object_portalopen_hd"),
     quest_done:    new SoundEffectPair(this.FILE_CURSOR, "questdone",      this.FILE_CURSOR, "cursor_questdone_1_hd"),
     none:          new SoundEffectPair(CharConstants.empty, this.FILE_NONE, CharConstants.empty, this.FILE_NONE),
-    custom:        new SoundEffectPair("", "", "", ""), // Put your custom drop sounds here [CSTM-DSND]
+    custom:        CustomSettings.dropSounds.customSound,
   };
 }

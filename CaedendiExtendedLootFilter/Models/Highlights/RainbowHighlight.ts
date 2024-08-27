@@ -5,6 +5,11 @@ import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { BigTooltip } from "../BigTooltip";
 import { DoubleHighlightBase } from "./DoubleHighlightBase";
 
+/**
+ * A rainbow-colored double highlight pattern that can be applied to an ItemEntry.
+ * 
+ * Mainly used for Rainbow Facets.
+ */
 export class RainbowHighlight extends DoubleHighlightBase {
   /**
    * paddingPatterns: padding between individual patterns
@@ -30,13 +35,8 @@ export class RainbowHighlight extends DoubleHighlightBase {
     return this._nameColor;
   }
 
-  // TODO
-  constructor(bigTooltipSetting?: EBigTooltipSetting) {
-    let pattern = BigTooltip.hasPickUpMessage(bigTooltipSetting ?? EBigTooltipSetting.DISABLED) 
-      ? HighlightConstants.pattern.p3 
-      : HighlightConstants.pattern.p5;
-
-    super(pattern, HighlightConstants.padding.p3);
+  constructor() {
+    super(HighlightConstants.pattern.p4, HighlightConstants.padding.p3);
   }
 
   protected getPrefix(): string {
@@ -48,7 +48,7 @@ export class RainbowHighlight extends DoubleHighlightBase {
       let next = (i == this.patternColors.length - 1) ? `${this.nameColor}${this.padding}` : this.patternsPadding;
       prefix += `${clr}${this.pattern}${next}`;
     });
-      
+    
     return prefix;
   }
 

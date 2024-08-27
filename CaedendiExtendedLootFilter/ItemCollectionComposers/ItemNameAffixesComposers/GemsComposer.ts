@@ -13,6 +13,7 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
     super();
   }
 
+  // TODO: fix shortened displaynames when highlighted not displaying correctly
   public applyFilter(): void {
     switch (JewelrySettings.gems.filter) {
       case SettingsConstants.all: // show all

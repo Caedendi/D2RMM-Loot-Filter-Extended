@@ -2,6 +2,9 @@ import { FilterSettings } from "../../Settings/Filter/FilterSettings";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "./Interfaces/IHighlight";
 
+/**
+ * The abstract base class for highlights.
+ */
 export abstract class HighlightBase implements IHighlight {
   /**
    * color

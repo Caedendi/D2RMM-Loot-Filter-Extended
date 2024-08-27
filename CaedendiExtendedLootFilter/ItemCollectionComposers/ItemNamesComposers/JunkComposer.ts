@@ -24,6 +24,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     this.applyKeys();
   }
 
+  // TODO: use translated names
   protected applyBuffPotions(): void {
     let buffPots: { key: string, name: string }[] = [
       { key: "yps", name: "Antidote" }, // Antidote Potion
@@ -47,6 +48,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     let highlightGas = new SingleHighlight(CharConstants.o, ColorConstants.darkGreen, HighlightConstants.padding.p1);
     let highlightOil = new SingleHighlight(CharConstants.o, ColorConstants.orange, HighlightConstants.padding.p1);
   
+    // TODO: use translated names
     let throwingPots: { key: string, name: string, highlight: IHighlight }[] = [
       { key: "gpl", name: "Gas 1", highlight: highlightGas }, // Strangling Gas Potion
       { key: "gpm", name: "Gas 2", highlight: highlightGas }, // Choking Gas Potion
