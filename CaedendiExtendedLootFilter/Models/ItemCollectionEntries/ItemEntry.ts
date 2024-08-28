@@ -1,13 +1,10 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { GemConstants } from "../../Constants/Items/GemConstants";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { FilterSettings } from "../../Settings/Filter/FilterSettings";
 import { BigTooltip } from "../BigTooltip";
 import { D2Color } from "../Colors/D2Color";
 import { ED2ColorCode } from "../Colors/ED2ColorCode";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
-import { SingleHighlight } from "../Highlights/SingleHighlight";
-import { Gem } from "../Items/Gem";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 
 export class ItemEntry implements IItemEntry {
@@ -88,21 +85,11 @@ export class ItemEntry implements IItemEntry {
     return entry;
   }
 
-  public static fromGem(gem: Gem, hasHighlight: boolean, bigTooltipSetting: EBigTooltipSetting): ItemEntry {
-    let highlight = hasHighlight ? new SingleHighlight(GemConstants.highlight, gem.color, GemConstants.padding) : null;
-    return new ItemEntry(gem.key, null, GemConstants.clrName, highlight, bigTooltipSetting);
-  }
-
-  public static fromGems(gems: Gem[], hasHighlight: boolean, bigTooltipSetting: EBigTooltipSetting): ItemEntry[] {
-    return gems.map<ItemEntry>(gem => this.fromGem(gem, hasHighlight, bigTooltipSetting));
-  }
-
-  public generateDisplayName(translatedName: string): string {
+  public generateDisplayName(localizedName: string): string {
     if (!this.isVisible)
       return FilterSettings.hidden;
-
     
-    let displayName = this.applyNewName(translatedName);
+    let displayName = this.applyNewName(localizedName);
     displayName = this.applyNameColor(displayName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyBigTooltip(displayName);
@@ -111,8 +98,8 @@ export class ItemEntry implements IItemEntry {
     return displayName;
   }
 
-  protected applyNewName(translatedName: string) {
-    return (this.newName == null || this.newName === CharConstants.empty) ? translatedName : this.newName;
+  protected applyNewName(localizedName: string) {
+    return (this.newName == null || this.newName === CharConstants.empty) ? localizedName : this.newName;
   }
 
   protected applyNameColor(displayName: string) {

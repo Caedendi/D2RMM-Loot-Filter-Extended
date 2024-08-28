@@ -1,6 +1,6 @@
 import { GemConstants } from "../../Constants/Items/GemConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
+import { GemEntry } from "../../Models/ItemCollectionEntries/GemEntry";
 import { Gem } from "../../Models/Items/Gem";
 import { JewelrySettings } from "../../Settings/Filter/JewelrySettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
@@ -48,6 +48,6 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   }
 
   protected upsertGems(gems: Gem[]): void {
-    this.collection.upsertMultipleIfHasHighlightOrBigTooltip(ItemEntry.fromGems(gems, JewelrySettings.gems.isHighlightEnabled, JewelrySettings.gems.bigTooltip));
+    this.collection.upsertMultipleIfHasHighlightOrBigTooltip(GemEntry.fromArray(gems, JewelrySettings.gems.isHighlightEnabled, JewelrySettings.gems.bigTooltip));
   }
 }

@@ -28,8 +28,8 @@ export class EquipmentEntry extends iLvlItemEntry implements IItemEntry {
     this._qualityTag = quality;
   }
 
-  protected applyNewName(translatedName: string): string {
-    let displayName = super.applyNewName(translatedName);
+  protected applyNewName(localizedName: string): string {
+    let displayName = super.applyNewName(localizedName);
     return this.applyQualityTag(displayName);
   }
 

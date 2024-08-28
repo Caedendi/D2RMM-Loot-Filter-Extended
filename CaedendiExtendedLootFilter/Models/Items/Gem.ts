@@ -1,4 +1,8 @@
+import { GemConstants } from "../../Constants/Items/GemConstants";
+import { JewelryConstants } from "../../Constants/Items/JewelryConstants";
 import { D2Color } from "../Colors/D2Color";
+import { EGem } from "./EGem";
+import { EGemQuality } from "./EGemQuality";
 
 export class Gem {
   /**
@@ -8,24 +12,37 @@ export class Gem {
   public get key(): string {
     return this._key;
   }
+
+  /**
+   * type
+   */
+  private readonly _type: EGem;
+  public get type(): EGem {
+    return this._type;
+  }
+
+  /**
+   * quality
+   */
+  private readonly _quality: EGemQuality;
+  public get quality(): EGemQuality {
+    return this._quality;
+  }
+
   /**
    * color
    */
-  private readonly _color: D2Color;
   public get color(): D2Color {
-    return this._color;
-  }
-  /**
-   * name
-   */
-  private readonly _name: string;
-  public get name(): string {
-    return this._name;
+    return Gem.getColor(this._type);
   }
 
-  constructor(key: string, color: D2Color, name: string) {
+  constructor(key: string, type: EGem, quality: EGemQuality) {
     this._key = key;
-    this._color = color;
-    this._name = name;
+    this._quality = quality;
+    this._type = type;
+  }
+
+  public static getColor(gemType: EGem): D2Color {
+    return JewelryConstants.gemColors.find(gem => gem.type == gemType).color;
   }
 }

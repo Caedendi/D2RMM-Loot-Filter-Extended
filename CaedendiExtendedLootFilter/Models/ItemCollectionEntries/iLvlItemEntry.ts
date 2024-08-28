@@ -32,11 +32,11 @@ export class iLvlItemEntry extends ItemEntry implements IItemEntry {
     this._iLvl = iLvlDigits;
   }
 
-  public generateDisplayName(translatedName: string): string {
+  public generateDisplayName(localizedName: string): string {
     if (!this.isVisible)
       return FilterSettings.hidden;
 
-    let displayName = this.applyNewName(translatedName);
+    let displayName = this.applyNewName(localizedName);
     displayName = this.applyNameColor(displayName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyIlvlIndent(displayName);

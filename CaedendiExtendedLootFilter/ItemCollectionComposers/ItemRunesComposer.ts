@@ -1,5 +1,5 @@
 import { RuneConstants } from "../Constants/Items/RuneConstants";
-import { RuneItemEntry } from "../Models/ItemCollectionEntries/RuneItemEntry";
+import { RuneEntry } from "../Models/ItemCollectionEntries/RuneEntry";
 import { IItemCollectionComposer } from "./Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "./ItemCollectionComposerBase";
 
@@ -15,7 +15,7 @@ export class ItemRunesComposer extends ItemCollectionComposerBase implements IIt
         return;
       }
 
-      tier.runes.forEach(rune => this.collection.upsert(new RuneItemEntry(rune, tier.nameColor, tier.numberColor, tier.highlight, tier.bigTooltipSetting)));
+      tier.runes.forEach(rune => this.collection.upsert(new RuneEntry(rune, tier.nameColor, tier.numberColor, tier.highlight, tier.bigTooltipSetting)));
     });
   }
 }

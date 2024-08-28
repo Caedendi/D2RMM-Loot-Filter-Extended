@@ -8,7 +8,7 @@ import { Rune } from "../Items/Rune";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 import { ItemEntry } from "./ItemEntry";
 
-export class RuneItemEntry extends ItemEntry implements IItemEntry {
+export class RuneEntry extends ItemEntry implements IItemEntry {
   /**
    * rune
    */
@@ -42,7 +42,7 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
   // tier 3 red highlight/number, orange name
   // tier 4 all red
   public generateDisplayName(localizedName: string): string {
-    let displayName = this.removeRuneAffix(localizedName);
+    let displayName = this.removeAffix(localizedName);
     displayName = this.applyNameColor(displayName);
     displayName = this.addRuneNumber(displayName);
     displayName = this.applyHighlightPattern(displayName); // TODO: create EDoubleHighlightPattern with values none/small/large/xl/rainbow
@@ -52,7 +52,7 @@ export class RuneItemEntry extends ItemEntry implements IItemEntry {
     return displayName;
   }
 
-  protected removeRuneAffix(localizedName: string): string {
+  protected removeAffix(localizedName: string): string {
     if (!RunesSettings.shouldHideAffix)
       return localizedName;
 
