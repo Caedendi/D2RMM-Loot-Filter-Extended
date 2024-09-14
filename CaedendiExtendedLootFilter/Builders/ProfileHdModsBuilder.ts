@@ -53,12 +53,15 @@ export class ProfileHdModsBuilder implements IBuilder {
    * 
    * This D2RMM mod fixes the font size in the settings menu (when any other mod modifies `_profilehd.json`).
    * 
-   * This is necessary because D2R ships with a `_profilehd.json` file that does not follow standard JSON conventions (same key has multiple values) which means that whenever the file is modifies by JavaScript, some data is lost. This mod restores this data by properly encoding the entire style into one object rather than having two styles on a single definition. See this comment for more details.
+   * This is necessary because D2R ships with a `_profilehd.json` file that does not follow standard JSON conventions 
+   * (same key has multiple values) which means that whenever the file is modifies by JavaScript, some data is lost. 
+   * This mod restores this data by properly encoding the entire style into one object rather than having two styles on 
+   * a single definition. See this comment for more details.
    * 
    * Source:
    * - https://www.nexusmods.com/diablo2resurrected/mods/200
    * - https://github.com/olegbl/d2rmm.mods/tree/main/SettingsFontFix
-   * @param profileHD 
+   * @param profileHD The `_profilehd.json` file.
    */
   protected applySettingsFontFix(profileHD): void {
     profileHD.StyleSettingsNumericSlider = {
