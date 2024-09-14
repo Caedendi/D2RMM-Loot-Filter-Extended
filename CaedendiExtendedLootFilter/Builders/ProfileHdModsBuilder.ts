@@ -8,7 +8,7 @@ import { IBuilder } from "./Interfaces/IBuilder";
 
 // TODO: function param typing
 export class ProfileHdModsBuilder implements IBuilder {
-  public build() {
+  public build(): void {
     if ( (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === "wg")
       && !EtherealColorSettings.isEnabled
       && !TooltipModsSettings.isEnabled)
@@ -21,29 +21,54 @@ export class ProfileHdModsBuilder implements IBuilder {
     this.applyCustomGoldColor(profileHD);
     this.applyCustomEtherealColor(profileHD);
     this.applyTooltipMods(profileHD);
+    this.applySettingsFontFix(profileHD);
 
     D2RMM.writeJson(path, profileHD);
   }
 
-  protected applyCustomGoldColor(profileHD) {
+  protected applyCustomGoldColor(profileHD): void {
     if (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === "wg")
       return;
 
     profileHD.TooltipStyle.GoldColor = FontColorConstants.currencyGold.toString();
   }
 
-  protected applyCustomEtherealColor(profileHD) {
+  protected applyCustomEtherealColor(profileHD): void {
     if (!EtherealColorSettings.isEnabled)
       return;
 
     profileHD.TooltipStyle.EtherealColor = EtherealColorSettings.color.toString();
   }
 
-  protected applyTooltipMods(profileHD) {
+  protected applyTooltipMods(profileHD): void {
     if (!TooltipModsSettings.isEnabled)
       return;
 
     profileHD.TooltipStyle.inGameBackgroundColor = [0, 0, 0, TooltipModsSettings.opacity]; // [R, G, B, opacity];
     profileHD.TooltipFontSize = TooltipModsSettings.size;
+  }
+
+  /**
+   * Applies Settings Font Fix for D2RMM by [olegbl](https://www.nexusmods.com/users/353885).
+   * 
+   * This D2RMM mod fixes the font size in the settings menu (when any other mod modifies `_profilehd.json`).
+   * 
+   * This is necessary because D2R ships with a `_profilehd.json` file that does not follow standard JSON conventions (same key has multiple values) which means that whenever the file is modifies by JavaScript, some data is lost. This mod restores this data by properly encoding the entire style into one object rather than having two styles on a single definition. See this comment for more details.
+   * 
+   * Source:
+   * - https://www.nexusmods.com/diablo2resurrected/mods/200
+   * - https://github.com/olegbl/d2rmm.mods/tree/main/SettingsFontFix
+   * @param profileHD 
+   */
+  protected applySettingsFontFix(profileHD): void {
+    profileHD.StyleSettingsNumericSlider = {
+      ...profileHD.StyleSettingsNumeric,
+      alignment: {
+        ...profileHD.StyleSettingsNumeric.alignment,
+        h: 'right',
+      },
+    };
+
+    profileHD.SettingsSliderValueFields.style = '$StyleSettingsNumericSlider';
   }
 }
