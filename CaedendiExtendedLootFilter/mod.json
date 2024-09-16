@@ -1863,7 +1863,7 @@
           "minValue": 20,
           "maxValue": 50,
           "name": "Font size",
-          "description": "Set the tooltip font size (unmodded = 36).",
+          "description": "Set the tooltip font size (unmodded: 36 (HD), 40 (low vision), 42 (console low vision)).",
           "defaultValue": 33,
           "visible": ["value", "IsTooltipModsEnabled"]
         }
