@@ -13,6 +13,7 @@ If you'd rather have a compact list to act as a template for your own naming sch
 
 - [Screenshots](#screenshots)
 - [Changelog](#changelog)
+  - [4.0.0](#400)
   - [3.0.0](#300)
   - [2.1.1](#211)
   - [2.1.0](#210)
@@ -23,16 +24,18 @@ If you'd rather have a compact list to act as a template for your own naming sch
 - [Features](#features)
 - [Presets Overview](#presets-overview)
   - [Text Colors](#text-colors)
+- [Known Issues](#known-issues)
+  - [Enabling Show Item Level online messes up socketed items](#enabling-show-item-level-online-messes-up-socketed-items)
 - [Roadmap](#roadmap)
+  - [4.0.0](#400-1)
+  - [3.0.0](#300-1)
   - [Fix known bugs](#fix-known-bugs)
   - [Add features](#add-features)
 - [Recommended Mods](#recommended-mods)
-- [License/Permissions](#licensepermissions)
 - [Credits](#credits)
   - [Code](#code)
   - [Filter Style](#filter-style)
-- [My Mods + Source](#my-mods--source)
-  - [Diablo II: Resurrected](#diablo-ii-resurrected)
+- [License/Permissions](#licensepermissions)
 
 
 ## Screenshots
@@ -158,6 +161,91 @@ For a full list of features, see [Presets Overview](#presets-overview) below.
 
 
 ## Presets Overview
+
+### Loot Filter Section
+
+| Subsection      | Setting             | Type           | Default                   | Notes                                                                                                                                                                                        |
+|-----------------|---------------------|----------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|                 | Enable              | Toggle switch  | Enabled                   | Triggers visibility of all below settings                                                                                                                                                    |
+| Junk            | Gold: Color         | Drop-down menu | White amount, gold suffix | Options: [Default], [White amount, gold suffix], [Gold amount, white suffix], [All gold]                                                                                                     |
+|                 | Gold: Suffix        | Drop-down menu | G                         | Options: [Default], [G], [Hide Suffix]                                                                                                                                                       |
+|                 | Healing Potions     | Drop-down menu | Enable (show all)         | Options: [Disable], [Enable (show all)], [Hide lvl 1-3], [Hide lvl 1-4], [hide lvl 1-3, small rejuvs], [hide lvl 1-4, small rejuvs], [show only rejuvs], [show only full rejuvs], [Hide all] |
+|                 | Buff Potions        | Drop-down menu | Enable                    | Options: [Disable], [Enable], [Hide]                                                                                                                                                         |
+|                 | Throwing Potions    | Drop-down menu | Enable                    | Options: [Disable], [Enable], [Hide]                                                                                                                                                         |
+|                 | Scrolls & Tomes     | Drop-down menu | Enable                    | Options: [Disable], [Enable], [Hide scrolls]                                                                                                                                                 |
+|                 | Arrows & Bolts      | Drop-down menu | Enable                    | Options: [Disable], [Enable], [Enable Arrows, hide Bolts], [Enable Bolts, hide Arrows], [Hide]                                                                                               |
+|                 | Keys                | Drop-down menu | Disable                   | Options: [Disable], [Hide]                                                                                                                                                                   |
+| Runes           | Enable              | Toggle switch  | Enabled                   | Triggers visibility of all below settings in section                                                                                                                                         |
+|                 | Remove Affix        | Toggle switch  | Enabled                   | Remove "Rune"-affix from all runes in all languages                                                                                                                                          |
+|                 | Add Rune Numbers    | Toggle switch  | Enabled                   | Shows the rune number between brackets in the name                                                                                                                                           |
+|                 | Low Runes           | Toggle switch  | Enabled                   | El [1] - Dol [14], except Ral [8]                                                                                                                                                            |
+|                 | Low-Mid Runes       | Toggle switch  | Enabled                   | Hel [15] - Fal [19] and Ral [8]                                                                                                                                                              |
+|                 | Mid Runes           | Toggle switch  | Enabled                   | Lem [20] - Gul [25]                                                                                                                                                                          |
+|                 | High Mid Runes      | Toggle switch  | Enabled                   | Vex [26] - Zod [33]                                                                                                                                                                          |
+| Jewelry         | Rings               | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 | Amulets             | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 | Gems & Jewels       | Toggle switch  | Enabled                   | These item types share some of the same graphics, they can not be set separately.                                                                                                            |
+|                 | Charms              | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+| Quest & Endgame | Quest Items         | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 | Quest Weapons       | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 | Essences            | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 | Token of Absolution | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 | Pandemonium Keys    | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 | Pandemonium Organs  | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 | Standard of Heroes  | Toggle switch  | Enabled                   |                                                                                                                                                                                              |
+|                 |                     |                |                           |                                                                                                                                                                                              |
+
+### Light Pillars Section
+
+| Subsection      | Setting              | Type          | Default | Notes                                                                             |
+|-----------------|----------------------|---------------|---------|-----------------------------------------------------------------------------------|
+|                 | Enable               | Toggle switch | Enabled | Triggers visibility of all below settings                                         |
+|                 | Exclude hidden items | Toggle switch | Enabled | Exclude for items set to hidden in filter section                                 |
+| Runes           | Low Runes            | Toggle switch | Enabled | El [1] - Dol [14], except Ral [8]                                                 |
+|                 | Low-Mid Runes        | Toggle switch | Enabled | Hel [15] - Fal [19] and Ral [8]                                                   |
+|                 | Mid Runes            | Toggle switch | Enabled | Lem [20] - Gul [25]                                                               |
+|                 | High Mid Runes       | Toggle switch | Enabled | Vex [26] - Zod [33]                                                               |
+| Jewelry         | Rings                | Toggle switch | Enabled |                                                                                   |
+|                 | Amulets              | Toggle switch | Enabled |                                                                                   |
+|                 | Gems & Jewels        | Toggle switch | Enabled | These item types share some of the same graphics, they can not be set separately. |
+|                 | Charms               | Toggle switch | Enabled |                                                                                   |
+| Quest & Endgame | Quest Items          | Toggle switch | Enabled |                                                                                   |
+|                 | Quest Weapons        | Toggle switch | Enabled |                                                                                   |
+|                 | Essences             | Toggle switch | Enabled |                                                                                   |
+|                 | Token of Absolution  | Toggle switch | Enabled |                                                                                   |
+|                 | Pandemonium Keys     | Toggle switch | Enabled |                                                                                   |
+|                 | Pandemonium Organs   | Toggle switch | Enabled |                                                                                   |
+|                 | Standard of Heroes   | Toggle switch | Enabled |                                                                                   |
+|                 |                      |               |         |                                                                                   |
+
+### Drop Sounds Section
+
+| Subsection      | Setting              | Type           | Default          | Notes                                             |
+|-----------------|----------------------|----------------|------------------|---------------------------------------------------|
+|                 | Enable               | Toggle switch  | Enabled          | Triggers visibility of all below settings         |
+|                 | Exclude hidden items | Toggle switch  | Enabled          | Exclude for items set to hidden in filter section |
+| Runes           | Low Runes            | Drop-down menu | Default          | El [1] - Dol [14], except Ral [8]                 |
+|                 | Low-Mid Runes        | Drop-down menu | Default          | Hel [15] - Fal [19] and Ral [8]                   |
+|                 | Mid Runes            | Drop-down menu | Hell Forge Place | Lem [20] - Gul [25]                               |
+|                 | High Mid Runes       | Drop-down menu | Hell Forge Place | Vex [26] - Zod [33]                               |
+| Quest & Endgame | Quest Items          | Drop-down menu | Hell Forge Smash |                                                   |
+|                 | Essences             | Drop-down menu | Default          |                                                   |
+|                 | Token of Absolution  | Drop-down menu | Default          |                                                   |
+|                 | Pandemonium Keys     | Drop-down menu | Hell Forge Smash |                                                   |
+|                 | Pandemonium Organs   | Drop-down menu | Hell Forge Smash |                                                   |
+|                 | Standard of Heroes   | Drop-down menu | Quest Done       |                                                   |
+|                 |                      |                |                  |                                                   |
+
+### Tooltip Mods Section
+
+| Setting   | Type          | Default | Notes                                            |
+|-----------|---------------|---------|--------------------------------------------------|
+| Enable    | Toggle switch | Off     | Triggers visibility of [Opacity] and [Font size] |
+| Opacity   | Number        | 0.75    | Unmodded value = 0.6                             |
+| Font size | Number        | 33      | Unmodded value = 36                              |
+|           |               |         |                                                  |
+
+## OLD
 
 |          Section           |                Setting                 | Default | Options                                                         |
 |:--------------------------:|:--------------------------------------:|:-------:|:----------------------------------------------------------------|
