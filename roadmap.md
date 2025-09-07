@@ -102,9 +102,9 @@ To do:
 
 ### New Features
 - [ ] Item Stat Ranges: pre-/suffix tag for which items sell for 35K
-  - [ ] $
-  - [ ] 35K
-  - [ ] brackets
+  - $
+  - 35K
+  - brackets
 - [ ] low vision (_profilelv.json) and controller compatibility
 - [ ] change light pillar aura position to circle item
 - [ ] how to customize which rune belongs to which group
