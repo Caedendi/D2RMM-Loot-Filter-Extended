@@ -6,6 +6,7 @@ import { JewelrySettings } from "../../Settings/Filter/JewelrySettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
+// TODO: add inheritance for this GemsComposer and ItemNames GemsComposer?
 export class GemsComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
   protected readonly gems: Gem[] = GemConstants.gemExceptions;
 
@@ -13,7 +14,6 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
     super();
   }
 
-  // TODO: fix shortened displaynames when highlighted not displaying correctly
   public applyFilter(): void {
     switch (JewelrySettings.gems.filter) {
       case SettingsConstants.all: // show all
@@ -21,6 +21,7 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
         return;
       case "flawless": // hide chipped/flawed/regular gems
       case "perfect":  // hide chipped/flawed/regular/flawless gems
+      case SettingsConstants.hide:
         this.hideGems();
         return;
     }
@@ -31,6 +32,7 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   }
 
   protected highlightGems(gems: Gem[]) {
-    this.collection.upsertMultipleIfHasHighlightOrBigTooltip(GemEntry.fromArray(gems, JewelrySettings.gems.isHighlightEnabled, JewelrySettings.gems.bigTooltip));
+    const gemEntries = GemEntry.fromArray(gems, JewelrySettings.gems.isHighlightEnabled, JewelrySettings.gems.bigTooltip);
+    this.collection.upsertMultipleIfHasHighlightOrBigTooltip(gemEntries);
   }
 }
