@@ -7,45 +7,25 @@ import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { QuestEndgameSettings } from "../../Settings/Filter/QuestEndgameSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
-import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
-
-// TODO: add inheritance for QuestEndgameItemsComposer, UiComposer and ItemModifiersComposer to remove duplicate code
-// TODO: also add for GemsComposers?
+import { QuestItemsComposerBase } from "../QuestItemsComposerBase";
 
 /**
- * TODO: Endgame: Pandemonium Event Items, Essences & Tokens of Absolution
+ * Composer for all Quest and Endgame Items in ItemNames.json.
  */
-export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
+export class QuestEndgameItemsComposer extends QuestItemsComposerBase implements IItemCollectionComposer {
   constructor() {
-    super();
+    super([]);
   }
 
-  public applyFilter(): void {
-    this.applyQuestItemsAndWeapons();
+  public override applyFilter(): void {
+    this.applyQuestItems();
     this.applyEndgameItems();
   }
 
-  protected applyQuestItemsAndWeapons(): void {
+  protected override applyQuestItems(): void {
     this.applyCube();
-    this.applyQuestItems();
+    this.applyQuestMiscItems();
     this.applyQuestWeapons();
-  }
-
-  private applyCube(): void {
-    if (QuestEndgameSettings.highlights.isCubeEnabled)
-      return;
-
-    this.upsertQuestItem(QuestConstants.cube, QuestEndgameSettings.highlights.quest);
-  }
-
-  private applyQuestItems(): void {
-    QuestConstants.questItems.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlights.quest));
-  }
-
-  private applyQuestWeapons(): void {
-    QuestConstants.questWeapons.forEach(weapon => this.upsertEntry(
-      new iLvlItemEntry(weapon.key, weapon.digits, null, HighlightConstants.uniqueNameColor, QuestEndgameSettings.highlights.quest, QuestEndgameSettings.bigTooltips.questItems)
-    ));
   }
 
   protected applyEndgameItems(): void {
@@ -57,6 +37,29 @@ export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implem
     this.upsertEndgameItems(EndgameConstants.organs, QuestEndgameSettings.highlights.organs, QuestEndgameSettings.bigTooltips.organs);
   }
 
+  //////////////////////////
+  // Quest Item functions //
+  //////////////////////////
+  private applyCube(): void {
+    if (QuestEndgameSettings.highlights.isCubeEnabled)
+      return;
+
+    this.upsertQuestItem(QuestConstants.cube, QuestEndgameSettings.highlights.quest);
+  }
+
+  private applyQuestMiscItems(): void {
+    QuestConstants.questItems.forEach(key => this.upsertQuestItem(key, QuestEndgameSettings.highlights.quest));
+  }
+
+  private applyQuestWeapons(): void {
+    QuestConstants.questWeapons.forEach(weapon => this.upsertEntry(
+      new iLvlItemEntry(weapon.key, weapon.digits, null, HighlightConstants.uniqueNameColor, QuestEndgameSettings.highlights.quest, QuestEndgameSettings.bigTooltips.questItems)
+    ));
+  }
+
+  ////////////////////////////
+  // Endgame Item functions //
+  ////////////////////////////
   private applyEssences(): void {
     if (!QuestEndgameSettings.filter.shouldShowEssences) {
       this.collection.upsertMultipleHidden(EndgameConstants.essences);
@@ -75,19 +78,11 @@ export class QuestEndgameItemsComposer extends ItemCollectionComposerBase implem
     this.upsertEndgameItem(EndgameConstants.standard, QuestEndgameSettings.highlights.standard, QuestEndgameSettings.bigTooltips.standard);
   }
 
-  private upsertQuestItem(key: string, highlight: IHighlight | null) {
-    this.upsertEntry(new ItemEntry(key, null, HighlightConstants.uniqueNameColor, highlight, QuestEndgameSettings.bigTooltips.questItems));
-  }
-
   private upsertEndgameItem(key: string, highlight: IHighlight | null, bigTooltipSetting: EBigTooltipSetting): void {
     this.upsertEntry(new ItemEntry(key, null, EndgameConstants.clrName, highlight, bigTooltipSetting));
   }
 
   private upsertEndgameItems(keys: string[], highlight: IHighlight | null, bigTooltipSetting: EBigTooltipSetting) {
     keys.forEach(key => this.upsertEndgameItem(key, highlight, bigTooltipSetting));
-  }
-
-  private upsertEntry(entry: ItemEntry): void {
-    this.collection.upsertIfHasHighlightOrBigTooltip(entry);
   }
 }
