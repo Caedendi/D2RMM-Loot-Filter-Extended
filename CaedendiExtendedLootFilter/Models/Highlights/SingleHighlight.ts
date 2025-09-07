@@ -23,7 +23,7 @@ export class SingleHighlight extends HighlightBase {
   }
 
   constructor(pattern: string, color: D2Color, padding?: string) {
-    super(pattern ??= CharConstants.empty, padding, color);
+    super(pattern ??= CharConstants.empty, padding, color); // TODO: padding is nullable but super padding is not
   }
 
   public apply(displayName: string): string {

@@ -85,7 +85,7 @@ export class ItemLevelBuilder implements IBuilder {
 
     // in this file, we only want the entries matching JewelryConstants.iLvlJewelry to have their ShowLevel be set to 1.
     // matching JewelryConstants.iLvlJewelry against the exclusions list makes the target list even smaller.
-    let misc = JewelryConstants.iLvlJewelry.filter(item => !this.miscExclusions.includes(item));
+    const misc = JewelryConstants.iLvlJewelry.filter(item => !this.miscExclusions.includes(item));
     file.rows.forEach((row) => {
       if (misc.includes(row.code))
         row.ShowLevel = "1";

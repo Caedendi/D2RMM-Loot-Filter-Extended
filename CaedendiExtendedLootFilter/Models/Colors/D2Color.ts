@@ -24,7 +24,7 @@ export class D2Color {
 
     if (code == ED2ColorCode.DEFAULT) {
       if (fallback == ED2ColorCode.DEFAULT)
-        throw new Error("EColorCode can't be DEFAULT.");
+        throw new Error("Fallback color code must contain a value other than NONE or DEFAULT.");
       if (fallback = ED2ColorCode.NONE)
         return null;
 

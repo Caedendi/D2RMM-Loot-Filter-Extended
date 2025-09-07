@@ -1,8 +1,6 @@
 import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
-import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
-import { BigTooltip } from "../BigTooltip";
 import { DoubleHighlightBase } from "./DoubleHighlightBase";
 
 /**
@@ -35,6 +33,12 @@ export class RainbowHighlight extends DoubleHighlightBase {
     return this._nameColor;
   }
 
+  // TODO: set pattern to p3 if BTT is enabled?
+  // constructor(bttSetting: EBigTooltipSetting = EBigTooltipSetting.DISABLED) {
+  //   const pattern = EBigTooltipSetting.DISABLED ? HighlightConstants.pattern.p4 : HighlightConstants.pattern.p3;
+  //   super(pattern, HighlightConstants.padding.p3);
+  // }
+    
   constructor() {
     super(HighlightConstants.pattern.p4, HighlightConstants.padding.p3);
   }
@@ -45,7 +49,7 @@ export class RainbowHighlight extends DoubleHighlightBase {
     // all: clr/pattern/paddingPatterns
     this.patternColors.forEach((clr, i) => {
       // if last, use clrName+paddingName, else use paddingPatterns
-      let next = (i == this.patternColors.length - 1) ? `${this.nameColor}${this.padding}` : this.patternsPadding;
+      const next = (i == this.patternColors.length - 1) ? `${this.nameColor}${this.padding}` : this.patternsPadding;
       prefix += `${clr}${this.pattern}${next}`;
     });
     
@@ -59,7 +63,7 @@ export class RainbowHighlight extends DoubleHighlightBase {
     // rest:  paddingPatterns/clr/pattern
     // end:   altClrName
     this.patternColors.reverse().forEach((clr, i) => {
-      let next = (i == 0) ? this.padding : this.patternsPadding;
+      const next = (i == 0) ? this.padding : this.patternsPadding;
       suffix += `${next}${clr}${this.pattern}`;
     });
     

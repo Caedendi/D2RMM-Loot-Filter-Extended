@@ -74,7 +74,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     let aqv: string  = "aqv";
     let cqv: string  = "cqv";
 
-    switch (JunkSettings.arrowsBolts) {
+    switch (JunkSettings.ammo) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:

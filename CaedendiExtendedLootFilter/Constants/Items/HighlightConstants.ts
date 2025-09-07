@@ -1,4 +1,3 @@
-import { D2Color } from "../../Models/Colors/D2Color";
 import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
 import { CustomSettings } from "../../Settings/CustomSettings";
 import { FilterSettings } from "../../Settings/Filter/FilterSettings";
@@ -7,8 +6,8 @@ import { ColorConstants } from "../Colors/ColorConstants";
 import { SettingsConstants } from "../SettingsConstants";
 
 export abstract class HighlightConstants {
-  public static character:             string  = FilterSettings.highlightCharacter !== SettingsConstants.custom ? FilterSettings.highlightCharacter : CustomSettings.filter.settings.highlightCharacter;
-  public static defaultHighlightColor: D2Color = FilterSettings.defaultHighlightColor; // todo: redundant?
+  public static character: string = FilterSettings.highlightCharacter === SettingsConstants.custom 
+    ? CustomSettings.filter.settings.highlightCharacter : FilterSettings.highlightCharacter;
 
   public static readonly padding = {
     none: CharConstants.empty,
@@ -29,7 +28,6 @@ export abstract class HighlightConstants {
     p3x10: `${this.character.repeat(10)}${this.padding.p2}${this.character.repeat(10)}${this.padding.p2}${this.character.repeat(10)}`,
   };
 
-  // TODO: remove?
   public static readonly uniqueNameColor = ColorConstants.gold;
 
   public static bttPadding = this.padding.p5;

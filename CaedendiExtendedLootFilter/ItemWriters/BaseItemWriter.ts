@@ -62,7 +62,6 @@ export abstract class BaseItemWriter implements IItemWriter {
   protected writeCustomNamesForEntry(fileEntry, filterEntry: IItemEntry): void {
     for (const key in fileEntry) { // for each property in this entry ...
       if (key === FileConstants.id || key === FileConstants.key) // ... that is a translation (not the id or Key property) ...
-      // if (key === FileConstants.id || key === FileConstants.key) // ... that is a translation (not the id or Key property) ...
         continue;
       
       fileEntry[key] = filterEntry.generateDisplayName(fileEntry[key]); // ... set to the corresponding name found in mergedCollection
@@ -71,7 +70,7 @@ export abstract class BaseItemWriter implements IItemWriter {
 
   /**
    * 
-   * @returns A single {@link ItemCollection} containing all entries in {@property builders} asd
+   * @returns A single {@link ItemCollection} containing all entries in {@property builders} asd // TODO: finish description
    */
   protected createMergedCollection(): ItemCollection {
     let mergedCollection = new ItemCollection();

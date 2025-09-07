@@ -28,7 +28,7 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IItemC
     if (JewelrySettings.facets.highlight === "rainbow")
       return new RainbowHighlight();
     if (JewelrySettings.facets.highlight === "highlight")
-      return new DoubleHighlight(EDoubleHighlightSetting.LARGE, ColorConstants.red);
+      return DoubleHighlight.create(EDoubleHighlightSetting.LARGE, ColorConstants.red);
 
     return null;
   }

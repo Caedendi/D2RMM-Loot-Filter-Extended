@@ -18,7 +18,7 @@ export abstract class RawSettings {
       buffPotions:       config.BuffPotions       as string,
       throwingPotions:   config.ThrowingPotions   as string,
       scrollsTomes:      config.ScrollsTomes      as string,
-      arrowsBolts:       config.ArrowsBolts       as string,
+      ammo:              config.Ammo              as string,
       keys:              config.Keys              as string,
     },
     // Runes
@@ -65,6 +65,29 @@ export abstract class RawSettings {
         isHighlightEnabled: config.JewelryGemsHighlight   as boolean,
         filter:             config.JewelryGemsFilter      as string,
         bigTooltip:         config.JewelryGemsBigTooltips as number as EBigTooltipSetting,
+
+        // isEnabled:       config.IsJewelryGemsSectionEnabled as boolean,
+        // shouldHideAffix: config.ShouldHideGemAffix          as boolean,
+        // chipped: {
+        //   highlight:  config.GemsChippedHighlight   as string,
+        //   bigTooltip: config.GemsChippedBigTooltip  as number as EBigTooltipSetting,
+        // },
+        // flawed: {
+        //   highlight:  config.GemsFlawedHighlight    as string,
+        //   bigTooltip: config.GemsFlawedBigTooltip   as number as EBigTooltipSetting,
+        // },
+        // standard: {
+        //   highlight:  config.GemsStandardHighlight  as string,
+        //   bigTooltip: config.GemsStandardBigTooltip as number as EBigTooltipSetting,
+        // },
+        // flawless: {
+        //   highlight:  config.GemsFlawlessHighlight  as string,
+        //   bigTooltip: config.GemsFlawlessBigTooltip as number as EBigTooltipSetting,
+        // },
+        // perfect: {
+        //   highlight:  config.GemsPerfectHighlight   as string,
+        //   bigTooltip: config.GemsPerfectBigTooltip  as number as EBigTooltipSetting,
+        // },
       },
       facets: {
         highlight:  config.FacetsHighlights as string,

@@ -19,6 +19,10 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   // - gem name (Ruby)
   // - custom
   public applyFilter(): void {
+    // this.processChippedFlawedRegularGems();
+    // this.processFlawlessGems();
+    // this.processPerfectGems();
+
     switch (JewelrySettings.gems.filter) {
       case SettingsConstants.all: // show all
         this.upsertGems(GemConstants.chippedFlawedRegularGems);
@@ -35,7 +39,7 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
         this.hideGems(GemConstants.flawlessGems);
         this.upsertGems(GemConstants.perfectGems);
         return;
-      case "hide": // hide chipped/flawed/regular/flawless gems
+      case SettingsConstants.hide: // hide chipped/flawed/regular/flawless/perfect gems
         this.hideGems(GemConstants.chippedFlawedRegularGems);
         this.hideGems(GemConstants.flawlessGems);
         this.hideGems(GemConstants.perfectGems);
@@ -46,6 +50,21 @@ export class GemsComposer extends ItemCollectionComposerBase implements IItemCol
   protected hideGems(gems: Gem[]): void {
     this.collection.upsertMultipleHidden(gems.map(gem => gem.key));
   }
+
+  // protected processChippedFlawedRegularGems() {
+  //   const highlightSetting = JewelrySettings.gems.filter;
+  //   this.upsertGems(GemConstants.chippedFlawedRegularGems, highlightSetting, JewelrySettings.gems.bigTooltip);
+  // }
+
+  // protected processFlawlessGems() {
+  //   const highlightSetting = JewelrySettings.gems.filter;
+  //   this.upsertGems(GemConstants.flawlessGems, highlightSetting, JewelrySettings.gems.bigTooltip);
+  // }
+
+  // protected processPerfectGems() {
+  //   const highlightSetting = JewelrySettings.gems.filter;
+  //   this.upsertGems(GemConstants.perfectGems, highlightSetting, JewelrySettings.gems.bigTooltip);
+  // }
 
   protected upsertGems(gems: Gem[]): void {
     this.collection.upsertMultipleIfHasHighlightOrBigTooltip(GemEntry.fromArray(gems, JewelrySettings.gems.isHighlightEnabled, JewelrySettings.gems.bigTooltip));

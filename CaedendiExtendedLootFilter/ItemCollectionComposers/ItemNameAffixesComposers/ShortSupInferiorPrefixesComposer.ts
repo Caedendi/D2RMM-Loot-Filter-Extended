@@ -14,12 +14,12 @@ export class ShortSupInferiorPrefixesComposer extends ItemCollectionComposerBase
     if (!ShortSupInfPrefixesSettings.isEnabled)
       return;
 
-    let supKey = "Hiquality";
-    let infKeys = [ "Damaged", "Cracked", "Low Quality", "Crude" ];
+    const supKey = "Hiquality";
+    const infKeys = [ "Damaged", "Cracked", "Low Quality", "Crude" ];
 
-    let supPrefix: string = CharConstants.empty;
-    let infPrefix: string = CharConstants.empty;
-    let infColor: D2Color | null = ShortSupInfPrefixesSettings.inferiorItemsColor;
+    let supPrefix = CharConstants.empty;
+    let infPrefix = CharConstants.empty;
+    const infColor = ShortSupInfPrefixesSettings.inferiorItemsColor;
     switch (ShortSupInfPrefixesSettings.style) {
       case "plusminus": // Enable
         supPrefix = `${CharConstants.plus}`;

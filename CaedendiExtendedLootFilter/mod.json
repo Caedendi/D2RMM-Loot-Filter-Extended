@@ -104,9 +104,9 @@
               ]
             },
             {
-              "id": "ArrowsBolts",
+              "id": "Ammo",
               "type": "select",
-              "name": "Arrows & Bolts",
+              "name": "Ammo",
               "description": "Customize Arrows & Bolts. [CSTM-ABK]",
               "defaultValue": "all",
               "options": [
@@ -230,9 +230,9 @@
                   "name": "Name Color",
                   "description": "Color of the name for Low Runes.",
                   "visible": ["value", "ShouldShowRunesLow"],
-                  "defaultValue": "8",
+                  "defaultValue": "none",
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -265,9 +265,9 @@
                   "name": "Number Color",
                   "description": "Color of the number for Low Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesLow"], ["value", "ShouldAddRuneNumbers"]],
-                  "defaultValue": "8",
+                  "defaultValue": "none",
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -384,9 +384,9 @@
                   "name": "Name Color",
                   "description": "Color of the name for Low-Mid Runes.",
                   "visible": ["value", "ShouldShowRunesLowMid"],
-                  "defaultValue": "8",
+                  "defaultValue": "none",
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -419,9 +419,9 @@
                   "name": "Number Color",
                   "description": "Color of the number for Low-Mid Runes.",
                   "visible": ["and", ["value", "ShouldShowRunesLowMid"], ["value", "ShouldAddRuneNumbers"]],
-                  "defaultValue": "8",
+                  "defaultValue": "none",
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -540,7 +540,7 @@
                   "visible": ["value", "ShouldShowRunesMid"],
                   "defaultValue": ";",
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -575,7 +575,7 @@
                   "visible": ["and", ["value", "ShouldShowRunesMid"], ["value", "ShouldAddRuneNumbers"]],
                   "defaultValue": ";",
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -694,7 +694,7 @@
                   "visible": ["value", "ShouldShowRunesHigh"],
                   "defaultValue": ";",
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },
@@ -729,7 +729,7 @@
                   "visible": ["and", ["value", "ShouldShowRunesHigh"], ["value", "ShouldAddRuneNumbers"]],
                   "defaultValue": ";",
                   "options": [
-                    { "value": "none", "label": "Disable" },
+                    { "value": "none", "label": "Default" },
                     { "value": "0", "label": "White" },
                     { "value": "=", "label": "White Smoke" },
                     { "value": "I", "label": "Dim Gray" },

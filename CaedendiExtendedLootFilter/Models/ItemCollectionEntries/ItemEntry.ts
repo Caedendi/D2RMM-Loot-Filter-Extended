@@ -120,7 +120,8 @@ export class ItemEntry implements IItemEntry {
     return this.bigTooltip.apply(displayName, this.highlight);
   }
 
-  // TODO: fix
+  // TODO: fix redundant color codes removal
+  
   /**
    * Removes all adjacent redundant color codes from a name. Assumes occurrences of "ÿc" are always followed by a valid color code character.
    * @param name The item name.

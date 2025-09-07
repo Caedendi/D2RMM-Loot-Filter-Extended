@@ -8,5 +8,5 @@ export class FilterSettings {
 
   public static readonly defaultHighlightColor: D2Color = D2Color.create(RawSettings.filter.settings.defaultHighlightColor)!;
   public static readonly highlightCharacter: string = RawSettings.filter.settings.highlightCharacter;
-  public static readonly hidden:             string = CharConstants.space.repeat(RawSettings.filter.settings.hidden);
+  public static readonly hidden: string = CharConstants.space.repeat(RawSettings.filter.settings.hidden);
 }

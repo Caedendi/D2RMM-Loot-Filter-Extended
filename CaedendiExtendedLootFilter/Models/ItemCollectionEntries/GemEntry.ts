@@ -17,7 +17,7 @@ export class GemEntry extends ItemEntry {
   }
 
   constructor(gem: Gem, newName: string | null, hasHighlight: boolean, bigTooltipSetting: EBigTooltipSetting) {
-    let highlight = hasHighlight ? new SingleHighlight(JewelryConstants.gemHighlight, gem.color, JewelryConstants.gemPadding) : null;
+    const highlight = hasHighlight ? new SingleHighlight(JewelryConstants.gemHighlight, gem.color, JewelryConstants.gemPadding) : null;
     super(gem.key, newName, JewelryConstants.gemNameColor, highlight, bigTooltipSetting);
     this._gem = gem;
   }

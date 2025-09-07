@@ -12,8 +12,8 @@ export class GoldComposer extends ItemCollectionComposerBase implements IItemCol
   }
 
   public applyFilter(): void {
-    let color = this.getGoldAffixColor();
-    let gld = "gld";
+    const color = this.getGoldAffixColor();
+    const gld = "gld";
 
     switch (JunkSettings.goldSuffix) {
       case SettingsConstants.disabled: // Gold displays as "1234 Gold".

@@ -7,15 +7,19 @@ import { TooltipModsSettings } from "../Settings/TooltipModsSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 // TODO: function param typing
+// TODO: add support for low vision and controller modes
 export class ProfileHdModsBuilder implements IBuilder {
+  protected readonly goldSettingWhiteAmountGoldSuffix: string = "wg";
+  protected readonly profileHdSettingsNumericSliderStyle: string= '$StyleSettingsNumericSlider';
+  protected readonly profileHdSettingRight: string = 'right';
+
   public build(): void {
-    if ( (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === "wg")
+    if ( (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === this.goldSettingWhiteAmountGoldSuffix)
       && !EtherealColorSettings.isEnabled
       && !TooltipModsSettings.isEnabled)
       return;
 
-    // TODO: add support for low vision and controller modes
-    let path = FileConstants.FILE_PROFILE_HD_PATH;
+    const path = FileConstants.FILE_PROFILE_HD_PATH;
     let profileHD = D2RMM.readJson(path);
 
     this.applyCustomGoldColor(profileHD);
@@ -27,7 +31,7 @@ export class ProfileHdModsBuilder implements IBuilder {
   }
 
   protected applyCustomGoldColor(profileHD): void {
-    if (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === "wg")
+    if (JunkSettings.goldTooltipColors === SettingsConstants.disabled || JunkSettings.goldTooltipColors === this.goldSettingWhiteAmountGoldSuffix)
       return;
 
     profileHD.TooltipStyle.GoldColor = FontColorConstants.currencyGold.toString();
@@ -50,14 +54,13 @@ export class ProfileHdModsBuilder implements IBuilder {
 
   /**
    * Applies [Settings Font Fix for D2RMM](https://www.nexusmods.com/diablo2resurrected/mods/200) by 
-   * [olegbl](https://www.nexusmods.com/users/353885).
+   * [olegbl](https://www.nexusmods.com/users/353885):
    * 
-   * This mod fixes the font size in the settings menu when any other mod modifies `_profilehd.json`.
-   * 
+   * "This mod fixes the font size in the settings menu when any other mod modifies `_profilehd.json`.
    * This is necessary because D2R ships with a `_profilehd.json` file that does not follow standard JSON conventions 
    * (same key has multiple values), which means that whenever the file is modified by JavaScript, some data is lost. 
    * This mod restores this data by properly encoding the entire style into one object rather than having two styles on 
-   * a single definition.
+   * a single definition."
    * 
    * Source code: https://github.com/olegbl/d2rmm.mods/tree/main/SettingsFontFix
    * 
@@ -68,10 +71,10 @@ export class ProfileHdModsBuilder implements IBuilder {
       ...profileHD.StyleSettingsNumeric,
       alignment: {
         ...profileHD.StyleSettingsNumeric.alignment,
-        h: 'right',
+        h: this.profileHdSettingRight,
       },
     };
 
-    profileHD.SettingsSliderValueFields.style = '$StyleSettingsNumericSlider';
+    profileHD.SettingsSliderValueFields.style = this.profileHdSettingsNumericSliderStyle;
   }
 }

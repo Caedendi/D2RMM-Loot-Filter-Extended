@@ -9,7 +9,8 @@ import { LightPillarsSettings } from "../Settings/LightPillarsSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
 export class LightPillarBuilder implements IBuilder {
-  protected readonly shouldExcludeForHidden: boolean = LightPillarsSettings.shouldExcludeForHidden;
+  protected readonly shouldExcludeHiddenItems: boolean = LightPillarsSettings.shouldExcludeForHidden;
+
   public build() {
     if (!LightPillarsSettings.isEnabled) {
       return;
@@ -30,7 +31,7 @@ export class LightPillarBuilder implements IBuilder {
   // runes
   protected pushLightPillarsForRunes() {
     RuneConstants.tiers.forEach(tier => {
-      if (!tier.hasLightPillar || (this.shouldExcludeForHidden && !tier.isVisible))
+      if (!tier.hasLightPillar || (this.shouldExcludeHiddenItems && !tier.isVisible))
         return;
 
       tier.runes.forEach((rune) => {
@@ -50,13 +51,12 @@ export class LightPillarBuilder implements IBuilder {
   // gems & jewels
   protected pushLightPillarsForGemsJewels() {
     if (!LightPillarsSettings.jewelry.isGemsJewelsEnabled
-      || (this.shouldExcludeForHidden && JewelrySettings.gems.filter === SettingsConstants.hide)) {
+      || (this.shouldExcludeHiddenItems && JewelrySettings.gems.filter === SettingsConstants.hide)) {
       return;
     }
 
-    let gemQualities = this.getLightPillarGemQualities();
-
-    let gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"]; // "saphire" is not a typo
+    const gemQualities = this.getLightPillarGemQualities();
+    const gemTypes = ["amethyst", "diamond", "emerald", "ruby", "saphire", "topaz", "skull"]; // "saphire" is not a typo
     gemQualities.forEach((quality) => {
       gemTypes.forEach((type) => {
         this.pushLightPillarToPath(`${LightPillarConstants.PATH_ITEMS_MISC}gem\\`, `${quality}${type}`);
@@ -66,11 +66,11 @@ export class LightPillarBuilder implements IBuilder {
 
   private getLightPillarGemQualities() {
     let gemQualities = ["perfect_"];
-    if (JewelrySettings.gems.filter === "perfect" && this.shouldExcludeForHidden) {
+    if (JewelrySettings.gems.filter === "perfect" && this.shouldExcludeHiddenItems) {
       return gemQualities;
     }
     gemQualities.push("flawless_");
-    if (JewelrySettings.gems.filter === "flawless" && this.shouldExcludeForHidden) {
+    if (JewelrySettings.gems.filter === "flawless" && this.shouldExcludeHiddenItems) {
       return gemQualities;
     }
 
@@ -100,24 +100,24 @@ export class LightPillarBuilder implements IBuilder {
     if (LightPillarsSettings.questEndgame.isQuestItemsEnabled) {
       questItems = questItems.concat([
         // act 1
-        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "bark_scroll"], // Scroll of Inifuss & Malah's Potion
-        [`${LightPillarConstants.PATH_ITEMS_MISC}scroll\\`, "deciphered_bark_scroll"], // Scroll of Inifuss (deciphered)
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "bark_scroll"],                   // Scroll of Inifuss & Malah's Potion
+        [`${LightPillarConstants.PATH_ITEMS_MISC}scroll\\`, "deciphered_bark_scroll"],      // Scroll of Inifuss (deciphered)
 
         // act 2
-        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "book_of_skill"], // Book of Skill
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "book_of_skill"],                 // Book of Skill
         [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "scroll_of_horadric_quest_info"], // Horadric Scroll
-        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "horadric_cube"], // Horadric Cube
-        [`${LightPillarConstants.PATH_ITEMS_MISC}amulet\\`, "viper_amulet"], // Amulet of the Viper
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "horadric_cube"],                 // Horadric Cube
+        [`${LightPillarConstants.PATH_ITEMS_MISC}amulet\\`, "viper_amulet"],                // Amulet of the Viper
 
         // act 3
-        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "jade_figurine"], // A Jade Figurine
-        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "gold_bird"], // The Golden Bird
-        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "scroll_of_self_resurrect"], // Potion of Life & Malah's Potion
-        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "lam_esens_tome"], // Lam Esen's Tome
-        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "eye"], // Khalim's Eye
-        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "heart"], // Khalim's Heart
-        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "brain"], // Khalim's Brain
-        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone"], // Mephisto's Soulstone
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "jade_figurine"],                 // A Jade Figurine
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "gold_bird"],                     // The Golden Bird
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "scroll_of_self_resurrect"],      // Potion of Life & Malah's Potion
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "lam_esens_tome"],                // Lam Esen's Tome
+        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "eye"],                       // Khalim's Eye
+        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "heart"],                     // Khalim's Heart
+        [`${LightPillarConstants.PATH_ITEMS_MISC_BODY_PART}`, "brain"],                     // Khalim's Brain
+        [`${LightPillarConstants.PATH_ITEMS_MISC_QUEST}`, "mephisto_soul_stone"],           // Mephisto's Soulstone
         // act 4
         // none
         // act 5
@@ -130,20 +130,20 @@ export class LightPillarBuilder implements IBuilder {
     if (LightPillarsSettings.questEndgame.isQuestWeaponsEnabled) {
       questItems = questItems.concat([
         // act 1
-        [`${LightPillarConstants.PATH_ITEMS_WEAPON}club\\`, "wirts_leg"], // Wirt's Leg
-        [`${LightPillarConstants.PATH_ITEMS_WEAPON_HAMMER}`, "horadric_malus"], // Horadric Malus
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON}club\\`, "wirts_leg"],          // Wirt's Leg
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_HAMMER}`, "horadric_malus"],    // Horadric Malus
 
         // act 2
         [`${LightPillarConstants.PATH_ITEMS_WEAPON_STAFF}`, "staff_of_the_kings"], // Staff of Kings
-        [`${LightPillarConstants.PATH_ITEMS_WEAPON_STAFF}`, "horadric_staff"], // Horadric Staff
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_STAFF}`, "horadric_staff"],     // Horadric Staff
 
         // act 3
-        [`${LightPillarConstants.PATH_ITEMS_WEAPON}knife\\`, "gidbinn"], // The Gidbinn
-        [`${LightPillarConstants.PATH_ITEMS_WEAPON_MACE}`, "khalim_flail"], // Khalim's Flail
-        [`${LightPillarConstants.PATH_ITEMS_WEAPON_MACE}`, "super_khalim_flail"], // Khalim's Will
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON}knife\\`, "gidbinn"],           // The Gidbinn
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_MACE}`, "khalim_flail"],        // Khalim's Flail
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_MACE}`, "super_khalim_flail"],  // Khalim's Will
 
         // act 4
-        [`${LightPillarConstants.PATH_ITEMS_WEAPON_HAMMER}`, "hellforge_hammer"], // Hell Forge Hammer
+        [`${LightPillarConstants.PATH_ITEMS_WEAPON_HAMMER}`, "hellforge_hammer"],  // Hell Forge Hammer
         // act 5
         // none
       ]);
@@ -159,8 +159,8 @@ export class LightPillarBuilder implements IBuilder {
     if (!LightPillarsSettings.questEndgame.isEssencesEnabled)
       return;
 
-    let essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
-    essences.forEach((essence) => {
+    const essences = ["burning_essence_of_terror", "charged_essense_of_hatred", "festering_essence_of_destruction", "twisted_essence_of_suffering"];
+    essences.forEach(essence => {
       this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_QUEST, essence);
     });
   }
@@ -178,11 +178,11 @@ export class LightPillarBuilder implements IBuilder {
     if (!LightPillarsSettings.questEndgame.isKeysEnabled)
       return;
 
-    let path = `${LightPillarConstants.PATH_ITEMS_MISC}key\\mephisto_key`;
-    var file = D2RMM.readJson(`${path}${FileConstants.FILE_EXTENSION_JSON}`);
+    const path = `${LightPillarConstants.PATH_ITEMS_MISC}key\\mephisto_key`;
+    let file = D2RMM.readJson(`${path}${FileConstants.FILE_EXTENSION_JSON}`);
     this.pushLightPillarToFile(file);
-    for (var i = 1; i <= 3; i++) {
-      let index = (i == 1) ? CharConstants.empty : `${i}`;
+    for (let i = 1; i <= 3; i++) {
+      const index = (i == 1) ? CharConstants.empty : `${i}`;
       D2RMM.writeJson(`${path}${index}${FileConstants.FILE_EXTENSION_JSON}`, file);
     }
   }
@@ -203,14 +203,14 @@ export class LightPillarBuilder implements IBuilder {
   // standard of heroes
   protected pushLightPillarForStandardOfHeroes() {
     if (!LightPillarsSettings.questEndgame.isStandardEnabled
-      || (this.shouldExcludeForHidden && !QuestEndgameSettings.filter.shouldShowStandard))
+      || (this.shouldExcludeHiddenItems && !QuestEndgameSettings.filter.shouldShowStandard))
       return;
 
     this.pushLightPillarToPath(LightPillarConstants.PATH_ITEMS_MISC_BODY_PART, "flag");
   }
 
   protected pushLightPillarToPath(path: string, item: string) {
-    let filePath = `${path}${item}${FileConstants.FILE_EXTENSION_JSON}`;
+    const filePath = `${path}${item}${FileConstants.FILE_EXTENSION_JSON}`;
     let file = D2RMM.readJson(filePath);
     this.pushLightPillarToFile(file);
     D2RMM.writeJson(filePath, file);

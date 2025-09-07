@@ -31,16 +31,16 @@ export class RuneTier {
   /**
    * name color
    */
-  private readonly _nameColor: D2Color;
-  public get nameColor(): D2Color {
+  private readonly _nameColor: D2Color | null;
+  public get nameColor(): D2Color | null {
     return this._nameColor;
   }
 
   /**
    * number color
    */
-  private readonly _numberColor: D2Color;
-  public get numberColor(): D2Color {
+  private readonly _numberColor: D2Color | null;
+  public get numberColor(): D2Color | null {
     return this._numberColor;
   }
 
@@ -80,8 +80,8 @@ export class RuneTier {
     number: number,
     runes: Rune[],
     isVisible: boolean,
-    nameColor: D2Color,
-    numberColor: D2Color,
+    nameColor: D2Color | null,
+    numberColor: D2Color | null,
     highlight: IHighlight | null,
     bigTooltipSetting: EBigTooltipSetting,
     hasLightPillar: boolean,
