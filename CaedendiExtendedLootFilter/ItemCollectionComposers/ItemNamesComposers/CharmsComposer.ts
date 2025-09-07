@@ -29,7 +29,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
     if ( JewelrySettings.charms.highlightUnique !== SettingsConstants.disabled
       && JewelrySettings.charms.bigTooltipUnique != EBigTooltipSetting.DISABLED
     ) {
-
+      // TODO
     }
   }
 
@@ -45,8 +45,8 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   protected applyLodUniqueCharms(): void {
-    let bttSetting = JewelrySettings.charms.bigTooltipUnique;
-    let highlight = JewelrySettings.charms.highlightUnique !== SettingsConstants.disabled 
+    const bttSetting = JewelrySettings.charms.bigTooltipUnique;
+    const highlight = JewelrySettings.charms.highlightUnique !== SettingsConstants.disabled 
       ? DoubleHighlight.create(EDoubleHighlightSetting.LARGE, FilterSettings.defaultHighlightColor, bttSetting) 
       : null;
     if (highlight == null && bttSetting == EBigTooltipSetting.DISABLED)
@@ -60,19 +60,19 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   protected applySunderCharms(): void {
-    let hlSetting = JewelrySettings.charms.highlightUnique;
-    let bttSetting = JewelrySettings.charms.bigTooltipUnique;
+    const hlSetting = JewelrySettings.charms.highlightUnique;
+    const bttSetting = JewelrySettings.charms.bigTooltipUnique;
     if (hlSetting === SettingsConstants.disabled && bttSetting == EBigTooltipSetting.DISABLED)
       return;
     
-    if (hlSetting === "hl-sa")
+    if (hlSetting === "hl-sa") // TODO: magic string
       this.highlightSunderCharmsAlt(bttSetting);
     else 
       this.highlightSunderCharmsDefault(bttSetting);
   }
 
   private highlightSunderCharmsDefault(bigTooltipSetting: EBigTooltipSetting): void {
-    let highlight = new DoubleHighlight(EDoubleHighlightSetting.LARGE, FilterSettings.defaultHighlightColor, JewelrySettings.charms.bigTooltipUnique);
+    const highlight = DoubleHighlight.create(EDoubleHighlightSetting.LARGE, FilterSettings.defaultHighlightColor, JewelrySettings.charms.bigTooltipUnique);
 
     CharmConstants.sunderCharms.forEach(sunder => this.collection.upsert(
       new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, this.nameColor, highlight, bigTooltipSetting)
@@ -80,8 +80,9 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   private highlightSunderCharmsAlt(bigTooltipSetting: EBigTooltipSetting): void {
-    CharmConstants.sunderCharms.forEach(sunder => this.collection.upsert(
-      new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, this.nameColor, new DoubleHighlight(EDoubleHighlightSetting.LARGE, sunder.color, bigTooltipSetting), bigTooltipSetting)
-    ));
+    CharmConstants.sunderCharms.forEach(sunder => {
+      const highlight = DoubleHighlight.create(EDoubleHighlightSetting.LARGE, sunder.color, bigTooltipSetting);
+      this.collection.upsert(new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, this.nameColor, highlight, bigTooltipSetting));
+    });
   }
 }

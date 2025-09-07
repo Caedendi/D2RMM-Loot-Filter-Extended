@@ -21,11 +21,11 @@ class RuneTierSetting {
     numberColorCode: ED2ColorCode,
     bttSetting: EBigTooltipSetting
   ) {
-    let hlColor = D2Color.create(hlColorCode, RawSettings.filter.settings.defaultHighlightColor)!;
+    const hlColor = D2Color.create(hlColorCode, RawSettings.filter.settings.defaultHighlightColor)!;
     this.isVisible = isVisible;
-    this.highlight = hlSetting == EDoubleHighlightSetting.DISABLED ? null : new DoubleHighlight(hlSetting, hlColor, bttSetting);
-    this.nameColor = D2Color.create(nameColorCode);
-    this.numberColor = D2Color.create(numberColorCode);
+    this.highlight = DoubleHighlight.create(hlSetting, hlColor, bttSetting);
+    this.nameColor = D2Color.create(nameColorCode, ED2ColorCode.ORANGE);
+    this.numberColor = D2Color.create(numberColorCode, ED2ColorCode.ORANGE);
     this.bigTooltip = bttSetting;
   }
 }

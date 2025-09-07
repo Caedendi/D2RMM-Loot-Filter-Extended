@@ -17,14 +17,14 @@ export class DoubleHighlight extends DoubleHighlightBase implements IHighlight {
     return this._setting;
   }
 
-  constructor(hlSetting: EDoubleHighlightSetting, color?: D2Color, bttSetting: EBigTooltipSetting = EBigTooltipSetting.DISABLED) {
+  private constructor(hlSetting: EDoubleHighlightSetting, color?: D2Color, bttSetting: EBigTooltipSetting = EBigTooltipSetting.DISABLED) {
     if (hlSetting == EDoubleHighlightSetting.DISABLED)
       throw new Error("hlSetting can not be DISABLED.");
 
     if (hlSetting == EDoubleHighlightSetting.EXTRA_EXTRA_LARGE && bttSetting != EBigTooltipSetting.DISABLED)
       hlSetting = EDoubleHighlightSetting.EXTRA_LARGE;
 
-    let settings = HighlightConstants.doubleHighlightSizes.find(size => size.setting == hlSetting)!;
+    const settings = HighlightConstants.doubleHighlightSizes.find(size => size.setting == hlSetting)!;
     super(settings.pattern, settings.padding, color);
     this._setting = hlSetting;
   }

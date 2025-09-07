@@ -27,10 +27,10 @@ export class RuneEntry extends ItemEntry implements IItemEntry {
 
   constructor(
     rune: Rune,
-    nameColor?: D2Color | null,
-    numberColor?: D2Color | null,
-    highlight?: IHighlight | null,
-    bigToolipSetting?: EBigTooltipSetting | null
+    nameColor: D2Color | null,
+    numberColor: D2Color | null,
+    highlight: IHighlight | null,
+    bigToolipSetting: EBigTooltipSetting
   ) {
     super(rune.key, CharConstants.empty, nameColor, highlight, bigToolipSetting);
     this._rune = rune;
