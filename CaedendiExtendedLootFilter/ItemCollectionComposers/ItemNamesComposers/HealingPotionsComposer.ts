@@ -1,18 +1,20 @@
-import { CharConstants } from "../../Constants/CharConstants";
-import { ColorConstants } from "../../Constants/Colors/ColorConstants";
-import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { D2Color } from "../../Models/Colors/D2Color";
-import { SingleHighlight } from "../../Models/Highlights/SingleHighlight";
-import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
+import { PotionEntry } from "../../Models/ItemCollectionEntries/PotionEntry";
+import { EPotionType } from "../../Models/Items/EPotionType";
+import { Potion } from "../../Models/Items/Potion";
 import { JunkSettings } from "../../Settings/Filter/JunkSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
 export class HealingPotionsComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
-  protected readonly clrHeal = ColorConstants.red;
-  protected readonly clrMana = ColorConstants.blue;
-  protected readonly clrRej  = ColorConstants.purple;
+  private readonly hpKey  = "hp";
+  private readonly mpKey  = "mp";
+  private readonly hpName = "HP"
+  private readonly mpName = "MP";
+  private readonly rejuvSmallKey  = "rvs";
+  private readonly rejuvFullKey   = "rvl";
+  private readonly rejuvSmallName = "RPS";
+  private readonly rejuvFullName  = "RPF";
 
   constructor() {
     super();
@@ -23,97 +25,91 @@ export class HealingPotionsComposer extends ItemCollectionComposerBase implement
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all: // show all
-        this.highlightLv123Potions();
-        this.highlightLv4Potions();
-        this.highlightLv5Potions();
+        this.highlightPotionLevels(1, 5);
         this.highlightSmallRejuv();
         this.highlightFullRejuv();
         return;
       case "hide3": // hide lvl 1-3 potions, show small/full rejuvs
-        this.hideHealingPotions();
-        this.highlightLv4Potions();
-        this.highlightLv5Potions();
+        this.hidePotionLevels(1, 3);
+        this.highlightPotionLevels(4, 5);
         this.highlightSmallRejuv();
         this.highlightFullRejuv();
         return;
       case "hide4": // hide lvl 1-4 potions, show small/full rejuvs
-        this.hideHealingPotions();
-        this.highlightLv5Potions();
+        this.hidePotionLevels(1, 4);
+        this.highlightPotionLevel(5);
         this.highlightSmallRejuv();
         this.highlightFullRejuv();
         return;
       case "hide3sr": // hide lvl 1-3 potions and small rejuvs, show full rejuvs
-        this.hideHealingPotions();
-        this.highlightLv4Potions();
-        this.highlightLv5Potions();
+        this.hidePotionLevels(1, 3);
+        this.hideSmallRejuvs();
+        this.highlightPotionLevels(4, 5);
         this.highlightFullRejuv();
         return;
       case "hide4sr": // hide lvl 1-4 potions and small rejuvs, show full rejuvs
-        this.hideHealingPotions();
-        this.highlightLv5Potions();
+        this.hidePotionLevels(1, 4);
+        this.hideSmallRejuvs();
+        this.highlightPotionLevel(5);
         this.highlightFullRejuv();
         return;
       case "sfr": // hide all healing/mana potions, show only small/full rejuvs
-        this.hideHealingPotions();
+        this.hidePotionLevels(1, 5);
         this.highlightSmallRejuv();
         this.highlightFullRejuv();
         return;
       case "fr": // hide all healing/mana potions and small rejuvs, show only full rejuvs
-        this.hideHealingPotions();
+        this.hidePotionLevels(1, 5);
+        this.hideSmallRejuvs();
         this.highlightFullRejuv();
         return;
       case "hide": // hide all healing potions
-        this.hideHealingPotions();
+        this.hidePotionLevels(1, 5);
+        this.hideSmallRejuvs();
+        this.hideFullRejuvs();
         return;
     }
   }
 
-  protected hideHealingPotions(): void {
-    this.collection.upsertMultipleHidden([
-      "hp1", "hp2", "hp3", "hp4", "hp5",
-      "mp1", "mp2", "mp3", "mp4", "mp5",
-      "rvs", "rvl",
-    ]);
+  private highlightPotionLevels(fromLevel: number, upToLevel: number): void {
+    for (let i = fromLevel; i <= upToLevel; i++) {
+      this.highlightPotionLevel(i);
+    }
   }
 
-  protected highlightLv123Potions(): void {
-    this.upsertPotions([
-      { key: "hp1", name: "HP1", color: this.clrHeal },
-      { key: "hp2", name: "HP2", color: this.clrHeal },
-      { key: "hp3", name: "HP3", color: this.clrHeal },
-      { key: "mp1", name: "MP1", color: this.clrMana },
-      { key: "mp2", name: "MP2", color: this.clrMana },
-      { key: "mp3", name: "MP3", color: this.clrMana },
-    ]);
+  private highlightPotionLevel(level: number,): void {
+    this.upsertPotion(new Potion(`${this.hpKey}${level}`, `${this.hpName}${level}`, EPotionType.HEALING));
+    this.upsertPotion(new Potion(`${this.mpKey}${level}`, `${this.mpName}${level}`, EPotionType.MANA));
   }
 
-  protected highlightLv4Potions(): void {
-    this.upsertPotions([
-      { key: "hp4", name: "HP4", color: this.clrHeal },
-      { key: "mp4", name: "MP4", color: this.clrMana },
-    ]);
+  private highlightSmallRejuv(): void {
+    this.upsertPotion(new Potion(this.rejuvSmallKey, this.rejuvSmallName, EPotionType.REJUVENATION));
   }
 
-  protected highlightLv5Potions(): void {
-    this.upsertPotions([
-      { key: "hp5", name: "HP5", color: this.clrHeal },
-      { key: "mp5", name: "MP5", color: this.clrMana },
-    ]);
+  private highlightFullRejuv(): void {
+    this.upsertPotion(new Potion(this.rejuvFullKey, this.rejuvFullName, EPotionType.REJUVENATION));
   }
 
-  protected highlightSmallRejuv(): void {
-    this.upsertPotion("rvs", "RPS", this.clrRej);
+  private upsertPotion(potion: Potion): void {
+    this.collection.upsert(new PotionEntry(potion));
   }
 
-  protected highlightFullRejuv(): void {
-    this.upsertPotion("rvl", "RPF", this.clrRej);
+  private hidePotionLevels(fromLevel: number, toLevel: number): void {
+    for (let i = fromLevel; i <= toLevel; i++) {
+      this.hidePotionLevel(i);
+    }
   }
 
-  protected upsertPotions(potions: { key: string, name: string, color: D2Color }[]): void { // TODO: create model?
-    potions.forEach(pot => this.upsertPotion(pot.key, pot.name, pot.color));
+  private hidePotionLevel(level: number): void {
+    this.collection.upsertHidden(`${this.hpKey}${level}`);
+    this.collection.upsertHidden(`${this.mpKey}${level}`);
   }
 
-  protected upsertPotion(key: string, name: string, color: D2Color): void {
-    this.collection.upsert(new ItemEntry(key, name, ColorConstants.white, new SingleHighlight(CharConstants.plus, color, HighlightConstants.padding.none)));
+  private hideSmallRejuvs(): void {
+    this.collection.upsertHidden(this.rejuvSmallKey);
+  }
+
+  private hideFullRejuvs(): void {
+    this.collection.upsertHidden(this.rejuvFullKey);
   }
 }

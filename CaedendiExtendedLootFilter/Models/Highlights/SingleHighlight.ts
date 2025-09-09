@@ -19,11 +19,15 @@ export class SingleHighlight extends HighlightBase {
    * prefix
    */
   protected get prefix(): string {
-    return `${this.color}${this.pattern}${this.padding ?? CharConstants.empty}`;
+    return `${this.color}${this.pattern}${this.padding}`;
   }
 
-  constructor(pattern: string, color: D2Color, padding?: string) {
-    super(pattern ??= CharConstants.empty, padding, color); // TODO: padding is nullable but super padding is not
+  constructor(pattern: string, color: D2Color | null = null, padding: string | null = null) {
+    if (pattern === CharConstants.empty) {
+      throw new Error("SingleHighlight pattern can not be empty.");
+    }
+
+    super(pattern, padding, color);
   }
 
   public apply(displayName: string): string {

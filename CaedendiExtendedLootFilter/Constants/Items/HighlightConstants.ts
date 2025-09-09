@@ -1,4 +1,4 @@
-import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
+import { EDoubleHighlightSize } from "../../Models/Highlights/EDoubleHighlightSize";
 import { CustomSettings } from "../../Settings/CustomSettings";
 import { FilterSettings } from "../../Settings/Filter/FilterSettings";
 import { CharConstants } from "../CharConstants";
@@ -33,11 +33,15 @@ export abstract class HighlightConstants {
   public static bttPadding = this.padding.p5;
   public static bttPickUpMsg = `${ColorConstants.purple}Pick Up`;
 
-  public static readonly doubleHighlightSizes = [
-    { setting: EDoubleHighlightSetting.SMALL,             pattern: this.pattern.p2,    padding: this.padding.p2 },
-    { setting: EDoubleHighlightSetting.MEDIUM,            pattern: this.pattern.p5,    padding: this.padding.p3 },
-    { setting: EDoubleHighlightSetting.LARGE,             pattern: this.pattern.p10,   padding: this.padding.p5 },
-    { setting: EDoubleHighlightSetting.EXTRA_LARGE,       pattern: this.pattern.p2x10, padding: this.padding.p5 },
-    { setting: EDoubleHighlightSetting.EXTRA_EXTRA_LARGE, pattern: this.pattern.p3x10, padding: this.padding.p5 },
-  ];
+  public static getDoubleHighlightSettings(setting: EDoubleHighlightSize): { pattern: string, padding: string } {
+    const settings: { [key in EDoubleHighlightSize]: { pattern: string, padding: string } }  = {
+    [ EDoubleHighlightSize.SMALL ]:             { pattern: this.pattern.p2,    padding: this.padding.p2 },
+    [ EDoubleHighlightSize.MEDIUM ]:            { pattern: this.pattern.p5,    padding: this.padding.p3 },
+    [ EDoubleHighlightSize.LARGE ]:             { pattern: this.pattern.p10,   padding: this.padding.p5 },
+    [ EDoubleHighlightSize.EXTRA_LARGE ]:       { pattern: this.pattern.p2x10, padding: this.padding.p5 },
+    [ EDoubleHighlightSize.EXTRA_EXTRA_LARGE ]: { pattern: this.pattern.p3x10, padding: this.padding.p5 },
+    };
+
+    return settings[setting];
+  }
 }

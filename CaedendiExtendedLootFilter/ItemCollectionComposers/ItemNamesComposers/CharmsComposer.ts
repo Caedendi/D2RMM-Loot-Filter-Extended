@@ -2,7 +2,7 @@ import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { CharmConstants } from "../../Constants/Items/CharmConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
-import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
+import { EDoubleHighlightSize } from "../../Models/Highlights/EDoubleHighlightSize";
 import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
 import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
@@ -47,7 +47,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   protected applyLodUniqueCharms(): void {
     const bttSetting = JewelrySettings.charms.bigTooltipUnique;
     const highlight = JewelrySettings.charms.highlightUnique !== SettingsConstants.disabled 
-      ? DoubleHighlight.create(EDoubleHighlightSetting.LARGE, FilterSettings.defaultHighlightColor, bttSetting) 
+      ? new DoubleHighlight(EDoubleHighlightSize.LARGE, FilterSettings.defaultHighlightColor, bttSetting) 
       : null;
     if (highlight == null && bttSetting == EBigTooltipSetting.DISABLED)
       return;
@@ -72,7 +72,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   private highlightSunderCharmsDefault(bigTooltipSetting: EBigTooltipSetting): void {
-    const highlight = DoubleHighlight.create(EDoubleHighlightSetting.LARGE, FilterSettings.defaultHighlightColor, JewelrySettings.charms.bigTooltipUnique);
+    const highlight = new DoubleHighlight(EDoubleHighlightSize.LARGE, FilterSettings.defaultHighlightColor, JewelrySettings.charms.bigTooltipUnique);
 
     CharmConstants.sunderCharms.forEach(sunder => this.collection.upsert(
       new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, this.nameColor, highlight, bigTooltipSetting)
@@ -81,7 +81,7 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
 
   private highlightSunderCharmsAlt(bigTooltipSetting: EBigTooltipSetting): void {
     CharmConstants.sunderCharms.forEach(sunder => {
-      const highlight = DoubleHighlight.create(EDoubleHighlightSetting.LARGE, sunder.color, bigTooltipSetting);
+      const highlight = new DoubleHighlight(EDoubleHighlightSize.LARGE, sunder.color, bigTooltipSetting);
       this.collection.upsert(new iLvlItemEntry(sunder.id, EiLvlDigits.Double, null, this.nameColor, highlight, bigTooltipSetting));
     });
   }

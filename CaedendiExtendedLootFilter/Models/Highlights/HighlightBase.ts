@@ -1,3 +1,4 @@
+import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { FilterSettings } from "../../Settings/Filter/FilterSettings";
 import { D2Color } from "../Colors/D2Color";
 import { IHighlight } from "./Interfaces/IHighlight";
@@ -30,10 +31,10 @@ export abstract class HighlightBase implements IHighlight {
     return this._padding;
   }
 
-  constructor(pattern: string, padding: string, color?: D2Color | null) {
-    this._pattern = pattern;
-    this._padding = padding;
+  constructor(pattern: string, padding: string | null = null, color: D2Color | null = null) {
     this._color = color ??= FilterSettings.defaultHighlightColor;
+    this._pattern = pattern;
+    this._padding = padding ??= HighlightConstants.padding.none;
   }
 
   public abstract apply(displayName: string): string;

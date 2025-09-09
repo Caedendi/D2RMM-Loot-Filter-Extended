@@ -2,17 +2,16 @@ import { CharConstants } from "../../Constants/CharConstants";
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
-import { D2Color } from "../../Models/Colors/D2Color";
-import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { SingleHighlight } from "../../Models/Highlights/SingleHighlight";
-import { ItemEntry } from "../../Models/ItemCollectionEntries/ItemEntry";
+import { JunkItemEntry } from "../../Models/ItemCollectionEntries/JunkItemEntry";
+import { PotionEntry } from "../../Models/ItemCollectionEntries/PotionEntry";
+import { EPotionType } from "../../Models/Items/EPotionType";
+import { Potion } from "../../Models/Items/Potion";
 import { JunkSettings } from "../../Settings/Filter/JunkSettings";
 import { IItemCollectionComposer } from "../Interfaces/IItemCollectionComposer";
 import { ItemCollectionComposerBase } from "../ItemCollectionComposerBase";
 
 export class JunkComposer extends ItemCollectionComposerBase implements IItemCollectionComposer {
-  protected readonly nameColor: D2Color = ColorConstants.white;
-
   constructor() {
     super();
   }
@@ -26,17 +25,17 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
 
   // TODO: use translated names
   protected applyBuffPotions(): void {
-    let buffPots: { key: string, name: string }[] = [
-      { key: "yps", name: "Antidote" }, // Antidote Potion
-      { key: "wms", name: "Thawing" },  // Thawing Potion
-      { key: "vps", name: "Stamina" },  // Stamina Potion
+    const buffPots: Potion[] = [
+      new Potion("yps", "Antidote", EPotionType.BUFF), // Antidote Potion
+      new Potion("wms", "Thawing",  EPotionType.BUFF), // Thawing Potion
+      new Potion("vps", "Stamina",  EPotionType.BUFF), // Stamina Potion
     ];
 
     switch (JunkSettings.buffPotions) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // show all
-        buffPots.forEach(pot => this.collection.upsert(new ItemEntry(pot.key, pot.name, this.nameColor, new SingleHighlight(CharConstants.plus, ColorConstants.green))));
+        buffPots.forEach(pot => this.collection.upsert(new PotionEntry(pot)));
         return;
       case SettingsConstants.hide: // hide all
         this.collection.upsertMultipleHidden(buffPots.map(pot => pot.key));
@@ -44,62 +43,58 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     }
   }
 
+  // TODO: use translated names
   protected applyThrowingPotions(): void {
-    let highlightGas = new SingleHighlight(CharConstants.o, ColorConstants.darkGreen, HighlightConstants.padding.p1);
-    let highlightOil = new SingleHighlight(CharConstants.o, ColorConstants.orange, HighlightConstants.padding.p1);
-  
-    // TODO: use translated names
-    let throwingPots: { key: string, name: string, highlight: IHighlight }[] = [
-      { key: "gpl", name: "Gas 1", highlight: highlightGas }, // Strangling Gas Potion
-      { key: "gpm", name: "Gas 2", highlight: highlightGas }, // Choking Gas Potion
-      { key: "gps", name: "Gas 3", highlight: highlightGas }, // Rancid Gas Potion
-      { key: "opl", name: "Oil 1", highlight: highlightOil }, // Fulminating Potion
-      { key: "opm", name: "Oil 2", highlight: highlightOil }, // Exploding Potion
-      { key: "ops", name: "Oil 3", highlight: highlightOil }, // Oil Potion
+    const throwPots: Potion[] = [
+      new Potion("gpl", "Gas 1", EPotionType.GAS), // Strangling Gas Potion
+      new Potion("gpm", "Gas 2", EPotionType.GAS), // Choking Gas Potion
+      new Potion("gps", "Gas 3", EPotionType.GAS), // Rancid Gas Potion
+      new Potion("opl", "Oil 1", EPotionType.OIL), // Fulminating Potion
+      new Potion("opm", "Oil 2", EPotionType.OIL), // Exploding Potion
+      new Potion("ops", "Oil 3", EPotionType.OIL), // Oil Potion
     ];
 
     switch (JunkSettings.throwingPotions) {
       case SettingsConstants.disabled: // no change
         return;
       case SettingsConstants.all: // show all
-        throwingPots.forEach(pot => this.collection.upsert(new ItemEntry(pot.key, pot.name, this.nameColor, pot.highlight)));
+        throwPots.forEach(pot => this.collection.upsert(new PotionEntry(pot)));
         return;
       case SettingsConstants.hide: // hide all
-        this.collection.upsertMultipleHidden(throwingPots.map(pot => pot.key));
+        this.collection.upsertMultipleHidden(throwPots.map(pot => pot.key));
         return;
     }
   }
 
   protected applyAmmo(): void {
-    let aqv: string  = "aqv";
-    let cqv: string  = "cqv";
+    const arrowsKey: string  = "aqv";
+    const boltsKey: string  = "cqv";
 
     switch (JunkSettings.ammo) {
       case SettingsConstants.disabled:
         return;
       case SettingsConstants.all:
-        this.highlightAmmo(aqv);
-        this.highlightAmmo(cqv);
+        this.highlightAmmo(arrowsKey);
+        this.highlightAmmo(boltsKey);
         return;
       case "arw":
-        this.highlightAmmo(aqv);
-        this.collection.upsertHidden(cqv);
+        this.highlightAmmo(arrowsKey);
+        this.collection.upsertHidden(boltsKey);
         return;
       case "blt":
-        this.highlightAmmo(cqv);
-        this.collection.upsertHidden(aqv);
+        this.highlightAmmo(boltsKey);
+        this.collection.upsertHidden(arrowsKey);
         return;
       case SettingsConstants.hide:
-        this.collection.upsertMultipleHidden([aqv, cqv]);
+        this.collection.upsertMultipleHidden([arrowsKey, boltsKey]);
         return;
     }
   }
 
   private highlightAmmo(key: string): void {
-    this.collection.upsert(new ItemEntry(key, null, this.nameColor, new SingleHighlight(CharConstants.o, ColorConstants.gray, HighlightConstants.padding.p1)));
+    this.collection.upsert(new JunkItemEntry(key, null, new SingleHighlight(CharConstants.o, ColorConstants.gray, HighlightConstants.padding.p1)));
   }
 
-  // TODO: add option for highlight?
   protected applyKeys(): void {
     if (JunkSettings.keys == SettingsConstants.hide)
         this.collection.upsertHidden("key");

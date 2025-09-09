@@ -1,11 +1,9 @@
 import { ED2ColorCode } from "../Models/Colors/ED2ColorCode";
 import { ED2rColor } from "../Models/Colors/ED2rColor";
-import { EDoubleHighlightSetting } from "../Models/Highlights/EDoubleHighlightSetting";
+import { EDoubleHighlightSetting } from "./Enums/EDoubleHighlightSetting";
 import { EQualityTagPosition } from "../Models/QualityTags/EQualityTagPosition";
 import { EBigTooltipSetting } from "./Enums/EBigTooltipSetting";
 
-// TODO: add this text somewhere
-// Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space].
 export abstract class RawSettings {
   // Filter Section
   public static filter = {

@@ -52,6 +52,7 @@
 ### Finish up
 - [ ] search code to fix all "// todo"
 - [ ] remove redundant color codes (ItemEntry)
+- [ ] Add this text somewhere: Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space].
 
 ## v4.0.1
 

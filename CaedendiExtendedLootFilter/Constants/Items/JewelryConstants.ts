@@ -1,5 +1,5 @@
 import { D2Color } from "../../Models/Colors/D2Color";
-import { EGem } from "../../Models/Items/EGem";
+import { EGemType } from "../../Models/Items/EGemType";
 import { CharConstants } from "../CharConstants";
 import { ColorConstants } from "../Colors/ColorConstants";
 import { CharmConstants } from "./CharmConstants";
@@ -31,14 +31,14 @@ export abstract class JewelryConstants {
   public static readonly gemHighlight = CharConstants.o;
   public static readonly gemPadding   = HighlightConstants.padding.p1;
 
-  public static gemColors: { type: EGem, color: D2Color }[] = [
-    { type: EGem.AMETHYST, color: this.amethystColor },
-    { type: EGem.DIAMOND,  color: this.diamondColor  },
-    { type: EGem.EMERALD,  color: this.emeraldColor  },
-    { type: EGem.RUBY,     color: this.rubyColor     },
-    { type: EGem.SAPPHIRE, color: this.sapphireColor },
-    { type: EGem.TOPAZ,    color: this.topazColor    },
-    { type: EGem.SKULL,    color: this.skullColor    },
+  public static gemColors: { type: EGemType, color: D2Color }[] = [
+    { type: EGemType.AMETHYST, color: this.amethystColor },
+    { type: EGemType.DIAMOND,  color: this.diamondColor  },
+    { type: EGemType.EMERALD,  color: this.emeraldColor  },
+    { type: EGemType.RUBY,     color: this.rubyColor     },
+    { type: EGemType.SAPPHIRE, color: this.sapphireColor },
+    { type: EGemType.TOPAZ,    color: this.topazColor    },
+    { type: EGemType.SKULL,    color: this.skullColor    },
   ];
 
   public static translatedGemNames: string[] = [

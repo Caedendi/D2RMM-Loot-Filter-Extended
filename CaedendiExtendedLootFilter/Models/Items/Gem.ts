@@ -1,6 +1,6 @@
 import { JewelryConstants } from "../../Constants/Items/JewelryConstants";
 import { D2Color } from "../Colors/D2Color";
-import { EGem } from "./EGem";
+import { EGemType } from "./EGemType";
 import { EGemQuality } from "./EGemQuality";
 
 export class Gem {
@@ -15,8 +15,8 @@ export class Gem {
   /**
    * type
    */
-  private readonly _type: EGem;
-  public get type(): EGem {
+  private readonly _type: EGemType;
+  public get type(): EGemType {
     return this._type;
   }
 
@@ -35,13 +35,13 @@ export class Gem {
     return Gem.getColor(this._type);
   }
 
-  constructor(key: string, type: EGem, quality: EGemQuality) {
+  constructor(key: string, type: EGemType, quality: EGemQuality) {
     this._key = key;
     this._type = type;
     this._quality = quality;
   }
 
-  public static getColor(gemType: EGem): D2Color {
+  public static getColor(gemType: EGemType): D2Color {
     const gemColor = JewelryConstants.gemColors.find(gem => gem.type == gemType)?.color;
     if (gemColor == undefined) {
       throw new Error(`Could not find gem color by gem type ${gemType}.`);

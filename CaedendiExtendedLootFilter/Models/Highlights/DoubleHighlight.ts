@@ -1,8 +1,9 @@
 import { HighlightConstants } from "../../Constants/Items/HighlightConstants";
 import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
+import { EDoubleHighlightSetting } from "../../Settings/Enums/EDoubleHighlightSetting";
 import { D2Color } from "../Colors/D2Color";
 import { DoubleHighlightBase } from "./DoubleHighlightBase";
-import { EDoubleHighlightSetting } from "./EDoubleHighlightSetting";
+import { EDoubleHighlightSize } from "./EDoubleHighlightSize";
 import { IHighlight } from "./Interfaces/IHighlight";
 
 /**
@@ -12,35 +13,23 @@ export class DoubleHighlight extends DoubleHighlightBase implements IHighlight {
   /**
    * The size setting for the highlight.
    */
-  private readonly _setting: EDoubleHighlightSetting;
-  protected get setting(): EDoubleHighlightSetting {
+  public readonly _setting: EDoubleHighlightSize;
+  protected get setting(): EDoubleHighlightSize {
     return this._setting;
   }
 
-  private constructor(hlSetting: EDoubleHighlightSetting, color?: D2Color, bttSetting: EBigTooltipSetting = EBigTooltipSetting.DISABLED) {
-    if (hlSetting == EDoubleHighlightSetting.DISABLED)
-      throw new Error("hlSetting can not be DISABLED.");
+  public constructor(size: EDoubleHighlightSize, color?: D2Color, bttSetting: EBigTooltipSetting = EBigTooltipSetting.DISABLED) {
+    if (size == EDoubleHighlightSize.EXTRA_EXTRA_LARGE && bttSetting != EBigTooltipSetting.DISABLED)
+      size = EDoubleHighlightSize.EXTRA_LARGE;
 
-    if (hlSetting == EDoubleHighlightSetting.EXTRA_EXTRA_LARGE && bttSetting != EBigTooltipSetting.DISABLED)
-      hlSetting = EDoubleHighlightSetting.EXTRA_LARGE;
-
-    const settings = HighlightConstants.doubleHighlightSizes.find(size => size.setting == hlSetting)!;
-    super(settings.pattern, settings.padding, color);
-    this._setting = hlSetting;
+    const { pattern, padding } = HighlightConstants.getDoubleHighlightSettings(size);
+    super(pattern, padding, color);
+    this._setting = size;
   }
 
-  /**
-   * Creates a DoubleHighlight the exact same way as the constructor, but returns null if hlSetting is set to DISABLED.
-   * @param hlSetting The size setting for the highlight.
-   * @param color The color of the highlight.
-   * @param bttSetting The Big Tooltip setting for the item that uses this highlight. Used to try to prevent the item's combined display name from exceeding the maximum amount of characters.
-   * @returns A DoubleHighlight with the provided parameters, or null if hlSetting is set to DISABLED.
-   */
-  public static create(hlSetting: EDoubleHighlightSetting, color?: D2Color, bttSetting?: EBigTooltipSetting): DoubleHighlight | null {
-    if (hlSetting == EDoubleHighlightSetting.DISABLED)
-      return null;
-
-    return new DoubleHighlight(hlSetting, color, bttSetting ??= EBigTooltipSetting.DISABLED);
+  public static createOrNull(setting: EDoubleHighlightSetting, color?: D2Color, bttSetting: EBigTooltipSetting = EBigTooltipSetting.DISABLED): DoubleHighlight | null {
+    const size = EDoubleHighlightSize.fromSetting(setting);
+    return size === null ? null : new DoubleHighlight(size, color, bttSetting);
   }
 
   protected getPrefix(): string {

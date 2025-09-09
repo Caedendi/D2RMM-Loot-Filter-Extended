@@ -10,12 +10,12 @@ export abstract class QuestEndgameSettings {
 
   public static readonly highlights = {
     isCubeEnabled: RawSettings.filter.questEndgame.highlights.isCubeEnabled,
-    quest:    DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.quest,    FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.questItems),
-    essences: DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.essences, FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.essences),
-    token:    DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.tokens,   FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.tokens),
-    keys:     DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.keys,     FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.keys),
-    organs:   DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.organs,   FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.organs),
-    standard: DoubleHighlight.create(RawSettings.filter.questEndgame.highlights.standard, FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.standard),
+    quest:    DoubleHighlight.createOrNull(RawSettings.filter.questEndgame.highlights.quest,    FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.questItems),
+    essences: DoubleHighlight.createOrNull(RawSettings.filter.questEndgame.highlights.essences, FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.essences),
+    token:    DoubleHighlight.createOrNull(RawSettings.filter.questEndgame.highlights.tokens,   FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.tokens),
+    keys:     DoubleHighlight.createOrNull(RawSettings.filter.questEndgame.highlights.keys,     FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.keys),
+    organs:   DoubleHighlight.createOrNull(RawSettings.filter.questEndgame.highlights.organs,   FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.organs),
+    standard: DoubleHighlight.createOrNull(RawSettings.filter.questEndgame.highlights.standard, FilterSettings.defaultHighlightColor, RawSettings.filter.questEndgame.bigTooltips.standard),
   };
 
   public static readonly bigTooltips = {

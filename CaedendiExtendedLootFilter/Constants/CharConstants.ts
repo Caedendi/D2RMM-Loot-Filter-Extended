@@ -6,6 +6,7 @@ export abstract class CharConstants {
   public static o     = 'o';
   public static plus  = '+';
   public static minus = '-';
+  public static asterisk = '*';
 
   public static getSpaces(amount: number): string {
     return this.space.repeat(amount);

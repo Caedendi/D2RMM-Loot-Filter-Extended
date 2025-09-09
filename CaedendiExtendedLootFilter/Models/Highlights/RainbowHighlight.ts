@@ -25,6 +25,7 @@ export class RainbowHighlight extends DoubleHighlightBase {
     return this._patternColors;
   }
   
+  // TODO: redundant?
   /**
    * nameColor
    */
@@ -48,7 +49,7 @@ export class RainbowHighlight extends DoubleHighlightBase {
     
     // all: clr/pattern/paddingPatterns
     this.patternColors.forEach((clr, i) => {
-      // if last, use clrName+paddingName, else use paddingPatterns
+      // if last, use nameColor+padding, else use paddingPatterns
       const next = (i == this.patternColors.length - 1) ? `${this.nameColor}${this.padding}` : this.patternsPadding;
       prefix += `${clr}${this.pattern}${next}`;
     });

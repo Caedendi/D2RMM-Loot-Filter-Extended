@@ -1,9 +1,8 @@
 import { CharConstants } from "../../Constants/CharConstants";
-import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { FilterSettings } from "../../Settings/Filter/FilterSettings";
 import { BigTooltip } from "../BigTooltip";
 import { D2Color } from "../Colors/D2Color";
-import { ED2ColorCode } from "../Colors/ED2ColorCode";
+import { EBigTooltipSetting } from "../../Settings/Enums/EBigTooltipSetting";
 import { IHighlight } from "../Highlights/Interfaces/IHighlight";
 import { IItemEntry } from "./Interfaces/IItemEntry";
 
@@ -93,7 +92,7 @@ export class ItemEntry implements IItemEntry {
     displayName = this.applyNameColor(displayName);
     displayName = this.applyHighlightPattern(displayName);
     displayName = this.applyBigTooltip(displayName);
-    displayName = this.removeRedundantColorCodes(displayName); // TODO: fix
+    displayName = this.removeRedundantColorCodes(displayName);
 
     return displayName;
   }
@@ -107,21 +106,13 @@ export class ItemEntry implements IItemEntry {
   }
 
   protected applyHighlightPattern(displayName: string): string {
-    if (this.highlight == null)
-      return displayName;
-
-    return this.highlight.apply(displayName);
+    return this.highlight == null ? displayName : this.highlight.apply(displayName);
   }
 
   protected applyBigTooltip(displayName: string): string {
-    if (this.bigTooltip == null)
-      return displayName;
-
-    return this.bigTooltip.apply(displayName, this.highlight);
+    return this.bigTooltip == null ? displayName : this.bigTooltip.apply(displayName, this.highlight);
   }
 
-  // TODO: fix redundant color codes removal
-  
   /**
    * Removes all adjacent redundant color codes from a name. Assumes occurrences of "ÿc" are always followed by a valid color code character.
    * @param name The item name.
@@ -132,6 +123,8 @@ export class ItemEntry implements IItemEntry {
 
     return name;
     // TODO: fix
+
+    /*
 
     if (name.length < 3) // name too short to have a color code
       return name;
@@ -150,5 +143,7 @@ export class ItemEntry implements IItemEntry {
 
     // if next color code does not match, proceed to search from there on
     return this.removeRedundantColorCodes(name.slice(i+3), nextColor);
+
+    */
   }
 }

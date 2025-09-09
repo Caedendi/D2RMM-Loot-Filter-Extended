@@ -1,7 +1,7 @@
 import { ColorConstants } from "../../Constants/Colors/ColorConstants";
 import { SettingsConstants } from "../../Constants/SettingsConstants";
 import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
-import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
+import { EDoubleHighlightSize } from "../../Models/Highlights/EDoubleHighlightSize";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { RainbowHighlight } from "../../Models/Highlights/RainbowHighlight";
 import { iLvlItemEntry } from "../../Models/ItemCollectionEntries/iLvlItemEntry";
@@ -21,14 +21,14 @@ export class JewelsComposer extends ItemCollectionComposerBase implements IItemC
       && JewelrySettings.facets.bigTooltip == EBigTooltipSetting.DISABLED)
       return;
 
-    this.collection.upsert(new iLvlItemEntry("Rainbow Facet", EiLvlDigits.Double, null, ColorConstants.unique, this.createFacetPattern(), JewelrySettings.facets.bigTooltip));
+    this.collection.upsert(new iLvlItemEntry("Rainbow Facet", EiLvlDigits.Double, null, ColorConstants.unique, this.createFacetHighlight(), JewelrySettings.facets.bigTooltip));
   }
 
-  protected createFacetPattern(): IHighlight | null {
+  protected createFacetHighlight(): IHighlight | null {
     if (JewelrySettings.facets.highlight === "rainbow")
       return new RainbowHighlight();
     if (JewelrySettings.facets.highlight === "highlight")
-      return DoubleHighlight.create(EDoubleHighlightSetting.LARGE, ColorConstants.red);
+      return new DoubleHighlight(EDoubleHighlightSize.LARGE, ColorConstants.red);
 
     return null;
   }

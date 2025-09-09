@@ -1,9 +1,9 @@
 import { D2Color } from "../../Models/Colors/D2Color";
 import { ED2ColorCode } from "../../Models/Colors/ED2ColorCode";
 import { DoubleHighlight } from "../../Models/Highlights/DoubleHighlight";
-import { EDoubleHighlightSetting } from "../../Models/Highlights/EDoubleHighlightSetting";
 import { IHighlight } from "../../Models/Highlights/Interfaces/IHighlight";
 import { EBigTooltipSetting } from "../Enums/EBigTooltipSetting";
+import { EDoubleHighlightSetting } from "../Enums/EDoubleHighlightSetting";
 import { RawSettings } from "../RawSettings";
 
 class RuneTierSetting {
@@ -23,7 +23,7 @@ class RuneTierSetting {
   ) {
     const hlColor = D2Color.create(hlColorCode, RawSettings.filter.settings.defaultHighlightColor)!;
     this.isVisible = isVisible;
-    this.highlight = DoubleHighlight.create(hlSetting, hlColor, bttSetting);
+    this.highlight = DoubleHighlight.createOrNull(hlSetting, hlColor, bttSetting);
     this.nameColor = D2Color.create(nameColorCode, ED2ColorCode.ORANGE);
     this.numberColor = D2Color.create(numberColorCode, ED2ColorCode.ORANGE);
     this.bigTooltip = bttSetting;

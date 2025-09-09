@@ -1,8 +1,8 @@
 import { CharConstants } from "../Constants/CharConstants";
 import { SoundEffectPair } from "../Models/SoundEffect";
 
+// TODO: finish?
 export abstract class CustomSettings {
-  // TODO
   public static readonly filter = {
     statsAndModifiers: {
       itemQuality: {

@@ -1,4 +1,4 @@
-export enum EGem {
+export enum EGemType {
   AMETHYST = 0,
   DIAMOND = 1,
   EMERALD = 2,

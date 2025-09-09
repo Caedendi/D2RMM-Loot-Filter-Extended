@@ -125,7 +125,7 @@ export class DropSoundBuilder implements IBuilder {
 
   // create new entry in sounds.txt
   protected pushSound(soundsFile, soundName: string, template: string, sfxChannel: string, sfxFileName: string, sfxRedirect: string) {
-    let newSound = { ...(soundsFile.rows.find((sound) => sound.Sound === template)) }; // create deep copy of template
+    let newSound = { ...(soundsFile.rows.find(sound => sound.Sound === template)) }; // create deep copy of template
 
     newSound["Sound"] = soundName;
     newSound["*Index"] = String(soundsFile.rows.length);
@@ -148,11 +148,11 @@ export class DropSoundBuilder implements IBuilder {
   protected pushNewDropSoundToItems(itemsFilePath: string, itemCodes: string[], dropSound: string) {
     let file = D2RMM.readTsv(itemsFilePath);
 
-    // TODO: fix
-    Object.entries(file.rows).forEach(([index, _]) => {
-
-    });
-
+    // TODO: check if broken?
+    ///
+    // possibly:
+    // Object.entries(file).forEach(([index, _]) => {
+    //   let fileEntry = file[index];
     file.rows.forEach(row => {
       if (itemCodes.indexOf(row.code) !== -1) {
         row.dropsound = dropSound;
