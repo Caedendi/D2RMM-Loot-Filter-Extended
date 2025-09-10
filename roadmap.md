@@ -50,9 +50,12 @@
 - [ ] Drop Sounds not working
 
 ### Finish up
-- [ ] search code to fix all "// todo"
+- [ ] search code to fix all todos
 - [ ] remove redundant color codes (ItemEntry)
 - [ ] Add this text somewhere: Selecting an option with \"Pick Up\" will add that message in purple above the item name. If you prefer to have a big transparent box, enable highlighting and set the highlight character to [space].
+- [ ] Add this text somewhere:    
+  - // each composer should compose a list of entries with unique keys not present in other composers, with CustomComposer being the sole exception.
+  - // if duplicate entries exist between composers, the earlier entries will be overwritten by the latest entry once all collections are merged.
 
 ## v4.0.1
 

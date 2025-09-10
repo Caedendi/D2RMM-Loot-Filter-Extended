@@ -29,7 +29,7 @@ export enum ED2ColorCodes {
 }
 */
 
-// TODO: fix
+// TODO: v5.0.0 fix
 
 /*
 White

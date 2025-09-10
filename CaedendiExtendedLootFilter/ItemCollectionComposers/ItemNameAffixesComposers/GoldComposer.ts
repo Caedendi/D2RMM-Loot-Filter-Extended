@@ -18,7 +18,8 @@ export class GoldComposer extends ItemCollectionComposerBase implements IItemCol
     switch (JunkSettings.goldSuffix) {
       case SettingsConstants.disabled: // Gold displays as "1234 Gold".
         if (color != null)
-          this.collection.upsert(new ItemEntry(gld, null, color)); // TODO: test use of translated name
+          // TODO: v4.0.1 test use of translated name
+          this.collection.upsert(new ItemEntry(gld, null, color));
         return;
       case "g": // Gold displays as "1234 G".
         this.collection.upsert(new ItemEntry(gld, `G`, color));

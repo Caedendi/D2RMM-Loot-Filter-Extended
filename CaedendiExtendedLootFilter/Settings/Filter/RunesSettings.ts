@@ -30,7 +30,6 @@ class RuneTierSetting {
   }
 }
 
-// TODO: fix default highlight color
 export abstract class RunesSettings {
   public static readonly isEnabled:       boolean = RawSettings.filter.runes.isEnabled;
   public static readonly shouldHideAffix: boolean = RawSettings.filter.runes.shouldHideAffix;

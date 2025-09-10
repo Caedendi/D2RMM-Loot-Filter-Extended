@@ -68,10 +68,6 @@ export abstract class BaseItemWriter implements IItemWriter {
     }
   }
 
-  /**
-   * 
-   * @returns A single {@link ItemCollection} containing all entries in {@property builders} asd // TODO: finish description
-   */
   protected createMergedCollection(): ItemCollection {
     let mergedCollection = new ItemCollection();
     this.composers.forEach(composer => {

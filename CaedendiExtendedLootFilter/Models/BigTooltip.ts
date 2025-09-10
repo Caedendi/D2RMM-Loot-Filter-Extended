@@ -41,14 +41,16 @@ export class BigTooltip {
 
   protected setAffixes(): void {
     // new lines work upside-down: adding \n will add a new line on top of the current one instead of below like you would expect
-    switch (+this._setting) { // TODO: find better way than using + to match enum with switch case
+    // TODO: v5.0.0 find better way than using + to match enum with switch case
+    switch (+this._setting) {
       case EBigTooltipSetting.DISABLED:
         break;
       case EBigTooltipSetting.TWO_LINES:
         this._prefix = CharConstants.newLine;
         break;
       case EBigTooltipSetting.TWO_LINES_PICK_UP:
-        this._prefix = `${CharConstants.newLine}${this.pickUpMessage}`; // TODO: add color after?
+        // TODO: add color after?
+        this._prefix = `${CharConstants.newLine}${this.pickUpMessage}`;
         break;
       case EBigTooltipSetting.THREE_LINES:
         this._prefix = CharConstants.newLine;

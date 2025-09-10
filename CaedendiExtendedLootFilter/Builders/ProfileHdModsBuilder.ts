@@ -6,8 +6,8 @@ import { JunkSettings } from "../Settings/Filter/JunkSettings";
 import { TooltipModsSettings } from "../Settings/TooltipModsSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
-// TODO: function param typing
-// TODO: add support for low vision and controller modes
+// TODO: v5.0.0 function param typing
+// TODO: v5.1.0 add support for low vision and controller modes
 export class ProfileHdModsBuilder implements IBuilder {
   protected readonly goldSettingWhiteAmountGoldSuffix: string = "wg";
   protected readonly profileHdSettingsNumericSliderStyle: string= '$StyleSettingsNumericSlider';

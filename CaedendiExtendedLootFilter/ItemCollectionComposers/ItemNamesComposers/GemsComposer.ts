@@ -9,7 +9,7 @@ export class GemsComposer extends GemsComposerBase {
   }
 
   // TODO: fix shortened displaynames when highlighted not displaying correctly
-  // TODO: add option for regular gem name:
+  // TODO: v4.1.0 add option for regular gem name:
   // - regular
   // - common
   // - standard

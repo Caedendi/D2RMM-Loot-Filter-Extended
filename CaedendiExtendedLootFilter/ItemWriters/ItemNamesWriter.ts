@@ -17,10 +17,6 @@ export class ItemNamesWriter extends BaseItemWriter {
   }
 
   protected initializeBuilders(): void {
-    // TODO: move below text to the right place
-    
-    // each composer should compose a list of entries with unique keys not present in other composers, with CustomComposer being the sole exception.
-    // if duplicate entries exist between composers, the earlier entries will be overwritten by the latest entry once all collections are merged.
     this.composers.push(new HealingPotionsComposer());
     this.composers.push(new ScrollsAndTomesComposer());
     this.composers.push(new JunkComposer());

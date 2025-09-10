@@ -29,11 +29,11 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
     if ( JewelrySettings.charms.highlightUnique !== SettingsConstants.disabled
       && JewelrySettings.charms.bigTooltipUnique != EBigTooltipSetting.DISABLED
     ) {
-      // TODO
+      // TODO: finish
     }
   }
 
-  // TODO: make compatible with translations
+  // TODO: v4.0.1 make compatible with translations
   protected highlightUnidentifiedCharms(): void {
     [
       [ CharmConstants.charmSmallId, "Small" ],
@@ -65,7 +65,8 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
     if (hlSetting === SettingsConstants.disabled && bttSetting == EBigTooltipSetting.DISABLED)
       return;
     
-    if (hlSetting === "hl-sa") // TODO: magic string
+    // TODO: v4.0.1 magic string
+    if (hlSetting === "hl-sa")
       this.highlightSunderCharmsAlt(bttSetting);
     else 
       this.highlightSunderCharmsDefault(bttSetting);

@@ -23,7 +23,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     this.applyKeys();
   }
 
-  // TODO: use translated names
+  // TODO: v4.0.1 use translated names
   protected applyBuffPotions(): void {
     const buffPots: Potion[] = [
       new Potion("yps", "Antidote", EPotionType.BUFF), // Antidote Potion
@@ -43,7 +43,7 @@ export class JunkComposer extends ItemCollectionComposerBase implements IItemCol
     }
   }
 
-  // TODO: use translated names
+  // TODO: v4.0.1 use translated names
   protected applyThrowingPotions(): void {
     const throwPots: Potion[] = [
       new Potion("gpl", "Gas 1", EPotionType.GAS), // Strangling Gas Potion
