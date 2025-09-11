@@ -1,7 +1,7 @@
 import { DropSoundConstants } from "../Constants/DropSoundConstants";
 import { FileConstants } from "../Constants/FileConstants";
 import { RuneConstants } from "../Constants/Items/RuneConstants";
-import { SoundEffectPair } from "../Models/SoundEffect";
+import { SoundEffect } from "../Models/SoundEffect";
 import { DropSoundsSettings } from "../Settings/DropSoundsSettings";
 import { IBuilder } from "./Interfaces/IBuilder";
 
@@ -35,7 +35,7 @@ export class DropSoundBuilder implements IBuilder {
   }
 
   protected modifyDropSoundForQuestItems(soundsFile) {
-    let itemCodesWeapons = [
+    const itemCodesWeapons = [
       "leg", // Wirt's Leg
       "hdm", // Horadric Malus
       "hst", // Horadric Staff
@@ -46,7 +46,7 @@ export class DropSoundBuilder implements IBuilder {
       "hfh", // Hell Forge Hammer
     ];
 
-    let itemCodesMisc = [
+    const itemCodesMisc = [
       "bks", // Scroll of Inifuss
       "bkd", // Scroll of Inifuss (deciphered)
       "tr1", // Horadric Scroll
@@ -66,7 +66,7 @@ export class DropSoundBuilder implements IBuilder {
       "tr2", // Scroll of Resistance
     ];
 
-    let suffix = "quest";
+    const suffix = "quest";
     this.modifyDropSoundForMiscItems(soundsFile, itemCodesMisc, suffix, DropSoundsSettings.questEndgame.questItems);
     this.modifyDropSoundForWeapons(soundsFile, itemCodesWeapons, suffix, DropSoundsSettings.questEndgame.questItems);
   }
@@ -108,14 +108,14 @@ export class DropSoundBuilder implements IBuilder {
       return;
     }
 
-    let newSoundName = this.createNewDropSound(soundsFile, newNameSuffix, DropSoundConstants.SOUND_EFFECTS[dropSound]);
+    const newSoundName = this.createNewDropSound(soundsFile, newNameSuffix, DropSoundConstants.SOUND_EFFECTS[dropSound]);
     this.pushNewDropSoundToItems(itemsFilePath, itemCodes, newSoundName);
   }
 
   // create SD and HD sound, redirect SD to HD
-  protected createNewDropSound(soundsFile, soundNameSuffix: string, sfxFileNames: SoundEffectPair) {
-    let soundNameSd = `${DropSoundConstants.SOUND_PREFIX}${soundNameSuffix}`;
-    let soundNameHd = `${soundNameSd}_hd`;
+  protected createNewDropSound(soundsFile, soundNameSuffix: string, sfxFileNames: SoundEffect) {
+    const soundNameSd = `${DropSoundConstants.SOUND_PREFIX}${soundNameSuffix}`;
+    const soundNameHd = `${soundNameSd}_hd`;
 
     this.pushSound(soundsFile, soundNameSd, DropSoundConstants.SOUND_ITEM_RUNE, DropSoundConstants.CHANNEL_ITEMS_SD, sfxFileNames.sd, soundNameHd);
     this.pushSound(soundsFile, soundNameHd, DropSoundConstants.SOUND_ITEM_RUNE, DropSoundConstants.CHANNEL_ITEMS_HD, sfxFileNames.hd, DropSoundConstants.SOUND_NONE);

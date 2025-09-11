@@ -1,4 +1,4 @@
-import { SoundEffectPair } from "../Models/SoundEffect";
+import { SoundEffect } from "../Models/SoundEffect";
 import { CustomSettings } from "../Settings/CustomSettings";
 import { CharConstants } from "./CharConstants";
 import { FileConstants } from "./FileConstants";
@@ -19,13 +19,13 @@ export abstract class DropSoundConstants {
   static FILE_NONE = `none${FileConstants.FILE_EXTENSION_FLAC}`;
 
   static SOUND_EFFECTS = {
-    hostile:       new SoundEffectPair(this.FILE_CURSOR, "hostile",        this.FILE_CURSOR, "cursor_hostile_1_hd"),
-    hf_place:      new SoundEffectPair(this.FILE_OBJECT, "hellforgeplace", this.FILE_OBJECT, "object_hellforgeplace_hd"),
-    hf_smash:      new SoundEffectPair(this.FILE_OBJECT, "hellforgesmash", this.FILE_OBJECT, "object_hellforgesmash_hd"),
-    cairn_success: new SoundEffectPair(this.FILE_OBJECT, "cairnsuccess",   this.FILE_OBJECT, "object_cairnsuccess_hd"),
-    portal_open:   new SoundEffectPair(this.FILE_OBJECT, "portalopen",     this.FILE_OBJECT, "object_portalopen_hd"),
-    quest_done:    new SoundEffectPair(this.FILE_CURSOR, "questdone",      this.FILE_CURSOR, "cursor_questdone_1_hd"),
-    none:          new SoundEffectPair(CharConstants.empty, this.FILE_NONE, CharConstants.empty, this.FILE_NONE),
+    hostile:       new SoundEffect(this.FILE_CURSOR, "hostile",        this.FILE_CURSOR, "cursor_hostile_1_hd"),
+    hf_place:      new SoundEffect(this.FILE_OBJECT, "hellforgeplace", this.FILE_OBJECT, "object_hellforgeplace_hd"),
+    hf_smash:      new SoundEffect(this.FILE_OBJECT, "hellforgesmash", this.FILE_OBJECT, "object_hellforgesmash_hd"),
+    cairn_success: new SoundEffect(this.FILE_OBJECT, "cairnsuccess",   this.FILE_OBJECT, "object_cairnsuccess_hd"),
+    portal_open:   new SoundEffect(this.FILE_OBJECT, "portalopen",     this.FILE_OBJECT, "object_portalopen_hd"),
+    quest_done:    new SoundEffect(this.FILE_CURSOR, "questdone",      this.FILE_CURSOR, "cursor_questdone_1_hd"),
+    none:          new SoundEffect(CharConstants.empty, this.FILE_NONE, CharConstants.empty, this.FILE_NONE),
     custom:        CustomSettings.dropSounds.customSound,
   };
 }

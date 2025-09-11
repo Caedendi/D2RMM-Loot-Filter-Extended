@@ -1,5 +1,5 @@
 import { CharConstants } from "../Constants/CharConstants";
-import { SoundEffectPair } from "../Models/SoundEffect";
+import { SoundEffect } from "../Models/SoundEffect";
 
 // TODO: finish?
 export abstract class CustomSettings {
@@ -45,6 +45,6 @@ export abstract class CustomSettings {
   };
   
   public static readonly dropSounds = {
-    customSound: new SoundEffectPair("", "", "", ""), // [CSTM-DSND]
+    customSound: new SoundEffect("", "", "", ""), // [CSTM-DSND]
   };
 }
