@@ -20,6 +20,15 @@ export class CharmsComposer extends ItemCollectionComposerBase implements IItemC
   }
 
   public applyFilter(): void {
+    // Options:
+    // - toggle highlight unid/magic
+    // - toggle uniques
+    //   - default (none)
+    //   - enabled (default color)
+    //   - enabled (rainbow sunders)
+    // - big tooltips: unique charms
+
+    
     if (JewelrySettings.charms.isHighlightMagicEnabled)
       this.highlightUnidentifiedCharms();
 

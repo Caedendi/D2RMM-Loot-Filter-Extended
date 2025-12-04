@@ -54,8 +54,7 @@ export class ItemLevelBuilder implements IBuilder {
     if (JewelrySettings.charms.bigTooltipUnique != EBigTooltipSetting.DISABLED)
       CharmConstants.charmIds.forEach(charm => this.miscExclusions.push(charm));
 
-    // TODO: check charms ilvls with BTT for uniques and magics
-    // TODO: add warning to charms BTT description
+    // TODO: check charms ilvls with BTT for uniques and magics & add warning to charms BTT description
   }
 
   protected enableForWeapons() {
